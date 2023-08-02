@@ -112,8 +112,8 @@
                                             </thead>
                                             <tbody>
                                                 @foreach($listData as $item)
-                                                <tr class="table-row" data-bs-toggle="modal" data-bs-target="#info" role="button">
-                                                    
+                                                <tr class="table-row"  role="button">
+                                                    {{-- data-bs-toggle="modal" data-bs-target="#info" --}}
                                                     <td>
                                                         <div class="overText text-center">
                                                             {{ $item['id'] }}

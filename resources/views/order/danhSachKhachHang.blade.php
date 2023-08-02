@@ -112,7 +112,7 @@
                                             </thead>
                                             <tbody>
                                                 @foreach($listData as $item)
-                                                <tr class="table-row" data-href="/chi-tiet-cham-cong/{{ $item['id'] }}" role="button">
+                                                <tr class="table-row"  role="button">
                                                     
                                                     <td>
                                                         <div class="overText text-center">
