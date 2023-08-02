@@ -10,6 +10,7 @@
 	<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
 		integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
 		crossorigin=""></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<style>
 		#sethPhatMap {
 			width: 100%;
@@ -49,12 +50,10 @@
 
 <script>
 	var mapObj = null;
-	var defaultCoord = [10.7743, 106.6669]; // coord mặc định
 	var zoomLevel = 13;
 	var mapConfig = {
 		attributionControl: true,
-		center: defaultCoord, // vị trí map mặc định hiện tại
-		zoom: zoomLevel, // level zoom
+		zoom: zoomLevel,
 	};
 
 	window.onload = function () {
@@ -67,10 +66,10 @@
 		}).addTo(mapObj);
 
 		var customerId = window.location.pathname.split('/').pop();
-		alert(customerId);
 		if (customerId.trim() !== '') {
 			// Gọi API để lấy thông tin khách hàng bằng id
 			var url = '/get-customer/' + customerId;
+			// alert(url);
 			$.ajax({
 				url: url,
 				type: 'GET',
@@ -92,7 +91,6 @@
 									var lat = parseFloat(result.lat);
 									var lon = parseFloat(result.lon);
 
-									// Hiển thị kết quả tìm kiếm lên thanh tìm kiếm (hoặc bất kỳ đâu bạn muốn)
 									alert('Tên: ' + name + '\n' + 'Địa chỉ: ' + address);
 
 									// Tạo marker với kết quả tìm kiếm
@@ -136,7 +134,6 @@
 		var popupOption = {
 			className: "map-popup-content",
 		};
-		// var marker = addMarker([10.7743, 106.6669], `<div class='left'><img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1SGNN50inDZcOweium4llf4qacFBFgBK9sXW7fxQ_lBm6-Abcww' /></div><div class='right'><b>Đây có gì hot?</b><br>Một Popup có 1 cô gái tên là Lailah</div><div class='clearfix'></div>`, popupOption);
 	};
 
 	function addMarker(coord, popupContent, popupOptionObj, markerObj) {
@@ -147,7 +144,7 @@
 			markerObj = {};
 		}
 
-		var marker = L.marker(coord, markerObj).addTo(mapObj); // chơi liều @@
+		var marker = L.marker(coord, markerObj).addTo(mapObj); 
 		var popup = L.popup(popupOptionObj);
 		popup.setContent(popupContent);
 
