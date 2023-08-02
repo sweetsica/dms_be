@@ -1,0 +1,92 @@
+[
+    {
+        "product_id": "1",
+        "name": "Xe máy",
+        "bienThes": [
+            {
+                "bienthe_id": "1",
+                "name": "Xe ga",
+                "tuybiens": [
+                    {
+                        "tuybien_id": "1",
+                        "name": "Bô"
+                    },
+                    {
+                        "tuybien_id": "2",
+                        "name": "Phanh"
+                    },
+                    {
+                        "tuybien_id": "3",
+                        "name": "Màu"
+                    },
+                    {
+                        "tuybien_id": "4",
+                        "name": "Máy"
+                    }
+                ]
+            },
+            {
+                "bienthe_id": "2",
+                "name": "Xe số",
+                "tuybiens": [
+                    {
+                        "tuybien_id": "5",
+                        "name": "Xích"
+                    },
+                    {
+                        "tuybien_id": "6",
+                        "name": "Còi"
+                    }
+                ]
+            },
+            {
+                "bienthe_id": "3",
+                "name": "Xe côn",
+                "tuybiens": [
+                    {
+                        "tuybien_id": "7",
+                        "name": "Côn"
+                    },
+                    {
+                        "tuybien_id": "8",
+                        "name": "Côn nhưng vip"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "product_id": "2",
+        "name": "Ô tô",
+        "bienThes": [
+            {
+                "bienthe_id": "4",
+                "name": "Ô tô điện",
+                "tuybiens": [
+                    {
+                        "tuybien_id": "9",
+                        "name": "Ắc quy"
+                    },
+                    {
+                        "tuybien_id": "10",
+                        "name": "Pin"
+                    }
+                ]
+            },
+            {
+                "bienthe_id": "5",
+                "name": "Ô tô xăng",
+                "ward": [
+                    {
+                        "tuybien_id": "11",
+                        "name": "Bình xăng"
+                    },
+                    {
+                        "tuybien_id": "12",
+                        "name": "Bộ máy vip vcl"
+                    }
+                ]
+            }
+        ]
+    }
+]

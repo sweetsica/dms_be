@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RouteDirectionController;
 
@@ -28,3 +29,5 @@ Route::get('/create-customer', [CustomerController::class, 'create'])->name('cre
 Route::post('/get-customer', [CustomerController::class, 'store'])->name('store-customer');
 
 Route::get('/get-customer/{id}', [CustomerController::class, 'findById'])->name('find-customer-byId');
+
+Route::get('/order', [OrderController::class, 'index'])->name('index.order');
