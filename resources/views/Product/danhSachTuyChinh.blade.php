@@ -1,6 +1,6 @@
 @extends('template.master')
 {{-- Trang chủ GIao Ban --}}
-@section('title', 'Danh sách phiên bản')
+@section('title', 'Danh sách tuỳ chỉnh')
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
     <style>
@@ -35,8 +35,8 @@
     // }
 
     $listData = [
-        ['id' => 1, 'code' => 'PB0001', 'name' => 'Phiên bản xe 4 bánh', 'usermanager' => 'Nguyễn Văn A - TBHT00', "email" => 'Xe ôtô điện', 'nhom' => '2', 'kenh' => 'OTC',],
-        ['id' => 2, 'code' => 'PB0002', 'name' => 'Phiên bản xe 6 bánh', 'usermanager' => 'Nguyễn Văn B - MTDH01', "email" => 'Xe ôtô điện', 'nhom' => '3', 'kenh' => 'ETC',]
+        ['id' => 1, 'code' => 'TC0001', 'name' => 'Động cơ', 'usermanager' => 'Nguyễn Văn A - TBHT00', "email" => 'Phiên bản xe GoCute 4 bánh', 'nhom' => '2', 'kenh' => 'OTC',],
+        ['id' => 2, 'code' => 'TC0002', 'name' => 'Nội thất', 'usermanager' => 'Nguyễn Văn B - MTDH01', "email" => 'Phiên bản xe GoCute 6 bánh', 'nhom' => '3', 'kenh' => 'ETC',]
     ];
     
 @endphp
@@ -47,7 +47,7 @@
             <div class="main">
                 <div class="container">
                     <div class="mainSection_heading">
-                        <h5 class="mainSection_heading-title">Danh sách phiên bản</h5>
+                        <h5 class="mainSection_heading-title">Danh sách tuỳ chỉnh sản phẩm</h5>
                         @include('template.components.sectionCard')
                     </div>
                     <div class="card mb-3">
@@ -87,8 +87,8 @@
                                                 class="btn-export"><i class="bi bi-download"></i></a>
                                         </div> --}}
 
-                                        <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Thêm phiên bản" data-bs-original-title="Thêm phiên bản">
-                                            <button class="btn btn-danger d-block testCreateUser" data-bs-toggle="modal" data-bs-target="#add">Thêm phiên bản</button>
+                                        <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Thêm tuỳ chỉnh" data-bs-original-title="Thêm tuỳ chỉnh">
+                                            <button class="btn btn-danger d-block testCreateUser" data-bs-toggle="modal" data-bs-target="#add">Thêm tuỳ chỉnh</button>
                                         </div>
                                     </div>
                                     <div class="table-responsive">
@@ -96,9 +96,9 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-nowrap text-center" style="width:3%">STT</th>
-                                                    <th class="text-nowrap text-center" style="width:8%">Mã phiên bản</th>
-                                                    <th class="text-nowrap text-center" style="width:30%">Tên phiên bản</th>
-                                                    <th class="text-nowrap text-center" style="width:30%">Thuộc loại sản phẩm</th>
+                                                    <th class="text-nowrap text-center" style="width:8%">Mã tuỳ chỉnh</th>
+                                                    <th class="text-nowrap text-center" style="width:30%">Tên tuỳ chỉnh</th>
+                                                    <th class="text-nowrap text-center" style="width:30%">Thuộc phiên bản</th>
                                                     <th class="text-nowrap text-center" style="width:4%">Hành động</th>
 
                                                 </tr>
@@ -207,7 +207,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">Sửa thông tin phiên bản</h5>
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Sửa thông tin tuỳ chỉnh</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="formThemCapPhat" method="POST" action="#">
@@ -215,13 +215,13 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <input type="text" value="1" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên phiên bản" placeholder="Tên phiên bản*" class="form-control">
+                                <input type="text" value="1" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên tuỳ chỉnh" placeholder="Tên tuỳ chỉnh*" class="form-control">
                             </div>
                             <div class="col-md-6 mb-3">
-                                <input type="text" value="1" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã phiên bản" placeholder="Mã phiên bản*" class="form-control">
+                                <input type="text" value="1" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã tuỳ chỉnh" placeholder="Mã tuỳ chỉnh*" class="form-control">
                             </div>
-                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Thuộc loại sản phẩm">
-                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Thuộc loại sản phẩm*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Thuộc phiên bản sản phẩm">
+                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Thuộc phiên bản sản phẩm*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
                                     <option value="1" selected>1</option>
                                 </select>
                             </div>
@@ -248,7 +248,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">Thêm phiên bản</h5>
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Thêm tuỳ chỉnh</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="formThemCapPhat" method="POST" action="#">
@@ -256,13 +256,13 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên phiên bản" placeholder="Tên phiên bản*" class="form-control">
+                                <input type="text" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên tuỳ chỉnh" placeholder="Tên tuỳ chỉnh*" class="form-control">
                             </div>
                             <div class="col-md-6 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã phiên bản" placeholder="Mã phiên bản*" class="form-control">
+                                <input type="text" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã tuỳ chỉnh" placeholder="Mã tuỳ chỉnh*" class="form-control">
                             </div>
-                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Thuộc loại sản phẩm">
-                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Thuộc loại sản phẩm*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Thuộc phiên bản sản phẩm">
+                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Thuộc phiên bản sản phẩm*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
                                     <option value="1">1</option>
                                 </select>
                             </div>

@@ -92,6 +92,10 @@ Route::middleware(['auth'])->group(function () {
         return view('Address.danhSachKhuVuc');
     });
 
+    Route::get('danh-sach-tuy-chinh', function () {
+        return view('Product.danhSachTuyChinh');
+    });
+
     Route::get('danh-sach-phien-ban', function () {
         return view('Product.danhSachPhienBan');
     });
