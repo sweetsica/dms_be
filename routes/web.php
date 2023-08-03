@@ -11,6 +11,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\PersonnelLevelController;
 use App\Http\Controllers\PositionController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -75,9 +76,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('danh-sach-khach-hang', [CustomerController::class, 'index'])->name('position.list');
 
-    Route::get('danh-sach-san-pham', function () {
-        return view('Product.danhSachSanPham');
-    });
+    Route::get('danh-sach-san-pham', [ProductController::class, 'index'])->name('product.list');
+    Route::post('them-moi-san-pham', [ProductController::class, 'store'])->name('product.store');
+    Route::put('sua-san-pham/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::delete('xoa-san-pham/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
 
     Route::get('danh-sach-tuyen', function () {
         return view('other.danhSachTuyen');
