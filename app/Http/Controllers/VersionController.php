@@ -12,6 +12,25 @@ class VersionController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function pagination($list)
+    {
+        return [
+            'current_page' => $list->currentPage(),
+            'data' => $list->items(),
+            'first_page_url' => $list->url(1),
+            'from' => $list->firstItem(),
+            'last_page' => $list->lastPage(),
+            'last_page_url' => $list->url($list->lastPage()),
+            'links' => $list->toArray()['links'],
+            'next_page_url' => $list->nextPageUrl(),
+            'path' => $list->url(1),
+            'per_page' => $list->perPage(),
+            'prev_page_url' => $list->previousPageUrl(),
+            'to' => $list->lastItem(),
+            'total' => $list->total(),
+        ];
+    }
+
     public function index(Request $request)
     {
         try {
@@ -32,9 +51,12 @@ class VersionController extends Controller
                 $version->products = Product::whereIn('id', $productIds)->get();
             }
 
+            $pagination = $this->pagination($listVersion);
+
             return view('Product.danhSachPhienBan')->with(compact(
                 "listVersion",
-                "listProduct"
+                "listProduct",
+                "pagination"
             ));
         } catch (Exception $e) {
             Session::flash('error', $e);

@@ -11,11 +11,11 @@
     
     function getPaginationLink($link, $pageName)
     {
-        if (!isset($link->url)) {
+        if (!isset($link['url'])) {
             return '#';
         }
     
-        $pageNumber = explode('?page=', $link->url)[1];
+        $pageNumber = explode('?page=', $link['url'])[1];
     
         $queryString = request()->query();
     
@@ -33,9 +33,7 @@
     //     }
     //     return false;
     // }
-    
-    $listData = [['id' => 1, 'code' => 'TBHT01', 'name' => 'Ô tô điện GoCute', 'usermanager' => 'Nguyễn Văn A - TBHT00', 'mobi' => 'Xe ô tô điện', 'email' => 'Sản phẩm dẫn', 'nhom' => 'Tuỳ biến', 'kenh' => 'Biến thể', 'tuyen' => '02/08/2023'], ['id' => 2, 'code' => 'TBHT02', 'name' => 'Ô tô điện Gocool', 'usermanager' => 'Nguyễn Văn B - MTDH01', 'mobi' => 'Xe ô tô điện', 'email' => 'Sản phẩm dẫn', 'nhom' => 'Tuỳ biến', 'kenh' => 'Biến thể', 'tuyen' => '02/08/2023'], ['id' => 3, 'code' => 'TBHT03', 'name' => 'Ô tô điện GoChoi', 'usermanager' => 'Nguyễn Văn C - TBHT02', 'mobi' => 'Xe ô tô điện', 'email' => 'Sản phẩm mới', 'nhom' => 'Tuỳ biến', 'kenh' => 'Biến thể', 'tuyen' => '02/08/2023'], ['id' => 4, 'code' => 'TBHT04', 'name' => 'Xe tải van', 'usermanager' => 'Nguyễn Văn D - MTDH04', 'mobi' => 'Xe ô tô điện', 'email' => 'Sản phẩm mới', 'nhom' => 'Tuỳ biến', 'kenh' => 'Biến thể', 'tuyen' => '02/08/2023']];
-    
+        
 @endphp
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
@@ -177,13 +175,13 @@
                                     </div>
                                     <nav aria-label="Page navigation example" class="float-end mt-3" id="target-pagination">
                                         <ul class="pagination">
-                                            {{-- @foreach ($listUsers->links as $link)
-                                                <li class="page-item {{ $link->active ? 'active' : '' }}">
+                                            @foreach ($pagination['links'] as $link)
+                                                <li class="page-item {{ $link['active'] ? 'active' : '' }}">
                                                     <a class="page-link" href="{{ getPaginationLink($link, 'page') }}" aria-label="Previous">
-                                                        <span aria-hidden="true">{!! $link->label !!}</span>
+                                                        <span aria-hidden="true">{!! $link['label'] !!}</span>
                                                     </a>
                                                 </li>
-                                            @endforeach --}}
+                                            @endforeach
                                         </ul>
                                     </nav>
                                 </div>

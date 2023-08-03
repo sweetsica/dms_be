@@ -3,30 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Models\Area;
-use App\Models\Department;
-use App\Models\UnitLeader;
+use App\Models\Locality;
 use Illuminate\Http\Request;
 
-class AreaController extends Controller
+class LocalityController extends Controller
 {
+
 
     public function index(Request $request){
         $search = $request->get('search');
-        $areaList = Area::join('department','department.id','=','area.area')
+        $localityList = Locality::join('area','area.id','=','locality.area_id')
         ->select(
-            'area.id',
-            'area.name',
-            'area.description',
-            'area.code',
-            'area.area',
-            'department.name as department_name'
+            'locality.id',
+            'locality.name',
+            'locality.description',
+            'locality.code',
+            'locality.area_id',
+            'area.name as area_name'
         )
-        ->where("area.code", "like", "%$search%")->paginate(5);
-        $department = Department::where('code', 'like', 'VUNG%')->get();
-        return view("Address.danhSachKhuVuc",[
-            "areaList"=>$areaList,
+        ->where("locality.code", "like", "%$search%")->paginate(5);
+        $area = Area::all();
+        return view("Address.danhSachDiaBan",[
+            "localityList"=>$localityList,
             'search' => $search,
-            'department' => $department,
+            'area' => $area,
 
         ]);
     }
@@ -34,35 +34,35 @@ class AreaController extends Controller
     {
         $name = $request->get('name');
         $code = $request->get('code');
-        $area  = $request->get('area');
+        $area_id  = $request->get('area_id');
         $description  = $request->get('description');
-        $data = new Area();
+        $data = new Locality();
         $data->name = $name;
         $data->code=$code;
-        $data->area=$area;
+        $data->area_id=$area_id;
         $data->description=$description;
         $data->save();
-        return redirect()->route('area.index');
+        return redirect()->route('locality.index');
     }
 
     public function update(Request $request,$id)
     {
         $name = $request->get('name');
         $code = $request->get('code');
-        $area  = $request->get('area');
+        $area_id  = $request->get('area_id');
         $description  = $request->get('description');
-        $data = Area::find($id);
+        $data = Locality::find($id);
         $data->name = $name;
         $data->code=$code;
-        $data->area=$area;
+        $data->area_id=$area_id;
         $data->description=$description;
         $data->save();
-        return redirect()->route('area.index');
+        return redirect()->route('locality.index');
     }
 
     public function destroy($id)
     {
-        Area::destroy($id);
+        Locality::destroy($id);
         return redirect()->back()->with('mess', 'Đã xóa!');;
     }
 }

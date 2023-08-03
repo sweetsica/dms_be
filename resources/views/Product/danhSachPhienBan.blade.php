@@ -9,19 +9,19 @@
 @endsection
 @php
     
-    // function getPaginationLink($link, $pageName)
-    // {
-    //     if (!isset($link->url)) {
-    //         return '#';
-    //     }
+    function getPaginationLink($link, $pageName)
+    {
+        if (!isset($link['url'])) {
+            return '#';
+        }
     
-    //     $pageNumber = explode('?page=', $link->url)[1];
+        $pageNumber = explode('?page=', $link['url'])[1];
     
-    //     $queryString = request()->query();
+        $queryString = request()->query();
     
-    //     $queryString[$pageName] = $pageNumber;
-    //     return route('timekeeping.list', $queryString);
-    // }
+        $queryString[$pageName] = $pageNumber;
+        return route('version.list', $queryString);
+    }
     
     // function isFiltering($filterNames)
     // {
@@ -156,28 +156,16 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
-                                        <nav aria-label="Page navigation example" class="float-end mt-3"
-                                            id="target-pagination">
-                                            <ul class="pagination">
-                                                {{-- @foreach ($documents->links as $link)
-                                                    <li class="page-item {{ $link->active ? 'active' : '' }}">
-                                                        <a class="page-link" href="{{ getPaginationLink($link, 'page') }}" aria-label="Previous">
-                                                            <span aria-hidden="true">{!! $link->label !!}</span>
-                                                        </a>
-                                                    </li>
-                                                @endforeach --}}
-                                            </ul>
-                                        </nav>
                                     </div>
                                     <nav aria-label="Page navigation example" class="float-end mt-3" id="target-pagination">
                                         <ul class="pagination">
-                                            {{-- @foreach ($listUsers->links as $link)
-                                                <li class="page-item {{ $link->active ? 'active' : '' }}">
+                                            @foreach ($pagination['links'] as $link)
+                                                <li class="page-item {{ $link['active'] ? 'active' : '' }}">
                                                     <a class="page-link" href="{{ getPaginationLink($link, 'page') }}" aria-label="Previous">
-                                                        <span aria-hidden="true">{!! $link->label !!}</span>
+                                                        <span aria-hidden="true">{!! $link['label'] !!}</span>
                                                     </a>
                                                 </li>
-                                            @endforeach --}}
+                                            @endforeach
                                         </ul>
                                     </nav>
                                 </div>
