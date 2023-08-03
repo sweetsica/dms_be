@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ForgotPasswordController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\LocalityController;
 use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\PersonnelLevelController;
 use App\Http\Controllers\PositionController;
@@ -84,13 +85,25 @@ Route::middleware(['auth'])->group(function () {
     Route::get('danh-sach-tuyen', function () {
         return view('other.danhSachTuyen');
     });
-    Route::get('danh-sach-dia-ban', function () {
-        return view('Address.danhSachDiaBan');
-    });
+    // Route::get('danh-sach-dia-ban', function () {
+    //     return view('Address.danhSachDiaBan');
+    // });
 
-    Route::get('danh-sach-khu-vuc', function () {
-        return view('Address.danhSachKhuVuc');
-    });
+    // Route::get('danh-sach-khu-vuc', function () {
+
+    //     return view('Address.danhSachKhuVuc');
+    // });
+
+    Route::get('danh-sach-dia-ban', [LocalityController::class, 'index'])->name('locality.index');
+    Route::post('danh-sach-dia-ban', [LocalityController::class, 'store'])->name('locality.store');
+    Route::post('danh-sach-dia-ban/{id}', [LocalityController::class, 'update'])->name('locality.update');
+    Route::post('danh-sach-dia-banx/{id}', [LocalityController::class, 'destroy'])->name('locality.destroy');
+
+    Route::get('danh-sach-khu-vuc', [AreaController::class, 'index'])->name('area.index');
+    Route::post('danh-sach-khu-vuc', [AreaController::class, 'store'])->name('area.store');
+    Route::post('danh-sach-khu-vuc/{id}', [AreaController::class, 'update'])->name('area.update');
+    Route::post('danh-sach-khu-vucx/{id}', [AreaController::class, 'destroy'])->name('area.destroy');
+
 
     Route::get('department', [DepartmentController::class, 'index'])->name('department.index');
     Route::post('department', [DepartmentController::class, 'store'])->name('department.store');
@@ -104,8 +117,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('position/{id}', [PositionController::class, 'update'])->name('position.update');
     Route::post('positionx/{id}', [PositionController::class, 'destroy'])->name('positionx.destroy');
 
-    Route::get('area', [AreaController::class, 'index'])->name('area.index');
-    Route::post('area', [AreaController::class, 'store'])->name('area.store');
+    // Route::get('area', [AreaController::class, 'index'])->name('area.index');
+    // Route::post('area', [AreaController::class, 'store'])->name('area.store');
 
 Route::get('cap-nhan-su', [PersonnelLevelController::class, 'index'])->name('PersonnelLevel.index');
 Route::post('cap-nhan-su', [PersonnelLevelController::class, 'store'])->name('PersonnelLevel.store');
@@ -121,4 +134,5 @@ Route::get('vai-tro', [RoleController::class, 'index'])->name('Role.index');
 Route::post('vai-tro', [RoleController::class, 'store'])->name('Role.store');
 Route::post('vai-trox/{id}', [RoleController::class, 'update'])->name('Rolex.update');
 Route::post('vai-tro/{id}', [RoleController::class, 'destroy'])->name('Role.destroy');
+
 });

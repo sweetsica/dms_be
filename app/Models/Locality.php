@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Area extends Model
+class Locality extends Model
 {
     use HasFactory;
-    protected $table = 'area';
+    protected $table = 'locality';
     public $timestamps=false;
     public $primaryKey= 'id';
     protected $fillable = [
         'name',
         'description',
         'code',
-        'area',
+        'area_id',
     ];
 }
