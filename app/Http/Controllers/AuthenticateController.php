@@ -21,6 +21,7 @@ class AuthenticateController extends Controller
 
     public function login(Request $request)
     {
+        dd('ki cuc vl');
         try {
             $email = $request->input('email');
             $password = $request->input('password');

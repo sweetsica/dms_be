@@ -35,8 +35,7 @@ class AuthController extends Controller
 
         }
             catch (Exception $e) {
-                dd('Có lỗi!');
-//                return Redirect::route('login')->with('error', 'Sai tài khoản hoặc mật khẩu');
+                return Redirect::route('login')->with('error', 'Sai tài khoản hoặc mật khẩu');
             }
         }
         public function logout(Request $request){
