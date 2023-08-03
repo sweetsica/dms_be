@@ -24,9 +24,10 @@ class AuthenticateController extends Controller
         try {
             $email = $request->input('email');
             $password = $request->input('password');
+
             $account = Personnel::where('email', $email)->first();
             if ($account && Hash::check($password, $account->password)) {
-                if ($account->status == 1) {
+                if ($account->status == "Đang làm việc") {
                     Auth::login($account);
                     return Redirect::route('home');
                 } else {
@@ -41,6 +42,6 @@ class AuthenticateController extends Controller
             return back()->with('loginError', 'Có gì đó sai sai');
         }
     }
-    
+
 
 }

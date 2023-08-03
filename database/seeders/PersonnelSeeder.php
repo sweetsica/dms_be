@@ -19,14 +19,21 @@ class PersonnelSeeder extends Seeder
             'email' => 'admin@tbht.vn',
             'password' => Hash::make('123456'),
             'code' => 'ADMIN-123',
-            'role' => 'admin',
+            'role_id' => 3,
             'phone' => "0123456789",
-            'working_form' => "Chính thức",
+            'form' => "Chính thức",
             'address' => "Hà Nội",
-            'department_id' => 1,
-            'position_id' => 2,
-            'position_level_id' => 3,
-            'area_id' => 4,
+            'department_id' => 18,
+            'position_id' => 4,
+            'personnel_lv_id' => 5,
+            'area_id' => '1',
+            'status' => 'Đang làm việc',
+            'birthday' => "2023-08-03",
+            'gender' => "Nam",
+            // 'annual_salary' => "",
+            'pack' => '1',
+            'manage' => '0',
+
         ]);
     }
 }

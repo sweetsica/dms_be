@@ -25,7 +25,7 @@
                                             <div
                                                 class="action_wrapper d-flex flex-wrap justify-content-between align-items-center mb-3">
                                                 <div class="order-2 order-md-1" style="font-size: 15px;">
-                                                    <b>Danh sách đơn vị trực thuộc</b>
+                                                    <b>Danh sách vị trí</b>
                                                 </div>
                                                 <div
                                                     class="order-1 order-md-2  justify-content-between align-items-center flex-grow-1 mb-2 mb-md-0">
@@ -73,12 +73,12 @@
                                                             </th>
                                                         </tr>
                                                     </thead>
-                                                    <?php $i = 1; ?>
+                                                    <?php $g = 1; ?>
                                                     @foreach ($positionList as $item)
                                                         <tbody>
                                                             <tr>
                                                                 <td class=" text-center">
-                                                                    {{ $i++ }}
+                                                                    {{ $g++ }}
                                                                 </td>
                                                                 <td class="">
                                                                     {{ $item->code }}
@@ -106,35 +106,31 @@
                                                                 </td>
                                                                 <td>
                                                                     <div class="table_actions d-flex justify-content-end">
-                                                                        <div class="btn" data-bs-toggle="modal"
-                                                                            data-bs-target="#qrCode">
-                                                                            <i class="bi bi-share-fill"
-                                                                                style="color: #787878;"></i>
+                                                                        <div data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top" title="Sửa ">
+                                                                            <div class="btn" data-bs-toggle="modal"
+                                                                                data-bs-target="#suaDeXuat{{ $item['id'] }}">
+                                                                                <img style="width:16px;height:16px"
+                                                                                    src="{{ asset('assets/img/edit.svg') }}" />
+                                                                            </div>
                                                                         </div>
                                                                         <div data-bs-toggle="tooltip"
-                                                                        data-bs-placement="top" title="Sửa ">
-                                                                        <div class="btn" data-bs-toggle="modal"
-                                                                            data-bs-target="#suaDeXuat{{$item['id']}}">
-                                                                            <img style="width:16px;height:16px"
-                                                                                src="{{ asset('assets/img/edit.svg') }}" />
+                                                                            data-bs-placement="top" title="Xóa">
+                                                                            <div class="btn" data-bs-toggle="modal"
+                                                                                data-bs-target="#xoaDeXuat{{ $item->id }}">
+                                                                                <img style="width:16px;height:16px"
+                                                                                    src="{{ asset('assets/img/trash.svg') }}" />
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div data-bs-toggle="tooltip"
-                                                                        data-bs-placement="top" title="Xóa">
-                                                                        <div class="btn" data-bs-toggle="modal"
-                                                                            data-bs-target="#xoaDeXuat{{ $item->id }}">
-                                                                            <img style="width:16px;height:16px"
-                                                                                src="{{ asset('assets/img/trash.svg') }}" />
-                                                                        </div>
-                                                                    </div>
                                                                     </div>
                                                                 </td>
                                                             </tr>
                                                         </tbody>
 
                                                         {{-- Sửa đề xuất --}}
-                                                        <div class="modal fade" id="suaDeXuat{{$item['id']}}" tabindex="-1"
-                                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal fade" id="suaDeXuat{{ $item['id'] }}"
+                                                            tabindex="-1" aria-labelledby="exampleModalLabel"
+                                                            aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header text-center">
@@ -144,39 +140,42 @@
                                                                             data-bs-dismiss="modal"
                                                                             aria-label="Close"></button>
                                                                     </div>
-                                                                    <form method="POST" action="{{route('position.update',$item->id)}}">
+                                                                    <form method="POST"
+                                                                        action="{{ route('position.update', $item->id) }}">
                                                                         @csrf
                                                                         <div class="modal-body">
                                                                             <div class="row">
                                                                                 <div class="col-6 mb-3">
                                                                                     <input data-bs-toggle="tooltip"
                                                                                         data-bs-placement="top"
-                                                                                        title="Nhập tên vị trí/chức danh*" name="name"
-                                                                                        type="text"
+                                                                                        title="Nhập tên vị trí/chức danh*"
+                                                                                        name="name" type="text"
                                                                                         class="form-control"
-                                                                                        value="{{$item->name}}">
+                                                                                        value="{{ $item->name }}">
                                                                                 </div>
                                                                                 <div class="col-6 mb-3">
                                                                                     <input data-bs-toggle="tooltip"
                                                                                         data-bs-placement="top"
-                                                                                        title="Nhập mã vị trí/chức danh*" name="code"
-                                                                                        type="text"
+                                                                                        title="Nhập mã vị trí/chức danh*"
+                                                                                        name="code" type="text"
                                                                                         class="form-control"
-                                                                                        value="{{$item->code}}">
+                                                                                        value="{{ $item->code }}">
                                                                                 </div>
 
                                                                                 <div class="col-6 mb-3">
                                                                                     <div data-bs-toggle="tooltip"
                                                                                         data-bs-placement="top"
                                                                                         title="Chọn đơn vị công tác">
-                                                                                        <select name="department_id" required
-                                                                                            class="selectpicker"
+                                                                                        <select name="department_id"
+                                                                                            required class="selectpicker"
                                                                                             data-dropup-auto="false">
-                                                                                            <option value="{{$item->department_id}}"> {{ $item->department_name}}</option>
+                                                                                            <option
+                                                                                                value="{{ $item->department_id }}">
+                                                                                                {{ $item->department_name }}
+                                                                                            </option>
                                                                                             @foreach ($departmentlists as $ac)
                                                                                                 <option
-                                                                                                    value="{{ $ac->id }}"
-                                                                                                   >
+                                                                                                    value="{{ $ac->id }}">
                                                                                                     @php
                                                                                                         $str = '';
                                                                                                         for ($i = 0; $i < $ac->level; $i++) {
@@ -194,15 +193,19 @@
                                                                                     <div data-bs-toggle="tooltip"
                                                                                         data-bs-placement="top"
                                                                                         title="Chọn cấp nhân sự">
-                                                                                        <select name="personnel_level" required
-                                                                                            class="selectpicker"
+                                                                                        <select name="personnel_level"
+                                                                                            required class="selectpicker"
                                                                                             data-dropup-auto="false">
-                                                                                            <option value="{{$item->personnel_level}}"> {{ $item->personnel_level_name}}</option>
-                                                                                            @foreach ($personnelLevelList as $av)
-                                                                                            <option value="{{ $av->id }}">
-                                                                                                {{ $av->name }}
+                                                                                            <option
+                                                                                                value="{{ $item->personnel_level }}">
+                                                                                                {{ $item->personnel_level_name }}
                                                                                             </option>
-                                                                                        @endforeach
+                                                                                            @foreach ($personnelLevelList as $av)
+                                                                                                <option
+                                                                                                    value="{{ $av->id }}">
+                                                                                                    {{ $av->name }}
+                                                                                                </option>
+                                                                                            @endforeach
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
@@ -214,11 +217,15 @@
                                                                                         <select name="parent" required
                                                                                             class="selectpicker"
                                                                                             data-dropup-auto="false">
-                                                                                            <option value="{{$item->parent}}"> @if ($item->donvime){{ $item->donvime->name }}  @endif</option>
+                                                                                            <option
+                                                                                                value="{{ $item->parent }}">
+                                                                                                @if ($item->donvime)
+                                                                                                    {{ $item->donvime->name }}
+                                                                                                @endif
+                                                                                            </option>
                                                                                             @foreach ($positionlists as $ac)
                                                                                                 <option
-                                                                                                    value="{{ $ac->id }}"
-                                                                                                   >
+                                                                                                    value="{{ $ac->id }}">
                                                                                                     @php
                                                                                                         $str = '';
                                                                                                         for ($i = 0; $i < $ac->level; $i++) {
@@ -234,29 +241,43 @@
 
                                                                                 </div>
                                                                                 <div class="col-6 mb-3">
-                                                                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn gói trang bị">
-                                                                                        <select name="pack" class="selectpicker" data-dropup-auto="false">
-                                                                                            <option value="">Chọn gói trang bị</option>
+                                                                                    <div data-bs-toggle="tooltip"
+                                                                                        data-bs-placement="top"
+                                                                                        title="Chọn gói trang bị">
+                                                                                        <select name="pack"
+                                                                                            class="selectpicker"
+                                                                                            data-dropup-auto="false">
+                                                                                            <option value="">Chọn gói
+                                                                                                trang bị</option>
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-6 mb-3">
-                                                                                    <div data-bs-toggle="tooltip" data-bs-placement="top" >
-                                                                                        <textarea name="description" type="text" placeholder="Chức năng nhiệm vụ"
-                                                                                            class="form-control " data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                                            title="Mô tả" style="width: 450px;height: 80px;">{{ $item->description }}</textarea>
+                                                                                    <div data-bs-toggle="tooltip"
+                                                                                        data-bs-placement="top">
+                                                                                        <textarea name="description" type="text" placeholder="Chức năng nhiệm vụ" class="form-control "
+                                                                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Mô tả" style="width: 450px;height: 80px;">{{ $item->description }}</textarea>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-6 mb-3">
 
                                                                                 </div>
                                                                                 <div class="col-6 mb-3">
-                                                                                    <input name="staffing" type="text" placeholder="Định biên*" class="form-control"
-                                                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Định biên*">
+                                                                                    <input name="staffing" type="text"
+                                                                                        placeholder="Định biên*"
+                                                                                        class="form-control"
+                                                                                        data-bs-toggle="tooltip"
+                                                                                        data-bs-placement="top"
+                                                                                        title="Định biên*">
                                                                                 </div>
                                                                                 <div class="col-6 mb-3">
-                                                                                    <input name="wage" type="text" placeholder="Quỹ lương năm*" class="form-control"
-                                                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Quỹ lương năm*" value="{{ $item->wage }}">
+                                                                                    <input name="wage" type="text"
+                                                                                        placeholder="Quỹ lương năm*"
+                                                                                        class="form-control"
+                                                                                        data-bs-toggle="tooltip"
+                                                                                        data-bs-placement="top"
+                                                                                        title="Quỹ lương năm*"
+                                                                                        value="{{ $item->wage }}">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -268,6 +289,38 @@
                                                                                 class="btn btn-danger">Lưu</button>
                                                                         </div>
                                                                     </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        {{-- Xóa đề xuất --}}
+                                                        <div class="modal fade" id="xoaDeXuat{{ $item->id }}"
+                                                            tabindex="-1" aria-labelledby="exampleModalLabel"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title text-danger"
+                                                                            id="exampleModalLabel">Xóa </h5>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        Bạn có thực sự muốn xoá vị trí này không?
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button"
+                                                                            class="btn btn-outline-danger"
+                                                                            data-bs-dismiss="modal">Hủy</button>
+                                                                        <form
+                                                                            action="{{ route('positionx.destroy', $item->id) }}"
+                                                                            method="POST">
+                                                                            @csrf
+                                                                            <button type="submit"
+                                                                                class="btn btn-danger">Xóa</button>
+                                                                        </form>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -406,13 +459,10 @@
     {{-- <script type="text/javascript" src="{{ asset('assets/plugins/jquery-repeater/repeater.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/plugins/jquery-repeater/custom-repeater.js') }}"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
-
-
     <!-- Chart Js -->
     <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chart.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-stacked100@1.0.0.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-datalabels@2.0.0.js') }}"></script>
-
     <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_khachHangActive.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_khachHangMoi.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_soDonHang.js') }}"></script>

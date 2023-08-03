@@ -33,6 +33,19 @@ class RoleController extends Controller
         return redirect()->route('Role.index');
     }
 
+    public function update(Request $request,$id)
+    {
+        $name = $request->get('name');
+        $code = $request->get('code');
+        $description  = $request->get('description');
+        $data = Role::find($id);
+        $data->name = $name;
+        $data->code = $code;
+        $data->description=$description;
+        $data->save();
+        return redirect()->route('Role.index');
+    }
+
     public function destroy($id)
     {
         Role::destroy($id);

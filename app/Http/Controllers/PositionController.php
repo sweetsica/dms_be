@@ -123,10 +123,10 @@ class PositionController extends Controller
         return redirect()->route('position.index');
     }
 
-    // public function destroy($id)
-    // {
-    //     Department::destroy($id);
-    //     return redirect()->back()->with('mess', 'Đã xóa!');;
-    // }
+    public function destroy($id)
+    {
+        Position::destroy($id);
+        return redirect()->back()->with('mess', 'Đã xóa!');;
+    }
 
 }
