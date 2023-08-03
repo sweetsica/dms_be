@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ProposalController;
 use App\Http\Controllers\Api\ForgotPasswordController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AuthenticateController;
+use App\Http\Controllers\CustomController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\PersonnelController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\PersonnelLevelController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\VersionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -81,6 +83,16 @@ Route::middleware(['auth'])->group(function () {
     Route::put('sua-san-pham/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('xoa-san-pham/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
 
+    Route::get('danh-sach-phien-ban', [VersionController::class, 'index'])->name('version.list');
+    Route::post('them-moi-phien-ban', [VersionController::class, 'store'])->name('version.store');
+    Route::put('sua-phien-ban/{id}', [VersionController::class, 'update'])->name('version.update');
+    Route::delete('xoa-phien-ban/{id}', [VersionController::class, 'destroy'])->name('version.destroy');
+
+    Route::get('danh-sach-tuy-chinh', [CustomController::class, 'index'])->name('custom.list');
+    Route::post('them-moi-tuy-chinh', [CustomController::class, 'store'])->name('custom.store');
+    Route::put('sua-tuy-chinh/{id}', [CustomController::class, 'update'])->name('custom.update');
+    Route::delete('xoa-tuy-chinh/{id}', [CustomController::class, 'destroy'])->name('custom.destroy');
+
     Route::get('danh-sach-tuyen', function () {
         return view('other.danhSachTuyen');
     });
@@ -92,13 +104,7 @@ Route::middleware(['auth'])->group(function () {
         return view('Address.danhSachKhuVuc');
     });
 
-    Route::get('danh-sach-tuy-chinh', function () {
-        return view('Product.danhSachTuyChinh');
-    });
 
-    Route::get('danh-sach-phien-ban', function () {
-        return view('Product.danhSachPhienBan');
-    });
 
     Route::get('department', [DepartmentController::class, 'index'])->name('department.index');
     Route::post('department', [DepartmentController::class, 'store'])->name('department.store');

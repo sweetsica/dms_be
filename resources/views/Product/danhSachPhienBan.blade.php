@@ -16,13 +16,13 @@
     //     }
     
     //     $pageNumber = explode('?page=', $link->url)[1];
-
+    
     //     $queryString = request()->query();
     
     //     $queryString[$pageName] = $pageNumber;
     //     return route('timekeeping.list', $queryString);
     // }
-
+    
     // function isFiltering($filterNames)
     // {
     //     $filters = request()->query();
@@ -33,11 +33,6 @@
     //     }
     //     return false;
     // }
-
-    $listData = [
-        ['id' => 1, 'code' => 'PB0001', 'name' => 'Phiên bản xe 4 bánh', 'usermanager' => 'Nguyễn Văn A - TBHT00', "email" => 'Xe ôtô điện', 'nhom' => '2', 'kenh' => 'OTC',],
-        ['id' => 2, 'code' => 'PB0002', 'name' => 'Phiên bản xe 6 bánh', 'usermanager' => 'Nguyễn Văn B - MTDH01', "email" => 'Xe ôtô điện', 'nhom' => '3', 'kenh' => 'ETC',]
-    ];
     
 @endphp
 @section('content')
@@ -73,12 +68,12 @@
                                                     </div>
                                                 </form>
                                             </div>
-    
+
                                             {{-- <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Lọc">
                                                 <button class="btn btn-outline-danger {{ isFiltering(['department', 'user', 'adminDate']) ? 'active' : '' }}" data-bs-toggle="modal" data-bs-target="#filterAdmin"><i class="bi bi-funnel"></i>
                                                 </button>
                                             </div> --}}
-    
+
                                         </div>
                                         {{-- <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                             title="Xuất file Excel">
@@ -87,63 +82,82 @@
                                                 class="btn-export"><i class="bi bi-download"></i></a>
                                         </div> --}}
 
-                                        <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Thêm phiên bản" data-bs-original-title="Thêm phiên bản">
-                                            <button class="btn btn-danger d-block testCreateUser" data-bs-toggle="modal" data-bs-target="#add">Thêm phiên bản</button>
+                                        <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            aria-label="Thêm phiên bản" data-bs-original-title="Thêm phiên bản">
+                                            <button class="btn btn-danger d-block testCreateUser" data-bs-toggle="modal"
+                                                data-bs-target="#add">Thêm phiên bản</button>
                                         </div>
                                     </div>
                                     <div class="table-responsive">
-                                        <table id="dsDaoTao" class="table table-responsive table-hover table-bordered filter" style="width: 100%">
+                                        <table id="dsDaoTao"
+                                            class="table table-responsive table-hover table-bordered filter"
+                                            style="width: 100%">
                                             <thead>
                                                 <tr>
                                                     <th class="text-nowrap text-center" style="width:3%">STT</th>
                                                     <th class="text-nowrap text-center" style="width:8%">Mã phiên bản</th>
                                                     <th class="text-nowrap text-center" style="width:30%">Tên phiên bản</th>
-                                                    <th class="text-nowrap text-center" style="width:30%">Thuộc loại sản phẩm</th>
+                                                    <th class="text-nowrap text-center" style="width:30%">Thuộc loại sản
+                                                        phẩm</th>
                                                     <th class="text-nowrap text-center" style="width:4%">Hành động</th>
 
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($listData as $item)
-                                                <tr class="table-row" role="button">
-                                                    
-                                                    <td>
-                                                        <div class="overText text-center">
-                                                            {{ $item['id'] }}
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="overText" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
-                                                            {{ $item['code'] }}
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="overText" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
-                                                            {{ $item['name'] }}
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="overText" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
-                                                            {{ $item['email'] }}
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="table_actions d-flex justify-content-center">
-                                                            <div class="btn test_btn-edit-{{ $item['id'] }}" href="#" data-bs-toggle="modal" data-bs-target="#suaca{{ $item['id'] }}">
-                                                                <img style="width:16px;height:16px" src="{{ asset('assets/img/edit.svg') }}" />
-                                                            </div>
-                                                            <div class="btn test_btn-remove-{{ $item['id'] }}" href="#" data-bs-toggle="modal" data-bs-target="#xoaca{{ $item['id'] }}">
-                                                                <img style="width:16px;height:16px" src="{{ asset('assets/img/trash.svg') }}" />
-                                                            </div>
-                                                        </div>
-                                
+                                                @foreach ($listVersion as $item)
+                                                    <tr class="table-row" role="button">
 
-                                                    </td>
-                                                </tr>
+                                                        <td>
+                                                            <div class="overText text-center">
+                                                                {{ $listVersion->total() - $loop->index - ($listVersion->currentPage() - 1) * $listVersion->perPage() }}
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="overText" data-bs-toggle="tooltip"
+                                                                data-bs-placement="top" title="{{ $item->code }}">
+                                                                {{ $item->code }}
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="overText" data-bs-toggle="tooltip"
+                                                                data-bs-placement="top" title="{{ $item->name }}">
+                                                                {{ $item->name }}
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="overText" data-bs-toggle="tooltip"
+                                                                data-bs-placement="top"
+                                                                title="@foreach ($item->products as $prod)
+                                                                {{ $prod->name }} | @endforeach">
+                                                                @foreach ($item->products as $prod)
+                                                                    | {{ $prod->name }} |
+                                                                @endforeach
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="table_actions d-flex justify-content-center">
+                                                                <div class="btn test_btn-edit-{{ $item->id }}"
+                                                                    href="#" data-bs-toggle="modal"
+                                                                    data-bs-target="#suaPhienBan{{ $item->id }}">
+                                                                    <img style="width:16px;height:16px"
+                                                                        src="{{ asset('assets/img/edit.svg') }}" />
+                                                                </div>
+                                                                <div class="btn test_btn-remove-{{ $item->id }}"
+                                                                    href="#" data-bs-toggle="modal"
+                                                                    data-bs-target="#xoaPhienBan{{ $item->id }}">
+                                                                    <img style="width:16px;height:16px"
+                                                                        src="{{ asset('assets/img/trash.svg') }}" />
+                                                                </div>
+                                                            </div>
+
+
+                                                        </td>
+                                                    </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
-                                        <nav aria-label="Page navigation example" class="float-end mt-3" id="target-pagination">
+                                        <nav aria-label="Page navigation example" class="float-end mt-3"
+                                            id="target-pagination">
                                             <ul class="pagination">
                                                 {{-- @foreach ($documents->links as $link)
                                                     <li class="page-item {{ $link->active ? 'active' : '' }}">
@@ -155,8 +169,7 @@
                                             </ul>
                                         </nav>
                                     </div>
-                                    <nav aria-label="Page navigation example" class="float-end mt-3"
-                                        id="target-pagination">
+                                    <nav aria-label="Page navigation example" class="float-end mt-3" id="target-pagination">
                                         <ul class="pagination">
                                             {{-- @foreach ($listUsers->links as $link)
                                                 <li class="page-item {{ $link->active ? 'active' : '' }}">
@@ -178,69 +191,84 @@
     </div>
     @include('template.sidebar.sidebarMaster.sidebarRight')
 
-    @foreach($listData as $item)
-    {{-- delete --}}
-    <div class="modal fade" id="xoaca{{ $item['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">XOÁ</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    @foreach ($listVersion as $item)
+        {{-- delete --}}
+        <div class="modal fade" id="xoaPhienBan{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h5 class="modal-title w-100" id="exampleModalLabel">XOÁ</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="fs-5">Bạn có thực sự muốn xoá không?</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
+                        <form action="{{ route('version.destroy', ['id' => $item->id]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" id="deleteRowElement">Có, tôi muốn
+                                xóa</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <div class="fs-5">Bạn có thực sự muốn xoá không?</div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
-                    <form action="#" method="POST">
+            </div>
+        </div>
+        {{-- edit --}}
+        <div class="modal fade" id="suaPhienBan{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h5 class="modal-title w-100" id="exampleModalLabel">Sửa thông tin phiên bản</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form id="formThemCapPhat" method="POST" action="{{ route('version.update', ['id' => $item->id]) }}">
                         @csrf
-                        {{-- @method('DELETE') --}}
-                        <button type="submit" class="btn btn-danger" id="deleteRowElement">Có, tôi muốn
-                            xóa</button>
+                        @method('PUT')
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" value="{{ $item->name }}" name="name"
+                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên phiên bản"
+                                        placeholder="Tên phiên bản*" class="form-control">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" value="{{ $item->code }}" name="code"
+                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã phiên bản"
+                                        placeholder="Mã phiên bản*" class="form-control">
+                                </div>
+                                <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Thuộc loại sản phẩm">
+                                    <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
+                                        data-live-search="true" title="Thuộc loại sản phẩm*"
+                                        data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
+                                        data-size="3" name="product_ids[]" data-live-search-placeholder="Tìm kiếm..." multiple>
+                                        @foreach ($listProduct as $pro)
+                                            <option value="{{ $pro->id }}" {{ in_array($pro->id, json_decode($item->product_ids)) ? "selected" : "" }} >{{ $pro->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" value="{{ $item->note }}" name="note" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Ghi chú" placeholder="Ghi chú"
+                                        class="form-control">
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger me-3"
+                                data-bs-dismiss="modal">Hủy</button>
+                            <button type="submit" class="btn btn-danger">Lưu</button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
-    {{-- edit --}}
-    <div class="modal fade" id="suaca{{ $item['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">Sửa thông tin phiên bản</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form id="formThemCapPhat" method="POST" action="#">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <input type="text" value="1" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên phiên bản" placeholder="Tên phiên bản*" class="form-control">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <input type="text" value="1" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã phiên bản" placeholder="Mã phiên bản*" class="form-control">
-                            </div>
-                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Thuộc loại sản phẩm">
-                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Thuộc loại sản phẩm*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
-                                    <option value="1" selected>1</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <input type="text" value="1" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Ghi chú" placeholder="Ghi chú" class="form-control">
-                            </div>
-                            
-                        
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
-                        <button type="submit" class="btn btn-danger">Lưu</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
     @endforeach
 
     <!-- Modal thêm  -->
@@ -251,26 +279,37 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Thêm phiên bản</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="formThemCapPhat" method="POST" action="#">
+                <form id="formThemCapPhat" method="POST" action="{{ route('version.store') }}">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên phiên bản" placeholder="Tên phiên bản*" class="form-control">
+                                <input type="text" name="name" data-bs-toggle="tooltip" required
+                                    data-bs-placement="top" title="Tên phiên bản" placeholder="Tên phiên bản*"
+                                    class="form-control">
                             </div>
                             <div class="col-md-6 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã phiên bản" placeholder="Mã phiên bản*" class="form-control">
+                                <input type="text" name="code" data-bs-toggle="tooltip" required
+                                    data-bs-placement="top" title="Mã phiên bản" placeholder="Mã phiên bản*"
+                                    class="form-control">
                             </div>
-                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Thuộc loại sản phẩm">
-                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Thuộc loại sản phẩm*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
-                                    <option value="1">1</option>
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Thuộc loại sản phẩm">
+                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
+                                    data-live-search="true" title="Thuộc loại sản phẩm*"
+                                    data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3"
+                                    name="product_ids[]" data-live-search-placeholder="Tìm kiếm..." multiple>
+                                    @foreach ($listProduct as $pro)
+                                        <option value="{{ $pro->id }}">{{ $pro->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Ghi chú" placeholder="Ghi chú" class="form-control">
+                                <input type="text" name="note" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Ghi chú" placeholder="Ghi chú" class="form-control">
                             </div>
-                            
-                        
+
+
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -288,13 +327,14 @@
 @endsection
 @section('footer-script')
 
-        <!-- Plugins -->
-         <script src="{{ asset('assets/plugins/jquery-datetimepicker/custom-datetimepicker.js') }}"></script>
+    <!-- Plugins -->
+    <script src="{{ asset('assets/plugins/jquery-datetimepicker/custom-datetimepicker.js') }}"></script>
 
-        <script type="text/javascript" charset="utf-8" src="https://cdn.datatables.net/fixedcolumns/4.2.2/js/dataTables.fixedColumns.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
-        <script type="text/javascript" src="{{ asset('assets/plugins/jquery-repeater/repeater.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('assets/plugins/jquery-repeater/custom-repeater.js') }}"></script>
+    <script type="text/javascript" charset="utf-8"
+        src="https://cdn.datatables.net/fixedcolumns/4.2.2/js/dataTables.fixedColumns.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/jquery-repeater/repeater.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/jquery-repeater/custom-repeater.js') }}"></script>
     <!-- Chart Js -->
     <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chart.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-stacked100@1.0.0.js') }}"></script>
@@ -444,21 +484,21 @@
 
 
 
-<script>
-    function resetTaskFilters(queryNames) {
-        console.log("reset filters", queryNames);
-        const urlParams = new URLSearchParams(window.location.search);
-        queryNames.forEach(queryName => {
+    <script>
+        function resetTaskFilters(queryNames) {
+            console.log("reset filters", queryNames);
+            const urlParams = new URLSearchParams(window.location.search);
+            queryNames.forEach(queryName => {
 
-            urlParams.delete(queryName);
+                urlParams.delete(queryName);
 
 
-        })
-        window.location.search = urlParams;
-    }
-</script>
+            })
+            window.location.search = urlParams;
+        }
+    </script>
 
-<script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
 
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}"></script>
