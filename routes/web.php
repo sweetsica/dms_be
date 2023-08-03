@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ProposalController;
 use App\Http\Controllers\Api\ForgotPasswordController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AuthenticateController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\PersonnelLevelController;
@@ -72,10 +73,7 @@ Route::middleware(['auth'])->group(function () {
     // danh sách vị trí
     Route::get('danh-sach-vi-tri', [PositionController::class, 'index'])->name('position.list');
 
-
-    Route::get('danh-sach-khach-hang', function () {
-        return view('other.danhSachKhachHang');
-    });
+    Route::get('danh-sach-khach-hang', [CustomerController::class, 'index'])->name('position.list');
 
     Route::get('danh-sach-san-pham', function () {
         return view('Product.danhSachSanPham');
