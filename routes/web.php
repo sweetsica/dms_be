@@ -45,7 +45,7 @@ Route::middleware(['guest'])->group(function () {
     Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
 });
 
-Route::middleware(['auth'])->group(function () {
+// Route::middleware(['auth'])->group(function () {
     Route::post('/log-out', function () {
         Auth::logout();
         return redirect()->route('login');
@@ -146,4 +146,4 @@ Route::middleware(['auth'])->group(function () {
     Route::post('vai-tro', [RoleController::class, 'store'])->name('Role.store');
     Route::post('vai-trox/{id}', [RoleController::class, 'update'])->name('Rolex.update');
     Route::post('vai-tro/{id}', [RoleController::class, 'destroy'])->name('Role.destroy');
-});
+// });
