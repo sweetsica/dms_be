@@ -21,7 +21,7 @@ class Authenticate
         if (auth()->guard($guards)->check()) {
             return $next($request);
         }
-        return $next($request);
-//        return redirect()->guest('/login');
+//        return $next($request);
+        return redirect()->guest('/login');
     }
 }
