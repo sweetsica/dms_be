@@ -31,10 +31,10 @@
                                     <div class=" control_wrapper"  >
                                         <a href="" class="control_link" id="control_link-1">
                                             <div class="control_img">
-                                                <img src="{{ asset('/assets/img/control/1.png') }}" alt="">
+                                                <img src="{{ asset('/assets/img/control/agreement.png') }}" alt="">
                                             </div>
                                             <div class="control_title fs-5">
-                                                Công việc
+                                                Khách hàng
                                             </div>
                                         </a>
                                     </div>
@@ -56,10 +56,10 @@
                                     <div class=" control_wrapper"  >
                                         <a href="#" class="control_link" id="control_link-3">
                                             <div class="control_img">
-                                                <img src="{{ asset('/assets/img/control/3.png') }}" alt="">
+                                                <img src="{{ asset('/assets/img/control/features.png') }}" alt="">
                                             </div>
                                             <div class="control_title fs-5">
-                                                Kho
+                                                Sản phẩm
                                             </div>
                                         </a>
                                     </div>
@@ -68,10 +68,10 @@
                                     <div class=" control_wrapper"  >
                                         <a href="#" class="control_link" id="control_link-4">
                                             <div class="control_img">
-                                                <img src="{{ asset('/assets/img/control/4.png') }}" alt="">
+                                                <img src="{{ asset('/assets/img/control/order-delivery.png') }}" alt="">
                                             </div>
                                             <div class="control_title fs-5">
-                                                Bán hàng
+                                                Sản phẩm Custom
                                             </div>
                                         </a>
                                     </div>
@@ -86,10 +86,10 @@
                                     <div class=" control_wrapper"  >
                                         <a href="#" class="control_link" id="control_link-5">
                                             <div class="control_img">
-                                                <img src="{{ asset('/assets/img/control/5.png') }}" alt="">
+                                                <img src="{{ asset('/assets/img/control/cargo.png') }}" alt="">
                                             </div>
                                             <div class="control_title fs-5">
-                                                KPIs
+                                                Đơn hàng
                                             </div>
                                         </a>
                                     </div>
@@ -98,10 +98,10 @@
                                     <div class=" control_wrapper"  >
                                         <a href="#" class="control_link" id="control_link-6">
                                             <div class="control_img">
-                                                <img src="{{ asset('/assets/img/control/6.png') }}" alt="">
+                                                <img src="{{ asset('/assets/img/control/users.png') }}" alt="">
                                             </div>
                                             <div class="control_title fs-5">
-                                                Trình ký
+                                                Tuyến
                                             </div>
                                         </a>
                                     </div>
@@ -110,10 +110,10 @@
                                     <div class=" control_wrapper"  >
                                         <a href="#" class="control_link" id="control_link-7">
                                             <div class="control_img">
-                                                <img src="{{ asset('/assets/img/control/7.png') }}" alt="">
+                                                <img src="{{ asset('/assets/img/control/workflow.png') }}" alt="">
                                             </div>
                                             <div class="control_title fs-5">
-                                                Phản ánh
+                                                Phòng ban
                                             </div>
                                         </a>
                                     </div>
@@ -122,114 +122,16 @@
                                     <div class=" control_wrapper"  >
                                         <a href="#" class="control_link" id="control_link-8">
                                             <div class="control_img">
-                                                <img src="{{ asset('/assets/img/control/8.png') }}" alt="">
+                                                <img src="{{ asset('/assets/img/control/brain.png') }}" alt="">
                                             </div>
                                             <div class="control_title fs-5">
-                                                Đề xuất
+                                                Cơ cấu đơn vị
                                             </div>
                                         </a>
                                     </div>
                                 </div>
-                                <div class="col-6 col-sm-6 col-md-4 col-xl-3 mb-5 mt-5">
-                                    <div class=" control_wrapper"  >
-                                        <a href="#" class="control_link" id="control_link-9">
-                                            <div class="control_img">
-                                                <img src="{{ asset('/assets/img/control/9.png') }}" alt="">
-                                            </div>
-                                            <div class="control_title fs-5">
-                                                Chấm công
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-6 col-sm-6 col-md-4 col-xl-3 mb-5 mt-5">
-                                    <div class=" control_wrapper"  >
-                                        <a href="#" class="control_link" id="control_link-10">
-                                            <div class="control_img">
-                                                <img src="{{ asset('/assets/img/control/10.png') }}" alt="">
-                                            </div>
-                                            <div class="control_title fs-5">
-                                                Nghỉ, phép
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-6 col-sm-6 col-md-4 col-xl-3 mb-5 mt-5">
-                                    <div class=" control_wrapper"  >
-                                        <a href="#" class="control_link" id="control_link-11">
-                                            <div class="control_img">
-                                                <img src="{{ asset('/assets/img/control/11.png') }}" alt="">
-                                            </div>
-                                            <div class="control_title fs-5">
-                                                Làm thêm
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-6 col-sm-6 col-md-4 col-xl-3 mb-5 mt-5">
-                                    <div class=" control_wrapper"  >
-                                        <a href="#" class="control_link" id="control_link-12">
-                                            <div class="control_img">
-                                                <img src="{{ asset('/assets/img/control/12.png') }}" alt="">
-                                            </div>
-                                            <div class="control_title fs-5">
-                                                Lương
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-6 col-sm-6 col-md-4 col-xl-3 mt-5">
-                                    <div class=" control_wrapper"  >
-                                        <a href="#" class="control_link" id="control_link-13">
-                                            <div class="control_img">
-                                                <img src="{{ asset('/assets/img/control/13.png') }}"
-                                                    alt="">
-                                            </div>
-                                            <div class="control_title fs-5">
-                                                Thanh toán
-                                            </div>
-                                        </a>
-                                    </div>
-
-                                </div>
-                                <div class="col-6 col-sm-6 col-md-4 col-xl-3 mt-5">
-                                    <div class=" control_wrapper"  >
-                                        <a href="#" class="control_link" id="control_link-14">
-                                            <div class="control_img">
-                                                <img src="{{ asset('/assets/img/control/14.png') }}"
-                                                    alt="">
-                                            </div>
-                                            <div class="control_title fs-5">
-                                                Cấp phát
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-6 col-sm-6 col-md-4 col-xl-3 mt-5">
-                                    <div class=" control_wrapper"  >
-                                        <a href="#" class="control_link" id="control_link-15">
-                                            <div class="control_img">
-                                                <img src="{{ asset('/assets/img/control/15.png') }}" alt="">
-                                            </div>
-                                            <div class="control_title fs-5">
-                                                Canteen
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-6 col-sm-6 col-md-4 col-xl-3 mt-5">
-                                    <div class=" control_wrapper"  >
-                                        <a href="#" class="control_link" id="control_link-16">
-                                            <div class="control_img">
-                                                <img src="{{ asset('/assets/img/control/16.png') }}"
-                                                    alt="">
-                                            </div>
-                                            <div class="control_title fs-5">
-                                                Công tác
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
+                                
+                                
                             </div>
                         </div>
                     </div>

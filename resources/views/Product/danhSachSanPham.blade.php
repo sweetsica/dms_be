@@ -169,8 +169,6 @@
                                                                 <img style="width:16px;height:16px" src="{{ asset('assets/img/trash.svg') }}" />
                                                             </div>
                                                         </div>
-                                
-
                                                     </td>
                                                 </tr>
                                                 @endforeach

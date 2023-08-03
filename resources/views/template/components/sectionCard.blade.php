@@ -9,7 +9,7 @@
         <div class="col-md-3">
             <div class="text-nowrap">Họ và tên: </div>
         </div>
-        <div class="col-md-9"><strong class="text-nowrap">Tên - Mã NV</strong></div>
+        <div class="col-md-9"><strong class="text-nowrap">{{ Auth::user()->name }} - {{ Auth::user()->code }}</strong></div>
     </div>
 </div>
 

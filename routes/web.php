@@ -74,7 +74,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('danh-sach-khach-hang', function () {
-        return view('order.danhSachKhachHang');
+        return view('other.danhSachKhachHang');
     });
 
 

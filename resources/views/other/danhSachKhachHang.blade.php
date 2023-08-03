@@ -112,7 +112,7 @@
                                             </thead>
                                             <tbody>
                                                 @foreach($listData as $item)
-                                                <tr class="table-row"  role="button">
+                                                <tr class="table-row" data-bs-toggle="modal" data-bs-target="#info"  role="button">
                                                     
                                                     <td>
                                                         <div class="overText text-center">
@@ -475,6 +475,89 @@
                         <button type="submit" class="btn btn-danger">Lưu</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    {{-- Thông tin khách hàng --}}
+    <div class="modal fade" id="info" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Thông tin khách hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12 mt-3">
+                            <div class="d-flex align-items-center">
+                                <div class="modal-title">Thông tin chung</div>
+                            </div>
+                            <div class="modal_list row">
+                                <div class="modal_items col-sm-6">
+                                    Tên khách hàng: <span class="text-danger">Nguyễn Văn A</span>
+                                </div>
+                                <div class="modal_items col-sm-6">
+                                    Mã khách hàng:<span class="text-danger">KH0001</span>
+                                </div>
+                                <div class="modal_items col-sm-6">
+                                    Số điện thoại: <span class="text-danger">098888888888</span>
+                                </div>
+                                <div class="modal_items col-sm-6" >
+                                    Email:<span class="text-danger">khtbht@gmail.com</span>
+                                </div>
+                                <div class="modal_items col-sm-6" >
+                                    Địa chỉ:<span class="text-danger">219 Trung Kính, Cầu Giấy, Hà Nội</span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mt-3">
+                            <div class="d-flex align-items-center">
+                                <div class="modal-title">Thông tin đầu mối liên hệ</div>
+                            </div>
+                            <div class="modal_list row">
+                                <div class="modal_items col-sm-6">
+                                    Tên người liên hệ: <span class="text-danger">Nguyễn Văn A</span>
+                                </div>
+                                <div class="modal_items col-sm-6">
+                                    Danh xưng:<span class="text-danger">Chị</span>
+                                </div>
+                                <div class="modal_items col-sm-6">
+                                    Số điện thoại: <span class="text-danger">098888888888</span>
+                                </div>
+                                <div class="modal_items col-sm-6" >
+                                    Email:<span class="text-danger">khtbht@gmail.com</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mt-3">
+                            <div class="d-flex align-items-center">
+                                <div class="modal-title">Quản lý khách hàng</div>
+                            </div>
+                            <div class="modal_list row">
+                                <div class="modal_items col-sm-6">
+                                    Nhân sự phụ trách: <span class="text-danger">Nguyễn Văn A</span>
+                                </div>
+                                <div class="modal_items col-sm-6">
+                                    Nhóm khách hàng <span class="text-danger"></span>
+                                </div>
+                                <div class="modal_items col-sm-6">
+                                    Kênh khách hàng: <span class="text-danger">Nhà thuốc</span>
+                                </div>
+                                <div class="modal_items col-sm-6" >
+                                    Tuyến:<span class="text-danger">Thứ 2</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
+                </div>
             </div>
         </div>
     </div>
