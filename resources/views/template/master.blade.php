@@ -221,8 +221,8 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
                                 <div class="mb-3">
                                     <img class="header_user-img" src="{{ asset('assets/img/avatar.jpeg') }}" />
                                 </div>
-                                <span class="fw-bold">{{ Auth::user()->name }}</span>
-                                <span>({{ Auth::user()->role }})</span>
+                                <span class="fw-bold">{{ Auth::user()->name ?? "" }}</span>
+                                <span>({{ Auth::user()->role ?? "" }})</span>
                                 <div class="">
                                     Vị trí
                                 </div>
