@@ -84,6 +84,21 @@ Route::middleware(['auth'])->group(function () {
     Route::get('danh-sach-tuyen', function () {
         return view('other.danhSachTuyen');
     });
+    Route::get('danh-sach-dia-ban', function () {
+        return view('Address.danhSachDiaBan');
+    });
+
+    Route::get('danh-sach-khu-vuc', function () {
+        return view('Address.danhSachKhuVuc');
+    });
+
+    Route::get('danh-sach-tuy-chinh', function () {
+        return view('Product.danhSachTuyChinh');
+    });
+
+    Route::get('danh-sach-phien-ban', function () {
+        return view('Product.danhSachPhienBan');
+    });
 
     Route::get('department', [DepartmentController::class, 'index'])->name('department.index');
     Route::post('department', [DepartmentController::class, 'store'])->name('department.store');
