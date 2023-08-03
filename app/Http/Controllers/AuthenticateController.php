@@ -26,8 +26,8 @@ class AuthenticateController extends Controller
             $email = $request->input('email');
             $password = $request->input('password');
 
-            dd($request);
             $account = Personnel::where('email', $email)->first();
+            dd($account);
             if ($account && Hash::check($password, $account->password)) {
                 if ($account->status == "Đang làm việc") {
                     Auth::login($account);
