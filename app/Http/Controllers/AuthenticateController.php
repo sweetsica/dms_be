@@ -29,13 +29,13 @@ class AuthenticateController extends Controller
             if ($account && Hash::check($password, $account->password)) {
                 if ($account->status == "Đang làm việc") {
                     Auth::login($account);
-                    return Redirect::route('home');
+                    return redirect()->route('home');
                 } else {
-                    return Redirect::back()
+                    return redirect()->back()
                         ->withInput()->with('loginError', 'Tài khoản của bạn không hoạt động');
                 }
             } else {
-                return Redirect::back()
+                return redirect()->back()
                     ->withInput()->with('loginError', 'Sai tài khoản hoặc mật khẩu');
             }
         } catch (Exception $e) {
