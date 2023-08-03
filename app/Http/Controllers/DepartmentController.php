@@ -73,15 +73,6 @@ class DepartmentController extends Controller
         return redirect()->route('department.index');
     }
 
-    public function edit($id)
-    {
-        $department= Department::find($id);
-        $UnitLeaderList = UnitLeader::all();
-        return view("Deparment.index",[
-            "department"=>$department
-        ]);
-    }
-
     public function update(Request $request,$id)
     {
         $name = $request->get('name');

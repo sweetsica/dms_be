@@ -258,7 +258,7 @@
                                                                             aria-label="Close"></button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        Bạn có thực sự muốn xoá đề xuất này không?
+                                                                        Bạn có thực sự muốn xoá đơn vị này không?
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button"

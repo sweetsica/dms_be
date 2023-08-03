@@ -12,7 +12,7 @@
             <div class="main">
                 <div class="container-fluid">
                     <div class="mainSection_heading">
-                        <h5 class="mainSection_heading-title">Danh sách vị trí</h5>
+                        <h5 class="mainSection_heading-title">Danh sách vai trò</h5>
                         @include('template.components.sectionCard')
                     </div>
 
@@ -50,7 +50,8 @@
 
                                                 <div class="action_export order-md-4">
                                                     <button class="btn btn-danger d-block testCreateUser"
-                                                        data-bs-toggle="modal" data-bs-target="#taoDeXuat">Thêm vai trò</button>
+                                                        data-bs-toggle="modal" data-bs-target="#taoDeXuat">Thêm vai
+                                                        trò</button>
                                                 </div>
                                             </div>
 
@@ -87,17 +88,17 @@
                                                                     <div class="table_actions d-flex justify-content-end">
 
                                                                         <div data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top" title="Sửa đề xuất">
+                                                                            data-bs-placement="top" title="Sửa ">
                                                                             <div class="btn" data-bs-toggle="modal"
-                                                                                data-bs-target="#sua{{$item->id}}">
+                                                                                data-bs-target="#sua{{ $item['id'] }}">
                                                                                 <img style="width:16px;height:16px"
                                                                                     src="{{ asset('assets/img/edit.svg') }}" />
                                                                             </div>
                                                                         </div>
                                                                         <div data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top" title="Xóa đề xuất">
+                                                                            data-bs-placement="top" title="Xóa ">
                                                                             <div class="btn" data-bs-toggle="modal"
-                                                                                data-bs-target="#xoa{{$item->id}}">
+                                                                                data-bs-target="#xoa{{ $item->id }}">
                                                                                 <img style="width:16px;height:16px"
                                                                                     src="{{ asset('assets/img/trash.svg') }}" />
                                                                             </div>
@@ -107,26 +108,83 @@
                                                             </tr>
                                                         </tbody>
 
-                                                        {{-- Xóa đề xuất --}}
-                                                        <div class="modal fade" id="xoa{{$item->id}}" tabindex="-1"
+
+                                                        {{-- Sửa đề xuất --}}
+                                                        <div class="modal fade" id="sua{{ $item['id'] }}" tabindex="-1"
                                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header text-center">
+                                                                        <h5 class="modal-title w-100"
+                                                                            id="exampleModalLabel">Sửa vai trò</h5>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <form method="POST" action="{{route('Rolex.update', $item->id)}}">
+                                                                        @csrf
+                                                                        <div class="modal-body">
+                                                                            <div class="row">
+                                                                                <div class="col-6 mb-3">
+                                                                                    <input data-bs-toggle="tooltip"
+                                                                                        data-bs-placement="top"
+                                                                                        title="Nhập tên vai trò*" name="name"
+                                                                                        type="text" placeholder="Nhập tên vai trò"
+                                                                                        class="form-control"
+                                                                                        value="{{$item->name}}">
+                                                                                </div>
+                                                                                <div class="col-6 mb-3">
+                                                                                    <input data-bs-toggle="tooltip"
+                                                                                        data-bs-placement="top"
+                                                                                        title="Nhập mã vai trò*" name="code"
+                                                                                        type="text" placeholder="Nhập mã vai trò"
+                                                                                        class="form-control"
+                                                                                        value="{{$item->code}}">
+                                                                                </div>
+                                                                                <div class="col-6 mb-3">
+                                                                                    <div data-bs-toggle="tooltip" data-bs-placement="top" >
+                                                                                        <textarea name="description" type="text" placeholder="Chức năng nhiệm vụ"
+                                                                                            class="form-control " data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                                            title="Mô tả" style="width: 450px;height: 80px;">{{ $item->description }}</textarea>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button"
+                                                                                class="btn btn-outline-danger"
+                                                                                data-bs-dismiss="modal">Hủy</button>
+                                                                            <button type="submit"
+                                                                                class="btn btn-danger">Lưu</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        {{-- Xóa đề xuất --}}
+                                                        <div class="modal fade" id="xoa{{ $item->id }}"
+                                                            tabindex="-1" aria-labelledby="exampleModalLabel"
+                                                            aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title text-danger"
-                                                                            id="exampleModalLabel">Xóa đề xuất</h5>
+                                                                            id="exampleModalLabel">Xóa vai trò</h5>
                                                                         <button type="button" class="btn-close"
                                                                             data-bs-dismiss="modal"
                                                                             aria-label="Close"></button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        Bạn có thực sự muốn xoá đề xuất này không?
+                                                                        Bạn có thực sự muốn xoá vai trò này không?
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button"
                                                                             class="btn btn-outline-danger"
                                                                             data-bs-dismiss="modal">Hủy</button>
-                                                                        <form action="{{ route('Role.destroy',$item->id) }}" method="POST">
+                                                                        <form
+                                                                            action="{{route('Role.destroy', $item->id)}}"
+                                                                            method="POST">
                                                                             @csrf
                                                                             <button type="submit"
                                                                                 class="btn btn-danger">Xóa</button>
@@ -154,118 +212,9 @@
     </div>
     {{-- @include('template.sidebar.sidebarDeXuatTheoMau.sidebarRight') --}}
 
-    {{-- QR CODE --}}
-    <div class="modal fade" id="qrCode" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-sm">
-            <div class="modal-content">
-                <div class="modal-header text-center w-100">
-                    <h5 class="modal-title text-danger" id="exampleModalLabel">QR CODE</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <div class="qrCode_wrapper">
-                                {!! QrCode::generate('QRCODE') !!}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    {{-- Sửa đề xuất --}}
-    <div class="modal fade" id="suaDeXuat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">Sửa đề xuất</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form method="POST" action="#">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-6 mb-3">
-                                <input data-bs-toggle="tooltip" data-bs-placement="top" title="Tiêu đề" name="title"
-                                    type="text" placeholder="Tiêu đề" class="form-control" value="title">
-                            </div>
-                            <div class="col-6 mb-3">
-                                <input data-bs-toggle="tooltip" data-bs-placement="top" title="Tóm tắt"
-                                    name="description" type="text" placeholder="Tóm tắt" class="form-control"
-                                    value="description">
-                            </div>
 
-                            <div class="col-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Người phê duyệt">
-                                    <select name="receiver_id" class="selectpicker" data-dropup-auto="false"
-                                        title="Chọn người phê duyệt" data-size="5" data-live-search="true">
-                                        <option value="1">name - code</option>
-                                    </select>
-                                </div>
-                            </div>
 
-                            <div class="col-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Người liên quan">
-                                    <select name="related_people[]" class="selectpicker" data-dropup-auto="false"
-                                        title="Chọn người liên quan" data-size="5" data-live-search="true" multiple
-                                        data-selected-text-format="count > 1"
-                                        data-count-selected-text="Có {0} người liên quan" data-actions-box="true"
-                                        data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn">
-                                        <option value="1">name - code</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Mẫu đề xuất">
-                                    <select name="form" class="selectpicker" data-dropup-auto="false"
-                                        title="Chọn mẫu đề xuất" data-size="5">
-                                        <option value="1">Yêu
-                                            cầu mua sắm</option>
-                                        <option value="2">Đề
-                                            nghị thanh toán</option>
-                                        <option value="3">Đề
-                                            nghị tạm ứng</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-6 mb-3">
-                                <div class="card_template-title">Mã VB: ...</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
-                        <button type="submit" class="btn btn-danger">Lưu</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    {{-- Xóa đề xuất --}}
-    <div class="modal fade" id="xoaDeXuat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-danger" id="exampleModalLabel">Xóa đề xuất</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Bạn có thực sự muốn xoá đề xuất này không?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
-                    <form action="#" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-danger">Xóa</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Modal Thêm Tao De Xuat -->
     <div class="modal fade" id="taoDeXuat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -280,12 +229,12 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-6 mb-3">
-                                <input name="name" required type="text" placeholder="Nhập tên cấp nhân sự*"
+                                <input name="name" required type="text" placeholder="Nhập tên vai trò*"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Nhập tên cấp nhân sự*">
                             </div>
                             <div class="col-6 mb-3">
-                                <input name="code" required type="text" placeholder="Nhập mã cấp nhân sự*"
+                                <input name="code" required type="text" placeholder="Nhập mã vai trò*"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Nhập mã cấp nhân sự*">
                             </div>

@@ -34,6 +34,19 @@ class PersonnelLevelController extends Controller
         return redirect()->route('PersonnelLevel.index');
     }
 
+    public function update(Request $request,$id)
+    {
+        $name = $request->get('name');
+        $code = $request->get('code');
+        $description  = $request->get('description');
+        $data = PersonnelLevel::find($id);
+        $data->name = $name;
+        $data->code = $code;
+        $data->description=$description;
+        $data->save();
+        return redirect()->route('PersonnelLevel.index');
+    }
+
     public function destroy($id)
     {
         PersonnelLevel::destroy($id);
