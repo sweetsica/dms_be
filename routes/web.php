@@ -77,11 +77,13 @@ Route::middleware(['auth'])->group(function () {
         return view('other.danhSachKhachHang');
     });
 
-
     Route::get('danh-sach-san-pham', function () {
         return view('Product.danhSachSanPham');
     });
 
+    Route::get('danh-sach-tuyen', function () {
+        return view('other.danhSachTuyen');
+    });
 
     Route::get('department', [DepartmentController::class, 'index'])->name('department.index');
     Route::post('department', [DepartmentController::class, 'store'])->name('department.store');
