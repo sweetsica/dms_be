@@ -2,11 +2,15 @@
 
 namespace App\Providers;
 
+namespace App\Providers;
+use Illuminate\Pagination\Paginator;
+
 use App\Services\DwtServices;
 use App\View\Composers\KpiKeyComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Foundation\Application;
+// use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Facades\Storage;
 use League\Flysystem\Filesystem;
@@ -25,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
      * Bootstrap any application services.
      */
     public function boot(): void
-    {   
+    {
         if(config('app.env') === 'production') {
 
             \URL::forceScheme('https');
@@ -35,5 +39,7 @@ class AppServiceProvider extends ServiceProvider
             ['template.components.KeyIndex.elementCardMini'],
             KpiKeyComposer::class
         );
+
+        Paginator::useBootstrap();
     }
 }
