@@ -19,6 +19,7 @@ class Authenticate
     
     public function handle(Request $request, Closure $next, ...$guards)
     {
+        dd($guards, Auth::guard($guards));
         if (Auth::guard($guards)->check()) {
             return $next($request);
         }
