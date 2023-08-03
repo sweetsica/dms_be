@@ -16,12 +16,12 @@ class Authenticate
     //     return $request->expectsJson() ? null : route('login');
     // }
 
-    public function handle(Request $request, Closure $next, string ...$guards)
-    {
-        if (auth()->guard($guards)->check()) {
-            return $next($request);
-        }
-//        return $next($request);
-        return redirect()->guest('/login');
-    }
+    // public function handle(Request $request, Closure $next, string ...$guards)
+    // {
+    //     if (auth()->guard($guards)->check()) {
+    //         return $next($request);
+    //     }
+
+    //     return redirect()->guest('/login');
+    // }
 }
