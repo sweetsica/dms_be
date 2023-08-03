@@ -19,16 +19,16 @@ return new class extends Migration
             $table->string('code', 255);
             $table->unsignedBigInteger('role_id');
             $table->string('phone', 255);
-            $table->string('working_form', 255);
+            $table->string('form', 255);
             $table->text('address')->nullable();
             $table->string('status');
             $table->unsignedBigInteger('department_id');
             $table->unsignedBigInteger('position_id');
-            $table->unsignedBigInteger('position_level_id');
+            $table->unsignedBigInteger('personnel_lv_id');
             $table->unsignedBigInteger('area_id');
             $table->date('birthday');
             $table->string('gender', 255);
-            $table->integer('annual_salary');
+            $table->integer('annual_salary')->default(0);
             $table->string('pack', 255);
             $table->unsignedBigInteger('manage');
 

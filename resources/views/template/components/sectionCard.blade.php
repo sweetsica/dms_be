@@ -17,8 +17,3 @@
 <div id="mainSection_width" class="mainSection_thismonth d-flex align-items-center overflow-hidden d-none d-sm-block">
     <input id="thismonth" class="form-control" type="text" />
 </div>
-
-{{-- Date Time Picker --}}
-<div id="mainSection_width" class="mainSection_thismonth d-flex align-items-center overflow-hidden d-none d-sm-block">
-    <input id="thismonth" class="form-control" type="text" />
-</div>

@@ -115,18 +115,18 @@ Route::middleware(['auth'])->group(function () {
     Route::get('area', [AreaController::class, 'index'])->name('area.index');
     Route::post('area', [AreaController::class, 'store'])->name('area.store');
 
-Route::get('cap-nhan-su', [PersonnelLevelController::class, 'index'])->name('PersonnelLevel.index');
-Route::post('cap-nhan-su', [PersonnelLevelController::class, 'store'])->name('PersonnelLevel.store');
-Route::post('cap_nhan_sux/{id}', [PersonnelLevelController::class, 'update'])->name('PersonnelLevel.update');
-Route::post('cap_nhan_su/{id}', [PersonnelLevelController::class, 'destroy'])->name('PersonnelLevelx.destroy');
+    Route::get('cap-nhan-su', [PersonnelLevelController::class, 'index'])->name('PersonnelLevel.index');
+    Route::post('cap-nhan-su', [PersonnelLevelController::class, 'store'])->name('PersonnelLevel.store');
+    Route::post('cap_nhan_sux/{id}', [PersonnelLevelController::class, 'update'])->name('PersonnelLevel.update');
+    Route::post('cap_nhan_su/{id}', [PersonnelLevelController::class, 'destroy'])->name('PersonnelLevelx.destroy');
 
-Route::get('nhan-su', [PersonnelController::class, 'index'])->name('Personnel.index');
-Route::post('nhan-su', [PersonnelController::class, 'store'])->name('Personnel.store');
-Route::post('nhan_sux/{id}', [PersonnelController::class, 'update'])->name('Personnel.update');
-Route::post('nhan_su/{id}', [PersonnelController::class, 'destroy'])->name('Personnel.destroy');
+    Route::get('nhan-su', [PersonnelController::class, 'index'])->name('Personnel.index');
+    Route::post('nhan-su', [PersonnelController::class, 'store'])->name('Personnel.store');
+    Route::post('nhan_sux/{id}', [PersonnelController::class, 'update'])->name('Personnel.update');
+    Route::post('nhan_su/{id}', [PersonnelController::class, 'destroy'])->name('Personnel.destroy');
 
-Route::get('vai-tro', [RoleController::class, 'index'])->name('Role.index');
-Route::post('vai-tro', [RoleController::class, 'store'])->name('Role.store');
-Route::post('vai-trox/{id}', [RoleController::class, 'update'])->name('Rolex.update');
-Route::post('vai-tro/{id}', [RoleController::class, 'destroy'])->name('Role.destroy');
+    Route::get('vai-tro', [RoleController::class, 'index'])->name('Role.index');
+    Route::post('vai-tro', [RoleController::class, 'store'])->name('Role.store');
+    Route::post('vai-trox/{id}', [RoleController::class, 'update'])->name('Rolex.update');
+    Route::post('vai-tro/{id}', [RoleController::class, 'destroy'])->name('Role.destroy');
 });
