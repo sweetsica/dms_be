@@ -21,11 +21,12 @@ class AuthenticateController extends Controller
 
     public function login(Request $request)
     {
-        dd('ki cuc vl');
+
         try {
             $email = $request->input('email');
             $password = $request->input('password');
 
+            dd($request);
             $account = Personnel::where('email', $email)->first();
             if ($account && Hash::check($password, $account->password)) {
                 if ($account->status == "Đang làm việc") {
