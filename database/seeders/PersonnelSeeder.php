@@ -21,7 +21,7 @@ class PersonnelSeeder extends Seeder
             'code' => 'ADMIN-123',
             'role_id' => 3,
             'phone' => "0123456789",
-            'form' => "Chính thức",
+            'working_form' => "Chính thức",
             'address' => "Hà Nội",
             'department_id' => 18,
             'position_id' => 4,
