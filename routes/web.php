@@ -91,7 +91,7 @@ Route::get('danh-sach-vi-tri', [PositionController::class, 'index'])->name('posi
 
 
 Route::get('danh-sach-khach-hang', function () {
-    return view('order.danhSachKhachHang');
+    return view('other.danhSachKhachHang');
 });
 
 
