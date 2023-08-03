@@ -47,52 +47,14 @@
                         style=" background-color: #EBEBEB; height: 40px; display: flex; justify-content: center; font-size: 15px;">
                         <b>Cơ cấu tổ chức</b>
                     </div><br>
-                    <style>
-                        /* CSS để tạo hiệu ứng gộp/hiện cho đơn vị con */
-                        .tree li {
-                            list-style-type: none;
-                            position: relative;
-                            cursor: pointer;
-                        }
 
-                        .tree li::before {
-                            content: "";
-                            position: absolute;
-                            top: 0;
-                            bottom: 0;
-                            left: -20px;
-                            border-left: 1px dashed #cc0000;
-                        }
-
-                        .tree li:last-child::before {
-                            display: none;
-                        }
-
-                        .tree .parent>ul {
-                            display: none;
-                            margin-left: 15px;
-                            /* Thêm margin để tạo thanh dọc */
-                            padding-left: 5px;
-                            /* Thêm padding để tạo khoảng cách giữa đường kẻ và văn bản */
-                            /* border-right: 1px dashed #cc0000; */
-                            /* Đường kẻ dọc */
-                        }
-
-                        .tree .parent>ul {
-                            display: none;
-                        }
-
-                        .tree .parent.opened>ul {
-                            display: block;
-                        }
-                    </style>
-
-                    <div style="font-size: 14px">
-                        <ul class="tree" style="margin: 0px;  padding: 0;">
+                    <div >
+                        <ul id="tree1">
                             @foreach ($departmentListTree as $donVi)
-                                <li class="parent" style=" margin: 5px; padding: 0;"  onclick="changeImage()" >
-                                    <img src="{{ asset('assets/img/cong.png') }}"id="myImage"
-                                       >&nbsp;&nbsp;{{ $donVi->name }}
+                                <li>
+                                    <img class= "indicator" src="{{ asset('assets/img/cong.png') }}"id="myImage" onclick="changeImage()"
+                                       >&nbsp;&nbsp;<a
+                      href="#" class="title-child">{{ $donVi->name }}</a>
                                     @if ($donVi->donViCon->count() > 0)
                                         @include('template.sidebar.sidebarDepartment.child', [
                                             'donViCon' => $donVi->donViCon,
@@ -101,7 +63,6 @@
                                 </li>
                             @endforeach
                         </ul>
-
                     </div>
                 </div>
             </div>
@@ -111,39 +72,124 @@
     </div>
 </div>
 
+<style>
+.title-child {
+  font-size: 14px;
+  color: #ca1f24;
+}
+
+.title-child:hover {
+  color: #ca1f24;
+}
+  .tree, .tree ul {
+    margin:0;
+    padding:0;
+    list-style:none
+}
+.tree ul {
+    margin-left:1em;
+    position:relative
+}
+.tree ul ul {
+    margin-left:.5em
+}
+.tree ul:before {
+    content:"";
+    display:block;
+    width:0;
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    border-left:2px dotted #ca1f24;
+}
+.tree li {
+  margin: 0;
+    padding: 0 1em;
+    line-height: 2em;
+    position: relative;
+    font-size: 12px;
+}
+
+
+.tree ul li:last-child:before {
+    background:#fff;
+    height:auto;
+    top:1em;
+    bottom:0
+}
+
+.tree li a {
+    text-decoration: none;
+}
+
+</style>
+
 @section('script-chart')
     @if (!env('FE_LAYOUT'))
         <script type="text/javascript" src="{{ asset('/assets/js/chart/ChartSidebarleft/dash.js') }}"></script>
     @endif
 
     <script>
-        let parentItems = document.querySelectorAll('.parent');
-
-        parentItems.forEach(item => {
-            item.addEventListener('click', function(event) {
-                if (item.querySelector('ul')) {
-                    item.classList.toggle('opened');
+      $.fn.extend({
+    treed: function (o) {
+      
+      var openedClass = 'glyphicon-minus-sign';
+      var closedClass = 'glyphicon-plus-sign';
+      
+      if (typeof o != 'undefined'){
+        if (typeof o.openedClass != 'undefined'){
+        openedClass = o.openedClass;
+        }
+        if (typeof o.closedClass != 'undefined'){
+        closedClass = o.closedClass;
+        }
+      };
+      
+        //initialize each of the top levels
+        var tree = $(this);
+        tree.addClass("tree");
+        tree.find('li').has("ul").each(function () {
+            var branch = $(this); //li with children ul
+            branch.prepend("<i class='indicator glyphicon " + closedClass + "'></i>");
+            branch.addClass('branch');
+            branch.on('click', function (e) {
+                if (this == e.target) {
+                    var icon = $(this).children('i:first');
+                    icon.toggleClass(openedClass + " " + closedClass);
+                    $(this).children().children().toggle();
                 }
+            })
+            branch.children().children().toggle();
+        });
+        //fire event from the dynamically added icon
+      tree.find('.branch .indicator').each(function(){
+        $(this).on('click', function () {
+            $(this).closest('li').click();
+        });
+      });
+        //fire event to open branch if the li contains an anchor instead of text
+        tree.find('.branch>a').each(function () {
+            $(this).on('click', function (e) {
+                $(this).closest('li').click();
+                e.preventDefault();
             });
         });
-    </script>
-
-    <script>
-        // Lấy đối tượng hình ảnh và danh sách "li"
-        const showListButton = document.getElementById('show-list-button');
-        const listContainer = document.getElementById('list-container');
-
-        // Thêm sự kiện click cho hình ảnh để hiển thị danh sách "li"
-        showListButton.addEventListener('click', () => {
-            // Toggle (bật/tắt) hiển thị của danh sách "li"
-            if (listContainer.style.display === 'none') {
-                listContainer.style.display = 'block';
-            } else {
-                listContainer.style.display = 'none';
-            }
+        //fire event to open branch if the li contains a button instead of text
+        tree.find('.branch>button').each(function () {
+            $(this).on('click', function (e) {
+                $(this).closest('li').click();
+                e.preventDefault();
+            });
         });
-    </script>
+    }
+});
 
+//Initialization of treeviews
+
+$('#tree1').treed();
+    </script>
+    
     <script>
         var images = [
             "{{ asset('assets/img/tru.png') }}", // Thay đổi đường dẫn thành URL của hình ảnh thứ nhất
