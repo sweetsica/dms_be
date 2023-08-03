@@ -31,9 +31,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+ Route::get('/', function () {
+     return view('welcome');
+ });
 
 
 Route::middleware(['guest'])->group(function () {
@@ -97,7 +97,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('danh-sach-tuyen', function () {
         return view('other.danhSachTuyen');
     });
-    
+
     // Route::get('danh-sach-dia-ban', function () {
     //     return view('Address.danhSachDiaBan');
     // });
