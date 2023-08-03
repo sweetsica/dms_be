@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>LeafletJS - OpenStreetMap API by Seth Phat</title>
+    <title>LeafletJS - OpenStreetMap API by Minh dep trai</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
         integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
         crossorigin="" />
@@ -20,7 +20,11 @@
         integrity="sha512-PbX1SOVzT8uS3dGhBbUZVo+TM8kIGohv/HOpY6PnBhQtMkMCf0/Kw3Ft2f69qBQ4Q0zm7JwAqmYUZEGM74PSw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
     <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
     <style>
@@ -66,11 +70,11 @@
 
 <script>
     var mapObj = null;
-    var zoomLevel = 13;
-    var defaultCoord = [10.7743, 106.6669]; // coord mặc định 
+    var zoomLevel = 7;
+    // var defaultCoord = [10.7743, 106.6669]; // coord mặc định 
     var mapConfig = {
         attributionControl: true,
-        center: defaultCoord, 
+        // center: defaultCoord,
         zoom: zoomLevel,
     };
     var markers = [];
@@ -86,60 +90,35 @@
 
         var customerId = window.location.pathname.split('/').pop();
         if (customerId.trim() !== '') {
-            // Gọi API để lấy danh sách khách hàng theo id route
-            var url = '/get-customers-by-route/' + customerId;
+            // Gọi API Nominatim để lấy thông tin vị trí từ địa chỉ
+            var nominatimUrl = '/get-coordinatesDirection/' + customerId;
             $.ajax({
-                url: url,
+                url: nominatimUrl,
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    if (data.success && data.customers.length > 0) {
-                        var customers = data.customers;
-                        // Tạo marker cho từng địa chỉ của khách hàng
-                        for (var i = 0; i < customers.length; i++) {
-                            var customer = customers[i];
-                            var address = customer.address;
-                            var name = customer.name;
+                    if (data.length > 0) {
+                        for (var i = 0; i < data.length; i++) {
+                            var result = data[i];
+                            var lat = parseFloat(result.lat);
+                            var lon = parseFloat(result.lon);
 
-                            // Gọi API Nominatim để lấy thông tin vị trí từ địa chỉ
-                            var nominatimUrl = 'https://nominatim.openstreetmap.org/search/' + encodeURIComponent(address) + '?format=json';
-                            $.ajax({
-                                url: nominatimUrl,
-                                type: 'GET',
-                                dataType: 'json',
-                                success: function (data) {
-                                    alert(data)
-                                    if (data.length > 0) {
-                                        var result = data[0];
-                                        var lat = parseFloat(result.lat);
-                                        var lon = parseFloat(result.lon);
-
-                                        // Tạo marker và popup
-                                        var marker = addMarker([lat, lon], name, {}, {
-                                            title: name
-                                        });
-
-                                        markers.push(marker);
-                                        mapObj.setView([lat, lon], zoomLevel);
-
-                                        // Nếu đã tạo đủ marker, hiển thị direction giữa các marker
-                                        if (markers.length === customers.length) {
-                                            displayDirection();
-                                        }
-                                    }
-                                },
-                                error: function (xhr, status, error) {
-                                    console.error('Đã xảy ra lỗi trong quá trình tìm kiếm.');
-                                }
+                            // Tạo marker và pin vào bản đồ
+                            var marker = addMarker([lat, lon], "", {}, {
+                                title: "Marker " + (i + 1)
                             });
+                            markers.push(marker);
+                            mapObj.setView([lat, lon], zoomLevel);
+                        }
+
+                        // Nếu có đủ số lượng marker, hiển thị direction giữa các marker
+                        if (data.length > 1) {
+                            displayDirection();
                         }
                     } else {
-                        console.error('Không có khách hàng nào có địa chỉ trong database.');
+                        console.error('Không có dữ liệu vị trí từ API.');
                     }
                 },
-                error: function (xhr, status, error) {
-                    console.error('Đã xảy ra lỗi khi lấy danh sách khách hàng.');
-                }
             });
         } else {
             console.error('Không có id của khách hàng trong URL.');
@@ -171,31 +150,23 @@
 
     function displayDirection() {
         if (markers.length > 1) {
-            var directions = [];
-            for (var i = 0; i < markers.length - 1; i++) {
-                var marker1 = markers[i];
-                var marker2 = markers[i + 1];
-                var waypoints = [
-                    L.latLng(marker1.getLatLng().lat, marker1.getLatLng().lng),
-                    L.latLng(marker2.getLatLng().lat, marker2.getLatLng().lng)
-                ];
-
-                //thư viện leaflet-routing-machine
-                var direction = L.Routing.control({
-                    waypoints: waypoints,
-                    routeWhileDragging: true,
-                    createMarker: function () { return null; },
-                    lineOptions: {
-                        styles: [{ color: 'blue', opacity: 1, weight: 5 }]
-                    },
-                    show: false //tắt chỉ đường
-                }).addTo(mapObj);
-                directions.push(direction);
+            var waypoints = [];
+            for (var i = 0; i < markers.length; i++) {
+                var marker = markers[i];
+                waypoints.push(L.latLng(marker.getLatLng().lat, marker.getLatLng().lng));
             }
+
+            // Tạo điểm đích là điểm đầu tiên
+            waypoints.push(waypoints[0]);
+
+            // Sử dụng thư viện leaflet-routing-machine để tạo direction giữa các marker
+            L.Routing.control({
+                waypoints: waypoints,
+                routeWhileDragging: true,
+                show: true // Hiển thị chỉ đường
+            }).addTo(mapObj);
         }
     }
-
-
 </script>
 
 </html>
