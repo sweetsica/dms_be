@@ -93,6 +93,9 @@ Route::get('danh-sach-vi-tri', [PositionController::class, 'index'])->name('posi
 Route::get('danh-sach-khach-hang', function () {
     return view('other.danhSachKhachHang');
 });
+Route::get('danh-sach-tuyen', function () {
+    return view('other.danhSachTuyen');
+});
 
 
 Route::get('danh-sach-san-pham', function () {
