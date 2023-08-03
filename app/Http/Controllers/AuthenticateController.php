@@ -29,7 +29,6 @@ class AuthenticateController extends Controller
             if ($account && Hash::check($password, $account->password)) {
                 if ($account->status == "Đang làm việc") {
                     Auth::login($account);
-                    dd(Auth::user());
                     return redirect()->route('home');
                 } else {
                     return redirect()->back()
