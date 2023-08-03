@@ -46,7 +46,7 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //handle 419 error
             if ($e instanceof \Illuminate\Session\TokenMismatchException) {
-//                return redirect('/login')->with('token_error', 'Phiên làm việc hết hạn, vui lòng đăng nhập lại!');
+                return redirect('/login')->with('token_error', 'Phiên làm việc hết hạn, vui lòng đăng nhập lại!');
             }
 
         });
