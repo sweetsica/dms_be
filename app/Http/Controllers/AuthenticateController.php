@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\Personnel;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
@@ -17,29 +19,28 @@ class AuthenticateController extends Controller
         return view('login');
     }
 
-   public function login(Request $request){
-
-    $urse = $request->get('email');
-    $pass= $request->get('password');
-
-
-    try {
-        $admin = Personnel::where('email',$urse)->where('password',$pass)->firstOrFail();
-        $request->session()->put('id',$admin->id);
-        $request->session()->put('email', $admin->email);
-        // return Redirect::route('department.index');
-
-        return view('other.danh-sach-dieu-khien');
-    } catch (Exception $e) {
-
-        return Redirect::route('login')->with('error', 'Sai tài khoản hoặc mật khẩu');
+    public function login(Request $request)
+    {
+        try {
+            $email = $request->input('email');
+            $password = $request->input('password');
+            $account = Personnel::where('email', $email)->first();
+            if ($account && Hash::check($password, $account->password)) {
+                if ($account->status == 1) {
+                    Auth::login($account);
+                    return Redirect::route('home');
+                } else {
+                    return Redirect::back()
+                        ->withInput()->with('loginError', 'Tài khoản của bạn không hoạt động');
+                }
+            } else {
+                return Redirect::back()
+                    ->withInput()->with('loginError', 'Sai tài khoản hoặc mật khẩu');
+            }
+        } catch (Exception $e) {
+            return back()->with('loginError', 'Có gì đó sai sai');
+        }
     }
-    }
-    // public function logout(Request $request){
-    //     $request->session()->flush();
-    //     return Redirect::route('login');
-    // }
+    
 
 }
-
-
