@@ -36,16 +36,16 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::middleware(['guest'])->group(function () {
+// Route::middleware(['guest'])->group(function () {
     // Đăng nhập
     Route::get('/login', [AuthenticateController::class, 'index'])->name('login.index');
 
     Route::post('/login', [AuthenticateController::class, 'login'])->name('login');
     // Quên MK
     Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
-});
+// });
 
-Route::middleware(['auth'])->group(function () {
+// Route::middleware(['auth'])->group(function () {
     Route::post('/log-out', function () {
         Auth::logout();
         return redirect()->route('login');
@@ -117,9 +117,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('danh-sach-khu-vuc/{id}', [AreaController::class, 'update'])->name('area.update');
     Route::post('danh-sach-khu-vucx/{id}', [AreaController::class, 'destroy'])->name('area.destroy');
 
-
-
-
     Route::get('department', [DepartmentController::class, 'index'])->name('department.index');
     Route::post('department', [DepartmentController::class, 'store'])->name('department.store');
     Route::post('department/{id}', [DepartmentController::class, 'edit'])->name('department.edit');
@@ -149,4 +146,4 @@ Route::middleware(['auth'])->group(function () {
     Route::post('vai-tro', [RoleController::class, 'store'])->name('Role.store');
     Route::post('vai-trox/{id}', [RoleController::class, 'update'])->name('Rolex.update');
     Route::post('vai-tro/{id}', [RoleController::class, 'destroy'])->name('Role.destroy');
-});
+// });
