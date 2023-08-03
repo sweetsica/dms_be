@@ -5,8 +5,6 @@
 /public/storage
 /storage/*.key
 /vendor
-composer.json
-composer.lock
 .env
 .env.backup
 .env.production
@@ -19,7 +17,3 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-.htaccess
-dwt-fe.zip
-storage/debugbar
-.history

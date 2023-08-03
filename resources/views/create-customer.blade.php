@@ -1,8 +1,3 @@
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
-<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
-
-
-
 <div class="container">
     <div class="card">
         <div class="card-header">
@@ -15,9 +10,17 @@
                     <label for="name">Tên khách hàng</label>
                     <input type="text" name="name" id="name" class="form-control" required>
                 </div>
+                <!-- <div class="form-group">
+                    <label for="code">Mã khách hàng</label>
+                    <input type="text" name="code" id="code" class="form-control" required>
+                </div> -->
                 <div class="form-group">
                     <label for="phone">Số điện thoại</label>
                     <input type="text" name="phone" id="phone" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="routeId">Tuyến đường</label>
@@ -38,6 +41,34 @@
                 <div class="form-group">
                     <label for="address">Địa chỉ</label>
                     <input type="text" name="address" id="address" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="personContact">Tên người liên hệ</label>
+                    <input type="text" name="personContact" id="personContact" class="form-control" >
+                </div>
+                <div class="form-group">
+                    <label for="personName">Danh xưng</label>
+                    <input type="text" name="personName" id="personName" class="form-control" >
+                </div>
+                <div class="form-group">
+                    <label for="personPhoneNumber">Số điện thoại người liên hệ</label>
+                    <input type="text" name="personPhoneNumber" id="personPhoneNumber" class="form-control" >
+                </div>
+                <div class="form-group">
+                    <label for="personEmail">Email người liên hệ</label>
+                    <input type="text" name="personEmail" id="personEmail" class="form-control" >
+                </div>
+                <div class="form-group">
+                    <label for="hrManager">Nhân sự phụ trách</label>
+                    <input type="text" name="hrManager" id="hrManager" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="type">Nhóm khách hàng</label>
+                    <input type="text" name="type" id="type" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="customerChanel">Kênh khách hàng</label>
+                    <input type="text" name="customerChanel" id="customerChanel" class="form-control" required>
                 </div>
                 <div class="mt-3">
                     <button type="submit" class="btn btn-primary">Lưu</button>

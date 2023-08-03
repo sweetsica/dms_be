@@ -18,4 +18,10 @@ class RouteDirectionController extends Controller
     {
         return view('map', ['id' => $id]);
     }
+
+    public function showMapDirection($id)
+    {
+        return view('mapDirection', ['id' => $id]);
+    }
+    
 }

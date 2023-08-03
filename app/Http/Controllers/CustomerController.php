@@ -15,22 +15,22 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
+            // 'code' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'phone' => 'string|max:20',
+            'email' => 'string|max:255',
             'routeId' => 'numeric',
-            // 'code' => 'required|string|max:255',
-            // 'tax_code' => 'string|max:255',
-            // 'email' => 'string|max:255',
             'city' => 'required|string|max:255',
             'district' => 'required|string|max:255',
-            //quận, huyện
             'guide' => 'required|string|max:255',
-            //xã, phường
             'address' => 'required|string|max:255',
-            // 'personContact' => 'string|max:255',
-            // 'person_anotherName' => 'string|max:255',
-            // 'person_phoneNumber' => 'string|max:255',
-            // 'person_email' => 'string|'
+            'personContact' => 'string|max:255',
+            'personName' => 'string|max:255',
+            'personPhoneNumber' => 'string|max:255',
+            'personEmail' => 'string|max:255',
+            'hrManager' => 'required|string|max:255',
+            'type' => 'required|string|max:255',
+            'customerChanel' => 'required|string|max:255'
         ]);
 
         if (isset($data['routeId'])) {
@@ -49,5 +49,11 @@ class CustomerController extends Controller
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => 'Không tìm thấy khách hàng hoặc có lỗi xảy ra'], 404);
         }
+    }
+
+    public function getCustomersByRouteId($id)
+    {
+        $customers = Customer::where('routeId', $id)->get();
+        return response()->json(['success' => true, 'customers' => $customers]);
     }
 }

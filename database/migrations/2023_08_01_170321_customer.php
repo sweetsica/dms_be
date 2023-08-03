@@ -14,12 +14,21 @@ return new class extends Migration {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            // $table->string('code');
             $table->string('phone');
+            $table->string('email');
             $table->bigInteger('routeId');
             $table->string('city');
             $table->string('district');
             $table->string('guide');
             $table->string('address');
+            $table->string('personContact');
+            $table->string('personName');
+            $table->string('personPhoneNumber');
+            $table->string('personEmail');
+            $table->string('hrManager');
+            $table->string('type');
+            $table->string('customerChanel');
             $table->timestamps();
         });
     }

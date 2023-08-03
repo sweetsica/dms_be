@@ -69,7 +69,6 @@
 		if (customerId.trim() !== '') {
 			// Gọi API để lấy thông tin khách hàng bằng id
 			var url = '/get-customer/' + customerId;
-			// alert(url);
 			$.ajax({
 				url: url,
 				type: 'GET',
@@ -90,8 +89,6 @@
 									var address = result.address;
 									var lat = parseFloat(result.lat);
 									var lon = parseFloat(result.lon);
-
-									alert('Tên: ' + name + '\n' + 'Địa chỉ: ' + address);
 
 									// Tạo marker với kết quả tìm kiếm
 									addMarker([lat, lon], name, {}, {

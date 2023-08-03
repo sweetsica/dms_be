@@ -9,13 +9,22 @@ class Customer extends Model
 {
     use HasFactory;
     protected $fillable = [
+        // 'code',
         'name',
         'phone',
+        'email',
         'routeId',
         'city',
         'district',
         'guide',
         'address',
+        'personContact',
+        'personName',
+        'personPhoneNumber',
+        'personEmail',
+        'hrManager',
+        'type',
+        'customerChanel'
     ];
 
     public function route()
