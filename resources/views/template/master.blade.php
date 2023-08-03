@@ -221,8 +221,8 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
                                 <div class="mb-3">
                                     <img class="header_user-img" src="{{ asset('assets/img/avatar.jpeg') }}" />
                                 </div>
-                                <span class="fw-bold">Name</span>
-                                <span>(Role)</span>
+                                <span class="fw-bold">{{ Auth::user()->name }}</span>
+                                <span>({{ Auth::user()->role }})</span>
                                 <div class="">
                                     Vị trí
                                 </div>
@@ -241,7 +241,7 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
                             </li>
                             <div class="dropdown-divider"></div>
                             <li class="header_user-item">
-                                <form action="/logout" method="POST">
+                                <form action="{{ route('logout') }}" method="POST">
                                     @csrf
                                     <button class="dropdown-item" type="submit">
                                         <i class="bi bi-box-arrow-right"></i>

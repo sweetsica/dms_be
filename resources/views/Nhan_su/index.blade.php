@@ -111,10 +111,10 @@
                                                                     {{ $item->phone }}
                                                                 </td>
                                                                 <td class="">
-                                                                    {{ $item->form }}
+                                                                    {{ $item->working_form }}
                                                                 </td>
                                                                 <td class="">
-                                                                    {{ $item->states }}
+                                                                    {{ $item->status }}
                                                                 </td>
                                                                 <td>
                                                                     <div class="table_actions d-flex justify-content-end">
@@ -305,8 +305,8 @@
                                                                                 </div>
                                                                                 <div class="col-6 mb-3">
                                                                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Hình thức làm việc">
-                                                                                        <select name="form"  class="selectpicker" data-dropup-auto="false">
-                                                                                            <option value="{{$item->form}}">{{$item->form}}</option>
+                                                                                        <select name="working_form"  class="selectpicker" data-dropup-auto="false">
+                                                                                            <option value="{{$item->working_form}}">{{$item->working_form}}</option>
                                                                                             <option value="Chính thức">Chính thức</option>
                                                                                             <option value="Thử việc">Thử việc</option>
                                                                                             <option value="Cộng tác viên">Cộng tác viên</option>
@@ -316,8 +316,8 @@
                                                                                 </div>
                                                                                 <div class="col-6 mb-3">
                                                                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Trạng thái">
-                                                                                        <select name="states"  class="selectpicker" data-dropup-auto="false">
-                                                                                            <option value="{{$item->states}}">{{$item->states}}</option>
+                                                                                        <select name="status"  class="selectpicker" data-dropup-auto="false">
+                                                                                            <option value="{{$item->status}}">{{$item->status}}</option>
                                                                                             <option value="Đang làm việc">Đang làm việc</option>
                                                                                             <option value="Đã nghỉ việc">Đã nghỉ việc</option>
                                                                                         </select>
@@ -547,7 +547,7 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Hình thức làm việc">
-                                    <select name="form"  class="selectpicker" data-dropup-auto="false">
+                                    <select name="working_form"  class="selectpicker" data-dropup-auto="false">
                                         <option value="">Hình thức làm việc</option>
                                         <option value="Chính thức">Chính thức</option>
                                         <option value="Thử việc">Thử việc</option>
@@ -558,7 +558,7 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Trạng thái">
-                                    <select name="states"  class="selectpicker" data-dropup-auto="false">
+                                    <select name="status"  class="selectpicker" data-dropup-auto="false">
                                         <option value="">Trạng thái</option>
                                         <option value="Đang làm việc">Đang làm việc</option>
                                         <option value="Đã nghỉ việc">Đã nghỉ việc</option>

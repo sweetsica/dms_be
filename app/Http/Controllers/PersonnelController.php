@@ -8,6 +8,7 @@ use App\Models\PersonnelLevel;
 use App\Models\Position;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class PersonnelController extends Controller
 {
@@ -31,8 +32,8 @@ class PersonnelController extends Controller
             'personnel.pack',
             'personnel.manage',
             'personnel.phone',
-            'personnel.form',
-            'personnel.states',
+            'personnel.working_form',
+            'personnel.status',
             'personnel.department_id',
             'personnel.personnel_lv_id',
             'personnel.position_id',
@@ -96,8 +97,8 @@ class PersonnelController extends Controller
         $area_id  = $request->get('area_id');
         $email  = $request->get('email');
         $phone  = $request->get('phone');
-        $form  = $request->get('form');
-        $states  = $request->get('states');
+        $working_form  = $request->get('working_form');
+        $status  = $request->get('status');
         $password  = $request->get('password');
         $birthday  = $request->get('birthday');
         $address  = $request->get('address');
@@ -117,9 +118,9 @@ class PersonnelController extends Controller
         $data->area_id=$area_id;
         $data->email=$email;
         $data->phone=$phone;
-        $data->form=$form;
-        $data->states=$states;
-        $data->password=$password;
+        $data->working_form=$working_form;
+        $data->status=$status;
+        $data->password=Hash::make($password);
         $data->birthday=$birthday;
         $data->address=$address;
         $data->annual_salary=$annual_salary;
@@ -140,8 +141,8 @@ class PersonnelController extends Controller
         $area_id  = $request->get('area_id');
         $email  = $request->get('email');
         $phone  = $request->get('phone');
-        $form  = $request->get('form');
-        $states  = $request->get('states');
+        $working_form  = $request->get('working_form');
+        $status  = $request->get('status');
         $password  = $request->get('password');
         $birthday  = $request->get('birthday');
         $address  = $request->get('address');
@@ -161,9 +162,9 @@ class PersonnelController extends Controller
         $data->area_id=$area_id;
         $data->email=$email;
         $data->phone=$phone;
-        $data->form=$form;
-        $data->states=$states;
-        $data->password=$password;
+        $data->working_form=$working_form;
+        $data->status=$status;
+        $data->password=Hash::make($password);
         $data->birthday=$birthday;
         $data->address=$address;
         $data->annual_salary=$annual_salary;

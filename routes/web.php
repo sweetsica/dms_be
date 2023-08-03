@@ -1,51 +1,17 @@
+
 <?php
 
-use App\Http\Controllers\Api\AssignTaskController;
-use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\DashboardController;
-use App\Http\Controllers\Api\KeyController;
-use App\Http\Controllers\Api\TargetController;
-// use App\Http\Controllers\Api\DepartmentController;
-use App\Http\Controllers\Api\DeploymentProcessController;
-use App\Http\Controllers\Api\DeploymentRequestController;
-use App\Http\Controllers\Api\EquipmentPackController;
-// use App\Http\Controllers\Api\PositionController;
-use App\Http\Controllers\Api\UsersController;
-use App\Http\Controllers\Api\PositionLevelController;
-use App\Http\Controllers\Api\PositionOrganizationController;
-use App\Http\Controllers\Api\UnitController;
-use App\Http\Controllers\Api\MeetingController;
-use App\Http\Controllers\Api\MeetingListController;
 use App\Http\Controllers\Api\ProposalController;
-use App\Http\Controllers\Api\ExecutiveDocumentController;
-use App\Http\Controllers\Api\FoodTicketController;
-use App\Http\Controllers\Api\WeeklyMenuController;
 use App\Http\Controllers\Api\ForgotPasswordController;
-use App\Http\Controllers\Api\AccountantDashboardController;
-use App\Http\Controllers\Api\HRStaffKpiKeyController;
-use App\Http\Controllers\Api\SalesStaffKpiKeyController;
-use App\Http\Controllers\Api\AdministrativeStaffKpiKeyController;
-use App\Http\Controllers\Api\TrainingRecordsController;
-use App\Http\Controllers\Api\FilesController;
-use App\Http\Controllers\Api\FreeProposalController;
-use App\Http\Controllers\Api\LeaveApplicationController;
-use App\Http\Controllers\Api\TargetDetailFormController;
-use App\Http\Controllers\Api\TimeKeepingController;
-use App\Http\Controllers\Api\VersionApiController;
-use App\Http\Controllers\Api\WorkingShiftController;
-use App\Http\Controllers\Api\WorkPlanController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AuthenticateController;
-use App\Http\Controllers\ModalController;
-use App\Http\Controllers\OrganizationController;
-use App\Http\Controllers\UnitTwoController;
 use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\DepartmentLv1Controller;
 use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\PersonnelLevelController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\RoleController;
-use App\Models\PersonnelLevel;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -59,43 +25,80 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// Đăng nhập
-Route::get('/login', [AuthenticateController::class, 'index'])->name('login.index');
-// Route::get('/login', [AuthController::class, 'index'])->name('login');
-Route::post('/login', [AuthenticateController::class, 'login'])->name('login');
 
-// Quên MK
-Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-// Trang chủ
-Route::get('/', [DashboardController::class, 'indexv2'])->name("dashboard");
 
-Route::get('de-xuat-theo-mau', [ProposalController::class, 'index'])->name('proposal.list');
+Route::middleware(['guest'])->group(function () {
+    // Đăng nhập
+    Route::get('/login', [AuthenticateController::class, 'index'])->name('login.index');
 
-Route::get('de-xuat-theo-mau/1', [ProposalController::class, 'show'])->name('proposal.show');
-
-Route::get('danh-sach-dieu-khien', function () {
-    return view('other.danh-sach-dieu-khien')->name('other.danh-sach-dieu-khien');
+    Route::post('/login', [AuthenticateController::class, 'login'])->name('login');
+    // Quên MK
+    Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
 });
 
-// danh sách vị trí
-Route::get('danh-sach-vi-tri', [PositionController::class, 'index'])->name('position.list');
+Route::middleware(['auth'])->group(function () {
+    Route::post('/log-out', function () {
+        Auth::logout();
+        return redirect()->route('login');
+    })->name('logout');
+
+    Route::resource('/tuyenduong', RouteDirectionController::class);
+
+    Route::get('/map/{id}', [RouteDirectionController::class, 'showMap'])->name('map');
+
+    Route::get('/create-customer', [CustomerController::class, 'create'])->name('create-customer');
+
+    Route::post('/get-customer', [CustomerController::class, 'store'])->name('store-customer');
+
+    Route::get('/get-customer/{id}', [CustomerController::class, 'findById'])->name('find-customer-byId');
+
+    Route::get('/order', [OrderController::class, 'index'])->name('index.order');
+
+    // Trang chủ
+    Route::get('/', [DashboardController::class, 'indexv2'])->name("dashboard");
+
+    Route::get('de-xuat-theo-mau', [ProposalController::class, 'index'])->name('proposal.list');
+
+    Route::get('de-xuat-theo-mau/1', [ProposalController::class, 'show'])->name('proposal.show');
+
+    Route::get('danh-sach-dieu-khien', function () {
+        return view('other.danh-sach-dieu-khien');
+    })->name('home');
+
+    // danh sách vị trí
+    Route::get('danh-sach-vi-tri', [PositionController::class, 'index'])->name('position.list');
 
 
-Route::get('department', [DepartmentController::class, 'index'])->name('department.index');
-Route::post('department', [DepartmentController::class, 'store'])->name('department.store');
-Route::post('department/{id}', [DepartmentController::class, 'edit'])->name('department.edit');
-Route::post('department/{id}', [DepartmentController::class, 'update'])->name('department.update');
-Route::post('departmentr/{id}', [DepartmentController::class, 'destroy'])->name('departmentr.destroy');
+    Route::get('danh-sach-khach-hang', function () {
+        return view('other.danhSachKhachHang');
+    });
+
+    Route::get('danh-sach-san-pham', function () {
+        return view('Product.danhSachSanPham');
+    });
+
+    Route::get('danh-sach-tuyen', function () {
+        return view('other.danhSachTuyen');
+    });
+
+    Route::get('department', [DepartmentController::class, 'index'])->name('department.index');
+    Route::post('department', [DepartmentController::class, 'store'])->name('department.store');
+    Route::post('department/{id}', [DepartmentController::class, 'edit'])->name('department.edit');
+    Route::post('department/{id}', [DepartmentController::class, 'update'])->name('department.update');
+    Route::post('departmentr/{id}', [DepartmentController::class, 'destroy'])->name('departmentr.destroy');
 
 
-Route::get('position', [PositionController::class, 'index'])->name('position.index');
-Route::post('position', [PositionController::class, 'store'])->name('position.store');
-Route::post('position/{id}', [PositionController::class, 'update'])->name('position.update');
-Route::post('positionx/{id}', [PositionController::class, 'destroy'])->name('positionx.destroy');
+    Route::get('position', [PositionController::class, 'index'])->name('position.index');
+    Route::post('position', [PositionController::class, 'store'])->name('position.store');
+    Route::post('position/{id}', [PositionController::class, 'update'])->name('position.update');
+    Route::post('positionx/{id}', [PositionController::class, 'destroy'])->name('positionx.destroy');
 
-Route::get('area', [AreaController::class, 'index'])->name('area.index');
-Route::post('area', [AreaController::class, 'store'])->name('area.store');
+    Route::get('area', [AreaController::class, 'index'])->name('area.index');
+    Route::post('area', [AreaController::class, 'store'])->name('area.store');
 
 Route::get('cap-nhan-su', [PersonnelLevelController::class, 'index'])->name('PersonnelLevel.index');
 Route::post('cap-nhan-su', [PersonnelLevelController::class, 'store'])->name('PersonnelLevel.store');
@@ -111,3 +114,4 @@ Route::get('vai-tro', [RoleController::class, 'index'])->name('Role.index');
 Route::post('vai-tro', [RoleController::class, 'store'])->name('Role.store');
 Route::post('vai-trox/{id}', [RoleController::class, 'update'])->name('Rolex.update');
 Route::post('vai-tro/{id}', [RoleController::class, 'destroy'])->name('Role.destroy');
+});
