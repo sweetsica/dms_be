@@ -92,6 +92,10 @@ Route::middleware(['auth'])->group(function () {
         return view('Address.danhSachKhuVuc');
     });
 
+    Route::get('danh-sach-phien-ban', function () {
+        return view('Product.danhSachPhienBan');
+    });
+
     Route::get('department', [DepartmentController::class, 'index'])->name('department.index');
     Route::post('department', [DepartmentController::class, 'store'])->name('department.store');
     Route::post('department/{id}', [DepartmentController::class, 'edit'])->name('department.edit');

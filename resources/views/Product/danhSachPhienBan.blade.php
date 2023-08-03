@@ -1,6 +1,6 @@
 @extends('template.master')
 {{-- Trang chủ GIao Ban --}}
-@section('title', 'Danh sách khu vực')
+@section('title', 'Danh sách phiên bản')
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
     <style>
@@ -47,7 +47,7 @@
             <div class="main">
                 <div class="container">
                     <div class="mainSection_heading">
-                        <h5 class="mainSection_heading-title">Danh sách khu vực</h5>
+                        <h5 class="mainSection_heading-title">Danh sách địa bàn</h5>
                         @include('template.components.sectionCard')
                     </div>
                     <div class="card mb-3">
@@ -87,8 +87,8 @@
                                                 class="btn-export"><i class="bi bi-download"></i></a>
                                         </div> --}}
 
-                                        <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Thêm khu vực" data-bs-original-title="Thêm khu vực">
-                                            <button class="btn btn-danger d-block testCreateUser" data-bs-toggle="modal" data-bs-target="#add">Thêm khu vực</button>
+                                        <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Thêm địa bàn" data-bs-original-title="Thêm địa bàn">
+                                            <button class="btn btn-danger d-block testCreateUser" data-bs-toggle="modal" data-bs-target="#add">Thêm địa bàn</button>
                                         </div>
                                     </div>
                                     <div class="table-responsive">
@@ -96,9 +96,9 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-nowrap text-center" style="width:3%">STT</th>
-                                                    <th class="text-nowrap text-center" style="width:8%">Mã khu vực</th>
-                                                    <th class="text-nowrap text-center" style="width:30%">Tên khu vực</th>
-                                                    <th class="text-nowrap text-center" style="width:30%">Vùng</th>
+                                                    <th class="text-nowrap text-center" style="width:8%">Mã địa bàn</th>
+                                                    <th class="text-nowrap text-center" style="width:30%">Tên địa bàn</th>
+                                                    <th class="text-nowrap text-center" style="width:30%">Khu vực</th>
                                                     <th class="text-nowrap text-center" style="width:4%">Hành động</th>
 
                                                 </tr>
@@ -207,7 +207,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">Sửa thông tin khu vực</h5>
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Sửa thông tin địa bàn</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="formThemCapPhat" method="POST" action="#">
@@ -215,13 +215,13 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <input type="text" value="1" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên khu vực" placeholder="Tên khu vực*" class="form-control">
+                                <input type="text" value="1" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên địa bàn" placeholder="Tên địa bàn*" class="form-control">
                             </div>
                             <div class="col-md-6 mb-3">
-                                <input type="text" value="1"  name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã khu vực" placeholder="Mã khu vực*" class="form-control">
+                                <input type="text" value="1"  name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã địa bàn" placeholder="Mã địa bàn*" class="form-control">
                             </div>
-                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Vùng">
-                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Vùng*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Khu vực">
+                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Khu vực*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
                                     <option value="1" selected>1</option>
                                 </select>
                             </div>
@@ -248,7 +248,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">Thêm khu vực</h5>
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Thêm địa bàn</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="formThemCapPhat" method="POST" action="#">
@@ -256,13 +256,13 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên khu vực" placeholder="Tên khu vực*" class="form-control">
+                                <input type="text" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên địa bàn" placeholder="Tên địa bàn*" class="form-control">
                             </div>
                             <div class="col-md-6 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã khu vực" placeholder="Mã khu vực*" class="form-control">
+                                <input type="text" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã địa bàn" placeholder="Mã địa bàn*" class="form-control">
                             </div>
-                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Vùng">
-                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Vùng*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Khu vực">
+                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Khu vực*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
                                     <option value="1">1</option>
                                 </select>
                             </div>
