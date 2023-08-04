@@ -44,12 +44,13 @@
                                     value="{{ $search }}" placeholder="Tìm kiếm" name="search">
                             </div>
                         </form>
-                    </div><br>
+                    </div>
+                    <br>
                     <div class="d-flex align-items-center"
                         style=" background-color: #EBEBEB; height: 40px; display: flex; justify-content: center; font-size: 15px;">
                         <b>Cơ cấu tổ chức</b>
-                    </div><br>
-
+                    </div>
+                    <br>
                     <div>
                         <ul id="tree1">
                             @foreach ($departmentListTree as $donVi)
@@ -132,6 +133,7 @@
     .indicator {
         font-size: 14px;
         color: #ca1f24;
+        margin-right: 5px
     }
 </style>
 

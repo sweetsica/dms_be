@@ -341,7 +341,7 @@
             @include('template.footer.footer')
         </div>
     </div>
-    {{-- @include('template.sidebar.sidebarDeXuatTheoMau.sidebarRight') --}}
+    @include('template.sidebar.sidebarPosition.sidebarRight')
 
 
 
