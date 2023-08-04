@@ -30,18 +30,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['web'])->group(function () {
-    Route::get('/clear', function () {
-        \Illuminate\Support\Facades\Session::flush();
-    });
+Route::get('/clear', function () {
+    \Illuminate\Support\Facades\Session::flush();
+});
 
-    // Đăng nhập
-    Route::get('/login', [AuthenticateController::class, 'index'])->name('login.index');
+// Đăng nhập
+Route::get('/login', [AuthenticateController::class, 'index'])->name('login.index');
 
-    Route::post('/login', [AuthenticateController::class, 'login'])->name('login');
-    // Quên MK
-    Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+Route::post('/login', [AuthenticateController::class, 'login'])->name('login');
+// Quên MK
+Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
 
+Route::middleware(['auth.role'])->group(function () {
     Route::post('/log-out', [AuthenticateController::class, 'logout'])->name('logout');
 
     Route::resource('/tuyenduong', RouteDirectionController::class);
