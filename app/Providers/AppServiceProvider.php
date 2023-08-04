@@ -40,6 +40,6 @@ class AppServiceProvider extends ServiceProvider
             KpiKeyComposer::class
         );
 
-        Paginator::useBootstrap();
+        // Paginator::useBootstrap();
     }
 }
