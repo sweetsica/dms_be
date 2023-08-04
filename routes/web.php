@@ -16,6 +16,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\VersionController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RouteDirectionController;
 
 
 /*
@@ -46,6 +47,10 @@ Route::middleware(['guest'])->group(function () {
 
 
 Route::middleware(['auth.role'])->group(function () {
+    
+    Route::get('/', function () {
+        return view('other.danh-sach-dieu-khien');
+    })->name('home');
 
     Route::post('/log-out', [AuthenticateController::class, 'logout'])->name('logout');
 
@@ -59,18 +64,14 @@ Route::middleware(['auth.role'])->group(function () {
 
     Route::get('/get-customer/{id}', [CustomerController::class, 'findById'])->name('find-customer-byId');
 
-    Route::get('/order', [OrderController::class, 'index'])->name('index.order');
+    //Route::get('/order', [OrderController::class, 'index'])->name('index.order');
 
     // Trang chủ
-    Route::get('/', [DashboardController::class, 'indexv2'])->name("dashboard");
+    Route::get('/dashboard', [DashboardController::class, 'indexv2'])->name("dashboard");
 
     Route::get('de-xuat-theo-mau', [ProposalController::class, 'index'])->name('proposal.list');
 
     Route::get('de-xuat-theo-mau/1', [ProposalController::class, 'show'])->name('proposal.show');
-
-    Route::get('danh-sach-dieu-khien', function () {
-        return view('other.danh-sach-dieu-khien');
-    })->name('home');
 
     // danh sách vị trí
     Route::get('danh-sach-vi-tri', [PositionController::class, 'index'])->name('position.list');
@@ -106,11 +107,9 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('danh-sach-khu-vuc/{id}', [AreaController::class, 'update'])->name('area.update');
     Route::post('danh-sach-khu-vucx/{id}', [AreaController::class, 'destroy'])->name('area.destroy');
 
-    Route::get('department', [DepartmentController::class, 'index'])->name('department.index');
-    Route::post('department', [DepartmentController::class, 'store'])->name('department.store');
-    Route::post('department/{id}', [DepartmentController::class, 'edit'])->name('department.edit');
-    Route::post('department/{id}', [DepartmentController::class, 'update'])->name('department.update');
-    Route::post('departmentr/{id}', [DepartmentController::class, 'destroy'])->name('departmentr.destroy');
+    Route::get('bao-gia', function () {
+        return view('other.baoGia');
+    });
 
     Route::get('department', [DepartmentController::class, 'index'])->name('department.index');
     Route::post('department', [DepartmentController::class, 'store'])->name('department.store');
