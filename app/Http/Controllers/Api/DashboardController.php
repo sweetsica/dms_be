@@ -10,15 +10,15 @@ use Illuminate\Support\Facades\Session;
 
 class DashboardController extends Controller
 {
-    public function __construct()
-    {
-        //get current user in session
-        $user = session()->get('user');
-        if (!$user) {
-            return redirect('/login');
-        }
-    }
-    
+    // public function __construct()
+    // {
+    //     //get current user in session
+    //     $user = session()->get('user');
+    //     if (!$user) {
+    //         return redirect('/login');
+    //     }
+    // }
+
     public function indexv2(Request $request)
     {
         return view('dashboardv2');

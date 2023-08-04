@@ -9,14 +9,14 @@ use Illuminate\Http\Request;
 class PersonnelLevelController extends Controller
 {
 
-    public function __construct()
-    {
-        //get current user in session
-        $user = session()->get('user');
-        if (!$user) {
-            return redirect('/login');
-        }
-    }
+    // public function __construct()
+    // {
+    //     //get current user in session
+    //     $user = session()->get('user');
+    //     if (!$user) {
+    //         return redirect('/login');
+    //     }
+    // }
 
     public function index(Request $request){
         $search = $request->get('search');

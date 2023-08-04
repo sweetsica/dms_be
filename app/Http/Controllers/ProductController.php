@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
-    public function __construct()
-    {
-        //get current user in session
-        $user = session()->get('user');
-        if (!$user) {
-            return redirect('/login');
-        }
-    }
+    // public function __construct()
+    // {
+    //     //get current user in session
+    //     $user = session()->get('user');
+    //     if (!$user) {
+    //         return redirect('/login');
+    //     }
+    // }
     /**
      * Display a listing of the resource.
      */
