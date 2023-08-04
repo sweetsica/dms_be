@@ -41,6 +41,9 @@
 
 @endphp
 @section('content')
+    @if(\Illuminate\Support\Facades\Session::get('data_vua_ghi'))
+        @dump(\Illuminate\Support\Facades\Session::get('data_vua_ghi'))
+    @endif
     @include('template.sidebar.sidebarMaster.sidebarLeft')
     <div id="mainWrap" class="mainWrap">
         <div class="mainSection">

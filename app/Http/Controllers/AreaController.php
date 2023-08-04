@@ -6,6 +6,7 @@ use App\Models\Area;
 use App\Models\Department;
 use App\Models\UnitLeader;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AreaController extends Controller
 {
@@ -50,6 +51,9 @@ class AreaController extends Controller
         $data->area=$area;
         $data->description=$description;
         $data->save();
+        Session::put('data_vua_ghi',$data);
+        //den day la se gap van de. đ (dât thì vẫn bthg
+        // co ve van de la con nginx hoac apache cua anh do
         return redirect()->route('area.index');
     }
 
