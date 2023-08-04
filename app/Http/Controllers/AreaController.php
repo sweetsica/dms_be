@@ -51,10 +51,10 @@ class AreaController extends Controller
         $data->description=$description;
         $data->save();
 
-        return response()->json($data);
+//        return response()->json($data);
 //        dd($data);
 //        return redirect()->back();
-        return redirect()->route('area.index');
+        return redirect()->to('https://dms.xedienthaihung.com/danh-sach-khu-vuc');
     }
 
     public function update(Request $request,$id)
