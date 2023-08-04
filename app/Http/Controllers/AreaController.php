@@ -52,8 +52,9 @@ class AreaController extends Controller
         $data->description=$description;
         $data->save();
 
-        dd($data);
-        return redirect()->back();
+        return back();
+//        dd($data);
+//        return redirect()->back();
 //        return redirect()->route('area.index');
     }
 
