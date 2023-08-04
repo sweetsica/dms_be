@@ -50,7 +50,8 @@ class AreaController extends Controller
         $data->area=$area;
         $data->description=$description;
         $data->save();
-        return redirect()->route('area.index');
+        return redirect()->back();
+//        return redirect()->route('area.index');
     }
 
     public function update(Request $request,$id)
