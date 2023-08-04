@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function (){
-    return view('other\danh-sach-dieu-khien');
+    return view('other.danh-sach-dieu-khien');
 });
 
 Route::get('/clear', function () {
