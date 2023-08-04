@@ -61,7 +61,7 @@ Route::get('/get-customer/{id}', [CustomerController::class, 'findById'])->name(
 //Route::get('/order', [OrderController::class, 'index'])->name('index.order');
 
 // Trang chủ
-Route::get('/', [DashboardController::class, 'indexv2'])->name("dashboard");
+Route::get('/dashboard', [DashboardController::class, 'indexv2'])->name("dashboard");
 
 Route::get('de-xuat-theo-mau', [ProposalController::class, 'index'])->name('proposal.list');
 
