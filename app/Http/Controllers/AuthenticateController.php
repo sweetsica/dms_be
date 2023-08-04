@@ -14,13 +14,17 @@ use Illuminate\Support\Facades\Session;
 
 class AuthenticateController extends Controller
 {
-    public function index(Request $request)
+    public function __construct()
     {
-        if ($request->session()->has('user')) {
-            // return redirect('/');
+        //get current user in session
+        $user = session()->get('user');
+        if ($user) {
             return redirect()->route('home');
         }
+    }
 
+    public function index(Request $request)
+    {
         return view('login');
     }
 

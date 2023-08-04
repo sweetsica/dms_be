@@ -8,7 +8,15 @@ use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
-
+    public function __construct()
+    {
+        //get current user in session
+        $user = session()->get('user');
+        if (!$user) {
+            return redirect('/login');
+        }
+    }
+    
     public function index(Request $request){
         $search = $request->get('search');
         $departmentList = Department::leftJoin('unit_leader','unit_leader.id','=','department.ib_lead')
