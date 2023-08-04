@@ -40,7 +40,6 @@ class AreaController extends Controller
     }
     public function store(Request $request)
     {
-
         $name = $request->get('name');
         $code = $request->get('code');
         $area  = $request->get('area');
@@ -52,6 +51,7 @@ class AreaController extends Controller
         $data->description=$description;
         $data->save();
 
+        return response()->json($data);
 //        dd($data);
 //        return redirect()->back();
         return redirect()->route('area.index');
