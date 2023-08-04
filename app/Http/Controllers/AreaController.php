@@ -40,6 +40,7 @@ class AreaController extends Controller
     }
     public function store(Request $request)
     {
+        dd($request);
         $name = $request->get('name');
         $code = $request->get('code');
         $area  = $request->get('area');

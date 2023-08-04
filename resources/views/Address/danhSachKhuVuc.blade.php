@@ -258,7 +258,7 @@
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <input type="text" name="description" data-bs-toggle="tooltip" data-bs-placement="top" title="Ghi chú" placeholder="Ghi chú" class="form-control">
+                                <input type="text" name="description" value='Ghi chú cái l' data-bs-toggle="tooltip" data-bs-placement="top" title="Ghi chú" placeholder="Ghi chú" class="form-control">
                             </div>
 
 
