@@ -32,7 +32,7 @@ use App\Http\Controllers\RouteDirectionController;
 */
 
 Route::get('/', function (){
-    return route('home');
+    return view('danh-sach-dieu-khien');
 });
 
 Route::get('/clear', function () {
