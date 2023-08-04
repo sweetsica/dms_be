@@ -31,6 +31,10 @@ use App\Http\Controllers\RouteDirectionController;
 |
 */
 
+Route::get('/', function (){
+    return route('danh-sach-dieu-khien');
+});
+
 Route::get('/clear', function () {
     \Illuminate\Support\Facades\Session::flush();
 });
