@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
+use App\Models\Locality;
 use App\Models\Personnel;
 use App\Models\PersonnelLevel;
 use App\Models\Position;
@@ -19,6 +20,7 @@ class PersonnelController extends Controller
         ->join('position','position.id','=','personnel.position_id')
         ->join('personnel_level','personnel_level.id','=','personnel.personnel_lv_id')
         ->join('role','role.id','=','personnel.role_id')
+        ->join('locality','locality.id','=','personnel.area_id')
         ->select(
             'personnel.id',
             'personnel.name',
@@ -42,6 +44,7 @@ class PersonnelController extends Controller
             'personnel_level.name as personnel_level_name',
             'personnel.role_id',
             'role.name as role_name',
+            'locality.name as locality_name',
             'personnel.area_id'
             // 'personnel.id',
         )
@@ -51,12 +54,14 @@ class PersonnelController extends Controller
         $personnellists =  $this->getPersonnel();
         $personnelLevelList = PersonnelLevel::all();
         $roleList = Role::all();
+        $localityList = Locality::all();
         $departmentListTree = Department::where('parent',0)->with('donViCon')->get();
         // dd($personnelLevelList);
         return view("nhan_su.index",[
             "personnelList"=>$personnelList,
             "departmentlists"=>$departmentlists,
             "positionlists"=>$positionlists,
+            "localityList"=>$localityList,
             "personnellists"=>$personnellists,
             "personnelLevelList"=>$personnelLevelList,
             "roleList"=>$roleList,

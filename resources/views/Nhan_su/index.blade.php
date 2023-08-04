@@ -102,7 +102,7 @@
                                                                     {{ $item->role }}
                                                                 </td>
                                                                 <td class="">
-                                                                    {{ $item->area_id }}
+                                                                    {{ $item->locality_name }}
                                                                 </td>
                                                                 <td class="">
                                                                     {{ $item->email }}
@@ -268,7 +268,12 @@
                                                                                 <div class="col-6 mb-3">
                                                                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Địa bàn">
                                                                                         <select name="area_id"  class="selectpicker" data-dropup-auto="false">
-                                                                                            <option value="">Địa bàn</option>
+                                                                                            <option value="{{$item->area_id}}">{{$item->locality_name}}</option>
+                                                                                            @foreach ($localityList as $localList)
+                                                                                            <option value="{{$localList->id}}">
+                                                                                                {{$localList->name}}
+                                                                                            </option>
+                                                                                        @endforeach
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
@@ -512,7 +517,13 @@
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Địa bàn">
                                     <select name="area_id"  class="selectpicker" data-dropup-auto="false">
-                                        <option value="">Địa bàn</option>
+                                           <option value="">Địa bàn</option>
+                                        @foreach ($localityList as $item)
+                                            <option value="{{ $item->id }}">
+                                                {{ $item->name }}
+                                            </option>
+                                        @endforeach
+
                                     </select>
                                 </div>
                             </div>
