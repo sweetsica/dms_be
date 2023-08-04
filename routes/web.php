@@ -64,6 +64,11 @@ Route::middleware(['web'])->group(function () {
     Route::get('de-xuat-theo-mau/1', [ProposalController::class, 'show'])->name('proposal.show');
 
     Route::get('danh-sach-dieu-khien', function () {
+        //get current user in session
+        $user = session()->get('user');
+        if (!$user) {
+            return redirect('/login');
+        }
         return view('other.danh-sach-dieu-khien');
     })->name('home');
 
