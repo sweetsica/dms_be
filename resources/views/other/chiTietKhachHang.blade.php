@@ -47,188 +47,33 @@
             <div class="main">
                 <div class="container">
                     <div class="mainSection_heading">
-                        <h5 class="mainSection_heading-title">Danh sách khách hàng</h5>
+                        <h5 class="mainSection_heading-title">Chi tiết khách hàng</h5>
                         @include('template.components.sectionCard')
                     </div>
                     <div class="card mb-3">
                         <div class="card-body">
                             <div class='row'>
                                 <div class="col-md-12">
-                                    <div class="action_wrapper d-flex justify-content-end mb-3">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center mb-3">
+                                            
+                                            <div class="card-title"> <i class="bi bi-briefcase" style="padding-right: 6px"></i>Nhà thuốc Vĩnh Thịnh</div>
+                                            
+                                        </div>
 
-                                        <div class="action_wrapper d-flex justify-content-end mb-3">
+                                        <div class="action_wrapper">
 
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <form method="GET" action="#">
-                                                    {{-- @foreach (request()->query() as $key => $value)
-                                                        @if ($key != 'q' && $key != 'page')
-                                                            <input type="hidden" name="{{ $key }}" value="{{ $value }}">
-                                                        @endif
-                                                    @endforeach --}}
-                                                    <div class="form-group has-search">
-                                                        <span type="submit"
-                                                            class="bi bi-search form-control-feedback fs-5"></span>
-                                                        <input type="text" class="form-control" placeholder="Tìm kiếm"
-                                                            value="{{ request()->get('q') }}" name="q">
-                                                    </div>
-                                                </form>
+                                            
+                                            <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Về danh sách" data-bs-original-title="Về danh sách">
+                                                <button class="btn btn-outline-danger d-block testCreateUser" data-bs-toggle="modal" data-bs-target="#">Về danh sách</button>
                                             </div>
-    
-                                            {{-- <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Lọc">
-                                                <button class="btn btn-outline-danger {{ isFiltering(['department', 'user', 'adminDate']) ? 'active' : '' }}" data-bs-toggle="modal" data-bs-target="#filterAdmin"><i class="bi bi-funnel"></i>
-                                                </button>
-                                            </div> --}}
-    
+                                            <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Tạo đơn hàng" data-bs-original-title="Tạo đơn hàng">
+                                                <button class="btn btn-danger d-block testCreateUser" data-bs-toggle="modal" data-bs-target="#">Tạo đơn hàng</button>
+                                            </div>
                                         </div>
-                                        {{-- <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                            title="Xuất file Excel">
-                                            <a role="button" target="_blank"
-                                                href={{ route('print.dwtUser', ['date' => request()->userDate ?? date('m-Y')]) }}
-                                                class="btn-export"><i class="bi bi-download"></i></a>
-                                        </div> --}}
 
-                                        <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Thêm khách hàng" data-bs-original-title="Thêm khách hàng">
-                                            <button class="btn btn-danger d-block testCreateUser" data-bs-toggle="modal" data-bs-target="#add">Thêm khách hàng</button>
-                                        </div>
                                     </div>
-                                    <div class="table-responsive">
-                                        <table id="dsDaoTao" class="table table-responsive table-hover table-bordered filter" style="width: 180%">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-nowrap text-center" style="width:2%">STT</th>
-                                                    <th class="text-nowrap text-center" style="width:5%">Mã KH</th>
-                                                    <th class="text-nowrap text-center" style="width:8%">Tên khách hàng</th>
-                                                    <th class="text-nowrap text-center" style="width:6%">Số điện thoại</th>
-                                                    <th class="text-nowrap text-center" style="width:6%">Email</th>
-                                                    <th class="text-nowrap text-center" style="width:8%">Tên công ty</th>
-                                                    <th class="text-nowrap text-center" style="width:6%">Tỉnh/thành</th>
-                                                    <th class="text-nowrap text-center" style="width:6%">Quận/huyện</th>
-                                                    <th class="text-nowrap text-center" style="width:6%">Phường/xã</th>
-                                                    <th class="text-nowrap text-center" style="width:10%">Địa chỉ</th>
-                                                    <th class="text-nowrap text-center" style="width:6%">Nhóm KH</th>
-                                                    <th class="text-nowrap text-center" style="width:6%">Kênh KH</th>
-                                                    <th class="text-nowrap text-center" style="width:6%">Tuyến KH</th>
-                                                    <th class="text-nowrap text-center" style="width:8%">Nhân sự thu thập</th>
-                                                    <th class="text-nowrap text-center" style="width:8%">Sản phẩm quan tâm</th>
-                                                    <th class="text-nowrap text-center" style="width:6%">Trạng thái</th>
-                                                    <th class="text-nowrap text-center" style="width:4%">Hành động</th>
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach($listData as $item)
-                                                <tr class="table-row" >
-                                                    {{-- data-bs-toggle="modal" data-bs-target="#info"  role="button" --}}
-                                                    <td>
-                                                        <div class="overText text-center">
-                                                            {{ $item['id'] }}
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="overText" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
-                                                            {{ $item['code'] }}
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="overText" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
-                                                            {{ $item['name'] }}
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="overText" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
-                                                            {{ $item['mobi'] }}
-                                                            
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="overText center" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
-                                                            {{ $item['email'] }}
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="overText center" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
-                                                            {{ $item['business'] }}
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="overText center" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
-                                                            {{ $item['tinh'] }}
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="overText center" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
-                                                            {{ $item['quan'] }}
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="overText center" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
-                                                            {{ $item['phuong'] }}
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="overText center" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
-                                                            {{ $item['diachi'] }}
-                                                        </div>
-                                                    </td>
-                                                    
-                                                    <td>
-                                                        <div class="overText center" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
-                                                            {{ $item['nhom'] }}
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="overText center" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
-                                                            {{ $item['kenh'] }}
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="overText center" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
-                                                            {{ $item['tuyen'] }}
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="overText center" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
-                                                            {{ $item['usermanager'] }}
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="overText center" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
-                                                            {{ $item['sp'] }}
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="overText center" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
-                                                            {{ $item['trangthai'] }}
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="table_actions d-flex justify-content-center">
-                                                            <div class="btn test_btn-edit-{{ $item['id'] }}" href="#" data-bs-toggle="modal" data-bs-target="#suaca{{ $item['id'] }}">
-                                                                <img style="width:16px;height:16px" src="{{ asset('assets/img/edit.svg') }}" />
-                                                            </div>
-                                                            <div class="btn test_btn-remove-{{ $item['id'] }}" href="#" data-bs-toggle="modal" data-bs-target="#xoaca{{ $item['id'] }}">
-                                                                <img style="width:16px;height:16px" src="{{ asset('assets/img/trash.svg') }}" />
-                                                            </div>
-                                                        </div>
-                                
-
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                        <nav aria-label="Page navigation example" class="float-end mt-3" id="target-pagination">
-                                            <ul class="pagination">
-                                                {{-- @foreach ($documents->links as $link)
-                                                    <li class="page-item {{ $link->active ? 'active' : '' }}">
-                                                        <a class="page-link" href="{{ getPaginationLink($link, 'page') }}" aria-label="Previous">
-                                                            <span aria-hidden="true">{!! $link->label !!}</span>
-                                                        </a>
-                                                    </li>
-                                                @endforeach --}}
-                                            </ul>
-                                        </nav>
-                                    </div>
+                                    
                                     <nav aria-label="Page navigation example" class="float-end mt-3"
                                         id="target-pagination">
                                         <ul class="pagination">

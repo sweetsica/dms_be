@@ -29,7 +29,7 @@
                             <div class="row">
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3">
                                     <div class=" control_wrapper"  >
-                                        <a href="" class="control_link" id="control_link-1">
+                                        <a href="/danh-sach-khach-hang" class="control_link" id="control_link-1">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/agreement.png') }}" alt="">
                                             </div>
@@ -54,7 +54,7 @@
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3">
                                     <div class=" control_wrapper"  >
-                                        <a href="#" class="control_link" id="control_link-3">
+                                        <a href="/danh-sach-san-pham" class="control_link" id="control_link-3">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/features.png') }}" alt="">
                                             </div>
@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3">
                                     <div class=" control_wrapper"  >
-                                        <a href="#" class="control_link" id="control_link-4">
+                                        <a href="/danh-sach-phien-ban" class="control_link" id="control_link-4">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/order-delivery.png') }}" alt="">
                                             </div>
@@ -96,7 +96,7 @@
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3 mb-5 mt-5">
                                     <div class=" control_wrapper"  >
-                                        <a href="#" class="control_link" id="control_link-6">
+                                        <a href="danh-sach-tuyen" class="control_link" id="control_link-6">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/users.png') }}" alt="">
                                             </div>

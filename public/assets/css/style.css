@@ -1467,6 +1467,12 @@ th {
     margin: 0;
 }
 
+.card-title-black {
+    font-size: var(--fz-12);
+    font-weight: 700;
+    margin: 0;
+}
+
 .main_search {
     position: relative;
     /* height: 30px; */
