@@ -15,9 +15,6 @@
 @endsection
 
 @section('content')
-    @php
-        dd(session()->all());
-    @endphp
     <div id="mainWrap" class="mainWrap m-0">
         <div class="mainSection withBg">
             <div class="main">
