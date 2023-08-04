@@ -1,6 +1,6 @@
 @extends('template.master')
 {{-- Trang chủ GIao Ban --}}
-@section('title', 'Đề xuất theo mẫu')
+@section('title', 'Danh sách tổ chức')
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 @endsection
@@ -64,7 +64,7 @@
                                                             <th class="text-nowrap" style="width:10%">Đơn vị </th>
                                                             <th class="text-nowrap" style="width:10%">Đơn vị mẹ </th>
                                                             <th class="text-nowrap" style="width:10%">Trưởng đơn vị </th>
-                                                            <th class="text-nowrap" style="width:20%">Chức năng nhiệ vụ</th>
+                                                            <th class="text-nowrap" style="width:20%">Chức năng nhiệm vụ</th>
                                                             <th class="text-nowrap" style="width:3%"><span>Hành động</span></th>
                                                         </tr>
                                                     </thead>
@@ -184,6 +184,10 @@
                                                                                         <select name="parent" required
                                                                                             class="selectpicker"
                                                                                             data-dropup-auto="false">
+                                                                                            <?php if( $item->parent == null){?>
+                                                                                                <option>Chọn đơn vị mẹ</option>
+                                                                                                    <?php}else{?>
+                                                                                                    <?php }?>
                                                                                             <option value="{{$item->parent}}"> @if ($item->donvime){{ $item->donvime->name }}  @endif</option>
                                                                                             @foreach ($departmentlists as $ac)
                                                                                                 <option
@@ -210,10 +214,13 @@
                                                                                         <select name="ib_lead"
                                                                                             class="selectpicker"
                                                                                             data-dropup-auto="false">
-                                                                                            <option
-                                                                                            value="{{ $item->ib_lead }}"  >
-                                                                                            {{ $item->leader_name }}
-                                                                                            </option>
+                                                                                            <?php if( $item->ib_lead == null){?>
+                                                                                            <option>Chọn trưởng bộ phận</option>
+                                                                                                <?php}else{?>
+                                                                                                <?php }?>
+                                                                                                <option value="{{ $item->ib_lead }}">
+                                                                                                    {{ $item->leader_name }}
+                                                                                                </option>
                                                                                             @foreach ($UnitLeaderList as $av)
                                                                                                 <option
                                                                                                     value="{{ $av->id }}" >
@@ -252,7 +259,7 @@
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title text-danger"
-                                                                            id="exampleModalLabel">Xóa đề xuất</h5>
+                                                                            id="exampleModalLabel">Xóa đơn vị </h5>
                                                                         <button type="button" class="btn-close"
                                                                             data-bs-dismiss="modal"
                                                                             aria-label="Close"></button>

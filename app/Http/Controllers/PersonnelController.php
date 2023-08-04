@@ -16,11 +16,11 @@ class PersonnelController extends Controller
 
     public function index(Request $request){
         $search = $request->get('search');
-        $personnelList = Personnel::join('department','department.id','=','personnel.department_id')
-        ->join('position','position.id','=','personnel.position_id')
-        ->join('personnel_level','personnel_level.id','=','personnel.personnel_lv_id')
-        ->join('role','role.id','=','personnel.role_id')
-        ->join('locality','locality.id','=','personnel.area_id')
+        $personnelList = Personnel::leftJoin('department','department.id','=','personnel.department_id')
+        ->leftJoin('position','position.id','=','personnel.position_id')
+        ->leftJoin('personnel_level','personnel_level.id','=','personnel.personnel_lv_id')
+        ->leftJoin('role','role.id','=','personnel.role_id')
+        ->leftJoin('locality','locality.id','=','personnel.area_id')
         ->select(
             'personnel.id',
             'personnel.name',
