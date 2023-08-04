@@ -17,9 +17,28 @@ class RoleAuthorization
     {
         //get current user in session
         $user = session()->get('user');
-        if ($user) {
+        if (!$user) {
+            return redirect('/login');
+        }
+        //get current token in session
+        $token = session()->get('token');
+        if (!$token) {
+            return redirect('/login');
+        }
+        //get user role
+        $role = $user['role'];
+        if (!$role) {
+            return redirect('/login');
+        }
+        // admin can do everything
+        if ($role == 'admin') {
             return $next($request);
         }
+        //check if user role is in the list of roles
+        if ($user && in_array($role, $roles)) {
+            return $next($request);
+        }
+        //if not, redirect to login page
         return redirect('/login');
     }
 }

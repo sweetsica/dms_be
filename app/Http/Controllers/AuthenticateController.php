@@ -55,9 +55,7 @@ class AuthenticateController extends Controller
 
     public function logout(Request $request)
     {
-        $request->session()->invalidate();
-        //regenerate csrf token
-        $request->session()->regenerateToken();
+        Session::flush();
         return redirect('/login');
     }
 }
