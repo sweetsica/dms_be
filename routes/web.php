@@ -77,6 +77,10 @@ Route::middleware(['auth'])->group(function () {
         return view('other.danhSachKhachHang');
     });
 
+    Route::get('chi-tiet-khach-hang', function () {
+        return view('other.chiTietKhachHang');
+    });
+
     Route::get('danh-sach-san-pham', function () {
         return view('Product.danhSachSanPham');
     });
@@ -98,6 +102,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('danh-sach-phien-ban', function () {
         return view('Product.danhSachPhienBan');
+    });
+
+
+    Route::get('bao-gia', function () {
+        return view('other.baoGia');
     });
 
     Route::get('department', [DepartmentController::class, 'index'])->name('department.index');
