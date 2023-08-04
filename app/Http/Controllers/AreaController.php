@@ -52,7 +52,7 @@ class AreaController extends Controller
         $data->description=$description;
         $data->save();
 
-        return back();
+        return view('Address.danhSachKhuVuc');
 //        dd($data);
 //        return redirect()->back();
 //        return redirect()->route('area.index');
