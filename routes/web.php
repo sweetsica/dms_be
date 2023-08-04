@@ -47,7 +47,7 @@ Route::middleware(['guest'])->group(function () {
 
 
 Route::middleware(['auth.role'])->group(function () {
-    
+
     Route::get('/', function () {
         return view('other.danh-sach-dieu-khien');
     })->name('home');
@@ -117,8 +117,28 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('department/{id}', [DepartmentController::class, 'update'])->name('department.update');
     Route::post('departmentr/{id}', [DepartmentController::class, 'destroy'])->name('departmentr.destroy');
 
+    Route::get('position', [PositionController::class, 'index'])->name('position.index');
+    Route::post('position', [PositionController::class, 'store'])->name('position.store');
+    Route::post('position/{id}', [PositionController::class, 'update'])->name('position.update');
+    Route::post('positionx/{id}', [PositionController::class, 'destroy'])->name('positionx.destroy');
+
+    Route::get('cap-nhan-su', [PersonnelLevelController::class, 'index'])->name('PersonnelLevel.index');
+    Route::post('cap-nhan-su', [PersonnelLevelController::class, 'store'])->name('PersonnelLevel.store');
+    Route::post('cap_nhan_sux/{id}', [PersonnelLevelController::class, 'update'])->name('PersonnelLevel.update');
+    Route::post('cap_nhan_su/{id}', [PersonnelLevelController::class, 'destroy'])->name('PersonnelLevelx.destroy');
+
+    Route::get('nhan-su', [PersonnelController::class, 'index'])->name('Personnel.index');
+    Route::post('nhan-su', [PersonnelController::class, 'store'])->name('Personnel.store');
+    Route::post('nhan_sux/{id}', [PersonnelController::class, 'update'])->name('Personnel.update');
+    Route::post('nhan_su/{id}', [PersonnelController::class, 'destroy'])->name('Personnel.destroy');
+
     Route::get('vai-tro', [RoleController::class, 'index'])->name('Role.index');
     Route::post('vai-tro', [RoleController::class, 'store'])->name('Role.store');
     Route::post('vai-trox/{id}', [RoleController::class, 'update'])->name('Rolex.update');
     Route::post('vai-tro/{id}', [RoleController::class, 'destroy'])->name('Role.destroy');
+});
+
+// 404
+Route::fallback(function () {
+    return view('404');
 });
