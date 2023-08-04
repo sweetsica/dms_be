@@ -110,8 +110,9 @@ Route::post('danh-sach-khu-vuc', [AreaController::class, 'store'])->name('area.s
 Route::post('danh-sach-khu-vuc/{id}', [AreaController::class, 'update'])->name('area.update');
 Route::post('danh-sach-khu-vucx/{id}', [AreaController::class, 'destroy'])->name('area.destroy');
 
-
-
+Route::get('bao-gia', function () {
+    return view('other.baoGia');
+});
 
 Route::get('department', [DepartmentController::class, 'index'])->name('department.index');
 Route::post('department', [DepartmentController::class, 'store'])->name('department.store');
