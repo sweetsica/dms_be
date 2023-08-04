@@ -15,6 +15,9 @@
 @endsection
 
 @section('content')
+    @php
+        dd(session()->all());
+    @endphp
     <div id="mainWrap" class="mainWrap m-0">
         <div class="mainSection withBg">
             <div class="main">
@@ -28,7 +31,7 @@
                         <div class="card-body" style="background-color: var(--white-color-blur); padding: 20px 10px">
                             <div class="row">
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3">
-                                    <div class=" control_wrapper"  >
+                                    <div class=" control_wrapper">
                                         <a href="" class="control_link" id="control_link-1">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/agreement.png') }}" alt="">
@@ -40,11 +43,10 @@
                                     </div>
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3">
-                                    <div class=" control_wrapper"  >
+                                    <div class=" control_wrapper">
                                         <a href="#" class="control_link" id="control_link-2">
                                             <div class="control_img">
-                                                <img src="{{ asset('/assets/img/control/2.png') }}"
-                                                    alt="">
+                                                <img src="{{ asset('/assets/img/control/2.png') }}" alt="">
                                             </div>
                                             <div class="control_title fs-5">
                                                 Nhân sự
@@ -53,7 +55,7 @@
                                     </div>
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3">
-                                    <div class=" control_wrapper"  >
+                                    <div class=" control_wrapper">
                                         <a href="#" class="control_link" id="control_link-3">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/features.png') }}" alt="">
@@ -65,10 +67,11 @@
                                     </div>
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3">
-                                    <div class=" control_wrapper"  >
+                                    <div class=" control_wrapper">
                                         <a href="#" class="control_link" id="control_link-4">
                                             <div class="control_img">
-                                                <img src="{{ asset('/assets/img/control/order-delivery.png') }}" alt="">
+                                                <img src="{{ asset('/assets/img/control/order-delivery.png') }}"
+                                                    alt="">
                                             </div>
                                             <div class="control_title fs-5">
                                                 Sản phẩm Custom
@@ -83,7 +86,7 @@
                         <div class="card-body" style="background-color: var(--white-color-blur); padding: 20px 10px">
                             <div class="row">
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3 mb-5 mt-5">
-                                    <div class=" control_wrapper"  >
+                                    <div class=" control_wrapper">
                                         <a href="#" class="control_link" id="control_link-5">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/cargo.png') }}" alt="">
@@ -95,7 +98,7 @@
                                     </div>
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3 mb-5 mt-5">
-                                    <div class=" control_wrapper"  >
+                                    <div class=" control_wrapper">
                                         <a href="#" class="control_link" id="control_link-6">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/users.png') }}" alt="">
@@ -107,7 +110,7 @@
                                     </div>
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3 mb-5 mt-5">
-                                    <div class=" control_wrapper"  >
+                                    <div class=" control_wrapper">
                                         <a href="#" class="control_link" id="control_link-7">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/workflow.png') }}" alt="">
@@ -119,7 +122,7 @@
                                     </div>
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3 mb-5 mt-5">
-                                    <div class=" control_wrapper"  >
+                                    <div class=" control_wrapper">
                                         <a href="#" class="control_link" id="control_link-8">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/brain.png') }}" alt="">
@@ -130,8 +133,8 @@
                                         </a>
                                     </div>
                                 </div>
-                                
-                                
+
+
                             </div>
                         </div>
                     </div>
