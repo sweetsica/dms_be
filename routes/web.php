@@ -141,3 +141,8 @@ Route::get('vai-tro', [RoleController::class, 'index'])->name('Role.index');
 Route::post('vai-tro', [RoleController::class, 'store'])->name('Role.store');
 Route::post('vai-trox/{id}', [RoleController::class, 'update'])->name('Rolex.update');
 Route::post('vai-tro/{id}', [RoleController::class, 'destroy'])->name('Role.destroy');
+
+// 404
+Route::fallback(function () {
+    return view('404');
+});
