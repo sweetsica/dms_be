@@ -1,6 +1,6 @@
 /**
  * @preserve jQuery DateTimePicker
- * @homepage http://xdsoft.net/jqplugins/datetimepicker/
+ * @homepage https://xdsoft.net/jqplugins/datetimepicker/
  * @author Chupurnov Valeriy (<chupurnov@gmail.com>)
  */
 
@@ -1006,7 +1006,7 @@ var datetimepickerFactory = function ($) {
 
 		createDateTimePicker = function (input) {
 			var datetimepicker = $('<div class="xdsoft_datetimepicker xdsoft_noselect"></div>'),
-				xdsoft_copyright = $('<div class="xdsoft_copyright"><a target="_blank" href="http://xdsoft.net/jqplugins/datetimepicker/">xdsoft.net</a></div>'),
+				xdsoft_copyright = $('<div class="xdsoft_copyright"><a target="_blank" href="https://xdsoft.net/jqplugins/datetimepicker/">xdsoft.net</a></div>'),
 				datepicker = $('<div class="xdsoft_datepicker active"></div>'),
 				month_picker = $('<div class="xdsoft_monthpicker"><button type="button" class="xdsoft_prev"></button><button type="button" class="xdsoft_today_button"></button>' +
 					'<div class="xdsoft_label xdsoft_month"><span></span><i></i></div>' +
