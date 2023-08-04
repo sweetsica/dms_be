@@ -4,10 +4,11 @@
             <div class="container">
                 <div class="sidebarBody_wrapper ">
                     <div class="sidebarBody_heading-wrapper  ">
-                       <div class="wrapper" >
-                            <h1 style="color: red;">Cơ cấu đơn vị <img src="{{ asset('assets/img/Vector.png') }}" onclick="showList()" id="show-list-button" style="float: right"></h1>
+                        <div class="wrapper">
+                            <h1 style="color: red;">Cơ cấu đơn vị <img src="{{ asset('assets/img/Vector.png') }}"
+                                    onclick="showList()" id="show-list-button" style="float: right"></h1>
                         </div>
-                        <div id="list-container"  style="display: none;">
+                        <div id="list-container" style="display: none;">
                             <ul>
                                 <li style=" margin: 5px; padding: 0;">
                                     <div class="d-flex align-items-center"
@@ -26,7 +27,8 @@
                                 <li style=" margin: 5px; padding: 0;">
                                     <div class="d-flex align-items-center"
                                         style=" background-color: #EBEBEB; height: 30px; display: flex; font-size: 15px; border-radius: 5px;">
-                                        <a href="{{ route('area.index') }}" style="color:black;padding-left:10px;">Cơ cấu địa bàn</a>
+                                        <a href="{{ route('area.index') }}" style="color:black;padding-left:10px;">Cơ
+                                            cấu địa bàn</a>
                                     </div>
                                 </li>
                             </ul>
@@ -48,13 +50,11 @@
                         <b>Cơ cấu tổ chức</b>
                     </div><br>
 
-                    <div >
+                    <div>
                         <ul id="tree1">
                             @foreach ($departmentListTree as $donVi)
                                 <li>
-                                    <img class= "indicator" src="{{ asset('assets/img/cong.png') }}"id="myImage" onclick="changeImage()"
-                                       >&nbsp;&nbsp;<a
-                      href="#" class="title-child">{{ $donVi->name }}</a>
+                                    <a href="#" class="title-child">{{ $donVi->name }}</a>
                                     @if ($donVi->donViCon->count() > 0)
                                         @include('template.sidebar.sidebarDepartment.child', [
                                             'donViCon' => $donVi->donViCon,
@@ -73,56 +73,66 @@
 </div>
 
 <style>
-.title-child {
-  font-size: 14px;
-  color: #ca1f24;
-}
+    .title-child {
+        font-size: 14px;
+        color: #ca1f24;
+    }
 
-.title-child:hover {
-  color: #ca1f24;
-}
-  .tree, .tree ul {
-    margin:0;
-    padding:0;
-    list-style:none
-}
-.tree ul {
-    margin-left:1em;
-    position:relative
-}
-.tree ul ul {
-    margin-left:.5em
-}
-.tree ul:before {
-    content:"";
-    display:block;
-    width:0;
-    position:absolute;
-    top:0;
-    bottom:0;
-    left:0;
-    border-left:2px dotted #ca1f24;
-}
-.tree li {
-  margin: 0;
-    padding: 0 1em;
-    line-height: 2em;
-    position: relative;
-    font-size: 12px;
-}
+    .title-child:hover {
+        color: #ca1f24;
+    }
+
+    .tree,
+    .tree ul {
+        margin: 0;
+        padding: 0;
+        list-style: none
+    }
+
+    .tree ul {
+        margin-left: 1em;
+        position: relative
+    }
+
+    .tree ul ul {
+        margin-left: .5em
+    }
+
+    .tree ul:before {
+        content: "";
+        display: block;
+        width: 0;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        border-left: 2px dotted #ca1f24;
+    }
+
+    .tree li {
+        margin: 0;
+        padding: 0 1em;
+        line-height: 2em;
+        position: relative;
+        font-size: 12px;
+    }
 
 
-.tree ul li:last-child:before {
-    background:#fff;
-    height:auto;
-    top:1em;
-    bottom:0
-}
+    .tree ul li:last-child:before {
+        background: #fff;
+        height: auto;
+        top: 1em;
+        bottom: 0
+    }
 
-.tree li a {
-    text-decoration: none;
-}
+    .tree li a {
+        text-decoration: none;
+    }
 
+    .indicator {
+        font-size: 14px;
+        color: #ca1f24;
+    }
 </style>
 
 @section('script-chart')
@@ -131,80 +141,54 @@
     @endif
 
     <script>
-      $.fn.extend({
-    treed: function (o) {
-      
-      var openedClass = 'glyphicon-minus-sign';
-      var closedClass = 'glyphicon-plus-sign';
-      
-      if (typeof o != 'undefined'){
-        if (typeof o.openedClass != 'undefined'){
-        openedClass = o.openedClass;
-        }
-        if (typeof o.closedClass != 'undefined'){
-        closedClass = o.closedClass;
-        }
-      };
-      
-        //initialize each of the top levels
-        var tree = $(this);
-        tree.addClass("tree");
-        tree.find('li').has("ul").each(function () {
-            var branch = $(this); //li with children ul
-            branch.prepend("<i class='indicator glyphicon " + closedClass + "'></i>");
-            branch.addClass('branch');
-            branch.on('click', function (e) {
-                if (this == e.target) {
-                    var icon = $(this).children('i:first');
-                    icon.toggleClass(openedClass + " " + closedClass);
-                    $(this).children().children().toggle();
-                }
-            })
-            branch.children().children().toggle();
-        });
-        //fire event from the dynamically added icon
-      tree.find('.branch .indicator').each(function(){
-        $(this).on('click', function () {
-            $(this).closest('li').click();
-        });
-      });
-        //fire event to open branch if the li contains an anchor instead of text
-        tree.find('.branch>a').each(function () {
-            $(this).on('click', function (e) {
-                $(this).closest('li').click();
-                e.preventDefault();
-            });
-        });
-        //fire event to open branch if the li contains a button instead of text
-        tree.find('.branch>button').each(function () {
-            $(this).on('click', function (e) {
-                $(this).closest('li').click();
-                e.preventDefault();
-            });
-        });
-    }
-});
+        $.fn.extend({
+            treed: function(o) {
 
-//Initialization of treeviews
+                var openedClass = 'bi-dash-square';
+                var closedClass = 'bi-plus-square';
 
-$('#tree1').treed();
+                if (typeof o != 'undefined') {
+                    if (typeof o.openedClass != 'undefined') {
+                        openedClass = o.openedClass;
+                    }
+                    if (typeof o.closedClass != 'undefined') {
+                        closedClass = o.closedClass;
+                    }
+                };
+
+                //initialize each of the top levels
+                var tree = $(this);
+                tree.addClass("tree");
+                tree.find('li').has("ul").each(function() {
+                    var branch = $(this); //li with children ul
+                    branch.prepend("<i class='indicator bi " + closedClass + "'></i>");
+                    branch.addClass('branch');
+                    branch.on('click', function(e) {
+                        if (this == e.target) {
+                            var icon = $(this).children('i');
+                            icon.toggleClass(openedClass + " " + closedClass);
+                            $(this).children().children().toggle();
+                        }
+                    })
+                    branch.children().children().toggle();
+                });
+
+                //fire event from the dynamically added icon
+                tree.find('.branch .indicator').each(function() {
+                    $(this).on('click', function() {
+                        $(this).closest('li').click();
+                    });
+                });
+                //fire event to open branch if the li contains an anchor instead of text
+                tree.find('.branch>a').each(function() {
+                    $(this).on('click', function(e) {
+                        $(this).closest('li').click();
+                        e.preventDefault();
+                    });
+                });
+            }
+        });
+
+        $('#tree1').treed();
     </script>
-    
-    <script>
-        var images = [
-            "{{ asset('assets/img/tru.png') }}", // Thay đổi đường dẫn thành URL của hình ảnh thứ nhất
-            "{{ asset('assets/img/cong.png') }}" // Thay đổi đường dẫn thành URL của hình ảnh thứ hai
-        ];
-
-        var currentImageIndex = 0;
-
-        function changeImage() {
-            var myImage = document.getElementById("myImage");
-
-            myImage.src = images[currentImageIndex];
-            currentImageIndex = (currentImageIndex + 1) % images.length;
-        }
-    </script>
-
-
 @endsection
