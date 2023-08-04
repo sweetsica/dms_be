@@ -29,7 +29,7 @@ class AreaController extends Controller
             'area.area',
             'department.name as department_name'
         )
-        ->where("area.code", "like", "%$search%")->orderBy('desc')->paginate(5);
+        ->where("area.code", "like", "%$search%")->orderBy('id','desc')->paginate(5);
         $department = Department::where('code', 'like', 'VUNG%')->get();
         return view("Address.danhSachKhuVuc",[
             "areaList"=>$areaList,
