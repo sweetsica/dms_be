@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('area', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255);
-            $table->string('description', 255);
+            $table->string('description', 255)->nullable();
             $table->string('code', 255);
             $table->unsignedBigInteger('area');
         });

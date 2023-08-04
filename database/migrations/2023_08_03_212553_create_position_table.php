@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('code', 255);
             $table->unsignedBigInteger('staffing')->nullable();
             $table->unsignedBigInteger('wage')->nullable();
-            $table->string('pack', 255)->nullable();
-            $table->string('personnel_level', 255)->nullable();
+            $table->string('pack', 50)->nullable();
+            $table->string('personnel_level', 50);
             $table->unsignedBigInteger('department_id');
         });
     }

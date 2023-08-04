@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('personnel_level', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 255);
-            $table->string('code', 255);
-            $table->string('description', 255);
+            $table->string('name', 50);
+            $table->string('code', 50);
+            $table->string('description', 255)->nullable();
         });
     }
 
