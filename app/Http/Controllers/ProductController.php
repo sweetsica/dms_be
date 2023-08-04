@@ -76,7 +76,7 @@ class ProductController extends Controller
                 'branch' => 'required'
             ]);
 
-            $data['created_by'] = Auth::id();
+            $data['created_by'] = session('user')['id'];
             $product = Product::create($data);
             if ($product) {
                 Session::flash('success', "Thêm sản phẩm thành công");

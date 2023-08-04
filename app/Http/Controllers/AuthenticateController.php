@@ -16,6 +16,11 @@ class AuthenticateController extends Controller
 {
     public function index(Request $request)
     {
+        if ($request->session()->has('user')) {
+            // return redirect('/');
+            return redirect()->route('home');
+        }
+
         return view('login');
     }
 
@@ -28,7 +33,7 @@ class AuthenticateController extends Controller
             $account = Personnel::where('email', $email)->first();
             if ($account && Hash::check($password, $account->password)) {
                 if ($account->status == "Đang làm việc") {
-                    Auth::login($account);
+                    $request->session()->put('user', $account);
                     
                     return redirect()->route('home');
                 } else {
@@ -44,5 +49,11 @@ class AuthenticateController extends Controller
         }
     }
 
-
+    public function logout(Request $request)
+    {
+        $request->session()->invalidate();
+        //regenerate csrf token
+        $request->session()->regenerateToken();
+        return redirect('/login');
+    }
 }

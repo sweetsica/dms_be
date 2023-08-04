@@ -16,7 +16,6 @@ use App\Http\Controllers\PositionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\VersionController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -30,26 +29,19 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/clear',function (){
+    \Illuminate\Support\Facades\Session::flush();
+ });
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+// Đăng nhập
+Route::get('/login', [AuthenticateController::class, 'index'])->name('login.index');
 
+Route::post('/login', [AuthenticateController::class, 'login'])->name('login');
+// Quên MK
+Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
 
-Route::middleware(['guest'])->group(function () {
-    // Đăng nhập
-    Route::get('/login', [AuthenticateController::class, 'index'])->name('login.index');
-
-    Route::post('/login', [AuthenticateController::class, 'login'])->name('login');
-    // Quên MK
-    Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
-});
-
-Route::middleware(['auth'])->group(function () {
-    Route::post('/log-out', function () {
-        Auth::logout();
-        return redirect()->route('login');
-    })->name('logout');
+Route::middleware(['auth.role'])->group(function () {
+    Route::post('/log-out', [AuthenticateController::class, 'logout'])->name('logout');
 
     Route::resource('/tuyenduong', RouteDirectionController::class);
 
@@ -97,7 +89,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('danh-sach-tuyen', function () {
         return view('other.danhSachTuyen');
     });
-    
+
     // Route::get('danh-sach-dia-ban', function () {
     //     return view('Address.danhSachDiaBan');
     // });

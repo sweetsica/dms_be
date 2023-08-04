@@ -19,10 +19,10 @@ class Authenticate
     
     public function handle(Request $request, Closure $next, string ...$guards)
     {
-        if (auth()->guard($guards)->check()) {
-            return $next($request);
+        //get current user in session
+        $user = session()->get('user');
+        if (!$user) {
+            return redirect('/login');
         }
-
-        return redirect()->guest('/login');
     }
 }
