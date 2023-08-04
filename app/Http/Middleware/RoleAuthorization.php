@@ -17,9 +17,9 @@ class RoleAuthorization
     {
         //get current user in session
         $user = session()->get('user');
-        if (!$user) {
-            return redirect('/login');
+        if ($user) {
+            return $next($request);
         }
-        return $next($request);
+        return redirect('/login');
     }
 }
