@@ -64,7 +64,7 @@
                                                             <th class="text-nowrap" style="width:10%">Mã vai trò</th>
                                                             <th class="text-nowrap" style="width:10%">Tên vai trò</th>
                                                             <th class="text-nowrap" style="width:20%">Mô tả</th>
-                                                            <th class="text-nowrap" style="width:3%"><span>Thao tác</span>
+                                                            <th class=" text-center" style="width:1%"><span>Thao tác</span>
                                                             </th>
                                                         </tr>
                                                     </thead>
@@ -126,7 +126,7 @@
                                                                         <div class="modal-body">
                                                                             <div class="row">
                                                                                 <div class="col-6 mb-3">
-                                                                                    <input data-bs-toggle="tooltip"
+                                                                                    <input data-bs-toggle="tooltip" required
                                                                                         data-bs-placement="top"
                                                                                         title="Nhập tên vai trò*" name="name"
                                                                                         type="text" placeholder="Nhập tên vai trò"
@@ -134,7 +134,7 @@
                                                                                         value="{{$item->name}}">
                                                                                 </div>
                                                                                 <div class="col-6 mb-3">
-                                                                                    <input data-bs-toggle="tooltip"
+                                                                                    <input data-bs-toggle="tooltip" required
                                                                                         data-bs-placement="top"
                                                                                         title="Nhập mã vai trò*" name="code"
                                                                                         type="text" placeholder="Nhập mã vai trò"
@@ -210,7 +210,7 @@
             @include('template.footer.footer')
         </div>
     </div>
-    {{-- @include('template.sidebar.sidebarDeXuatTheoMau.sidebarRight') --}}
+    @include('template.sidebar.sidebarPosition.sidebarRight')
 
 
 
@@ -231,12 +231,12 @@
                             <div class="col-6 mb-3">
                                 <input name="name" required type="text" placeholder="Nhập tên vai trò*"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Nhập tên cấp nhân sự*">
+                                    title="Nhập tên vai trò*">
                             </div>
                             <div class="col-6 mb-3">
                                 <input name="code" required type="text" placeholder="Nhập mã vai trò*"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Nhập mã cấp nhân sự*">
+                                    title="Nhập mã vai trò**">
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top">
