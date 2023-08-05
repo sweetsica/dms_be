@@ -1,6 +1,6 @@
 @extends('template.master')
 {{-- Trang chủ GIao Ban --}}
-@section('title', 'Đề xuất theo mẫu')
+@section('title', 'Danh sách tổ chức')
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 @endsection
@@ -64,16 +64,18 @@
                                                             <th class="text-nowrap" style="width:10%">Đơn vị </th>
                                                             <th class="text-nowrap" style="width:10%">Đơn vị mẹ </th>
                                                             <th class="text-nowrap" style="width:10%">Trưởng đơn vị </th>
-                                                            <th class="text-nowrap" style="width:20%">Chức năng nhiệ vụ</th>
-                                                            <th class="text-nowrap" style="width:3%"><span>Hành động</span></th>
+                                                            <th class="text-nowrap" style="width:20%">Chức năng nhiệm vụ
+                                                            </th>
+                                                            <th class="text-nowrap" style="width:3%"><span>Hành động</span>
+                                                            </th>
                                                         </tr>
                                                     </thead>
                                                     <?php $t = 1; ?>
                                                     @foreach ($departmentList as $item)
                                                         <tbody>
                                                             <tr>
-                                                                <td class=" text-center" >
-                                                                    {{$t++}}
+                                                                <td class=" text-center">
+                                                                    {{ $t++ }}
                                                                 </td>
                                                                 <td class="">
                                                                     <div class="overText" data-bs-toggle="tooltip"
@@ -123,7 +125,7 @@
                                                                         <div data-bs-toggle="tooltip"
                                                                             data-bs-placement="top" title="Sửa ">
                                                                             <div class="btn" data-bs-toggle="modal"
-                                                                                data-bs-target="#suaDeXuat{{$item['id']}}">
+                                                                                data-bs-target="#suaDeXuat{{ $item['id'] }}">
                                                                                 <img style="width:16px;height:16px"
                                                                                     src="{{ asset('assets/img/edit.svg') }}" />
                                                                             </div>
@@ -141,7 +143,7 @@
                                                             </tr>
                                                         </tbody>
                                                         {{-- Sửa đề xuất --}}
-                                                        <div class="modal fade" id="suaDeXuat{{$item['id']}}"
+                                                        <div class="modal fade" id="suaDeXuat{{ $item['id'] }}"
                                                             tabindex="-1" aria-labelledby="exampleModalLabel"
                                                             aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered">
@@ -154,24 +156,24 @@
                                                                             aria-label="Close"></button>
                                                                     </div>
                                                                     <form method="POST"
-                                                                    action="{{route('department.update',$item->id)}}"
-                                                                    >
+                                                                        action="{{ route('department.update', $item->id) }}">
                                                                         @csrf
                                                                         <div class="modal-body">
                                                                             <div class="row">
                                                                                 <div class="col-6 mb-3">
                                                                                     <input data-bs-toggle="tooltip"
-                                                                                        data-bs-placement="top" title="Nhập tên đơn vị*"
-                                                                                        name="name"
-                                                                                        type="text"
+                                                                                        data-bs-placement="top"
+                                                                                        title="Nhập tên đơn vị*"
+                                                                                        name="name" type="text"
                                                                                         placeholder="Tên đơn vị"
                                                                                         class="form-control"
                                                                                         value="{{ $item->name }}">
                                                                                 </div>
                                                                                 <div class="col-6 mb-3">
                                                                                     <input data-bs-toggle="tooltip"
-                                                                                        data-bs-placement="top" title="Mã đơn vị"
-                                                                                        name="code" type="text"
+                                                                                        data-bs-placement="top"
+                                                                                        title="Mã đơn vị" name="code"
+                                                                                        type="text"
                                                                                         placeholder="Mã đơn vị"
                                                                                         class="form-control"
                                                                                         value="{{ $item->code }}">
@@ -184,11 +186,20 @@
                                                                                         <select name="parent" required
                                                                                             class="selectpicker"
                                                                                             data-dropup-auto="false">
-                                                                                            <option value="{{$item->parent}}"> @if ($item->donvime){{ $item->donvime->name }}  @endif</option>
+                                                                                            <?php if( $item->parent == null){ ?>
+                                                                                            <option>Chọn đơn vị mẹ</option>
+                                                                                            <?php
+                                                                                            }else{ ?>
+                                                                                            <?php } ?>
+                                                                                            <option
+                                                                                                value="{{ $item->parent }}">
+                                                                                                @if ($item->donvime)
+                                                                                                    {{ $item->donvime->name }}
+                                                                                                @endif
+                                                                                            </option>
                                                                                             @foreach ($departmentlists as $ac)
                                                                                                 <option
-                                                                                                    value="{{ $ac->id }}"
-                                                                                                   >
+                                                                                                    value="{{ $ac->id }}">
                                                                                                     @php
                                                                                                         $str = '';
                                                                                                         for ($i = 0; $i < $ac->level; $i++) {
@@ -210,13 +221,18 @@
                                                                                         <select name="ib_lead"
                                                                                             class="selectpicker"
                                                                                             data-dropup-auto="false">
+                                                                                            <?php if( $item->ib_lead == null){ ?>
+                                                                                            <option>Chọn trưởng bộ phận
+                                                                                            </option>
+                                                                                            <?php }else{ ?>
+                                                                                            <?php } ?>
                                                                                             <option
-                                                                                            value="{{ $item->ib_lead }}"  >
-                                                                                            {{ $item->leader_name }}
+                                                                                                value="{{ $item->ib_lead }}">
+                                                                                                {{ $item->leader_name }}
                                                                                             </option>
                                                                                             @foreach ($UnitLeaderList as $av)
                                                                                                 <option
-                                                                                                    value="{{ $av->id }}" >
+                                                                                                    value="{{ $av->id }}">
                                                                                                     {{ $av->leader_name }}
                                                                                                 </option>
                                                                                             @endforeach
@@ -225,10 +241,10 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-6 mb-3">
-                                                                                <div data-bs-toggle="tooltip" data-bs-placement="top" >
-                                                                                    <textarea name="description" type="text" placeholder="Chức năng nhiệm vụ"
-                                                                                        class="form-control " data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                                        title="Mô tả" style="width: 450px;height: 80px;">{{ $item->description }}</textarea>
+                                                                                <div data-bs-toggle="tooltip"
+                                                                                    data-bs-placement="top">
+                                                                                    <textarea name="description" type="text" placeholder="Chức năng nhiệm vụ" class="form-control "
+                                                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Mô tả" style="width: 450px;height: 80px;">{{ $item->description }}</textarea>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -246,13 +262,14 @@
                                                         </div>
 
                                                         {{-- Xóa đề xuất --}}
-                                                        <div class="modal fade" id="xoaDeXuat{{ $item->id }}" tabindex="-1"
-                                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal fade" id="xoaDeXuat{{ $item->id }}"
+                                                            tabindex="-1" aria-labelledby="exampleModalLabel"
+                                                            aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title text-danger"
-                                                                            id="exampleModalLabel">Xóa đề xuất</h5>
+                                                                            id="exampleModalLabel">Xóa đơn vị </h5>
                                                                         <button type="button" class="btn-close"
                                                                             data-bs-dismiss="modal"
                                                                             aria-label="Close"></button>
@@ -264,7 +281,9 @@
                                                                         <button type="button"
                                                                             class="btn btn-outline-danger"
                                                                             data-bs-dismiss="modal">Hủy</button>
-                                                                        <form action="{{ route('departmentr.destroy',$item->id) }}" method="POST">
+                                                                        <form
+                                                                            action="{{ route('departmentr.destroy', $item->id) }}"
+                                                                            method="POST">
                                                                             @csrf
                                                                             <button type="submit"
                                                                                 class="btn btn-danger">Xóa</button>
@@ -279,8 +298,8 @@
                                                     id="target-pagination">
                                                     <ul class="pagination">
                                                         {{ $departmentList->appends([
-                                                            'search' => $search,
-                                                        ])->links() }}
+                                                                'search' => $search,
+                                                            ])->links() }}
                                                     </ul>
                                                 </nav>
                                                 {{-- <nav aria-label="Page navigation example" class="float-end mt-3"
@@ -369,10 +388,9 @@
                                 </div>
                             </div>
                             <div class="col-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top" >
-                                    <textarea name="description" type="text" placeholder="Chức năng nhiệm vụ"
-                                        class="form-control " data-bs-toggle="tooltip" data-bs-placement="top"
-                                        title="Chức năng nhiệm vụ" style="width: 450px;height: 80px;"></textarea>
+                                <div data-bs-toggle="tooltip" data-bs-placement="top">
+                                    <textarea name="description" type="text" placeholder="Chức năng nhiệm vụ" class="form-control "
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Chức năng nhiệm vụ" style="width: 450px;height: 80px;"></textarea>
                                 </div>
                             </div>
                             <div class="modal-footer">

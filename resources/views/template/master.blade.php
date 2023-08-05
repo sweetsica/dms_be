@@ -118,7 +118,7 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
         <header id="header" class="header fixed-top" data-scrollto-offset="0">
             <div class="container-fluid d-flex align-items-center justify-content-between">
                 <div class="header_logo" id="header_logo-wrapper">
-                    <a href="/" class="navbar-brand d-inline-flex align-items-center scrollto me-auto me-lg-0">
+                    <a href="{{ route('home') }}" class="navbar-brand d-inline-flex align-items-center scrollto me-auto me-lg-0">
                         <img class="header_logo" src="{{ env('LOGO_URL', '') }}" />
                     </a>
                 </div>
@@ -221,10 +221,10 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
                                 <div class="mb-3">
                                     <img class="header_user-img" src="{{ asset('assets/img/avatar.jpeg') }}" />
                                 </div>
-                                <span class="fw-bold">{{ Auth::user()->name }}</span>
-                                <span>({{ Auth::user()->role }})</span>
+                                <span class="fw-bold">{{ session('user')['name'] ?? "" }}</span>
+                                <span>({{ session('user')['role'] ?? "" }})</span>
                                 <div class="">
-                                    Vị trí
+                                    {{ session('user')['position'] ?? "" }}
                                 </div>
                             </li>
                             <li class="header_user-item">

@@ -1,6 +1,6 @@
 @extends('template.master')
 {{-- Trang chủ GIao Ban --}}
-@section('title', 'Đề xuất theo mẫu')
+@section('title', 'Danh sách cấp nhân sự')
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 @endsection
@@ -64,7 +64,7 @@
                                                             <th class="text-nowrap" style="width:10%">Mã cấp nhân sự</th>
                                                             <th class="text-nowrap" style="width:10%">Tên cấp nhân sự</th>
                                                             <th class="text-nowrap" style="width:20%">Mô tả</th>
-                                                            <th class="text-nowrap" style="width:3%"><span>Thao tác</span>
+                                                            <th class="text-center" style="width:1%"><span>Thao tác</span>
                                                             </th>
                                                         </tr>
                                                     </thead>
@@ -126,23 +126,23 @@
                                                                           <div class="row">
                                                                               <div class="col-6 mb-3">
                                                                                   <input data-bs-toggle="tooltip"
-                                                                                      data-bs-placement="top"
-                                                                                      title="Nhập tên vai trò*" name="name"
+                                                                                      data-bs-placement="top" required
+                                                                                      title="Nhập tên cấp nhân sự*" name="name"
                                                                                       type="text" placeholder="Nhập tên cấp nhân sự"
                                                                                       class="form-control"
                                                                                       value="{{$item->name}}">
                                                                               </div>
                                                                               <div class="col-6 mb-3">
-                                                                                  <input data-bs-toggle="tooltip"
+                                                                                  <input data-bs-toggle="tooltip" required
                                                                                       data-bs-placement="top"
-                                                                                      title="Nhập mã vai trò*" name="code"
+                                                                                      title="Nhập mã cấp nhân sự*" name="code"
                                                                                       type="text" placeholder="Nhập mã cấp nhân sự"
                                                                                       class="form-control"
                                                                                       value="{{$item->code}}">
                                                                               </div>
                                                                               <div class="col-6 mb-3">
                                                                                   <div data-bs-toggle="tooltip" data-bs-placement="top" >
-                                                                                      <textarea name="description" type="text" placeholder="Chức năng nhiệm vụ"
+                                                                                      <textarea name="description" type="text" placeholder="Mô tả"
                                                                                           class="form-control " data-bs-toggle="tooltip" data-bs-placement="top"
                                                                                           title="Mô tả" style="width: 450px;height: 80px;">{{ $item->description }}</textarea>
                                                                                   </div>
@@ -206,7 +206,7 @@
             @include('template.footer.footer')
         </div>
     </div>
-    {{-- @include('template.sidebar.sidebarDeXuatTheoMau.sidebarRight') --}}
+    @include('template.sidebar.sidebarPosition.sidebarRight')
 
     <!-- Modal Thêm Tao De Xuat -->
     <div class="modal fade" id="taoDeXuat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

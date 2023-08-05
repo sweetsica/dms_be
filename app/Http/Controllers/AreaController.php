@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 
 class AreaController extends Controller
 {
-
     public function index(Request $request){
         $search = $request->get('search');
         $areaList = Area::join('department','department.id','=','area.area')
@@ -42,7 +41,8 @@ class AreaController extends Controller
         $data->area=$area;
         $data->description=$description;
         $data->save();
-        return redirect()->route('area.index');
+        return redirect()->back();
+//        return redirect()->route('area.index');
     }
 
     public function update(Request $request,$id)

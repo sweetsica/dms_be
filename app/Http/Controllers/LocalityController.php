@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 class LocalityController extends Controller
 {
 
-
     public function index(Request $request){
         $search = $request->get('search');
         $localityList = Locality::join('area','area.id','=','locality.area_id')

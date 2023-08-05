@@ -29,7 +29,7 @@
                             <div class="row">
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3">
                                     <div class=" control_wrapper"  >
-                                        <a href="" class="control_link" id="control_link-1">
+                                        <a href="/danh-sach-khach-hang" class="control_link" id="control_link-1">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/agreement.png') }}" alt="">
                                             </div>
@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3">
                                     <div class=" control_wrapper"  >
-                                        <a href="#" class="control_link" id="control_link-2">
+                                        <a href="{{ route('Personnel.store') }}" class="control_link" id="control_link-2">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/2.png') }}"
                                                     alt="">
@@ -54,7 +54,7 @@
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3">
                                     <div class=" control_wrapper"  >
-                                        <a href="#" class="control_link" id="control_link-3">
+                                        <a href="{{ route('product.list') }}" class="control_link" id="control_link-3">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/features.png') }}" alt="">
                                             </div>
@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3">
                                     <div class=" control_wrapper"  >
-                                        <a href="#" class="control_link" id="control_link-4">
+                                        <a href="{{ route('version.list') }}" class="control_link" id="control_link-4">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/order-delivery.png') }}" alt="">
                                             </div>
@@ -96,7 +96,7 @@
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3 mb-5 mt-5">
                                     <div class=" control_wrapper"  >
-                                        <a href="#" class="control_link" id="control_link-6">
+                                        <a href="danh-sach-tuyen" class="control_link" id="control_link-6">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/users.png') }}" alt="">
                                             </div>
@@ -108,24 +108,24 @@
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3 mb-5 mt-5">
                                     <div class=" control_wrapper"  >
-                                        <a href="#" class="control_link" id="control_link-7">
+                                        <a href="{{ route('department.store') }}" class="control_link" id="control_link-7">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/workflow.png') }}" alt="">
                                             </div>
                                             <div class="control_title fs-5">
-                                                Phòng ban
+                                                Cơ cấu đơn vị
                                             </div>
                                         </a>
                                     </div>
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3 mb-5 mt-5">
                                     <div class=" control_wrapper"  >
-                                        <a href="#" class="control_link" id="control_link-8">
+                                        <a href="{{ route('position.store') }}" class="control_link" id="control_link-8">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/brain.png') }}" alt="">
                                             </div>
                                             <div class="control_title fs-5">
-                                                Cơ cấu đơn vị
+                                                Cơ cấu chức danh
                                             </div>
                                         </a>
                                     </div>

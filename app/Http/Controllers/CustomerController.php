@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
+    
+    public function index(Request $request)
+    {
+
+        return view('other.danhSachKhachHang');
+    }
+
+
     public function create()
     {
         return view('create-customer');

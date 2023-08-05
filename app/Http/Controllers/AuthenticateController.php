@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Session;
 
 class AuthenticateController extends Controller
 {
+
     public function index(Request $request)
     {
         return view('login');
@@ -28,14 +29,15 @@ class AuthenticateController extends Controller
             $account = Personnel::where('email', $email)->first();
             if ($account && Hash::check($password, $account->password)) {
                 if ($account->status == "Đang làm việc") {
-                    Auth::login($account);
-                    return Redirect::route('home');
+                    $request->session()->put('user', $account);
+                    
+                    return redirect()->route('home');
                 } else {
-                    return Redirect::back()
+                    return redirect()->back()
                         ->withInput()->with('loginError', 'Tài khoản của bạn không hoạt động');
                 }
             } else {
-                return Redirect::back()
+                return redirect()->back()
                     ->withInput()->with('loginError', 'Sai tài khoản hoặc mật khẩu');
             }
         } catch (Exception $e) {
@@ -43,5 +45,9 @@ class AuthenticateController extends Controller
         }
     }
 
-
+    public function logout(Request $request)
+    {
+        Session::flush();
+        return redirect('/login');
+    }
 }

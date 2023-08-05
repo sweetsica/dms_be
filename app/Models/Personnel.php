@@ -13,25 +13,25 @@ class Personnel extends Model implements Authenticatable
     use HasFactory;
     public $timestamps = false;
     protected $table = 'personnel';
-    public $primaryKey= 'id';
     protected $fillable = [
-        'name',
-        'email',
-        'password',
         'code',
-        'role_id',
-        'phone',
-        'working_form',
-        'address',
-        'status',
+        'name',
         'department_id',
         'position_id',
         'position_level_id',
+        'role_id',
         'area_id',
         'email',
         'phone',
-        'states',
-        'manage',
+        'working_form',
+        'status',
+        'password',
+        'birthday',
+        'address',
+        'gender',
+        'annual_salary',
+        'pack',
+        'manage'
     ];
     public function donViMe()
     {

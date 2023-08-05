@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 class PersonnelLevelController extends Controller
 {
 
-
     public function index(Request $request){
         $search = $request->get('search');
         $personnelLevelList = PersonnelLevel::where("personnel_level.code", "like", "%$search%")->paginate(5);

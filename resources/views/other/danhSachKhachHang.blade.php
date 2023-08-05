@@ -35,10 +35,8 @@
     // }
 
     $listData = [
-        ['id' => 1, 'code' => 'KH0001', 'name' => 'Nguyễn Tuân', 'usermanager' => 'Nguyễn Văn A - TBHT00', "mobi" => '0988888888', "email" => 'khachhang1@tbht.vn', 'nhom' => 'Nhà Thuốc', 'kenh' => 'OTC', 'tuyen' => 'Thứ 2'],
-        ['id' => 2, 'code' => 'KH0001', 'name' => 'Nguyễn Trãi', 'usermanager' => 'Nguyễn Văn B - MTDH01', "mobi" => '0988888888', "email" => 'khachhang2@tbht.vn', 'nhom' => 'Bệnh viện', 'kenh' => 'ETC', 'tuyen' => 'Thứ 3'],
-        ['id' => 3, 'code' => 'KH0001', 'name' => 'Nguyễn Siêu', 'usermanager' => 'Nguyễn Văn C - TBHT02', "mobi" => '0988888888', "email" => 'khachhang3@tbht.vn', 'nhom' => 'Khách sạn', 'kenh' => 'MT', 'tuyen' => 'Thứ 4'],
-        ['id' => 4, 'code' => 'KH0001', 'name' => 'Nguyễn Hùng', 'usermanager' => 'Nguyễn Văn D - MTDH04', "mobi" => '0988888888', "email" => 'khachhang4@tbht.vn', 'nhom' => 'Chuỗi nhà thuốc', 'kenh' => 'Đại lý cá nhân', 'tuyen' => 'Thứ 5'],
+        ['id' => 1, 'code' => 'KH0001', 'name' => 'Nguyễn Tuân', 'usermanager' => 'Nguyễn Văn A - TBHT00', "mobi" => '0988888888', "email" => 'khachhang1@tbht.vn', 'nhom' => 'Nhà Thuốc', 'kenh' => 'OTC', 'tuyen' => 'Thứ 2',  'business' => 'Công ty A',  'thue' => '123456',  'tinh' => 'Hà Nội',  'quan' => 'Cầu Giấy',  'phuong' => 'Yên Hoà',  'diachi' => '219 Trung Kính',  'tuyen' => 'Thứ 2',  'sp' => 'Ô tô điện, xe đạp điện',  'trangthai' => 'Tiềm năng',],
+        
     ];
     
 @endphp
@@ -94,26 +92,33 @@
                                         </div>
                                     </div>
                                     <div class="table-responsive">
-                                        <table id="dsDaoTao" class="table table-responsive table-hover table-bordered filter" style="width: 100%">
+                                        <table id="dsDaoTao" class="table table-responsive table-hover table-bordered filter" style="width: 180%">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-nowrap text-center" style="width:3%">STT</th>
+                                                    <th class="text-nowrap text-center" style="width:2%">STT</th>
                                                     <th class="text-nowrap text-center" style="width:5%">Mã KH</th>
-                                                    <th class="text-nowrap text-center" style="width:15%">Tên khách hàng</th>
-                                                    <th class="text-nowrap text-center" style="width:8%">Số điện thoại</th>
-                                                    <th class="text-nowrap text-center" style="width:12%">Email</th>
-                                                    <th class="text-nowrap text-center" style="width:12%">Nhân sự phụ trách</th>
-                                                    <th class="text-nowrap text-center" style="width:12%">Nhóm</th>
-                                                    <th class="text-nowrap text-center" style="width:8%">Kênh</th>
-                                                    <th class="text-nowrap text-center" style="width:8%">Tuyến</th>
+                                                    <th class="text-nowrap text-center" style="width:8%">Tên khách hàng</th>
+                                                    <th class="text-nowrap text-center" style="width:6%">Số điện thoại</th>
+                                                    <th class="text-nowrap text-center" style="width:6%">Email</th>
+                                                    <th class="text-nowrap text-center" style="width:8%">Tên công ty</th>
+                                                    <th class="text-nowrap text-center" style="width:6%">Tỉnh/thành</th>
+                                                    <th class="text-nowrap text-center" style="width:6%">Quận/huyện</th>
+                                                    <th class="text-nowrap text-center" style="width:6%">Phường/xã</th>
+                                                    <th class="text-nowrap text-center" style="width:10%">Địa chỉ</th>
+                                                    <th class="text-nowrap text-center" style="width:6%">Nhóm KH</th>
+                                                    <th class="text-nowrap text-center" style="width:6%">Kênh KH</th>
+                                                    <th class="text-nowrap text-center" style="width:6%">Tuyến KH</th>
+                                                    <th class="text-nowrap text-center" style="width:8%">Nhân sự thu thập</th>
+                                                    <th class="text-nowrap text-center" style="width:8%">Sản phẩm quan tâm</th>
+                                                    <th class="text-nowrap text-center" style="width:6%">Trạng thái</th>
                                                     <th class="text-nowrap text-center" style="width:4%">Hành động</th>
 
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach($listData as $item)
-                                                <tr class="table-row" data-bs-toggle="modal" data-bs-target="#info"  role="button">
-                                                    
+                                                <tr class="table-row" >
+                                                    {{-- data-bs-toggle="modal" data-bs-target="#info"  role="button" --}}
                                                     <td>
                                                         <div class="overText text-center">
                                                             {{ $item['id'] }}
@@ -142,9 +147,30 @@
                                                     </td>
                                                     <td>
                                                         <div class="overText center" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
-                                                            {{ $item['usermanager'] }}
+                                                            {{ $item['business'] }}
                                                         </div>
                                                     </td>
+                                                    <td>
+                                                        <div class="overText center" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
+                                                            {{ $item['tinh'] }}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="overText center" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
+                                                            {{ $item['quan'] }}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="overText center" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
+                                                            {{ $item['phuong'] }}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="overText center" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
+                                                            {{ $item['diachi'] }}
+                                                        </div>
+                                                    </td>
+                                                    
                                                     <td>
                                                         <div class="overText center" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
                                                             {{ $item['nhom'] }}
@@ -158,6 +184,21 @@
                                                     <td>
                                                         <div class="overText center" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
                                                             {{ $item['tuyen'] }}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="overText center" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
+                                                            {{ $item['usermanager'] }}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="overText center" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
+                                                            {{ $item['sp'] }}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="overText center" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
+                                                            {{ $item['trangthai'] }}
                                                         </div>
                                                     </td>
                                                     <td>
@@ -240,7 +281,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">Sửa thông tin khách hàng</h5>
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Thêm khách hàng</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="formThemCapPhat" method="POST" action="#">
@@ -248,73 +289,93 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-12 mb-3">
-                                <div class="card-title">Thông tin chung</div>
+                                <div class="card-title">1. Thông tin chung</div>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <input type="text" value="Nguyễn Văn A" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên khách hàng" placeholder="Tên khách hàng*" class="form-control">
+                            <div class="col-md-4 mb-3">
+                                <input type="text" value="1" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên khách hàng" placeholder="Tên khách hàng*" class="form-control">
                             </div>
-                            <div class="col-md-3 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Tỉnh/thành">
+
+                            <div class="col-md-4 mb-3">
+                                <input type="text" value="1"  name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Số điện thoại" placeholder="Số điện thoại*" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" value="1"  name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Email" placeholder="Email*" class="form-control">
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <div class="card-title">2. Tổ chức</div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" value="1"  name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Tên công ty" placeholder="Tên công ty" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" value="1"  name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Người đại diện" placeholder="Người đại diện" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" value="1"  name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Chức danh" placeholder="Chức danh" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" value="1"  name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Mã số thuế" placeholder="Mã số thuế" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" value="1"  name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Số điện thoại công ty" placeholder="Số điện thoại công ty" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" value="1"  name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Email công ty" placeholder="Email công ty" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" value="1"  name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Số tài khoản" placeholder="Số tài khoản" class="form-control">
+                            </div>
+                            <div class="col-md-8 mb-3">
+                                <input type="text" value="1"  name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Mở tại ngân hàng" placeholder="Mở tại ngân hàng" class="form-control">
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <div class="card-title">3. Địa chỉ</div>
+                            </div>
+                            <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Tỉnh/thành">
                                 <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Tỉnh/thành*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
                                     <option value="1" selected>1</option>
                                     <option value="1">1</option>
                                 </select>
                             </div>
-                            <div class="col-md-3 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Quận/huyện">
+                            <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Quận/huyện">
                                 <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Quận/huyện*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
                                     <option value="1" selected>1</option>
                                     <option value="1">1</option>
                                 </select>
                             </div>
-                            <div class="col-md-3 mb-3">
-                                <input type="text" value="KH0001" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã khách hàng" placeholder="Mã khách hàng*" class="form-control">
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Mã số thuế" placeholder="Mã số thuế" class="form-control">
-                            </div>
-                            <div class="col-md-3 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Phường/xã">
-                                <select class="selectpicker" data-dropup-auto="false" required data-width="100%" data-live-search="true" title="Phường/xã*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
+                            <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Phường/xã">
+                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Phường/xã*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
                                     <option value="1" selected>1</option>
                                     <option value="1">1</option>
                                 </select>
                             </div>
-                            <div class="col-md-3 mb-3">
-                                <input type="text" value="219 Trung Kính" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ*" class="form-control">
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <input type="text" value="1" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Số điện thoại" placeholder="Số điện thoại" class="form-control">
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <input type="text" value="1" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Email" placeholder="Email" class="form-control">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <input type="text" value="1" name="topic" data-bs-toggle="tooltip" readonly data-bs-placement="top" title="Toạ độ" placeholder="Toạ độ" class="form-control">
+                            <div class="col-md-12 mb-3">
+                                <input type="text" value="1"  name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ*" class="form-control">
                             </div>
 
                             <div class="col-md-12 mb-3">
-                                <div class="card-title">Thông tin đầu mối liên hệ</div>
+                                <div class="card-title">4. Mô tả</div>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <input type="text" value="1" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Tên người liên hệ" placeholder="Tên người liên hệ" class="form-control">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <input type="text" value="1" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Danh xưng" placeholder="Danh xưng" class="form-control">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <input type="text" value="1" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Số điện thoại" placeholder="Số điện thoại" class="form-control">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <input type="text" value="1" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Email" placeholder="Email" class="form-control">
-                            </div>
-
-                            <div class="col-md-12 mb-3">
-                                <div class="card-title">Quản lý khách hàng</div>
-                            </div>
-                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Nhân sự phụ trách">
-                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required data-live-search="true" title="Nhân sự phụ trách*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
+                            
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Nhân sự thu thập">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required data-live-search="true" title="Nhân sự thu thập*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
                                     <option value="1" selected>1</option>
                                     <option value="1">1</option>
                                 </select>
                             </div>
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Sản phẩm quan tâm">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required data-live-search="true" title="Sản phẩm quan tâm*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="1" selected>1</option>
+                                    <option value="1">1</option>
+                                </select>
+                            </div>
+                            
+
+                            <div class="col-md-12 mb-3">
+                                <div class="card-title">5. Phân loại</div>
+                            </div>
+                            
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Nhóm khách hàng">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%" required data-live-search="true" title="Nhóm khách hàng*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
                                     <option value="Nhà thuốc" selected>Nhà thuốc</option>
@@ -330,6 +391,14 @@
                                     <option value="Làm đẹp/Phòng tập thể dục/Thể thao">Làm đẹp/Phòng tập thể dục/Thể thao</option>
                                 </select>
                             </div>
+
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Tuyến">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required data-live-search="true" title="Tuyến*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="1" selected>1</option>
+                                    <option value="1">1</option>
+                                </select>
+                            </div>
+
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Kênh khách hàng">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%" required data-live-search="true" title="Kênh khách hàng*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
                                     <option value="OTC" selected>OTC</option>
@@ -339,10 +408,13 @@
 
                                 </select>
                             </div>
-                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Tuyến">
-                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required data-live-search="true" title="Tuyến*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
-                                    <option value="1" selected>1</option>
-                                    <option value="1">1</option>
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Trạng thái">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required data-live-search="true" title="Trạng thái*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="Trinh sát" selected>Trinh sát</option>
+                                    <option value="Tiềm năng">Tiềm năng</option>
+                                    <option value="Cơ hội">Cơ hội</option>
+                                    <option value="Khách hàng">Khách hàng</option>
+
                                 </select>
                             </div>
                         </div>
@@ -371,73 +443,93 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-12 mb-3">
-                                <div class="card-title">Thông tin chung</div>
+                                <div class="card-title">1. Thông tin chung</div>
                             </div>
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <input type="text" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên khách hàng" placeholder="Tên khách hàng*" class="form-control">
                             </div>
-                            <div class="col-md-3 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Tỉnh/thành">
+
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Số điện thoại" placeholder="Số điện thoại*" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Email" placeholder="Email*" class="form-control">
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <div class="card-title">2. Tổ chức</div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Tên công ty" placeholder="Tên công ty" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Người đại diện" placeholder="Người đại diện" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Chức danh" placeholder="Chức danh" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Mã số thuế" placeholder="Mã số thuế" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Số điện thoại công ty" placeholder="Số điện thoại công ty" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Email công ty" placeholder="Email công ty" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Số tài khoản" placeholder="Số tài khoản" class="form-control">
+                            </div>
+                            <div class="col-md-8 mb-3">
+                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Mở tại ngân hàng" placeholder="Mở tại ngân hàng" class="form-control">
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <div class="card-title">3. Địa chỉ</div>
+                            </div>
+                            <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Tỉnh/thành">
                                 <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Tỉnh/thành*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
                                     <option value="1">1</option>
                                     <option value="1">1</option>
                                 </select>
                             </div>
-                            <div class="col-md-3 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Quận/huyện">
+                            <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Quận/huyện">
                                 <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Quận/huyện*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
                                     <option value="1">1</option>
                                     <option value="1">1</option>
                                 </select>
                             </div>
-                            <div class="col-md-3 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã khách hàng" placeholder="Mã khách hàng*" class="form-control">
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Mã số thuế" placeholder="Mã số thuế" class="form-control">
-                            </div>
-                            <div class="col-md-3 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Phường/xã">
-                                <select class="selectpicker" data-dropup-auto="false" required data-width="100%" data-live-search="true" title="Phường/xã*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
+                            <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Phường/xã">
+                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Phường/xã*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
                                     <option value="1">1</option>
                                     <option value="1">1</option>
                                 </select>
                             </div>
-                            <div class="col-md-3 mb-3">
+                            <div class="col-md-12 mb-3">
                                 <input type="text" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ*" class="form-control">
                             </div>
-                            <div class="col-md-3 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Số điện thoại" placeholder="Số điện thoại" class="form-control">
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Email" placeholder="Email" class="form-control">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" readonly data-bs-placement="top" title="Toạ độ" placeholder="Toạ độ" class="form-control">
-                            </div>
 
                             <div class="col-md-12 mb-3">
-                                <div class="card-title">Thông tin đầu mối liên hệ</div>
+                                <div class="card-title">4. Mô tả</div>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Tên người liên hệ" placeholder="Tên người liên hệ" class="form-control">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Danh xưng" placeholder="Danh xưng" class="form-control">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Số điện thoại" placeholder="Số điện thoại" class="form-control">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Email" placeholder="Email" class="form-control">
-                            </div>
-
-                            <div class="col-md-12 mb-3">
-                                <div class="card-title">Quản lý khách hàng</div>
-                            </div>
-                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Nhân sự phụ trách">
-                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required data-live-search="true" title="Nhân sự phụ trách*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
+                            
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Nhân sự thu thập">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required data-live-search="true" title="Nhân sự thu thập*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
                                     <option value="1">1</option>
                                     <option value="1">1</option>
                                 </select>
                             </div>
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Sản phẩm quan tâm">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required data-live-search="true" title="Sản phẩm quan tâm*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="1">1</option>
+                                    <option value="1">1</option>
+                                </select>
+                            </div>
+                            
+
+                            <div class="col-md-12 mb-3">
+                                <div class="card-title">5. Phân loại</div>
+                            </div>
+                            
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Nhóm khách hàng">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%" required data-live-search="true" title="Nhóm khách hàng*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
                                     <option value="Nhà thuốc">Nhà thuốc</option>
@@ -453,6 +545,14 @@
                                     <option value="Làm đẹp/Phòng tập thể dục/Thể thao">Làm đẹp/Phòng tập thể dục/Thể thao</option>
                                 </select>
                             </div>
+
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Tuyến">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required data-live-search="true" title="Tuyến*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="1">1</option>
+                                    <option value="1">1</option>
+                                </select>
+                            </div>
+
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Kênh khách hàng">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%" required data-live-search="true" title="Kênh khách hàng*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
                                     <option value="OTC">OTC</option>
@@ -462,10 +562,13 @@
 
                                 </select>
                             </div>
-                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Tuyến">
-                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required data-live-search="true" title="Tuyến*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
-                                    <option value="1">1</option>
-                                    <option value="1">1</option>
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Trạng thái">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required data-live-search="true" title="Trạng thái*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="Trinh sát">Trinh sát</option>
+                                    <option value="Tiềm năng">Tiềm năng</option>
+                                    <option value="Cơ hội">Cơ hội</option>
+                                    <option value="Khách hàng">Khách hàng</option>
+
                                 </select>
                             </div>
                         </div>
