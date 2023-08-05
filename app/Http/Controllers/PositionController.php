@@ -126,7 +126,7 @@ class PositionController extends Controller
     public function destroy($id)
     {
         Position::destroy($id);
-        return redirect()->back()->with('mess', 'Đã xóa!');;
+        return redirect()->back()->with('mess', 'Đã xóa!');
     }
 
 }
