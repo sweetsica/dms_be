@@ -244,7 +244,7 @@
                                                                                                 <?php if ($item->personnel_level == null){ ?>
                                                                                             <option>Chọn cấp nhân sự
                                                                                             </option>
-                                                                                                <? php} else { ?>
+                                                                                                <?php } else { ?>
                                                                                             <?php } ?>
                                                                                             <option
                                                                                                 value="{{ $item->personnel_level }}">
@@ -271,7 +271,7 @@
                                                                                             <option value="0">Chọn đơn
                                                                                                 vị mẹ
                                                                                             </option>
-                                                                                                <? php} else { ?>
+                                                                                                <?php } else { ?>
                                                                                             <?php } ?>
                                                                                             <option
                                                                                                 value="{{ $item->parent }}">
@@ -518,6 +518,8 @@
                                 </button>
                                 <button type="submit" class="btn btn-danger">Tạo</button>
                             </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
