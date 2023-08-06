@@ -29,7 +29,7 @@
                             <div class="row">
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3">
                                     <div class=" control_wrapper"  >
-                                        <a href=" {{ route('store-customer') }}" class="control_link" id="control_link-1">
+                                        <a href=" {{ route('customers') }}" class="control_link" id="control_link-1">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/agreement.png') }}" alt="">
                                             </div>

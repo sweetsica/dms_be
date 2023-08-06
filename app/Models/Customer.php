@@ -16,7 +16,7 @@ class Customer extends Model
         'phone',
         'email',
         'personContact',
-        'comanyName',
+        'companyName',
         'career',
         'taxCode',
         'companyPhoneNumber',
