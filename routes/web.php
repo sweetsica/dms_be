@@ -127,6 +127,11 @@ Route::get('danh-sach-san-pham', [ProductController::class, 'index'])->name('pro
         return view('other.baoGia');
     });
 
+
+    Route::get('chi-tiet-khach-hang/{id}', function () {
+        return view('other.chiTietKhachHang');
+    });
+
     Route::get('department', [DepartmentController::class, 'index'])->name('department.index');
     Route::post('department', [DepartmentController::class, 'store'])->name('department.store');
     Route::post('department/{id}', [DepartmentController::class, 'edit'])->name('department.edit');

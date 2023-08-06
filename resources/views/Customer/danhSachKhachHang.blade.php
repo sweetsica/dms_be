@@ -122,8 +122,11 @@
                                         </thead>
                                         <tbody>
                                             @foreach($listData as $key => $item)
-                                            <tr class="table-row">
-                                                {{-- ata-bs-toggle="modal" data-bs-target="#info" role="button" --}}
+                                            <tr class="table-row" class="table-row" data-status-id="{{ $item->id }}"
+                                                data-status="{{ $item->status }}"
+                                                data-href="chi-tiet-khach-hang/{{ $item->id }}"
+                                                role="button">
+                                                
                                                 <td>
                                                     <div class="overText text-center">
                                                         {{$loop->iteration }}
