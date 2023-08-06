@@ -191,26 +191,30 @@
                                                 </td>
                                                 <td>
                                                     <div class="overText center" data-bs-toggle="tooltip"
-                                                        data-bs-placement="top" title=" {{ $chanelNames[$key] }}">
-                                                        {{ $chanelNames[$key] }}
+                                                        data-bs-placement="top"
+                                                        title=" {{ isset($chanelNames[$key]) ? $chanelNames[$key] : '' }}">
+                                                        {{ isset($chanelNames[$key]) ? $chanelNames[$key] : '' }}
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="overText center" data-bs-toggle="tooltip"
-                                                        data-bs-placement="top" title="{{ $routeNames[$key] }}">
-                                                        {{ $routeNames[$key] }}
+                                                        data-bs-placement="top"
+                                                        title="{{ isset($routeNames[$key]) ? $routeNames[$key] : '' }}">
+                                                        {{ isset($routeNames[$key]) ? $routeNames[$key] : '' }}
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="overText center" data-bs-toggle="tooltip"
-                                                        data-bs-placement="top" title="{{ $personalNames[$key] }}">
-                                                        {{ $personalNames[$key] }}
+                                                        data-bs-placement="top"
+                                                        title="{{ isset($personalNames[$key]) ? $personalNames[$key] : '' }}">
+                                                        {{ isset($personalNames[$key]) ? $personalNames[$key] : '' }}
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="overText center" data-bs-toggle="tooltip"
-                                                        data-bs-placement="top" title="{{ $productNames[$key] }}">
-                                                        {{ $productNames[$key] }}
+                                                        data-bs-placement="top"
+                                                        title="{{ isset($productNames[$key]) ? $productNames[$key] : '' }}">
+                                                        {{ isset($productNames[$key]) ? $productNames[$key] : '' }}
                                                     </div>
                                                 </td>
                                                 <td>
@@ -430,7 +434,7 @@
                                 data-live-search-placeholder="Tìm kiếm...">
                                 @foreach ($listData as $items)
                                 <option value="{{ $items->id }}" {{ $items->id == $item->id ? 'selected' : '' }}>
-                                    {{ $items->personId }}
+                                    {{ isset($personalNames[$key]) ? $personalNames[$key] : '' }}
                                 </option>
                                 @endforeach
                             </select>
@@ -443,7 +447,7 @@
                                 data-live-search-placeholder="Tìm kiếm...">
                                 @foreach ($listData as $items)
                                 <option value="{{ $items->id }}" {{ $items->id == $item->id ? 'selected' : '' }}>
-                                    {{ $items->productId }}
+                                    {{ isset($productNames[$key]) ? $productNames[$key] : '' }}
                                 </option>
                                 @endforeach
                             </select>
@@ -483,7 +487,7 @@
                                 data-live-search-placeholder="Tìm kiếm...">
                                 @foreach ($listData as $items)
                                 <option value="{{ $items->id }}" {{ $items->id == $item->id ? 'selected' : '' }}>
-                                    {{ $items->routeId }}
+                                    {{ isset($routeNames[$key]) ? $routeNames[$key] : '' }}
                                 </option>
                                 @endforeach
                             </select>
@@ -500,7 +504,7 @@
                                 <option value="Đại lý cá nhân">Đại lý cá nhân</option>
                                 @foreach ($listData as $items)
                                 <option value="{{ $items->id }}" {{ $items->id == $item->id ? 'selected' : '' }}>
-                                    {{ $items->chanelId }}
+                                    {{ isset($chanelNames[$key]) ? $chanelNames[$key] : '' }}
                                 </option>
                                 @endforeach
                             </select>
