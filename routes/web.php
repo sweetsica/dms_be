@@ -51,14 +51,6 @@ Route::middleware(['auth.role'])->group(function () {
     })->name('home');
 
     Route::post('/log-out', [AuthenticateController::class, 'logout'])->name('logout');
-
-Route::middleware(['auth.role'])->group(function () {
-
-    Route::get('/', function () {
-        return view('other.danh-sach-dieu-khien');
-    })->name('home');
-
-    Route::post('/log-out', [AuthenticateController::class, 'logout'])->name('logout');
     
     Route::post('/create-customer', [CustomerController::class, 'create'])->name('create-customer');
 
@@ -100,7 +92,8 @@ Route::middleware(['auth.role'])->group(function () {
 
     Route::get('danh-sach-khach-hang', [CustomerController::class, 'index'])->name('position.list');
 
-    Route::get('danh-sach-san-pham', [ProductController::class, 'index'])->name('product.list');
+
+Route::get('danh-sach-san-pham', [ProductController::class, 'index'])->name('product.list');
     Route::post('them-moi-san-pham', [ProductController::class, 'store'])->name('product.store');
     Route::put('sua-san-pham/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('xoa-san-pham/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
@@ -116,6 +109,9 @@ Route::middleware(['auth.role'])->group(function () {
     Route::delete('xoa-tuy-chinh/{id}', [CustomController::class, 'destroy'])->name('custom.destroy');
 
     Route::get('danh-sach-tuyen', [RouteDirectionController::class, 'view'])->name('routeDirection.view');
+    Route::post('danh-sach-tuyen', [RouteDirectionController::class, 'store'])->name('routeDirection.store');
+    Route::put('sua-tuyen/{id}', [RouteDirectionController::class, 'update'])->name('routeDirection.update');
+    Route::delete('xoa-tuyen/{id}', [RouteDirectionController::class, 'destroy'])->name('routeDirection.destroy');
 
     Route::get('danh-sach-dia-ban', [LocalityController::class, 'index'])->name('locality.index');
     Route::post('danh-sach-dia-ban', [LocalityController::class, 'store'])->name('locality.store');
@@ -146,7 +142,6 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('cap-nhan-su', [PersonnelLevelController::class, 'store'])->name('PersonnelLevel.store');
     Route::post('cap_nhan_sux/{id}', [PersonnelLevelController::class, 'update'])->name('PersonnelLevel.update');
     Route::post('cap_nhan_su/{id}', [PersonnelLevelController::class, 'destroy'])->name('PersonnelLevelx.destroy');
-
     Route::get('nhan-su', [PersonnelController::class, 'index'])->name('Personnel.index');
     Route::post('nhan-su', [PersonnelController::class, 'store'])->name('Personnel.store');
     Route::post('nhan_sux/{id}', [PersonnelController::class, 'update'])->name('Personnel.update');
