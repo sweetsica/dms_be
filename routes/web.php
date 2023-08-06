@@ -81,9 +81,6 @@ Route::middleware(['auth.role'])->group(function () {
     // Route::get('/get-customer/{id}', [CustomerController::class, 'findById'])->name('find-customer-byId');
 
     Route::get('/order', [OrderController::class, 'index'])->name('index.order');
-    Route::post('/log-out', [AuthenticateController::class, 'logout'])->name('logout');
-
-    Route::get('/order', [OrderController::class, 'index'])->name('index.order');
 
     // Trang chủ
     Route::get('/dashboard', [DashboardController::class, 'indexv2'])->name("dashboard");
@@ -112,7 +109,7 @@ Route::middleware(['auth.role'])->group(function () {
     Route::put('sua-tuy-chinh/{id}', [CustomController::class, 'update'])->name('custom.update');
     Route::delete('xoa-tuy-chinh/{id}', [CustomController::class, 'destroy'])->name('custom.destroy');
 
-
+    Route::get('danh-sach-tuyen', [RouteDirectionController::class, 'view'])->name('routeDirection.view');
 
     Route::get('danh-sach-dia-ban', [LocalityController::class, 'index'])->name('locality.index');
     Route::post('danh-sach-dia-ban', [LocalityController::class, 'store'])->name('locality.store');
@@ -153,9 +150,6 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('vai-tro', [RoleController::class, 'store'])->name('Role.store');
     Route::post('vai-trox/{id}', [RoleController::class, 'update'])->name('Rolex.update');
     Route::post('vai-tro/{id}', [RoleController::class, 'destroy'])->name('Role.destroy');
-
-    Route::get('danh-sach-tuyen', [RouteDirectionController::class, 'view'])->name('routeDirection.view');
-
 });
 
 // 404
