@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -43,5 +44,15 @@ class Customer extends Model
     public function favoriteProducts()
     {
         return $this->hasMany(Product::class, 'productId');
+    }
+
+    public function person()
+    {
+        return $this->belongsTo(Personnel::class, 'personId');
+    }
+
+    public function channel()
+    {
+        return $this->belongsTo(Department::class, 'chanelId');
     }
 }
