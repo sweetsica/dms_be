@@ -54,7 +54,7 @@
                         <ul id="tree1">
                             @foreach ($positionListTree as $donVi)
                                 <li class="parent" style=" margin: 10px; padding: 0;">
-                                     <a href="#" class="title-child">{{ $donVi->name }}</a>
+                                    <a href="#" class="title-child">{{ $donVi->name }}</a>
                                     @if ($donVi->donViCon->count() > 0)
                                         @include('template.sidebar.sidebarPosition.child', [
                                             'donViCon' => $donVi->donViCon,
