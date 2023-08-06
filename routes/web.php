@@ -51,14 +51,6 @@ Route::middleware(['auth.role'])->group(function () {
     })->name('home');
 
     Route::post('/log-out', [AuthenticateController::class, 'logout'])->name('logout');
-
-Route::middleware(['auth.role'])->group(function () {
-
-    Route::get('/', function () {
-        return view('other.danh-sach-dieu-khien');
-    })->name('home');
-
-    Route::post('/log-out', [AuthenticateController::class, 'logout'])->name('logout');
     
     Route::post('/create-customer', [CustomerController::class, 'create'])->name('create-customer');
 
@@ -116,6 +108,9 @@ Route::middleware(['auth.role'])->group(function () {
     Route::delete('xoa-tuy-chinh/{id}', [CustomController::class, 'destroy'])->name('custom.destroy');
 
     Route::get('danh-sach-tuyen', [RouteDirectionController::class, 'view'])->name('routeDirection.view');
+    Route::post('danh-sach-tuyen', [RouteDirectionController::class, 'store'])->name('routeDirection.store');
+    Route::put('sua-tuyen/{id}', [RouteDirectionController::class, 'update'])->name('routeDirection.update');
+    Route::delete('xoa-tuyen/{id}', [RouteDirectionController::class, 'destroy'])->name('routeDirection.destroy');
 
     Route::get('danh-sach-dia-ban', [LocalityController::class, 'index'])->name('locality.index');
     Route::post('danh-sach-dia-ban', [LocalityController::class, 'store'])->name('locality.store');
