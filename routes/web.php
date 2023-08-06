@@ -43,7 +43,6 @@ Route::middleware(['guest'])->group(function () {
     // Quên MK
     Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
 
-
 });
 
 
