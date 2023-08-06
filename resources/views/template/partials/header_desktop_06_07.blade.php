@@ -246,16 +246,16 @@
                     </a>
                     <ul class="header_more">
                         <li class="header_more-item">
-                            <a href="#" class="header_more-link">Hồ sơ đơn vị (phòng ban)</a>
+                            <a href="{{ route('department.store') }} " class="header_more-link">Hồ sơ đơn vị (phòng ban)</a>
                         </li>
                         <li class="header_more-item">
-                            <a href="#" class="header_more-link">Vị trí/chức danh</a>
+                            <a href="{{ route('position.store') }} "class="header_more-link">Vị trí/chức danh</a>
                         </li>
                         <li class="header_more-item">
-                            <a href="#" class="header_more-link">Cấp nhân sự</a>
+                            <a href="{{ route('PersonnelLevel.store') }}" class="header_more-link">Cấp nhân sự</a>
                         </li>
                         <li class="header_more-item">
-                            <a href="#" class="header_more-link">Vai trò (phân quyền)</a>
+                            <a href="{{ route('Role.store') }}"class="header_more-link">Vai trò (phân quyền)</a>
                         </li>
                     </ul>
                 </li>
@@ -265,9 +265,17 @@
                     </a>
                 </li>
                 <li class="header_submenu-items more position-relative">
-                    <a href="#" class="header_submenu-link">
-                        Địa bàn/khu vực
+                    <a href="#" class="header_submenu-link more_btn">
+                        Địa bàn/khu vực<i class="bi bi-chevron-right"></i>
                     </a>
+                    <ul class="header_more">
+                        <li class="header_more-item">
+                            <a href="{{ route('locality.store') }}" class="header_more-link">Địa bàn</a>
+                        </li>
+                        <li class="header_more-item">
+                            <a href="{{ route('area.store') }}"class="header_more-link">Khu vực</a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="header_submenu-items more position-relative">
                     <a href="#" class="header_submenu-link">

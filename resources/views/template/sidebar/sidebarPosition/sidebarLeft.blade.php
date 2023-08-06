@@ -5,7 +5,7 @@
                 <div class="sidebarBody_wrapper ">
                     <div class="sidebarBody_heading-wrapper  ">
                         <div class="wrapper">
-                            <h1 style="color: red;">Cơ cấu vị trí<img src="{{ asset('assets/img/Vector.png') }}"
+                            <h1 style="color: red;">Cơ cấu đơn vị<img src="{{ asset('assets/img/Vector.png') }}"
                                     onclick="showList()" id="show-list-button" style="float: right"></h1>
                         </div>
                         <div id="list-container" style="display: none;">
@@ -53,7 +53,7 @@
                     <div>
                         <ul id="tree1">
                             @foreach ($positionListTree as $donVi)
-                                <li>
+                                <li class="parent" style=" margin: 10px; padding: 0;">
                                     <a href="#" class="title-child">{{ $donVi->name }}</a>
                                     @if ($donVi->donViCon->count() > 0)
                                         @include('template.sidebar.sidebarPosition.child', [
@@ -142,6 +142,19 @@
     @endif
 
     <script>
+        // Lấy đối tượng hình ảnh và danh sách "li"
+        const showListButton = document.getElementById('show-list-button');
+        const listContainer = document.getElementById('list-container');
+        // Thêm sự kiện click cho hình ảnh để hiển thị danh sách "li"
+        showListButton.addEventListener('click', () => {
+            // Toggle (bật/tắt) hiển thị của danh sách "li"
+            if (listContainer.style.display === 'none') {
+                listContainer.style.display = 'block';
+            } else {
+                listContainer.style.display = 'none';
+            }
+        });
+
         $.fn.extend({
             treed: function(o) {
 

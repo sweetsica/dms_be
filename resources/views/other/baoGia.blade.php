@@ -50,18 +50,20 @@
                         <form action="" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
-                            <div class="card_template-body" id="container-fluid">
+                            {{-- <div class="card_template-body" id="container-fluid">
                                 <div class="card_template-body-top">
                                     <div class='row mb-3 d-flex align-items-center'>
                                         <div class="col-3 d-flex align-items-center justify-content-center flex-column">
                                             <a class=" ">
                                                 <img class="header_logo" src="{{ env('LOGO_URL', '') }}" />
                                             </a>
-                                            <div class="card_template-title fst-italic">BM013.QT02/12</div>
+                                            <div class="card_template-sub with_input d-flex justify-content-center align-items-center">
+                                                <input value="BM013.QT02/12" type="text" placeholder="" class="form-control text-center" name="proposalNo">
+                                            
+                                            </div>
                                         </div>
                                         <div class="col-6 d-flex align-items-center justify-content-center flex-column">
                                             <div class="card_template-heading">Bảng báo giá</div>
-                                            <div class="card_template-heading-mini">Mã: </div>
 
                                         </div>
                                         <div class="col-3">
@@ -89,8 +91,8 @@
                                     <div class="col-md-12 mb-3">
                                         <div class="table-responsive YCMS_repeater">
                                             <table class="table table-bordered">
-                                                <thead>
-                                                  <tbody>
+                                                
+                                                <tbody>
                                                     <tr>
                                                         <td>
                                                             <div class="card_template-title d-flex align-items-center justify-content-center">
@@ -165,174 +167,436 @@
                                                         </td>
                                                     </tr>
                                                     
-                                                  </tbody>
+                                                </tbody>
                                             </table>
                                         </div>
                                     </div>
                                     
                                     <div class="col-md-12 mb-3">
-                                        <textarea type="text"  rows="1" placeholder="" class="card-title-black form-control textareaResize" name="product">Khách hàng: Quý khách hàng.</textarea>
+                                        <textarea type="text"  rows="1" placeholder="" class="card-title-black form-control textareaResize" name="product">Khách hàng: Quý khách hàng,</textarea>
                                     
                                     </div>
                                     <div class="col-md-12 mb-3">
-                                        <textarea type="text"  rows="2" placeholder="" class=" form-control textareaResize" name="product">Cảm ơn Quý khách hàng đã quan tâm đến sản phẩm. Hy vọng rằng sản phẩm sẽ đáp ứng tốt nhu cầu của Quý khách và chúng tôi mong rằng sẽ nhận được phản hồi của Quý khách trong thời gian sớm nhất. Xin hãy tham chiếu Mã báo giá: VN001 trên các thư từ liên quan hoặc đơn đặt hàng. Vui lòng trao đổi với nhân viên tư vấn để biết thêm thông tin chi tiết. Điều khoản thanh toán: Thanh toán trước 50% giá trị đơn hàng khi tiến hành ký Hợp đồng mua bán. 50% giá trị đơn hàng còn lại Quý khách hàng sẽ thanh toán sau 05 ngày kể từ ngày Công ty chúng tôi thông báo thờigian giao hàng.
-                                            Điều khoản giao hàng: Công ty chúng tôi sẽ tiến hành giao hàng khi đã nhận đủ 100% giá trị đơn hàng.Thời gian giao hàng dự kiến: Trong vòng 45 ngày kể từ ngày hai bên ký kết Hợp đồng mua bán. Hiệu lực báo giá:
-                                            Giá và số lượng chỉ có hiệu lực khi mặt hàng (sản phẩm) được khách hàng quyết định mua. Model, hình ảnh, thông số kỹ thuật và báo giá như sau:</textarea>
+                                        <textarea type="text"  rows="8" placeholder="" class=" form-control textareaResize" name="product">Cảm ơn Quý khách hàng đã quan tâm đến sản phẩm. Hy vọng rằng sản phẩm sẽ đáp ứng tốt nhu cầu của Quý khách và chúng tôi mong rằng sẽ nhận được phản hồi của Quý khách trong thời gian sớm nhất. Xin hãy tham chiếu Mã báo giá: VN001 trên các thư từ liên quan hoặc đơn đặt hàng. Vui lòng trao đổi với nhân viên tư vấn để biết thêm thông tin chi tiết.&#13;&#10;Điều khoản thanh toán: Thanh toán trước 50% giá trị đơn hàng khi tiến hành ký Hợp đồng mua bán. 50% giá trị đơn hàng còn lại Quý khách hàng sẽ thanh toán sau 05 ngày kể từ ngày Công ty chúng tôi thông báo thời gian giao hàng.&#13;&#10;Điều khoản giao hàng: Công ty chúng tôi sẽ tiến hành giao hàng khi đã nhận đủ 100% giá trị đơn hàng.Thời gian giao hàng dự kiến: Trong vòng 45 ngày kể từ ngày hai bên ký kết Hợp đồng mua bán.&#13;&#10;Hiệu lực báo giá:&#13;&#10;Giá và số lượng chỉ có hiệu lực khi mặt hàng (sản phẩm) được khách hàng quyết định mua. Model, hình ảnh, thông số kỹ thuật và báo giá như sau:</textarea>
                                     
                                     </div>
-                                    
-                                 
-                                    
-
-                                    {{-- <div class="col-md-12 mb-3">
+                                    <div class="col-md-12 mb-3">
                                         <div class="table-responsive YCMS_repeater">
-                                            <table class="table table-bordered">
+                                            <table class="table table-bordered" style="width: 100%">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col" class="text-center" style="width:3%">STT</th>
-                                                        <th scope="col" class="text-center" style="width: 22%">Tên, chủng
-                                                            loại, quy cách hàng hóa (Đính kèm hình ảnh, mô tả nếu có)</th>
-                                                        <th scope="col" class="text-center" style="width: 7%">Số lượng
-                                                        </th>
-                                                        <th scope="col" class="text-center" style="width: 5%">ĐVT</th>
-                                                        <th scope="col" class="text-center" style="width: 15%">MĐ sử dụng
-                                                            &
-                                                            T.gian hoàn thành</th>
-                                                        <th scope="col" class="text-center" style="width: 15%">NCC tốt
-                                                            nhất
-                                                            (Tên, sđt, đc)</th>
-                                                        <th scope="col" class="text-center" style="width: 15%">Đơn giá
-                                                            (VNĐ)
-                                                        </th>
-                                                        <th scope="col" class="text-center" style="width: 15%">Tổng tiền
-                                                            (VNĐ)</th>
-                                                        <th scope="col" style="width:3%"></th>
-
+                                                      <th class="text-nowrap text-center" style="width:10%">Model</th>
+                                                      <th class="text-nowrap text-center" style="width:30%">Hình ảnh</th>
+                                                      <th class="text-nowrap text-center" style="width:30%">Thông số kỹ thuật cơ bản</th>
+                                                      <th class="text-nowrap text-center" style="width:8%">Số lượng</th>
+                                                      <th class="text-nowrap text-center" style="width:10%">Thành tiền</th>
+                                                      <th class="text-nowrap text-center" style="width:2%"></th>
                                                     </tr>
                                                 </thead>
-                                                    <tbody data-repeater-list="listShoppingRequest">
-                                                        <tr data-repeater-item>
-                                                            <td scope="row" class="text-center">
-                                                                <div>
-                                                                    1
+                                                <tbody data-repeater-list="listShoppingRequest">
+
+                                                    <tr data-repeater-item>
+                                                        <td>
+                                                            <div class="">
+                                                                <textarea type="text"  rows="1" placeholder="" class="card-title-black form-control textareaResize" name="product">WLD T242</textarea>
+                                                                
+                                                            </div>
+
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+
+                                                                <div class="upload_wrapper-items">
+                                                                    <input type="hidden" value="" />
+                                                                    <button role="button" type="button" class="btn position-relative border d-flex">
+                                                                        <img style="width:16px;height:16px" src="{{ asset('assets/img/upload-file.svg') }}" />
+                                                                        <span class="ps-2">Chọn ảnh</span>
+                                                                        <input role="button" type="file" class="modal_upload-input modal_upload-file" name="files[]" multiple onchange="updateList(event)" />
+                                                                    </button>
+                                                                    <ul class="modal_upload-list" style="max-height: 200px; overflow-y: scroll; overflow-x: hidden;">
+                                                                    </ul>
+                
                                                                 </div>
-                                                            </td>
-                                                            <td>
-                                                                <textarea type="text" rows="1" placeholder="" class="form-control textareaResize" name="product"></textarea>
-                                                            </td>
-                                                            <td>
-                                                                <textarea rows="1" type="text" placeholder="" class="form-control textareaResize" name="quantity"></textarea>
-                                                            </td>
-                                                            <td>
-                                                                <textarea rows="1" type="text" placeholder="" class="form-control textareaResize" name="unit"></textarea>
-                                                            </td>
-                                                            <td>
-                                                                <textarea rows="1" type="text" placeholder="" class="form-control textareaResize" name="purpose"></textarea>
-                                                            </td>
-                                                            <td>
-                                                                <textarea rows="1" type="text" placeholder=""class="form-control textareaResize" name="provider"></textarea>
-                                                            </td>
-                                                            <td>
-                                                                <textarea rows="1" type="text" placeholder=""style="text-align: right;" class="form-control textareaResize" name="price"></textarea>
-                                                            </td>
-                                                            <td>
-                                                                <textarea rows="1" type="text" placeholder=""style="text-align: right;" class="form-control textareaResize" name="totalPrice"></textarea>
-                                                            </td>
-                                                            <td>
-                                                                <img data-repeater-delete role="button" src="{{ asset('/assets/img/trash.svg') }}" width="15px" height="15px" />
-                                                            </td>
-                                                        </tr>
-
-                                                    </tbody>
-                                                    <tr>
-                                                        <td colspan="9">
-                                                            <span role="button" class="fs-5 text-danger" data-repeater-create><i class="bi bi-plus-circle"></i></span>
+                
+                                                            </div>
                                                         </td>
-                                                        </td>
-                                                    <tr>
-
-                                                <td colspan="7" class="text-center fw-bold">Tổng (chưa VAT)</td>
-                                                <td colspan="2">
-                                                    <div style="text-align: right">
-                                                        <textarea rows="1" type="text" placeholder=""class="form-control textareaResize" name="sumPriceNovat"></textarea>
-                                                        
-
-                                                    </div>
-                                                </td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="7" class="text-center fw-bold">Tổng (có VAT)</td>
-                                                    <td colspan="2">
-                                                        <div style="text-align: right">
-                                                            <textarea rows="1" type="text" placeholder=""class="form-control textareaResize" name="sumPricevat"></textarea>
                                                             
-                                                        </div>
+                                                        <td>
+                                                            <textarea rows="14" type="text " placeholder="" class="form-control textareaResize" name="quantity">Xe Điện Wuling - WLDT242&#13;&#10;- Khối lượng bản thân xe: 540kg&#13;&#10;- Khối lượng toàn bộ xe: 1.080kg&#13;&#10;- Số chỗ ngồi 4+2 (6 người kể cả lái)&#13;&#10;- Kích thước bao (D x R x C) 3536 x 1200 x 1800 mm&#13;&#10;- Khoảng cách trục: 3340 mm&#13;&#10;- Ký hiệu, động cơ: HPQ4-48-18N/Điện xoay chiều&#13;&#10;- Tốc độ tối đa: 24 km/h&#13;&#10;- Ắc quy Chì Axit: 48V - 170Ah&#13;&#10;- Công suất động cơ Motor (max) 4KW&#13;&#10;- Lốp xe: + Trục 1 (1st Axle): 2/205/50-10&#13;&#10;+ Trục 2 (2md Axle): 2/205/50-10&#13;&#10;- Khả năng leo dốc 20%&#13;&#10;- Quãng đường hoạt động: 70km/h</textarea>
+                                                        </td>
+                                                        <td>
+                                                            <div class="">
+                                                                <textarea type="text"  rows="1" placeholder="" class=" form-control textareaResize" name="product">01</textarea>
+                                                                
+                                                            </div>
+                                                        
+                                                        </td>
+
+                                                        <td class="">
+
+                                                            <div class="">
+                                                                <textarea type="text"  rows="1" placeholder="" class=" form-control textareaResize" name="product">158.000.000</textarea>
+                                                                
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <img data-repeater-delete role="button" src="{{ asset('/assets/img/trash.svg') }}" width="15px" height="15px" />
+                                                        </td>
+                                                    </tr>
+
+                                                    
+                                                    
+                                                </tbody>
+                                                <tr>
+                                                    <td colspan="9">
+                                                        <span role="button" class="fs-5 text-danger" data-repeater-create><i class="bi bi-plus-circle"></i></span>
                                                     </td>
-
-                                                </tr>
+                                                    </td>
+                                                <tr>
                                             </table>
-
-                                        </div>
-                                    </div> --}}
-
-                                    {{-- <div class="mb-3 col-12">
-                                        <div class="card_template-title  with_form">
-                                            <div class="text-nowrap">Tệp đính kèm/Attached files:</div>
                                         </div>
                                     </div>
-                                        <div class="col-md-5 mb-3">
-                                            <div class="d-flex flex-column">
-
-                                                <div class="upload_wrapper-items">
-                                                    <input type="hidden" value="" />
-                                                    <button role="button" type="button" class="btn position-relative border d-flex">
-                                                        <img style="width:16px;height:16px" src="{{ asset('assets/img/upload-file.svg') }}" />
-                                                        <span class="ps-2">Chọn file đính kèm</span>
-                                                        <input role="button" type="file" class="modal_upload-input modal_upload-file" name="files[]" multiple onchange="updateList(event)" />
-                                                    </button>
-                                                    <ul class="modal_upload-list" style="max-height: 200px; overflow-y: scroll; overflow-x: hidden;">
-                                                    </ul>
-
-                                                </div>
-
-                                            </div>
-                                        </div> --}}
+                                    <div class="col-md-12 mb-3">
+                                        <textarea type="text"  rows="1" placeholder="" class="card-title-black fst-italic form-control textareaResize" name="product">Bằng chữ: Một trăm bốn hai triệu đồng chẵn (Giá trên đã bao gồm VAT).</textarea>
+                                    
+                                    </div>
+                                    <div class="ol-md-12 mb-3 card_template-title d-flex align-items-center justify-content-center">
+                                        <div class=" text-nowrap">*Lưu ý:</div>
+                                        <div class=" card_template-sub with_input d-flex justify-content-center align-items-center">
+                                            <input type="text" value="Màu sắc khách hàng tuỳ chọn" placeholder="" class="form-control" name="proposalNo">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <textarea type="text"  rows="1" placeholder="" class="card-title-black form-control textareaResize" name="product">Chính sách bảo hành:</textarea>
+                                    
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <textarea type="text"  rows="1" placeholder="" class=" form-control textareaResize" name="product">Bảo hành 12 tháng đối với Ắc quy, động cơ và bộ điều khiển điện, hạng mục bảo hành sẽ được bên bán chịu trách nhiệm bảo hành.</textarea>
+                                    
+                                    </div>
+                                    <div class="col-md-12 d-flex  align-items-center">
+                                        <div class="btn-custom me-2" style="background: #ec7c30"></div>
+                                        <div class="btn-custom me-2" style="background: #dc3545"></div>
+                                        <div class="btn-custom me-2" style="background: #00af50"></div>
+                                        <div class="btn-custom me-2" style="background: #212529"></div>
+                                        <div class="btn-custom" style="background: #fff; border-color: #212529; border-width: 1px; border-style: solid;"></div>
+                                    </div>
                                 </div>
 
+
+                                <div class="card_template-body-bottom">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="">
+                                                <textarea type="text"  rows="1" placeholder="" class="card-title-black form-control textareaResize" name="product">Công ty CP Thái Bình Hưng Thịnh</textarea>
+                                            </div>
+                                            <div class="">
+                                                <textarea type="text"  rows="3" placeholder="" class="form-control textareaResize" name="product">Số 266 Đường Trần Hưng Đạo Thị trần An Bài, Huyện Quỳnh Phụ, Tỉnh Thái Bình, Việt Nam</textarea>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="col">
+                                            <div class="">
+                                                <textarea type="text"  rows="1" placeholder="" class="card-title-black form-control textareaResize" name="product">Thông tin liên hệ</textarea>
+                                            </div>
+                                            <div class="">
+                                                <textarea type="text"  rows="1" placeholder="" class="form-control textareaResize" name="product">Hotline: +84 88 8809889</textarea>
+                                            </div>
+                                            <div class="">
+                                                <textarea type="text"  rows="1" placeholder="" class="form-control textareaResize" name="product">Email: duong_pham@tbht.vn</textarea>
+                                            </div>
+                                            <div class="">
+                                                <textarea type="text"  rows="1" placeholder="" class="form-control textareaResize" name="product">Website: https://tbht.vn/</textarea>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="col">
+                                            <div class="">
+                                                <textarea type="text"  rows="1" placeholder="" class="card-title-black form-control textareaResize" name="product">Trưởng Phòng Bán Hàng</textarea>
+                                            </div>
+                                            <div class="">
+                                                <textarea type="text"  rows="1" placeholder="" class="form-control textareaResize" name="product">Mr. Phạm Ánh Dương</textarea>
+                                            </div>
+                                            <div class="">
+                                                <textarea type="text"  rows="1" placeholder="" class="form-control textareaResize" name="product">Di động: 0945.699.269</textarea>
+                                            </div>
+                                            <div class="">
+                                                <textarea type="text"  rows="1" placeholder="" class="form-control textareaResize" name="product">Email: duong_pham@tbht.vn</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="">
+                                                <textarea type="text"  rows="1" placeholder="" class="card-title-black form-control textareaResize" name="product">Thông tin ngân hàng: Vietinbank</textarea>
+                                            </div>
+                                            <div class="">
+                                                <textarea type="text"  rows="1" placeholder="" class="form-control textareaResize" name="product">Tên: Công ty CP Thái Bình Hưng Thịnh</textarea>
+                                            </div>
+                                            <div class="">
+                                                <textarea type="text"  rows="1" placeholder="" class="form-control textareaResize" name="product">Số tài khoản: 178954148</textarea>
+                                            </div>
+                                            <div class="">
+                                                <textarea type="text"  rows="1" placeholder="" class="form-control textareaResize" name="product">Chi nhánh: Thăng Long – Hà Nội</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div> --}}
+
+
+
+                            <div class="card_template-body" id="container-fluid">
+                                <div class="card_template-body-top">
+                                    <div class='row mb-3 d-flex align-items-center'>
+                                        <div class="col-3 d-flex align-items-center justify-content-center flex-column">
+                                            <a class=" ">
+                                                <img class="header_logo" src="{{ env('LOGO_URL', '') }}" />
+                                            </a>
+                                            <div class="card_template-sub with_input d-flex justify-content-center align-items-center">
+                                                <input value="BM013.QT02/12" type="text" placeholder="" class="form-control text-center" name="proposalNo">
+                                            
+                                            </div>
+                                        </div>
+                                        <div class="col-6 d-flex align-items-center justify-content-center flex-column">
+                                            <div class="card_template-heading">Bảng báo giá</div>
+
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="card_template-title fst-italic d-flex align-items-center justify-content-center">
+                                                <div class="text-nowrap">Số/No:</div>
+                                                <div class="card_template-sub with_input d-flex justify-content-center align-items-center">
+                                                    <div class="card_template-sub-text">123</div>
+                                                </div>
+                                            </div>
+                                            <div class="card_template-title fst-italic d-flex align-items-center justify-content-center">
+                                                <div class="text-nowrap">Ngày/Date:</div>
+                                                <div class="card_template-sub with_input d-flex justify-content-center align-items-center">
+                                                    <span>05/08/2023</span>
+                                                    
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="card_template-body-middle">
+                                    <div class="col-md-12 mb-3">
+                                        <div class="table-responsive YCMS_repeater">
+                                            <table class="table table-borderless">
+                                                
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex align-items-center ">
+                                                                <div class="card-title-black text-nowrap me-3" >Công ty:</div>
+                                                                <div class="card-title-black text-break ">1</div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center ">
+                                                                <div class="card-title-black text-nowrap me-3">Liên hệ:</div>
+                                                                <div class="card-title-black text-break">1</div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex align-items-center ">
+                                                                <div class="text-nowrap me-3">Địa chỉ:</div>
+                                                                <div class="text-break">1</div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center ">
+                                                                <div class=" text-nowrap me-3">Di động:</div>
+                                                                <div class="text-break">1</div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex align-items-center ">
+                                                                <div class=" text-nowrap me-3">Mã số thuế:</div>
+                                                                <div class="text-break">1</div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center ">
+                                                                <div class=" text-nowrap me-3">Email:</div>
+                                                                <div class="text-break">1</div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex align-items-center ">
+                                                                <div class=" text-nowrap me-3">Số tổng đài:</div>
+                                                                <div class="text-break">1</div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center ">
+                                                                <div class=" text-nowrap me-3">Website:</div>
+                                                                <div class="text-break">1</div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-12 mb-3 fw-bold">
+                                        <div class="text-break">1</div>
+                                    
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <div class="text-break">1</div>
+                                    
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <div class="table-responsive YCMS_repeater">
+                                            <table class="table table-bordered" style="width: 100%">
+                                                <thead>
+                                                    <tr>
+                                                      <th class="text-nowrap text-center" style="width:10%">Model</th>
+                                                      <th class="text-nowrap text-center" style="width:30%">Hình ảnh</th>
+                                                      <th class="text-nowrap text-center" style="width:30%">Thông số kỹ thuật cơ bản</th>
+                                                      <th class="text-nowrap text-center" style="width:8%">Số lượng</th>
+                                                      <th class="text-nowrap text-center" style="width:10%">Thành tiền</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody data-repeater-list="listShoppingRequest">
+
+                                                    <tr data-repeater-item>
+                                                        <td >
+                                                            <div class="text-break text-center">1</div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex product_img ">
+                                                                <img class="" src="{{ asset('/assets/img/xedien.png') }}" />
+                                                            </div>
+                                                        </td>
+                                                            
+                                                        <td>
+                                                            <div class="text-break ">1</div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="text-break text-center">1</div>
+                                                        
+                                                        </td>
+
+                                                        <td class="">
+
+                                                            <div class="text-break text-center">1</div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mb-3 fw-bold fst-italic">
+                                        <div class="text-break ">1</div>
+                                    </div>
+                                    <div class="ol-md-12 mb-3 card_template-title d-flex align-items-center">
+                                        <div class=" text-nowrap fw-bold me-3">*Lưu ý:</div>
+                                        <div class="text-break ">1</div>
+                                        
+                                    </div>
+                                    <div class="col-md-12 mb-3 fw-bold">
+                                        <div class="text-break ">1</div>
+                                    
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <div class="text-break ">1</div>
+                                    
+                                    </div>
+                                    <div class="col-md-12 d-flex  align-items-center">
+                                        <div class="btn-custom me-2" style="background: #ec7c30"></div>
+                                        <div class="btn-custom me-2" style="background: #dc3545"></div>
+                                        <div class="btn-custom me-2" style="background: #00af50"></div>
+                                        <div class="btn-custom me-2" style="background: #212529"></div>
+                                        <div class="btn-custom" style="background: #fff; border-color: #212529; border-width: 1px; border-style: solid;"></div>
+                                    </div>
+                                </div>
+
+
+                                <div class="card_template-body-bottom">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="fw-bold">
+                                                <div class="text-break ">1</div>
+                                                
+                                            </div>
+                                            <div class="">
+                                                <div class="text-break ">1</div>
+
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="col">
+                                            <div class="fw-bold">
+                                                <div class="text-break  ">1</div>
+
+                                            </div>
+                                            <div class="">
+                                                <div class="text-break ">1</div>
+
+                                            </div>
+                                            <div class="">
+                                                <div class="text-break ">1</div>
+
+                                            </div>
+                                            <div class="">
+                                                <div class="text-break ">1</div>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="col">
+                                            <div class="fw-bold">
+                                                <div class="text-break  ">1</div>
+
+                                            </div>
+                                            <div class="">
+                                                <div class="text-break ">1</div>
+                                            </div>
+                                            <div class="">
+                                                <div class="text-break ">1</div>
+                                            </div>
+                                            <div class="">
+                                                <div class="text-break ">1</div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="fw-bold">
+                                                <div class="text-break  ">1</div>
+
+                                            </div>
+                                            <div class="">
+                                                <div class="text-break ">1</div>
+                                            </div>
+                                            <div class="">
+                                                <div class="text-break ">1</div>
+                                            </div>
+                                            <div class="">
+                                                <div class="text-break ">1</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 
                             </div>
-                            {{-- <div class="d-flex justify-content-end">
-                                @if (isEdit($proposal, $user->id))
-                                    <div class="card_template-footer">
-                                        <a href="/de-xuat-theo-mau" type="button" class="btn btn-outline-danger ps-5 pe-5 me-3">Hủy</a>
-                                        <button type="submit" class="btn btn-danger ps-5 pe-5">Gửi</button>
-                                    </div>
-                                @else
-                                    <div class="card_template-footer">
-                                        <a href="/de-xuat-theo-mau" type="button" class="btn btn-outline-danger ps-2 pe-2 me-3">Về danh sách</a>
-                                        <button type="button" class="btn btn-danger btnPrint" style="padding: 0 36px;" data-content="container-fluid-{{ $proposal->id }}">In</button>
-                                    </div>
-                                    @if (count($nextProposalIds))
-                                        <div class="card_template-footer">
-                                            <a href="/de-xuat-theo-mau/{{ $nextProposalIds[0] }}" type="button" class="btn btn-danger ps-5 pe-5 ms-3">
-                                                {{ $proposal->status > 1 ? 'Chuyển kí tiếp' : 'Bỏ qua' }}
-                                                <i class="bi bi-arrow-right-short"></i>
-                                            </a>
-                                        </div>
-                                    @else
-                                        <div class="card_template-footer">
-                                            <a href="{{ route('proposal.list') }}" type="button" class="btn btn-danger ps-5 pe-5 ms-3">
-                                                Đã hết đề xuất
-                                            </a>
-                                        </div>
-                                    @endif
-
-                                @endif
-
-
-
-                            </div> --}}
+                            <div class="d-flex justify-content-end">
+                                <div class="card_template-footer">
+                                    <a href="#" type="button" class="btn btn-outline-danger ps-5 pe-5 me-3">Hủy</a>
+                                    <button type="submit" class="btn btn-danger ps-5 pe-5">Lưu</button>
+                                </div> 
+                            </div>
+                            
                         </form>
                     </div>
                 </div>
@@ -341,35 +605,6 @@
         </div>
     </div>
     @include('template.sidebar.sidebarDeXuat.sidebarRight')
-
-
-    {{-- Modal Confirm --}}
-    <div class="modal fade" id="conFirm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">Xác nhận yêu cầu</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form method="" action="" id="myForm">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="row">
-                            <div>Bạn đã chắc chắn với thông tin đề nghị chưa</div>
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Xem lại</button>
-                        <a href="/xem/yeu-cau-mua-sam/id" type="button" class="btn btn-danger">Gửi</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
-    
-
 
 @endsection
 @section('footer-script')
