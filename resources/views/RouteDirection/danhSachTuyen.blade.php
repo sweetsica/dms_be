@@ -113,8 +113,8 @@
                                                             ->get()
                                                             ->pluck('count', 'routeId');
                                                     @endphp
-                                                    <tr class="table-row" data-bs-toggle="modal" data-bs-target="#info"
-                                                        role="button">
+                                                    <tr class="table-row" data-bs-toggle="modal"
+                                                        data-bs-target="#info{{ $item->id }}" role="button">
 
                                                         <td>
                                                             <div class="overText text-center">
@@ -149,7 +149,8 @@
                                                         </td>
                                                         <td>
                                                             <div class="overText text-center" data-bs-toggle="tooltip"
-                                                                data-bs-placement="top" title="{{ $routeCounts[$item->id] ?? 0 }}">
+                                                                data-bs-placement="top"
+                                                                title="{{ $routeCounts[$item->id] ?? 0 }}">
                                                                 {{ $routeCounts[$item->id] ?? 0 }}
                                                             </div>
                                                         </td>
@@ -315,6 +316,151 @@
                 </div>
             </div>
         </div>
+
+        {{-- Thông tin tuyến --}}
+        <div class="modal fade" id="info{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h5 class="modal-title w-100" id="exampleModalLabel">Chi tiết tuyến</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12 mt-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="modal-title">Thông tin về tuyến</div>
+                                </div>
+                                <div class="modal_list row">
+                                    <div class="modal_items col-sm-6">
+                                        Tên tuyến: <span style="padding-left: 4px"
+                                            class="text-danger">{{ $item->name }} - {{ $item->travel_time }}</span>
+                                    </div>
+                                    <div class="modal_items col-sm-6">
+                                        Nhân sự phụ trách: <span style="padding-left: 4px"
+                                            class="text-danger">{{ $item->personnel->name }} -
+                                            {{ $item->personnel->code }}</span>
+                                    </div>
+                                    <div class="modal_items col-sm-6">
+                                        Mã tuyến:<span style="padding-left: 4px"
+                                            class="text-danger">{{ $item->code }}</span>
+                                    </div>
+                                    <div class="modal_items col-sm-6">
+                                        Thời gian đi tuyến:<span style="padding-left: 4px"
+                                            class="text-danger">{{ $item->travel_time }}</span>
+                                    </div>
+                                    <div class="modal_items col-sm-6">
+                                        Địa bàn:<span style="padding-left: 4px"
+                                            class="text-danger">{{ $item->areas->name }}</span>
+                                    </div>
+                                    <div class="modal_items col-sm-6">
+                                        Ghi chú:<span style="padding-left: 4px"
+                                            class="text-danger">{{ $item->description }}</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            @php
+                                $customers = \App\Models\Customer::where('routeId', $item->id)->with('person')->get();
+                            @endphp
+                            <div class="col-sm-12 mt-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="modal-title">Danh sách khách hàng thuộc tuyến</div>
+                                </div>
+                                <div class="modal_list row">
+                                    <div class="modal_items col-sm-12">
+                                        <div class="table-responsive mt-2"style="height: auto;">
+                                            <table id="dsbbdanhgia" class="table table-hover table-bordered"
+                                                width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-nowrap text-center" style="width:2%">STT</th>
+                                                        <th class="text-nowrap text-center" style="width:20%">Tên khách
+                                                            hàng
+                                                        </th>
+                                                        <th class="text-nowrap text-center" style="width:8%">Số điện thoại
+                                                        </th>
+                                                        <th class="text-nowrap text-center" style="width:12%">Email</th>
+                                                        <th class="text-nowrap text-center" style="width:12%">Nhân sự phụ
+                                                            trách</th>
+                                                        <th class="text-nowrap text-center" style="width:8%">Nhóm</th>
+                                                        <th class="text-nowrap text-center" style="width:8%">Kênh</th>
+                                                        {{-- <th class="text-nowrap text-center" style="width:3%"></th> --}}
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr role="button">
+                                                        @forelse ($customers as $key => $cus)
+                                                            <td class="text-nowrap text-center">
+                                                                <div class="text-nowrap d-block text-truncate"
+                                                                    style="">
+                                                                    {{ $key + 1 }}
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-nowrap">
+                                                                <div class="text-nowrap d-block text-truncate"
+                                                                    style="max-width:350px;" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $cus->name }}">
+                                                                    {{ $cus->name }}
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-nowrap">
+                                                                <div class="text-nowrap  d-block text-truncate"
+                                                                    style="max-width:565px;" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $cus->phone }}">
+                                                                    {{ $cus->phone }}
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-nowrap">
+                                                                <div class="text-nowrap  d-block text-truncate"
+                                                                    style="max-width:565px;" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $cus->email }}">
+                                                                    {{ $cus->email }}
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-nowrap">
+                                                                <div class="text-nowrap d-block text-truncate"
+                                                                    style="max-width:565px;" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $cus->person->name }} - {{ $cus->person->code }}">
+                                                                    {{ $cus->person->name }} - {{ $cus->person->code }}
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-nowrap">
+                                                                <div class="text-nowrap text-center d-block text-truncate"
+                                                                    style="max-width:565px;" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="Nhóm {{ $cus->groupId }}">
+                                                                    Nhóm {{ $cus->groupId }}
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-nowrap">
+                                                                <div class="text-nowrap text-center d-block text-truncate"
+                                                                    style="max-width:565px;" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $cus->channel->name }}">
+                                                                    {{ $cus->channel->name }}
+                                                                </div>
+                                                            </td>
+                                                        @empty
+                                                        <td colspan="7" class="text-center">
+                                                            Chưa có khách hàng nào thuộc tuyến này
+                                                        </td>
+                                                        @endforelse
+
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     @endforeach
 
     <!-- Modal thêm  -->
@@ -394,142 +540,6 @@
         </div>
     </div>
 
-    {{-- Thông tin tuyến --}}
-    <div class="modal fade" id="info" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">Chi tiết tuyến</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-sm-12 mt-3">
-                            <div class="d-flex align-items-center">
-                                <div class="modal-title">Thông tin về tuyến</div>
-                            </div>
-                            <div class="modal_list row">
-                                <div class="modal_items col-sm-6">
-                                    Tên tuyến: <span style="padding-left: 4px" class="text-danger">Hà Nội - Thứ 2</span>
-                                </div>
-                                <div class="modal_items col-sm-6">
-                                    Nhân sự phụ trách: <span style="padding-left: 4px" class="text-danger">Nguyễn Văn A -
-                                        TBHT01</span>
-                                </div>
-                                <div class="modal_items col-sm-6">
-                                    Mã tuyến:<span style="padding-left: 4px" class="text-danger">NHT2</span>
-                                </div>
-                                <div class="modal_items col-sm-6">
-                                    Thời gian đi tuyến:<span style="padding-left: 4px" class="text-danger">Thứ 2</span>
-                                </div>
-                                <div class="modal_items col-sm-6">
-                                    Địa bàn:<span style="padding-left: 4px" class="text-danger">Hà Nội</span>
-                                </div>
-                                <div class="modal_items col-sm-6">
-                                    Ghi chú:<span style="padding-left: 4px" class="text-danger">Thứ 2 hàng tuần</span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-sm-12 mt-3">
-                            <div class="d-flex align-items-center">
-                                <div class="modal-title">Danh sách khách hàng thuộc tuyến</div>
-                            </div>
-                            <div class="modal_list row">
-                                <div class="modal_items col-sm-12">
-                                    <div class="table-responsive mt-2"style="height: auto;">
-                                        <table id="dsbbdanhgia" class="table table-hover table-bordered" width="100%">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-nowrap text-center" style="width:2%">STT</th>
-                                                    <th class="text-nowrap text-center" style="width:8%">Mã </th>
-                                                    <th class="text-nowrap text-center" style="width:20%">Tên khách hàng
-                                                    </th>
-                                                    <th class="text-nowrap text-center" style="width:8%">Số điện thoại
-                                                    </th>
-                                                    <th class="text-nowrap text-center" style="width:12%">Email</th>
-                                                    <th class="text-nowrap text-center" style="width:12%">Nhân sự phụ
-                                                        trách</th>
-                                                    <th class="text-nowrap text-center" style="width:8%">Nhóm</th>
-                                                    <th class="text-nowrap text-center" style="width:8%">Kênh</th>
-                                                    {{-- <th class="text-nowrap text-center" style="width:3%"></th> --}}
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr role="button">
-                                                    <td class="text-nowrap text-center">
-                                                        <div class="text-nowrap d-block text-truncate" style="">
-                                                            1
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-nowrap ">
-                                                        <div class="text-nowrap d-block text-truncate" style=""
-                                                            data-bs-toggle="tooltip" data-bs-placement="top"
-                                                            title="NTVP">
-                                                            NTVP
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-nowrap">
-                                                        <div class="text-nowrap d-block text-truncate"
-                                                            style="max-width:350px;" data-bs-toggle="tooltip"
-                                                            data-bs-placement="top" title="Nhà thuốc A">
-                                                            Nhà thuốc A
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-nowrap">
-                                                        <div class="text-nowrap  d-block text-truncate"
-                                                            style="max-width:565px;" data-bs-toggle="tooltip"
-                                                            data-bs-placement="top" title="0988888888">
-                                                            0988888888
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-nowrap">
-                                                        <div class="text-nowrap  d-block text-truncate"
-                                                            style="max-width:565px;" data-bs-toggle="tooltip"
-                                                            data-bs-placement="top" title="Kh01@tbht.vn">
-                                                            Kh01@tbht.vn
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-nowrap">
-                                                        <div class="text-nowrap d-block text-truncate"
-                                                            style="max-width:565px;" data-bs-toggle="tooltip"
-                                                            data-bs-placement="top" title="Lê Văn A - MTT123">
-                                                            Lê Văn A - MTT123
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-nowrap">
-                                                        <div class="text-nowrap text-center d-block text-truncate"
-                                                            style="max-width:565px;" data-bs-toggle="tooltip"
-                                                            data-bs-placement="top" title="Nhóm 1">
-                                                            Nhóm 1
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-nowrap">
-                                                        <div class="text-nowrap text-center d-block text-truncate"
-                                                            style="max-width:565px;" data-bs-toggle="tooltip"
-                                                            data-bs-placement="top" title="OTC">
-                                                            OTC
-                                                        </div>
-                                                    </td>
-
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 @endsection
