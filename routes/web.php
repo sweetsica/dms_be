@@ -42,6 +42,23 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/login', [AuthenticateController::class, 'login'])->name('login');
     // Quên MK
     Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+
+
+    Route::post('/create-customer', [CustomerController::class, 'create'])->name('create-customer');
+
+    Route::get('/customer', [CustomerController::class, 'view'])->name('customers');
+
+    Route::post('/update-customer/{id}', [CustomerController::class, 'update'])->name('update.customer');
+
+    Route::post('/delete-customer/{id}', [CustomerController::class, 'delete'])->name('delete.customer');
+
+    Route::get('/nhan_su', [PersonnelController::class, 'view'])->name('personel.view');
+
+    Route::get('/danh_sach_san_pham_cho_select', [ProductController::class, 'getAll'])->name('personal.getAll');
+
+    Route::get('/department_getAll', [DepartmentController::class, 'getAll'])->name('department.getAll');
+
+    Route::get('/route_direction_getAll', [RouteDirectionController::class, 'getAll'])->name('routeDirection.getAll');
 });
 
 
@@ -54,17 +71,17 @@ Route::middleware(['auth.role'])->group(function () {
 
     Route::post('/log-out', [AuthenticateController::class, 'logout'])->name('logout');
 
-    Route::resource('/tuyenduong', RouteDirectionController::class);
+    // Route::resource('/tuyenduong', RouteDirectionController::class);
 
-    Route::get('/map/{id}', [RouteDirectionController::class, 'showMap'])->name('map');
+    // Route::get('/map/{id}', [RouteDirectionController::class, 'showMap'])->name('map');
 
-    Route::get('/create-customer', [CustomerController::class, 'create'])->name('create-customer');
+    // Route::get('/create-customer', [CustomerController::class, 'create'])->name('create-customer');
 
-    Route::post('/get-customer', [CustomerController::class, 'store'])->name('store-customer');
+    // Route::post('/get-customer', [CustomerController::class, 'store'])->name('store-customer');
 
-    Route::get('/get-customer/{id}', [CustomerController::class, 'findById'])->name('find-customer-byId');
+    // Route::get('/get-customer/{id}', [CustomerController::class, 'findById'])->name('find-customer-byId');
 
-    //Route::get('/order', [OrderController::class, 'index'])->name('index.order');
+    Route::get('/order', [OrderController::class, 'index'])->name('index.order');
 
     // Trang chủ
     Route::get('/dashboard', [DashboardController::class, 'indexv2'])->name("dashboard");

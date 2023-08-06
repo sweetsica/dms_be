@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class RouteDirectionController extends Controller
 {
-    // 
+    //
     public function index()
     {
         $routeDirection = RouteDirection::all();
@@ -17,5 +17,10 @@ class RouteDirectionController extends Controller
     public function showMap($id)
     {
         return view('map', ['id' => $id]);
+    }
+    public function getAll()
+    {
+        $routeDirections = RouteDirection::all();
+        return $routeDirections;
     }
 }

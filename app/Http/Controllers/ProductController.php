@@ -45,10 +45,12 @@ class ProductController extends Controller
 
             $pagination = $this->pagination($listProduct);
 
-            return view('Product.danhSachSanPham')->with(compact(
-                "listProduct",
-                "pagination"
-            ));
+            return view('Product.danhSachSanPham')->with(
+                compact(
+                    "listProduct",
+                    "pagination"
+                )
+            );
         } catch (Exception $e) {
             Session::flash('error', $e);
             return back();
@@ -147,5 +149,11 @@ class ProductController extends Controller
 
         Session::flash('success', "Xoá sản phẩm thành công");
         return back();
+    }
+
+    public function getAll()
+    {
+        $productList = Product::all();
+        return $productList;
     }
 }

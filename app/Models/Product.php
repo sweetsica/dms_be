@@ -20,9 +20,13 @@ class Product extends Model
         'created_at',
         'deleted_at',
     ];
-    
+
     public function creators()
     {
         return $this->belongsTo(Personnel::class, 'created_by');
+    }
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'productId');
     }
 }

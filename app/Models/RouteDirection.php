@@ -10,7 +10,12 @@ class RouteDirection extends Model
     use HasFactory;
     protected $table = 'routeDirections';
     protected $fillable = [
-        'name'
+        'name',
+        'code',
+        'personId',
+        // 'timeTravel',
+        'areaId',
+        'description',
     ];
 
     public function customers()
