@@ -43,22 +43,8 @@ Route::middleware(['guest'])->group(function () {
     // Quên MK
     Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
 
+    Route::get('danh-sach-tuyen', [RouteDirectionController::class, 'view'])->name('routeDirection.view');
 
-    Route::post('/create-customer', [CustomerController::class, 'create'])->name('create-customer');
-
-    Route::get('/customer', [CustomerController::class, 'view'])->name('customers');
-
-    Route::post('/update-customer/{id}', [CustomerController::class, 'update'])->name('update.customer');
-
-    Route::post('/delete-customer/{id}', [CustomerController::class, 'delete'])->name('delete.customer');
-
-    Route::get('/nhan_su', [PersonnelController::class, 'view'])->name('personel.view');
-
-    Route::get('/danh_sach_san_pham_cho_select', [ProductController::class, 'getAll'])->name('personal.getAll');
-
-    Route::get('/department_getAll', [DepartmentController::class, 'getAll'])->name('department.getAll');
-
-    Route::get('/route_direction_getAll', [RouteDirectionController::class, 'getAll'])->name('routeDirection.getAll');
 });
 
 
@@ -70,16 +56,6 @@ Route::middleware(['auth.role'])->group(function () {
     })->name('home');
 
     Route::post('/log-out', [AuthenticateController::class, 'logout'])->name('logout');
-
-    // Route::resource('/tuyenduong', RouteDirectionController::class);
-
-    // Route::get('/map/{id}', [RouteDirectionController::class, 'showMap'])->name('map');
-
-    // Route::get('/create-customer', [CustomerController::class, 'create'])->name('create-customer');
-
-    // Route::post('/get-customer', [CustomerController::class, 'store'])->name('store-customer');
-
-    // Route::get('/get-customer/{id}', [CustomerController::class, 'findById'])->name('find-customer-byId');
 
     Route::get('/order', [OrderController::class, 'index'])->name('index.order');
 
@@ -110,9 +86,7 @@ Route::middleware(['auth.role'])->group(function () {
     Route::put('sua-tuy-chinh/{id}', [CustomController::class, 'update'])->name('custom.update');
     Route::delete('xoa-tuy-chinh/{id}', [CustomController::class, 'destroy'])->name('custom.destroy');
 
-    Route::get('danh-sach-tuyen', function () {
-        return view('other.danhSachTuyen');
-    });
+
 
     Route::get('danh-sach-dia-ban', [LocalityController::class, 'index'])->name('locality.index');
     Route::post('danh-sach-dia-ban', [LocalityController::class, 'store'])->name('locality.store');
@@ -153,6 +127,22 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('vai-tro', [RoleController::class, 'store'])->name('Role.store');
     Route::post('vai-trox/{id}', [RoleController::class, 'update'])->name('Rolex.update');
     Route::post('vai-tro/{id}', [RoleController::class, 'destroy'])->name('Role.destroy');
+
+    Route::post('/create-customer', [CustomerController::class, 'create'])->name('create-customer');
+
+    Route::get('/customer', [CustomerController::class, 'view'])->name('customers');
+
+    Route::post('/update-customer/{id}', [CustomerController::class, 'update'])->name('update.customer');
+
+    Route::post('/delete-customer/{id}', [CustomerController::class, 'delete'])->name('delete.customer');
+
+    Route::get('/nhan_su', [PersonnelController::class, 'view'])->name('personel.view');
+
+    Route::get('/danh_sach_san_pham_cho_select', [ProductController::class, 'getAll'])->name('personal.getAll');
+
+    Route::get('/department_getAll', [DepartmentController::class, 'getAll'])->name('department.getAll');
+
+    Route::get('/route_direction_getAll', [RouteDirectionController::class, 'getAll'])->name('routeDirection.getAll');
 });
 
 // 404

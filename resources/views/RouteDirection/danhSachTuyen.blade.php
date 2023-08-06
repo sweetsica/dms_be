@@ -8,17 +8,17 @@
     </style>
 @endsection
 @php
-    
+
     // function getPaginationLink($link, $pageName)
     // {
     //     if (!isset($link->url)) {
     //         return '#';
     //     }
-    
+
     //     $pageNumber = explode('?page=', $link->url)[1];
 
     //     $queryString = request()->query();
-    
+
     //     $queryString[$pageName] = $pageNumber;
     //     return route('timekeeping.list', $queryString);
     // }
@@ -34,13 +34,6 @@
     //     return false;
     // }
 
-    $listData = [
-        ['id' => 1, 'code' => 'tuyen01', 'name' => 'Tuyến thứ 2', 'usermanager' => 'Nguyễn Văn A - TBHT00', "email" => 'Cầu Giấy', 'nhom' => '2', 'kenh' => 'OTC',],
-        ['id' => 2, 'code' => 'tuyen01', 'name' => 'Tuyến thứ 3', 'usermanager' => 'Nguyễn Văn B - MTDH01', "email" => 'Thanh Xuân', 'nhom' => '3', 'kenh' => 'ETC',],
-        ['id' => 3, 'code' => 'tuyen01', 'name' => 'Tuyến thứ 4', 'usermanager' => 'Nguyễn Văn C - TBHT02', "email" => 'Ba Đình', 'nhom' => '4', 'kenh' => 'MT',],
-        ['id' => 4, 'code' => 'tuyen01', 'name' => 'Tuyến thứ 5', 'usermanager' => 'Nguyễn Văn D - MTDH04', "email" => 'Đống Đa', 'nhom' => '5', 'kenh' => 'Đại lý cá nhân',],
-    ];
-    
 @endphp
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
@@ -75,12 +68,12 @@
                                                     </div>
                                                 </form>
                                             </div>
-    
+
                                             {{-- <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Lọc">
                                                 <button class="btn btn-outline-danger {{ isFiltering(['department', 'user', 'adminDate']) ? 'active' : '' }}" data-bs-toggle="modal" data-bs-target="#filterAdmin"><i class="bi bi-funnel"></i>
                                                 </button>
                                             </div> --}}
-    
+
                                         </div>
                                         {{-- <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                             title="Xuất file Excel">
@@ -110,7 +103,7 @@
                                             <tbody>
                                                 @foreach($listData as $item)
                                                 <tr class="table-row" data-bs-toggle="modal" data-bs-target="#info"  role="button">
-                                                    
+
                                                     <td>
                                                         <div class="overText text-center">
                                                             {{ $item['id'] }}
@@ -150,7 +143,7 @@
                                                                 <img style="width:16px;height:16px" src="{{ asset('assets/img/trash.svg') }}" />
                                                             </div>
                                                         </div>
-                                
+
 
                                                     </td>
                                                 </tr>
@@ -260,8 +253,8 @@
                             <div class="col-md-6 mb-3">
                                 <input type="text" value="1" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Ghi chú" placeholder="Ghi chú" class="form-control">
                             </div>
-                            
-                        
+
+
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -319,8 +312,8 @@
                             <div class="col-md-6 mb-3">
                                 <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Ghi chú" placeholder="Ghi chú" class="form-control">
                             </div>
-                            
-                        
+
+
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -445,7 +438,7 @@
                                                             OTC
                                                         </div>
                                                     </td>
-                                                    
+
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -453,9 +446,9 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        
-                        
+
+
+
                     </div>
                 </div>
                 <div class="modal-footer">

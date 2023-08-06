@@ -12,12 +12,12 @@ return new class extends Migration {
     {
         Schema::create('routeDirections', function (Blueprint $table) {
             $table->id();
-            $table->string('name',255);
-            $table->string('code',255);
-            // $table->timestamps('timeTravel');
+            $table->string('name', 255);
+            $table->string('code', 255);
+            $table->timestamp('travel_time')->nullable();
             $table->unsignedBigInteger('personId');
             $table->unsignedBigInteger('areaId');
-            $table->string('description',255);
+            $table->string('description', 255);
             // $table->timestamps();
         });
     }
@@ -29,4 +29,6 @@ return new class extends Migration {
     {
         Schema::dropIfExists('routeDirections');
     }
+
+
 };

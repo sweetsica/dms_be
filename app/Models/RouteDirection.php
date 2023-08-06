@@ -13,7 +13,7 @@ class RouteDirection extends Model
         'name',
         'code',
         'personId',
-        // 'timeTravel',
+        'travel_time',
         'areaId',
         'description',
     ];

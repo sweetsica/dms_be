@@ -20,7 +20,7 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $td->name }}</td>
-                        <td><a href="{{ route('map', $td->id) }}">Xem trên bản đồ</a></td>
+                        <td><a href="{{ route('mapDirection', $td->id) }}">Xem trên bản đồ</a></td>
                     </tr>
                     @endforeach
                 </tbody>
