@@ -163,7 +163,7 @@
                                                                                 </div>
                                                                                 <div class="col-4 mb-3">
                                                                                         <div data-bs-toggle="tooltip" data-bs-placement="top" title="Giới tính*">
-                                                                                            <select name="gender"  class="selectpicker" data-dropup-auto="false">
+                                                                                            <select name="gender"  class="selectpicker" data-dropup-auto="false" required >
                                                                                                 <option value="{{$item->gender}}">{{$item->gender}}</option>
                                                                                                 <option value="Nam">Nam</option>
                                                                                                 <option value="Nữ">Nữ</option>
@@ -436,7 +436,7 @@
                             </div>
                             <div class="col-4 mb-3">
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Giới tính*">
-                                        <select name="gender"  class="selectpicker" data-dropup-auto="false">
+                                        <select name="gender"  class="selectpicker" data-dropup-auto="false" required>
                                             <option value="">Giới tính*</option>
                                             <option value="Nam">Nam</option>
                                             <option value="Nữ">Nữ</option>

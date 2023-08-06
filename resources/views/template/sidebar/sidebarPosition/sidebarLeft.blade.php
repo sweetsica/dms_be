@@ -112,7 +112,7 @@
                         @endforeach --}}
                         <ul class="tree" style="margin: 5px;  padding: 0;"><br>
                             @foreach ($positionListTree as $donVi)
-                            <li class="parent" style=" margin: 10px; padding: 0;">
+                            <li    class="parent" style=" margin: 10px; padding: 0;">
                                    <img  src="{{ asset('assets/img/cong.png') }}">&nbsp;&nbsp;{{ $donVi->name }}
                                     @if ($donVi->donViCon->count() > 0)
                                         @include('template.sidebar.sidebarPosition.child', [

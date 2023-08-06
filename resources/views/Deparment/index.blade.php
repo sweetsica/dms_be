@@ -366,7 +366,7 @@
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn trưởng bộ phận">
                                     <select name="ib_lead" required class="selectpicker" data-dropup-auto="false">
-                                        <option value="0">Chọn trưởng bộ phận</option>
+                                        <option value="">Chọn trưởng bộ phận</option>
                                         @foreach ($UnitLeaderList as $item)
                                             <option value="{{ $item->id }}">
                                                 {{ $item->leader_name }}
@@ -431,5 +431,6 @@
     </script>
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}"></script>
+
 
 @endsection

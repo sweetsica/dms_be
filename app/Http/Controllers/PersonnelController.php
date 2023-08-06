@@ -57,7 +57,7 @@ class PersonnelController extends Controller
         $localityList = Locality::all();
         $departmentListTree = Department::where('parent',0)->with('donViCon')->get();
         // dd($personnelLevelList);
-        return view("nhan_su.index",[
+        return view("Nhan_su.index",[
             "personnelList"=>$personnelList,
             "departmentlists"=>$departmentlists,
             "positionlists"=>$positionlists,
