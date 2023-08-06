@@ -5,7 +5,7 @@
                 <div class="sidebarBody_wrapper ">
                     <div class="sidebarBody_heading-wrapper  ">
                         <div class="wrapper">
-                            <h1 style="color: red;">Cơ cấu vị trí<img src="{{ asset('assets/img/Vector.png') }}"
+                            <h1 style="color: red;">Cơ cấu đơn vị<img src="{{ asset('assets/img/Vector.png') }}"
                                     onclick="showList()" id="show-list-button" style="float: right"></h1>
                         </div>
                         <div id="list-container" style="display: none;">
@@ -53,8 +53,8 @@
                     <div>
                         <ul id="tree1">
                             @foreach ($positionListTree as $donVi)
-                                <li>
-                                    <a href="#" class="title-child">{{ $donVi->name }}</a>
+                                <li class="parent" style=" margin: 10px; padding: 0;">
+                                     <a href="#" class="title-child">{{ $donVi->name }}</a>
                                     @if ($donVi->donViCon->count() > 0)
                                         @include('template.sidebar.sidebarPosition.child', [
                                             'donViCon' => $donVi->donViCon,

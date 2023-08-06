@@ -126,9 +126,15 @@
                                                         </td>
                                                         <td>
                                                             <div class="overText" data-bs-toggle="tooltip"
-                                                                data-bs-placement="top" title="$$$">
+                                                                data-bs-placement="top"
+                                                                title="@foreach ($item->versions as $ver)
+                                                                {{ $ver->name }}@if (!$loop->last)
+                                                                    ,
+                                                                @endif @endforeach">
                                                                 @foreach ($item->versions as $ver)
-                                                                    | {{ $ver->name }} |
+                                                                    {{ $ver->name }}@if (!$loop->last)
+                                                                        ,
+                                                                    @endif
                                                                 @endforeach
                                                             </div>
                                                         </td>
@@ -159,7 +165,8 @@
                                         <ul class="pagination">
                                             @foreach ($pagination['links'] as $link)
                                                 <li class="page-item {{ $link['active'] ? 'active' : '' }}">
-                                                    <a class="page-link" href="{{ getPaginationLink($link, 'page') }}" aria-label="Previous">
+                                                    <a class="page-link" href="{{ getPaginationLink($link, 'page') }}"
+                                                        aria-label="Previous">
                                                         <span aria-hidden="true">{!! $link['label'] !!}</span>
                                                     </a>
                                                 </li>
@@ -235,14 +242,16 @@
                                         data-size="3" name="version_ids[]" data-live-search-placeholder="Tìm kiếm..."
                                         multiple>
                                         @foreach ($listVersion as $ver)
-                                            <option value="{{ $ver->id }}" {{ in_array($ver->id, json_decode($item->version_ids)) ? "selected" : "" }} >{{ $ver->name }}</option>
+                                            <option value="{{ $ver->id }}"
+                                                {{ in_array($ver->id, json_decode($item->version_ids)) ? 'selected' : '' }}>
+                                                {{ $ver->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <input type="text" value="{{ $item->note }}" name="note" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Ghi chú" placeholder="Ghi chú"
-                                        class="form-control">
+                                    <input type="text" value="{{ $item->note }}" name="note"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Ghi chú"
+                                        placeholder="Ghi chú" class="form-control">
                                 </div>
 
 
