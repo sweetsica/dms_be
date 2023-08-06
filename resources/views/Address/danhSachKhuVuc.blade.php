@@ -82,22 +82,22 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div class="overText" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
+                                                        <div class="overText" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->code }}">
                                                             {{ $item->code }}
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div class="overText" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
+                                                        <div class="overText" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->name}}">
                                                             {{ $item->name}}
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div class="overText" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
+                                                        <div class="overText" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->department_name }}">
                                                             {{ $item->department_name }}
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div class="overText" data-bs-toggle="tooltip" data-bs-placement="top" title="$$$">
+                                                        <div class="overText" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->description }}">
                                                             {{ $item->description }}
                                                         </div>
                                                     </td>
@@ -114,9 +114,12 @@
                                                                     src="{{ asset('assets/img/edit.svg') }}" />
                                                             </div>
                                                         </div>
+                                                        <div data-bs-toggle="tooltip"
+                                                            data-bs-placement="top" title="Xóa">
                                                             <div class="btn test_btn-remove-{{ $item['id'] }}" href="#" data-bs-toggle="modal" data-bs-target="#xoaca{{ $item['id'] }}">
                                                                 <img style="width:16px;height:16px" src="{{ asset('assets/img/trash.svg') }}" />
                                                             </div>
+                                                        </div>
                                                         </div>
 
 
@@ -134,6 +137,9 @@
                                                         </a>
                                                     </li>
                                                 @endforeach --}}
+                                                {{ $areaList->appends([
+                                                    'search' => $search,
+                                                ])->links() }}
                                             </ul>
                                         </nav>
                                     </div>
@@ -166,18 +172,18 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">XOÁ</h5>
+                    <h5 class="modal-title w-100" id="exampleModalLabel">XOÁ Khu vực</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="fs-5">Bạn có thực sự muốn xoá không?</div>
+                    <div class="fs-5">Bạn có thực sự muốn xoá khu vực không?</div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
                     <form action="{{ route('area.destroy',$item->id)}}" method="POST">
                         @csrf
                         {{-- @method('DELETE') --}}
-                        <button type="submit" class="btn btn-danger" id="deleteRowElement">Có, tôi muốn
+                        <button type="submit" class="btn btn-danger" id="deleteRowElement">
                             xóa</button>
                     </form>
                 </div>
@@ -249,7 +255,7 @@
                             </div>
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Vùng">
                                 <select name="area" required class="selectpicker" data-dropup-auto="false">
-                                    <option value="">chọn vùng</option>
+                                    <option value="">Chọn vùng*</option>
                                     @foreach ($department as $item)
                                         <option value="{{$item->id}}">
                                             {{$item->name}}
