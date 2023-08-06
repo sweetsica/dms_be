@@ -44,8 +44,6 @@ Route::middleware(['guest'])->group(function () {
     Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
 });
 
-
-
 Route::middleware(['auth.role'])->group(function () {
 
     Route::get('/', function () {
@@ -54,6 +52,14 @@ Route::middleware(['auth.role'])->group(function () {
 
     Route::post('/log-out', [AuthenticateController::class, 'logout'])->name('logout');
 
+Route::middleware(['auth.role'])->group(function () {
+
+    Route::get('/', function () {
+        return view('other.danh-sach-dieu-khien');
+    })->name('home');
+
+    Route::post('/log-out', [AuthenticateController::class, 'logout'])->name('logout');
+    
     Route::post('/create-customer', [CustomerController::class, 'create'])->name('create-customer');
 
     Route::get('/customer', [CustomerController::class, 'view'])->name('customers');

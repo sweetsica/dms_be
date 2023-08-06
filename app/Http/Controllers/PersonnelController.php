@@ -58,15 +58,15 @@ class PersonnelController extends Controller
         $localityList = Locality::all();
         $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
         // dd($personnelLevelList);
-        return view("nhan_su.index", [
-            "personnelList" => $personnelList,
-            "departmentlists" => $departmentlists,
-            "positionlists" => $positionlists,
-            "localityList" => $localityList,
-            "personnellists" => $personnellists,
-            "personnelLevelList" => $personnelLevelList,
-            "roleList" => $roleList,
-            "departmentListTree" => $departmentListTree,
+        return view("ds_nhan_su.index",[
+            "personnelList"=>$personnelList,
+            "departmentlists"=>$departmentlists,
+            "positionlists"=>$positionlists,
+            "localityList"=>$localityList,
+            "personnellists"=>$personnellists,
+            "personnelLevelList"=>$personnelLevelList,
+            "roleList"=>$roleList,
+            "departmentListTree"=>$departmentListTree,
             'search' => $search
         ]);
     }

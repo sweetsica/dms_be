@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->string('phone', 255);
             $table->string('email', 255);
             $table->string('personContact', 255)->nullable();
-            $table->string('comanyName', 255)->nullable();
+            $table->string('companyName', 255)->nullable();
             $table->string('career', 255)->nullable();
             $table->string('taxCode', 255)->nullable();
             $table->string('companyPhoneNumber', 255)->nullable();
