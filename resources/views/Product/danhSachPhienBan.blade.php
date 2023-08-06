@@ -128,9 +128,12 @@
                                                             <div class="overText" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top"
                                                                 title="@foreach ($item->products as $prod)
-                                                                {{ $prod->name }} | @endforeach">
+                                                                {{ $prod->name }}@if (!$loop->last),
+                                                                @endif @endforeach">
                                                                 @foreach ($item->products as $prod)
-                                                                    | {{ $prod->name }} |
+                                                                    {{ $prod->name }}@if (!$loop->last)
+                                                                        ,
+                                                                    @endif
                                                                 @endforeach
                                                             </div>
                                                         </td>
@@ -161,7 +164,8 @@
                                         <ul class="pagination">
                                             @foreach ($pagination['links'] as $link)
                                                 <li class="page-item {{ $link['active'] ? 'active' : '' }}">
-                                                    <a class="page-link" href="{{ getPaginationLink($link, 'page') }}" aria-label="Previous">
+                                                    <a class="page-link" href="{{ getPaginationLink($link, 'page') }}"
+                                                        aria-label="Previous">
                                                         <span aria-hidden="true">{!! $link['label'] !!}</span>
                                                     </a>
                                                 </li>
@@ -213,7 +217,8 @@
                         <h5 class="modal-title w-100" id="exampleModalLabel">Sửa thông tin phiên bản</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form id="formThemCapPhat" method="POST" action="{{ route('version.update', ['id' => $item->id]) }}">
+                    <form id="formThemCapPhat" method="POST"
+                        action="{{ route('version.update', ['id' => $item->id]) }}">
                         @csrf
                         @method('PUT')
                         <div class="modal-body">
@@ -233,16 +238,19 @@
                                     <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
                                         data-live-search="true" title="Thuộc loại sản phẩm*"
                                         data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
-                                        data-size="3" name="product_ids[]" data-live-search-placeholder="Tìm kiếm..." multiple>
+                                        data-size="3" name="product_ids[]" data-live-search-placeholder="Tìm kiếm..."
+                                        multiple>
                                         @foreach ($listProduct as $pro)
-                                            <option value="{{ $pro->id }}" {{ in_array($pro->id, json_decode($item->product_ids)) ? "selected" : "" }} >{{ $pro->name }}</option>
+                                            <option value="{{ $pro->id }}"
+                                                {{ in_array($pro->id, json_decode($item->product_ids)) ? 'selected' : '' }}>
+                                                {{ $pro->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <input type="text" value="{{ $item->note }}" name="note" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Ghi chú" placeholder="Ghi chú"
-                                        class="form-control">
+                                    <input type="text" value="{{ $item->note }}" name="note"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Ghi chú"
+                                        placeholder="Ghi chú" class="form-control">
                                 </div>
 
 
