@@ -11,24 +11,27 @@ class Customer extends Model
     public $timestamps = false;
     protected $table = 'customers';
     protected $fillable = [
-        'code',
         'name',
         'phone',
-        'MST',
         'email',
-        'point_name',
-        'point_nickname',
-        'point_phone',
-        'point_email',
-        'incharge_id',
-        'group',
-        'channel',
-
-        'routeId',
+        'personContact',
+        'comanyName',
+        'career',
+        'taxCode',
+        'companyPhoneNumber',
+        'companyEmail',
+        'accountNumber',
+        'bankOpen',
         'city',
         'district',
         'guide',
         'address',
+        'personId',
+        'productId',
+        'routeId',
+        'groupId',
+        'chanelId',
+        'status',
     ];
 
     public function route()
@@ -36,8 +39,8 @@ class Customer extends Model
         return $this->belongsTo(RouteDirection::class, 'routeId');
     }
 
-    public function incharges()
+    public function favoriteProducts()
     {
-        return $this->belongsTo(Personnel::class, 'incharge_id');
+        return $this->hasMany(Product::class, 'productId');
     }
 }

@@ -3,50 +3,135 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Department;
+use App\Models\Personnel;
+use App\Models\Product;
+use App\Models\RouteDirection;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
-    
     public function index(Request $request)
     {
-
-        return view('other.danhSachKhachHang');
     }
 
 
-    public function create()
+    public function view()
     {
-        return view('create-customer');
+        $listData = Customer::all();
+        $personIDs = $listData->pluck('personId')->toArray();
+        $productIDs = $listData->pluck('productId')->toArray();
+        $routeIDs = $listData->pluck('routeId')->toArray();
+        $chanelIDs = $listData->pluck('chanelId')->toArray();
+        $groupIDs = $listData->pluck('groupId')->toArray();
+
+        $personalNames = Personnel::whereIn('id', $personIDs)->pluck('name')->toArray();
+        $productNames = Product::whereIn('id', $productIDs)->pluck('name')->toArray();
+        $routeNames = RouteDirection::whereIn('id', $routeIDs)->pluck('name')->toArray();
+        $chanelNames = Department::whereIn('id', $chanelIDs)->pluck('name')->toArray();
+        return view('customer.danhSachKhachHang', compact('listData', 'personalNames', 'productNames', 'routeNames', 'chanelNames'));
     }
 
-    public function store(Request $request)
+    public function create(Request $request)
     {
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'phone' => 'string|max:20',
-            'routeId' => 'numeric',
-            // 'code' => 'required|string|max:255',
-            // 'tax_code' => 'string|max:255',
-            // 'email' => 'string|max:255',
-            'city' => 'required|string|max:255',
-            'district' => 'required|string|max:255',
-            //quận, huyện
-            'guide' => 'required|string|max:255',
-            //xã, phường
-            'address' => 'required|string|max:255',
-            // 'personContact' => 'string|max:255',
-            // 'person_anotherName' => 'string|max:255',
-            // 'person_phoneNumber' => 'string|max:255',
-            // 'person_email' => 'string|'
-        ]);
+        // dd($request);
+        $name = $request->get('name');
+        $phone = $request->get('phone');
+        $email = $request->get('email');
+        $comanyName = $request->get('comanyName');
+        $personContact = $request->get('personContact');
+        $career = $request->get('career');
+        $taxCode = $request->get('taxCode');
+        $companyPhoneNumber = $request->get('companyPhoneNumber');
+        $companyEmail = $request->get('companyEmail');
+        $accountNumber = $request->get('accountNumber');
+        $bankOpen = $request->get('bankOpen');
+        $city = $request->get('city');
+        $district = $request->get('district');
+        $guide = $request->get('guide');
+        $address = $request->get('address');
+        $personId = $request->get('personId');
+        $productId = $request->get('productId');
+        $groupId = $request->get('groupId');
+        $chanelId = $request->get('chanelId');
+        $routeId = $request->get('routeId');
+        $status = $request->get('status');
+        $data = new Customer();
+        $data->name = $name;
+        $data->phone = $phone;
+        $data->email = $email;
+        $data->comanyName = $comanyName;
+        $data->personContact = $personContact;
+        $data->career = $career;
+        $data->taxCode = $taxCode;
+        $data->companyPhoneNumber = $companyPhoneNumber;
+        $data->companyEmail = $companyEmail;
+        $data->accountNumber = $accountNumber;
+        $data->bankOpen = $bankOpen;
+        $data->city = $city;
+        $data->district = $district;
+        $data->guide = $guide;
+        $data->address = $address;
+        $data->personId = $personId;
+        $data->productId = $productId;
+        $data->groupId = $groupId;
+        $data->chanelId = $chanelId;
+        $data->routeId = $routeId;
+        $data->status = $status;
+        $data->save();
+        $listData = Customer::all();
+        return redirect()->route('customers', compact('listData'));
+        // return view('customer.danhSachKhachHang', compact('listData'));
+    }
 
-        if (isset($data['routeId'])) {
-            $data['routeId'] = (int) $data['routeId']; // Chuyển giá trị thành kiểu bigInteger
-        }
-        Customer::create($data);
-        $customers = Customer::all();
-        return view('view-customer', compact('customers'));
+    public function update(Request $request, $id)
+    {
+        $name = $request->get('name');
+        $phone = $request->get('phone');
+        $email = $request->get('email');
+        $comanyName = $request->get('comanyName');
+        $personContact = $request->get('personContact');
+        $career = $request->get('career');
+        $taxCode = $request->get('taxCode');
+        $companyPhoneNumber = $request->get('companyPhoneNumber');
+        $companyEmail = $request->get('companyEmail');
+        $accountNumber = $request->get('accountNumber');
+        $bankOpen = $request->get('bankOpen');
+        $city = $request->get('city');
+        $district = $request->get('district');
+        $guide = $request->get('guide');
+        $address = $request->get('address');
+        $personId = $request->get('personId');
+        $productId = $request->get('productId');
+        $groupId = $request->get('groupId');
+        $chanelId = $request->get('chanelId');
+        $routeId = $request->get('routeId');
+        $status = $request->get('status');
+        $data = Customer::find($id);
+        $data->name = $name;
+        $data->phone = $phone;
+        $data->email = $email;
+        $data->comanyName = $comanyName;
+        $data->personContact = $personContact;
+        $data->career = $career;
+        $data->taxCode = $taxCode;
+        $data->companyPhoneNumber = $companyPhoneNumber;
+        $data->companyEmail = $companyEmail;
+        $data->accountNumber = $accountNumber;
+        $data->bankOpen = $bankOpen;
+        $data->city = $city;
+        $data->district = $district;
+        $data->guide = $guide;
+        $data->address = $address;
+        $data->personId = $personId;
+        $data->productId = $productId;
+        $data->groupId = $groupId;
+        $data->chanelId = $chanelId;
+        $data->routeId = $routeId;
+        $data->status = $status;
+        $data->save();
+        $listData = Customer::all();
+        return redirect()->route('customers', compact('listData'));
     }
 
     public function findById($id)
@@ -57,5 +142,18 @@ class CustomerController extends Controller
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => 'Không tìm thấy khách hàng hoặc có lỗi xảy ra'], 404);
         }
+    }
+
+    public function getCustomersByRouteId($id)
+    {
+        $customers = Customer::where('routeId', $id)->get();
+        return response()->json(['success' => true, 'customers' => $customers]);
+    }
+
+    public function delete($id)
+    {
+        Customer::destroy($id);
+        return redirect()->back()->with('mess', 'Đã xóa!');
+        ;
     }
 }
