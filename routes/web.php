@@ -43,7 +43,6 @@ Route::middleware(['guest'])->group(function () {
     // Quên MK
     Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
 
-    Route::get('danh-sach-tuyen', [RouteDirectionController::class, 'view'])->name('routeDirection.view');
 
 });
 
@@ -143,6 +142,9 @@ Route::middleware(['auth.role'])->group(function () {
     Route::get('/department_getAll', [DepartmentController::class, 'getAll'])->name('department.getAll');
 
     Route::get('/route_direction_getAll', [RouteDirectionController::class, 'getAll'])->name('routeDirection.getAll');
+
+    Route::get('danh-sach-tuyen', [RouteDirectionController::class, 'view'])->name('routeDirection.view');
+
 });
 
 // 404
