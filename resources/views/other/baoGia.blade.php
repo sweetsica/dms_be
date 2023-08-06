@@ -50,7 +50,7 @@
                         <form action="" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
-                            <div class="card_template-body" id="container-fluid">
+                            {{-- <div class="card_template-body" id="container-fluid">
                                 <div class="card_template-body-top">
                                     <div class='row mb-3 d-flex align-items-center'>
                                         <div class="col-3 d-flex align-items-center justify-content-center flex-column">
@@ -336,6 +336,254 @@
                                             </div>
                                             <div class="">
                                                 <textarea type="text"  rows="1" placeholder="" class="form-control textareaResize" name="product">Chi nhánh: Thăng Long – Hà Nội</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div> --}}
+
+
+
+                            <div class="card_template-body" id="container-fluid">
+                                <div class="card_template-body-top">
+                                    <div class='row mb-3 d-flex align-items-center'>
+                                        <div class="col-3 d-flex align-items-center justify-content-center flex-column">
+                                            <a class=" ">
+                                                <img class="header_logo" src="{{ env('LOGO_URL', '') }}" />
+                                            </a>
+                                            <div class="card_template-sub with_input d-flex justify-content-center align-items-center">
+                                                <input value="BM013.QT02/12" type="text" placeholder="" class="form-control text-center" name="proposalNo">
+                                            
+                                            </div>
+                                        </div>
+                                        <div class="col-6 d-flex align-items-center justify-content-center flex-column">
+                                            <div class="card_template-heading">Bảng báo giá</div>
+
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="card_template-title fst-italic d-flex align-items-center justify-content-center">
+                                                <div class="text-nowrap">Số/No:</div>
+                                                <div class="card_template-sub with_input d-flex justify-content-center align-items-center">
+                                                    <div class="card_template-sub-text">123</div>
+                                                </div>
+                                            </div>
+                                            <div class="card_template-title fst-italic d-flex align-items-center justify-content-center">
+                                                <div class="text-nowrap">Ngày/Date:</div>
+                                                <div class="card_template-sub with_input d-flex justify-content-center align-items-center">
+                                                    <span>05/08/2023</span>
+                                                    
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="card_template-body-middle">
+                                    <div class="col-md-12 mb-3">
+                                        <div class="table-responsive YCMS_repeater">
+                                            <table class="table table-borderless">
+                                                
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex align-items-center ">
+                                                                <div class="card-title-black text-nowrap me-3" >Công ty:</div>
+                                                                <div class="card-title-black text-break ">1</div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center ">
+                                                                <div class="card-title-black text-nowrap me-3">Liên hệ:</div>
+                                                                <div class="card-title-black text-break">1</div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex align-items-center ">
+                                                                <div class="text-nowrap me-3">Địa chỉ:</div>
+                                                                <div class="text-break">1</div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center ">
+                                                                <div class=" text-nowrap me-3">Di động:</div>
+                                                                <div class="text-break">1</div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex align-items-center ">
+                                                                <div class=" text-nowrap me-3">Mã số thuế:</div>
+                                                                <div class="text-break">1</div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center ">
+                                                                <div class=" text-nowrap me-3">Email:</div>
+                                                                <div class="text-break">1</div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex align-items-center ">
+                                                                <div class=" text-nowrap me-3">Số tổng đài:</div>
+                                                                <div class="text-break">1</div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center ">
+                                                                <div class=" text-nowrap me-3">Website:</div>
+                                                                <div class="text-break">1</div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-12 mb-3 fw-bold">
+                                        <div class="text-break">1</div>
+                                    
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <div class="text-break">1</div>
+                                    
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <div class="table-responsive YCMS_repeater">
+                                            <table class="table table-bordered" style="width: 100%">
+                                                <thead>
+                                                    <tr>
+                                                      <th class="text-nowrap text-center" style="width:10%">Model</th>
+                                                      <th class="text-nowrap text-center" style="width:30%">Hình ảnh</th>
+                                                      <th class="text-nowrap text-center" style="width:30%">Thông số kỹ thuật cơ bản</th>
+                                                      <th class="text-nowrap text-center" style="width:8%">Số lượng</th>
+                                                      <th class="text-nowrap text-center" style="width:10%">Thành tiền</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody data-repeater-list="listShoppingRequest">
+
+                                                    <tr data-repeater-item>
+                                                        <td >
+                                                            <div class="text-break text-center">1</div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex product_img ">
+                                                                <img class="" src="{{ asset('/assets/img/xedien.png') }}" />
+                                                            </div>
+                                                        </td>
+                                                            
+                                                        <td>
+                                                            <div class="text-break ">1</div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="text-break text-center">1</div>
+                                                        
+                                                        </td>
+
+                                                        <td class="">
+
+                                                            <div class="text-break text-center">1</div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mb-3 fw-bold fst-italic">
+                                        <div class="text-break ">1</div>
+                                    </div>
+                                    <div class="ol-md-12 mb-3 card_template-title d-flex align-items-center">
+                                        <div class=" text-nowrap fw-bold me-3">*Lưu ý:</div>
+                                        <div class="text-break ">1</div>
+                                        
+                                    </div>
+                                    <div class="col-md-12 mb-3 fw-bold">
+                                        <div class="text-break ">1</div>
+                                    
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <div class="text-break ">1</div>
+                                    
+                                    </div>
+                                    <div class="col-md-12 d-flex  align-items-center">
+                                        <div class="btn-custom me-2" style="background: #ec7c30"></div>
+                                        <div class="btn-custom me-2" style="background: #dc3545"></div>
+                                        <div class="btn-custom me-2" style="background: #00af50"></div>
+                                        <div class="btn-custom me-2" style="background: #212529"></div>
+                                        <div class="btn-custom" style="background: #fff; border-color: #212529; border-width: 1px; border-style: solid;"></div>
+                                    </div>
+                                </div>
+
+
+                                <div class="card_template-body-bottom">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="fw-bold">
+                                                <div class="text-break ">1</div>
+                                                
+                                            </div>
+                                            <div class="">
+                                                <div class="text-break ">1</div>
+
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="col">
+                                            <div class="fw-bold">
+                                                <div class="text-break  ">1</div>
+
+                                            </div>
+                                            <div class="">
+                                                <div class="text-break ">1</div>
+
+                                            </div>
+                                            <div class="">
+                                                <div class="text-break ">1</div>
+
+                                            </div>
+                                            <div class="">
+                                                <div class="text-break ">1</div>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="col">
+                                            <div class="fw-bold">
+                                                <div class="text-break  ">1</div>
+
+                                            </div>
+                                            <div class="">
+                                                <div class="text-break ">1</div>
+                                            </div>
+                                            <div class="">
+                                                <div class="text-break ">1</div>
+                                            </div>
+                                            <div class="">
+                                                <div class="text-break ">1</div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="fw-bold">
+                                                <div class="text-break  ">1</div>
+
+                                            </div>
+                                            <div class="">
+                                                <div class="text-break ">1</div>
+                                            </div>
+                                            <div class="">
+                                                <div class="text-break ">1</div>
+                                            </div>
+                                            <div class="">
+                                                <div class="text-break ">1</div>
                                             </div>
                                         </div>
                                     </div>
