@@ -15,6 +15,27 @@ class CustomerController extends Controller
     {
     }
 
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            // 'code' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'phone' => 'string|max:20',
+            'email' => 'string|max:255',
+            'routeId' => 'numeric',
+            'city' => 'required|string|max:255',
+            'district' => 'required|string|max:255',
+            'guide' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'personContact' => 'string|max:255',
+            'personName' => 'string|max:255',
+            'personPhoneNumber' => 'string|max:255',
+            'personEmail' => 'string|max:255',
+            'hrManager' => 'required|string|max:255',
+            'type' => 'required|string|max:255',
+            'customerChanel' => 'required|string|max:255'
+        ]);
+    }
 
     public function view()
     {
@@ -156,4 +177,5 @@ class CustomerController extends Controller
         return redirect()->back()->with('mess', 'Đã xóa!');
         ;
     }
+
 }

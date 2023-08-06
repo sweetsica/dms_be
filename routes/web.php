@@ -44,7 +44,13 @@ Route::middleware(['guest'])->group(function () {
     Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
 });
 
+Route::middleware(['auth.role'])->group(function () {
 
+    Route::get('/', function () {
+        return view('other.danh-sach-dieu-khien');
+    })->name('home');
+
+    Route::post('/log-out', [AuthenticateController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth.role'])->group(function () {
 
@@ -109,9 +115,7 @@ Route::middleware(['auth.role'])->group(function () {
     Route::put('sua-tuy-chinh/{id}', [CustomController::class, 'update'])->name('custom.update');
     Route::delete('xoa-tuy-chinh/{id}', [CustomController::class, 'destroy'])->name('custom.destroy');
 
-    Route::get('danh-sach-tuyen', function () {
-        return view('other.danhSachTuyen');
-    });
+    Route::get('danh-sach-tuyen', [RouteDirectionController::class, 'view'])->name('routeDirection.view');
 
     Route::get('danh-sach-dia-ban', [LocalityController::class, 'index'])->name('locality.index');
     Route::post('danh-sach-dia-ban', [LocalityController::class, 'store'])->name('locality.store');
