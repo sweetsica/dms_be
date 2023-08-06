@@ -142,6 +142,19 @@
     @endif
 
     <script>
+        // Lấy đối tượng hình ảnh và danh sách "li"
+        const showListButton = document.getElementById('show-list-button');
+        const listContainer = document.getElementById('list-container');
+        // Thêm sự kiện click cho hình ảnh để hiển thị danh sách "li"
+        showListButton.addEventListener('click', () => {
+            // Toggle (bật/tắt) hiển thị của danh sách "li"
+            if (listContainer.style.display === 'none') {
+                listContainer.style.display = 'block';
+            } else {
+                listContainer.style.display = 'none';
+            }
+        });
+
         $.fn.extend({
             treed: function(o) {
 
