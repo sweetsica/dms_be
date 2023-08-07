@@ -233,7 +233,7 @@
                                                                                             @foreach ($UnitLeaderList as $av)
                                                                                                 <option
                                                                                                     value="{{ $av->id }}">
-                                                                                                    {{ $av->leader_name }}
+                                                                                                    {{ $av->name }}
                                                                                                 </option>
                                                                                             @endforeach
                                                                                         </select>
@@ -381,7 +381,7 @@
                                         <option value="">Chọn trưởng bộ phận</option>
                                         @foreach ($UnitLeaderList as $item)
                                             <option value="{{ $item->id }}">
-                                                {{ $item->leader_name }}
+                                                {{ $item->name }}
                                             </option>
                                         @endforeach
                                     </select>
