@@ -2689,10 +2689,9 @@ ul.modal_upload-list li:last-child {
 .viewport {
   position: relative;
   display: block;
-  height: 20rem;
-  margin-top: 6rem;
+  height: 80rem;
   background-color: #fff; 
-  padding: 1rem 1.5rem;
+  /* padding: 1rem 1.5rem; */
   animation-name: popAnim;
   animation-duration: 0.3s;
   animation-timing-function: forward;
@@ -2723,32 +2722,57 @@ input[type="radio"]:checked ~ label:after {
   bottom: 0; left: 0; right: 0;
   margin-bottom: -1px;
   height: 0.25rem;
-  background-color: #03A9F4;
+  background-color: var(--primary-color);
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
 }
-label {
+.label-info {
   position:relative;
-  display: block;
-  color: #37474F;
+  text-transform: initial;
+  font-weight: 500;
+  color: #4c4c4c;
+  float: left;
+  text-decoration: none;
+  font-size: var(--fz-12);
   text-align: center;
-  text-transform: capitalize;
-  padding: 0.5rem 1rem 0.75rem;
-  margin-right: 0.25rem;
-  line-height: 1.25rem;
-  cursor: pointer;
-  transition: 0.3s ease-in-out;
+  padding: 7px 8px;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
 }
-label:hover:after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  margin-bottom: -1px;
-  background-color: #B3E5FC;
-  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;
-  height: 0.25rem;
+
+
+.label-info:hover {
+    color: var(--primary-color) !important;
+    background-color: var(--white-color-blur);
+    transition: 0.3s;
 }
+
+.label-info .active {
+    color: var(--primary-color) !important;
+    background-color: var(--white-color-blur);
+}
+
+.label-info:after {
+    content: "";
+    display: block;
+    height: 1.5px;
+    background-color: var(--primary-color);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+}
+.label-info:hover:after {
+    transform: scaleX(1);
+    transition: transform 0.3s;
+}
+
+.label-info:hover:after .action{
+    transform: scaleX(1);
+    transition: transform 0.3s;
+}
+
+
 input[type="radio"]:checked ~ .tabBody { 
   display: block;
 }
@@ -2757,12 +2781,19 @@ input[type="radio"]:checked ~ .tabBody {
   display: none; 
   top: 0; left: 0; right: 0; bottom: 0;
   margin-top: 3.5rem;
-  padding: 1rem 1.5rem;
+  /* padding: 1rem 1.5rem; */
 }
-p {
-  margin: 0 0 0.5rem;
-  color: #546E7A;
+
+.label-item input:checked + .label-info {
+    color: var(--primary-color); /* Màu chữ mà bạn muốn */
+    background-color: var(--white-color-blur);
+
 }
+
+.pr-4 {
+    padding-right: 4px;
+}
+
 
 
 

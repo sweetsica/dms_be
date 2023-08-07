@@ -46,7 +46,10 @@
     <div id="mainWrap" class="mainWrap">
         <div class="mainSection">
             <div class="main">
-                <div class="container">
+                <div class="container-fluid">
+                    {{-- <div class="card_template-wrapper">
+                        
+                    </div> --}}
                     <div class="mainSection_heading">
                         <h5 class="mainSection_heading-title">Chi tiết khách hàng</h5>
                         @include('template.components.sectionCard')
@@ -66,7 +69,8 @@
 
                                             
                                             <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Về danh sách" data-bs-original-title="Về danh sách">
-                                                <button class="btn btn-outline-danger d-block testCreateUser" data-bs-toggle="modal" data-bs-target="#">Về danh sách</button>
+                                                <a class="btn btn-outline-danger d-block testCreateUser" href="customer" role="button"
+                                                    role="button">Về danh sách</a>
                                             </div>
                                             <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Tạo đơn hàng" data-bs-original-title="Tạo đơn hàng">
                                                 <button class="btn btn-danger d-block testCreateUser" data-bs-toggle="modal" data-bs-target="#">Tạo đơn hàng</button>
@@ -125,36 +129,221 @@
 
                                     </div>
 
-                                    <div class="viewport">
+                                    <div class="viewport mt-3">
                                         <ul class="tabs">
-                                          <li>
+                                          <li class="label-item">
                                             <input type="radio" name="tab" id="playlists" value="playlists" checked> 
-                                            <label for="playlists">Thông tin chi tiết</label>
+                                            <label class="label-info header_menu-link"  for="playlists">
+                                                Thông tin chi tiết
+                                            </label>
                                             <div class="tabBody">
-                                              <p>Lorem ipsum dolor sit amet, duo populo tincidunt sadipscing at, id appetere suavitate eum. Ei ius movet accommodare, vim ex idque ponderum mandamus. Vis et legimus luptatum accusamus, sea id audiam appetere. Ne mel zril argumentum, cu est dicant putant, ad eirmod expetenda has. Nam no quidam regione, solet hendrerit reprehendunt qui et.</p>
+                                                <div class="row">
+                                                    <div class="col-sm-12 card-title mt-3">1. Liên hệ</div>
+                                                    <div class="col-4 mt-3">
+                                                        <div class="card_template-title d-flex align-items-center">
+                                                            <div class="text-nowrap me-4">Người liên hệ:</div>
+                                                            <div class="card_template-sub d-flex align-items-center">
+                                                                <div class="card_template-sub-text">Hà Anh</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4 mt-3">
+                                                        <div class="card_template-title d-flex align-items-center">
+                                                            <div class="text-nowrap me-4 ">Số điện thoại:</div>
+                                                            <div class="card_template-sub d-flex align-items-center">
+                                                                <div class="card_template-sub-text">098888888</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4 mt-3">
+                                                        <div class="card_template-title d-flex align-items-center">
+                                                            <div class="text-nowrap me-4">Email:</div>
+                                                            <div class="card_template-sub d-flex align-items-center">
+                                                                <div class="card_template-sub-text">test@tbht.vn</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12 card-title mt-3">2. Tổ chức</div>
+                                                    <div class="col-6 mt-3">
+                                                        <div class="card_template-title d-flex align-items-center">
+                                                            <div class="text-nowrap me-4">Tên công ty:</div>
+                                                            <div class="card_template-sub d-flex align-items-center">
+                                                                <div class="card_template-sub-text">Nhà thuốc Vĩnh Thịnh</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 mt-3">
+                                                        <div class="card_template-title d-flex align-items-center">
+                                                            <div class="text-nowrap me-4">Số điện thoại công ty:</div>
+                                                            <div class="card_template-sub d-flex align-items-center">
+                                                                <div class="card_template-sub-text">024 791 88 88</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 mt-3">
+                                                        <div class="card_template-title d-flex align-items-center">
+                                                            <div class="text-nowrap me-4">Mã số thuế:</div>
+                                                            <div class="card_template-sub d-flex align-items-center">
+                                                                <div class="card_template-sub-text">0108976543</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 mt-3">
+                                                        <div class="card_template-title d-flex align-items-center">
+                                                            <div class="text-nowrap me-4">Email công ty:</div>
+                                                            <div class="card_template-sub d-flex align-items-center">
+                                                                <div class="card_template-sub-text">nhathuocvinhthinh@gmail.com</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 mt-3">
+                                                        <div class="card_template-title d-flex align-items-center">
+                                                            <div class="text-nowrap me-4">Người đại diện:</div>
+                                                            <div class="card_template-sub d-flex align-items-center">
+                                                                <div class="card_template-sub-text fw-bolder">Lê Vĩnh Long</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 mt-3">
+                                                        <div class="card_template-title d-flex align-items-center">
+                                                            <div class="text-nowrap me-4">Chức danh:</div>
+                                                            <div class="card_template-sub d-flex align-items-center">
+                                                                <div class="card_template-sub-text fw-bolder">Giám đốc</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 mt-3">
+                                                        <div class="card_template-title d-flex align-items-center">
+                                                            <div class="text-nowrap me-4">Số tài khoản: </div>
+                                                            <div class="card_template-sub d-flex align-items-center">
+                                                                <div class="card_template-sub-text">07003988012</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 mt-3">
+                                                        <div class="card_template-title d-flex align-items-center">
+                                                            <div class="text-nowrap me-4">Mở tại ngân hàng:</div>
+                                                            <div class="card_template-sub d-flex align-items-center">
+                                                                <div class="card_template-sub-text">Vietcombank - CN Cầu Giấy</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12 card-title mt-3">3. Địa chỉ</div>
+                                                    <div class="col-6 mt-3">
+                                                        <div class="card_template-title d-flex align-items-center">
+                                                            <div class="text-nowrap me-4">Tỉnh/thành:</div>
+                                                            <div class="card_template-sub d-flex align-items-center">
+                                                                <div class="card_template-sub-text">Hà Nội</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 mt-3">
+                                                        <div class="card_template-title d-flex align-items-center">
+                                                            <div class="text-nowrap me-4 ">Quận/huyện:</div>
+                                                            <div class="card_template-sub d-flex align-items-center">
+                                                                <div class="card_template-sub-text">Cầu Giấy</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 mt-3">
+                                                        <div class="card_template-title d-flex align-items-center">
+                                                            <div class="text-nowrap me-4">Phường/xã:</div>
+                                                            <div class="card_template-sub d-flex align-items-center">
+                                                                <div class="card_template-sub-text">Yên Hòa</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 mt-3">
+                                                        <div class="card_template-title d-flex align-items-center">
+                                                            <div class="text-nowrap me-4">Địa chỉ:</div>
+                                                            <div class="card_template-sub d-flex align-items-center">
+                                                                <div class="card_template-sub-text">219 Trung Kính</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 mt-3">
+                                                        <div id="map" style="height: 300px; display: none"></div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12 card-title mt-3">4. Mô tả</div>
+                                                    <div class="col-6 mt-3">
+                                                        <div class="card_template-title d-flex align-items-center">
+                                                            <div class="text-nowrap me-4">Nhân sự thu thập: </div>
+                                                            <div class="card_template-sub d-flex align-items-center">
+                                                                <div class="card_template-sub-text">Nguyễn Hương Mai</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 mt-3">
+                                                        <div class="card_template-title d-flex align-items-center">
+                                                            <div class="text-nowrap me-4 ">Sản phẩm quan tâm: </div>
+                                                            <div class="card_template-sub d-flex align-items-center">
+                                                                <div class="card_template-sub-text">Viên sủi, Colagen</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12 card-title mt-3">5. Phân loại</div>
+                                                    <div class="col-4 mt-3">
+                                                        <div class="card_template-title d-flex align-items-center">
+                                                            <div class="text-nowrap me-4">Nhóm khách hàng: </div>
+                                                            <div class="card_template-sub d-flex align-items-center">
+                                                                <div class="card_template-sub-text">Nhà thuốc</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4 mt-3">
+                                                        <div class="card_template-title d-flex align-items-center">
+                                                            <div class="text-nowrap me-4 ">Kênh khách hàng:</div>
+                                                            <div class="card_template-sub d-flex align-items-center">
+                                                                <div class="card_template-sub-text">Nhà thuốc</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4 mt-3">
+                                                        <div class="card_template-title d-flex align-items-center">
+                                                            <div class="text-nowrap me-4 ">Tuyến:</div>
+                                                            <div class="card_template-sub d-flex align-items-center">
+                                                                <div class="card_template-sub-text">Hà Nội - Thứ 2</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+
+
+
                                             </div>
                                           </li>  
-                                          <li>
+                                          <li class="label-item">
                                             <input type="radio" name="tab" id="artists" value="artists"> 
-                                            <label for="artists">Chào hàng</label>
+                                            <label class=" label-info header_menu-link"  for="artists">Chào hàng</label>
                                             <div class="tabBody">
-                                              <p>Ex eos suas iriure, his at modus tritani periculis. Tantas populo altera ex mei, nam labores volutpat consequat et. Etiam oblique consulatu te mei, his maiorum placerat dissentiet ei, per eu sale ceteros. Eros oblique comprehensam duo ea, usu dolorem efficiantur instructior et. Ad dicat ponderum quaerendum vis, pri in eirmod intellegebat, ne eum ridens graeci.</p>
+
                                             </div>
                                           </li>  
-                                          <li>
+                                          <li class="label-item">
                                             <input type="radio" name="tab" id="albums" value="albums"> 
-                                            <label for="albums">Cơ hội</label>
+                                            <label class="label-info header_menu-link"  for="albums">Cơ hội</label>
                                             <div class="tabBody">
-                                              <p>Populo platonem conclusionemque sit te, duo ad volumus appareat. Ullum dolorum eam at, ut nam esse graecis inimicus. Ex brute illud mei. Cu tollit explicari laboramus vis, idque movet dicam ad per.</p>
                                       
-                                              <p>Mei mutat scribentur et, quas choro cum ut. Quot posidonium efficiendi duo at, est et persius constituto. No modo suavitate vis. An nam case utroque, elitr affert ne vix.</p>
                                             </div>
                                           </li>
-                                          <li>
+                                          <li class="label-item">
                                             <input type="radio" name="tab" id="baogia" value="baogia"> 
-                                            <label for="baogia">Báo giá</label>
+                                            <label class=" label-info header_menu-link"  for="baogia">Báo giá</label>
                                             <div class="tabBody">
-                                                <p>Populo platonem conclusionemque sit te, duo ad volumus appareat. Ullum dolorum eam at, ut nam esse graecis inimicus. Ex brute illud mei. Cu tollit explicari laboramus vis, idque movet dicam ad per.</p>
 
                                             </div>
                                           </li>
@@ -771,6 +960,117 @@
         })
         window.location.search = urlParams;
     }
+</script>
+
+<script>
+    $(document).ready(function() {
+        var apiKey = "b5b7553f4280465482f4a03273fb8813";
+        var map;
+        var marker;
+
+        // Function to geocode address
+        function geocodeAddress(address) {
+            $.ajax({
+                url: 'https://api.opencagedata.com/geocode/v1/json',
+                method: 'GET',
+                dataType: 'json',
+                data: {
+                    q: address,
+                    key: apiKey
+                },
+                success: function(response) {
+                    if (response.total_results > 0) {
+                        var latitude = response.results[0].geometry.lat;
+                        var longitude = response.results[0].geometry.lng;
+
+                        // Display map
+                        if (!map) {
+                            map = L.map('map').setView([latitude, longitude], 13);
+                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+
+                            }).addTo(map);
+                        } else {
+                            map.setView([latitude, longitude], 13);
+                        }
+
+                        // Add or update marker
+                        if (!marker) {
+                            marker = L.marker([latitude, longitude]).addTo(map);
+                        } else {
+                            marker.setLatLng([latitude, longitude]);
+                        }
+                    } else {
+                        alert("Please check the address.");
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log("An error occurred while geocoding: " + error);
+                }
+            });
+        }
+
+        // Event handler for focusout event on address input
+        $('#addressInput').on('focusout', function() {
+            var address = $(this).val();
+            $("#map").show();
+            geocodeAddress(address);
+        });
+
+        // Bind an event handler to the pop-up event
+        $('.editForm').on('shown.bs.modal', function() {
+            // Retrieve the value of the input with ID "editAddress" within the current modal
+            var addressValue = $(this).find('#editAddress').val();
+            geocodeAddressEdit(addressValue);
+
+            $(this).find('#editAddress').on('focusout', function() {
+                // Retrieve the value when the input field loses focus
+                var addressValueFocusOut = $(this).val();
+                geocodeAddressEdit(addressValueFocusOut);
+            });
+
+            // Function to geocode address
+            function geocodeAddressEdit(address) {
+                $.ajax({
+                    url: 'https://api.opencagedata.com/geocode/v1/json',
+                    method: 'GET',
+                    dataType: 'json',
+                    data: {
+                        q: address,
+                        key: apiKey
+                    },
+                    success: function(response) {
+                        if (response.total_results > 0) {
+                            var latitude = response.results[0].geometry.lat;
+                            var longitude = response.results[0].geometry.lng;
+
+                            // Display map
+                            if (!map) {
+                                map = L.map('mapEdit').setView([latitude, longitude], 13);
+                                L.tileLayer(
+                                    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+
+                                    }).addTo(map);
+                            } else {
+                                map.setView([latitude, longitude], 13);
+                            }
+
+                            // Add or update marker
+                            if (!marker) {
+                                marker = L.marker([latitude, longitude]).addTo(map);
+                            } else {
+                                marker.setLatLng([latitude, longitude]);
+                            }
+                        } else {
+                            alert("Please check the address.");
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.log("An error occurred while geocoding: " + error);
+                    }
+                });
+            }
+        });
+    });
 </script>
 
 

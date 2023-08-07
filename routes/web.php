@@ -91,7 +91,7 @@ Route::middleware(['auth.role'])->group(function () {
     // danh sách vị trí
     Route::get('danh-sach-vi-tri', [PositionController::class, 'index'])->name('position.list');
 
-    Route::get('danh-sach-khach-hang', [CustomerController::class, 'index'])->name('position.list');
+    Route::get('danh-sach-khach-hang', [CustomerController::class, 'index'])->name('customer.list');
 
 
 Route::get('danh-sach-san-pham', [ProductController::class, 'index'])->name('product.list');
@@ -129,7 +129,7 @@ Route::get('danh-sach-san-pham', [ProductController::class, 'index'])->name('pro
     });
 
 
-    Route::get('chi-tiet-khach-hang', function () {
+    Route::get('chi-tiet-khach-hang/{id}', function () {
         return view('other.chiTietKhachHang');
     });
 
