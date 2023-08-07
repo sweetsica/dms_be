@@ -50,6 +50,11 @@ class CustomerController extends Controller
         $productNames = Product::whereIn('id', $productIDs)->pluck('name')->toArray();
         $routeNames = RouteDirection::whereIn('id', $routeIDs)->pluck('name')->toArray();
         $chanelNames = Department::whereIn('id', $chanelIDs)->pluck('name')->toArray();
+
+        $personalNames = array_merge($personalNames, $personalNames);
+        $productNames = array_merge($productNames, $productNames);
+        $routeNames = array_merge($routeNames, $routeNames);
+        $chanelNames = array_merge($chanelNames, $chanelNames);
         return view('customer.danhSachKhachHang', compact('listData', 'personalNames', 'productNames', 'routeNames', 'chanelNames'));
     }
 

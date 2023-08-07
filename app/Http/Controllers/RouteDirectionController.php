@@ -45,4 +45,10 @@ class RouteDirectionController extends Controller
         return redirect()->back()->with('mess', 'Đã xóa!');
         ;
     }
+
+    public function getAll()
+    {
+        $list = RouteDirection::all();
+        return $list;
+    }
 }
