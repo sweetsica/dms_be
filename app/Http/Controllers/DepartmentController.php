@@ -23,7 +23,7 @@ class DepartmentController extends Controller
                 'department.ib_lead',
                 'personnel.name as leader_name'
             )
-            ->where("department.code", "like", "%$search%")->paginate(10);
+            ->where("department.code", "like", "%$search%")->paginate(2);
         // dd($departmentList);
         $UnitLeaderList = Personnel::all();
 

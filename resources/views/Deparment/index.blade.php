@@ -167,7 +167,7 @@
                                                                                         name="name" type="text"
                                                                                         placeholder="Tên đơn vị"
                                                                                         class="form-control"
-                                                                                        value="{{ $item->name }}">
+                                                                                        value="{{ $item->name }}" required>
                                                                                 </div>
                                                                                 <div class="col-6 mb-3">
                                                                                     <input data-bs-toggle="tooltip"
@@ -176,7 +176,7 @@
                                                                                         type="text"
                                                                                         placeholder="Mã đơn vị"
                                                                                         class="form-control"
-                                                                                        value="{{ $item->code }}">
+                                                                                        value="{{ $item->code }}" required>
                                                                                 </div>
                                                                                 <div class="col-6 mb-3">
 
@@ -300,6 +300,7 @@
                                                     <ul class="pagination">
                                                         {{ $departmentList->appends([
                                                                 'search' => $search,
+
                                                             ])->links() }}
                                                     </ul>
                                                 </nav>
