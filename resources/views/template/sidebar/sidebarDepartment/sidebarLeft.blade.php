@@ -51,7 +51,7 @@
                         <b>Cơ cấu tổ chức</b>
                     </div>
                     <br>
-                    <div>
+                    <div class="wapper-tree">
                         <ul id="tree1">
                             @foreach ($departmentListTree as $donVi)
                                 <li>
@@ -74,6 +74,11 @@
 </div>
 
 <style>
+    .wapper-tree {
+        height: calc(100vh - 210px);
+        overflow: auto;
+    }
+
     .title-child {
         font-size: 14px;
         color: #ca1f24;

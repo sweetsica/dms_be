@@ -105,13 +105,14 @@
 
                                                 </tr>
                                             </thead>
+                                            <?php $a=1 ?>
                                             <tbody>
                                                 @foreach($localityList as $item)
                                                 <tr class="table-row" role="button">
 
                                                     <td>
                                                         <div class="overText text-center">
-                                                            {{ $item->id }}
+                                                            {{ $a++ }}
                                                         </div>
                                                     </td>
                                                     <td>

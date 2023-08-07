@@ -1,92 +1,35 @@
 <div class="header_menu">
     <ul class="header_menu-list">
-
-
         <li class="header_menu-item">
-            <a class="header_menu-link menu_btn-sub" href="#">
-                <i class="bi bi-card-list"></i>
-                <span>HCNS</span>
+            <a class="header_menu-link menu_btn-sub" href="{{ route('home') }} ">
+                <i class="bi bi-house"></i>
+                <span>Bảng điều khiển</span>
             </a>
-            <ul id="header_submenu">
-                <li class="header_submenu-items more position-relative">
-                    <a href="#" class="header_submenu-link more_btn">
-                        Văn thư</a>
-
-                </li>
-                <li class="header_submenu-items more position-relative">
-                    <a href="#" class="header_submenu-link more_btn">
-                        Danh sách nhân sự <i class="bi bi-chevron-right"></i></a>
-                    <ul class="header_more">
-                        <li class="header_more-item">
-                            <a href="file-list" class="header_submenu-link">Vị trí làm việc</a>
-                        </li>
-                        <li class="header_more-item">
-                            <a href="file-list" class="header_submenu-link">Chức danh</a>
-                        </li>
-                        
-                    </ul>
-                </li>
-                <li class="header_submenu-items more position-relative">
-                    <a href="#" class="header_submenu-link more_btn">
-                        Chấm công<i class="bi bi-chevron-right"></i>
-                    </a>
-                    <ul class="header_more">
-                        <li class="header_more-item">
-                            <a href="#" class="header_submenu-link">Nghỉ phép</a>
-                        </li>
-                        <li class="header_more-item">
-                            <a href="#" class="header_submenu-link">Làm thêm</a>
-                        </li>
-                        <li class="header_more-item">
-                            <a href="#" class="header_submenu-link">Công tác</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="header_submenu-items more position-relative">
-                    <a href="#" class="header_submenu-link more_btn">
-                        Phản ánh & Đề xuất</a>
-
-                </li>
-                
-            </ul>
         </li>
 
         <li class="header_menu-item">
             <a class="header_menu-link menu_btn-sub" href="#">
-                <i class="bi bi-people"></i>
-                <span>Công việc</span>
+                <i class="bi bi-database-add"></i>
+                <span>Khách hàng</span>
             </a>
             <ul id="header_submenu">
                 <li class="header_submenu-items more position-relative">
                     <a href="#" class="header_submenu-link more_btn">
-                        Kiểm soát<i class="bi bi-chevron-right"></i>
-                    </a>
-                    <ul class="header_more">
-                        <li class="header_more-item">
-                            <a href="#" class="header_submenu-link">
-                                Báo cáo kiểm soát thị trường</a>
-                        </li>
-                        <li class="header_more-item">
-                            <a href="#" class="header_submenu-link">
-                                Báo cáo cạnh tranh</a>
-                        </li>
+                        Nhà phân phối</a>
 
-                    </ul>
+                </li>
+                <li class="header_more-item">
+                    <a href="{{ route('customers') }} " class="header_more-link">Khách hàng</a>
                 </li>
                 <li class="header_submenu-items more position-relative">
                     <a href="#" class="header_submenu-link more_btn">
-                        Quản lý hoạt động<i class="bi bi-chevron-right"></i>
-                    </a>
-                    <ul class="header_more">
-                        <li class="header_more-item">
-                            <a href="#" class="header_submenu-link">Số nhân viên online/offline</a>
-                        </li>
-                        <li class="header_more-item">
-                            <a href="#" class="header_submenu-link">Bản đồ vị trí nhân viên</a>
-                        </li>
+                        Đại lý</a>
 
-                    </ul>
+                </li>
+                <li class="header_submenu-items more position-relative">
+                    <a href="#" class="header_submenu-link more_btn">
+                        Bán lẻ</a>
+
                 </li>
             </ul>
         </li>
@@ -135,27 +78,14 @@
             </ul>
         </li>
 
+
         <li class="header_menu-item">
             <a class="header_menu-link menu_btn-sub" href="#">
                 <i class="bi bi-bar-chart"></i>
                 <span>Kinh doanh</span>
             </a>
             <ul id="header_submenu">
-                <li class="header_submenu-items more position-relative">
-                    <a href="#" class="header_submenu-link more_btn">
-                        Khách hàng<i class="bi bi-chevron-right"></i></a>
-                    <ul class="header_more">
-                        <li class="header_more-item">
-                            <a href="#" class="header_submenu-link">Nhà phân phối</a>
-                        </li>
-                        <li class="header_more-item">
-                            <a href="#" class="header_submenu-link">Đại lý</a>
-                        </li>
-                        <li class="header_more-item">
-                            <a href="#" class="header_submenu-link">Bán lẻ</a>
-                        </li>
-                    </ul>
-                </li>
+                
                 <li class="header_submenu-items more position-relative">
                     <a href="#" class="header_submenu-link more_btn">
                         Nhà cung cấp</a>
@@ -183,6 +113,7 @@
                 </li>
             </ul>
         </li>
+
         <li class="header_menu-item">
             <a class="header_menu-link menu_btn-sub" href="#">
                 <i class="bi bi-archive"></i>
@@ -233,6 +164,96 @@
                 </li>
             </ul>
         </li>
+
+        {{-- <li class="header_menu-item">
+            <a class="header_menu-link menu_btn-sub" href="#">
+                <i class="bi bi-card-list"></i>
+                <span>HCNS</span>
+            </a>
+            <ul id="header_submenu">
+                <li class="header_submenu-items more position-relative">
+                    <a href="#" class="header_submenu-link more_btn">
+                        Văn thư</a>
+
+                </li>
+                <li class="header_submenu-items more position-relative">
+                    <a href="#" class="header_submenu-link more_btn">
+                        Danh sách nhân sự <i class="bi bi-chevron-right"></i></a>
+                    <ul class="header_more">
+                        <li class="header_more-item">
+                            <a href="file-list" class="header_submenu-link">Vị trí làm việc</a>
+                        </li>
+                        <li class="header_more-item">
+                            <a href="file-list" class="header_submenu-link">Chức danh</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+                <li class="header_submenu-items more position-relative">
+                    <a href="#" class="header_submenu-link more_btn">
+                        Chấm công<i class="bi bi-chevron-right"></i>
+                    </a>
+                    <ul class="header_more">
+                        <li class="header_more-item">
+                            <a href="#" class="header_submenu-link">Nghỉ phép</a>
+                        </li>
+                        <li class="header_more-item">
+                            <a href="#" class="header_submenu-link">Làm thêm</a>
+                        </li>
+                        <li class="header_more-item">
+                            <a href="#" class="header_submenu-link">Công tác</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="header_submenu-items more position-relative">
+                    <a href="#" class="header_submenu-link more_btn">
+                        Phản ánh & Đề xuất</a>
+
+                </li>
+                
+            </ul>
+        </li> --}}
+
+        <li class="header_menu-item">
+            <a class="header_menu-link menu_btn-sub" href="#">
+                <i class="bi bi-people"></i>
+                <span>Công việc</span>
+            </a>
+            <ul id="header_submenu">
+                <li class="header_submenu-items more position-relative">
+                    <a href="#" class="header_submenu-link more_btn">
+                        Kiểm soát<i class="bi bi-chevron-right"></i>
+                    </a>
+                    <ul class="header_more">
+                        <li class="header_more-item">
+                            <a href="#" class="header_submenu-link">
+                                Báo cáo kiểm soát thị trường</a>
+                        </li>
+                        <li class="header_more-item">
+                            <a href="#" class="header_submenu-link">
+                                Báo cáo cạnh tranh</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="header_submenu-items more position-relative">
+                    <a href="#" class="header_submenu-link more_btn">
+                        Quản lý hoạt động<i class="bi bi-chevron-right"></i>
+                    </a>
+                    <ul class="header_more">
+                        <li class="header_more-item">
+                            <a href="#" class="header_submenu-link">Số nhân viên online/offline</a>
+                        </li>
+                        <li class="header_more-item">
+                            <a href="#" class="header_submenu-link">Bản đồ vị trí nhân viên</a>
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        
         <li class="header_menu-item">
             <a href="#" class="header_menu-link menu_btn-sub">
                 <i class="bi bi-gear"></i>
@@ -248,14 +269,15 @@
                         <li class="header_more-item">
                             <a href="{{ route('department.store') }} " class="header_more-link">Hồ sơ đơn vị (phòng ban)</a>
                         </li>
+                        
+                        <li class="header_more-item">
+                            <a href="{{ route('Personnel.store') }}" class="header_more-link">Nhân sự</a>
+                        </li>
                         <li class="header_more-item">
                             <a href="{{ route('position.store') }} "class="header_more-link">Vị trí/chức danh</a>
                         </li>
                         <li class="header_more-item">
-                            <a href="{{ route('PersonnelLevel.store') }}" class="header_more-link">Cấp nhân sự</a>
-                        </li>
-                        <li class="header_more-item">
-                            <a href="{{ route('Role.store') }}"class="header_more-link">Vai trò (phân quyền)</a>
+                            <a href="{{ route('PersonnelLevel.store') }}"class="header_more-link">Cấp nhân sự</a>
                         </li>
                     </ul>
                 </li>
@@ -266,35 +288,36 @@
                 </li>
                 <li class="header_submenu-items more position-relative">
                     <a href="#" class="header_submenu-link more_btn">
-                        Địa bàn/khu vực<i class="bi bi-chevron-right"></i>
+                        Phạm vi kinh doanh<i class="bi bi-chevron-right"></i>
                     </a>
                     <ul class="header_more">
                         <li class="header_more-item">
-                            <a href="{{ route('locality.store') }}" class="header_more-link">Địa bàn</a>
+                            <a href="#" class="header_more-link">Vùng</a>
                         </li>
                         <li class="header_more-item">
                             <a href="{{ route('area.store') }}"class="header_more-link">Khu vực</a>
                         </li>
+                        
+                        <li class="header_more-item">
+                            <a href="{{ route('locality.store') }}" class="header_more-link">Địa bàn</a>
+                        </li>
+                        <li class="header_more-item">
+                            <a href="{{ route('routeDirection.store') }}" class="header_more-link">Tuyến</a>
+                        </li>
                     </ul>
                 </li>
-                <li class="header_submenu-items more position-relative">
-                    <a href="#" class="header_submenu-link">
-                        Tuyến
-                    </a>
-                </li>
+                
                 <li class="header_submenu-items more position-relative">
                     <a href="#" class="header_submenu-link more_btn">
                         Khách hàng<i class="bi bi-chevron-right"></i>
                     </a>
                     <ul class="header_more">
-                        <li class="header_more-item">
-                            <a href="#" class="header_more-link">Danh sách kênh</a>
-                        </li>
+                        
                         <li class="header_more-item">
                             <a href="#" class="header_more-link">Nhóm khách hàng</a>
                         </li>
                         <li class="header_more-item">
-                            <a href="#" class="header_more-link">Hạng</a>
+                            <a href="#" class="header_more-link">Loại khách hàng</a>
                         </li>
                     </ul>
                 </li>
@@ -310,23 +333,7 @@
                             <a href="#" class="header_more-link">Đơn vị tính</a>
                         </li>
                         <li class="header_more-item">
-                            <a href="#" class="header_more-link">Thương hiệu</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="header_submenu-items more position-relative">
-                    <a href="#" class="header_submenu-link more_btn">
-                        Đơn vị kinh doanh<i class="bi bi-chevron-right"></i>
-                    </a>
-                    <ul class="header_more">
-                        <li class="header_more-item">
-                            <a href="#" class="header_more-link">Cơ cấu ĐVKD</a>
-                        </li>
-                        <li class="header_more-item">
-                            <a href="#" class="header_more-link">Chỉ tiêu ĐVKD</a>
-                        </li>
-                        <li class="header_more-item">
-                            <a href="#" class="header_more-link">Báo cáo cạnh tranh</a>
+                            <a href="#" class="header_more-link">Ngành hàng</a>
                         </li>
                     </ul>
                 </li>

@@ -467,7 +467,7 @@
                                 </div>
                             </div>
                             <div class="col-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn vị trí cấp quẩn lý">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn vị trí cấp quản lý">
                                     <select name="parent" required class="selectpicker" data-dropup-auto="false">
                                         <option value="0">Chọn vị trí cấp quản lý</option>
                                         @foreach ($positionlists as $item)

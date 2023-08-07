@@ -100,7 +100,7 @@
                                                                         <div data-bs-toggle="tooltip"
                                                                             data-bs-placement="top" title="Sửa">
                                                                             <div class="btn" data-bs-toggle="modal"
-                                                                                data-bs-target="#sua{{$item->id}}">
+                                                                                data-bs-target="#sua{{$item['id']}}">
                                                                                 <img style="width:16px;height:16px"
                                                                                     src="{{ asset('assets/img/edit.svg') }}" />
                                                                             </div>
@@ -130,7 +130,9 @@
                                                                           data-bs-dismiss="modal"
                                                                           aria-label="Close"></button>
                                                                   </div>
-                                                                  <form method="POST" action="{{route('CustomerGroup.update', $item->id)}}">
+                                                                  <form method="POST"
+                                                                  action="{{ route('CustomerGroup.update', $item->id) }}"
+                                                                  >
                                                                       @csrf
                                                                       <div class="modal-body">
                                                                           <div class="row">
@@ -190,7 +192,9 @@
                                                                         <button type="button"
                                                                             class="btn btn-outline-danger"
                                                                             data-bs-dismiss="modal">Hủy</button>
-                                                                        <form action="{{ route('CustomerGroup.destroy',$item->id) }}" method="POST">
+                                                                        <form
+                                                                        action="{{ route('CustomerGroup.destroy',$item->id) }}"
+                                                                        method="POST">
                                                                             @csrf
                                                                             <button type="submit"
                                                                                 class="btn btn-danger">Xóa</button>

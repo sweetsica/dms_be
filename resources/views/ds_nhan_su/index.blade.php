@@ -76,12 +76,12 @@
                                                             </th>
                                                         </tr>
                                                     </thead>
-                                                    <?php $i = 1; ?>
+                                                    <?php $a = 1; ?>
                                                     @foreach ($personnelList as $item)
                                                         <tbody>
                                                             <tr>
                                                                 <td class=" text-center">
-                                                                    {{ $i++ }}
+                                                                    {{ $a++ }}
                                                                 </td>
                                                                 <td class="">
                                                                     {{ $item->code }}

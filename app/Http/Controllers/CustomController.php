@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Custom;
 use App\Models\Version;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -50,7 +51,7 @@ class CustomController extends Controller
                 $versionIds = json_decode($custom->version_ids);
                 $custom->versions = Version::whereIn('id', $versionIds)->get();
             }
-            
+
             $pagination = $this->pagination($listCustom);
 
             return view('Product.danhSachTuyChinh')->with(compact(
