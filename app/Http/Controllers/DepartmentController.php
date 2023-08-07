@@ -23,11 +23,12 @@ class DepartmentController extends Controller
                 'department.ib_lead',
                 'personnel.name as leader_name'
             )
-            ->where("department.code", "like", "%$search%")->paginate(2);
+            ->where("department.code", "like", "%$search%")->paginate(10);
         // dd($departmentList);
         $UnitLeaderList = Personnel::all();
 
         $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
+        // dd($departmentListTree);
         $departmentlists = $this->getDepartment();
 
         return view("Deparment.index", [
