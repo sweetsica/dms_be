@@ -7,6 +7,7 @@ use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\CustomController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CustomerGroupController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\LocalityController;
 use App\Http\Controllers\PersonnelController;
@@ -52,7 +53,7 @@ Route::middleware(['auth.role'])->group(function () {
     })->name('home');
 
     Route::post('/log-out', [AuthenticateController::class, 'logout'])->name('logout');
-    
+
     Route::post('/create-customer', [CustomerController::class, 'create'])->name('create-customer');
 
     Route::get('/customer', [CustomerController::class, 'view'])->name('customers');
@@ -157,6 +158,15 @@ Route::get('danh-sach-san-pham', [ProductController::class, 'index'])->name('pro
     Route::post('vai-tro', [RoleController::class, 'store'])->name('Role.store');
     Route::post('vai-trox/{id}', [RoleController::class, 'update'])->name('Rolex.update');
     Route::post('vai-tro/{id}', [RoleController::class, 'destroy'])->name('Role.destroy');
+
+    Route::get('nhom-khach-hang', [CustomerGroupController::class, 'index'])->name('CustomerGroup.index');
+    Route::post('them-nhom-khach-hang', [CustomerGroupController::class, 'store'])->name('CustomerGroup.store');
+    Route::post('sua-nhom-khach-hang/{id}', [CustomerGroupController::class, 'update'])->name('CustomerGroup.update');
+    Route::post('xoa-nhom-khach-hang/{id}', [CustomerGroupController::class, 'destroy'])->name('CustomerGroup.destroy');
+
+
+
+
 });
 
 // 404
