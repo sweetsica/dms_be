@@ -9,7 +9,7 @@ class RouteDirection extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $table = 'routeDirections';
+    protected $table = 'route_directions';
     protected $fillable = [
         'name',
         'code',

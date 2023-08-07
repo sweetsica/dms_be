@@ -238,14 +238,14 @@
                                 <div class="col-md-6 mb-3">
                                     <input type="text" value="{{ $item->name }}" name="name"
                                         data-bs-toggle="tooltip" required data-bs-placement="top"
-                                        title="{{ $item->name }}" placeholder="{{ $item->name }}"
+                                        title="Tên sản phẩm" placeholder="Tên sản phẩm"
                                         class="form-control">
                                 </div>
 
                                 <div class="col-md-6 mb-3">
                                     <input type="text" value="{{ $item->code }}" name="code"
                                         data-bs-toggle="tooltip" required data-bs-placement="top"
-                                        title="{{ $item->code }}" placeholder="{{ $item->code }}"
+                                        title="Mã sản phẩm" placeholder="Mã sản phẩm"
                                         class="form-control">
                                 </div>
 

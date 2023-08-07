@@ -34,6 +34,7 @@ use App\Http\Controllers\RouteDirectionController;
 
 Route::get('/clear', function () {
     \Illuminate\Support\Facades\Session::flush();
+    return view('login');
 });
 
 Route::middleware(['guest'])->group(function () {
