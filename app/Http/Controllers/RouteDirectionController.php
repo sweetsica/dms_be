@@ -133,4 +133,10 @@ class RouteDirectionController extends Controller
         Session::flash('success', "Xoá tuyến thành công");
         return back();
     }
+
+    public function getAll()
+    {
+        $routeList = RouteDirection::all();
+        return $routeList;
+    }
 }
