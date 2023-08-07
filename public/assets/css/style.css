@@ -2659,11 +2659,11 @@ ul.modal_upload-list li:last-child {
 
 
 /* Image */
-.product_img {
-    max-width: 600px;
-    max-height: 600px;
-    margin-bottom: 10px;
-}
+/* .product_img {
+    max-width: 300px;
+    max-height: 300px;
+    margin-bottom: 20px;
+} */
 .product_img img {
     width: 100%;
     height: 100%;

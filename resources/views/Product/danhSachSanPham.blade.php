@@ -96,9 +96,9 @@
                                                 <tr>
                                                     <th class="text-nowrap text-center" style="width:2%">STT</th>
                                                     <th class="text-nowrap text-center" style="width:5%">Mã hiệu</th>
-                                                    <th class="text-nowrap text-center" style="width:15%">Tên sản phẩm</th>
+                                                    <th class="text-nowrap text-center" style="width:12%">Tên sản phẩm</th>
                                                     <th class="text-nowrap text-center" style="width:4%">Ảnh sản phẩm</th>
-                                                    <th class="text-nowrap text-center" style="width:8%">Phân loại</th>
+                                                    <th class="text-nowrap text-center" style="width:6%">Phân loại</th>
                                                     <th class="text-nowrap text-center" style="width:6%">Thời gian</th>
                                                     <th class="text-nowrap text-center" style="width:4%">Hành động</th>
 
@@ -350,6 +350,8 @@
                                 <select required name="type" class="selectpicker" data-dropup-auto="false"
                                     data-width="100%" title="Phân loại" data-size="3">
                                     <option value="Sản phẩm">Sản phẩm</option>
+                                    <option value="Phiên bản">Phiên bản</option>
+                                    <option value="Tuỳ chọn">Tuỳ chọn</option>
                                     <option value="Vật tư MKT">Vật tư MKT</option>
                                 </select>
                             </div>

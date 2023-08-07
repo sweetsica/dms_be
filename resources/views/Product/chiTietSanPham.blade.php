@@ -47,16 +47,17 @@
             <div class="main">
                 <div class="container-fluid">
                     <div class="card_template-wrapper">
-                        <form action="" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
                             <div class="card_template-body" id="container-fluid">
                                 <div class="card_template-body-top">
                                     <div class='row mb-3 d-flex align-items-center'>
-                                        
-                                        <div class="col-12 d-flex align-items-center justify-content-center flex-column">
+                                        <div class="col-3 d-flex align-items-center justify-content-center flex-column">
+                                            <a class=" ">
+                                                <img class="header_logo" src="{{ env('LOGO_URL', '') }}" />
+                                            </a>
+                                        </div>
+                                        <div class="col-6 d-flex align-items-center justify-content-center flex-column">
                                             <div class="card_template-heading">Thông số sản phẩm</div>
-                                            <div class="card_template-sub with_input d-flex justify-content-center align-items-center">Xe điện - SP0001</div>
+                                            <div class="card_template-sub mt-2 with_input d-flex justify-content-center align-items-center">Xe điện - SP0001</div>
                                         </div>
                                     </div>
                                 </div>
@@ -64,9 +65,9 @@
 
                                 <div class="card_template-body-middle">
                                     <div class="col-md-12 mb-3">
-                                        <textarea type="text"  rows="4" placeholder="" class=" form-control textareaResize" name="product">Mẫu xe điện bán chạy nhất thế giới được Thái Hưng nhập về để phục vụ cho quá trình nghiên cứu. Được mệnh danh là xe điện nhỏ nhất thế giới, Wuling Hongguang Mini EV chỉ có mức giá từ 100-150 triệu đồng tương đương với mẫu xe SH Honda được ưa thích hiện nay. Với chính sách và ưu đãi hấp dẫn của Trung Quốc cho người dân khi mua xe điện, Wuling Hongquang trở thành xe điện báy chạy nhất toàn cầu và vượt qua Tesla Model 3.
-
-                                        </textarea>
+                                        <div>
+                                            <textarea rows="1" type="text" placeholder="(Vui lòng nhập thông tin chung về sản phẩm)" class="form-control textareaResize" name=""></textarea>
+                                        </div>
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <div class="table-responsive YCMS_repeater">
@@ -82,14 +83,13 @@
 
                                                     <tr >
                                                         <td>
-                                                            <div class="">
-                                                                <textarea type="text"  rows="1" placeholder="" class="card-title-black form-control textareaResize" name="product">WLD T242</textarea>
-                                                                
+                                                            <div>
+                                                                <textarea rows="1" type="text" placeholder="(Vui lòng nhập nội dung)" class="form-control textareaResize" name="orderMoney"></textarea>
                                                             </div>
 
                                                         </td>
                                                         <td>
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                            <div class="d-flex flex-column justify-content-center align-items-center mt-3 mb-3">
 
                                                                 <div class="upload_wrapper-items">
                                                                     <input type="hidden" value="" />
@@ -107,7 +107,9 @@
                                                         </td>
                                                             
                                                         <td>
-                                                            <textarea rows="14" type="text " placeholder="" class="form-control textareaResize" name="quantity">Xe Điện Wuling - WLDT242&#13;&#10;- Khối lượng bản thân xe: 540kg&#13;&#10;- Khối lượng toàn bộ xe: 1.080kg&#13;&#10;- Số chỗ ngồi 4+2 (6 người kể cả lái)&#13;&#10;- Kích thước bao (D x R x C) 3536 x 1200 x 1800 mm&#13;&#10;- Khoảng cách trục: 3340 mm&#13;&#10;- Ký hiệu, động cơ: HPQ4-48-18N/Điện xoay chiều&#13;&#10;- Tốc độ tối đa: 24 km/h&#13;&#10;- Ắc quy Chì Axit: 48V - 170Ah&#13;&#10;- Công suất động cơ Motor (max) 4KW&#13;&#10;- Lốp xe: + Trục 1 (1st Axle): 2/205/50-10&#13;&#10;+ Trục 2 (2md Axle): 2/205/50-10&#13;&#10;- Khả năng leo dốc 20%&#13;&#10;- Quãng đường hoạt động: 70km/h</textarea>
+                                                            <div>
+                                                                <textarea rows="1" type="text" placeholder="(Vui lòng nhập nội dung)" class="form-control textareaResize" name="orderMoney"></textarea>
+                                                            </div>
                                                         </td>
                                                         
                                                     </tr>
@@ -120,6 +122,54 @@
                                     </div>
                                     
                                 </div>
+
+                                {{-- <div class="card_template-body-middle">
+                                    <div class="col-md-12 mb-3">
+                                        <div>
+                                            <div class="text-break ">1</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <div class="table-responsive YCMS_repeater">
+                                            <table class="table table-bordered" style="width: 100%">
+                                                <thead>
+                                                    <tr>
+                                                      <th class="text-nowrap text-center" style="width:10%">Model</th>
+                                                      <th class="text-nowrap text-center" style="width:10%">Hình ảnh</th>
+                                                      <th class="text-nowrap text-center" style="width:30%">Thông số kỹ thuật cơ bản</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <tr>
+                                                        <td>
+                                                            <div>
+                                                                <div class="text-break " style="margin-left: 4px">1</div>
+                                                            </div>
+
+                                                        </td>
+                                                        <td class="list_img">
+                                                            <div class="d-flex justify-content-center align-items-center" style="padding:10px">
+                                                                <img class="" src="{{ asset('/assets/img/xedien.png') }}" />
+                                                            </div>
+                                                        </td>
+                                                            
+                                                        <td>
+                                                            <div>
+                                                                <div class="text-break " style="margin-left: 4px">1</div>
+                                                            </div>
+                                                        </td>
+                                                        
+                                                    </tr>
+
+                                                    
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    
+                                </div> --}}
 
                                 <div class="card_template-body-bottom">
                                     <div class="row">
@@ -176,8 +226,12 @@
                                                 </a>
                                             </div>
                                         </div>
-                                        <div class="col-12 mt-3" >
+                                        {{-- <div class="col-12 mt-3" >
                                             <button class="btn btn-danger d-block" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Thêm sản phẩm liên quan" data-bs-original-title="Thêm sản phẩm liên quan" data-bs-toggle="modal" data-bs-target="#add">+</button>
+                                        </div> --}}
+
+                                        <div class="col-12 mt-3">
+                                            <button class="btn btn-danger d-block" data-bs-toggle="modal" data-bs-target="#add">+</button>
                                         </div>
                                         
                                     </div>
@@ -185,12 +239,10 @@
                             </div>
                             <div class="d-flex justify-content-end">
                                 <div class="card_template-footer">
-                                    <a href="#" type="button" class="btn btn-outline-danger ps-5 pe-5 me-3">Hủy</a>
+                                    <button type="button" class="btn btn-outline-danger ps-5 pe-5 me-3" data-bs-dismiss="modal">Hủy</button>
                                     <button type="submit" class="btn btn-danger ps-5 pe-5">Lưu</button>
                                 </div> 
                             </div>
-                            
-                        </form>
                     </div>
                 </div>
             </div>
@@ -199,148 +251,72 @@
     </div>
     @include('template.sidebar.sidebarDeXuat.sidebarRight')
 
-    
+            {{-- delete --}}
+            <div class="modal fade" id="xoa" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h5 class="modal-title w-100" id="exampleModalLabel">XOÁ</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="fs-5">Bạn có thực sự muốn xoá sản phẩm này không?</div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger" data-bs-target="#add" data-bs-toggle="modal" data-bs-dismiss="modal">Hủy</button>
+                            <form action="" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger" id="deleteRowElement">Có, tôi muốn
+                                    xóa</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
     {{-- Modal thêm sản phẩm liên quan --}}
     <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">Thêm khách hàng</h5>
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Link sản phẩm liên quan</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="formThemCapPhat" method="POST" action="#">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-md-12 mb-3">
-                                <div class="card-title">1. Thông tin chung</div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên khách hàng" placeholder="Tên khách hàng*" class="form-control">
+                            <div class="col-sm-12 d-flex align-items-center pb-3 mt-2" >
+                                <div class="d-flex align-items-center">
+                                    <div class="card-title">Chọn sản phẩm liên quan</div>
+                                </div>
+
+                                <div class="col-sm-7" style="padding-left: 10px">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Sản phẩm">
+                                        <select class="selectpicker" data-dropup-auto="false" data-width="100%" data-live-search="true" title="Chọn sản phẩm ..." data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
+                                            <option value="1">1</option>
+                                            <option value="1">1</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
                             </div>
 
-                            <div class="col-md-4 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Số điện thoại" placeholder="Số điện thoại*" class="form-control">
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Email" placeholder="Email*" class="form-control">
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <div class="card-title">2. Tổ chức</div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Tên công ty" placeholder="Tên công ty" class="form-control">
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Người đại diện" placeholder="Người đại diện" class="form-control">
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Chức danh" placeholder="Chức danh" class="form-control">
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Mã số thuế" placeholder="Mã số thuế" class="form-control">
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Số điện thoại công ty" placeholder="Số điện thoại công ty" class="form-control">
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Email công ty" placeholder="Email công ty" class="form-control">
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Số tài khoản" placeholder="Số tài khoản" class="form-control">
-                            </div>
-                            <div class="col-md-8 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top" title="Mở tại ngân hàng" placeholder="Mở tại ngân hàng" class="form-control">
-                            </div>
+                            <div class="d-flex align-items-center mt-3 ">
+                                <div class="col-sm-5 mb-3 me-3">
+                                    <input type="text" value="Xe điện" readonly class="form-control" required placeholder="Tên sản phẩm" name="title"data-bs-toggle="tooltip" data-bs-placement="top" title="Tên sản phẩm">
+                                </div>
+                                <div class="col-sm-6 mb-3 me-3">
+                                    <input type="text" class="form-control" required placeholder="Mô tả tóm tắt" name="title"data-bs-toggle="tooltip" data-bs-placement="top" title="Mô tả tóm tắt">
+                                </div>
+                                <div  class="col mb-3 btn test_btn-remove" href="#" data-bs-toggle="modal" data-bs-target="#xoa">
+                                    <img data-repeater-delete role="button" src="{{ asset('/assets/img/trash.svg') }}" width="15px" height="15px" />
 
-                            <div class="col-md-12 mb-3">
-                                <div class="card-title">3. Địa chỉ</div>
-                            </div>
-                            <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Tỉnh/thành">
-                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Tỉnh/thành*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
-                                    <option value="1">1</option>
-                                    <option value="1">1</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Quận/huyện">
-                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Quận/huyện*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
-                                    <option value="1">1</option>
-                                    <option value="1">1</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Phường/xã">
-                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Phường/xã*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
-                                    <option value="1">1</option>
-                                    <option value="1">1</option>
-                                </select>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <input type="text" name="topic" data-bs-toggle="tooltip" required data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ*" class="form-control">
-                            </div>
+                                </div>
 
-                            <div class="col-md-12 mb-3">
-                                <div class="card-title">4. Mô tả</div>
                             </div>
                             
-                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Nhân sự thu thập">
-                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required data-live-search="true" title="Nhân sự thu thập*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
-                                    <option value="1">1</option>
-                                    <option value="1">1</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Sản phẩm quan tâm">
-                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required data-live-search="true" title="Sản phẩm quan tâm*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
-                                    <option value="1">1</option>
-                                    <option value="1">1</option>
-                                </select>
-                            </div>
-                            
-
-                            <div class="col-md-12 mb-3">
-                                <div class="card-title">5. Phân loại</div>
-                            </div>
-                            
-                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Nhóm khách hàng">
-                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required data-live-search="true" title="Nhóm khách hàng*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
-                                    <option value="Nhà thuốc">Nhà thuốc</option>
-                                    <option value="Phòng khám/Trung tâm tế">Phòng khám/Trung tâm tế</option>
-                                    <option value="Bệnh viện">Bệnh viện</option>
-                                    <option value="Nhà phân phối">Nhà phân phối</option>
-                                    <option value="Online">Online</option>
-                                    <option value="Khách sạn">Khách sạn</option>
-                                    <option value="Nhà thuốc S">Nhà thuốc S</option>
-                                    <option value="Siêu thị/Cửa hàng bán lẻ">Siêu thị/Cửa hàng bán lẻ</option>
-                                    <option value="Chuỗi nhà thuốc">Chuỗi nhà thuốc</option>
-                                    <option value="Đại siêu thị">Đại siêu thị</option>
-                                    <option value="Làm đẹp/Phòng tập thể dục/Thể thao">Làm đẹp/Phòng tập thể dục/Thể thao</option>
-                                </select>
-                            </div>
-
-                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Tuyến">
-                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required data-live-search="true" title="Tuyến*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
-                                    <option value="1">1</option>
-                                    <option value="1">1</option>
-                                </select>
-                            </div>
-
-                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Kênh khách hàng">
-                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required data-live-search="true" title="Kênh khách hàng*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
-                                    <option value="OTC">OTC</option>
-                                    <option value="ETC">ETC</option>
-                                    <option value="MT">MT</option>
-                                    <option value="Đại lý cá nhân">Đại lý cá nhân</option>
-
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Trạng thái">
-                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required data-live-search="true" title="Trạng thái*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
-                                    <option value="Trinh sát">Trinh sát</option>
-                                    <option value="Tiềm năng">Tiềm năng</option>
-                                    <option value="Cơ hội">Cơ hội</option>
-                                    <option value="Khách hàng">Khách hàng</option>
-
-                                </select>
-                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
