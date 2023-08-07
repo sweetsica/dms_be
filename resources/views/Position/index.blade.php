@@ -511,7 +511,6 @@
                                 <input name="wage" type="text" placeholder="Quỹ lương năm*" class="form-control"
                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Quỹ lương năm*">
                             </div>
-
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-outline-danger"
                                         data-bs-dismiss="modal">Hủy
