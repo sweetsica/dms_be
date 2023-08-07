@@ -13,7 +13,7 @@ class CustomerController extends Controller
 {
     public function show($id)
     {
-        $customer = Customer::findOrFail($id);
+        $customer = Customer::with('channel', 'route', 'person')->findOrFail($id);
         return view('other.chiTietKhachHang')->with(compact(
             "customer"
         ));
@@ -93,7 +93,7 @@ class CustomerController extends Controller
         $data->address = $address;
         $data->personId = $personId;
         $data->productId = json_encode($productId);
-        $data->groupId = $groupId;
+        $data->group = $groupId;
         $data->chanelId = $chanelId;
         $data->routeId = $routeId;
         $data->status = $status;

@@ -31,7 +31,7 @@ class Customer extends Model
         'personId',
         'productId',
         'routeId',
-        'groupId',
+        'group',
         'chanelId',
         'status',
     ];

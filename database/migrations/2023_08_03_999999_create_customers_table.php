@@ -24,9 +24,9 @@ return new class extends Migration {
             $table->string('companyEmail', 255)->nullable();
             $table->string('accountNumber', 255)->nullable();
             $table->string('bankOpen', 255)->nullable();
+            $table->string('group', 255);
             $table->unsignedBigInteger('routeId');
             $table->unsignedBigInteger('chanelId');
-            $table->unsignedBigInteger('groupId')->nullable();
             $table->string('status');
             $table->unsignedBigInteger('personId');
             $table->text('productId');

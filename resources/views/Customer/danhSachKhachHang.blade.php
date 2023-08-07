@@ -713,17 +713,17 @@
                                     data-live-search="true" title="Nhóm khách hàng*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="groupId" id="groupId"
                                     data-live-search-placeholder="Tìm kiếm...">
-                                    <option value="1">Nhà thuốc</option>
-                                    <option value="2">Phòng khám/Trung tâm tế</option>
-                                    <option value="3">Bệnh viện</option>
-                                    <option value="4">Nhà phân phối</option>
-                                    <option value="5">Online</option>
-                                    <option value="6">Khách sạn</option>
-                                    <option value="7">Nhà thuốc S</option>
-                                    <option value="8">Siêu thị/Cửa hàng bán lẻ</option>
-                                    <option value="9">Chuỗi nhà thuốc</option>
-                                    <option value="10">Đại siêu thị</option>
-                                    <option value="11">Làm đẹp/Phòng tập thể dục/Thể thao
+                                    <option value="Nhà thuốc">Nhà thuốc</option>
+                                    <option value="Phòng khám/Trung tâm tế">Phòng khám/Trung tâm tế</option>
+                                    <option value="Bệnh viện">Bệnh viện</option>
+                                    <option value="Nhà phân phối">Nhà phân phối</option>
+                                    <option value="Online">Online</option>
+                                    <option value="Khách sạn">Khách sạn</option>
+                                    <option value="Nhà thuốc S">Nhà thuốc S</option>
+                                    <option value="Siêu thị/Cửa hàng bán lẻ">Siêu thị/Cửa hàng bán lẻ</option>
+                                    <option value="Chuỗi nhà thuốc">Chuỗi nhà thuốc</option>
+                                    <option value="Đại siêu thị">Đại siêu thị</option>
+                                    <option value="Làm đẹp/Phòng tập thể dục/Thể thao">Làm đẹp/Phòng tập thể dục/Thể thao
                                     </option>
                                 </select>
                             </div>
