@@ -427,12 +427,12 @@
                             <div class="col-6 mb-3">
                                 <input name="name" required type="text" placeholder="Nhập tên vị trí/chức danh*"
                                        class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
-                                       title="Nhập tên vị trí/chức danh*">
+                                       title="Nhập tên vị trí/chức danh*" required>
                             </div>
                             <div class="col-6 mb-3">
                                 <input name="code" required type="text" placeholder="Nhập mã vị trí/chức danh*"
                                        class="form-control" data-bs-toggle="tooltip"
-                                       title="Nhập mã vị trí/chức danh*">
+                                       title="Nhập mã vị trí/chức danh*" required>
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn đơn vị công tác">
@@ -494,9 +494,9 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top">
-                                    <textarea name="description" type="text" placeholder="Mô tảo công việc"
+                                    <textarea name="description" type="text" placeholder="Mô tả công việc"
                                               class="form-control "
-                                              data-bs-toggle="tooltip" data-bs-placement="top" title="Mô tảo công việc"
+                                              data-bs-toggle="tooltip" data-bs-placement="top" title="Mô tả công việc"
                                               style="width: 450px;height: 80px;"></textarea>
                                 </div>
                             </div>
