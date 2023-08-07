@@ -50,7 +50,7 @@ class CustomerController extends Controller
         $productNames = Product::whereIn('id', $productIDs)->pluck('name')->toArray();
         $routeNames = RouteDirection::whereIn('id', $routeIDs)->pluck('name')->toArray();
         $chanelNames = Department::whereIn('id', $chanelIDs)->pluck('name')->toArray();
-        return view('customer.danhSachKhachHang', compact('listData', 'personalNames', 'productNames', 'routeNames', 'chanelNames'));
+        return view('Customer.danhSachKhachHang', compact('listData', 'personalNames', 'productNames', 'routeNames', 'chanelNames'));
     }
 
     public function create(Request $request)
@@ -175,7 +175,6 @@ class CustomerController extends Controller
     {
         Customer::destroy($id);
         return redirect()->back()->with('mess', 'Đã xóa!');
-        ;
     }
 
 }
