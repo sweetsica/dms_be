@@ -84,8 +84,8 @@
         mapObj = L.map('sethPhatMap', mapConfig);
 
         // add tile để map có thể hoạt động
-        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(mapObj);
 
         var customerId = window.location.pathname.split('/').pop();
