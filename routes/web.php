@@ -51,7 +51,7 @@ Route::middleware(['auth.role'])->group(function () {
     })->name('home');
 
     Route::post('/log-out', [AuthenticateController::class, 'logout'])->name('logout');
-
+});
 Route::middleware(['auth.role'])->group(function () {
 
     Route::get('/', function () {
@@ -59,7 +59,7 @@ Route::middleware(['auth.role'])->group(function () {
     })->name('home');
 
     Route::post('/log-out', [AuthenticateController::class, 'logout'])->name('logout');
-    
+
     Route::post('/create-customer', [CustomerController::class, 'create'])->name('create-customer');
 
     Route::get('/customer', [CustomerController::class, 'view'])->name('customers');
@@ -76,11 +76,7 @@ Route::middleware(['auth.role'])->group(function () {
 
     Route::get('/route_direction_getAll', [RouteDirectionController::class, 'getAll'])->name('routeDirection.getAll');
 
-    // Route::resource('/tuyenduong', RouteDirectionController::class);
-
     // Route::get('/map/{id}', [RouteDirectionController::class, 'showMap'])->name('map');
-
-    // Route::get('/create-customer', [CustomerController::class, 'create'])->name('create-customer');
 
     // Route::post('/get-customer', [CustomerController::class, 'store'])->name('store-customer');
 
