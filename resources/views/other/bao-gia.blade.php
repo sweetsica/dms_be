@@ -345,11 +345,11 @@
 
 
 
-                            <div class="card_template-body" id="container-fluid">
+                            {{-- <div class="card_template-body" id="container-fluid">
                                 <div class="card_template-body-top">
                                     <div class='row mb-3 d-flex align-items-center'>
                                         <div class="col-3 d-flex align-items-center justify-content-center flex-column">
-                                            <a class=" ">
+                                            <a class="">
                                                 <img class="header_logo" src="{{ env('LOGO_URL', '') }}" />
                                             </a>
                                             <div class="card_template-sub with_input d-flex justify-content-center align-items-center">
@@ -589,7 +589,7 @@
                                     </div>
                                 </div>
                                 
-                            </div>
+                            </div> --}}
                             <div class="d-flex justify-content-end">
                                 <div class="card_template-footer">
                                     <a href="#" type="button" class="btn btn-outline-danger ps-5 pe-5 me-3">Hủy</a>
