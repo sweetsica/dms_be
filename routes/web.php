@@ -51,7 +51,7 @@ Route::middleware(['auth.role'])->group(function () {
     })->name('home');
 
     Route::post('/log-out', [AuthenticateController::class, 'logout'])->name('logout');
-    
+
     Route::post('/create-customer', [CustomerController::class, 'create'])->name('create-customer');
 
     Route::get('/customer', [CustomerController::class, 'view'])->name('customers');
@@ -151,6 +151,15 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('vai-tro', [RoleController::class, 'store'])->name('Role.store');
     Route::post('vai-trox/{id}', [RoleController::class, 'update'])->name('Rolex.update');
     Route::post('vai-tro/{id}', [RoleController::class, 'destroy'])->name('Role.destroy');
+
+    Route::get('nhom-', [RoleController::class, 'index'])->name('Role.index');
+    Route::post('vai-tro', [RoleController::class, 'store'])->name('Role.store');
+    Route::post('vai-trox/{id}', [RoleController::class, 'update'])->name('Rolex.update');
+    Route::post('vai-tro/{id}', [RoleController::class, 'destroy'])->name('Role.destroy');
+
+
+
+
 });
 
 // 404

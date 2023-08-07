@@ -186,17 +186,18 @@
                                                                                         <select name="parent" required
                                                                                             class="selectpicker"
                                                                                             data-dropup-auto="false">
-                                                                                            <?php if( $item->parent == null){ ?>
-                                                                                            <option>Chọn đơn vị mẹ</option>
+                                                                                            <?php if( $item->parent == 0){ ?>
+                                                                                            <option value="0">Chọn đơn vị mẹ</option>
                                                                                             <?php
                                                                                             }else{ ?>
-                                                                                            <?php } ?>
-                                                                                            <option
+                                                                                                <option
                                                                                                 value="{{ $item->parent }}">
                                                                                                 @if ($item->donvime)
                                                                                                     {{ $item->donvime->name }}
                                                                                                 @endif
                                                                                             </option>
+                                                                                            <?php } ?>
+
                                                                                             @foreach ($departmentlists as $ac)
                                                                                                 <option
                                                                                                     value="{{ $ac->id }}">
@@ -221,8 +222,8 @@
                                                                                         <select name="ib_lead"
                                                                                             class="selectpicker"
                                                                                             data-dropup-auto="false">
-                                                                                            <?php if( $item->ib_lead == null){ ?>
-                                                                                            <option>Chọn trưởng bộ phận
+                                                                                            <?php if( $item->ib_lead == 0){ ?>
+                                                                                            <option value="0">Chọn trưởng bộ phận
                                                                                             </option>
                                                                                             <?php }else{ ?>
                                                                                             <?php } ?>
