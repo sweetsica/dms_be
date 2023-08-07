@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,12 +12,12 @@ class Customer extends Model
     public $timestamps = false;
     protected $table = 'customers';
     protected $fillable = [
-        // 'code',
+        'code',
         'name',
         'phone',
         'email',
         'personContact',
-        'comanyName',
+        'companyName',
         'career',
         'taxCode',
         'companyPhoneNumber',
@@ -30,7 +31,7 @@ class Customer extends Model
         'personId',
         'productId',
         'routeId',
-        'groupId',
+        'group',
         'chanelId',
         'status',
     ];
@@ -40,8 +41,20 @@ class Customer extends Model
         return $this->belongsTo(RouteDirection::class, 'routeId');
     }
 
-    public function favoriteProducts()
+    public function products()
     {
-        return $this->hasMany(Product::class, 'productId');
+        $productIds = json_decode($this->productId);
+
+        return Product::whereIn('id', $productIds)->get();
+    }
+
+    public function person()
+    {
+        return $this->belongsTo(Personnel::class, 'personId');
+    }
+
+    public function channel()
+    {
+        return $this->belongsTo(Department::class, 'chanelId');
     }
 }

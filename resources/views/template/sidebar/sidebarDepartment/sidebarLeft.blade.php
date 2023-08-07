@@ -13,21 +13,21 @@
                                 <li style=" margin: 5px; padding: 0;">
                                     <div class="d-flex align-items-center"
                                         style=" background-color: #EBEBEB; height: 30px; display: flex; font-size: 15px; border-radius: 5px;">
-                                        <a href="{{ route('department.index') }}"
+                                        <a href="{{ route('Personnel.index') }}"
                                             style="color:black;padding-left:10px;">Cơ cấu tổ chức</a>
                                     </div>
                                 </li>
                                 <li style=" margin: 5px; padding: 0;">
                                     <div class="d-flex align-items-center"
                                         style=" background-color: #EBEBEB; height: 30px; display: flex; font-size: 15px; border-radius: 5px;">
-                                        <a href="{{ route('position.index') }} "
+                                        <a href="{{ route('Personnel.indexvtri') }} "
                                             style="color:black;padding-left:10px;">Cơ cấu chức danh</a>
                                     </div>
                                 </li>
                                 <li style=" margin: 5px; padding: 0;">
                                     <div class="d-flex align-items-center"
                                         style=" background-color: #EBEBEB; height: 30px; display: flex; font-size: 15px; border-radius: 5px;">
-                                        <a href="{{ route('area.index') }}" style="color:black;padding-left:10px;">Cơ
+                                        <a href="{{ route('Personnel.index') }}" style="color:black;padding-left:10px;">Cơ
                                             cấu địa bàn</a>
                                     </div>
                                 </li>
@@ -51,11 +51,11 @@
                         <b>Cơ cấu tổ chức</b>
                     </div>
                     <br>
-                    <div>
+                    <div class="wapper-tree">
                         <ul id="tree1">
                             @foreach ($departmentListTree as $donVi)
                                 <li>
-                                    <a href="#" class="title-child">{{ $donVi->name }}</a>
+                                    <a href="{{ route('Personnel.show',$donVi->id) }}" class="title-child">{{ $donVi->name }}</a>
                                     @if ($donVi->donViCon->count() > 0)
                                         @include('template.sidebar.sidebarDepartment.child', [
                                             'donViCon' => $donVi->donViCon,
@@ -74,6 +74,15 @@
 </div>
 
 <style>
+    ul {
+        padding: 0;
+    }
+
+    .wapper-tree {
+        height: calc(100vh - 210px);
+        overflow: auto;
+    }
+
     .title-child {
         font-size: 14px;
         color: #ca1f24;
@@ -195,12 +204,12 @@
                     });
                 });
                 //fire event to open branch if the li contains an anchor instead of text
-                tree.find('.branch>a').each(function() {
-                    $(this).on('click', function(e) {
-                        $(this).closest('li').click();
-                        e.preventDefault();
-                    });
-                });
+                // tree.find('.branch>a').each(function() {
+                //     $(this).on('click', function(e) {
+                //         $(this).closest('li').click();
+                //         e.preventDefault();
+                //     });
+                // });
             }
         });
 

@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class RouteDirection extends Model
 {
     use HasFactory;
-    protected $table = 'routeDirections';
+    public $timestamps = false;
+    protected $table = 'route_directions';
     protected $fillable = [
         'name',
         'code',
@@ -18,8 +19,13 @@ class RouteDirection extends Model
         'description',
     ];
 
-    public function customers()
+    public function personnel()
     {
-        return $this->hasMany(Customer::class, 'routeId');
+        return $this->belongsTo(Personnel::class, 'personId');
+    }
+    
+    public function areas()
+    {
+        return $this->belongsTo(Area::class, 'areaId');
     }
 }

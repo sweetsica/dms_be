@@ -167,7 +167,7 @@
                                                                                         name="name" type="text"
                                                                                         placeholder="Tên đơn vị"
                                                                                         class="form-control"
-                                                                                        value="{{ $item->name }}">
+                                                                                        value="{{ $item->name }}" required>
                                                                                 </div>
                                                                                 <div class="col-6 mb-3">
                                                                                     <input data-bs-toggle="tooltip"
@@ -176,7 +176,7 @@
                                                                                         type="text"
                                                                                         placeholder="Mã đơn vị"
                                                                                         class="form-control"
-                                                                                        value="{{ $item->code }}">
+                                                                                        value="{{ $item->code }}" required>
                                                                                 </div>
                                                                                 <div class="col-6 mb-3">
 
@@ -186,17 +186,18 @@
                                                                                         <select name="parent" required
                                                                                             class="selectpicker"
                                                                                             data-dropup-auto="false">
-                                                                                            <?php if( $item->parent == null){ ?>
-                                                                                            <option>Chọn đơn vị mẹ</option>
+                                                                                            <?php if( $item->parent == 0){ ?>
+                                                                                            <option value="0">Chọn đơn vị mẹ</option>
                                                                                             <?php
                                                                                             }else{ ?>
-                                                                                            <?php } ?>
-                                                                                            <option
+                                                                                                <option
                                                                                                 value="{{ $item->parent }}">
                                                                                                 @if ($item->donvime)
                                                                                                     {{ $item->donvime->name }}
                                                                                                 @endif
                                                                                             </option>
+                                                                                            <?php } ?>
+                                                                                            <option value="0">Chọn đơn vị mẹ</option>
                                                                                             @foreach ($departmentlists as $ac)
                                                                                                 <option
                                                                                                     value="{{ $ac->id }}">
@@ -221,19 +222,20 @@
                                                                                         <select name="ib_lead"
                                                                                             class="selectpicker"
                                                                                             data-dropup-auto="false">
-                                                                                            <?php if( $item->ib_lead == null){ ?>
-                                                                                            <option>Chọn trưởng bộ phận
+                                                                                            <?php if( $item->ib_lead == 0){ ?>
+                                                                                            <option value="0">Chọn trưởng bộ phận
                                                                                             </option>
                                                                                             <?php }else{ ?>
-                                                                                            <?php } ?>
-                                                                                            <option
+                                                                                                <option
                                                                                                 value="{{ $item->ib_lead }}">
                                                                                                 {{ $item->leader_name }}
                                                                                             </option>
+                                                                                            <?php } ?>
+
                                                                                             @foreach ($UnitLeaderList as $av)
                                                                                                 <option
                                                                                                     value="{{ $av->id }}">
-                                                                                                    {{ $av->leader_name }}
+                                                                                                    {{ $av->name }}
                                                                                                 </option>
                                                                                             @endforeach
                                                                                         </select>
@@ -299,6 +301,7 @@
                                                     <ul class="pagination">
                                                         {{ $departmentList->appends([
                                                                 'search' => $search,
+
                                                             ])->links() }}
                                                     </ul>
                                                 </nav>
@@ -378,10 +381,10 @@
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn trưởng bộ phận">
                                     <select name="ib_lead" required class="selectpicker" data-dropup-auto="false">
-                                        <option value="">Chọn trưởng bộ phận</option>
+                                        <option value="0">Chọn trưởng bộ phận</option>
                                         @foreach ($UnitLeaderList as $item)
                                             <option value="{{ $item->id }}">
-                                                {{ $item->leader_name }}
+                                                {{ $item->name }}
                                             </option>
                                         @endforeach
                                     </select>

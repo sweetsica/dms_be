@@ -10,14 +10,14 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('routeDirections', function (Blueprint $table) {
+        Schema::create('route_directions', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255);
             $table->string('code', 255);
-            $table->timestamp('travel_time')->nullable();
+            $table->string('travel_time', 255);
             $table->unsignedBigInteger('personId');
             $table->unsignedBigInteger('areaId');
-            $table->string('description', 255);
+            $table->text('description')->nullable();
             // $table->timestamps();
         });
     }

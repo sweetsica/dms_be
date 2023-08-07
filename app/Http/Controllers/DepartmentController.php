@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
+use App\Models\Personnel;
 use App\Models\UnitLeader;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class DepartmentController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search');
-        $departmentList = Department::leftJoin('unit_leader', 'unit_leader.id', '=', 'department.ib_lead')
+        $departmentList = Department::leftJoin('personnel', 'personnel.id', '=', 'department.ib_lead')
             ->select(
                 'department.id',
                 'department.name',
@@ -20,13 +21,14 @@ class DepartmentController extends Controller
                 'department.code',
                 'department.parent',
                 'department.ib_lead',
-                'unit_leader.leader_name'
+                'personnel.name as leader_name'
             )
             ->where("department.code", "like", "%$search%")->paginate(10);
         // dd($departmentList);
-        $UnitLeaderList = UnitLeader::all();
+        $UnitLeaderList = Personnel::all();
 
         $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
+        // dd($departmentListTree);
         $departmentlists = $this->getDepartment();
 
         return view("Deparment.index", [

@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
+            $table->string('code', 255);
             $table->string('name', 255);
             $table->string('phone', 255);
             $table->string('email', 255);
@@ -23,19 +24,22 @@ return new class extends Migration {
             $table->string('companyEmail', 255)->nullable();
             $table->string('accountNumber', 255)->nullable();
             $table->string('bankOpen', 255)->nullable();
+            $table->string('group', 255);
             $table->unsignedBigInteger('routeId');
             $table->unsignedBigInteger('chanelId');
-            $table->unsignedBigInteger('groupId');
             $table->string('status');
             $table->unsignedBigInteger('personId');
-            $table->unsignedBigInteger('productId');
+            $table->text('productId');
             $table->string('city');
             $table->string('district');
             $table->string('guide');
             $table->string('address');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('deleted_at')->nullable();
-            // $table->foreign('productId')->references('id')->on('products');
+            
+            $table->foreign('routeId')->references('id')->on('route_directions')->onDelete('cascade');
+            $table->foreign('chanelId')->references('id')->on('department')->onDelete('cascade');
+            $table->foreign('personId')->references('id')->on('personnel')->onDelete('cascade');
         });
     }
 

@@ -15,10 +15,44 @@ class CustomerGroupController extends Controller
         $search = $request->get('search');
 
         $CustomerGroupList = CustomerGroup::where("customer_group.code", "like", "%$search%")->paginate(5);
+        
         $positionListTree = Position::where('parent', 0)->with('donViCon')->get();
         return view('nhom_khach_hang.index', [
             'search' => $search,
-
+            'customerGroupList'=>$CustomerGroupList,
+            'positionListTree'=> $positionListTree,
         ]);
     }
+
+    public function store(Request $request){
+        $name = $request->get('name');
+        $code = $request->get('code');
+        $description = $request->get('description');
+        $data = new CustomerGroup();
+        $data->name = $name;
+        $data->code = $code;
+        $data->description = $description;
+        $data->save();
+        return redirect()->route('CustomerGroup.index');
+    }
+
+    public function update(Request $request,$id)
+    {
+        $name = $request->get('name');
+        $code = $request->get('code');
+        $description = $request->get('description');
+        $data = CustomerGroup::find($id);
+        $data->name = $name;
+        $data->code = $code;
+        $data->description = $description;
+        $data->save();
+        return redirect()->route('CustomerGroup.index');
+    }
+
+    public function destroy($id)
+    {
+        CustomerGroup::destroy($id);
+        return redirect()->back()->with('mess', 'Đã xóa!');
+    }
+
 }
