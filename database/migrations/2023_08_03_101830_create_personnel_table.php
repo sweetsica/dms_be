@@ -21,7 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('role_id')->nullable();
             $table->unsignedBigInteger('area_id')->nullable();
             $table->string('email', 50);
-            $table->integer('phone');
+            $table->string('phone', 50);
             $table->string('working_form', 50);
             $table->string('status', 50);
             $table->string('password', 255);
