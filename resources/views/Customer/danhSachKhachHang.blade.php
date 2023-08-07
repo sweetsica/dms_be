@@ -3,6 +3,48 @@
 @section('title', 'Danh sách khách hàng')
 @section('header-style')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+    crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+    integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+    crossorigin=""></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+    #sethPhatMap {
+        width: 100%;
+        height: 600px;
+        position: inherit;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .map-popup-content {
+        width: 300px;
+    }
+
+    .map-popup-content .left {
+        float: left;
+        width: 40%;
+    }
+
+    .map-popup-content .left img {
+        width: 100%;
+        height: 100px;
+        margin: -15px 0 -15px -20px;
+        border-radius: 12px;
+    }
+
+    .map-popup-content .right {
+        float: left;
+        width: 60%;
+    }
+
+    .clearfix {
+        clear: both;
+    }
+</style>
 <style>
 
 </style>
@@ -628,9 +670,12 @@
                         </div>
                         <div class="col-md-12 mb-3">
                             <input type="text" name="address" data-bs-toggle="tooltip" required data-bs-placement="top"
-                                title="Địa chỉ" placeholder="Địa chỉ*" class="form-control">
+                                title="Địa chỉ" placeholder="Địa chỉ*" class="form-control" id="addressInput" style="width: 80%; display: inline-block;">
+                            <button type="button" class="btn btn-danger" id="searchButton" style="display: inline-block; width: 17%; margin-left: 2%;">Tìm kiếm</button>
                         </div>
-
+                        <div class="col-md-12 mb-3">
+                            <div id="sethPhatMap"></div>
+                        </div>
                         <div class="col-md-12 mb-3">
                             <div class="card-title">4. Mô tả</div>
                         </div>
@@ -926,6 +971,86 @@
             .catch((error) => console.error('Lỗi khi gọi API:', error));
     }
     window.addEventListener('load', loadRouteData);
+
+</script>
+
+<script>
+    var mapObj = null;
+    var zoomLevel = 7;
+    // var defaultCoord = [10.7743, 106.6669]
+    var mapConfig = {
+        attributionControl: true,
+        // center: defaultCoord,
+        zoom: zoomLevel,
+    };
+    window.onload = function () {
+        // init map
+        mapObj = L.map('sethPhatMap', mapConfig);
+
+        // add tile để map có thể hoạt động
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(mapObj);
+
+    }
+    document.getElementById('searchButton').addEventListener('click', function () {
+        mapObj.invalidateSize();
+        var address = document.getElementById('addressInput').value;
+        var xhr = new XMLHttpRequest();
+        var url = nominatimUrl = 'https://nominatim.openstreetmap.org/search?q=' + encodeURI(address) + '&format=json';
+        $.ajax({
+            url: nominatimUrl,
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                if (data.length > 0) {
+                    var result = data[0];
+                    var name = result.display_name;
+                    var lat = parseFloat(result.lat);
+                    var lon = parseFloat(result.lon);
+
+                    // Tạo marker với kết quả tìm kiếm
+                    addMarker([lat, lon], name, {}, {
+                        title: name
+                    });
+
+                    // Di chuyển tới vị trí tìm kiếm
+                    mapObj.setView([lat, lon], 10);
+                } else {
+                    alert('Không tìm thấy kết quả phù hợp.');
+                    // Sử dụng defaultCoord nếu không tìm thấy kết quả phù hợp
+                    mapObj.setView(defaultCoord, zoomLevel);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert('Đã xảy ra lỗi trong quá trình tìm kiếm.');
+                // Sử dụng defaultCoord nếu có lỗi trong quá trình tìm kiếm
+                mapObj.setView(defaultCoord, zoomLevel);
+            }
+        });
+        // tạo marker
+        var popupOption = {
+            className: "map-popup-content",
+        };
+        function addMarker(coord, popupContent, popupOptionObj, markerObj) {
+            if (!popupOptionObj) {
+                popupOptionObj = {};
+            }
+            if (!markerObj) {
+                markerObj = {};
+            }
+
+            var marker = L.marker(coord, markerObj).addTo(mapObj);
+            var popup = L.popup(popupOptionObj);
+            popup.setContent(popupContent);
+
+            // binding
+            marker.bindPopup(popup);
+
+            return marker;
+        }
+    });
+
 
 </script>
 @endsection
