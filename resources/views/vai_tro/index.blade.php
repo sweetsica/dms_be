@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-    @include('template.sidebar.sidebarPosition.sidebarLeft')
+    @include('template.sidebar.sidebarDepartment.sidebarLeft')
     <div id="mainWrap" class="mainWrap">
         <div class="mainSection">
             <div class="main">
@@ -121,31 +121,34 @@
                                                                             data-bs-dismiss="modal"
                                                                             aria-label="Close"></button>
                                                                     </div>
-                                                                    <form method="POST" action="{{route('Rolex.update', $item->id)}}">
+                                                                    <form method="POST"
+                                                                        action="{{ route('Rolex.update', $item->id) }}">
                                                                         @csrf
                                                                         <div class="modal-body">
                                                                             <div class="row">
                                                                                 <div class="col-6 mb-3">
                                                                                     <input data-bs-toggle="tooltip" required
                                                                                         data-bs-placement="top"
-                                                                                        title="Nhập tên vai trò*" name="name"
-                                                                                        type="text" placeholder="Nhập tên vai trò"
+                                                                                        title="Nhập tên vai trò*"
+                                                                                        name="name" type="text"
+                                                                                        placeholder="Nhập tên vai trò"
                                                                                         class="form-control"
-                                                                                        value="{{$item->name}}">
+                                                                                        value="{{ $item->name }}">
                                                                                 </div>
                                                                                 <div class="col-6 mb-3">
-                                                                                    <input data-bs-toggle="tooltip" required
-                                                                                        data-bs-placement="top"
-                                                                                        title="Nhập mã vai trò*" name="code"
-                                                                                        type="text" placeholder="Nhập mã vai trò"
+                                                                                    <input data-bs-toggle="tooltip"
+                                                                                        required data-bs-placement="top"
+                                                                                        title="Nhập mã vai trò*"
+                                                                                        name="code" type="text"
+                                                                                        placeholder="Nhập mã vai trò"
                                                                                         class="form-control"
-                                                                                        value="{{$item->code}}">
+                                                                                        value="{{ $item->code }}">
                                                                                 </div>
                                                                                 <div class="col-6 mb-3">
-                                                                                    <div data-bs-toggle="tooltip" data-bs-placement="top" >
-                                                                                        <textarea name="description" type="text" placeholder="Chức năng nhiệm vụ"
-                                                                                            class="form-control " data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                                            title="Mô tả" style="width: 450px;height: 80px;">{{ $item->description }}</textarea>
+                                                                                    <div data-bs-toggle="tooltip"
+                                                                                        data-bs-placement="top">
+                                                                                        <textarea name="description" type="text" placeholder="Chức năng nhiệm vụ" class="form-control "
+                                                                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Mô tả" style="width: 450px;height: 80px;">{{ $item->description }}</textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -183,7 +186,7 @@
                                                                             class="btn btn-outline-danger"
                                                                             data-bs-dismiss="modal">Hủy</button>
                                                                         <form
-                                                                            action="{{route('Role.destroy', $item->id)}}"
+                                                                            action="{{ route('Role.destroy', $item->id) }}"
                                                                             method="POST">
                                                                             @csrf
                                                                             <button type="submit"

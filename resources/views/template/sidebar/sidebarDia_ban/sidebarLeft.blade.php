@@ -5,7 +5,7 @@
                 <div class="sidebarBody_wrapper ">
                     <div class="sidebarBody_heading-wrapper  ">
                         <div class="wrapper">
-                            <h1 style="color: red;">Cơ cấu đơn vị<img src="{{ asset('assets/img/Vector.png') }}"
+                            <h1 style="color: red;">Cơ cấu đơn vị <img src="{{ asset('assets/img/Vector.png') }}"
                                     onclick="showList()" id="show-list-button" style="float: right"></h1>
                         </div>
                         <div id="list-container" style="display: none;">
@@ -34,7 +34,7 @@
                             </ul>
                         </div>
                     </div>
-                    <title>Danh sách vị trí</title>
+                    <title>Danh sách đơn vị</title>
                     <hr>
                     <div class="d-flex justify-content-between align-items-center">
                         <form method="GET" action="">
@@ -44,26 +44,28 @@
                                     value="{{ $search }}" placeholder="Tìm kiếm" name="search">
                             </div>
                         </form>
-                    </div><br>
-                    <div class="d-flex align-items-center"
-                        style=" background-color: #EBEBEB; height: 40px; display: flex; justify-content: center; font-size: 15px;">
-                        <b>Cơ cấu chức danh</b>
                     </div>
                     <br>
-                    <div class="wapper-tree">
+                    <div class="d-flex align-items-center"
+                        style=" background-color: #EBEBEB; height: 40px; display: flex; justify-content: center; font-size: 15px;">
+                        <b>Cơ cấu địa bàn</b>
+                    </div>
+                    <br>
+                    {{-- Cây sơ đồ --}}
+                    {{-- <div class="wapper-tree">
                         <ul id="tree1">
-                            @foreach ($positionListTree as $donVi)
-                                <li class="parent" style=" margin: 10px; padding: 0;">
+                            @foreach ($departmentListTree as $donVi)
+                                <li>
                                     <a href="#" class="title-child">{{ $donVi->name }}</a>
                                     @if ($donVi->donViCon->count() > 0)
-                                        @include('template.sidebar.sidebarPosition.child', [
+                                        @include('template.sidebar.sidebarDepartment.child', [
                                             'donViCon' => $donVi->donViCon,
                                         ])
                                     @endif
                                 </li>
                             @endforeach
                         </ul>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -200,13 +202,6 @@
                 tree.find('.branch .indicator').each(function() {
                     $(this).on('click', function() {
                         $(this).closest('li').click();
-                    });
-                });
-                //fire event to open branch if the li contains an anchor instead of text
-                tree.find('.branch>a').each(function() {
-                    $(this).on('click', function(e) {
-                        $(this).closest('li').click();
-                        e.preventDefault();
                     });
                 });
             }

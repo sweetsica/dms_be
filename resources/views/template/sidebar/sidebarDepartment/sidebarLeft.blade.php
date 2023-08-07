@@ -74,6 +74,10 @@
 </div>
 
 <style>
+    ul {
+        padding: 0;
+    }
+
     .wapper-tree {
         height: calc(100vh - 210px);
         overflow: auto;
@@ -197,13 +201,6 @@
                 tree.find('.branch .indicator').each(function() {
                     $(this).on('click', function() {
                         $(this).closest('li').click();
-                    });
-                });
-                //fire event to open branch if the li contains an anchor instead of text
-                tree.find('.branch>a').each(function() {
-                    $(this).on('click', function(e) {
-                        $(this).closest('li').click();
-                        e.preventDefault();
                     });
                 });
             }

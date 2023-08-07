@@ -36,7 +36,7 @@
     
 @endphp
 @section('content')
-    @include('template.sidebar.sidebarMaster.sidebarLeft')
+    @include('template.sidebar.sidebarDia_ban.sidebarLeft')
     <div id="mainWrap" class="mainWrap">
         <div class="mainSection">
             <div class="main">
@@ -362,7 +362,9 @@
                                 </div>
                             </div>
                             @php
-                                $customers = \App\Models\Customer::where('routeId', $item->id)->with('person')->get();
+                                $customers = \App\Models\Customer::where('routeId', $item->id)
+                                    ->with('person')
+                                    ->get();
                             @endphp
                             <div class="col-sm-12 mt-3">
                                 <div class="d-flex align-items-center">
@@ -422,28 +424,31 @@
                                                             <td class="text-nowrap">
                                                                 <div class="text-nowrap d-block text-truncate"
                                                                     style="max-width:565px;" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top" title="{{ $cus->person->name }} - {{ $cus->person->code }}">
+                                                                    data-bs-placement="top"
+                                                                    title="{{ $cus->person->name }} - {{ $cus->person->code }}">
                                                                     {{ $cus->person->name }} - {{ $cus->person->code }}
                                                                 </div>
                                                             </td>
                                                             <td class="text-nowrap">
                                                                 <div class="text-nowrap text-center d-block text-truncate"
                                                                     style="max-width:565px;" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top" title="Nhóm {{ $cus->groupId }}">
+                                                                    data-bs-placement="top"
+                                                                    title="Nhóm {{ $cus->groupId }}">
                                                                     Nhóm {{ $cus->groupId }}
                                                                 </div>
                                                             </td>
                                                             <td class="text-nowrap">
                                                                 <div class="text-nowrap text-center d-block text-truncate"
                                                                     style="max-width:565px;" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top" title="{{ $cus->channel->name }}">
+                                                                    data-bs-placement="top"
+                                                                    title="{{ $cus->channel->name }}">
                                                                     {{ $cus->channel->name }}
                                                                 </div>
                                                             </td>
                                                         @empty
-                                                        <td colspan="7" class="text-center">
-                                                            Chưa có khách hàng nào thuộc tuyến này
-                                                        </td>
+                                                            <td colspan="7" class="text-center">
+                                                                Chưa có khách hàng nào thuộc tuyến này
+                                                            </td>
                                                         @endforelse
 
                                                     </tr>
