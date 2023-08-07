@@ -8,21 +8,21 @@
     </style>
 @endsection
 @php
-
+    
     // function getPaginationLink($link, $pageName)
     // {
     //     if (!isset($link->url)) {
     //         return '#';
     //     }
-
+    
     //     $pageNumber = explode('?page=', $link->url)[1];
-
+    
     //     $queryString = request()->query();
-
+    
     //     $queryString[$pageName] = $pageNumber;
     //     return route('timekeeping.list', $queryString);
     // }
-
+    
     // function isFiltering($filterNames)
     // {
     //     $filters = request()->query();
@@ -33,15 +33,13 @@
     //     }
     //     return false;
     // }
-
-    $listData = [
-        ['id' => 1, 'code' => 'tuyen01', 'name' => 'Địa bàn 2', 'usermanager' => 'Nguyễn Văn A - TBHT00', "email" => 'Cầu Giấy', 'nhom' => '2', 'kenh' => 'OTC',],
-        ['id' => 2, 'code' => 'tuyen01', 'name' => 'Địa bàn 3', 'usermanager' => 'Nguyễn Văn B - MTDH01', "email" => 'Thanh Xuân', 'nhom' => '3', 'kenh' => 'ETC',]
-    ];
-
+    
+    $listData = [['id' => 1, 'code' => 'tuyen01', 'name' => 'Địa bàn 2', 'usermanager' => 'Nguyễn Văn A - TBHT00', 'email' => 'Cầu Giấy', 'nhom' => '2', 'kenh' => 'OTC'], ['id' => 2, 'code' => 'tuyen01', 'name' => 'Địa bàn 3', 'usermanager' => 'Nguyễn Văn B - MTDH01', 'email' => 'Thanh Xuân', 'nhom' => '3', 'kenh' => 'ETC']];
+    
 @endphp
 @section('content')
-    @include('template.sidebar.sidebarMaster.sidebarLeft')
+    @include('template.sidebar.sidebarDia_ban.sidebarLeft')
+
     <div id="mainWrap" class="mainWrap">
         <div class="mainSection">
             <div class="main">
@@ -68,7 +66,7 @@
                                                     <div class="form-group has-search">
                                                         <span type="submit"
                                                             class="bi bi-search form-control-feedback fs-5"></span>
-                                                            <input type="text" style="width: 150px; float: right;"
+                                                        <input type="text" style="width: 150px; float: right;"
                                                             class="form-control" value="{{ $search }}"
                                                             placeholder="Tìm kiếm" name="search">
                                                     </div>
@@ -88,12 +86,16 @@
                                                 class="btn-export"><i class="bi bi-download"></i></a>
                                         </div> --}}
 
-                                        <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Thêm địa bàn" data-bs-original-title="Thêm địa bàn">
-                                            <button class="btn btn-danger d-block testCreateUser" data-bs-toggle="modal" data-bs-target="#add">Thêm địa bàn</button>
+                                        <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            aria-label="Thêm địa bàn" data-bs-original-title="Thêm địa bàn">
+                                            <button class="btn btn-danger d-block testCreateUser" data-bs-toggle="modal"
+                                                data-bs-target="#add">Thêm địa bàn</button>
                                         </div>
                                     </div>
                                     <div class="table-responsive">
-                                        <table id="dsDaoTao" class="table table-responsive table-hover table-bordered filter" style="width: 100%">
+                                        <table id="dsDaoTao"
+                                            class="table table-responsive table-hover table-bordered filter"
+                                            style="width: 100%">
                                             <thead>
                                                 <tr>
                                                     <th class="text-nowrap text-center" style="width:3%">STT</th>
@@ -105,67 +107,78 @@
 
                                                 </tr>
                                             </thead>
+                                            <?php $a = 1; ?>
                                             <tbody>
-                                                @foreach($localityList as $item)
-                                                <tr class="table-row" role="button">
+                                                @foreach ($localityList as $item)
+                                                    <tr class="table-row" role="button">
 
-                                                    <td>
-                                                        <div class="overText text-center">
-                                                            {{ $item->id }}
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="overText" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->code }}">
-                                                            {{ $item->code }}
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="overText" data-bs-toggle="tooltip" data-bs-placement="top" title=" {{ $item->name }}">
-                                                            {{ $item->name }}
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="overText" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->area_name }}">
-                                                            {{ $item->area_name }}
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="overText" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item->description }}">
-                                                            {{ $item->description }}
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="table_actions d-flex justify-content-center">
-                                                            <div data-bs-toggle="tooltip"
-                                                            data-bs-placement="top" title="Sửa">
-                                                            <div class="btn test_btn-edit-{{ $item['id'] }}" href="#" data-bs-toggle="modal" data-bs-target="#suaca{{ $item['id'] }}" >
-                                                                <img style="width:16px;height:16px" src="{{ asset('assets/img/edit.svg') }}" />
+                                                        <td>
+                                                            <div class="overText text-center">
+                                                                {{ $a++ }}
                                                             </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="overText" data-bs-toggle="tooltip"
+                                                                data-bs-placement="top" title="{{ $item->code }}">
+                                                                {{ $item->code }}
                                                             </div>
-                                                            <div data-bs-toggle="tooltip"
-                                                            data-bs-placement="top" title="Xóa">
-                                                            <div class="btn test_btn-remove-{{ $item['id'] }}" href="#" data-bs-toggle="modal" data-bs-target="#xoaca{{ $item['id'] }}">
-                                                                <img style="width:16px;height:16px" src="{{ asset('assets/img/trash.svg') }}" />
+                                                        </td>
+                                                        <td>
+                                                            <div class="overText" data-bs-toggle="tooltip"
+                                                                data-bs-placement="top" title=" {{ $item->name }}">
+                                                                {{ $item->name }}
                                                             </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="overText" data-bs-toggle="tooltip"
+                                                                data-bs-placement="top" title="{{ $item->area_name }}">
+                                                                {{ $item->area_name }}
                                                             </div>
-                                                        </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="overText" data-bs-toggle="tooltip"
+                                                                data-bs-placement="top" title="{{ $item->description }}">
+                                                                {{ $item->description }}
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="table_actions d-flex justify-content-center">
+                                                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                    title="Sửa">
+                                                                    <div class="btn test_btn-edit-{{ $item['id'] }}"
+                                                                        href="#" data-bs-toggle="modal"
+                                                                        data-bs-target="#suaca{{ $item['id'] }}">
+                                                                        <img style="width:16px;height:16px"
+                                                                            src="{{ asset('assets/img/edit.svg') }}" />
+                                                                    </div>
+                                                                </div>
+                                                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                    title="Xóa">
+                                                                    <div class="btn test_btn-remove-{{ $item['id'] }}"
+                                                                        href="#" data-bs-toggle="modal"
+                                                                        data-bs-target="#xoaca{{ $item['id'] }}">
+                                                                        <img style="width:16px;height:16px"
+                                                                            src="{{ asset('assets/img/trash.svg') }}" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
 
 
-                                                    </td>
-                                                </tr>
+                                                        </td>
+                                                    </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
-                                        <nav aria-label="Page navigation example" class="float-end mt-3" id="target-pagination">
+                                        <nav aria-label="Page navigation example" class="float-end mt-3"
+                                            id="target-pagination">
                                             <ul class="pagination">
                                                 {{ $localityList->appends([
-                                                    'search' => $search,
-                                                ])->links() }}
+                                                        'search' => $search,
+                                                    ])->links() }}
                                             </ul>
                                         </nav>
                                     </div>
-                                    <nav aria-label="Page navigation example" class="float-end mt-3"
-                                        id="target-pagination">
+                                    <nav aria-label="Page navigation example" class="float-end mt-3" id="target-pagination">
                                         <ul class="pagination">
                                             {{-- @foreach ($listUsers->links as $link)
                                                 <li class="page-item {{ $link->active ? 'active' : '' }}">
@@ -187,77 +200,86 @@
     </div>
     @include('template.sidebar.sidebarMaster.sidebarRight')
 
-    @foreach($localityList as $item)
-    {{-- delete --}}
-    <div class="modal fade" id="xoaca{{ $item['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">XOÁ ĐỊA BÀN</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    @foreach ($localityList as $item)
+        {{-- delete --}}
+        <div class="modal fade" id="xoaca{{ $item['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h5 class="modal-title w-100" id="exampleModalLabel">XOÁ ĐỊA BÀN</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="fs-5">Bạn có thực sự muốn xoá địa bàn không?</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
+                        <form action="{{ route('locality.destroy', $item->id) }}" method="POST">
+                            @csrf
+                            {{-- @method('DELETE') --}}
+                            <button type="submit" class="btn btn-danger" id="deleteRowElement">
+                                xóa</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <div class="fs-5">Bạn có thực sự muốn xoá địa bàn không?</div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
-                    <form action="{{ route('locality.destroy',$item->id)}}" method="POST">
+            </div>
+        </div>
+        {{-- edit --}}
+        <div class="modal fade" id="suaca{{ $item['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h5 class="modal-title w-100" id="exampleModalLabel">Sửa thông tin địa bàn</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form id="formThemCapPhat" method="POST" action="{{ route('locality.update', $item->id) }}">
                         @csrf
-                        {{-- @method('DELETE') --}}
-                        <button type="submit" class="btn btn-danger" id="deleteRowElement">
-                            xóa</button>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" value="{{ $item->name }}" name="name"
+                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên địa bàn"
+                                        placeholder="Tên địa bàn*" class="form-control">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" value="{{ $item->code }}" name="code"
+                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã địa bàn"
+                                        placeholder="Mã địa bàn*" class="form-control">
+                                </div>
+                                <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Khu vực">
+                                    {{-- <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Khu vực*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="1" selected>1</option>
+                                </select> --}}
+                                    <select name="area_id" required class="selectpicker" data-dropup-auto="false">
+                                        <option value="{{ $item->area_id }}">{{ $item->area_name }}</option>
+                                        @foreach ($area as $ar)
+                                            <option value="{{ $ar->id }}">
+                                                {{ $ar->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" value="{{ $item->description }}" name="description"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Ghi chú"
+                                        placeholder="Ghi chú" class="form-control">
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger me-3"
+                                data-bs-dismiss="modal">Hủy</button>
+                            <button type="submit" class="btn btn-danger">Lưu</button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
-    {{-- edit --}}
-    <div class="modal fade" id="suaca{{ $item['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">Sửa thông tin địa bàn</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form id="formThemCapPhat" method="POST" action="{{ route('locality.update',$item->id)}}">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <input type="text" value="{{$item->name}}" name="name" data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên địa bàn" placeholder="Tên địa bàn*" class="form-control">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <input type="text" value="{{$item->code}}"  name="code" data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã địa bàn" placeholder="Mã địa bàn*" class="form-control">
-                            </div>
-                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Khu vực">
-                                {{-- <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Khu vực*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
-                                    <option value="1" selected>1</option>
-                                </select> --}}
-                                <select name="area_id" required class="selectpicker" data-dropup-auto="false">
-                                    <option value="{{$item->area_id}}" >{{$item->area_name}}</option>
-                                @foreach ($area as $ar)
-                                    <option value="{{$ar->id}}">
-                                        {{$ar->name}}
-                                    </option>
-                                @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <input type="text" value="{{$item->description}}"  name="description" data-bs-toggle="tooltip" data-bs-placement="top" title="Ghi chú" placeholder="Ghi chú" class="form-control">
-                            </div>
-
-
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
-                        <button type="submit" class="btn btn-danger">Lưu</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
     @endforeach
 
     <!-- Modal thêm  -->
@@ -268,15 +290,19 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Thêm địa bàn</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="formThemCapPhat" method="POST" action="{{ route('locality.store')}}">
+                <form id="formThemCapPhat" method="POST" action="{{ route('locality.store') }}">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <input type="text" name="name" data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên địa bàn" placeholder="Tên địa bàn*" class="form-control">
+                                <input type="text" name="name" data-bs-toggle="tooltip" required
+                                    data-bs-placement="top" title="Tên địa bàn" placeholder="Tên địa bàn*"
+                                    class="form-control">
                             </div>
                             <div class="col-md-6 mb-3">
-                                <input type="text" name="code" data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã địa bàn" placeholder="Mã địa bàn*" class="form-control">
+                                <input type="text" name="code" data-bs-toggle="tooltip" required
+                                    data-bs-placement="top" title="Mã địa bàn" placeholder="Mã địa bàn*"
+                                    class="form-control">
                             </div>
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Khu vực">
                                 {{-- <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Khu vực*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
@@ -285,14 +311,15 @@
                                 <select name="area_id" required class="selectpicker" data-dropup-auto="false">
                                     <option value="">Chọn khu vực*</option>
                                     @foreach ($area as $item)
-                                        <option value="{{$item->id}}">
-                                            {{$item->name}}
+                                        <option value="{{ $item->id }}">
+                                            {{ $item->name }}
                                         </option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <input type="text" name="description" data-bs-toggle="tooltip" data-bs-placement="top" title="Ghi chú" placeholder="Ghi chú" class="form-control">
+                                <input type="text" name="description" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="Ghi chú" placeholder="Ghi chú" class="form-control">
                             </div>
 
 
@@ -313,13 +340,14 @@
 @endsection
 @section('footer-script')
 
-        <!-- Plugins -->
-         <script src="{{ asset('assets/plugins/jquery-datetimepicker/custom-datetimepicker.js') }}"></script>
+    <!-- Plugins -->
+    <script src="{{ asset('assets/plugins/jquery-datetimepicker/custom-datetimepicker.js') }}"></script>
 
-        <script type="text/javascript" charset="utf-8" src="https://cdn.datatables.net/fixedcolumns/4.2.2/js/dataTables.fixedColumns.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
-        <script type="text/javascript" src="{{ asset('assets/plugins/jquery-repeater/repeater.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('assets/plugins/jquery-repeater/custom-repeater.js') }}"></script>
+    <script type="text/javascript" charset="utf-8"
+        src="https://cdn.datatables.net/fixedcolumns/4.2.2/js/dataTables.fixedColumns.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/jquery-repeater/repeater.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/jquery-repeater/custom-repeater.js') }}"></script>
     <!-- Chart Js -->
     <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chart.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-stacked100@1.0.0.js') }}"></script>
@@ -469,21 +497,21 @@
 
 
 
-<script>
-    function resetTaskFilters(queryNames) {
-        console.log("reset filters", queryNames);
-        const urlParams = new URLSearchParams(window.location.search);
-        queryNames.forEach(queryName => {
+    <script>
+        function resetTaskFilters(queryNames) {
+            console.log("reset filters", queryNames);
+            const urlParams = new URLSearchParams(window.location.search);
+            queryNames.forEach(queryName => {
 
-            urlParams.delete(queryName);
+                urlParams.delete(queryName);
 
 
-        })
-        window.location.search = urlParams;
-    }
-</script>
+            })
+            window.location.search = urlParams;
+        }
+    </script>
 
-<script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
 
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}"></script>

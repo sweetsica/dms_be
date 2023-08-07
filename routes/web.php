@@ -7,6 +7,7 @@ use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\CustomController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CustomerGroupController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\LocalityController;
 use App\Http\Controllers\PersonnelController;
@@ -52,7 +53,7 @@ Route::middleware(['auth.role'])->group(function () {
     })->name('home');
 
     Route::post('/log-out', [AuthenticateController::class, 'logout'])->name('logout');
-    
+
     Route::post('/create-customer', [CustomerController::class, 'create'])->name('create-customer');
 
     Route::get('/customer', [CustomerController::class, 'view'])->name('customers');
@@ -129,9 +130,7 @@ Route::get('danh-sach-san-pham', [ProductController::class, 'index'])->name('pro
     });
 
 
-    Route::get('chi-tiet-khach-hang/{id}', function () {
-        return view('other.chiTietKhachHang');
-    });
+    Route::get('chi-tiet-khach-hang/{id}', [CustomerController::class, 'show'])->name('customer.list');
 
     Route::get('department', [DepartmentController::class, 'index'])->name('department.index');
     Route::post('department', [DepartmentController::class, 'store'])->name('department.store');
@@ -149,14 +148,27 @@ Route::get('danh-sach-san-pham', [ProductController::class, 'index'])->name('pro
     Route::post('cap_nhan_sux/{id}', [PersonnelLevelController::class, 'update'])->name('PersonnelLevel.update');
     Route::post('cap_nhan_su/{id}', [PersonnelLevelController::class, 'destroy'])->name('PersonnelLevelx.destroy');
     Route::get('nhan-su', [PersonnelController::class, 'index'])->name('Personnel.index');
+    Route::get('nhan-su-vitri', [PersonnelController::class, 'indexvtri'])->name('Personnel.indexvtri');
+    Route::post('nhan-su-vitri', [PersonnelController::class, 'store'])->name('Personnel.store.vtri');
     Route::post('nhan-su', [PersonnelController::class, 'store'])->name('Personnel.store');
     Route::post('nhan_sux/{id}', [PersonnelController::class, 'update'])->name('Personnel.update');
     Route::post('nhan_su/{id}', [PersonnelController::class, 'destroy'])->name('Personnel.destroy');
+    Route::get('nhan_suv/{department_id}', [PersonnelController::class, 'show'])->name('Personnel.show');
+    Route::get('nhan_suvtri/{position_id}', [PersonnelController::class, 'showVtri'])->name('Personnel.show.vtri');
 
     Route::get('vai-tro', [RoleController::class, 'index'])->name('Role.index');
     Route::post('vai-tro', [RoleController::class, 'store'])->name('Role.store');
     Route::post('vai-trox/{id}', [RoleController::class, 'update'])->name('Rolex.update');
     Route::post('vai-tro/{id}', [RoleController::class, 'destroy'])->name('Role.destroy');
+
+    Route::get('nhom-khach-hang', [CustomerGroupController::class, 'index'])->name('CustomerGroup.index');
+    Route::post('them-nhom-khach-hang', [CustomerGroupController::class, 'store'])->name('CustomerGroup.store');
+    Route::post('sua-nhom-khach-hang/{id}', [CustomerGroupController::class, 'update'])->name('CustomerGroup.update');
+    Route::post('xoa-nhom-khach-hang/{id}', [CustomerGroupController::class, 'destroy'])->name('CustomerGroup.destroy');
+
+
+
+
 });
 
 // 404

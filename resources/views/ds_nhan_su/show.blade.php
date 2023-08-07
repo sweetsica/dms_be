@@ -176,8 +176,7 @@
                                                                                         title="Giới tính*">
                                                                                         <select name="gender"
                                                                                             class="selectpicker"
-                                                                                            data-dropup-auto="false"
-                                                                                            required>
+                                                                                            data-dropup-auto="false" required>
                                                                                             <option
                                                                                                 value="{{ $item->gender }}">
                                                                                                 {{ $item->gender }}
@@ -210,7 +209,7 @@
                                                                                         value="{{ $item->code }}">
                                                                                 </div>
                                                                                 <div class="col-8 mb-3">
-                                                                                    <input name="address"
+                                                                                    <input name="address" required
                                                                                         type="text"
                                                                                         placeholder="Địa chỉ"
                                                                                         class="form-control"
@@ -539,15 +538,15 @@
                                                 {{-- {{ $personnelList->appends([
                                                         'search' => $search,
                                                     ])->links() }} --}}
-
-                                                <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                    <nav aria-label="Page navigation example" class="float-end mt-3"
                                                     id="target-pagination">
                                                     <ul class="pagination">
                                                         {{ $personnelList->appends([
                                                                 'search' => $search,
+
                                                             ])->links() }}
                                                     </ul>
-                                                </nav>
+                                                    </nav>
                                             </div>
                                         </div>
                                     </div>
@@ -584,7 +583,7 @@
                                     title="Họ và tên*">
                             </div>
                             <div class="col-4 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Giới tính*">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Giới tính*" >
                                     <select name="gender" class="selectpicker" data-dropup-auto="false" required>
                                         <option value="">Giới tính*</option>
                                         <option value="Nam">Nam</option>

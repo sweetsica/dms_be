@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Area;
 use App\Models\Customer;
+use App\Models\Locality;
 use App\Models\Personnel;
 use App\Models\RouteDirection;
 use Illuminate\Http\Request;
@@ -49,13 +50,13 @@ class RouteDirectionController extends Controller
 
             $listNS = Personnel::all();
 
-            $listArea = Area::all();
+            $listLocality = Locality::all();
 
             $pagination = $this->pagination($listRoute);
 
             return view('RouteDirection.danhSachTuyen')->with(compact(
                 "listRoute",
-                "listArea",
+                "listLocality",
                 "listNS",
                 "pagination"
             ));
@@ -75,7 +76,7 @@ class RouteDirectionController extends Controller
         try {
             $data = $request->validate([
                 'name' => 'required',
-                'code' => 'required|unique:routedirections,code',
+                'code' => 'required|unique:route_directions,code',
                 'personId' => 'required',
                 'travel_time' => 'required',
                 'areaId' => 'required',
@@ -131,5 +132,11 @@ class RouteDirectionController extends Controller
 
         Session::flash('success', "Xoá tuyến thành công");
         return back();
+    }
+
+    public function getAll()
+    {
+        $routeList = RouteDirection::all();
+        return $routeList;
     }
 }

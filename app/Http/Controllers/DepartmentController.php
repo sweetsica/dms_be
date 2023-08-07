@@ -28,6 +28,7 @@ class DepartmentController extends Controller
         $UnitLeaderList = Personnel::all();
 
         $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
+        // dd($departmentListTree);
         $departmentlists = $this->getDepartment();
 
         return view("Deparment.index", [

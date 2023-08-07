@@ -12,7 +12,7 @@ class Customer extends Model
     public $timestamps = false;
     protected $table = 'customers';
     protected $fillable = [
-        // 'code',
+        'code',
         'name',
         'phone',
         'email',
@@ -31,7 +31,7 @@ class Customer extends Model
         'personId',
         'productId',
         'routeId',
-        'groupId',
+        'group',
         'chanelId',
         'status',
     ];
@@ -41,9 +41,11 @@ class Customer extends Model
         return $this->belongsTo(RouteDirection::class, 'routeId');
     }
 
-    public function favoriteProducts()
+    public function products()
     {
-        return $this->hasMany(Product::class, 'productId');
+        $productIds = json_decode($this->productId);
+
+        return Product::whereIn('id', $productIds)->get();
     }
 
     public function person()

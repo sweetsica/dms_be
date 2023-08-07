@@ -25,29 +25,33 @@
                                             <div class="action_wrapper d-flex justify-content-end mb-3">
                                                 <div class="order-2 order-md-1" style="font-size: 15px;">
                                                     <b>Danh sách đơn vị trực thuộc</b>
-                                                  </div>
-                                                  <div class="order-1 order-md-2  justify-content-between align-items-center flex-grow-1 mb-2 mb-md-0"  >
+                                                </div>
+                                                <div
+                                                    class="order-1 order-md-2  justify-content-between align-items-center flex-grow-1 mb-2 mb-md-0">
                                                     <form method="GET" action="">
                                                         <div class="form-group has-search">
                                                             {{-- <span type="submit"
                                                                 class="bi bi-search  fs-5" style="float: left;;"></span> --}}
-                                                                <input type="text" style="width: 150px; float: right;" class="form-control" value="{{$search}}"  placeholder="Tìm kiếm" name="search">
+                                                            <input type="text" style="width: 150px; float: right;"
+                                                                class="form-control" value="{{ $search }}"
+                                                                placeholder="Tìm kiếm" name="search">
                                                         </div>
                                                     </form>
                                                 </div>
 
                                                 <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
-                                                data-bs-placement="top" title="Lọc">
-                                                <button class="btn btn-outline-danger" data-bs-toggle="modal"
-                                                    data-bs-target="#filterOptions">
-                                                    <i class="bi bi-funnel"></i>
-                                                </button>
-                                            </div>
+                                                    data-bs-placement="top" title="Lọc">
+                                                    <button class="btn btn-outline-danger" data-bs-toggle="modal"
+                                                        data-bs-target="#filterOptions">
+                                                        <i class="bi bi-funnel"></i>
+                                                    </button>
+                                                </div>
 
-                                            <div class="action_export order-md-4">
-                                                <button class="btn btn-danger d-block testCreateUser"
-                                                    data-bs-toggle="modal" data-bs-target="#taoDeXuat">Thêm đơn vị</button>
-                                            </div>
+                                                <div class="action_export order-md-4">
+                                                    <button class="btn btn-danger d-block testCreateUser"
+                                                        data-bs-toggle="modal" data-bs-target="#taoDeXuat">Thêm đơn
+                                                        vị</button>
+                                                </div>
                                             </div>
                                             <div class="table-responsive">
                                                 <table id="dsDaoTao"
@@ -59,68 +63,67 @@
                                                             <th class="text-nowrap" style="width:10%">Đơn vị </th>
                                                             <th class="text-nowrap" style="width:10%">Đơn vị mẹ </th>
                                                             <th class="text-nowrap" style="width:10%">Trưởng đơn vị </th>
-                                                            <th class="text-nowrap" style="width:20%">Chức năng  nhiệ vụ</th>
+                                                            <th class="text-nowrap" style="width:20%">Chức năng nhiệ vụ</th>
                                                             <th class="text-nowrap" style="width:3%"><span></span></th>
                                                         </tr>
                                                     </thead>
-                                                    <?php $i=1 ?>
-                                                    @foreach ($areaList as $item )
-                                                    <tbody>
-                                                        <tr  >
-                                                            <td class=" text-center">
-                                                                {{ $i++ }}
-                                                            </td>
-                                                            <td class="">
-                                                                {{ $item->code }}
-                                                            </td>
-                                                            <td class="">
-                                                                {{ $item->name }}
-                                                            </td>
-                                                            <td>
-                                                                @if($item->donvime)
-                                                                            {{ $item->donvime->name }}
-                                                                @else
-
-                                                                @endif
-                                                            </td>
-                                                            <td class="">
-                                                                {{ $item->leader_name }}
-                                                            </td>
-                                                            <td class="">
-                                                                {{ $item->description }}
-                                                            </td>
-                                                            <td>
-                                                                <div class="table_actions d-flex justify-content-end">
-                                                                    <div class="btn" data-bs-toggle="modal"
-                                                                        data-bs-target="#qrCode">
-                                                                        <i class="bi bi-share-fill"
-                                                                            style="color: #787878;"></i>
-                                                                    </div>
-                                                                    <div data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                        title="Sửa đề xuất">
+                                                    <?php $i = 1; ?>
+                                                    @foreach ($areaList as $item)
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class=" text-center">
+                                                                    {{ $i++ }}
+                                                                </td>
+                                                                <td class="">
+                                                                    {{ $item->code }}
+                                                                </td>
+                                                                <td class="">
+                                                                    {{ $item->name }}
+                                                                </td>
+                                                                <td>
+                                                                    @if ($item->donvime)
+                                                                        {{ $item->donvime->name }}
+                                                                    @else
+                                                                    @endif
+                                                                </td>
+                                                                <td class="">
+                                                                    {{ $item->leader_name }}
+                                                                </td>
+                                                                <td class="">
+                                                                    {{ $item->description }}
+                                                                </td>
+                                                                <td>
+                                                                    <div class="table_actions d-flex justify-content-end">
                                                                         <div class="btn" data-bs-toggle="modal"
-                                                                            data-bs-target="#suaDeXuat">
-                                                                            <img style="width:16px;height:16px"
-                                                                                src="{{ asset('assets/img/edit.svg') }}" />
+                                                                            data-bs-target="#qrCode">
+                                                                            <i class="bi bi-share-fill"
+                                                                                style="color: #787878;"></i>
+                                                                        </div>
+                                                                        <div data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top" title="Sửa đề xuất">
+                                                                            <div class="btn" data-bs-toggle="modal"
+                                                                                data-bs-target="#suaDeXuat">
+                                                                                <img style="width:16px;height:16px"
+                                                                                    src="{{ asset('assets/img/edit.svg') }}" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top" title="Xóa đề xuất">
+                                                                            <div class="btn" data-bs-toggle="modal"
+                                                                                data-bs-target="#xoaDeXuat">
+                                                                                <img style="width:16px;height:16px"
+                                                                                    src="{{ asset('assets/img/trash.svg') }}" />
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                        title="Xóa đề xuất">
-                                                                        <div class="btn" data-bs-toggle="modal"
-                                                                            data-bs-target="#xoaDeXuat">
-                                                                            <img style="width:16px;height:16px"
-                                                                                src="{{ asset('assets/img/trash.svg') }}" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
                                                     @endforeach
                                                 </table>
-                                                {{$areaList ->appends([
-                                                    'search'=>$search,
-                                                ])->links()}}
+                                                {{ $areaList->appends([
+                                                        'search' => $search,
+                                                    ])->links() }}
                                             </div>
                                         </div>
                                     </div>
@@ -256,7 +259,7 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Thêm mới</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form  action="{{ route('area.store')}}" method="POST">
+                <form action="{{ route('area.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -269,8 +272,8 @@
                                     <select name="ib_lead" required class="selectpicker" data-dropup-auto="false">
                                         <option value="">chọn trưởng bộ phận</option>
                                         @foreach ($UnitLeaderList as $item)
-                                            <option value="{{$item->id}}">
-                                                {{$item->leader_name}}
+                                            <option value="{{ $item->id }}">
+                                                {{ $item->leader_name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -288,15 +291,15 @@
                                     <select name="parent" required class="selectpicker" data-dropup-auto="false">
                                         <option value="0">chọn đơn vị mẹ</option>
                                         @foreach ($areaLists as $item)
-                                            <option value="{{$item->id}}">
+                                            <option value="{{ $item->id }}">
                                                 @php
-                                                    $str='';
-                                                    for ($i=0; $i < $item->level ; $i++) {
+                                                    $str = '';
+                                                    for ($i = 0; $i < $item->level; $i++) {
                                                         echo $str;
                                                         $str = '  --';
                                                     }
                                                 @endphp
-                                                {{$item->name}}
+                                                {{ $item->name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -309,10 +312,11 @@
                                         title="description" style="width: 450px;height: 80px;">
                                 </div>
                             </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
-                        <button type="submit" class="btn btn-danger">Tạo</button>
-                    </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-danger"
+                                    data-bs-dismiss="modal">Hủy</button>
+                                <button type="submit" class="btn btn-danger">Tạo</button>
+                            </div>
                 </form>
             </div>
         </div>
