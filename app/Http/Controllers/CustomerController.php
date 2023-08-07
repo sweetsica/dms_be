@@ -11,8 +11,12 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
-    public function index(Request $request)
+    public function show($id)
     {
+        $customer = Customer::findOrFail($id);
+        return view('other.chiTietKhachHang')->with(compact(
+            "customer"
+        ));
     }
 
     public function store(Request $request)
@@ -39,27 +43,20 @@ class CustomerController extends Controller
 
     public function view()
     {
-        $listData = Customer::all();
-        $personIDs = $listData->pluck('personId')->toArray();
-        $productIDs = $listData->pluck('productId')->toArray();
-        $routeIDs = $listData->pluck('routeId')->toArray();
-        $chanelIDs = $listData->pluck('chanelId')->toArray();
+        $listData = Customer::with('channel', 'route', 'person')->get();
         $groupIDs = $listData->pluck('groupId')->toArray();
 
-        $personalNames = Personnel::whereIn('id', $personIDs)->pluck('name')->toArray();
-        $productNames = Product::whereIn('id', $productIDs)->pluck('name')->toArray();
-        $routeNames = RouteDirection::whereIn('id', $routeIDs)->pluck('name')->toArray();
-        $chanelNames = Department::whereIn('id', $chanelIDs)->pluck('name')->toArray();
-        return view('Customer.danhSachKhachHang', compact('listData', 'personalNames', 'productNames', 'routeNames', 'chanelNames'));
+        return view('Customer.danhSachKhachHang', compact('listData'));
     }
 
     public function create(Request $request)
     {
         // dd($request);
+        $code = $request->get('code');
         $name = $request->get('name');
         $phone = $request->get('phone');
         $email = $request->get('email');
-        $comanyName = $request->get('comanyName');
+        $companyName = $request->get('companyName');
         $personContact = $request->get('personContact');
         $career = $request->get('career');
         $taxCode = $request->get('taxCode');
@@ -78,10 +75,11 @@ class CustomerController extends Controller
         $routeId = $request->get('routeId');
         $status = $request->get('status');
         $data = new Customer();
+        $data->code = $code;
         $data->name = $name;
         $data->phone = $phone;
         $data->email = $email;
-        $data->comanyName = $comanyName;
+        $data->companyName = $companyName;
         $data->personContact = $personContact;
         $data->career = $career;
         $data->taxCode = $taxCode;
@@ -94,7 +92,7 @@ class CustomerController extends Controller
         $data->guide = $guide;
         $data->address = $address;
         $data->personId = $personId;
-        $data->productId = $productId;
+        $data->productId = json_encode($productId);
         $data->groupId = $groupId;
         $data->chanelId = $chanelId;
         $data->routeId = $routeId;
@@ -176,5 +174,4 @@ class CustomerController extends Controller
         Customer::destroy($id);
         return redirect()->back()->with('mess', 'Đã xóa!');
     }
-
 }

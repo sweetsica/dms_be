@@ -41,9 +41,11 @@ class Customer extends Model
         return $this->belongsTo(RouteDirection::class, 'routeId');
     }
 
-    public function favoriteProducts()
+    public function products()
     {
-        return $this->hasMany(Product::class, 'productId');
+        $productIds = json_decode($this->productId);
+
+        return Product::whereIn('id', $productIds)->get();
     }
 
     public function person()

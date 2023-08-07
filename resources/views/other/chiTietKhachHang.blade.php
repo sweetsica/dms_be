@@ -69,7 +69,7 @@
 
                                             
                                             <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Về danh sách" data-bs-original-title="Về danh sách">
-                                                <a class="btn btn-outline-danger d-block testCreateUser" href="customer" role="button"
+                                                <a class="btn btn-outline-danger d-block testCreateUser" href="/customer" role="button"
                                                     role="button">Về danh sách</a>
                                             </div>
                                             <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Tạo đơn hàng" data-bs-original-title="Tạo đơn hàng">
