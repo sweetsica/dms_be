@@ -44,7 +44,20 @@ class CustomerController extends Controller
 
     public function view()
     {
-        $listData = Customer::with('channel', 'route', 'person')->get();
+        $listData = Customer::query()->with('channel', 'route', 'person');
+        switch (session('user')['role_id']) {
+            case 2:
+                $listData = $listData->whereHas('person', function ($query) {
+                    $query->where('department_id', '=', session('user')['department_id']);
+                });
+                break;
+
+            case 3:
+                $listData = $listData->where('personId', session('user')['id']);
+                break;
+        }
+        $listData = $listData->get();
+
         $groupIDs = $listData->pluck('groupId')->toArray();
         $listPerson = Personnel::all();
         $listProduct = Product::all();

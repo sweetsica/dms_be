@@ -12,10 +12,11 @@ class Department extends Model
     public $timestamps=false;
     public $primaryKey= 'id';
     protected $fillable = [
+        'code',
         'name',
         'description',
         'parent',
-        'id_lead',
+        'ib_lead',
     ];
 
 
