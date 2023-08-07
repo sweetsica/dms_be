@@ -175,7 +175,6 @@ class CustomerController extends Controller
     {
         Customer::destroy($id);
         return redirect()->back()->with('mess', 'Đã xóa!');
-        ;
     }
 
 }
