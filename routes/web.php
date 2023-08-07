@@ -128,7 +128,7 @@ Route::get('danh-sach-san-pham', [ProductController::class, 'index'])->name('pro
     });
 
 
-    Route::get('chi-tiet-khach-hang/{id}', function () {
+    Route::get('chi-tiet-khach-hang', function () {
         return view('other.chiTietKhachHang');
     });
 

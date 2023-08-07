@@ -3,6 +3,7 @@
 @section('title', 'Danh sách khách hàng')
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
+    
     <style>
 
     </style>
@@ -72,7 +73,96 @@
                                             </div>
                                         </div>
 
+                                        
                                     </div>
+                                    <div class="row mb-3 d-flex align-items-center mt-3">
+                                        
+                                        <div class="col-4">
+                                            <div class="card_template-title d-flex align-items-center">
+                                                <div class="text-nowrap me-4">Người liên hệ:</div>
+                                                <div class="card_template-sub d-flex align-items-center">
+                                                    <div class="card_template-sub-text">Hà Anh</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="card_template-title d-flex align-items-center">
+                                                <div class="text-nowrap me-4 ">Số điện thoại:</div>
+                                                <div class="card_template-sub d-flex align-items-center">
+                                                    <div class="card_template-sub-text">098888888</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="card_template-title d-flex align-items-center">
+                                                <div class="text-nowrap me-4">Email:</div>
+                                                <div class="card_template-sub d-flex align-items-center">
+                                                    <div class="card_template-sub-text">test@tbht.vn</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row mb-3 d-flex align-items-center mt-3">
+                                        
+                                        <div class="col-4">
+                                            <div class="card_template-title d-flex align-items-center">
+                                                <div class="text-nowrap me-4">Giai đoạn:</div>
+                                                <div class="card_template-sub d-flex align-items-center">
+                                                    <div class="card_template-sub-text">Trinh sát</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="card_template-title d-flex align-items-center">
+                                                <div class="text-nowrap me-4 ">Tỷ lệ thành công:</div>
+                                                <div class="card_template-sub d-flex align-items-center">
+                                                    <div class="card_template-sub-text">100%</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="viewport">
+                                        <ul class="tabs">
+                                          <li>
+                                            <input type="radio" name="tab" id="playlists" value="playlists" checked> 
+                                            <label for="playlists">Thông tin chi tiết</label>
+                                            <div class="tabBody">
+                                              <p>Lorem ipsum dolor sit amet, duo populo tincidunt sadipscing at, id appetere suavitate eum. Ei ius movet accommodare, vim ex idque ponderum mandamus. Vis et legimus luptatum accusamus, sea id audiam appetere. Ne mel zril argumentum, cu est dicant putant, ad eirmod expetenda has. Nam no quidam regione, solet hendrerit reprehendunt qui et.</p>
+                                            </div>
+                                          </li>  
+                                          <li>
+                                            <input type="radio" name="tab" id="artists" value="artists"> 
+                                            <label for="artists">Chào hàng</label>
+                                            <div class="tabBody">
+                                              <p>Ex eos suas iriure, his at modus tritani periculis. Tantas populo altera ex mei, nam labores volutpat consequat et. Etiam oblique consulatu te mei, his maiorum placerat dissentiet ei, per eu sale ceteros. Eros oblique comprehensam duo ea, usu dolorem efficiantur instructior et. Ad dicat ponderum quaerendum vis, pri in eirmod intellegebat, ne eum ridens graeci.</p>
+                                            </div>
+                                          </li>  
+                                          <li>
+                                            <input type="radio" name="tab" id="albums" value="albums"> 
+                                            <label for="albums">Cơ hội</label>
+                                            <div class="tabBody">
+                                              <p>Populo platonem conclusionemque sit te, duo ad volumus appareat. Ullum dolorum eam at, ut nam esse graecis inimicus. Ex brute illud mei. Cu tollit explicari laboramus vis, idque movet dicam ad per.</p>
+                                      
+                                              <p>Mei mutat scribentur et, quas choro cum ut. Quot posidonium efficiendi duo at, est et persius constituto. No modo suavitate vis. An nam case utroque, elitr affert ne vix.</p>
+                                            </div>
+                                          </li>
+                                          <li>
+                                            <input type="radio" name="tab" id="baogia" value="baogia"> 
+                                            <label for="baogia">Báo giá</label>
+                                            <div class="tabBody">
+                                                <p>Populo platonem conclusionemque sit te, duo ad volumus appareat. Ullum dolorum eam at, ut nam esse graecis inimicus. Ex brute illud mei. Cu tollit explicari laboramus vis, idque movet dicam ad per.</p>
+
+                                            </div>
+                                          </li>
+                                        </ul>
+                                    </div>
+
+
+                                    
                                     
                                     <nav aria-label="Page navigation example" class="float-end mt-3"
                                         id="target-pagination">
@@ -513,7 +603,6 @@
 
 @endsection
 @section('footer-script')
-
         <!-- Plugins -->
          <script src="{{ asset('assets/plugins/jquery-datetimepicker/custom-datetimepicker.js') }}"></script>
 
@@ -684,9 +773,10 @@
     }
 </script>
 
+
 <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
 
 
-    <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}"></scrip>
     <script type="text/javascript" src="{{ asset('/assets/js/components/dataHrefTable.js') }}"></script>
 @endsection
