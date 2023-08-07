@@ -12,7 +12,7 @@ class Customer extends Model
     public $timestamps = false;
     protected $table = 'customers';
     protected $fillable = [
-        // 'code',
+        'code',
         'name',
         'phone',
         'email',

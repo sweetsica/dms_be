@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('personnel', function (Blueprint $table) {
             $table->id();
-            $table->string('code', 50);
+            $table->string('code', 50)->unique();
             $table->string('name', 50);
             $table->unsignedBigInteger('department_id')->nullable();
             $table->unsignedBigInteger('position_id')->nullable();
@@ -31,6 +31,12 @@ return new class extends Migration
             $table->integer('annual_salary')->nullable();
             $table->string('pack', 50)->nullable();
             $table->unsignedBigInteger('manage')->nullable();
+
+            $table->foreign('department_id')->references('id')->on('department')->onDelete('cascade');
+            $table->foreign('position_id')->references('id')->on('position')->onDelete('cascade');
+            $table->foreign('personnel_lv_id')->references('id')->on('personnel_level')->onDelete('cascade');
+            $table->foreign('role_id')->references('id')->on('role')->onDelete('cascade');
+            $table->foreign('area_id')->references('id')->on('area')->onDelete('cascade');
         });
     }
 

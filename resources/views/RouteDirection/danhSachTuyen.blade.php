@@ -292,7 +292,7 @@
                                         data-live-search="true" title="Địa bàn*" data-select-all-text="Chọn tất cả"
                                         data-deselect-all-text="Bỏ chọn" data-size="3" name="areaId"
                                         data-live-search-placeholder="Tìm kiếm...">
-                                        @foreach ($listArea as $a)
+                                        @foreach ($listLocality as $a)
                                             <option value="{{ $a->id }}"
                                                 {{ $item->areaId == $a->id ? 'selected' : '' }}>{{ $a->name }} -
                                                 {{ $a->code }}
@@ -517,7 +517,7 @@
                                     data-live-search="true" title="Địa bàn*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="areaId"
                                     data-live-search-placeholder="Tìm kiếm...">
-                                    @foreach ($listArea as $a)
+                                    @foreach ($listLocality as $a)
                                         <option value="{{ $a->id }}">{{ $a->name }} - {{ $a->code }}
                                         </option>
                                     @endforeach

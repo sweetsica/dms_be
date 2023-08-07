@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
+            $table->string('code', 255);
             $table->string('name', 255);
             $table->string('phone', 255);
             $table->string('email', 255);
@@ -25,7 +26,7 @@ return new class extends Migration {
             $table->string('bankOpen', 255)->nullable();
             $table->unsignedBigInteger('routeId');
             $table->unsignedBigInteger('chanelId');
-            $table->unsignedBigInteger('groupId');
+            $table->unsignedBigInteger('groupId')->nullable();
             $table->string('status');
             $table->unsignedBigInteger('personId');
             $table->unsignedBigInteger('productId');
@@ -35,7 +36,11 @@ return new class extends Migration {
             $table->string('address');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('deleted_at')->nullable();
-            // $table->foreign('productId')->references('id')->on('products');
+            
+            $table->foreign('routeId')->references('id')->on('route_directions')->onDelete('cascade');
+            $table->foreign('chanelId')->references('id')->on('department')->onDelete('cascade');
+            $table->foreign('personId')->references('id')->on('personnel')->onDelete('cascade');
+            $table->foreign('productId')->references('id')->on('products')->onDelete('cascade');
         });
     }
 
