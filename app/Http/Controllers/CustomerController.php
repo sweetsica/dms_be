@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Models\Personnel;
 use App\Models\Product;
 use App\Models\RouteDirection;
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -45,8 +46,12 @@ class CustomerController extends Controller
     {
         $listData = Customer::with('channel', 'route', 'person')->get();
         $groupIDs = $listData->pluck('groupId')->toArray();
+        $listPerson = Personnel::all();
+        $listProduct = Product::all();
+        $listRoute = RouteDirection::all();
+        $listChannel = Department::all();
 
-        return view('Customer.danhSachKhachHang', compact('listData'));
+        return view('Customer.danhSachKhachHang', compact('listData', 'listPerson', 'listProduct', 'listRoute', 'listChannel'));
     }
 
     public function create(Request $request)
@@ -108,7 +113,7 @@ class CustomerController extends Controller
         $name = $request->get('name');
         $phone = $request->get('phone');
         $email = $request->get('email');
-        $comanyName = $request->get('comanyName');
+        $companyName = $request->get('companyName');
         $personContact = $request->get('personContact');
         $career = $request->get('career');
         $taxCode = $request->get('taxCode');
@@ -130,7 +135,7 @@ class CustomerController extends Controller
         $data->name = $name;
         $data->phone = $phone;
         $data->email = $email;
-        $data->comanyName = $comanyName;
+        $data->companyName = $companyName;
         $data->personContact = $personContact;
         $data->career = $career;
         $data->taxCode = $taxCode;
@@ -143,8 +148,8 @@ class CustomerController extends Controller
         $data->guide = $guide;
         $data->address = $address;
         $data->personId = $personId;
-        $data->productId = $productId;
-        $data->groupId = $groupId;
+        $data->productId = json_encode($productId);
+        $data->group = $groupId;
         $data->chanelId = $chanelId;
         $data->routeId = $routeId;
         $data->status = $status;

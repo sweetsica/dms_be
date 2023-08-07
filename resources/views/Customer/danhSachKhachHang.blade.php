@@ -158,8 +158,8 @@
                                                         <td>
                                                             <div class="overText center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top"
-                                                                title="  {{ $item['comanyName'] }}">
-                                                                {{ $item['comanyName'] }}
+                                                                title="  {{ $item['companyName'] }}">
+                                                                {{ $item['companyName'] }}
                                                             </div>
                                                         </td>
                                                         <td>
@@ -194,8 +194,8 @@
                                                         </td>
                                                         <td>
                                                             <div class="overText center" data-bs-toggle="tooltip"
-                                                                data-bs-placement="top" title="{{ $item['groupId'] }}">
-                                                                {{ $item['groupId'] }}
+                                                                data-bs-placement="top" title="{{ $item['group'] }}">
+                                                                {{ $item['group'] }}
                                                             </div>
                                                         </td>
                                                         <td>
@@ -357,7 +357,7 @@
                                     <div class="card-title">2. Tổ chức</div>
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <input type="text" value="{{ $item->comanyName }}" name="comanyName"
+                                    <input type="text" value="{{ $item->companyName }}" name="companyName"
                                         data-bs-toggle="tooltip" data-bs-placement="top" title="Tên công ty"
                                         placeholder="Tên công ty" class="form-control">
                                 </div>
@@ -459,24 +459,28 @@
                                         data-live-search="true" title="Nhân sự thu thập*"
                                         data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
                                         data-size="3" name="personId" data-live-search-placeholder="Tìm kiếm...">
-                                        @foreach ($listData as $items)
-                                            <option value="{{ $items->id }}"
-                                                {{ $items->id == $item->id ? 'selected' : '' }}>
-                                                {{ $items->personId }}
+                                        @foreach ($listPerson as $per)
+                                            <option value="{{ $per->id }}"
+                                                {{ $per->id == $item->personId ? 'selected' : '' }}>
+                                                {{ $per->name }}
                                             </option>
                                         @endforeach
                                     </select>
                                 </div>
+                                @php
+                                    $selectedValues = json_decode($item->productId);
+                                @endphp
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Sản phẩm quan tâm">
                                     <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
                                         data-live-search="true" title="Sản phẩm quan tâm*"
                                         data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
-                                        data-size="3" name="productId" data-live-search-placeholder="Tìm kiếm...">
-                                        @foreach ($listData as $items)
-                                            <option value="{{ $items->id }}"
-                                                {{ $items->id == $item->id ? 'selected' : '' }}>
-                                                {{ $items->productId }}
+                                        data-size="3" name="productId[]" data-live-search-placeholder="Tìm kiếm..."
+                                        multiple>
+                                        @foreach ($listProduct as $pro)
+                                            <option value="{{ $pro->id }}"
+                                                {{ in_array($pro->id, $selectedValues) ? 'selected' : '' }}>
+                                                {{ $pro->name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -490,22 +494,30 @@
                                         data-live-search="true" title="Nhóm khách hàng*"
                                         data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
                                         data-size="3" name="groupId" data-live-search-placeholder="Tìm kiếm...">
-                                        @foreach ($listData as $items)
-                                            <option value="{{ $items->id }}"
-                                                {{ $items->id == $item->id ? 'selected' : '' }}>
-                                                {{ $items->groupId }}
-                                            </option>
-                                        @endforeach
-                                        <option value="Phòng khám/Trung tâm tế">Phòng khám/Trung tâm tế</option>
-                                        <option value="Bệnh viện">Bệnh viện</option>
-                                        <option value="Nhà phân phối">Nhà phân phối</option>
-                                        <option value="Online">Online</option>
-                                        <option value="Khách sạn">Khách sạn</option>
-                                        <option value="Nhà thuốc S">Nhà thuốc S</option>
-                                        <option value="Siêu thị/Cửa hàng bán lẻ">Siêu thị/Cửa hàng bán lẻ</option>
-                                        <option value="Chuỗi nhà thuốc">Chuỗi nhà thuốc</option>
-                                        <option value="Đại siêu thị">Đại siêu thị</option>
-                                        <option value="Làm đẹp/Phòng tập thể dục/Thể thao">Làm đẹp/Phòng tập thể dục/Thể
+                                        <option value="Phòng khám/Trung tâm tế"
+                                            {{ $item->group == 'Phòng khám/Trung tâm tế' ? 'selected' : '' }}>Phòng
+                                            khám/Trung tâm tế</option>
+                                        <option value="Bệnh viện" {{ $item->group == 'Bệnh viện' ? 'selected' : '' }}>Bệnh
+                                            viện</option>
+                                        <option value="Nhà phân phối"
+                                            {{ $item->group == 'Nhà phân phối' ? 'selected' : '' }}>Nhà phân phối</option>
+                                        <option value="Online" {{ $item->group == 'Online' ? 'selected' : '' }}>Online
+                                        </option>
+                                        <option value="Khách sạn" {{ $item->group == 'Khách sạn' ? 'selected' : '' }}>
+                                            Khách sạn</option>
+                                        <option value="Nhà thuốc S" {{ $item->group == 'Nhà thuốc S' ? 'selected' : '' }}>
+                                            Nhà thuốc S</option>
+                                        <option value="Siêu thị/Cửa hàng bán lẻ"
+                                            {{ $item->group == 'Siêu thị/Cửa hàng bán lẻ' ? 'selected' : '' }}>Siêu thị/Cửa
+                                            hàng bán lẻ</option>
+                                        <option value="Chuỗi nhà thuốc"
+                                            {{ $item->group == 'Chuỗi nhà thuốc' ? 'selected' : '' }}>Chuỗi nhà thuốc
+                                        </option>
+                                        <option value="Đại siêu thị"
+                                            {{ $item->group == 'Đại siêu thị' ? 'selected' : '' }}>Đại siêu thị</option>
+                                        <option value="Làm đẹp/Phòng tập thể dục/Thể thao"
+                                            {{ $item->group == 'Làm đẹp/Phòng tập thể dục/Thể thao' ? 'selected' : '' }}>
+                                            Làm đẹp/Phòng tập thể dục/Thể
                                             thao
                                         </option>
                                     </select>
@@ -517,10 +529,10 @@
                                         data-live-search="true" title="Tuyến*" data-select-all-text="Chọn tất cả"
                                         data-deselect-all-text="Bỏ chọn" data-size="3" name="routeId"
                                         data-live-search-placeholder="Tìm kiếm...">
-                                        @foreach ($listData as $items)
-                                            <option value="{{ $items->id }}"
-                                                {{ $items->id == $item->id ? 'selected' : '' }}>
-                                                {{ $items->routeId }}
+                                        @foreach ($listRoute as $route)
+                                            <option value="{{ $route->id }}"
+                                                {{ $route->id == $item->routeId ? 'selected' : '' }}>
+                                                {{ $route->name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -532,13 +544,10 @@
                                         data-live-search="true" title="Kênh khách hàng*"
                                         data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
                                         data-size="3" name="chanelId" data-live-search-placeholder="Tìm kiếm...">
-                                        <option value="ETC">ETC</option>
-                                        <option value="MT">MT</option>
-                                        <option value="Đại lý cá nhân">Đại lý cá nhân</option>
-                                        @foreach ($listData as $items)
+                                        @foreach ($listChannel as $ch)
                                             <option value="{{ $items->id }}"
-                                                {{ $items->id == $item->id ? 'selected' : '' }}>
-                                                {{ $items->chanelId }}
+                                                {{ $ch->id == $item->chanelId ? 'selected' : '' }}>
+                                                {{ $ch->name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -549,15 +558,10 @@
                                         data-live-search="true" title="Trạng thái*" data-select-all-text="Chọn tất cả"
                                         data-deselect-all-text="Bỏ chọn" data-size="3" name="status"
                                         data-live-search-placeholder="Tìm kiếm...">
-                                        <option value="Tiềm năng">Tiềm năng</option>
-                                        <option value="Cơ hội">Cơ hội</option>
-                                        <option value="Khách hàng">Khách hàng</option>
-                                        @foreach ($listData as $items)
-                                            <option value="{{ $items->id }}"
-                                                {{ $items->id == $item->id ? 'selected' : '' }}>
-                                                {{ $items->status }}
-                                            </option>
-                                        @endforeach
+                                        <option value="Trinh sát" {{ $item->status == "Trinh sát" ? "selected" : "" }}>Trinh sát</option>
+                                        <option value="Tiềm năng" {{ $item->status == "Tiềm năng" ? "selected" : "" }}>Tiềm năng</option>
+                                        <option value="Cơ hội" {{ $item->status == "Cơ hội" ? "selected" : "" }}>Cơ hội</option>
+                                        <option value="Khách hàng" {{ $item->status == "Khách hàng" ? "selected" : "" }}>Khách hàng</option>
                                     </select>
                                 </div>
                             </div>
