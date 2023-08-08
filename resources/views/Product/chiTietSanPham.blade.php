@@ -1,6 +1,33 @@
 @extends('template.master')
 {{-- Trang chủ GIao Ban --}}
 @section('title', 'Mẫu yêu cầu mua sắm')
+@section('header-style')
+    <style>
+        .carousel-indicators button.thumbnail {
+            width: 200px;
+        }
+
+        .carousel-indicators button.thumbnail:not(.active) {
+            opacity: 0.7;
+        }
+
+        .carousel-indicators {
+            position: static;
+        }
+
+
+        .carousel-indicators [data-bs-target] {
+            height: 40px;
+        }
+
+        @media screen and (min-width: 200px) {
+            .carousel {
+                max-width: 70%;
+                margin: 0 auto;
+            }
+        }
+    </style>
+@endsection
 
 @php
     $userDepartmentName = session('department_name');
@@ -50,188 +77,337 @@
                             <div class="card_template-body" id="container-fluid">
                                 <div class="card_template-body-top">
                                     <div class='row mb-3 d-flex align-items-center'>
-                                        <div class="col-3 d-flex align-items-center justify-content-center flex-column">
+                                        <div class="col-4 d-flex align-items-center justify-content-center ">
                                             <a class=" ">
                                                 <img class="header_logo" src="{{ env('LOGO_URL', '') }}" />
                                             </a>
                                         </div>
-                                        <div class="col-6 d-flex align-items-center justify-content-center flex-column">
-                                            <div class="card_template-heading">Thông số sản phẩm</div>
-                                            <div class="card_template-sub mt-2 with_input d-flex justify-content-center align-items-center">Xe điện - SP0001</div>
+                                        <div class="col-4 d-flex align-items-center justify-content-center flex-column">
+                                            <div class="card_template-heading">Thông tin sản phẩm</div>
+                                            <div class="d-flex align-items-center">
+                                                <div class="modal-title-black mt-2"> SẢN PHẨM XE TANO -</div>
+                                                <div class=" modal-title mt-2 ms-2">SP - TANO01</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 d-flex align-items-center justify-content-end">
+                                            <img class="qrCode_wrapper1" src="{{ asset('/assets/img/QR.webp')}}" alt="">
                                         </div>
                                     </div>
                                 </div>
+                                {{-- <div>
+                                    <div class="text-break " style="margin-left: 4px">1</div>
+                                </div> --}}
 
 
-                                <div class="card_template-body-middle">
-                                    <div class="col-md-12 mb-3">
-                                        <div>
-                                            <textarea rows="1" type="text" placeholder="(Vui lòng nhập thông tin chung về sản phẩm)" class="form-control textareaResize" name=""></textarea>
+                                {{-- Giao diện nhập input --}}
+                                {{-- <div class="row card_template-body-middle mb-3">
+                                    <div class="col-md-6 mb-3">
+                                            <div class="upload_wrapper-items">
+                                                <div class="alert alert-danger alertNotSupport" role="alert" style="display:none">
+                                                    File bạn tải lên hiện tại không hỗ trợ !
+                                                </div>
+                                                <div class="modal_upload-wrapper">
+                                                    <label class="modal_upload-label" for="file">
+                                                        Tải ảnh của sản phẩm ở đây</label>
+                                                    <div class="mt-2 text-secondary fst-italic">Hỗ trợ định
+                                                        dạng
+                                                        JPG,
+                                                        PNG
+                                                    </div>
+                                                    <div
+                                                        class="modal_upload-action mt-3 d-flex align-items-center justify-content-center">
+                                                        <div class="modal_upload-addFile me-3">
+                                                            <button role="button" type="button"
+                                                                class="btn position-relative pe-4 ps-4">
+                                                                <img style="width:16px;height:16px"
+                                                                    src="{{ asset('assets/img/upload-file.svg') }}" />
+                                                                Tải file lên
+                                                                <input role="button" type="file"
+                                                                    class="modal_upload-input modal_upload-file" name="files[]"
+                                                                    multiple onchange="updateList(event)">
+                                                            </button>
+                                                        </div>
+            
+                                                    </div>
+                                                </div>
+                                                <ul class="modal_upload-list"
+                                                    style="max-height: 134px; overflow-y: scroll; overflow-x: hidden;"></ul>
+                                            </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="row">
+                                            <div class="col-md-12 mb-3">
+                                                <div class="card-title-black">Mô tả:</div>
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <textarea rows="4" type="text" placeholder="(Vui lòng nhập thông tin chung về sản phẩm)" class="form-control textareaResize" name="">VF 5 Plus sở hữu thiết kế hiện đại, trẻ trung, cá tính và nổi bật với các lựa chọn phối màu nội ngoại thất, đảm bảo cá nhân hóa theo phong cách sống, cá tính và sở thích của mỗi khách hàng.</textarea>
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <textarea rows="6" type="text" placeholder="(Vui lòng nhập thông tin chung về sản phẩm)" class="form-control textareaResize" name="">VinFast VF 5 Plus được trang bị đầy đủ những công nghệ tiên tiến bậc nhất:&#13;&#10;-Giám sát hành trình cơ bản&#13;&#10;-Cảnh báo giao thông phía sau&#13;&#10;-Cảnh báo điểm mù&#13;&#10;-Hỗ trợ đỗ xe phía sau&#13;&#10;-Hỗ trợ phanh khẩn cấp...</textarea>
+                                            </div>
+
+                                            <div class="col-md-12 mb-3">
+                                                <button type="button" class="btn btn-danger" id="showPriceButton">Giá bán</button>
+                                            </div>
+                                            <div class="col-md-12 mb-3" id="priceSection" style="display: none;">
+                                                <div class="card_template-title d-flex align-items-center justify-content-center">
+                                                    <div class="text-nowrap">Giá bán:</div>
+                                                    <div class="card_template-sub with_input d-flex justify-content-center align-items-center">
+                                                        <input type="text" placeholder="" class="form-control" name="proposalNo">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                            <div class="col-md-4 mb-3">
+                                                <textarea rows="1" type="text" placeholder="(Catalogue)" class="form-control textareaResize" name="">Catalogue mô tả</textarea>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <textarea rows="1" type="text" placeholder="(Bản thiết kế)" class="form-control textareaResize" name="">Bản thiết kế</textarea>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <textarea rows="1" type="text" placeholder="(Giới thiệu)" class="form-control textareaResize" name="">Giới thiệu</textarea>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 mb-3">
-                                        <div class="table-responsive YCMS_repeater">
-                                            <table class="table table-bordered" style="width: 100%">
-                                                <thead>
-                                                    <tr>
-                                                      <th class="text-nowrap text-center" style="width:10%">Model</th>
-                                                      <th class="text-nowrap text-center" style="width:30%">Hình ảnh</th>
-                                                      <th class="text-nowrap text-center" style="width:30%">Thông số kỹ thuật cơ bản</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody >
 
-                                                    <tr >
-                                                        <td>
-                                                            <div>
-                                                                <textarea rows="1" type="text" placeholder="(Vui lòng nhập nội dung)" class="form-control textareaResize" name="orderMoney"></textarea>
-                                                            </div>
-
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex flex-column justify-content-center align-items-center mt-3 mb-3">
-
-                                                                <div class="upload_wrapper-items">
-                                                                    <input type="hidden" value="" />
-                                                                    <button role="button" type="button" class="btn position-relative border d-flex">
-                                                                        <img style="width:16px;height:16px" src="{{ asset('assets/img/upload-file.svg') }}" />
-                                                                        <span class="ps-2">Chọn ảnh</span>
-                                                                        <input role="button" type="file" class="modal_upload-input modal_upload-file" name="files[]" multiple onchange="updateList(event)" />
-                                                                    </button>
-                                                                    <ul class="modal_upload-list" style="max-height: 200px; overflow-y: scroll; overflow-x: hidden;">
-                                                                    </ul>
-                
-                                                                </div>
-                
-                                                            </div>
-                                                        </td>
-                                                            
-                                                        <td>
-                                                            <div>
-                                                                <textarea rows="1" type="text" placeholder="(Vui lòng nhập nội dung)" class="form-control textareaResize" name="orderMoney"></textarea>
-                                                            </div>
-                                                        </td>
-                                                        
-                                                    </tr>
-
-                                                    
-                                                    
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
                                     
-                                </div>
 
-                                {{-- <div class="card_template-body-middle">
                                     <div class="col-md-12 mb-3">
-                                        <div>
-                                            <div class="text-break ">1</div>
-                                        </div>
+                                            <div class="mb-3">
+                                                <div class="modal-title">Thông số kỹ thuật:</div>
+                                            </div>
+
+                                            <div class="DNTU_repeater">
+                                                <div data-repeater-list="DNTU_list">
+                                                    <div class="row repeater_wrapper d-flex align-items-center" style="position: relative" data-repeater-item>
+                                                            <div class="col-md-5 mb-3 d-flex align-items-center">
+                                                                <div class=" card_template-sub with_input d-flex justify-content-center align-items-center" style="width:30%">
+                                                                    <input type="text" value="Độ dài" placeholder="" class="card-title-black form-control" name="proposalNo">
+                                                                </div>
+                                                                <div class=" card_template-sub with_input d-flex justify-content-center align-items-center" style="width:70%">
+                                                                    <input type="text" value="Catalogue mô tả" placeholder="" class=" form-control" name="proposalNo">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-5 mb-3 d-flex align-items-center">
+                                                                <div class=" card_template-sub with_input d-flex justify-content-center align-items-center" style="width:30%">
+                                                                    <input type="text" value="Độ dài" placeholder="" class="card-title-black form-control" name="proposalNo">
+                                                                </div>
+                                                                <div class=" card_template-sub with_input d-flex justify-content-center align-items-center" style="width:70%">
+                                                                    <input type="text" value="Catalogue mô tả" placeholder="" class=" form-control" name="proposalNo">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-2 mb-3">
+                                                                <img data-repeater-delete role="button" src="{{ asset('/assets/img/trash.svg') }}" width="20px" height="20px" />
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                                <div class="">
+                                                    <div class="d-flex justify-content-start">
+                                                        <div role="button" class="fs-5 text-danger" data-repeater-create><i class="bi bi-plus-circle"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                     </div>
-                                    <div class="col-md-12 mb-3">
-                                        <div class="table-responsive YCMS_repeater">
-                                            <table class="table table-bordered" style="width: 100%">
-                                                <thead>
-                                                    <tr>
-                                                      <th class="text-nowrap text-center" style="width:10%">Model</th>
-                                                      <th class="text-nowrap text-center" style="width:10%">Hình ảnh</th>
-                                                      <th class="text-nowrap text-center" style="width:30%">Thông số kỹ thuật cơ bản</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
 
-                                                    <tr>
-                                                        <td>
-                                                            <div>
-                                                                <div class="text-break " style="margin-left: 4px">1</div>
-                                                            </div>
 
-                                                        </td>
-                                                        <td class="list_img">
-                                                            <div class="d-flex justify-content-center align-items-center" style="padding:10px">
-                                                                <img class="" src="{{ asset('/assets/img/xedien.png') }}" />
-                                                            </div>
-                                                        </td>
-                                                            
-                                                        <td>
-                                                            <div>
-                                                                <div class="text-break " style="margin-left: 4px">1</div>
-                                                            </div>
-                                                        </td>
-                                                        
-                                                    </tr>
-
-                                                    
-                                                    
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
                                     
                                 </div> --}}
 
+                                {{-- Giao diện hiển thị --}}
+                                <div class="row card_template-body-middle mb-3">
+                                    <div class="col-md-6 mb-3" style="overflow: hidden;">
+                                        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+
+                                            <div class="carousel-inner">
+                                                <div class="carousel-item active">
+                                                    <img src="https://codingyaar.com/wp-content/uploads/bootstrap-carousel-slide-2.jpg" class="d-block w-100 "
+                                                        alt="...">
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <img src="https://codingyaar.com/wp-content/uploads/bootstrap-carousel-slide-1.jpg" class="d-block w-100"
+                                                        alt="...">
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <img src="https://codingyaar.com/wp-content/uploads/bootstrap-carousel-slide-3.jpg" class="d-block w-100"
+                                                        alt="...">
+                                                </div>
+                                            </div>
+                                            <div class="carousel-indicators">
+                                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active thumbnail"
+                                                    aria-current="true" aria-label="Slide 1">
+                                                    <img src="https://codingyaar.com/wp-content/uploads/bootstrap-carousel-slide-2.jpg" class="d-block w-100"
+                                                        alt="...">
+                                                </button>
+                                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" class="thumbnail"
+                                                    aria-label="Slide 2">
+                                                    <img src="https://codingyaar.com/wp-content/uploads/bootstrap-carousel-slide-1.jpg" class="d-block w-100"
+                                                        alt="...">
+                                                </button>
+                                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" class="thumbnail"
+                                                    aria-label="Slide 3">
+                                                    <img src="https://codingyaar.com/wp-content/uploads/bootstrap-carousel-slide-3.jpg" class="d-block w-100"
+                                                        alt="...">
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="row">
+                                            <div class="col-md-12 mb-3">
+                                                <div class="card-title-black">Mô tả:</div>
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <div class="text-break " style="margin-left: 4px">1</div>
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <div class="text-break " style="margin-left: 4px">1</div>
+                                                
+                                            </div>
+                                            <div class="col-md-12 mb-3" id="priceSection" style="display: none;">
+                                                <div class="card_template-title d-flex align-items-center justify-content-center">
+                                                    <div class="text-nowrap">Giá bán:</div>
+                                                    <div class="card_template-sub with_input d-flex justify-content-center align-items-center">
+                                                        <div class="text-break " style="margin-left: 4px">1</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                            <div class="col-md-4 mb-3">
+                                                <div class="text-break " style="margin-left: 4px">1</div>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <div class="text-break " style="margin-left: 4px">1</div>
+
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <div class="text-break " style="margin-left: 4px">1</div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    
+
+                                    <div class="col-md-12 mb-3">
+                                            <div class="mb-3">
+                                                <div class="modal-title">Thông số kỹ thuật:</div>
+                                            </div>
+
+                                            <div class="DNTU_repeater">
+                                                <div data-repeater-list="DNTU_list">
+                                                    <div class="row repeater_wrapper d-flex align-items-center" style="position: relative" data-repeater-item>
+                                                            <div class="col-md-5 mb-3 d-flex align-items-center">
+                                                                <div class=" card_template-sub with_input d-flex justify-content-center align-items-center" style="width:30%">
+
+                                                                     <div class="text-break " style="margin-left: 4px">1</div>
+                                                                </div>
+                                                                <div class=" card_template-sub with_input d-flex justify-content-center align-items-center" style="width:70%">
+
+                                                                    <div class="text-break " style="margin-left: 4px">1</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-5 mb-3 d-flex align-items-center">
+                                                                <div class=" card_template-sub with_input d-flex justify-content-center align-items-center" style="width:30%">
+                                                                    <div class="text-break " style="margin-left: 4px">1</div>
+                                                                </div>
+                                                                <div class=" card_template-sub with_input d-flex justify-content-center align-items-center" style="width:70%">
+                                                                    <div class="text-break " style="margin-left: 4px">1</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-2 mb-3">
+                                                                <img data-repeater-delete role="button" src="{{ asset('/assets/img/trash.svg') }}" width="20px" height="20px" />
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                                <div class="">
+                                                    <div class="d-flex justify-content-start">
+                                                        <div role="button" class="fs-5 text-danger" data-repeater-create><i class="bi bi-plus-circle"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+
+
+                                    
+                                </div>
+                                
+                                
                                 <div class="card_template-body-bottom">
                                     <div class="row">
                                         <div class="col-12 modal-title">Sản phẩm liên quan</div>
                                         <div class="col-4 mt-3">
                                             <div class=" control_product"  >
-                                                <a href=" {{ route('customers') }}" class="control_product_link" id="control_link-1">
+                                                <div href="#" class="control_product_link" id="control_link-1">
                                                     
-                                                    <div class="control_product_img" style="width: 40%">
+                                                    <div class="control_product_img" style="width: 30%">
                                                         <img src="{{ asset('/assets/img/xedien.png')}}" alt="">
                                                     </div>
-                                                    <div class="control-info ms-2" style="width: 80%">
+                                                    <div class="control-info ms-2" style="width: 60%">
 
-                                                        <div class="over_info1 control_title fs-5">
-                                                            Xe điện tuần tra
+                                                        <div class="over_info1 card-title-black fs-5">
+                                                            Mẫu xe gia đình - BT-TANO1
                                                         </div>
-                                                        <div class="over_info2">Tiết kiệm năng lượng, Tốc độ 28km/h, </div>
+                                                        <div class="over_info1">120.000.000</div>
+                                                        <a href="" class="over_info1">Xem chi tiết</a>
                                                     </div>
+                                                    <div  class="col btn test_btn-remove custom-btn" href="#" data-bs-toggle="modal" data-bs-target="#xoa"  style="width: 10%">
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
-                                                </a>
+                    
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-4 mt-3">
                                             <div class=" control_product"  >
-                                                <a href=" {{ route('customers') }}" class="control_product_link" id="control_link-1">
-                                                    <div class="control_product_img" style="width: 40%">
+                                                <div href="#" class="control_product_link" id="control_link-1">
+                                                    
+                                                    <div class="control_product_img" style="width: 30%">
                                                         <img src="{{ asset('/assets/img/xedien.png')}}" alt="">
                                                     </div>
-                                                    <div class="control-info ms-2" style="width: 80%">
+                                                    <div class="control-info ms-2" style="width: 60%">
 
-                                                        <div class="over_info1 control_title fs-5">
-                                                            Xe đẩy hàng
+                                                        <div class="over_info1 card-title-black fs-5">
+                                                            Mẫu xe gia đình - BT-TANO1
                                                         </div>
-                                                        <div class="over_info2">Lồng chứa rời, Tải trọng 400kg </div>
+                                                        <div class="over_info1">120.000.000</div>
+                                                        <a href="" class="over_info1">Xem chi tiết</a>
                                                     </div>
+                                                    <div  class="col btn test_btn-remove custom-btn" href="#" data-bs-toggle="modal" data-bs-target="#xoa"  style="width: 10%">
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
-                                                </a>
+                    
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-4 mt-3">
                                             <div class=" control_product"  >
-                                                <a href=" {{ route('customers') }}" class="control_product_link" id="control_link-1">
-                                                    <div class="control_product_img" style="width: 40%">
+                                                <div href="#" class="control_product_link" id="control_link-1">
+                                                    
+                                                    <div class="control_product_img" style="width: 30%">
                                                         <img src="{{ asset('/assets/img/xedien.png')}}" alt="">
                                                     </div>
-                                                    <div class="control-info ms-2" style="width: 80%">
+                                                    <div class="control-info ms-2" style="width: 60%">
 
-                                                        <div class="over_info1 control_title fs-5">
-                                                            Xe thăm quan
+                                                        <div class="over_info1 card-title-black fs-5">
+                                                            Mẫu xe gia đình - BT-TANO1
                                                         </div>
-                                                        <div class="over_info2">Quãng đường 120km, 12 chỗ ngồi</div>
+                                                        <div class="over_info1">120.000.000</div>
+                                                        <a href="" class="over_info1">Xem chi tiết</a>
                                                     </div>
+                                                    <div  class="col btn test_btn-remove custom-btn" href="#" data-bs-toggle="modal" data-bs-target="#xoa"  style="width: 10%">
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
-                                                </a>
+                    
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        {{-- <div class="col-12 mt-3" >
-                                            <button class="btn btn-danger d-block" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Thêm sản phẩm liên quan" data-bs-original-title="Thêm sản phẩm liên quan" data-bs-toggle="modal" data-bs-target="#add">+</button>
-                                        </div> --}}
-
                                         <div class="col-12 mt-3">
-                                            <button class="btn btn-danger d-block" data-bs-toggle="modal" data-bs-target="#add">+</button>
+                                            <button class="btn btn-danger d-block" data-bs-toggle="modal" data-bs-target="#add">+ Thêm thông số</button>
                                         </div>
                                         
                                     </div>
@@ -264,7 +440,7 @@
                             <div class="fs-5">Bạn có thực sự muốn xoá sản phẩm này không?</div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-danger" data-bs-target="#add" data-bs-toggle="modal" data-bs-dismiss="modal">Hủy</button>
+                            <button type="button" class="btn btn-outline-danger"  data-bs-toggle="modal" data-bs-dismiss="modal">Hủy</button>
                             <form action="" method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -275,6 +451,8 @@
                     </div>
                 </div>
             </div>
+
+
     {{-- Modal thêm sản phẩm liên quan --}}
     <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -301,20 +479,6 @@
                                     </div>
                                 </div>
                                 
-                            </div>
-
-                            <div class="d-flex align-items-center mt-3 ">
-                                <div class="col-sm-5 mb-3 me-3">
-                                    <input type="text" value="Xe điện" readonly class="form-control" required placeholder="Tên sản phẩm" name="title"data-bs-toggle="tooltip" data-bs-placement="top" title="Tên sản phẩm">
-                                </div>
-                                <div class="col-sm-6 mb-3 me-3">
-                                    <input type="text" class="form-control" required placeholder="Mô tả tóm tắt" name="title"data-bs-toggle="tooltip" data-bs-placement="top" title="Mô tả tóm tắt">
-                                </div>
-                                <div  class="col mb-3 btn test_btn-remove" href="#" data-bs-toggle="modal" data-bs-target="#xoa">
-                                    <img data-repeater-delete role="button" src="{{ asset('/assets/img/trash.svg') }}" width="15px" height="15px" />
-
-                                </div>
-
                             </div>
                             
                         </div>
@@ -350,6 +514,14 @@
     <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_chiPhi.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
+
+    <script>
+        document.getElementById('showPriceButton').addEventListener('click', function() {
+            document.getElementById('showPriceButton').style.display = 'none';
+            document.getElementById('priceSection').style.display = 'block';
+        });
+    </script>
+    
 
     <script>
         const targetTable = $('#dsDaoTao').DataTable({

@@ -130,7 +130,9 @@ Route::get('danh-sach-san-pham', [ProductController::class, 'index'])->name('pro
     });
 
 
-    Route::get('chi-tiet-khach-hang/{id}', [CustomerController::class, 'show'])->name('customer.list');
+
+
+    Route::get('chi-tiet-khach-hang/{id}', [CustomerController::class, 'show'])->name('customer-detail.list');
 
     Route::get('department', [DepartmentController::class, 'index'])->name('department.index');
     Route::post('department', [DepartmentController::class, 'store'])->name('department.store');
