@@ -27,7 +27,7 @@
                                 <li style=" margin: 5px; padding: 0;">
                                     <div class="d-flex align-items-center"
                                         style=" background-color: #EBEBEB; height: 30px; display: flex; font-size: 15px; border-radius: 5px;">
-                                        <a href="{{ route('Personnel.index') }}" style="color:black;padding-left:10px;">Cơ
+                                        <a href="{{ route('Personnel.indexDiaBan') }}" style="color:black;padding-left:10px;">Cơ
                                             cấu địa bàn</a>
                                     </div>
                                 </li>

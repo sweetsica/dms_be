@@ -17,4 +17,9 @@ class Locality extends Model
         'code',
         'area_id',
     ];
+
+    public function tuyens()
+    {
+        return $this->hasMany(Locality::class, 'area_id');
+    }
 }

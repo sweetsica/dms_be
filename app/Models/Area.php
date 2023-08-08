@@ -17,4 +17,9 @@ class Area extends Model
         'code',
         'area',
     ];
+
+    public function diaBans()
+{
+    return $this->hasMany(Locality::class, 'area_id');
+}
 }

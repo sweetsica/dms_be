@@ -22,10 +22,14 @@ class AreaController extends Controller
         )
         ->where("area.code", "like", "%$search%")->paginate(5);
         $department = Department::where('code', 'like', 'VUNG%')->get();
+
+        $areaTree =  Department::with('khuVucs.diaBans.tuyens')->where('code', 'like', 'VUNG%')->get();
+        // dd()
         return view("Address.danhSachKhuVuc",[
             "areaList"=>$areaList,
             'search' => $search,
             'department' => $department,
+            'areaTree' => $areaTree,
 
         ]);
     }

@@ -146,12 +146,15 @@ Route::middleware(['auth.role'])->group(function () {
 
     Route::get('nhan-su', [PersonnelController::class, 'index'])->name('Personnel.index');
     Route::get('nhan-su-vitri', [PersonnelController::class, 'indexvtri'])->name('Personnel.indexvtri');
+    Route::get('nhan-su-dia-ban', [PersonnelController::class, 'indexDiaBan'])->name('Personnel.indexDiaBan');
     Route::post('nhan-su-vitri', [PersonnelController::class, 'store'])->name('Personnel.store.vtri');
+    Route::post('nhan-su-dia-ban', [PersonnelController::class, 'store'])->name('Personnel.store.diaban');
     Route::post('nhan-su', [PersonnelController::class, 'store'])->name('Personnel.store');
     Route::post('nhan_sux/{id}', [PersonnelController::class, 'update'])->name('Personnel.update');
     Route::post('nhan_su/{id}', [PersonnelController::class, 'destroy'])->name('Personnel.destroy');
     Route::get('nhan_suv/{department_id}', [PersonnelController::class, 'show'])->name('Personnel.show');
     Route::get('nhan_suvtri/{position_id}', [PersonnelController::class, 'showVtri'])->name('Personnel.show.vtri');
+    Route::get('nhan_su_dia_ban/{area_id}', [PersonnelController::class, 'showDiaBan'])->name('Personnel.show.diaban');
 
     Route::get('vai-tro', [RoleController::class, 'index'])->name('Role.index');
     Route::post('vai-tro', [RoleController::class, 'store'])->name('Role.store');
