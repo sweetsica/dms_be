@@ -27,7 +27,7 @@ return new class extends Migration {
             $table->string('group', 255);
             $table->unsignedBigInteger('routeId');
             $table->unsignedBigInteger('chanelId');
-            $table->string('status');
+            $table->string('status')->nullable();
             $table->unsignedBigInteger('personId');
             $table->text('productId');
             $table->string('city');
@@ -36,9 +36,9 @@ return new class extends Migration {
             $table->string('address');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('deleted_at')->nullable();
-            
-            $table->foreign('routeId')->references('id')->on('route_directions')->onDelete('cascade');
-            $table->foreign('chanelId')->references('id')->on('department')->onDelete('cascade');
+
+            $table->foreign('routeId')->references('id')->on('route_directions')->onDelete('cascade')->nullable();
+            $table->foreign('chanelId')->references('id')->on('department')->onDelete('cascade')->nullable();
             $table->foreign('personId')->references('id')->on('personnel')->onDelete('cascade');
         });
     }

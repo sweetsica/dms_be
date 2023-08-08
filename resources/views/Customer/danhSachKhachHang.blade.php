@@ -697,7 +697,7 @@
 
                         <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                             title="Nhóm khách hàng">
-                            <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
+                            <select class="selectpicker" data-dropup-auto="false" data-width="100%" 
                                 data-live-search="true" title="Nhóm khách hàng*" data-select-all-text="Chọn tất cả"
                                 data-deselect-all-text="Bỏ chọn" data-size="3" name="groupId" id="groupId"
                                 data-live-search-placeholder="Tìm kiếm...">
@@ -717,7 +717,7 @@
                         </div>
 
                         <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Tuyến">
-                            <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
+                            <select class="selectpicker" data-dropup-auto="false" data-width="100%" 
                                 data-live-search="true" title="Tuyến*" data-select-all-text="Chọn tất cả"
                                 data-deselect-all-text="Bỏ chọn" data-size="3" name="routeId" id="routeId"
                                 data-live-search-placeholder="Tìm kiếm...">
@@ -726,14 +726,14 @@
 
                         <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                             title="Kênh khách hàng">
-                            <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
+                            <select class="selectpicker" data-dropup-auto="false" data-width="100%" 
                                 data-live-search="true" title="Kênh khách hàng*" data-select-all-text="Chọn tất cả"
                                 data-deselect-all-text="Bỏ chọn" data-size="3" name="chanelId" id="chanelId"
                                 data-live-search-placeholder="Tìm kiếm...">
                             </select>
                         </div>
                         <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Trạng thái">
-                            <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
+                            <select class="selectpicker" data-dropup-auto="false" data-width="100%" 
                                 data-live-search="true" title="Trạng thái*" data-select-all-text="Chọn tất cả"
                                 data-deselect-all-text="Bỏ chọn" data-size="3" name="status"
                                 data-live-search-placeholder="Tìm kiếm...">
