@@ -20,7 +20,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'name' => 'Thái Hưng Corp',
             'parent' => '0',
             'description' => 'Tổng công ty',
-            'id_lead' => 'Trần Minh Thao',
+            'ib_lead' => 'Trần Minh Thao',
         ]);
 
         Department::updateOrCreate([
@@ -30,7 +30,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'name' => 'Ban Giám Đốc',
             'parent' => '1',
             'description' => 'Tập hợp hành viên đầu não của công ty, đóng vai trò định hướng, đề ra đường lối hoạt động cho công ty',
-            'id_lead' => 'Trần Minh Thao',
+            'ib_lead' => 'Trần Minh Thao',
         ]);
 
         Department::updateOrCreate([
@@ -40,7 +40,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'name' => 'Ban Kiểm Soát',
             'parent' => '1',
             'description' => 'Thành viên giám sát, hỗ trợ ban lãnh đạo trong việc điều hành. Bộ phận này cung cấp các quy định, điều lệ cho công ty',
-            'id_lead' => 'Nguyễn Ngọc Bảo',
+            'ib_lead' => 'Nguyễn Ngọc Bảo',
         ]);
 
         Department::updateOrCreate([
@@ -50,7 +50,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'name' => 'Khối Kinh Doanh',
             'parent' => '1',
             'description' => 'Quản lý khối văn phòng',
-            'id_lead' => '',
+            'ib_lead' => '',
         ]);
         
         Department::updateOrCreate([
@@ -60,7 +60,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'name' => 'Phòng Kinh doanh',
             'parent' => '1',
             'description' => '',
-            'id_lead' => 'Phạm Ánh Dương',
+            'ib_lead' => 'Phạm Ánh Dương',
         ]);
         
         Department::create([
@@ -69,7 +69,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'name' => 'Phòng Phát triển kinh doanh',
             'parent' => '4',
             'description' => 'Phụ trách các hoạt động tiếp thị của doanh nghiệp',
-            'id_lead' => 'Olaf Baunman',
+            'ib_lead' => 'Olaf Baunman',
         ]);
 
         Department::create([
@@ -78,7 +78,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'name' => 'Khối Văn phòng',
             'parent' => '1',
             'description' => 'Quản lý khối văn phòng',
-            'id_lead' => '',
+            'ib_lead' => '',
         ]);
 
         Department::create([
@@ -87,7 +87,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'name' => 'Phòng Mua hàng',
             'parent' => '7',
             'description' => 'Giám sát điều phối mua hàng. BỘ phận đưa ra các quy định về việc mua hàng',
-            'id_lead' => 'Nguyễn Thị Thanh Nga',
+            'ib_lead' => 'Nguyễn Thị Thanh Nga',
         ]);
         Department::create([
             //9
@@ -95,7 +95,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'name' => 'Phòng Tài chính Kế toán',
             'parent' => '7',
             'description' => '',
-            'id_lead' => 'Mai Văn Sơn',
+            'ib_lead' => 'Mai Văn Sơn',
         ]);
         Department::create([
             //10
@@ -103,7 +103,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'name' => 'Phòng Hành chính Nhân sự',
             'parent' => '7',
             'description' => 'Phụ trách Hành chính Nhân sự',
-            'id_lead' => 'Nguyễn Sỹ Sơn',
+            'ib_lead' => 'Nguyễn Sỹ Sơn',
         ]);
         Department::create([
             //11
@@ -111,7 +111,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'name' => 'Phòng Marketing',
             'parent' => '7',
             'description' => 'Phụ trách các hoạt động tiếp thị của doanh nghiệp',
-            'id_lead' => '',
+            'ib_lead' => '',
         ]);
         Department::create([
             //12
@@ -119,7 +119,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'name' => 'Phòng IT và Phân tích kinh doanh',
             'parent' => '7',
             'description' => 'Phụ trách phân tích yêu cầu kinh doanh của lãnh đạo và doanh nghiệp',
-            'id_lead' => '',
+            'ib_lead' => '',
         ]);
         Department::create([
             //13
@@ -127,7 +127,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'name' => 'Phòng Kỹ thuật và phát triển sản phẩm',
             'parent' => '7',
             'description' => 'Kỹ thuật và phát triển sản phẩm',
-            'id_lead' => 'Trịnh Thanh Hải',
+            'ib_lead' => 'Trịnh Thanh Hải',
         ]);
 
         Department::create([
@@ -136,7 +136,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'name' => 'Khối Sản xuất',
             'parent' => '1',
             'description' => 'Phụ trách các hoạt động sản xuất, lắp ráp của doanh nghiệp',
-            'id_lead' => '',
+            'ib_lead' => '',
         ]);
         Department::create([
             //15
@@ -144,7 +144,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'name' => 'Tổ vận hành',
             'parent' => '14',
             'description' => 'Phụ trách các hoạt động về vận hành của nhà máy',
-            'id_lead' => '',
+            'ib_lead' => '',
         ]);
         Department::create([
             //16
@@ -152,7 +152,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'name' => 'Tổ Sửa chữa',
             'parent' => '14',
             'description' => 'Phụ trách các hoạt động về sửa chữa và bảo hành của nhà máy',
-            'id_lead' => '',
+            'ib_lead' => '',
         ]);
         Department::create([
             //17
@@ -160,7 +160,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'name' => 'Tổ Lắp ráp',
             'parent' => '14',
             'description' => 'Phụ trách các hoạt động về lắp ráp sản phẩm của nhà máy',
-            'id_lead' => '',
+            'ib_lead' => '',
         ]);
     }
 }

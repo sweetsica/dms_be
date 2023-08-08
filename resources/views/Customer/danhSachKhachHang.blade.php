@@ -558,10 +558,14 @@
                                         data-live-search="true" title="Trạng thái*" data-select-all-text="Chọn tất cả"
                                         data-deselect-all-text="Bỏ chọn" data-size="3" name="status"
                                         data-live-search-placeholder="Tìm kiếm...">
-                                        <option value="Trinh sát" {{ $item->status == "Trinh sát" ? "selected" : "" }}>Trinh sát</option>
-                                        <option value="Tiềm năng" {{ $item->status == "Tiềm năng" ? "selected" : "" }}>Tiềm năng</option>
-                                        <option value="Cơ hội" {{ $item->status == "Cơ hội" ? "selected" : "" }}>Cơ hội</option>
-                                        <option value="Khách hàng" {{ $item->status == "Khách hàng" ? "selected" : "" }}>Khách hàng</option>
+                                        <option value="Trinh sát" {{ $item->status == 'Trinh sát' ? 'selected' : '' }}>
+                                            Trinh sát</option>
+                                        <option value="Tiềm năng" {{ $item->status == 'Tiềm năng' ? 'selected' : '' }}>
+                                            Tiềm năng</option>
+                                        <option value="Cơ hội" {{ $item->status == 'Cơ hội' ? 'selected' : '' }}>Cơ hội
+                                        </option>
+                                        <option value="Khách hàng" {{ $item->status == 'Khách hàng' ? 'selected' : '' }}>
+                                            Khách hàng</option>
                                     </select>
                                 </div>
                             </div>
