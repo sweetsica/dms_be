@@ -18,7 +18,7 @@ class PersonnelSeeder extends Seeder
             //1
             'name' => 'admin',
             'email' => 'admin@tbht.vn',
-            'password' => Hash::make('123456'),
+            'password' => '123456',
             'code' => 'ADMIN-123',
             'role_id' => 1,
             'phone' => "0123456789",
@@ -40,7 +40,7 @@ class PersonnelSeeder extends Seeder
             //2
             'name' => 'tester',
             'email' => 'test@tbht.vn',
-            'password' => Hash::make('123456'),
+            'password' => '123456',
             'code' => 'TESTER',
             'role_id' => 1,
             'phone' => "0123456789",
@@ -57,12 +57,12 @@ class PersonnelSeeder extends Seeder
             'pack' => '1',
             'manage' => null,
         ]);
-        
+
         Personnel::create([
             //3
             'name' => 'dev',
             'email' => 'dev@tbht.vn',
-            'password' => Hash::make('123456'),
+            'password' => '123456',
             'code' => 'DEV',
             'role_id' => 1,
             'phone' => "0123456789",
@@ -85,7 +85,7 @@ class PersonnelSeeder extends Seeder
             //4
             'name' => 'Nguyễn Quang Trung',
             'email' => 'trungnq@tbht.vn',
-            'password' => Hash::make('123456'),
+            'password' => '123456',
             'code' => 'NQT712',
             'role_id' => 3,
             'phone' => "0123456789",
@@ -102,12 +102,12 @@ class PersonnelSeeder extends Seeder
             'pack' => '1',
             'manage' => null,
         ]);
-        
+
         Personnel::create([
             //5
             'name' => 'Nguyễn Thị Huệ',
             'email' => 'huent@tbht.vn',
-            'password' => Hash::make('123456'),
+            'password' => '123456',
             'code' => 'NTH712',
             'role_id' => 3,
             'phone' => "0123456789",
@@ -124,12 +124,12 @@ class PersonnelSeeder extends Seeder
             'pack' => '1',
             'manage' => null,
         ]);
-        
+
         Personnel::create([
             //6
             'name' => 'Nguyễn Thành Viên',
             'email' => 'viennt@tbht.vn',
-            'password' => Hash::make('123456'),
+            'password' => '123456',
             'code' => 'NTV912',
             'role_id' => 3,
             'phone' => "0123456789",
@@ -146,12 +146,12 @@ class PersonnelSeeder extends Seeder
             'pack' => '1',
             'manage' => null,
         ]);
-        
+
         Personnel::create([
             //7
             'name' => 'Trần Văn Trưởng',
             'email' => 'truongtv@tbht.vn',
-            'password' => Hash::make('123456'),
+            'password' => '123456',
             'code' => 'TruongDHB',
             'role_id' => 2,
             'phone' => "0123456789",

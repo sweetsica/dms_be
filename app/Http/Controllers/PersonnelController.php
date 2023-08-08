@@ -163,6 +163,7 @@ class PersonnelController extends Controller
                 'personnel.area_id'
                 // 'personnel.id',
             )
+
             ->where("personnel.code", "like", "%$search%")->paginate(10);
         $departmentlists = $this->getDepartment();
         $positionlists = $this->getPosition();
@@ -218,11 +219,17 @@ class PersonnelController extends Controller
                 'personnel.role_id',
                 'role.name as role_name',
                 'locality.name as locality_name',
+                'department.parent',
                 'personnel.area_id'
                 // 'personnel.id',
             )
             ->where("personnel.code", "like", "%$search%")
             ->where("personnel.department_id", $department_id)
+
+            ->orWhereHas('department', function ($query) use ($department_id) {
+                $query->where('department.parent', $department_id);
+            })
+            // ->Where("personnel.department_id", $department_id)
             ->paginate(10);
         $departmentlists = $this->getDepartment();
         $positionlists = $this->getPosition();
@@ -282,6 +289,10 @@ class PersonnelController extends Controller
             )
             ->where("personnel.code", "like", "%$search%")
             ->where("personnel.position_id", $position_id)
+
+            ->orWhereHas('position', function ($query) use ($position_id) {
+                $query->where('position.parent', $position_id);
+            })
             ->paginate(10);
         $departmentlists = $this->getDepartment();
         $positionlists = $this->getPosition();
@@ -422,7 +433,7 @@ class PersonnelController extends Controller
         $data->phone = $phone;
         $data->working_form = $working_form;
         $data->status = $status;
-        $data->password = Hash::make($password);
+        $data->password = $password;
         $data->birthday = $birthday;
         $data->address = $address;
         $data->annual_salary = $annual_salary;
@@ -466,7 +477,7 @@ class PersonnelController extends Controller
         $data->phone = $phone;
         $data->working_form = $working_form;
         $data->status = $status;
-        $data->password = Hash::make($password);
+        $data->password = $password;
         $data->birthday = $birthday;
         $data->address = $address;
         $data->annual_salary = $annual_salary;
