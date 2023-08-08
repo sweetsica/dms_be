@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Area;
+use App\Models\Department;
 use App\Models\Locality;
 use Illuminate\Http\Request;
 
@@ -22,10 +23,12 @@ class LocalityController extends Controller
         )
         ->where("locality.code", "like", "%$search%")->paginate(5);
         $area = Area::all();
+        $areaTree =  Department::with('khuVucs.diaBans.tuyens')->where('code', 'like', 'VUNG%')->get();
         return view("Address.danhSachDiaBan",[
             "localityList"=>$localityList,
             'search' => $search,
             'area' => $area,
+            'areaTree' => $areaTree,
 
         ]);
     }

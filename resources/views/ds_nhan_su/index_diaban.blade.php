@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-    @include('template.sidebar.sidebarDepartment.sidebarLeft')
+    @include('template.sidebar.sidebarArea.sidebarLeft')
     <div id="mainWrap" class="mainWrap">
         <div class="mainSection">
             <div class="main">
@@ -571,7 +571,7 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Thêm mới nhân sự</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form ction="{{ route('Personnel.store') }}" method="POST">
+                <form action="{{ route('Personnel.store.diaban') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="row">

@@ -197,7 +197,7 @@
                                                                                                 @endif
                                                                                             </option>
                                                                                             <?php } ?>
-
+                                                                                            <option value="0">Chọn đơn vị mẹ</option>
                                                                                             @foreach ($departmentlists as $ac)
                                                                                                 <option
                                                                                                     value="{{ $ac->id }}">
@@ -226,11 +226,12 @@
                                                                                             <option value="0">Chọn trưởng bộ phận
                                                                                             </option>
                                                                                             <?php }else{ ?>
-                                                                                            <?php } ?>
-                                                                                            <option
+                                                                                                <option
                                                                                                 value="{{ $item->ib_lead }}">
                                                                                                 {{ $item->leader_name }}
                                                                                             </option>
+                                                                                            <?php } ?>
+
                                                                                             @foreach ($UnitLeaderList as $av)
                                                                                                 <option
                                                                                                     value="{{ $av->id }}">

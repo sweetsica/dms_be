@@ -5,13 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
-     */
+     */ 
+    private function _toObject($array)
+    {
+        $objectStr = json_encode($array);
+        $object = json_decode($objectStr);
+        return $object;
+    }
+
     public function pagination($list)
     {
         return [
@@ -36,7 +44,7 @@ class ProductController extends Controller
         try {
             $q = $request->query('q');
             $limit = 10;
-            $listProduct = Product::query()->with('creators');
+            $listProduct = Product::query();
             if ($q) {
                 $listProduct = $listProduct->where('code', 'like', '%' . $q . '%')
                     ->orWhere('name', 'like', '%' . $q . '%');
@@ -75,10 +83,11 @@ class ProductController extends Controller
                 'name' => 'required',
                 'code' => 'required|unique:products,code',
                 'type' => 'required',
-                'branch' => 'required'
+                'branch' => 'required',
+                'file' => 'required'
             ]);
-
-            $data['created_by'] = session('user')['id'];
+            $data['thumbnail'] = $this->uploadFileToRemoteHost($data['file']);
+            $data['created_at'] = now();
             $product = Product::create($data);
             if ($product) {
                 Session::flash('success', "Thêm sản phẩm thành công");
@@ -93,6 +102,24 @@ class ProductController extends Controller
         }
     }
 
+    public function uploadFileToRemoteHost($file)
+    {
+        $fileStream = fopen($file, 'r');
+        $url = "https://report.sweetsica.com/api/report/upload";
+        //send form data
+        $response = Http::attach(
+            'files',
+            file_get_contents($file),
+            $file->getClientOriginalName()
+        )->post($url);
+
+        //throw exception if response is not successful
+        $response->throw()->json();
+        //get data from response
+        $data = $response->json();
+        $dataObj = $this->_toObject($data);
+        return $dataObj->downloadLink;
+    }
     /**
      * Display the specified resource.
      */

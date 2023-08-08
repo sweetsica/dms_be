@@ -11,39 +11,42 @@ class Customer extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table = 'customers';
-    protected $fillable = [
-        'code',
-        'name',
-        'phone',
-        'email',
-        'personContact',
-        'companyName',
-        'career',
-        'taxCode',
-        'companyPhoneNumber',
-        'companyEmail',
-        'accountNumber',
-        'bankOpen',
-        'city',
-        'district',
-        'guide',
-        'address',
-        'personId',
-        'productId',
-        'routeId',
-        'groupId',
-        'chanelId',
-        'status',
-    ];
+    // protected $guarded = [''];
+   protected $fillable = [
+       'code',
+       'name',
+       'phone',
+       'email',
+       'personContact',
+       'companyName',
+       'career',
+       'taxCode',
+       'companyPhoneNumber',
+       'companyEmail',
+       'accountNumber',
+       'bankOpen',
+       'city',
+       'district',
+       'guide',
+       'address',
+       'personId',
+       'productId',
+       'routeId',
+       'groupId',
+       'chanelId',
+       'status',
+   ];
 
     public function route()
     {
         return $this->belongsTo(RouteDirection::class, 'routeId');
     }
 
-    public function favoriteProducts()
+    public function products()
     {
-        return $this->hasMany(Product::class, 'productId');
+        $productIds = json_decode($this->productId);
+
+        return Product::whereIn('id', $productIds)->get();
     }
 
     public function person()
