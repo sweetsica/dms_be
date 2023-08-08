@@ -163,6 +163,7 @@ class PersonnelController extends Controller
                 'personnel.area_id'
                 // 'personnel.id',
             )
+
             ->where("personnel.code", "like", "%$search%")->paginate(10);
         $departmentlists = $this->getDepartment();
         $positionlists = $this->getPosition();
@@ -218,11 +219,17 @@ class PersonnelController extends Controller
                 'personnel.role_id',
                 'role.name as role_name',
                 'locality.name as locality_name',
+                'department.parent',
                 'personnel.area_id'
                 // 'personnel.id',
             )
             ->where("personnel.code", "like", "%$search%")
             ->where("personnel.department_id", $department_id)
+
+            ->orWhereHas('department', function ($query) use ($department_id) {
+                $query->where('department.parent', $department_id);
+            })
+            // ->Where("personnel.department_id", $department_id)
             ->paginate(10);
         $departmentlists = $this->getDepartment();
         $positionlists = $this->getPosition();
@@ -241,6 +248,71 @@ class PersonnelController extends Controller
             "personnelLevelList"=>$personnelLevelList,
             "roleList"=>$roleList,
             "departmentListTree"=>$departmentListTree,
+            'search' => $search
+        ]);
+    }
+
+    public function showVung(Request $request ,$department_id)
+    {
+        $search = $request->get('search');
+        $personnelList = Personnel::leftJoin('department', 'department.id', '=', 'personnel.department_id')
+            ->leftJoin('position', 'position.id', '=', 'personnel.position_id')
+            ->leftJoin('personnel_level', 'personnel_level.id', '=', 'personnel.personnel_lv_id')
+            ->leftJoin('role', 'role.id', '=', 'personnel.role_id')
+            ->leftJoin('locality', 'locality.id', '=', 'personnel.area_id')
+            ->select(
+                'personnel.id',
+                'personnel.name',
+                'personnel.address',
+                'personnel.gender',
+                'personnel.birthday',
+                'personnel.password',
+                'personnel.code',
+                'personnel.email',
+                'personnel.annual_salary',
+                'personnel.pack',
+                'personnel.manage',
+                'personnel.phone',
+                'personnel.working_form',
+                'personnel.status',
+                'personnel.department_id',
+                'personnel.personnel_lv_id',
+                'personnel.position_id',
+                'department.name as department_name',
+                'position.name as position_name',
+                'personnel_level.name as personnel_level_name',
+                'personnel.role_id',
+                'role.name as role_name',
+                'locality.name as locality_name',
+                'department.parent',
+                'personnel.area_id'
+                // 'personnel.id',
+            )
+            ->where("personnel.code", "like", "%$search%")
+            ->where("personnel.department_id", $department_id)
+
+            ->orWhereHas('department', function ($query) use ($department_id) {
+                $query->where('department.parent', $department_id);
+            })
+            // ->Where("personnel.department_id", $department_id)
+            ->paginate(10);
+        $departmentlists = $this->getDepartment();
+        $positionlists = $this->getPosition();
+        $personnellists = $this->getPersonnel();
+        $personnelLevelList = PersonnelLevel::all();
+        $roleList = Role::all();
+        $localityList = Locality::all();
+        $areaTree =  Department::with('khuVucs.diaBans.tuyens')->where('code', 'like', 'VUNG%')->get();
+        // dd($personnelLevelList);
+        return view("ds_nhan_su.show_vung",[
+            "personnelList"=>$personnelList,
+            "departmentlists"=>$departmentlists,
+            "positionlists"=>$positionlists,
+            "localityList"=>$localityList,
+            "personnellists"=>$personnellists,
+            "personnelLevelList"=>$personnelLevelList,
+            "roleList"=>$roleList,
+            "areaTree"=>$areaTree,
             'search' => $search
         ]);
     }
@@ -282,6 +354,10 @@ class PersonnelController extends Controller
             )
             ->where("personnel.code", "like", "%$search%")
             ->where("personnel.position_id", $position_id)
+
+            ->orWhereHas('position', function ($query) use ($position_id) {
+                $query->where('position.parent', $position_id);
+            })
             ->paginate(10);
         $departmentlists = $this->getDepartment();
         $positionlists = $this->getPosition();
@@ -422,7 +498,7 @@ class PersonnelController extends Controller
         $data->phone = $phone;
         $data->working_form = $working_form;
         $data->status = $status;
-        $data->password = Hash::make($password);
+        $data->password = $password;
         $data->birthday = $birthday;
         $data->address = $address;
         $data->annual_salary = $annual_salary;
@@ -466,7 +542,7 @@ class PersonnelController extends Controller
         $data->phone = $phone;
         $data->working_form = $working_form;
         $data->status = $status;
-        $data->password = Hash::make($password);
+        $data->password = $password;
         $data->birthday = $birthday;
         $data->address = $address;
         $data->annual_salary = $annual_salary;

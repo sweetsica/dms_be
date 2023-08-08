@@ -54,8 +54,8 @@
                     <div class="wapper-tree">
                         <ul id="tree1">
                             @foreach ($departmentListTree as $donVi)
-                                <li>
-                                    <a href="{{ route('Personnel.show',$donVi->id) }}" class="title-child">{{ $donVi->name }}</a>
+                                <li data-id="{{ $donVi->id }}">
+                                    <a href="{{ route('Personnel.show',['department_id' => $donVi->id]) }}" class="title-child">{{ $donVi->name }}</a>
                                     @if ($donVi->donViCon->count() > 0)
                                         @include('template.sidebar.sidebarDepartment.child', [
                                             'donViCon' => $donVi->donViCon,

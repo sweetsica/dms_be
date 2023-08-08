@@ -43,6 +43,19 @@ class Personnel extends Model implements Authenticatable
         return $this->hasMany(Personnel::class, 'manage');
     }
 
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'department_id');
+    }
+
+    public function position()
+    {
+        return $this->belongsTo(Position::class, 'position_id');
+    }
+
+
+
+
     public static  function recursive($personnel, $manages = 0,$level = 1, &$personnellists){
         if(count($personnel)>0){
             foreach($personnel as $key =>$value){
@@ -56,5 +69,8 @@ class Personnel extends Model implements Authenticatable
             }
         }
     }
+
+
+
 
 }
