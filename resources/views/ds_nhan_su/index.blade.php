@@ -560,7 +560,7 @@
             @include('template.footer.footer')
         </div>
     </div>
-    @include('template.sidebar.sidebarPosition.sidebarRight')
+    @include('template.sidebar.sidebarMaster.sidebarRight')
 
 
     <!-- Modal Thêm Tao De Xuat -->
