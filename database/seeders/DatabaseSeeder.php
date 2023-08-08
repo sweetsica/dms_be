@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PersonnelSeeder::class);
         $this->call(OfficeDepartmentTBSeeder::class);
         $this->call(PositionDepartmentSeeder::class);
+        $this->call(PersonelLevelSeeder::class);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
