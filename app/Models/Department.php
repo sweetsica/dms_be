@@ -35,6 +35,11 @@ class Department extends Model
     return $this->hasMany(Area::class, 'area');
 }
 
+public function personnel()
+{
+    return $this->hasMany(Personnel::class, 'department_id');
+}
+
 
 
     public static  function recursive($department, $parents = 0,$level = 1, &$departmentlists){

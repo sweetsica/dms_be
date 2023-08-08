@@ -27,10 +27,11 @@ class AuthenticateController extends Controller
             $password = $request->input('password');
 
             $account = Personnel::where('email', $email)->first();
-            if ($account && Hash::check($password, $account->password)) {
+            $checkPass = Personnel::where('password',$password)->first();
+            if ($account && $checkPass ) {
                 if ($account->status == "Đang làm việc") {
                     $request->session()->put('user', $account);
-                    
+
                     return redirect()->route('home');
                 } else {
                     return redirect()->back()

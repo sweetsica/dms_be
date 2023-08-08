@@ -33,6 +33,11 @@ class Position extends Model
         return $this->hasMany(Position::class, 'parent');
     }
 
+    public function personnel()
+{
+    return $this->hasMany(Personnel::class, 'position_id');
+}
+
     public static  function recursive($position, $parents = 0,$level = 1, &$positionlists){
         if(count($position)>0){
             foreach($position as $key =>$value){
