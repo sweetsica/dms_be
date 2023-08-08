@@ -207,25 +207,29 @@
                                                         </td>
                                                         <td>
                                                             <div class="overText center" data-bs-toggle="tooltip"
-                                                                data-bs-placement="top" title="{{ $item->route->name }}">
-                                                                {{ $item->route->name }}
+                                                                data-bs-placement="top"
+                                                                title="{{ $item->route->name ?? '' }}">
+                                                                {{ $item->route->name ?? '' }}
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="overText center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top"
-                                                                title="{{ $item->person->name }}">
-                                                                {{ $item->person->name }}
+                                                                title="{{ $item->person->name ?? '' }}">
+                                                                {{ $item->person->name ?? '' }}
                                                             </div>
                                                         </td>
                                                         <td>
                                                             @php
-                                                                $products = $item->products();
-                                                                $productNames = [];
-                                                                foreach ($products as $product) {
-                                                                    $productNames[] = $product->name;
+                                                            $productList = null;
+                                                                if ($item->productId) {
+                                                                    $products = $item->products();
+                                                                    $productNames = [];
+                                                                    foreach ($products as $product) {
+                                                                        $productNames[] = $product->name;
+                                                                    }
+                                                                    $productList = implode(', ', $productNames);
                                                                 }
-                                                                $productList = implode(', ', $productNames);
                                                             @endphp
                                                             <div class="overText center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="{{ $productList }}">

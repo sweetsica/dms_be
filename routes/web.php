@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RouteDirectionController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -170,3 +171,5 @@ Route::middleware(['auth.role'])->group(function () {
 Route::fallback(function () {
     return view('404');
 });
+
+
