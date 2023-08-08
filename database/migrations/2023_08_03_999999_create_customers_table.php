@@ -14,6 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->string('code', 255)->default(time());
             $table->string('name', 255)->nullable();
+            $table->string('type')->default(0);
+            $table->string('class')->default(0);
             $table->string('phone', 255)->nullable();
             $table->string('email', 255)->nullable();
             $table->string('category')->nullable()->nullable();

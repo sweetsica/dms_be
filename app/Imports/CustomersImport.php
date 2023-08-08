@@ -11,13 +11,40 @@ class CustomersImport implements ToModel, WithStartRow
 {
     public function model(array $row)
     {
-//        dd($row);
+        $row['ngay_sinh'] = ($row['ngay_sinh'] == '') ? '0' : $row['ngay_sinh'];
+
         return new Customer([
-            'id'=> $row[0],
-            'code'=> $row[1],
-            'name'=> $row[2],
-            'phone'=> $row[3],
-            'email'=> $row[4],
+            'code'=> 'KH-'.$row['0'],
+            'name'=> $row['1'],
+            'address'=> $row['2'],
+            'category'=> $row['3'],
+            'companyPhoneNumber'=> $row['4'],
+            'phone'=> $row['5'],
+            'personContact'=> $row['6'],
+            'zalo'=> $row['7'],
+            'note'=> $row['8'],
+            'email'=> $row['9'],
+            'website'=> $row['10'],
+            'city'=> $row['11'],
+            'district'=> $row['12'],
+            'guide'=> $row['13'],
+            'companyName'=> $row['14'],
+            'career'=> $row['15'],
+            'taxCode'=> $row['16'],
+            'companyEmail'=> $row['17'],
+            'accountNumber'=> $row['18'],
+            'bankOpen'=> $row['19'],
+            'routeId'=> $row['20'],
+            'chanelId'=> $row['21'],
+            'groupId'=> $row['22'],
+            'status'=> $row['23'],
+            'personId'=> $row['24'],
+            'productId'=> $row['25'],
+            'created_at'=> $row['26'],
+            'updated_at'=> $row['27'],
+            'deleted_at'=> $row['28'],
+            'type'=> $row['29'],
+            'class'=> $row['30'],
         ]);
     }
 //    public function headingRow(): int
