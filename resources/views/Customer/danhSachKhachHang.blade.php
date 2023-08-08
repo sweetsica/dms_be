@@ -221,7 +221,7 @@
                                                         </td>
                                                         <td>
                                                             @php
-                                                            $productList = null;
+                                                                $productList = null;
                                                                 if ($item->productId) {
                                                                     $products = $item->products();
                                                                     $productNames = [];
@@ -408,43 +408,28 @@
                                 <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Tỉnh/thành">
                                     <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
-                                        data-live-search="true" title="Tỉnh/thành*" data-select-all-text="Chọn tất cả"
-                                        data-deselect-all-text="Bỏ chọn" data-size="3" name="city"
+                                        data-live-search="true" title="{{ $item->city }}"
+                                        data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
+                                        data-size="3" name="city" id="city_edit"
                                         data-live-search-placeholder="Tìm kiếm...">
-                                        @foreach ($listData as $items)
-                                            <option value="{{ $items->id }}"
-                                                {{ $items->id == $item->id ? 'selected' : '' }}>
-                                                {{ $items->city }}
-                                            </option>
-                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Quận/huyện">
                                     <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
-                                        data-live-search="true" title="Quận/huyện*" data-select-all-text="Chọn tất cả"
-                                        data-deselect-all-text="Bỏ chọn" data-size="3" name="district"
+                                        data-live-search="true" title="{{ $item->district }}"
+                                        data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
+                                        data-size="3" name="district" id="district_edit"
                                         data-live-search-placeholder="Tìm kiếm...">
-                                        @foreach ($listData as $items)
-                                            <option value="{{ $items->id }}"
-                                                {{ $items->id == $item->id ? 'selected' : '' }}>
-                                                {{ $items->district }}
-                                            </option>
-                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Phường/xã">
                                     <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
-                                        data-live-search="true" title="Phường/xã*" data-select-all-text="Chọn tất cả"
-                                        data-deselect-all-text="Bỏ chọn" data-size="3" name="guide"
+                                        data-live-search="true" title="{{ $item->guide }}"
+                                        data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
+                                        data-size="3" name="guide" id="guide_edit"
                                         data-live-search-placeholder="Tìm kiếm...">
-                                        @foreach ($listData as $items)
-                                            <option value="{{ $items->id }}"
-                                                {{ $items->id == $item->id ? 'selected' : '' }}>
-                                                {{ $items->guide }}
-                                            </option>
-                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-12 mb-3">
@@ -878,23 +863,25 @@
             return axios.get(api)
                 .then((response) => {
                     renderData(response.data.districts, "district");
-                    $('#district').selectpicker('refresh');
+                    // $('#district').selectpicker('destroy');
                 });
         }
         var callApiWard = (api) => {
             return axios.get(api)
                 .then((response) => {
                     renderData(response.data.wards, "guide");
-                    $('#guide').selectpicker('refresh');
+                    // $('#guide').selectpicker('destroy');
                 });
         }
 
         var renderData = (array, select) => {
+            $('#' + select).selectpicker('destroy');
             let row = '<option disable value="">Chọn</option>';
             array.forEach(element => {
                 row += `<option data-id="${element.code}" value="${element.name}">${element.name}</option>`
             });
             document.querySelector("#" + select).innerHTML = row;
+            $('#' + select).selectpicker();
         }
 
         $("#city").change(() => {
@@ -904,6 +891,48 @@
             callApiWard(host + "d/" + $("#district").find(':selected').data('id') + "?depth=2");
         });
         $("#guide").change(() => {})
+
+
+        //sua dia chi cho edit
+        var callAPI_edit = (api) => {
+            return axios.get(api)
+                .then((response) => {
+                    renderData_edit(response.data, "city_edit");
+                });
+        }
+        callAPI_edit('https://provinces.open-api.vn/api/?depth=1');
+        var callApiDistrict_edit = (api) => {
+            return axios.get(api)
+                .then((response) => {
+                    renderData_edit(response.data.districts, "district_edit");
+                });
+        }
+        var callApiWard_edit = (api) => {
+            return axios.get(api)
+                .then((response) => {
+                    renderData_edit(response.data.wards, "guide_edit");
+                });
+        }
+
+        var renderData_edit = (array, select) => {
+            $('#' + select).selectpicker('destroy');
+            let row = '<option disable value="">Chọn</option>';
+            array.forEach(element => {
+                row += `<option data-id="${element.code}" value="${element.name}">${element.name}</option>`
+            });
+            document.querySelector("#" + select).innerHTML = row;
+            $('#' + select).selectpicker();
+        }
+
+        $("#city_edit").change(() => {
+            callApiDistrict_edit(host + "p/" + $("#city_edit").find(':selected').data('id') + "?depth=2");
+        });
+        $("#district_edit").change(() => {
+            callApiWard_edit(host + "d/" + $("#district_edit").find(':selected').data('id') + "?depth=2");
+        });
+        $("#guide_edit").change(() => {})
+
+
 
         //load data nhan su api
         function loadPersonnelData() {
