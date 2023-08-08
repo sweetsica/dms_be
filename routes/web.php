@@ -96,6 +96,11 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('them-moi-san-pham', [ProductController::class, 'store'])->name('product.store');
     Route::put('sua-san-pham/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('xoa-san-pham/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
+    
+    Route::get('chi-tiet-san-pham/{id}', [ProductController::class, 'show'])->name('product.show');
+    Route::post('them-moi-chi-tiet/{id}', [ProductController::class, 'create'])->name('product.create');
+    Route::post('them-san-pham-lien-quan/{id}', [ProductController::class, 'related'])->name('product.related');
+    Route::delete('xoa-chi-tiet/{id}', [ProductController::class, 'delete'])->name('product.deleted');
 
     Route::get('danh-sach-phien-ban', [VersionController::class, 'index'])->name('version.list');
     Route::post('them-moi-phien-ban', [VersionController::class, 'store'])->name('version.store');
@@ -121,12 +126,6 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('danh-sach-khu-vuc', [AreaController::class, 'store'])->name('area.store');
     Route::post('danh-sach-khu-vuc/{id}', [AreaController::class, 'update'])->name('area.update');
     Route::post('danh-sach-khu-vucx/{id}', [AreaController::class, 'destroy'])->name('area.destroy');
-
-    Route::get('chi-tiet-san-pham', function () {
-        return view('Product.chiTietSanPham');
-    });
-
-
 
 
     Route::get('chi-tiet-khach-hang/{id}', [CustomerController::class, 'show'])->name('customer-detail.list');

@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
-     */ 
+     */
     private function _toObject($array)
     {
         $objectStr = json_encode($array);
@@ -68,9 +70,55 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request, $id)
     {
-        //
+        $details = ProductDetails::where('product_id', $id)->first();
+
+        if ($request->hasFile('files')) {
+            $files = $request->file('files');
+            $directory = 'product/' . $id;
+
+            // Check if the directory exists
+            if (!Storage::exists($directory)) {
+                // Create the directory
+                Storage::makeDirectory($directory);
+            }
+
+            $uploadedImages = [];
+            $uploadedFiles = [];
+
+            foreach ($files as $file) {
+                $extension = $file->getClientOriginalExtension();
+
+                // Additional logic if needed
+
+                if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif'])) {
+                    $uploadedImages[] = $this->uploadFileToRemoteHost($file);
+                } else {
+                    $uploadedFiles[] = $this->uploadFileToRemoteHost($file);
+                }
+            }
+
+            if (!empty($uploadedImages)) {
+                $details->images = json_encode($uploadedImages);
+            }
+
+            if (!empty($uploadedFiles)) {
+                $details->attachments = json_encode($uploadedFiles);
+            }
+        }
+
+        if($request->description){
+            $details->description = $request->description;
+        }
+        
+        if($request->price){
+            $details->price = $request->price;
+        }
+
+        $details->save();
+        Session::flash('success', "Cập nhật thành công");
+        return back();
     }
 
     /**
@@ -90,6 +138,9 @@ class ProductController extends Controller
             $data['created_at'] = now();
             $product = Product::create($data);
             if ($product) {
+                ProductDetails::create([
+                    'product_id' => $product->id
+                ]);
                 Session::flash('success', "Thêm sản phẩm thành công");
                 return back();
             } else {
@@ -123,17 +174,32 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $details = ProductDetails::where('product_id', $id)->first();
+
+        $other_product = Product::where('id', '!=', $id)->get();
+
+        return view("Product.chiTietSanPham")->with(compact(
+            "product",
+            "details",
+            "other_product"
+        ));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function related(Request $request, $id)
     {
-        //
+        $details = ProductDetails::where('product_id', $id)->first();
+        if($request->related){
+            $details->related = json_encode($request->related);
+            $details->save();
+            Session::flash('success', "Thêm sản phẩm liên quan thành công");
+        }
+        return back();
     }
 
     /**
@@ -182,5 +248,33 @@ class ProductController extends Controller
     {
         $productList = Product::all();
         return $productList;
+    }
+    
+    public function delete($id)
+    {
+        dd($id);
+        $details = ProductDetails::findOrFail($id);
+        $relatedArray = json_decode($details->related);
+        if (count($relatedArray) > 1) {
+            $details_array = array_diff($relatedArray, [$id]);
+
+            // Convert the associative array to an indexed array
+            $details_array = array_values($details_array);
+
+            // Encode the array back to a JSON string
+            $details_json = json_encode($details_array);
+
+            // Update the task's prev_tasks attribute in the database
+            $details->related = $details_json;
+            // dd($taskDetails->prev_tasks);
+            $details->save();
+        }else{
+            $details->related = null;
+            // dd($taskDetails->prev_tasks);
+            $details->save();
+        }
+
+        Session::flash('success', "Xoá sản phẩm liên quan thành công");
+        return back();
     }
 }

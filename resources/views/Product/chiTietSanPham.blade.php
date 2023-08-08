@@ -1,6 +1,6 @@
 @extends('template.master')
 {{-- Trang chủ GIao Ban --}}
-@section('title', 'Mẫu yêu cầu mua sắm')
+@section('title', 'Chi tiết sản phẩm')
 @section('header-style')
     <style>
         .carousel-indicators button.thumbnail {
@@ -29,51 +29,16 @@
     </style>
 @endsection
 
-@php
-    $userDepartmentName = session('department_name');
-    // function getProposalRelatedPeople($proposal)
-    // {
-    //     $data = $proposal->data;
-    //     $data = json_decode($data);
-    //     if (!isset($data->relatedPeople)) {
-    //         return [];
-    //     }
-    //     return $data->relatedPeople;
-    // }
-
-    // function isRelatedToProposal($proposal, $userId)
-    // {
-    //     $related = getProposalRelatedPeople($proposal);
-    //     if (count($related) == 0) {
-    //         return false;
-    //     }
-    //     foreach ($related as $item) {
-    //         if ($item == $userId) {
-    //             return true;
-    //         }
-    //     }
-    // }
-
-    // function isEdit($proposal, $userId)
-    // {
-    //     if ($proposal->status > 0) {
-    //         return false;
-    //     }
-    //     if ($proposal->sender_id == $userId) {
-    //         return true;
-    //     }
-    // }
-    // foreach (Session::get('listPositions') as $items)
-    //     if ($items->id === Session::get('position_id'))
-    //         $position_name =$items->name 
-@endphp
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
     <div id="mainWrap" class="mainWrap">
         <div class="mainSection">
             <div class="main">
                 <div class="container-fluid">
-                    <div class="card_template-wrapper">
+                    <form method="POST" action="{{ route('product.create', ['id' => $product->id]) }}"
+                        enctype="multipart/form-data">
+                        @csrf
+                        <div class="card_template-wrapper">
                             <div class="card_template-body" id="container-fluid">
                                 <div class="card_template-body-top">
                                     <div class='row mb-3 d-flex align-items-center'>
@@ -85,25 +50,26 @@
                                         <div class="col-4 d-flex align-items-center justify-content-center flex-column">
                                             <div class="card_template-heading">Thông tin sản phẩm</div>
                                             <div class="d-flex align-items-center">
-                                                <div class="modal-title-black mt-2"> SẢN PHẨM XE TANO -</div>
-                                                <div class=" modal-title mt-2 ms-2">SP - TANO01</div>
+                                                <div class="modal-title-black mt-2 text-uppercase"> {{ $product->name }} -
+                                                </div>
+                                                <div class=" modal-title mt-2 ms-2 text-uppercase">{{ $product->code }}
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-4 d-flex align-items-center justify-content-end">
-                                            <img class="qrCode_wrapper1" src="{{ asset('/assets/img/QR.webp')}}" alt="">
+                                        <div class="col-4 d-flex align-items-center justify-content-end"
+                                            style="height: 70px;">
+                                            {!! QrCode::generate(route('product.show', $product->id)) !!}
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <div>
-                                    <div class="text-break " style="margin-left: 4px">1</div>
-                                </div> --}}
-
 
                                 {{-- Giao diện nhập input --}}
-                                {{-- <div class="row card_template-body-middle mb-3">
-                                    <div class="col-md-6 mb-3">
+                                <div class="row card_template-body-middle mb-3">
+                                    @if (empty($details->images))
+                                        <div class="col-md-6 mb-3">
                                             <div class="upload_wrapper-items">
-                                                <div class="alert alert-danger alertNotSupport" role="alert" style="display:none">
+                                                <div class="alert alert-danger alertNotSupport" role="alert"
+                                                    style="display:none">
                                                     File bạn tải lên hiện tại không hỗ trợ !
                                                 </div>
                                                 <div class="modal_upload-wrapper">
@@ -123,172 +89,164 @@
                                                                     src="{{ asset('assets/img/upload-file.svg') }}" />
                                                                 Tải file lên
                                                                 <input role="button" type="file"
-                                                                    class="modal_upload-input modal_upload-file" name="files[]"
-                                                                    multiple onchange="updateList(event)">
+                                                                    class="modal_upload-input modal_upload-file"
+                                                                    name="files[]" multiple onchange="updateList(event)">
                                                             </button>
                                                         </div>
-            
+
                                                     </div>
                                                 </div>
                                                 <ul class="modal_upload-list"
                                                     style="max-height: 134px; overflow-y: scroll; overflow-x: hidden;"></ul>
                                             </div>
-                                    </div>
+                                        </div>
+                                    @else
+                                        <div class="col-md-6 mb-3" style="overflow: hidden;">
+                                            <div id="carouselExampleIndicators" class="carousel slide"
+                                                data-bs-ride="carousel">
+
+                                                <div class="carousel-inner">
+                                                    @foreach (json_decode($details->images) as $img)
+                                                        <div class="carousel-item active">
+                                                            <img src="{{ $img }}" class="d-block w-100 "
+                                                                alt="...">
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                                <div class="carousel-indicators">
+                                                    @foreach (json_decode($details->images) as $key => $img)
+                                                        <button type="button" data-bs-target="#carouselExampleIndicators"
+                                                            data-bs-slide-to="{{ $key }}"
+                                                            class="{{ $key == 0 ? 'active' : '' }} thumbnail"
+                                                            aria-current="true" aria-label="Slide {{ $key + 1 }}">
+                                                            <img src="{{ $img }}" class="d-block w-100"
+                                                                alt="...">
+                                                        </button>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+
                                     <div class="col-md-6 mb-3">
                                         <div class="row">
                                             <div class="col-md-12 mb-3">
                                                 <div class="card-title-black">Mô tả:</div>
                                             </div>
-                                            <div class="col-md-12 mb-3">
-                                                <textarea rows="4" type="text" placeholder="(Vui lòng nhập thông tin chung về sản phẩm)" class="form-control textareaResize" name="">VF 5 Plus sở hữu thiết kế hiện đại, trẻ trung, cá tính và nổi bật với các lựa chọn phối màu nội ngoại thất, đảm bảo cá nhân hóa theo phong cách sống, cá tính và sở thích của mỗi khách hàng.</textarea>
-                                            </div>
-                                            <div class="col-md-12 mb-3">
-                                                <textarea rows="6" type="text" placeholder="(Vui lòng nhập thông tin chung về sản phẩm)" class="form-control textareaResize" name="">VinFast VF 5 Plus được trang bị đầy đủ những công nghệ tiên tiến bậc nhất:&#13;&#10;-Giám sát hành trình cơ bản&#13;&#10;-Cảnh báo giao thông phía sau&#13;&#10;-Cảnh báo điểm mù&#13;&#10;-Hỗ trợ đỗ xe phía sau&#13;&#10;-Hỗ trợ phanh khẩn cấp...</textarea>
-                                            </div>
+                                            @if (!$details->description)
+                                                <div class="col-md-12 mb-3">
+                                                    <textarea rows="4" type="text" placeholder="(Vui lòng nhập thông tin chung về sản phẩm)"
+                                                        class="form-control textareaResize" name="description"></textarea>
+                                                </div>
+                                            @else
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="text-break " style="margin-left: 4px">
+                                                        {{ $details->description }}</div>
+                                                </div>
+                                            @endif
 
-                                            <div class="col-md-12 mb-3">
-                                                <button type="button" class="btn btn-danger" id="showPriceButton">Giá bán</button>
-                                            </div>
-                                            <div class="col-md-12 mb-3" id="priceSection" style="display: none;">
-                                                <div class="card_template-title d-flex align-items-center justify-content-center">
-                                                    <div class="text-nowrap">Giá bán:</div>
-                                                    <div class="card_template-sub with_input d-flex justify-content-center align-items-center">
-                                                        <input type="text" placeholder="" class="form-control" name="proposalNo">
+                                            @if (!$details->price)
+                                                <div class="col-md-12 mb-3">
+                                                    <button type="button" class="btn btn-danger" id="showPriceButton">Giá
+                                                        bán</button>
+                                                </div>
+                                                <div class="col-md-12 mb-3" id="priceSection" style="display: none;">
+                                                    <div
+                                                        class="card_template-title d-flex align-items-center justify-content-center">
+                                                        <div class="text-nowrap">Giá bán:</div>
+                                                        <div
+                                                            class="card_template-sub with_input d-flex justify-content-center align-items-center">
+                                                            <input type="text" placeholder="" class="form-control"
+                                                                name="price">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            
-                                            
-                                            <div class="col-md-4 mb-3">
-                                                <textarea rows="1" type="text" placeholder="(Catalogue)" class="form-control textareaResize" name="">Catalogue mô tả</textarea>
-                                            </div>
-                                            <div class="col-md-4 mb-3">
-                                                <textarea rows="1" type="text" placeholder="(Bản thiết kế)" class="form-control textareaResize" name="">Bản thiết kế</textarea>
-                                            </div>
-                                            <div class="col-md-4 mb-3">
-                                                <textarea rows="1" type="text" placeholder="(Giới thiệu)" class="form-control textareaResize" name="">Giới thiệu</textarea>
-                                            </div>
+                                            @else
+                                                <div class="col-md-12 mb-3">
+                                                    <div
+                                                        class="card_template-title d-flex align-items-center justify-content-center">
+                                                        <div class="text-nowrap">Giá bán:</div>
+                                                        <div
+                                                            class="card_template-sub with_input d-flex justify-content-center align-items-center">
+                                                            <div class="text-break " style="margin-left: 4px">
+                                                                {{ number_format($details->price, 2, ',', '.') }}</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
+
+                                            @if (!empty($details->attachments))
+                                                @foreach (json_decode($details->attachments) as $att)
+                                                    <div class="col-md-4 mb-3">
+                                                        <div class="text-break " style="margin-left: 4px">
+                                                            <a
+                                                                href="{{ $att }}">{{ pathinfo(basename($att), PATHINFO_FILENAME) }}</a>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            @endif
                                         </div>
                                     </div>
 
-                                    
+
 
                                     <div class="col-md-12 mb-3">
-                                            <div class="mb-3">
-                                                <div class="modal-title">Thông số kỹ thuật:</div>
-                                            </div>
+                                        <div class="mb-3">
+                                            <div class="modal-title">Thông số kỹ thuật:</div>
+                                        </div>
 
-                                            <div class="DNTU_repeater">
-                                                <div data-repeater-list="DNTU_list">
-                                                    <div class="row repeater_wrapper d-flex align-items-center" style="position: relative" data-repeater-item>
-                                                            <div class="col-md-5 mb-3 d-flex align-items-center">
-                                                                <div class=" card_template-sub with_input d-flex justify-content-center align-items-center" style="width:30%">
-                                                                    <input type="text" value="Độ dài" placeholder="" class="card-title-black form-control" name="proposalNo">
-                                                                </div>
-                                                                <div class=" card_template-sub with_input d-flex justify-content-center align-items-center" style="width:70%">
-                                                                    <input type="text" value="Catalogue mô tả" placeholder="" class=" form-control" name="proposalNo">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5 mb-3 d-flex align-items-center">
-                                                                <div class=" card_template-sub with_input d-flex justify-content-center align-items-center" style="width:30%">
-                                                                    <input type="text" value="Độ dài" placeholder="" class="card-title-black form-control" name="proposalNo">
-                                                                </div>
-                                                                <div class=" card_template-sub with_input d-flex justify-content-center align-items-center" style="width:70%">
-                                                                    <input type="text" value="Catalogue mô tả" placeholder="" class=" form-control" name="proposalNo">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-2 mb-3">
-                                                                <img data-repeater-delete role="button" src="{{ asset('/assets/img/trash.svg') }}" width="20px" height="20px" />
-                                                            </div>
+                                        <div class="DNTU_repeater">
+                                            <div data-repeater-list="DNTU_list">
+                                                <div class="row repeater_wrapper d-flex align-items-center"
+                                                    style="position: relative" data-repeater-item>
+                                                    <div class="col-md-5 mb-3 d-flex align-items-center">
+                                                        <div class=" card_template-sub with_input d-flex justify-content-center align-items-center"
+                                                            style="width:30%">
+                                                            <input type="text" placeholder=""
+                                                                class="card-title-black form-control"
+                                                                name="listDetail[0][key]">
                                                         </div>
-                                                </div>
-                                                <div class="">
-                                                    <div class="d-flex justify-content-start">
-                                                        <div role="button" class="fs-5 text-danger" data-repeater-create><i class="bi bi-plus-circle"></i></div>
+                                                        <div class=" card_template-sub with_input d-flex justify-content-center align-items-center"
+                                                            style="width:70%">
+                                                            <input type="text" placeholder="" class=" form-control"
+                                                                name="listDetail[0][value]">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-5 mb-3 d-flex align-items-center">
+                                                        <div class=" card_template-sub with_input d-flex justify-content-center align-items-center"
+                                                            style="width:30%">
+                                                            <input type="text" placeholder=""
+                                                                class="card-title-black form-control"
+                                                                name="listDetail[0][key]">
+                                                        </div>
+                                                        <div class=" card_template-sub with_input d-flex justify-content-center align-items-center"
+                                                            style="width:70%">
+                                                            <input type="text" placeholder="" class=" form-control"
+                                                                name="listDetail[0][value]">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-2 mb-3">
+                                                        <img data-repeater-delete role="button"
+                                                            src="{{ asset('/assets/img/trash.svg') }}" width="20px"
+                                                            height="20px" />
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="">
+                                                <div class="d-flex justify-content-start">
+                                                    <div role="button" class="fs-5 text-danger" data-repeater-create><i
+                                                            class="bi bi-plus-circle"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
 
-                                    
-                                </div> --}}
+
+                                </div>
 
                                 {{-- Giao diện hiển thị --}}
-                                <div class="row card_template-body-middle mb-3">
-                                    <div class="col-md-6 mb-3" style="overflow: hidden;">
-                                        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-
-                                            <div class="carousel-inner">
-                                                <div class="carousel-item active">
-                                                    <img src="https://codingyaar.com/wp-content/uploads/bootstrap-carousel-slide-2.jpg" class="d-block w-100 "
-                                                        alt="...">
-                                                </div>
-                                                <div class="carousel-item">
-                                                    <img src="https://codingyaar.com/wp-content/uploads/bootstrap-carousel-slide-1.jpg" class="d-block w-100"
-                                                        alt="...">
-                                                </div>
-                                                <div class="carousel-item">
-                                                    <img src="https://codingyaar.com/wp-content/uploads/bootstrap-carousel-slide-3.jpg" class="d-block w-100"
-                                                        alt="...">
-                                                </div>
-                                            </div>
-                                            <div class="carousel-indicators">
-                                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active thumbnail"
-                                                    aria-current="true" aria-label="Slide 1">
-                                                    <img src="https://codingyaar.com/wp-content/uploads/bootstrap-carousel-slide-2.jpg" class="d-block w-100"
-                                                        alt="...">
-                                                </button>
-                                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" class="thumbnail"
-                                                    aria-label="Slide 2">
-                                                    <img src="https://codingyaar.com/wp-content/uploads/bootstrap-carousel-slide-1.jpg" class="d-block w-100"
-                                                        alt="...">
-                                                </button>
-                                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" class="thumbnail"
-                                                    aria-label="Slide 3">
-                                                    <img src="https://codingyaar.com/wp-content/uploads/bootstrap-carousel-slide-3.jpg" class="d-block w-100"
-                                                        alt="...">
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <div class="row">
-                                            <div class="col-md-12 mb-3">
-                                                <div class="card-title-black">Mô tả:</div>
-                                            </div>
-                                            <div class="col-md-12 mb-3">
-                                                <div class="text-break " style="margin-left: 4px">1</div>
-                                            </div>
-                                            <div class="col-md-12 mb-3">
-                                                <div class="text-break " style="margin-left: 4px">1</div>
-                                                
-                                            </div>
-                                            <div class="col-md-12 mb-3" id="priceSection" style="display: none;">
-                                                <div class="card_template-title d-flex align-items-center justify-content-center">
-                                                    <div class="text-nowrap">Giá bán:</div>
-                                                    <div class="card_template-sub with_input d-flex justify-content-center align-items-center">
-                                                        <div class="text-break " style="margin-left: 4px">1</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            
-                                            <div class="col-md-4 mb-3">
-                                                <div class="text-break " style="margin-left: 4px">1</div>
-                                            </div>
-                                            <div class="col-md-4 mb-3">
-                                                <div class="text-break " style="margin-left: 4px">1</div>
-
-                                            </div>
-                                            <div class="col-md-4 mb-3">
-                                                <div class="text-break " style="margin-left: 4px">1</div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    
+                                {{-- <div class="row card_template-body-middle mb-3">                                    
 
                                     <div class="col-md-12 mb-3">
                                             <div class="mb-3">
@@ -331,126 +289,113 @@
 
 
                                     
-                                </div>
-                                
-                                
+                                </div> --}}
+
+
                                 <div class="card_template-body-bottom">
                                     <div class="row">
                                         <div class="col-12 modal-title">Sản phẩm liên quan</div>
-                                        <div class="col-4 mt-3">
-                                            <div class=" control_product"  >
-                                                <div href="#" class="control_product_link" id="control_link-1">
-                                                    
-                                                    <div class="control_product_img" style="width: 30%">
-                                                        <img src="{{ asset('/assets/img/xedien.png')}}" alt="">
-                                                    </div>
-                                                    <div class="control-info ms-2" style="width: 60%">
+                                        @if (!empty($details->related))
+                                            @php
+                                                $relatedProductIds = json_decode($details->related);
+                                                $relatedProducts = \App\Models\Product::whereIn('id', $relatedProductIds)->get();
+                                            @endphp
+                                            @foreach ($relatedProducts as $related)
+                                                @php
+                                                    $detailsPro = \App\Models\ProductDetails::where('id', $related->id)->first();
+                                                @endphp
+                                                <div class="col-4 mt-3">
+                                                    <div class=" control_product">
+                                                        <div href="/chi-tiet-san-pham/{{ $related->id }}"
+                                                            class="control_product_link" id="control_link-1">
 
-                                                        <div class="over_info1 card-title-black fs-5">
-                                                            Mẫu xe gia đình - BT-TANO1
+                                                            <div class="control_product_img" style="width: 30%">
+                                                                <img src="{{ $related->thumbnail }}" alt="">
+                                                            </div>
+                                                            <div class="control-info ms-2" style="width: 60%">
+
+                                                                <div class="over_info1 card-title-black fs-5">
+                                                                    {{ $related->name }} - {{ $related->code }}
+                                                                </div>
+                                                                <div class="over_info1">
+                                                                    {{ number_format($detailsPro->price ?? 0, 2, ',', '.') }}
+                                                                </div>
+                                                                <a href="/chi-tiet-san-pham/{{ $related->id }}"
+                                                                    class="over_info1">Xem chi tiết</a>
+                                                            </div>
+                                                            <div class="col btn test_btn-remove custom-btn" href="#"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#xoaDetail{{ $related->id }}"
+                                                                style="width: 10%">
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
                                                         </div>
-                                                        <div class="over_info1">120.000.000</div>
-                                                        <a href="" class="over_info1">Xem chi tiết</a>
-                                                    </div>
-                                                    <div  class="col btn test_btn-remove custom-btn" href="#" data-bs-toggle="modal" data-bs-target="#xoa"  style="width: 10%">
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-                    
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-4 mt-3">
-                                            <div class=" control_product"  >
-                                                <div href="#" class="control_product_link" id="control_link-1">
-                                                    
-                                                    <div class="control_product_img" style="width: 30%">
-                                                        <img src="{{ asset('/assets/img/xedien.png')}}" alt="">
-                                                    </div>
-                                                    <div class="control-info ms-2" style="width: 60%">
+                                            @endforeach
 
-                                                        <div class="over_info1 card-title-black fs-5">
-                                                            Mẫu xe gia đình - BT-TANO1
-                                                        </div>
-                                                        <div class="over_info1">120.000.000</div>
-                                                        <a href="" class="over_info1">Xem chi tiết</a>
-                                                    </div>
-                                                    <div  class="col btn test_btn-remove custom-btn" href="#" data-bs-toggle="modal" data-bs-target="#xoa"  style="width: 10%">
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
-                    
+                                            @foreach ($relatedProducts as $related)
+                                                {{-- delete --}}
+                                                <div class="modal fade" id="xoaDetail{{ $related->id }}" tabindex="-1"
+                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <form
+                                                            action="{{ route('product.deleted', ['id' => $related->id]) }}">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <div class="modal-content">
+                                                                <div class="modal-header text-center">
+                                                                    <h5 class="modal-title w-100" id="exampleModalLabel">
+                                                                        XOÁ
+                                                                    </h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal"
+                                                                        aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="fs-5">Bạn có thực sự muốn xoá sản phẩm
+                                                                        liên
+                                                                        quan này không?</div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-outline-danger"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-dismiss="modal">Hủy</button>
+                                                                    <button type="submit" class="btn btn-danger"
+                                                                        id="deleteRowElement">Có, tôi muốn
+                                                                        xóa</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-4 mt-3">
-                                            <div class=" control_product"  >
-                                                <div href="#" class="control_product_link" id="control_link-1">
-                                                    
-                                                    <div class="control_product_img" style="width: 30%">
-                                                        <img src="{{ asset('/assets/img/xedien.png')}}" alt="">
-                                                    </div>
-                                                    <div class="control-info ms-2" style="width: 60%">
-
-                                                        <div class="over_info1 card-title-black fs-5">
-                                                            Mẫu xe gia đình - BT-TANO1
-                                                        </div>
-                                                        <div class="over_info1">120.000.000</div>
-                                                        <a href="" class="over_info1">Xem chi tiết</a>
-                                                    </div>
-                                                    <div  class="col btn test_btn-remove custom-btn" href="#" data-bs-toggle="modal" data-bs-target="#xoa"  style="width: 10%">
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-                    
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                            @endforeach
+                                        @endif
                                         <div class="col-12 mt-3">
-                                            <button class="btn btn-danger d-block" data-bs-toggle="modal" data-bs-target="#add">+ Thêm thông số</button>
+                                            <button type="button" class="btn btn-danger d-block" data-bs-toggle="modal"
+                                                data-bs-target="#add">+ Thêm thông số</button>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end">
                                 <div class="card_template-footer">
-                                    <button type="button" class="btn btn-outline-danger ps-5 pe-5 me-3" data-bs-dismiss="modal">Hủy</button>
+                                    <a href="/danh-sach-san-pham" class="btn btn-outline-danger ps-5 pe-5 me-3"
+                                        role="button">Hủy</a>
                                     <button type="submit" class="btn btn-danger ps-5 pe-5">Lưu</button>
-                                </div> 
+                                </div>
                             </div>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
             @include('template.footer.footer')
         </div>
     </div>
     @include('template.sidebar.sidebarDeXuat.sidebarRight')
-
-            {{-- delete --}}
-            <div class="modal fade" id="xoa" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header text-center">
-                            <h5 class="modal-title w-100" id="exampleModalLabel">XOÁ</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="fs-5">Bạn có thực sự muốn xoá sản phẩm này không?</div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-danger"  data-bs-toggle="modal" data-bs-dismiss="modal">Hủy</button>
-                            <form action="" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger" id="deleteRowElement">Có, tôi muốn
-                                    xóa</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
 
     {{-- Modal thêm sản phẩm liên quan --}}
@@ -461,26 +406,38 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Link sản phẩm liên quan</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="formThemCapPhat" method="POST" action="#">
+                <form method="POST" action="{{ route('product.related', ['id' => $product->id]) }}">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-sm-12 d-flex align-items-center pb-3 mt-2" >
+                            <div class="col-sm-12 d-flex align-items-center pb-3 mt-2">
                                 <div class="d-flex align-items-center">
                                     <div class="card-title">Chọn sản phẩm liên quan</div>
                                 </div>
 
                                 <div class="col-sm-7" style="padding-left: 10px">
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Sản phẩm">
-                                        <select class="selectpicker" data-dropup-auto="false" data-width="100%" data-live-search="true" title="Chọn sản phẩm ..." data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
-                                            <option value="1">1</option>
-                                            <option value="1">1</option>
+                                        <select class="selectpicker" data-dropup-auto="false" data-width="100%"
+                                            data-live-search="true" title="Chọn sản phẩm ..."
+                                            data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
+                                            data-size="3" name="related[]" data-live-search-placeholder="Tìm kiếm..."
+                                            multiple>
+
+                                            @forelse ($other_product as $op)
+                                                <option value="{{ $op->id }}"
+                                                    @if (!empty($details->related) && in_array($op->id, json_decode($details->related, true))) selected @endif>{{ $op->name }}
+                                                    -
+                                                    {{ $op->code }}</option>
+                                            @empty
+                                                <option value="" selected disabled>Chưa có sản phẩm nào để chọn
+                                                </option>
+                                            @endforelse
                                         </select>
                                     </div>
                                 </div>
-                                
+
                             </div>
-                            
+
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -521,7 +478,7 @@
             document.getElementById('priceSection').style.display = 'block';
         });
     </script>
-    
+
 
     <script>
         const targetTable = $('#dsDaoTao').DataTable({
