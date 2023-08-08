@@ -534,7 +534,7 @@
                                         data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
                                         data-size="3" name="chanelId" data-live-search-placeholder="Tìm kiếm...">
                                         @foreach ($listChannel as $ch)
-                                            <option value="{{ $items->id }}"
+                                            <option value="{{ $item->id }}"
                                                 {{ $ch->id == $item->chanelId ? 'selected' : '' }}>
                                                 {{ $ch->name }}
                                             </option>

@@ -15,6 +15,8 @@ return new class extends Migration {
             $table->id();
             $table->string('code', 255)->default(time());
             $table->string('name', 255)->nullable();
+            $table->string('type')->default(0);
+            $table->string('class')->default(0);
             $table->string('phone', 255)->nullable();
             $table->string('email', 255)->nullable();
             $table->string('category')->nullable();
@@ -32,7 +34,7 @@ return new class extends Migration {
             $table->string('group', 255)->nullable();
             $table->unsignedBigInteger('routeId')->nullable();
             $table->unsignedBigInteger('chanelId')->nullable();
-            $table->string('status', 255)->default(1);
+            $table->string('status', 255)->nullable()->default(1);
             $table->unsignedBigInteger('personId')->nullable();
             $table->text('productId')->nullable();
             

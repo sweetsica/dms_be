@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('code', 255)->unique();
             $table->string('name', 255);
+            $table->text('thumbnail');
             $table->string('type', 255);
             $table->string('branch', 255);
-            $table->unsignedBigInteger('created_by');
             $table->integer('status')->default(1);
             
             $table->timestamp('created_at')->useCurrent();
