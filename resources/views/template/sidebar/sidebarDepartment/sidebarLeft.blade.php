@@ -27,7 +27,8 @@
                                 <li style=" margin: 5px; padding: 0;">
                                     <div class="d-flex align-items-center"
                                         style=" background-color: #EBEBEB; height: 30px; display: flex; font-size: 15px; border-radius: 5px;">
-                                        <a href="{{ route('Personnel.indexDiaBan') }}" style="color:black;padding-left:10px;">Cơ
+                                        <a href="{{ route('Personnel.indexDiaBan') }}"
+                                            style="color:black;padding-left:10px;">Cơ
                                             cấu địa bàn</a>
                                     </div>
                                 </li>
@@ -55,7 +56,8 @@
                         <ul id="tree1">
                             @foreach ($departmentListTree as $donVi)
                                 <li>
-                                    <a href="{{ route('Personnel.show',$donVi->id) }}" class="title-child">{{ $donVi->name }}</a>
+                                    <a href="{{ route('Personnel.show', $donVi->id) }}"
+                                        class="title-child">{{ $donVi->name }}</a>
                                     @if ($donVi->donViCon->count() > 0)
                                         @include('template.sidebar.sidebarDepartment.child', [
                                             'donViCon' => $donVi->donViCon,
@@ -143,6 +145,10 @@
         font-size: 14px;
         color: #ca1f24;
         margin-right: 5px
+    }
+
+    .indicator a {
+        color: #ca1f24;
     }
 </style>
 
