@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-    @include('template.sidebar.sidebarPosition.sidebarLeft')
+    @include('template.sidebar.sidebarDepartment.sidebarLeft')
     <div id="mainWrap" class="mainWrap">
         <div class="mainSection">
             <div class="main">
@@ -90,7 +90,7 @@
                                                                         <div data-bs-toggle="tooltip"
                                                                             data-bs-placement="top" title="Sửa">
                                                                             <div class="btn" data-bs-toggle="modal"
-                                                                                data-bs-target="#sua{{$item->id}}">
+                                                                                data-bs-target="#sua{{ $item->id }}">
                                                                                 <img style="width:16px;height:16px"
                                                                                     src="{{ asset('assets/img/edit.svg') }}" />
                                                                             </div>
@@ -98,7 +98,7 @@
                                                                         <div data-bs-toggle="tooltip"
                                                                             data-bs-placement="top" title="Xóa">
                                                                             <div class="btn" data-bs-toggle="modal"
-                                                                                data-bs-target="#xoa{{$item->id}}">
+                                                                                data-bs-target="#xoa{{ $item->id }}">
                                                                                 <img style="width:16px;height:16px"
                                                                                     src="{{ asset('assets/img/trash.svg') }}" />
                                                                             </div>
@@ -108,62 +108,66 @@
                                                             </tr>
                                                         </tbody>
 
-                                                          {{-- Sửa đề xuất --}}
-                                                          <div class="modal fade" id="sua{{ $item['id'] }}" tabindex="-1"
-                                                          aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                          <div class="modal-dialog modal-dialog-centered">
-                                                              <div class="modal-content">
-                                                                  <div class="modal-header text-center">
-                                                                      <h5 class="modal-title w-100"
-                                                                          id="exampleModalLabel">Sửa cấp nhân sự</h5>
-                                                                      <button type="button" class="btn-close"
-                                                                          data-bs-dismiss="modal"
-                                                                          aria-label="Close"></button>
-                                                                  </div>
-                                                                  <form method="POST" action="{{route('PersonnelLevel.update', $item->id)}}">
-                                                                      @csrf
-                                                                      <div class="modal-body">
-                                                                          <div class="row">
-                                                                              <div class="col-6 mb-3">
-                                                                                  <input data-bs-toggle="tooltip"
-                                                                                      data-bs-placement="top" required
-                                                                                      title="Nhập tên cấp nhân sự*" name="name"
-                                                                                      type="text" placeholder="Nhập tên cấp nhân sự"
-                                                                                      class="form-control"
-                                                                                      value="{{$item->name}}">
-                                                                              </div>
-                                                                              <div class="col-6 mb-3">
-                                                                                  <input data-bs-toggle="tooltip" required
-                                                                                      data-bs-placement="top"
-                                                                                      title="Nhập mã cấp nhân sự*" name="code"
-                                                                                      type="text" placeholder="Nhập mã cấp nhân sự"
-                                                                                      class="form-control"
-                                                                                      value="{{$item->code}}">
-                                                                              </div>
-                                                                              <div class="col-6 mb-3">
-                                                                                  <div data-bs-toggle="tooltip" data-bs-placement="top" >
-                                                                                      <textarea name="description" type="text" placeholder="Mô tả"
-                                                                                          class="form-control " data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                                          title="Mô tả" style="width: 450px;height: 80px;">{{ $item->description }}</textarea>
-                                                                                  </div>
-                                                                              </div>
-                                                                          </div>
-                                                                      </div>
-                                                                      <div class="modal-footer">
-                                                                          <button type="button"
-                                                                              class="btn btn-outline-danger"
-                                                                              data-bs-dismiss="modal">Hủy</button>
-                                                                          <button type="submit"
-                                                                              class="btn btn-danger">Lưu</button>
-                                                                      </div>
-                                                                  </form>
-                                                              </div>
-                                                          </div>
-                                                      </div>
+                                                        {{-- Sửa đề xuất --}}
+                                                        <div class="modal fade" id="sua{{ $item['id'] }}" tabindex="-1"
+                                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header text-center">
+                                                                        <h5 class="modal-title w-100"
+                                                                            id="exampleModalLabel">Sửa cấp nhân sự</h5>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <form method="POST"
+                                                                        action="{{ route('PersonnelLevel.update', $item->id) }}">
+                                                                        @csrf
+                                                                        <div class="modal-body">
+                                                                            <div class="row">
+                                                                                <div class="col-6 mb-3">
+                                                                                    <input data-bs-toggle="tooltip"
+                                                                                        data-bs-placement="top" required
+                                                                                        title="Nhập tên cấp nhân sự*"
+                                                                                        name="name" type="text"
+                                                                                        placeholder="Nhập tên cấp nhân sự"
+                                                                                        class="form-control"
+                                                                                        value="{{ $item->name }}">
+                                                                                </div>
+                                                                                <div class="col-6 mb-3">
+                                                                                    <input data-bs-toggle="tooltip"
+                                                                                        required data-bs-placement="top"
+                                                                                        title="Nhập mã cấp nhân sự*"
+                                                                                        name="code" type="text"
+                                                                                        placeholder="Nhập mã cấp nhân sự"
+                                                                                        class="form-control"
+                                                                                        value="{{ $item->code }}">
+                                                                                </div>
+                                                                                <div class="col-6 mb-3">
+                                                                                    <div data-bs-toggle="tooltip"
+                                                                                        data-bs-placement="top">
+                                                                                        <textarea name="description" type="text" placeholder="Mô tả" class="form-control " data-bs-toggle="tooltip"
+                                                                                            data-bs-placement="top" title="Mô tả" style="width: 450px;height: 80px;">{{ $item->description }}</textarea>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button"
+                                                                                class="btn btn-outline-danger"
+                                                                                data-bs-dismiss="modal">Hủy</button>
+                                                                            <button type="submit"
+                                                                                class="btn btn-danger">Lưu</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
                                                         {{-- Xóa đề xuất --}}
-                                                        <div class="modal fade" id="xoa{{$item->id}}" tabindex="-1"
-                                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal fade" id="xoa{{ $item->id }}"
+                                                            tabindex="-1" aria-labelledby="exampleModalLabel"
+                                                            aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
@@ -180,7 +184,9 @@
                                                                         <button type="button"
                                                                             class="btn btn-outline-danger"
                                                                             data-bs-dismiss="modal">Hủy</button>
-                                                                        <form action="{{ route('PersonnelLevelx.destroy',$item->id) }}" method="POST">
+                                                                        <form
+                                                                            action="{{ route('PersonnelLevelx.destroy', $item->id) }}"
+                                                                            method="POST">
                                                                             @csrf
                                                                             <button type="submit"
                                                                                 class="btn btn-danger">Xóa</button>

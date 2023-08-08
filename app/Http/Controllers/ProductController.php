@@ -79,6 +79,7 @@ class ProductController extends Controller
             ]);
 
             $data['created_by'] = session('user')['id'];
+            $data['created_at'] = now();
             $product = Product::create($data);
             if ($product) {
                 Session::flash('success', "Thêm sản phẩm thành công");

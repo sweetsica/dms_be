@@ -36,7 +36,7 @@
     
 @endphp
 @section('content')
-    @include('template.sidebar.sidebarMaster.sidebarLeft')
+    @include('template.sidebar.sidebarDia_ban.sidebarLeft')
     <div id="mainWrap" class="mainWrap">
         <div class="mainSection">
             <div class="main">
@@ -123,28 +123,29 @@
                                                         </td>
                                                         <td>
                                                             <div class="overText" data-bs-toggle="tooltip"
-                                                                data-bs-placement="top" title="{{ $item->code }}">
-                                                                {{ $item->code }}
+                                                                data-bs-placement="top" title="{{ $item->code ?? '' }}">
+                                                                {{ $item->code ?? '' }}
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="overText" data-bs-toggle="tooltip"
-                                                                data-bs-placement="top" title="{{ $item->name }}">
-                                                                {{ $item->name }}
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="overText" data-bs-toggle="tooltip"
-                                                                data-bs-placement="top" title="{{ $item->areas->name }}">
-                                                                {{ $item->areas->name }}
+                                                                data-bs-placement="top" title="{{ $item->name ?? '' }}">
+                                                                {{ $item->name ?? '' }}
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="overText" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top"
-                                                                title="{{ $item->personnel->name }} - {{ $item->personnel->code }}">
-                                                                {{ $item->personnel->name }} -
-                                                                {{ $item->personnel->code }}
+                                                                title="{{ $item->areas->name ?? '' }}">
+                                                                {{ $item->areas->name ?? '' }}
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="overText" data-bs-toggle="tooltip"
+                                                                data-bs-placement="top"
+                                                                title="{{ $item->personnel->name ?? '' }} - {{ $item->personnel->code ?? '' }}">
+                                                                {{ $item->personnel->name ?? '' }} -
+                                                                {{ $item->personnel->code ?? '' }}
                                                             </div>
                                                         </td>
                                                         <td>
@@ -335,34 +336,37 @@
                                 <div class="modal_list row">
                                     <div class="modal_items col-sm-6">
                                         Tên tuyến: <span style="padding-left: 4px"
-                                            class="text-danger">{{ $item->name }} - {{ $item->travel_time }}</span>
+                                            class="text-danger">{{ $item->name ?? '' }} -
+                                            {{ $item->travel_time ?? '' }}</span>
                                     </div>
                                     <div class="modal_items col-sm-6">
                                         Nhân sự phụ trách: <span style="padding-left: 4px"
-                                            class="text-danger">{{ $item->personnel->name }} -
-                                            {{ $item->personnel->code }}</span>
+                                            class="text-danger">{{ $item->personnel->name ?? '' }} -
+                                            {{ $item->personnel->code ?? '' }}</span>
                                     </div>
                                     <div class="modal_items col-sm-6">
                                         Mã tuyến:<span style="padding-left: 4px"
-                                            class="text-danger">{{ $item->code }}</span>
+                                            class="text-danger">{{ $item->code ?? '' }}</span>
                                     </div>
                                     <div class="modal_items col-sm-6">
                                         Thời gian đi tuyến:<span style="padding-left: 4px"
-                                            class="text-danger">{{ $item->travel_time }}</span>
+                                            class="text-danger">{{ $item->travel_time ?? '' }}</span>
                                     </div>
                                     <div class="modal_items col-sm-6">
                                         Địa bàn:<span style="padding-left: 4px"
-                                            class="text-danger">{{ $item->areas->name }}</span>
+                                            class="text-danger">{{ $item->areas->name ?? '' }}</span>
                                     </div>
                                     <div class="modal_items col-sm-6">
                                         Ghi chú:<span style="padding-left: 4px"
-                                            class="text-danger">{{ $item->description }}</span>
+                                            class="text-danger">{{ $item->description ?? '' }}</span>
                                     </div>
 
                                 </div>
                             </div>
                             @php
-                                $customers = \App\Models\Customer::where('routeId', $item->id)->with('person')->get();
+                                $customers = \App\Models\Customer::where('routeId', $item->id)
+                                    ->with('person')
+                                    ->get();
                             @endphp
                             <div class="col-sm-12 mt-3">
                                 <div class="d-flex align-items-center">
@@ -390,8 +394,8 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr role="button">
-                                                        @forelse ($customers as $key => $cus)
+                                                    @forelse ($customers as $key => $cus)
+                                                        <tr role="button">
                                                             <td class="text-nowrap text-center">
                                                                 <div class="text-nowrap d-block text-truncate"
                                                                     style="">
@@ -401,52 +405,60 @@
                                                             <td class="text-nowrap">
                                                                 <div class="text-nowrap d-block text-truncate"
                                                                     style="max-width:350px;" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top" title="{{ $cus->name }}">
-                                                                    {{ $cus->name }}
+                                                                    data-bs-placement="top"
+                                                                    title="{{ $cus->name ?? '' }}">
+                                                                    {{ $cus->name ?? '' }}
                                                                 </div>
                                                             </td>
                                                             <td class="text-nowrap">
                                                                 <div class="text-nowrap  d-block text-truncate"
                                                                     style="max-width:565px;" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top" title="{{ $cus->phone }}">
-                                                                    {{ $cus->phone }}
+                                                                    data-bs-placement="top"
+                                                                    title="{{ $cus->phone ?? '' }}">
+                                                                    {{ $cus->phone ?? '' }}
                                                                 </div>
                                                             </td>
                                                             <td class="text-nowrap">
                                                                 <div class="text-nowrap  d-block text-truncate"
                                                                     style="max-width:565px;" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top" title="{{ $cus->email }}">
-                                                                    {{ $cus->email }}
+                                                                    data-bs-placement="top"
+                                                                    title="{{ $cus->email ?? '' }}">
+                                                                    {{ $cus->email ?? '' }}
                                                                 </div>
                                                             </td>
                                                             <td class="text-nowrap">
                                                                 <div class="text-nowrap d-block text-truncate"
                                                                     style="max-width:565px;" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top" title="{{ $cus->person->name }} - {{ $cus->person->code }}">
-                                                                    {{ $cus->person->name }} - {{ $cus->person->code }}
+                                                                    data-bs-placement="top"
+                                                                    title="{{ $cus->person->name ?? '' }} - {{ $cus->person->code ?? '' }}">
+                                                                    {{ $cus->person->name ?? '' }} -
+                                                                    {{ $cus->person->code ?? '' }}
                                                                 </div>
                                                             </td>
                                                             <td class="text-nowrap">
                                                                 <div class="text-nowrap text-center d-block text-truncate"
                                                                     style="max-width:565px;" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top" title="Nhóm {{ $cus->groupId }}">
-                                                                    Nhóm {{ $cus->groupId }}
+                                                                    data-bs-placement="top"
+                                                                    title="Nhóm {{ $cus->groupId ?? '' }}">
+                                                                    Nhóm {{ $cus->groupId ?? '' }}
                                                                 </div>
                                                             </td>
                                                             <td class="text-nowrap">
                                                                 <div class="text-nowrap text-center d-block text-truncate"
                                                                     style="max-width:565px;" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top" title="{{ $cus->channel->name }}">
-                                                                    {{ $cus->channel->name }}
+                                                                    data-bs-placement="top"
+                                                                    title="{{ $cus->channel->name ?? '' }}">
+                                                                    {{ $cus->channel->name ?? '' }}
                                                                 </div>
                                                             </td>
-                                                        @empty
-                                                        <td colspan="7" class="text-center">
-                                                            Chưa có khách hàng nào thuộc tuyến này
-                                                        </td>
-                                                        @endforelse
-
-                                                    </tr>
+                                                        </tr>
+                                                    @empty
+                                                        <tr role="button">
+                                                            <td colspan="7" class="text-center">
+                                                                Chưa có khách hàng nào thuộc tuyến này
+                                                            </td>
+                                                        </tr>
+                                                    @endforelse
                                                 </tbody>
                                             </table>
                                         </div>

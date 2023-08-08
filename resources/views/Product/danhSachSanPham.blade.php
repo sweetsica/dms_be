@@ -313,27 +313,27 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <input type="text" name="name" data-bs-toggle="tooltip" required
-                                    data-bs-placement="top" title="Tên sản phẩm" placeholder="Tên sản phẩm"
+                                    data-bs-placement="top" title="Tên sản phẩm*" placeholder="Tên sản phẩm*"
                                     class="form-control">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <input type="text" name="code" data-bs-toggle="tooltip" required
-                                    data-bs-placement="top" title="Mã sản phẩm" placeholder="Mã sản phẩm"
+                                    data-bs-placement="top" title="Mã sản phẩm*" placeholder="Mã sản phẩm*"
                                     class="form-control">
                             </div>
 
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Phân loại">
+                                title="Phân loại*">
                                 <select required name="type" class="selectpicker" data-dropup-auto="false"
-                                    data-width="100%" title="Phân loại" data-size="3">
+                                    data-width="100%" title="Phân loại*" data-size="3">
                                     <option value="Sản phẩm">Sản phẩm</option>
                                     <option value="Vật tư MKT">Vật tư MKT</option>
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Ngành hàng">
+                                title="Ngành hàng*">
                                 <select required name="branch" class="selectpicker" data-dropup-auto="false"
-                                    data-width="100%" title="Ngành hàng" data-size="3">
+                                    data-width="100%" title="Ngành hàng*" data-size="3">
                                     <option value="Sản phẩm dẫn">Sản phẩm dẫn</option>
                                     <option value="Sản phẩm tư vấn">Sản phẩm tư vấn</option>
                                     <option value="Sản phẩm mới">Sản phẩm mới</option>

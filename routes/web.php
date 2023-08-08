@@ -70,11 +70,7 @@ Route::middleware(['auth.role'])->group(function () {
 
     Route::get('/route_direction_getAll', [RouteDirectionController::class, 'getAll'])->name('routeDirection.getAll');
 
-    // Route::resource('/tuyenduong', RouteDirectionController::class);
-
     // Route::get('/map/{id}', [RouteDirectionController::class, 'showMap'])->name('map');
-
-    // Route::get('/create-customer', [CustomerController::class, 'create'])->name('create-customer');
 
     // Route::post('/get-customer', [CustomerController::class, 'store'])->name('store-customer');
 
@@ -92,9 +88,10 @@ Route::middleware(['auth.role'])->group(function () {
     // danh sách vị trí
     Route::get('danh-sach-vi-tri', [PositionController::class, 'index'])->name('position.list');
 
-    Route::get('danh-sach-khach-hang', [CustomerController::class, 'index'])->name('position.list');
+    Route::get('danh-sach-khach-hang', [CustomerController::class, 'index'])->name('customer.list');
 
-    Route::get('danh-sach-san-pham', [ProductController::class, 'index'])->name('product.list');
+
+Route::get('danh-sach-san-pham', [ProductController::class, 'index'])->name('product.list');
     Route::post('them-moi-san-pham', [ProductController::class, 'store'])->name('product.store');
     Route::put('sua-san-pham/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('xoa-san-pham/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
@@ -128,6 +125,9 @@ Route::middleware(['auth.role'])->group(function () {
         return view('other.baoGia');
     });
 
+
+    Route::get('chi-tiet-khach-hang/{id}', [CustomerController::class, 'show'])->name('customer.list');
+
     Route::get('department', [DepartmentController::class, 'index'])->name('department.index');
     Route::post('department', [DepartmentController::class, 'store'])->name('department.store');
     Route::post('department/{id}', [DepartmentController::class, 'edit'])->name('department.edit');
@@ -143,7 +143,6 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('cap-nhan-su', [PersonnelLevelController::class, 'store'])->name('PersonnelLevel.store');
     Route::post('cap_nhan_sux/{id}', [PersonnelLevelController::class, 'update'])->name('PersonnelLevel.update');
     Route::post('cap_nhan_su/{id}', [PersonnelLevelController::class, 'destroy'])->name('PersonnelLevelx.destroy');
-
     Route::get('nhan-su', [PersonnelController::class, 'index'])->name('Personnel.index');
     Route::get('nhan-su-vitri', [PersonnelController::class, 'indexvtri'])->name('Personnel.indexvtri');
     Route::get('nhan-su-dia-ban', [PersonnelController::class, 'indexDiaBan'])->name('Personnel.indexDiaBan');

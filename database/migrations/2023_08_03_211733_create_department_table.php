@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('parent')->nullable();
             $table->string('description', 255)->nullable();
             $table->string('code', 50);
-            $table->unsignedBigInteger('ib_lead');
+            $table->string('ib_lead', 255)->nullable();
         });
     }
 

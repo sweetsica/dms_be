@@ -24,12 +24,12 @@ return new class extends Migration {
             $table->string('companyEmail', 255)->nullable();
             $table->string('accountNumber', 255)->nullable();
             $table->string('bankOpen', 255)->nullable();
+            $table->string('group', 255);
             $table->unsignedBigInteger('routeId');
             $table->unsignedBigInteger('chanelId');
-            $table->unsignedBigInteger('groupId')->nullable();
             $table->string('status');
             $table->unsignedBigInteger('personId');
-            $table->unsignedBigInteger('productId');
+            $table->text('productId');
             $table->string('city');
             $table->string('district');
             $table->string('guide');
@@ -40,7 +40,6 @@ return new class extends Migration {
             $table->foreign('routeId')->references('id')->on('route_directions')->onDelete('cascade');
             $table->foreign('chanelId')->references('id')->on('department')->onDelete('cascade');
             $table->foreign('personId')->references('id')->on('personnel')->onDelete('cascade');
-            $table->foreign('productId')->references('id')->on('products')->onDelete('cascade');
         });
     }
 

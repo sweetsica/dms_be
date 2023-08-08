@@ -5,7 +5,7 @@
                 <div class="sidebarBody_wrapper ">
                     <div class="sidebarBody_heading-wrapper  ">
                         <div class="wrapper">
-                            <h1 style="color: red;">Cơ cấu đơn vị<img src="{{ asset('assets/img/Vector.png') }}"
+                            <h1 style="color: red;">Cơ cấu đơn vị <img src="{{ asset('assets/img/Vector.png') }}"
                                     onclick="showList()" id="show-list-button" style="float: right"></h1>
                         </div>
                         <div id="list-container" style="display: none;">
@@ -13,57 +13,59 @@
                                 <li style=" margin: 5px; padding: 0;">
                                     <div class="d-flex align-items-center"
                                         style=" background-color: #EBEBEB; height: 30px; display: flex; font-size: 15px; border-radius: 5px;">
-                                        <a href="{{ route('Personnel.index') }}"
+                                        <a href="{{ route('department.index') }}"
                                             style="color:black;padding-left:10px;">Cơ cấu tổ chức</a>
                                     </div>
                                 </li>
                                 <li style=" margin: 5px; padding: 0;">
                                     <div class="d-flex align-items-center"
                                         style=" background-color: #EBEBEB; height: 30px; display: flex; font-size: 15px; border-radius: 5px;">
-                                        <a href="{{ route('Personnel.indexvtri') }} "
+                                        <a href="{{ route('position.index') }} "
                                             style="color:black;padding-left:10px;">Cơ cấu chức danh</a>
                                     </div>
                                 </li>
                                 <li style=" margin: 5px; padding: 0;">
                                     <div class="d-flex align-items-center"
                                         style=" background-color: #EBEBEB; height: 30px; display: flex; font-size: 15px; border-radius: 5px;">
-                                        <a href="{{ route('Personnel.indexDiaBan') }}" style="color:black;padding-left:10px;">Cơ
+                                        <a href="{{ route('area.index') }}" style="color:black;padding-left:10px;">Cơ
                                             cấu địa bàn</a>
                                     </div>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <title>Danh sách vị trí</title>
+                    <title>Danh sách đơn vị</title>
                     <hr>
                     <div class="d-flex justify-content-between align-items-center">
                         <form method="GET" action="">
                             <div class="form-group has-search">
                                 <span type="submit" class="bi bi-search form-control-feedback fs-5"></span>
-                                <input type="text" style="width: 250px;" class="form-control"
-                                    value="{{ $search }}" placeholder="Tìm kiếm" name="search">
+                             <input type="text" style="width: 250px;" class="form-control"
+                                    value="" placeholder="Tìm kiếm" name="search">
                             </div>
                         </form>
-                    </div><br>
-                    <div class="d-flex align-items-center"
-                        style=" background-color: #EBEBEB; height: 40px; display: flex; justify-content: center; font-size: 15px;">
-                        <b>Cơ cấu chức danh</b>
                     </div>
                     <br>
-                    <div class="wapper-tree">
+                    <div class="d-flex align-items-center"
+                        style=" background-color: #EBEBEB; height: 40px; display: flex; justify-content: center; font-size: 15px;">
+                        <b>Cơ cấu địa bàn</b>
+                    </div>
+                    <br>
+                    {{-- Cây sơ đồ --}}
+                    {{-- <div class="wapper-tree">
                         <ul id="tree1">
-                            @foreach ($positionListTree as $donVi)
-                                <li class="parent" style=" margin: 10px; padding: 0;">
-                                    <a href="{{ route('Personnel.show.vtri',$donVi->id) }}" class="title-child">{{ $donVi->name }}</a>
+                            @foreach ($departmentListTree as $donVi)
+                                <li>
+                                    <a href="#" class="title-child">{{ $donVi->name }}</a>
                                     @if ($donVi->donViCon->count() > 0)
-                                        @include('template.sidebar.sidebarPosition.child', [
+                                        @include('template.sidebar.sidebarDepartment.child', [
                                             'donViCon' => $donVi->donViCon,
                                         ])
                                     @endif
                                 </li>
                             @endforeach
                         </ul>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -202,13 +204,6 @@
                         $(this).closest('li').click();
                     });
                 });
-                //fire event to open branch if the li contains an anchor instead of text
-                // tree.find('.branch>a').each(function() {
-                //     $(this).on('click', function(e) {
-                //         $(this).closest('li').click();
-                //         e.preventDefault();
-                //     });
-                // });
             }
         });
 

@@ -12,10 +12,10 @@ class PersonnelLevelController extends Controller
     public function index(Request $request){
         $search = $request->get('search');
         $personnelLevelList = PersonnelLevel::where("personnel_level.code", "like", "%$search%")->paginate(5);
-        $positionListTree = Position::where('parent',0)->with('donViCon')->get();
+        $departmentListTree = Position::where('parent',0)->with('donViCon')->get();
         return view("cap_nhan_su.index",[
             "personnelLevelList"=>$personnelLevelList,
-            "positionListTree"=>$positionListTree,
+            "departmentListTree"=>$departmentListTree,
             'search' => $search
         ]);
     }

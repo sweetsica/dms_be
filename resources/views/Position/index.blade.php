@@ -331,7 +331,7 @@
                                                                                            class="form-control"
                                                                                            data-bs-toggle="tooltip"
                                                                                            data-bs-placement="top"
-                                                                                           title="Định biên*">
+                                                                                           title="Định biên*" value="{{ $item->staffing }}">
                                                                                 </div>
                                                                                 <div class="col-6 mb-3">
                                                                                     <input name="wage" type="text"
