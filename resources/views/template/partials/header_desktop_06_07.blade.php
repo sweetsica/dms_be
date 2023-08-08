@@ -85,14 +85,14 @@
                 <span>Kinh doanh</span>
             </a>
             <ul id="header_submenu">
-                
+
                 <li class="header_submenu-items more position-relative">
                     <a href="#" class="header_submenu-link more_btn">
                         Nhà cung cấp</a>
 
                 </li>
                 <li class="header_submenu-items more position-relative">
-                    <a href="#" class="header_submenu-link more_btn">
+                    <a href="{{ route('product.list') }}" class="header_submenu-link more_btn">
                         Hồ sơ sản phẩm</a>
 
                 </li>
@@ -253,7 +253,7 @@
                 </li>
             </ul>
         </li>
-        
+
         <li class="header_menu-item">
             <a href="#" class="header_menu-link menu_btn-sub">
                 <i class="bi bi-gear"></i>
@@ -267,9 +267,10 @@
                     </a>
                     <ul class="header_more">
                         <li class="header_more-item">
-                            <a href="{{ route('department.store') }} " class="header_more-link">Hồ sơ đơn vị (phòng ban)</a>
+                            <a href="{{ route('department.store') }} " class="header_more-link">Hồ sơ đơn vị (phòng
+                                ban)</a>
                         </li>
-                        
+
                         <li class="header_more-item">
                             <a href="{{ route('Personnel.store') }}" class="header_more-link">Nhân sự</a>
                         </li>
@@ -297,7 +298,7 @@
                         <li class="header_more-item">
                             <a href="{{ route('area.store') }}"class="header_more-link">Khu vực</a>
                         </li>
-                        
+
                         <li class="header_more-item">
                             <a href="{{ route('locality.store') }}" class="header_more-link">Địa bàn</a>
                         </li>
@@ -306,13 +307,13 @@
                         </li>
                     </ul>
                 </li>
-                
+
                 <li class="header_submenu-items more position-relative">
                     <a href="#" class="header_submenu-link more_btn">
                         Khách hàng<i class="bi bi-chevron-right"></i>
                     </a>
                     <ul class="header_more">
-                        
+
                         <li class="header_more-item">
                             <a href="#" class="header_more-link">Nhóm khách hàng</a>
                         </li>

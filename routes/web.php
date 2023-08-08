@@ -91,7 +91,7 @@ Route::middleware(['auth.role'])->group(function () {
     Route::get('danh-sach-khach-hang', [CustomerController::class, 'index'])->name('customer.list');
 
 
-Route::get('danh-sach-san-pham', [ProductController::class, 'index'])->name('product.list');
+    Route::get('danh-sach-san-pham', [ProductController::class, 'index'])->name('product.list');
     Route::post('them-moi-san-pham', [ProductController::class, 'store'])->name('product.store');
     Route::put('sua-san-pham/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('xoa-san-pham/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
@@ -164,10 +164,6 @@ Route::get('danh-sach-san-pham', [ProductController::class, 'index'])->name('pro
     Route::post('them-nhom-khach-hang', [CustomerGroupController::class, 'store'])->name('CustomerGroup.store');
     Route::post('sua-nhom-khach-hang/{id}', [CustomerGroupController::class, 'update'])->name('CustomerGroup.update');
     Route::post('xoa-nhom-khach-hang/{id}', [CustomerGroupController::class, 'destroy'])->name('CustomerGroup.destroy');
-
-
-
-
 });
 
 // 404
