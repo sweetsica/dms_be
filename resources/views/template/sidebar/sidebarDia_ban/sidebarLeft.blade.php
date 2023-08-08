@@ -40,8 +40,8 @@
                         <form method="GET" action="">
                             <div class="form-group has-search">
                                 <span type="submit" class="bi bi-search form-control-feedback fs-5"></span>
-{{-- <!--                                 <input type="text" style="width: 250px;" class="form-control"
-                                    value="{{ $search }}" placeholder="Tìm kiếm" name="search"> --> --}}
+                             <input type="text" style="width: 250px;" class="form-control"
+                                    value="" placeholder="Tìm kiếm" name="search">
                             </div>
                         </form>
                     </div>

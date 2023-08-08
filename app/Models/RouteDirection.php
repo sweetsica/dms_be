@@ -23,9 +23,11 @@ class RouteDirection extends Model
     {
         return $this->belongsTo(Personnel::class, 'personId');
     }
-    
+
     public function areas()
     {
-        return $this->belongsTo(Area::class, 'areaId');
+        return $this->belongsTo(Locality::class, 'areaId');
     }
+
+
 }

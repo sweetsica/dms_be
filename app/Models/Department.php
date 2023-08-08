@@ -12,10 +12,11 @@ class Department extends Model
     public $timestamps=false;
     public $primaryKey= 'id';
     protected $fillable = [
+        'code',
         'name',
         'description',
         'parent',
-        'id_lead',
+        'ib_lead',
     ];
 
 
@@ -28,6 +29,13 @@ class Department extends Model
     {
         return $this->hasMany(Department::class, 'parent');
     }
+
+    public function khuVucs()
+{
+    return $this->hasMany(Area::class, 'area');
+}
+
+
 
     public static  function recursive($department, $parents = 0,$level = 1, &$departmentlists){
         if(count($department)>0){

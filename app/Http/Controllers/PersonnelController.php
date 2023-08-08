@@ -128,6 +128,64 @@ class PersonnelController extends Controller
         ]);
     }
 
+    public function indexDiaBan(Request $request)
+    {
+        $search = $request->get('search');
+        $personnelList = Personnel::leftJoin('department', 'department.id', '=', 'personnel.department_id')
+            ->leftJoin('position', 'position.id', '=', 'personnel.position_id')
+            ->leftJoin('personnel_level', 'personnel_level.id', '=', 'personnel.personnel_lv_id')
+            ->leftJoin('role', 'role.id', '=', 'personnel.role_id')
+            ->leftJoin('locality', 'locality.id', '=', 'personnel.area_id')
+            ->select(
+                'personnel.id',
+                'personnel.name',
+                'personnel.address',
+                'personnel.gender',
+                'personnel.birthday',
+                'personnel.password',
+                'personnel.code',
+                'personnel.email',
+                'personnel.annual_salary',
+                'personnel.pack',
+                'personnel.manage',
+                'personnel.phone',
+                'personnel.working_form',
+                'personnel.status',
+                'personnel.department_id',
+                'personnel.personnel_lv_id',
+                'personnel.position_id',
+                'department.name as department_name',
+                'position.name as position_name',
+                'personnel_level.name as personnel_level_name',
+                'personnel.role_id',
+                'role.name as role_name',
+                'locality.name as locality_name',
+                'personnel.area_id'
+                // 'personnel.id',
+            )
+            ->where("personnel.code", "like", "%$search%")->paginate(10);
+        $departmentlists = $this->getDepartment();
+        $positionlists = $this->getPosition();
+        $personnellists = $this->getPersonnel();
+        $personnelLevelList = PersonnelLevel::all();
+        $roleList = Role::all();
+        $localityList = Locality::all();
+        $areaTree =  Department::with('khuVucs.diaBans.tuyens')->where('code', 'like', 'VUNG%')->get();
+        // dd($personnelLevelList);
+        return view("ds_nhan_su.index_diaban",[
+            "personnelList"=>$personnelList,
+            "departmentlists"=>$departmentlists,
+            "positionlists"=>$positionlists,
+            "localityList"=>$localityList,
+            "personnellists"=>$personnellists,
+            "personnelLevelList"=>$personnelLevelList,
+            "roleList"=>$roleList,
+            "areaTree"=>$areaTree,
+            'search' => $search
+        ]);
+    }
+
+
     public function show(Request $request ,$department_id)
     {
         $search = $request->get('search');
@@ -246,6 +304,64 @@ class PersonnelController extends Controller
         ]);
     }
 
+    public function showDiaBan(Request $request ,$area_id)
+    {
+        $search = $request->get('search');
+        $personnelList = Personnel::leftJoin('department', 'department.id', '=', 'personnel.department_id')
+            ->leftJoin('position', 'position.id', '=', 'personnel.position_id')
+            ->leftJoin('personnel_level', 'personnel_level.id', '=', 'personnel.personnel_lv_id')
+            ->leftJoin('role', 'role.id', '=', 'personnel.role_id')
+            ->leftJoin('locality', 'locality.id', '=', 'personnel.area_id')
+            ->select(
+                'personnel.id',
+                'personnel.name',
+                'personnel.address',
+                'personnel.gender',
+                'personnel.birthday',
+                'personnel.password',
+                'personnel.code',
+                'personnel.email',
+                'personnel.annual_salary',
+                'personnel.pack',
+                'personnel.manage',
+                'personnel.phone',
+                'personnel.working_form',
+                'personnel.status',
+                'personnel.department_id',
+                'personnel.personnel_lv_id',
+                'personnel.position_id',
+                'department.name as department_name',
+                'position.name as position_name',
+                'personnel_level.name as personnel_level_name',
+                'personnel.role_id',
+                'role.name as role_name',
+                'locality.name as locality_name',
+                'personnel.area_id'
+                // 'personnel.id',
+            )
+            ->where("personnel.code", "like", "%$search%")
+            ->where("personnel.area_id", $area_id)
+            ->paginate(10);
+        $departmentlists = $this->getDepartment();
+        $positionlists = $this->getPosition();
+        $personnellists = $this->getPersonnel();
+        $personnelLevelList = PersonnelLevel::all();
+        $roleList = Role::all();
+        $localityList = Locality::all();
+        $areaTree =  Department::with('khuVucs.diaBans.tuyens')->where('code', 'like', 'VUNG%')->get();
+        // dd($personnelLevelList);
+        return view("ds_nhan_su.show_dia_ban",[
+            "personnelList"=>$personnelList,
+            "departmentlists"=>$departmentlists,
+            "positionlists"=>$positionlists,
+            "localityList"=>$localityList,
+            "personnellists"=>$personnellists,
+            "personnelLevelList"=>$personnelLevelList,
+            "roleList"=>$roleList,
+            "areaTree"=>$areaTree,
+            'search' => $search
+        ]);
+    }
 
 
     public function getPersonnel()

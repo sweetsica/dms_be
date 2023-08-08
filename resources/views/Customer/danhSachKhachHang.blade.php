@@ -158,8 +158,8 @@
                                                         <td>
                                                             <div class="overText center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top"
-                                                                title="  {{ $item['comanyName'] }}">
-                                                                {{ $item['comanyName'] }}
+                                                                title="  {{ $item['companyName'] }}">
+                                                                {{ $item['companyName'] }}
                                                             </div>
                                                         </td>
                                                         <td>
@@ -194,8 +194,8 @@
                                                         </td>
                                                         <td>
                                                             <div class="overText center" data-bs-toggle="tooltip"
-                                                                data-bs-placement="top" title="{{ $item['groupId'] }}">
-                                                                {{ $item['groupId'] }}
+                                                                data-bs-placement="top" title="{{ $item['group'] }}">
+                                                                {{ $item['group'] }}
                                                             </div>
                                                         </td>
                                                         <td>
@@ -207,25 +207,29 @@
                                                         </td>
                                                         <td>
                                                             <div class="overText center" data-bs-toggle="tooltip"
-                                                                data-bs-placement="top" title="{{ $item->route->name }}">
-                                                                {{ $item->route->name }}
+                                                                data-bs-placement="top"
+                                                                title="{{ $item->route->name ?? '' }}">
+                                                                {{ $item->route->name ?? '' }}
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="overText center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top"
-                                                                title="{{ $item->person->name }}">
-                                                                {{ $item->person->name }}
+                                                                title="{{ $item->person->name ?? '' }}">
+                                                                {{ $item->person->name ?? '' }}
                                                             </div>
                                                         </td>
                                                         <td>
                                                             @php
-                                                                $products = $item->products();
-                                                                $productNames = [];
-                                                                foreach ($products as $product) {
-                                                                    $productNames[] = $product->name;
+                                                                $productList = null;
+                                                                if ($item->productId) {
+                                                                    $products = $item->products();
+                                                                    $productNames = [];
+                                                                    foreach ($products as $product) {
+                                                                        $productNames[] = $product->name;
+                                                                    }
+                                                                    $productList = implode(', ', $productNames);
                                                                 }
-                                                                $productList = implode(', ', $productNames);
                                                             @endphp
                                                             <div class="overText center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="{{ $productList }}">
@@ -357,7 +361,7 @@
                                     <div class="card-title">2. Tổ chức</div>
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <input type="text" value="{{ $item->comanyName }}" name="comanyName"
+                                    <input type="text" value="{{ $item->companyName }}" name="companyName"
                                         data-bs-toggle="tooltip" data-bs-placement="top" title="Tên công ty"
                                         placeholder="Tên công ty" class="form-control">
                                 </div>
@@ -404,43 +408,28 @@
                                 <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Tỉnh/thành">
                                     <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
-                                        data-live-search="true" title="Tỉnh/thành*" data-select-all-text="Chọn tất cả"
-                                        data-deselect-all-text="Bỏ chọn" data-size="3" name="city"
+                                        data-live-search="true" title="{{ $item->city }}"
+                                        data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
+                                        data-size="3" name="city" id="city_edit"
                                         data-live-search-placeholder="Tìm kiếm...">
-                                        @foreach ($listData as $items)
-                                            <option value="{{ $items->id }}"
-                                                {{ $items->id == $item->id ? 'selected' : '' }}>
-                                                {{ $items->city }}
-                                            </option>
-                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Quận/huyện">
                                     <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
-                                        data-live-search="true" title="Quận/huyện*" data-select-all-text="Chọn tất cả"
-                                        data-deselect-all-text="Bỏ chọn" data-size="3" name="district"
+                                        data-live-search="true" title="{{ $item->district }}"
+                                        data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
+                                        data-size="3" name="district" id="district_edit"
                                         data-live-search-placeholder="Tìm kiếm...">
-                                        @foreach ($listData as $items)
-                                            <option value="{{ $items->id }}"
-                                                {{ $items->id == $item->id ? 'selected' : '' }}>
-                                                {{ $items->district }}
-                                            </option>
-                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Phường/xã">
                                     <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
-                                        data-live-search="true" title="Phường/xã*" data-select-all-text="Chọn tất cả"
-                                        data-deselect-all-text="Bỏ chọn" data-size="3" name="guide"
+                                        data-live-search="true" title="{{ $item->guide }}"
+                                        data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
+                                        data-size="3" name="guide" id="guide_edit"
                                         data-live-search-placeholder="Tìm kiếm...">
-                                        @foreach ($listData as $items)
-                                            <option value="{{ $items->id }}"
-                                                {{ $items->id == $item->id ? 'selected' : '' }}>
-                                                {{ $items->guide }}
-                                            </option>
-                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-12 mb-3">
@@ -459,24 +448,28 @@
                                         data-live-search="true" title="Nhân sự thu thập*"
                                         data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
                                         data-size="3" name="personId" data-live-search-placeholder="Tìm kiếm...">
-                                        @foreach ($listData as $items)
-                                            <option value="{{ $items->id }}"
-                                                {{ $items->id == $item->id ? 'selected' : '' }}>
-                                                {{ $items->personId }}
+                                        @foreach ($listPerson as $per)
+                                            <option value="{{ $per->id }}"
+                                                {{ $per->id == $item->personId ? 'selected' : '' }}>
+                                                {{ $per->name }}
                                             </option>
                                         @endforeach
                                     </select>
                                 </div>
+                                @php
+                                    $selectedValues = json_decode($item->productId);
+                                @endphp
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Sản phẩm quan tâm">
                                     <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
                                         data-live-search="true" title="Sản phẩm quan tâm*"
                                         data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
-                                        data-size="3" name="productId" data-live-search-placeholder="Tìm kiếm...">
-                                        @foreach ($listData as $items)
-                                            <option value="{{ $items->id }}"
-                                                {{ $items->id == $item->id ? 'selected' : '' }}>
-                                                {{ $items->productId }}
+                                        data-size="3" name="productId[]" data-live-search-placeholder="Tìm kiếm..."
+                                        multiple>
+                                        @foreach ($listProduct as $pro)
+                                            <option value="{{ $pro->id }}"
+                                                {{ in_array($pro->id, $selectedValues) ? 'selected' : '' }}>
+                                                {{ $pro->name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -490,22 +483,30 @@
                                         data-live-search="true" title="Nhóm khách hàng*"
                                         data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
                                         data-size="3" name="groupId" data-live-search-placeholder="Tìm kiếm...">
-                                        @foreach ($listData as $items)
-                                            <option value="{{ $items->id }}"
-                                                {{ $items->id == $item->id ? 'selected' : '' }}>
-                                                {{ $items->groupId }}
-                                            </option>
-                                        @endforeach
-                                        <option value="Phòng khám/Trung tâm tế">Phòng khám/Trung tâm tế</option>
-                                        <option value="Bệnh viện">Bệnh viện</option>
-                                        <option value="Nhà phân phối">Nhà phân phối</option>
-                                        <option value="Online">Online</option>
-                                        <option value="Khách sạn">Khách sạn</option>
-                                        <option value="Nhà thuốc S">Nhà thuốc S</option>
-                                        <option value="Siêu thị/Cửa hàng bán lẻ">Siêu thị/Cửa hàng bán lẻ</option>
-                                        <option value="Chuỗi nhà thuốc">Chuỗi nhà thuốc</option>
-                                        <option value="Đại siêu thị">Đại siêu thị</option>
-                                        <option value="Làm đẹp/Phòng tập thể dục/Thể thao">Làm đẹp/Phòng tập thể dục/Thể
+                                        <option value="Phòng khám/Trung tâm tế"
+                                            {{ $item->group == 'Phòng khám/Trung tâm tế' ? 'selected' : '' }}>Phòng
+                                            khám/Trung tâm tế</option>
+                                        <option value="Bệnh viện" {{ $item->group == 'Bệnh viện' ? 'selected' : '' }}>Bệnh
+                                            viện</option>
+                                        <option value="Nhà phân phối"
+                                            {{ $item->group == 'Nhà phân phối' ? 'selected' : '' }}>Nhà phân phối</option>
+                                        <option value="Online" {{ $item->group == 'Online' ? 'selected' : '' }}>Online
+                                        </option>
+                                        <option value="Khách sạn" {{ $item->group == 'Khách sạn' ? 'selected' : '' }}>
+                                            Khách sạn</option>
+                                        <option value="Nhà thuốc S" {{ $item->group == 'Nhà thuốc S' ? 'selected' : '' }}>
+                                            Nhà thuốc S</option>
+                                        <option value="Siêu thị/Cửa hàng bán lẻ"
+                                            {{ $item->group == 'Siêu thị/Cửa hàng bán lẻ' ? 'selected' : '' }}>Siêu thị/Cửa
+                                            hàng bán lẻ</option>
+                                        <option value="Chuỗi nhà thuốc"
+                                            {{ $item->group == 'Chuỗi nhà thuốc' ? 'selected' : '' }}>Chuỗi nhà thuốc
+                                        </option>
+                                        <option value="Đại siêu thị"
+                                            {{ $item->group == 'Đại siêu thị' ? 'selected' : '' }}>Đại siêu thị</option>
+                                        <option value="Làm đẹp/Phòng tập thể dục/Thể thao"
+                                            {{ $item->group == 'Làm đẹp/Phòng tập thể dục/Thể thao' ? 'selected' : '' }}>
+                                            Làm đẹp/Phòng tập thể dục/Thể
                                             thao
                                         </option>
                                     </select>
@@ -517,10 +518,10 @@
                                         data-live-search="true" title="Tuyến*" data-select-all-text="Chọn tất cả"
                                         data-deselect-all-text="Bỏ chọn" data-size="3" name="routeId"
                                         data-live-search-placeholder="Tìm kiếm...">
-                                        @foreach ($listData as $items)
-                                            <option value="{{ $items->id }}"
-                                                {{ $items->id == $item->id ? 'selected' : '' }}>
-                                                {{ $items->routeId }}
+                                        @foreach ($listRoute as $route)
+                                            <option value="{{ $route->id }}"
+                                                {{ $route->id == $item->routeId ? 'selected' : '' }}>
+                                                {{ $route->name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -532,13 +533,10 @@
                                         data-live-search="true" title="Kênh khách hàng*"
                                         data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
                                         data-size="3" name="chanelId" data-live-search-placeholder="Tìm kiếm...">
-                                        <option value="ETC">ETC</option>
-                                        <option value="MT">MT</option>
-                                        <option value="Đại lý cá nhân">Đại lý cá nhân</option>
-                                        @foreach ($listData as $items)
-                                            <option value="{{ $items->id }}"
-                                                {{ $items->id == $item->id ? 'selected' : '' }}>
-                                                {{ $items->chanelId }}
+                                        @foreach ($listChannel as $ch)
+                                            <option value="{{ $item->id }}"
+                                                {{ $ch->id == $item->chanelId ? 'selected' : '' }}>
+                                                {{ $ch->name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -549,15 +547,14 @@
                                         data-live-search="true" title="Trạng thái*" data-select-all-text="Chọn tất cả"
                                         data-deselect-all-text="Bỏ chọn" data-size="3" name="status"
                                         data-live-search-placeholder="Tìm kiếm...">
-                                        <option value="Tiềm năng">Tiềm năng</option>
-                                        <option value="Cơ hội">Cơ hội</option>
-                                        <option value="Khách hàng">Khách hàng</option>
-                                        @foreach ($listData as $items)
-                                            <option value="{{ $items->id }}"
-                                                {{ $items->id == $item->id ? 'selected' : '' }}>
-                                                {{ $items->status }}
-                                            </option>
-                                        @endforeach
+                                        <option value="Trinh sát" {{ $item->status == 'Trinh sát' ? 'selected' : '' }}>
+                                            Trinh sát</option>
+                                        <option value="Tiềm năng" {{ $item->status == 'Tiềm năng' ? 'selected' : '' }}>
+                                            Tiềm năng</option>
+                                        <option value="Cơ hội" {{ $item->status == 'Cơ hội' ? 'selected' : '' }}>Cơ hội
+                                        </option>
+                                        <option value="Khách hàng" {{ $item->status == 'Khách hàng' ? 'selected' : '' }}>
+                                            Khách hàng</option>
                                     </select>
                                 </div>
                             </div>
@@ -866,23 +863,25 @@
             return axios.get(api)
                 .then((response) => {
                     renderData(response.data.districts, "district");
-                    $('#district').selectpicker('refresh');
+                    // $('#district').selectpicker('destroy');
                 });
         }
         var callApiWard = (api) => {
             return axios.get(api)
                 .then((response) => {
                     renderData(response.data.wards, "guide");
-                    $('#guide').selectpicker('refresh');
+                    // $('#guide').selectpicker('destroy');
                 });
         }
 
         var renderData = (array, select) => {
+            $('#' + select).selectpicker('destroy');
             let row = '<option disable value="">Chọn</option>';
             array.forEach(element => {
                 row += `<option data-id="${element.code}" value="${element.name}">${element.name}</option>`
             });
             document.querySelector("#" + select).innerHTML = row;
+            $('#' + select).selectpicker();
         }
 
         $("#city").change(() => {
@@ -892,6 +891,48 @@
             callApiWard(host + "d/" + $("#district").find(':selected').data('id') + "?depth=2");
         });
         $("#guide").change(() => {})
+
+
+        //sua dia chi cho edit
+        var callAPI_edit = (api) => {
+            return axios.get(api)
+                .then((response) => {
+                    renderData_edit(response.data, "city_edit");
+                });
+        }
+        callAPI_edit('https://provinces.open-api.vn/api/?depth=1');
+        var callApiDistrict_edit = (api) => {
+            return axios.get(api)
+                .then((response) => {
+                    renderData_edit(response.data.districts, "district_edit");
+                });
+        }
+        var callApiWard_edit = (api) => {
+            return axios.get(api)
+                .then((response) => {
+                    renderData_edit(response.data.wards, "guide_edit");
+                });
+        }
+
+        var renderData_edit = (array, select) => {
+            $('#' + select).selectpicker('destroy');
+            let row = '<option disable value="">Chọn</option>';
+            array.forEach(element => {
+                row += `<option data-id="${element.code}" value="${element.name}">${element.name}</option>`
+            });
+            document.querySelector("#" + select).innerHTML = row;
+            $('#' + select).selectpicker();
+        }
+
+        $("#city_edit").change(() => {
+            callApiDistrict_edit(host + "p/" + $("#city_edit").find(':selected').data('id') + "?depth=2");
+        });
+        $("#district_edit").change(() => {
+            callApiWard_edit(host + "d/" + $("#district_edit").find(':selected').data('id') + "?depth=2");
+        });
+        $("#guide_edit").change(() => {})
+
+
 
         //load data nhan su api
         function loadPersonnelData() {

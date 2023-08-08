@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RouteDirectionController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -70,11 +71,7 @@ Route::middleware(['auth.role'])->group(function () {
 
     Route::get('/route_direction_getAll', [RouteDirectionController::class, 'getAll'])->name('routeDirection.getAll');
 
-    // Route::resource('/tuyenduong', RouteDirectionController::class);
-
     // Route::get('/map/{id}', [RouteDirectionController::class, 'showMap'])->name('map');
-
-    // Route::get('/create-customer', [CustomerController::class, 'create'])->name('create-customer');
 
     // Route::post('/get-customer', [CustomerController::class, 'store'])->name('store-customer');
 
@@ -95,7 +92,7 @@ Route::middleware(['auth.role'])->group(function () {
     Route::get('danh-sach-khach-hang', [CustomerController::class, 'index'])->name('customer.list');
 
 
-Route::get('danh-sach-san-pham', [ProductController::class, 'index'])->name('product.list');
+    Route::get('danh-sach-san-pham', [ProductController::class, 'index'])->name('product.list');
     Route::post('them-moi-san-pham', [ProductController::class, 'store'])->name('product.store');
     Route::put('sua-san-pham/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('xoa-san-pham/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
@@ -151,12 +148,15 @@ Route::get('danh-sach-san-pham', [ProductController::class, 'index'])->name('pro
     Route::post('cap_nhan_su/{id}', [PersonnelLevelController::class, 'destroy'])->name('PersonnelLevelx.destroy');
     Route::get('nhan-su', [PersonnelController::class, 'index'])->name('Personnel.index');
     Route::get('nhan-su-vitri', [PersonnelController::class, 'indexvtri'])->name('Personnel.indexvtri');
+    Route::get('nhan-su-dia-ban', [PersonnelController::class, 'indexDiaBan'])->name('Personnel.indexDiaBan');
     Route::post('nhan-su-vitri', [PersonnelController::class, 'store'])->name('Personnel.store.vtri');
+    Route::post('nhan-su-dia-ban', [PersonnelController::class, 'store'])->name('Personnel.store.diaban');
     Route::post('nhan-su', [PersonnelController::class, 'store'])->name('Personnel.store');
     Route::post('nhan_sux/{id}', [PersonnelController::class, 'update'])->name('Personnel.update');
     Route::post('nhan_su/{id}', [PersonnelController::class, 'destroy'])->name('Personnel.destroy');
     Route::get('nhan_suv/{department_id}', [PersonnelController::class, 'show'])->name('Personnel.show');
     Route::get('nhan_suvtri/{position_id}', [PersonnelController::class, 'showVtri'])->name('Personnel.show.vtri');
+    Route::get('nhan_su_dia_ban/{area_id}', [PersonnelController::class, 'showDiaBan'])->name('Personnel.show.diaban');
 
     Route::get('vai-tro', [RoleController::class, 'index'])->name('Role.index');
     Route::post('vai-tro', [RoleController::class, 'store'])->name('Role.store');
@@ -167,13 +167,11 @@ Route::get('danh-sach-san-pham', [ProductController::class, 'index'])->name('pro
     Route::post('them-nhom-khach-hang', [CustomerGroupController::class, 'store'])->name('CustomerGroup.store');
     Route::post('sua-nhom-khach-hang/{id}', [CustomerGroupController::class, 'update'])->name('CustomerGroup.update');
     Route::post('xoa-nhom-khach-hang/{id}', [CustomerGroupController::class, 'destroy'])->name('CustomerGroup.destroy');
-
-
-
-
 });
 
 // 404
 Route::fallback(function () {
     return view('404');
 });
+
+

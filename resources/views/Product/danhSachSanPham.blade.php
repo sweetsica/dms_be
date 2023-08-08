@@ -33,7 +33,7 @@
     //     }
     //     return false;
     // }
-        
+    
 @endphp
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
@@ -124,13 +124,15 @@
                                                                 {{ $item->name }}
                                                             </div>
                                                         </td>
-                                                        
+
                                                         <td class="list_img">
-                                                            <div class="d-flex justify-content-center align-items-center" style="padding:10px">
-                                                                <img class="" src="{{ asset('/assets/img/xedien.png') }}" />
+                                                            <div class="d-flex justify-content-center align-items-center"
+                                                                style="padding:10px">
+                                                                <img class=""
+                                                                    src="{{ $item->thumbnail }}" />
                                                             </div>
                                                         </td>
-                                                        
+
                                                         <td>
                                                             <div class="overText" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="{{ $item->type }}">
@@ -138,19 +140,6 @@
 
                                                             </div>
                                                         </td>
-                                                        {{-- <td>
-                                                            <div class="overText center" data-bs-toggle="tooltip"
-                                                                data-bs-placement="top" title="{{ $item->branch }}">
-                                                                {{ $item->branch }}
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="overText center" data-bs-toggle="tooltip"
-                                                                data-bs-placement="top"
-                                                                title="{{ $item->creators->name }} - {{ $item->creators->code }}">
-                                                                {{ $item->creators->name }} - {{ $item->creators->code }}
-                                                            </div>
-                                                        </td> --}}
                                                         <td>
                                                             <div class="overText center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top"
@@ -183,7 +172,8 @@
                                         <ul class="pagination">
                                             @foreach ($pagination['links'] as $link)
                                                 <li class="page-item {{ $link['active'] ? 'active' : '' }}">
-                                                    <a class="page-link" href="{{ getPaginationLink($link, 'page') }}" aria-label="Previous">
+                                                    <a class="page-link" href="{{ getPaginationLink($link, 'page') }}"
+                                                        aria-label="Previous">
                                                         <span aria-hidden="true">{!! $link['label'] !!}</span>
                                                     </a>
                                                 </li>
@@ -243,16 +233,14 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <input type="text" value="{{ $item->name }}" name="name"
-                                        data-bs-toggle="tooltip" required data-bs-placement="top"
-                                        title="Tên sản phẩm" placeholder="Tên sản phẩm"
-                                        class="form-control">
+                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên sản phẩm"
+                                        placeholder="Tên sản phẩm" class="form-control">
                                 </div>
 
                                 <div class="col-md-6 mb-3">
                                     <input type="text" value="{{ $item->code }}" name="code"
-                                        data-bs-toggle="tooltip" required data-bs-placement="top"
-                                        title="Mã sản phẩm" placeholder="Mã sản phẩm"
-                                        class="form-control">
+                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã sản phẩm"
+                                        placeholder="Mã sản phẩm" class="form-control">
                                 </div>
 
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
@@ -330,25 +318,25 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Thêm sản phẩm</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="formThemCapPhat" method="POST" action="{{ route('product.store') }}">
+                <form id="formThemCapPhat" method="POST" action="{{ route('product.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <input type="text" name="name" data-bs-toggle="tooltip" required
-                                    data-bs-placement="top" title="Tên sản phẩm" placeholder="Tên sản phẩm"
+                                    data-bs-placement="top" title="Tên sản phẩm*" placeholder="Tên sản phẩm*"
                                     class="form-control">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <input type="text" name="code" data-bs-toggle="tooltip" required
-                                    data-bs-placement="top" title="Mã sản phẩm" placeholder="Mã sản phẩm"
+                                    data-bs-placement="top" title="Mã sản phẩm*" placeholder="Mã sản phẩm*"
                                     class="form-control">
                             </div>
 
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Phân loại">
+                                title="Phân loại*">
                                 <select required name="type" class="selectpicker" data-dropup-auto="false"
-                                    data-width="100%" title="Phân loại" data-size="3">
+                                    data-width="100%" title="Phân loại*" data-size="3">
                                     <option value="Sản phẩm">Sản phẩm</option>
                                     <option value="Phiên bản">Phiên bản</option>
                                     <option value="Tuỳ chọn">Tuỳ chọn</option>
@@ -356,9 +344,9 @@
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Ngành hàng">
+                                title="Ngành hàng*">
                                 <select required name="branch" class="selectpicker" data-dropup-auto="false"
-                                    data-width="100%" title="Ngành hàng" data-size="3">
+                                    data-width="100%" title="Ngành hàng*" data-size="3">
                                     <option value="Sản phẩm dẫn">Sản phẩm dẫn</option>
                                     <option value="Sản phẩm tư vấn">Sản phẩm tư vấn</option>
                                     <option value="Sản phẩm mới">Sản phẩm mới</option>
@@ -376,8 +364,8 @@
                                             Tải ảnh sản phẩm tại đây</label>
                                         <div class="mt-2 text-secondary fst-italic">Hỗ trợ định
                                             dạng
-                                            JPG,
-                                            PNG, PDF, XLSX, DOCX, hoặc PPTX kích
+                                            JPG hoặc
+                                            PNG kích
                                             thước tệp không quá 10MB
                                         </div>
                                         <div
@@ -388,9 +376,9 @@
                                                     <img style="width:16px;height:16px"
                                                         src="{{ asset('assets/img/upload-file.svg') }}" />
                                                     Tải file lên
-                                                    <input role="button" type="file"
-                                                        class="modal_upload-input modal_upload-file" name="files[]"
-                                                        multiple onchange="updateList(event)">
+                                                    <input accept=".png, .jpeg, .jpg" required role="button" type="file"
+                                                        class="modal_upload-input modal_upload-file" name="file"
+                                                        onchange="updateList(event)">
                                                 </button>
                                             </div>
 
@@ -410,7 +398,7 @@
             </div>
         </div>
     </div>
-    
+
 @endsection
 @section('footer-script')
 
