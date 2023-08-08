@@ -253,36 +253,19 @@
                                                 <div class="modal-title">Thông số kỹ thuật:</div>
                                             </div>
 
-                                            <div class="DNTU_repeater">
-                                                <div data-repeater-list="DNTU_list">
-                                                    <div class="row repeater_wrapper d-flex align-items-center" style="position: relative" data-repeater-item>
-                                                            <div class="col-md-5 mb-3 d-flex align-items-center">
-                                                                <div class=" card_template-sub with_input d-flex justify-content-center align-items-center" style="width:30%">
-
-                                                                     <div class="text-break " style="margin-left: 4px">1</div>
-                                                                </div>
-                                                                <div class=" card_template-sub with_input d-flex justify-content-center align-items-center" style="width:70%">
-
-                                                                    <div class="text-break " style="margin-left: 4px">1</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5 mb-3 d-flex align-items-center">
-                                                                <div class=" card_template-sub with_input d-flex justify-content-center align-items-center" style="width:30%">
-                                                                    <div class="text-break " style="margin-left: 4px">1</div>
-                                                                </div>
-                                                                <div class=" card_template-sub with_input d-flex justify-content-center align-items-center" style="width:70%">
-                                                                    <div class="text-break " style="margin-left: 4px">1</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-2 mb-3">
-                                                                <img data-repeater-delete role="button" src="{{ asset('/assets/img/trash.svg') }}" width="20px" height="20px" />
-                                                            </div>
-                                                        </div>
-                                                </div>
-                                                <div class="">
-                                                    <div class="d-flex justify-content-start">
-                                                        <div role="button" class="fs-5 text-danger" data-repeater-create><i class="bi bi-plus-circle"></i></div>
+                                            <div class="row d-flex align-items-center" style="position: relative">
+                                                <div class="col-md-4 mb-3 d-flex align-items-center item-1">
+                                                    <div class=" card_template-sub with_input d-flex justify-content-center align-items-center" style="width:30%">
+                                                        <input type="text" value="Độ dài" placeholder="" class="card-title-black form-control" name="proposalNo">
                                                     </div>
+                                                    <div class=" card_template-sub with_input d-flex justify-content-center align-items-center" style="width:60%">
+                                                        <input type="text" value="Catalogue mô tả" placeholder="" class=" form-control" name="proposalNo">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <div class="d-flex justify-content-start">
+                                                    <div role="button" class="fs-5 text-danger"><i class="bi bi-plus-circle"></i></div>
                                                 </div>
                                             </div>
                                     </div>
@@ -472,6 +455,9 @@
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
 
+    
+    
+    
     <script>
         document.getElementById('showPriceButton').addEventListener('click', function() {
             document.getElementById('showPriceButton').style.display = 'none';
@@ -521,6 +507,52 @@
             </div>
         `);
     </script>
+
+
+<script>
+    // Lắng nghe sự kiện click cho nút plus
+var plusButton = document.querySelector(".bi-plus-circle");
+plusButton.addEventListener("click", function () {
+    // Tạo phần tử div mới
+    var newDivElement = document.createElement("div");
+    newDivElement.className = "col-md-4 mb-3 d-flex align-items-center";
+    newDivElement.innerHTML = `
+        <div class=" card_template-sub with_input d-flex justify-content-center align-items-center" style="width:30%">
+            <input type="text" value="Độ dài" placeholder="" class="card-title-black form-control" name="proposalNo">
+        </div>
+        <div class=" card_template-sub with_input d-flex justify-content-center align-items-center" style="width:60%">
+            <input type="text" value="Catalogue mô tả" placeholder="" class=" form-control" name="proposalNo">
+        </div>
+        <div class="col-2 mb-3" style="width:10%">
+            <img data-repeater-delete role="button" src="{{ asset('/assets/img/trash.svg') }}" width="20px" height="20px" />
+        </div>
+    `;
+
+    // Tìm phần tử chứa lớp col-md-4
+    var colMd4Element = document.querySelector(".item-1");
+
+    // Thêm phần tử div vào sau phần tử chứa lớp col-md-4
+    colMd4Element.parentNode.insertBefore(newDivElement, colMd4Element.nextSibling);
+
+
+    // Lắng nghe sự kiện click cho nút xoá
+    var deleteButton = document.querySelector('[data-repeater-delete]');
+    deleteButton.addEventListener('click', function() {
+    // Tìm phần tử cha có lớp col-2
+    var col2Element = this.closest('.col-2');
+    
+    // Tìm phần tử cha có lớp col-md-4
+    var colMd4Element = col2Element.closest('.col-md-4');
+    
+    // Xóa phần tử col-md-4
+    colMd4Element.remove();
+});
+});
+
+</script>
+
+
+
 
     <script>
         updateList = function(e) {
