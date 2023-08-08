@@ -175,6 +175,8 @@
             }
         });
 
+
+
         $.fn.extend({
             treed: function(o) {
 
@@ -224,7 +226,6 @@
         });
 
         $(document).ready(function() {
-            console.log("vao day dau tien");
             $("#tree1").children("li:first-child").click();
             // $("#tree1").children("li:last-child").click();
         })

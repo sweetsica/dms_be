@@ -54,12 +54,14 @@
 
                         <ul id="tree1">
                             @foreach ($areaTree as $vung)
-                                <li><a href="{{ route('Personnel.show.diaban',$vung->id) }}" class="title-child">{{ $vung->name }}</a>
+                                <li><a href="{{ route('Personnel.show.diaban', $vung->id) }}"
+                                        class="title-child">{{ $vung->name }}</a>
                                     @if ($vung->khuVucs->count() > 0)
                                         <ul>
                                             @foreach ($vung->khuVucs as $khuVuc)
                                                 <li>
-                                                    <a href="{{ route('Personnel.show.diaban',$khuVuc->id) }}" class="title-child">{{ $khuVuc->name }}</a>
+                                                    <a href="{{ route('Personnel.show.diaban', $khuVuc->id) }}"
+                                                        class="title-child">{{ $khuVuc->name }}</a>
                                                     @if ($khuVuc->diaBans->count() > 0)
                                                         <ul>
                                                             @foreach ($khuVuc->diaBans as $diaBan)
@@ -234,7 +236,6 @@
         });
 
         $(document).ready(function() {
-            console.log("vao day dau tien");
             $("#tree1").children("li:first-child").click();
             // $("#tree1").children("li:last-child").click();
         })
