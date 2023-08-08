@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RouteDirectionController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -173,3 +174,5 @@ Route::get('danh-sach-san-pham', [ProductController::class, 'index'])->name('pro
 Route::fallback(function () {
     return view('404');
 });
+
+
