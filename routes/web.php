@@ -154,6 +154,7 @@ Route::get('danh-sach-san-pham', [ProductController::class, 'index'])->name('pro
     Route::get('nhan_suv/{department_id}', [PersonnelController::class, 'show'])->name('Personnel.show');
     Route::get('nhan_suvtri/{position_id}', [PersonnelController::class, 'showVtri'])->name('Personnel.show.vtri');
     Route::get('nhan_su_dia_ban/{area_id}', [PersonnelController::class, 'showDiaBan'])->name('Personnel.show.diaban');
+    Route::get('nhan_su_vung/{department_id}', [PersonnelController::class, 'showVung'])->name('Personnel.show.vung');
 
     Route::get('vai-tro', [RoleController::class, 'index'])->name('Role.index');
     Route::post('vai-tro', [RoleController::class, 'store'])->name('Role.store');
