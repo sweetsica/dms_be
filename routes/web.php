@@ -121,8 +121,8 @@ Route::get('danh-sach-san-pham', [ProductController::class, 'index'])->name('pro
     Route::post('danh-sach-khu-vuc/{id}', [AreaController::class, 'update'])->name('area.update');
     Route::post('danh-sach-khu-vucx/{id}', [AreaController::class, 'destroy'])->name('area.destroy');
 
-    Route::get('bao-gia', function () {
-        return view('other.baoGia');
+    Route::get('chi-tiet-san-pham', function () {
+        return view('Product.chiTietSanPham');
     });
 
 
