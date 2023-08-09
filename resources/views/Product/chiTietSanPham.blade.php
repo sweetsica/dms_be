@@ -68,7 +68,7 @@
                                             </a>
                                         </div>
                                         <div class="col-4 d-flex align-items-center justify-content-center flex-column">
-                                            <div class="card_template-heading">Thông tin sản phẩm</div>
+                                            <div id="headingDetail" class="card_template-heading">Thông tin sản phẩm</div>
                                             <div class="d-flex align-items-center">
                                                 <div class="modal-title-black mt-2 text-uppercase"> {{ $product->name }} -
                                                 </div>
@@ -85,43 +85,43 @@
 
                                 {{-- Giao diện nhập input --}}
                                 <div class="row card_template-body-middle mb-3">
-                                    @if (empty($details->images))
-                                        <div class="col-md-6 mb-3">
-                                            <div class="upload_wrapper-items">
-                                                <div class="alert alert-danger alertNotSupport" role="alert"
-                                                    style="display:none">
-                                                    File bạn tải lên hiện tại không hỗ trợ !
-                                                </div>
-                                                <div class="modal_upload-wrapper">
-                                                    <label class="modal_upload-label" for="file">
-                                                        Tải ảnh của sản phẩm ở đây</label>
-                                                    <div class="mt-2 text-secondary fst-italic">Hỗ trợ định
-                                                        dạng
-                                                        JPG,
-                                                        PNG
-                                                    </div>
-                                                    <div
-                                                        class="modal_upload-action mt-3 d-flex align-items-center justify-content-center">
-                                                        <div class="modal_upload-addFile me-3">
-                                                            <button role="button" type="button"
-                                                                class="btn position-relative pe-4 ps-4">
-                                                                <img style="width:16px;height:16px"
-                                                                    src="{{ asset('assets/img/upload-file.svg') }}" />
-                                                                Tải file lên
-                                                                <input required role="button" type="file"
-                                                                    class="modal_upload-input modal_upload-file"
-                                                                    name="files[]" multiple onchange="updateList(event)">
-                                                            </button>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                                <ul class="modal_upload-list"
-                                                    style="max-height: 134px; overflow-y: scroll; overflow-x: hidden;"></ul>
+                                    <div id="fileInput" class="col-md-6 mb-3 {{ empty($details->images) ? 'd-block' : 'd-none' }}">
+                                        <div class="upload_wrapper-items">
+                                            <div class="alert alert-danger alertNotSupport" role="alert"
+                                                style="display:none">
+                                                File bạn tải lên hiện tại không hỗ trợ !
                                             </div>
+                                            <div class="modal_upload-wrapper">
+                                                <label class="modal_upload-label" for="file">
+                                                    Tải ảnh của sản phẩm ở đây</label>
+                                                <div class="mt-2 text-secondary fst-italic">Hỗ trợ định
+                                                    dạng
+                                                    JPG,
+                                                    PNG
+                                                </div>
+                                                <div
+                                                    class="modal_upload-action mt-3 d-flex align-items-center justify-content-center">
+                                                    <div class="modal_upload-addFile me-3">
+                                                        <button role="button" type="button"
+                                                            class="btn position-relative pe-4 ps-4">
+                                                            <img style="width:16px;height:16px"
+                                                                src="{{ asset('assets/img/upload-file.svg') }}" />
+                                                            Tải file lên
+                                                            <input role="button" type="file"
+                                                                class="modal_upload-input modal_upload-file" name="files[]"
+                                                                multiple onchange="updateList(event)">
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <ul class="modal_upload-list"
+                                                style="max-height: 134px; overflow-y: scroll; overflow-x: hidden;"></ul>
                                         </div>
-                                    @else
-                                        <div class="col-md-6 mb-3" style="overflow: hidden;">
+                                    </div>
+                                    @if (!empty($details->images))
+                                        <div id="caroselImg" class="col-md-6 mb-3 {{ !empty($details->images) ? 'd-block' : 'd-none' }}"
+                                            style="overflow: hidden;">
                                             <div id="carouselExampleIndicators" class="carousel slide"
                                                 data-bs-ride="carousel">
 
@@ -160,8 +160,8 @@
                                                 </div>
                                             @else
                                                 <div class="col-md-12 mb-3">
-                                                    <div class="text-break " style="margin-left: 4px">
-                                                        {{ $details->description }}</div>
+                                                    <textarea style="pointer-events: none;" rows="4" type="text"
+                                                        placeholder="(Vui lòng nhập thông tin chung về sản phẩm)" class="form-control textareaResize" name="description">{{ $details->description }}</textarea>
                                                 </div>
                                             @endif
 
@@ -188,8 +188,9 @@
                                                         <div class="text-nowrap">Giá bán:</div>
                                                         <div
                                                             class="card_template-sub with_input d-flex justify-content-center align-items-center">
-                                                            <div class="text-break " style="margin-left: 4px">
-                                                                {{ number_format($details->price, 2, ',', '.') }}</div>
+
+                                                            <textarea style="pointer-events: none;" rows="1" type="text" placeholder="Nhập giá tiền" class="form-control textareaResize"
+                                                                name="price">{{ number_format($details->price, 2, ',', '.') }}</textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -228,14 +229,13 @@
                                                 <div class="col-md-4 mb-3 d-flex align-items-center item-1">
                                                     <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center"
                                                         style="width:30%">
-                                                        <input type="text" placeholder="Độ dài"
-                                                            class="card-title-black form-control"
-                                                            name="listProducts[0][key]">
+                                                        <textarea rows="1" type="text" placeholder="Độ dài" class="card-title-black form-control textareaResize"
+                                                            name="listProducts[0][key]"></textarea>
                                                     </div>
                                                     <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center"
-                                                        style="width:60%">
-                                                        <input type="text" placeholder="Catalogue mô tả"
-                                                            class=" form-control" name="listProducts[0][value]">
+                                                        style="width:70%">
+                                                        <textarea rows="1" type="text" placeholder="Catalogue mô tả" class="form-control textareaResize"
+                                                            name="listProducts[0][value]"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -243,16 +243,15 @@
                                             <div class="row d-flex align-items-center" style="position: relative">
                                                 @foreach ($data as $key => $element)
                                                     <div class="col-md-4 mb-3 d-flex align-items-center item-1">
-                                                        <div class=" card_template-sub with_input d-flex  align-items-center"
+                                                        <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center"
                                                             style="width:30%">
-                                                            <div class="text-break card-title-black "
-                                                                style="margin-left: 4px">{{ $element->key }}
-                                                            </div>
+                                                            <textarea rows="1" style="pointer-events: none;" type="text" placeholder="Độ dài"
+                                                                class="card-title-black form-control textareaResize" name="listProducts[0][key]">{{ $element->key }}</textarea>
                                                         </div>
-                                                        <div class=" card_template-sub with_input d-flex  align-items-center"
+                                                        <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center"
                                                             style="width:70%">
-                                                            <div class="text-break " style="margin-left: 4px">
-                                                                {{ $element->value }}</div>
+                                                            <textarea rows="1" style="pointer-events: none;" type="text" placeholder="Catalogue mô tả"
+                                                                class="form-control textareaResize" name="listProducts[0][value]">{{ $element->value }}</textarea>
                                                         </div>
                                                     </div>
                                                 @endforeach
@@ -321,6 +320,7 @@
                             </div>
                             <div class="d-flex justify-content-end">
                                 <div class="card_template-footer">
+                                    <button type="button" class="btn btn-danger ps-5 pe-5 me-3 editRowBtn">Sửa</button>
                                     <a href="/danh-sach-san-pham" class="btn btn-outline-danger ps-5 pe-5 me-3"
                                         role="button">Hủy</a>
                                     <button type="submit" class="btn btn-danger ps-5 pe-5">Lưu</button>
@@ -442,7 +442,31 @@
     <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
 
 
+    <script>
+        $(document).on('click', '.editRowBtn', function() {
+            var fileInputDiv = $('#fileInput');
+            var caroselDiv = $('#caroselImg');
 
+            if (fileInputDiv.hasClass('d-none')) {
+                fileInputDiv.removeClass('d-none').addClass('d-block');
+            }
+            
+            if (caroselDiv.hasClass('d-block')) {
+                caroselDiv.removeClass('d-block').addClass('d-none');
+            }
+
+            // Get the parent tr element
+            var mainWrap = $('#mainWrap');
+
+            // Remove the "pointer-events: none;" style from all input fields
+            mainWrap.find('input, textarea').removeAttr('style');
+
+            // Set focus on the first input or textarea field
+            mainWrap.find('textarea:first').focus();
+            $('#headingDetail').text("Sửa thông tin sản phẩm");
+            $(this).hide();
+        });
+    </script>
 
     <script>
         document.getElementById('showPriceButton').addEventListener('click', function() {
@@ -506,10 +530,10 @@
             newDivElement.className = "col-md-4 mb-3 d-flex align-items-center";
             newDivElement.innerHTML = `
         <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center" style="width:30%">
-            <input type="text" placeholder="Độ dài" class="card-title-black form-control" name="listProducts[${index}][key]">
+            <textarea rows="1" type="text" placeholder="Độ dài" class="card-title-black form-control textareaResize" name="listProducts[${index}][key]"></textarea>
         </div>
         <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center" style="width:60%">
-            <input type="text" placeholder="Catalogue mô tả" class=" form-control" name="listProducts[${index}][value]">
+            <textarea rows="1" type="text" placeholder="Catalogue mô tả" class="form-control textareaResize" name="listProducts[${index}][value]"></textarea>
         </div>
         <div class="col-2 mb-3" style="width:10%">
             <img data-repeater-delete role="button" src="{{ asset('/assets/img/trash.svg') }}" width="20px" height="20px" />
