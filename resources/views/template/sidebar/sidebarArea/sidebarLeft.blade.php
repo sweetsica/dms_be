@@ -4,27 +4,33 @@
             <div class="container">
                 <div class="sidebarBody_wrapper ">
                     <div class="sidebarBody_heading-wrapper  ">
-                        <h1 style="color: red;">cơ cấu đơn vị</h1>
-                        <img src="{{ asset('assets/img/Vector.png') }}" onclick="showList()" id="show-list-button">
-                        <div id="list-container">
+                        <div class="wrapper">
+                            <h1 style="color: red;">Cơ cấu đơn vị <img src="{{ asset('assets/img/Vector.png') }}"
+                                    onclick="showList()" id="show-list-button" style="float: right"></h1>
+                        </div>
+                        <div id="list-container" style="display: none;">
                             <ul>
-                                <li>
+                                <li style=" margin: 5px; padding: 0;">
                                     <div class="d-flex align-items-center"
-                                        style=" background-color: #EBEBEB; height: 30px; display: flex; font-size: 15px; border-radius: 10px;">
+                                        style=" background-color: #EBEBEB; height: 30px; display: flex; font-size: 15px; border-radius: 5px;">
                                         <a href="{{ route('Personnel.index') }}"
-                                            style="color:black;padding-left:10px;">Cơ cấu tổ chức</a></div>
-                                </li><br>
-                                <li>
+                                            style="color:black;padding-left:10px;">Cơ cấu tổ chức</a>
+                                    </div>
+                                </li>
+                                <li style=" margin: 5px; padding: 0;">
                                     <div class="d-flex align-items-center"
-                                        style=" background-color: #EBEBEB; height: 30px; display: flex; font-size: 15px; border-radius: 10px;">
+                                        style=" background-color: #EBEBEB; height: 30px; display: flex; font-size: 15px; border-radius: 5px;">
                                         <a href="{{ route('Personnel.indexvtri') }} "
-                                            style="color:black;padding-left:10px;">Cơ cấu chức danh</a></div>
-                                </li><br>
-                                <li>
+                                            style="color:black;padding-left:10px;">Cơ cấu chức danh</a>
+                                    </div>
+                                </li>
+                                <li style=" margin: 5px; padding: 0;">
                                     <div class="d-flex align-items-center"
-                                        style=" background-color: #EBEBEB; height: 30px; display: flex; font-size: 15px; border-radius: 10px;">
-                                        <a href="{{ route('Personnel.indexDiaBan') }}" style="color:black;padding-left:10px;">Cơ
-                                            cấu địa bàn</a></div>
+                                        style=" background-color: #EBEBEB; height: 30px; display: flex; font-size: 15px; border-radius: 5px;">
+                                        <a href="{{ route('Personnel.indexDiaBan') }}"
+                                            style="color:black;padding-left:10px;">Cơ
+                                            cấu địa bàn</a>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
@@ -46,19 +52,23 @@
                     </div><br>
                     <div style="font-size: 14px">
 
-                        <ul  id="tree1">
+                        <ul id="tree1">
                             @foreach ($areaTree as $vung)
-                                <li><a href="{{ route('Personnel.show.vung',$vung->id) }}" class="title-child">{{ $vung->name }}</a>
+                                <li><a href="{{ route('Personnel.show.diaban', $vung->id) }}"
+                                        class="title-child">{{ $vung->name }}</a>
+                                    {{-- <li><a href="{{ route('Personnel.show.vung',$vung->id) }}" class="title-child">{{ $vung->name }}</a> --}}
                                     @if ($vung->khuVucs->count() > 0)
                                         <ul>
                                             @foreach ($vung->khuVucs as $khuVuc)
                                                 <li>
-                                                    <a href="{{ route('Personnel.show.diaban',$khuVuc->id) }}" class="title-child">{{ $khuVuc->name }}</a>
+                                                    <a href="{{ route('Personnel.show.diaban', $khuVuc->id) }}"
+                                                        class="title-child">{{ $khuVuc->name }}</a>
                                                     @if ($khuVuc->diaBans->count() > 0)
                                                         <ul>
                                                             @foreach ($khuVuc->diaBans as $diaBan)
                                                                 <li>
-                                                                    <a href="{{ route('Personnel.show.diaban',$diaBan->id) }}" class="title-child">{{ $diaBan->name }}</a>
+                                                                    <a href="{{ route('Personnel.show.diaban', $diaBan->id) }}"
+                                                                        class="title-child">{{ $diaBan->name }}</a>
                                                                     @if ($diaBan->tuyens->count() > 0)
                                                                         <ul>
                                                                             @foreach ($diaBan->tuyens as $tuyen)
@@ -87,6 +97,15 @@
 </div>
 
 <style>
+    ul {
+        padding: 0;
+    }
+
+    .wapper-tree {
+        height: calc(100vh - 210px);
+        overflow: auto;
+    }
+
     .title-child {
         font-size: 14px;
         color: #ca1f24;
@@ -172,6 +191,9 @@
         $.fn.extend({
             treed: function(o) {
 
+                // var openedClass = 'bi-plus-square';
+                // var closedClass = 'bi-dash-square';
+
                 var openedClass = 'bi-dash-square';
                 var closedClass = 'bi-plus-square';
 
@@ -187,8 +209,12 @@
                 //initialize each of the top levels
                 var tree = $(this);
                 tree.addClass("tree");
+
                 tree.find('li').has("ul").each(function() {
                     var branch = $(this); //li with children ul
+
+                    // $(this).children().children().toggle();
+
                     branch.prepend("<i class='indicator bi " + closedClass + "'></i>");
                     branch.addClass('branch');
                     branch.on('click', function(e) {
@@ -207,17 +233,14 @@
                         $(this).closest('li').click();
                     });
                 });
-                //fire event to open branch if the li contains an anchor instead of text
-                // tree.find('.branch>a').each(function() {
-                //     $(this).on('click', function(e) {
-                //         $(this).closest('li').click();
-                //         e.preventDefault();
-                //     });
-                // });
             }
         });
+
+        $(document).ready(function() {
+            $("#tree1").children("li:first-child").click();
+            // $("#tree1").children("li:last-child").click();
+        })
 
         $('#tree1').treed();
     </script>
 @endsection
-

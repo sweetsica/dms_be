@@ -40,8 +40,8 @@
                         <form method="GET" action="">
                             <div class="form-group has-search">
                                 <span type="submit" class="bi bi-search form-control-feedback fs-5"></span>
-                             <input type="text" style="width: 250px;" class="form-control"
-                                    value="" placeholder="Tìm kiếm" name="search">
+                                <input type="text" style="width: 250px;" class="form-control" value=""
+                                    placeholder="Tìm kiếm" name="search">
                             </div>
                         </form>
                     </div>
@@ -169,6 +169,9 @@
         $.fn.extend({
             treed: function(o) {
 
+                // var openedClass = 'bi-plus-square';
+                // var closedClass = 'bi-dash-square';
+
                 var openedClass = 'bi-dash-square';
                 var closedClass = 'bi-plus-square';
 
@@ -184,8 +187,12 @@
                 //initialize each of the top levels
                 var tree = $(this);
                 tree.addClass("tree");
+
                 tree.find('li').has("ul").each(function() {
                     var branch = $(this); //li with children ul
+
+                    // $(this).children().children().toggle();
+
                     branch.prepend("<i class='indicator bi " + closedClass + "'></i>");
                     branch.addClass('branch');
                     branch.on('click', function(e) {
@@ -206,6 +213,11 @@
                 });
             }
         });
+
+        $(document).ready(function() {
+            $("#tree1").children("li:first-child").click();
+            // $("#tree1").children("li:last-child").click();
+        })
 
         $('#tree1').treed();
     </script>
