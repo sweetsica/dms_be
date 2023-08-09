@@ -49,12 +49,6 @@
         }
     </style>
 @endsection
-@php
-    $checkSubmition = false;
-    if ($details->images != null || $details->description != null || $details->attachments != null || $details->data != null || $details->related != null || $details->price != 0) {
-        $checkSubmition = true;
-    }
-@endphp
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
     <div id="mainWrap" class="mainWrap">
@@ -172,13 +166,10 @@
                                             @endif
 
                                             @if (!$details->price)
-                                                @if (!$checkSubmition)
-                                                    <div class="col-md-12 mb-3">
-                                                        <button type="button" class="btn btn-danger"
-                                                            id="showPriceButton">Giá
-                                                            bán</button>
-                                                    </div>
-                                                @endif
+                                                <div class="col-md-12 mb-3">
+                                                    <button type="button" class="btn btn-danger" id="showPriceButton">Giá
+                                                        bán</button>
+                                                </div>
                                                 <div class="col-md-12 mb-3" id="priceSection" style="display: none;">
                                                     <div
                                                         class="card_template-title d-flex align-items-center justify-content-center">
@@ -268,14 +259,12 @@
                                             </div>
                                         @endif
 
-                                        @if (!$checkSubmition)
-                                            <div class="">
-                                                <div class="d-flex justify-content-start">
-                                                    <div role="button" class="fs-5 text-danger"><i
-                                                            class="bi bi-plus-circle"></i></div>
-                                                </div>
+                                        <div class="">
+                                            <div class="d-flex justify-content-start">
+                                                <div role="button" class="fs-5 text-danger"><i
+                                                        class="bi bi-plus-circle"></i></div>
                                             </div>
-                                        @endif
+                                        </div>
                                     </div>
 
                                 </div>
@@ -322,25 +311,21 @@
                                                 </div>
                                             @endforeach
                                         @endif
-                                        @if (!$checkSubmition)
-                                            <div class="col-12 mt-3">
-                                                <button type="button" class="btn btn-danger d-block"
-                                                    data-bs-toggle="modal" data-bs-target="#add">+ Thêm thông số</button>
-                                            </div>
-                                        @endif
+                                        <div class="col-12 mt-3">
+                                            <button type="button" class="btn btn-danger d-block" data-bs-toggle="modal"
+                                                data-bs-target="#add">+ Thêm thông số</button>
+                                        </div>
 
                                     </div>
                                 </div>
                             </div>
-                            @if (!$checkSubmition)
-                                <div class="d-flex justify-content-end">
-                                    <div class="card_template-footer">
-                                        <a href="/danh-sach-san-pham" class="btn btn-outline-danger ps-5 pe-5 me-3"
-                                            role="button">Hủy</a>
-                                        <button type="submit" class="btn btn-danger ps-5 pe-5">Lưu</button>
-                                    </div>
+                            <div class="d-flex justify-content-end">
+                                <div class="card_template-footer">
+                                    <a href="/danh-sach-san-pham" class="btn btn-outline-danger ps-5 pe-5 me-3"
+                                        role="button">Hủy</a>
+                                    <button type="submit" class="btn btn-danger ps-5 pe-5">Lưu</button>
                                 </div>
-                            @endif
+                            </div>
                         </div>
                     </form>
                 </div>

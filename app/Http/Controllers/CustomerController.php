@@ -61,39 +61,49 @@ class CustomerController extends Controller
         ]);
     }
 
-    public function view()
+    public function view(Request $request)
     {
-        $limit = 30;
-        $listData = Customer::query()->with('channel', 'route', 'person');
-        switch (session('user')['role_id']) {
-            case 2:
-                $listData = $listData->whereHas('person', function ($query) {
-                    $query->where('department_id', '=', session('user')['department_id']);
-                });
-                break;
+        try {
+            $q = $request->query('q');
+            $limit = 30;
+            $listData = Customer::query()->with('channel', 'route', 'person');
+            if ($q) {
+                $listData = $listData->where('code', 'like', '%' . $q . '%')
+                ->orWhere('name', 'like', '%' . $q . '%');
+            }
+            switch (session('user')['role_id']) {
+                case 2:
+                    $listData = $listData->whereHas('person', function ($query) {
+                        $query->where('department_id', '=', session('user')['department_id']);
+                    });
+                    break;
 
-            case 3:
-                $listData = $listData->where('personId', session('user')['id']);
-                break;
+                case 3:
+                    $listData = $listData->where('personId', session('user')['id']);
+                    break;
+            }
+            $listData = $listData->paginate($limit);
+
+            $groupIDs = $listData->pluck('groupId')->toArray();
+            $listPerson = Personnel::all();
+            $listProduct = Product::all();
+            $listRoute = RouteDirection::all();
+            $listChannel = Department::all();
+
+            $pagination = $this->pagination($listData);
+
+            return view('Customer.danhSachKhachHang', compact(
+                'listData',
+                'listPerson',
+                'listProduct',
+                'listRoute',
+                'listChannel',
+                "pagination"
+            ));
+        } catch (Exception $e) {
+            Session::flash('error', $e);
+            return back();
         }
-        $listData = $listData->paginate($limit);
-
-        $groupIDs = $listData->pluck('groupId')->toArray();
-        $listPerson = Personnel::all();
-        $listProduct = Product::all();
-        $listRoute = RouteDirection::all();
-        $listChannel = Department::all();
-
-        $pagination = $this->pagination($listData);
-
-        return view('Customer.danhSachKhachHang', compact(
-            'listData',
-            'listPerson',
-            'listProduct',
-            'listRoute',
-            'listChannel',
-            "pagination"
-        ));
     }
 
     public function create(Request $request)

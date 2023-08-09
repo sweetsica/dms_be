@@ -249,6 +249,10 @@
                                         data-width="100%" title="Phân loại" data-size="3">
                                         <option value="Sản phẩm" {{ $item->type == 'Sản phẩm' ? 'selected' : '' }}>Sản
                                             phẩm</option>
+                                        <option value="Phiên bản" {{ $item->type == 'Phiên bản' ? 'selected' : '' }}>Phiên
+                                            bản</option>
+                                        <option value="Tuỳ chọn" {{ $item->type == 'Tuỳ chọn' ? 'selected' : '' }}>Tuỳ
+                                            chọn</option>
                                         <option value="Vật tư MKT" {{ $item->type == 'Vật tư MKT' ? 'selected' : '' }}>Vật
                                             tư MKT</option>
                                     </select>
