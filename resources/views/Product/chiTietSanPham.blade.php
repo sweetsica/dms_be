@@ -5,6 +5,14 @@
     <style>
         .carousel-indicators button.thumbnail {
             width: 200px;
+            height: 10vh;
+            object-fit: contain;
+        }
+
+        .carousel-indicators button.thumbnail img {
+            max-height: 100%;
+            width: auto;
+            object-fit: contain;
         }
 
         .carousel-indicators button.thumbnail:not(.active) {
@@ -18,6 +26,19 @@
 
         .carousel-indicators [data-bs-target] {
             height: 40px;
+        }
+
+
+        .carousel-item {
+            height: 30vh;
+            background-size: 100%;
+            background-repeat: no-repeat
+        }
+
+        .carousel-item img {
+            max-height: 100%;
+            width: auto;
+            object-fit: contain;
         }
 
         @media screen and (min-width: 200px) {
