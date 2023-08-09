@@ -18,6 +18,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\VersionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RouteDirectionController;
+use App\Http\Controllers\ExcelController;
 
 
 
@@ -96,7 +97,7 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('them-moi-san-pham', [ProductController::class, 'store'])->name('product.store');
     Route::put('sua-san-pham/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('xoa-san-pham/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
-    
+
     Route::get('chi-tiet-san-pham/{id}', [ProductController::class, 'show'])->name('product.show');
     Route::post('them-moi-chi-tiet/{id}', [ProductController::class, 'create'])->name('product.create');
     Route::post('them-san-pham-lien-quan/{id}', [ProductController::class, 'related'])->name('product.related');
@@ -168,6 +169,8 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('sua-nhom-khach-hang/{id}', [CustomerGroupController::class, 'update'])->name('CustomerGroup.update');
     Route::post('xoa-nhom-khach-hang/{id}', [CustomerGroupController::class, 'destroy'])->name('CustomerGroup.destroy');
 });
+
+Route::get('/export/customer',[ExcelController::class,'setExportCustomter']);
 
 // 404
 Route::fallback(function () {
