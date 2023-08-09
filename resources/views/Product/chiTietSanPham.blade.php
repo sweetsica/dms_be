@@ -5,7 +5,7 @@
     <style>
         .carousel-indicators button.thumbnail {
             width: 200px;
-            height: 10vh;
+            max-height: 6vh;
             object-fit: contain;
         }
 
@@ -30,7 +30,7 @@
 
 
         .carousel-item {
-            height: 30vh;
+            height: 20vh;
             background-size: 100%;
             background-repeat: no-repeat
         }
@@ -120,32 +120,27 @@
                                         </div>
                                     </div>
                                     @if (!empty($details->images))
-                                        <div id="caroselImg" class="col-md-6 mb-3 {{ !empty($details->images) ? 'd-block' : 'd-none' }}"
-                                            style="overflow: hidden;">
-                                            <div id="carouselExampleIndicators" class="carousel slide"
-                                                data-bs-ride="carousel">
-
+                                        <div id="caroselImg" class="col-md-6 mb-3 {{ !empty($details->images) ? 'd-block' : 'd-none' }}" style="overflow: hidden;">
+                                            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                                                 <div class="carousel-inner">
-                                                    @foreach (json_decode($details->images) as $img)
-                                                        <div class="carousel-item active">
-                                                            <img src="{{ $img }}" class="d-block w-100 "
-                                                                alt="...">
+                                                    @foreach (json_decode($details->images) as $key => $img)
+                                                        <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                                            <img src="{{ $img }}" class="d-block w-100" alt="...">
                                                         </div>
                                                     @endforeach
                                                 </div>
                                                 <div class="carousel-indicators">
                                                     @foreach (json_decode($details->images) as $key => $img)
-                                                        <button type="button" data-bs-target="#carouselExampleIndicators"
-                                                            data-bs-slide-to="{{ $key }}"
-                                                            class="{{ $key == 0 ? 'active' : '' }} thumbnail"
-                                                            aria-current="true" aria-label="Slide {{ $key + 1 }}">
-                                                            <img src="{{ $img }}" class="d-block w-100"
-                                                                alt="...">
+                                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $key }}"
+                                                            class="{{ $key == 0 ? 'active' : '' }} thumbnail" aria-current="true"
+                                                            aria-label="Slide {{ $key + 1 }}">
+                                                            <img src="{{ $img }}" class="d-block w-100" alt="...">
                                                         </button>
                                                     @endforeach
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                     @endif
 
                                     <div class="col-md-6 mb-3">
