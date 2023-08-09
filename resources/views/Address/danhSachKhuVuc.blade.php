@@ -72,8 +72,9 @@
                                                     <th class="text-nowrap text-center" style="width:30%">Tên khu vực</th>
                                                     <th class="text-nowrap text-center" style="width:30%">Vùng</th>
                                                     <th class="text-nowrap text-center" style="width:30%">Mô tả</th>
+                                                    @if ((session('user')['role_id'] == '1') || (session('user')['role_id'] == '2') )
                                                     <th class="text-nowrap text-center" style="width:4%">Hành động</th>
-
+                                                    @endif
                                                 </tr>
                                             </thead>
                                             <?php $a = 1; ?>
@@ -111,6 +112,7 @@
                                                                 {{ $item->description }}
                                                             </div>
                                                         </td>
+                                                        @if ((session('user')['role_id'] == '1') || (session('user')['role_id'] == '2') )
                                                         <td>
                                                             <div class="table_actions d-flex justify-content-center">
                                                                 {{-- <div class="btn test_btn-edit-{{ $item['id'] }}" href="#" data-bs-toggle="modal" data-bs-target="#suaca{{ $item['id'] }}">
@@ -134,9 +136,8 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-
-
                                                         </td>
+                                                        @endif
                                                     </tr>
                                                 @endforeach
                                             </tbody>

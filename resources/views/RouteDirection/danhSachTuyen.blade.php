@@ -8,21 +8,21 @@
     </style>
 @endsection
 @php
-    
+
     function getPaginationLink($link, $pageName)
     {
         if (!isset($link['url'])) {
             return '#';
         }
-    
+
         $pageNumber = explode('?page=', $link['url'])[1];
-    
+
         $queryString = request()->query();
-    
+
         $queryString[$pageName] = $pageNumber;
         return route('version.list', $queryString);
     }
-    
+
     // function isFiltering($filterNames)
     // {
     //     $filters = request()->query();
@@ -33,7 +33,7 @@
     //     }
     //     return false;
     // }
-    
+
 @endphp
 @section('content')
     @include('template.sidebar.sidebarDia_ban.sidebarLeft')
@@ -101,8 +101,9 @@
                                                     <th class="text-nowrap text-center" style="width:12%">Nhân sự phụ trách
                                                     </th>
                                                     <th class="text-nowrap text-center" style="width:10%">Số khách hàng</th>
+                                                    @if ((session('user')['role_id'] == '1') || (session('user')['role_id'] == '2') )
                                                     <th class="text-nowrap text-center" style="width:4%">Hành động</th>
-
+                                                    @endif
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -155,6 +156,7 @@
                                                                 {{ $routeCounts[$item->id] ?? 0 }}
                                                             </div>
                                                         </td>
+                                                        @if ((session('user')['role_id'] == '1') || (session('user')['role_id'] == '2') )
                                                         <td>
                                                             <div class="table_actions d-flex justify-content-center">
                                                                 <div class="btn test_btn-edit-{{ $item['id'] }}"
@@ -173,6 +175,7 @@
 
 
                                                         </td>
+                                                        @endif
                                                     </tr>
                                                 @endforeach
                                             </tbody>

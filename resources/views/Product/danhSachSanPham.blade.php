@@ -8,21 +8,21 @@
     </style>
 @endsection
 @php
-    
+
     function getPaginationLink($link, $pageName)
     {
         if (!isset($link['url'])) {
             return '#';
         }
-    
+
         $pageNumber = explode('?page=', $link['url'])[1];
-    
+
         $queryString = request()->query();
-    
+
         $queryString[$pageName] = $pageNumber;
         return route('customers', $queryString);
     }
-    
+
     // function isFiltering($filterNames)
     // {
     //     $filters = request()->query();
@@ -33,7 +33,7 @@
     //     }
     //     return false;
     // }
-    
+
 @endphp
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
@@ -94,14 +94,15 @@
                                             style="width: 100%">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-nowrap text-center" style="width:2%">STT</th>
-                                                    <th class="text-nowrap text-center" style="width:5%">Mã hiệu</th>
-                                                    <th class="text-nowrap text-center" style="width:12%">Tên sản phẩm</th>
-                                                    <th class="text-nowrap text-center" style="width:4%">Ảnh sản phẩm</th>
-                                                    <th class="text-nowrap text-center" style="width:6%">Phân loại</th>
-                                                    <th class="text-nowrap text-center" style="width:6%">Thời gian</th>
+                                                    <th class="text-nowrap text-center" style="width:3%">STT</th>
+                                                    <th class="text-nowrap text-center" style="width:5%">Mã </th>
+                                                    <th class="text-nowrap text-center" style="width:15%">Tên sản phẩm</th>
+                                                    <th class="text-nowrap text-center" style="width:8%">Phân loại</th>
+                                                    <th class="text-nowrap text-center" style="width:8%">Ngành hàng</th>
+                                                    <th class="text-nowrap text-center" style="width:12%">Người nhập</th>
+                                                    <th class="text-nowrap text-center" style="width:8%">Thời gian</th>
                                                     <th class="text-nowrap text-center" style="width:4%">Hành động</th>
-
+                                                    @endif
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -147,6 +148,7 @@
                                                                 {{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y') }}
                                                             </div>
                                                         </td>
+                                                        @if ((session('user')['role_id'] == '1') || (session('user')['role_id'] == '2') )
                                                         <td>
                                                             <div class="table_actions d-flex justify-content-center">
                                                                 <div class="btn test_btn-edit-{{ $item->id }}"
@@ -163,6 +165,7 @@
                                                                 </div>
                                                             </div>
                                                         </td>
+                                                        @endif
                                                     </tr>
                                                 @endforeach
                                             </tbody>

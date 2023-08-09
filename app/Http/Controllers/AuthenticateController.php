@@ -22,16 +22,18 @@ class AuthenticateController extends Controller
 
     public function login(Request $request)
     {
+
+
         try {
             $email = $request->input('email');
             $password = $request->input('password');
 
-            $account = Personnel::where('email', $email)->first();
-            $checkPass = Personnel::where('password',$password)->first();
-            if ($account && $checkPass ) {
+            $account = Personnel::where('email', $email)->where('password',$password)->firstOrFail();
+
+            if ($account) {
                 if ($account->status == "Đang làm việc") {
                     $request->session()->put('user', $account);
-
+                    $request->session()->put('statsus', $account->role_id);
                     return redirect()->route('home');
                 } else {
                     return redirect()->back()

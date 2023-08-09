@@ -66,8 +66,9 @@
                                                             <th class="text-nowrap" style="width:10%">Trưởng đơn vị </th>
                                                             <th class="text-nowrap" style="width:20%">Chức năng nhiệm vụ
                                                             </th>
-                                                            <th class="text-nowrap" style="width:3%"><span>Hành động</span>
-                                                            </th>
+                                                            @if ((session('user')['role_id'] == '1') )
+                                                            <th class="text-nowrap" style="width:3%"><span>Hành động</span></th>
+                                                             @endif
                                                         </tr>
                                                     </thead>
                                                     <?php $t = 1; ?>
@@ -115,7 +116,9 @@
                                                                     </div>
 
                                                                 </td>
+                                                                @if ((session('user')['role_id'] == '1') )
                                                                 <td>
+
                                                                     <div class="table_actions d-flex justify-content-end">
                                                                         <div class="btn" data-bs-toggle="modal"
                                                                             data-bs-target="#qrCode">
@@ -140,6 +143,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </td>
+                                                                @endif
                                                             </tr>
                                                         </tbody>
                                                         {{-- Sửa đề xuất --}}

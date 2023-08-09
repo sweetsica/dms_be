@@ -15,11 +15,11 @@
         if (!isset($link['url'])) {
             return '#';
         }
-    
+
         $pageNumber = explode('?page=', $link['url'])[1];
-    
+
         $queryString = request()->query();
-    
+
         $queryString[$pageName] = $pageNumber;
         return route('customers', $queryString);
     }
@@ -106,6 +106,7 @@
                                                     <th class="text-nowrap text-center" style="width:8%">Sản phẩm quan tâm
                                                     </th>
                                                     <th class="text-nowrap text-center" style="width:6%">Trạng thái</th>
+
                                                     <th class="text-nowrap text-center" style="width:4%">Hành động</th>
 
                                                 </tr>
@@ -230,6 +231,7 @@
                                                                 {{ $item['status'] }}
                                                             </div>
                                                         </td>
+
                                                         <td>
                                                             <div class="table_actions d-flex justify-content-center">
                                                                 <div class="btn test_btn-edit-{{ $item['id'] }}"
@@ -246,6 +248,7 @@
                                                                 </div>
                                                             </div>
                                                         </td>
+
                                                     </tr>
                                                 @endforeach
                                             </tbody>
