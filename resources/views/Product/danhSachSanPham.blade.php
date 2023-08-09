@@ -20,7 +20,7 @@
         $queryString = request()->query();
     
         $queryString[$pageName] = $pageNumber;
-        return route('product.list', $queryString);
+        return route('customers', $queryString);
     }
     
     // function isFiltering($filterNames)

@@ -12,6 +12,25 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
+    public function pagination($list)
+    {
+        return [
+            'current_page' => $list->currentPage(),
+            'data' => $list->items(),
+            'first_page_url' => $list->url(1),
+            'from' => $list->firstItem(),
+            'last_page' => $list->lastPage(),
+            'last_page_url' => $list->url($list->lastPage()),
+            'links' => $list->toArray()['links'],
+            'next_page_url' => $list->nextPageUrl(),
+            'path' => $list->url(1),
+            'per_page' => $list->perPage(),
+            'prev_page_url' => $list->previousPageUrl(),
+            'to' => $list->lastItem(),
+            'total' => $list->total(),
+        ];
+    }
+
     public function show($id)
     {
         $customer = Customer::with('channel', 'route', 'person')->findOrFail($id);
@@ -44,6 +63,7 @@ class CustomerController extends Controller
 
     public function view()
     {
+        $limit = 30;
         $listData = Customer::query()->with('channel', 'route', 'person');
         switch (session('user')['role_id']) {
             case 2:
@@ -56,7 +76,7 @@ class CustomerController extends Controller
                 $listData = $listData->where('personId', session('user')['id']);
                 break;
         }
-        $listData = $listData->get();
+        $listData = $listData->paginate($limit);
 
         $groupIDs = $listData->pluck('groupId')->toArray();
         $listPerson = Personnel::all();
@@ -64,7 +84,16 @@ class CustomerController extends Controller
         $listRoute = RouteDirection::all();
         $listChannel = Department::all();
 
-        return view('Customer.danhSachKhachHang', compact('listData', 'listPerson', 'listProduct', 'listRoute', 'listChannel'));
+        $pagination = $this->pagination($listData);
+
+        return view('Customer.danhSachKhachHang', compact(
+            'listData',
+            'listPerson',
+            'listProduct',
+            'listRoute',
+            'listChannel',
+            "pagination"
+        ));
     }
 
     public function create(Request $request)

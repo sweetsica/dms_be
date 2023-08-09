@@ -10,31 +10,19 @@
     </style>
 @endsection
 @php
+    function getPaginationLink($link, $pageName)
+    {
+        if (!isset($link['url'])) {
+            return '#';
+        }
     
-    // function getPaginationLink($link, $pageName)
-    // {
-    // if (!isset($link->url)) {
-    // return '#';
-    // }
+        $pageNumber = explode('?page=', $link['url'])[1];
     
-    // $pageNumber = explode('?page=', $link->url)[1];
+        $queryString = request()->query();
     
-    // $queryString = request()->query();
-    
-    // $queryString[$pageName] = $pageNumber;
-    // return route('timekeeping.list', $queryString);
-    // }
-    
-    // function isFiltering($filterNames)
-    // {
-    // $filters = request()->query();
-    // foreach ($filterNames as $filterName) {
-    // if (isset($filters[$filterName]) && $filters[$filterName] != '') {
-    // return true;
-    // }
-    // }
-    // return false;
-    // }
+        $queryString[$pageName] = $pageNumber;
+        return route('product.list', $queryString);
+    }
 @endphp
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
@@ -279,14 +267,14 @@
                                     <nav aria-label="Page navigation example" class="float-end mt-3"
                                         id="target-pagination">
                                         <ul class="pagination">
-                                            {{-- @foreach ($listUsers->links as $link)
-                                        <li class="page-item {{ $link->active ? 'active' : '' }}">
-                                            <a class="page-link" href="{{ getPaginationLink($link, 'page') }}"
-                                                aria-label="Previous">
-                                                <span aria-hidden="true">{!! $link->label !!}</span>
-                                            </a>
-                                        </li>
-                                        @endforeach --}}
+                                            @foreach ($pagination['links'] as $link)
+                                                <li class="page-item {{ $link['active'] ? 'active' : '' }}">
+                                                    <a class="page-link" href="{{ getPaginationLink($link, 'page') }}"
+                                                        aria-label="Previous">
+                                                        <span aria-hidden="true">{!! $link['label'] !!}</span>
+                                                    </a>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </nav>
                                 </div>
@@ -468,7 +456,7 @@
                                         multiple>
                                         @foreach ($listProduct as $pro)
                                             <option value="{{ $pro->id }}"
-                                                {{ in_array($pro->id, $selectedValues) ? 'selected' : '' }}>
+                                                {{ is_array($selectedValues) && in_array($pro->id, $selectedValues) ? 'selected' : '' }}>
                                                 {{ $pro->name }}
                                             </option>
                                         @endforeach
