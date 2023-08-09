@@ -279,7 +279,45 @@
                                         <option value="0" {{ $item->status == 0 ? 'selected' : '' }}>Khoá</option>
                                     </select>
                                 </div>
-                                <div class="col-12 col-md-12 mb-3">
+
+                                <div class="col-md-6 mb-3">
+                                    <div class="d-flex flex-column">
+                                        <div class="upload_wrapper-items">
+                                            <input type="hidden" value="" />
+                                            <button role="button" type="button"
+                                                class="btn position-relative border d-flex w-100">
+                                                <img style="width:16px;height:16px"
+                                                    src="{{ asset('assets/img/upload-file.svg') }}" />
+                                                <span class="ps-2">Đính kèm tài liệu</span>
+                                                <input role="button" type="file"
+                                                    class="modal_upload-input modal_upload-file" name="file"
+                                                    onchange="updateList(event)" />
+                                            </button>
+                                        </div>
+                                        <div class="alert alert-danger alertNotSupport" role="alert"
+                                            style="display:none">
+                                            File bạn tải lên hiện tại không hỗ trợ !
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="card-title">File đã
+                                        tải lên</div>
+                                    <ul class="modal_upload-list"
+                                        style="max-height: 200px; overflow-y: scroll; overflow-x: hidden;">
+                                        <li>
+                                            @if ($item->file)
+                                                <a href="{{ $item->file }}" target="_blank" class="fs-5">
+                                                    <i class="bi bi-link-45deg"></i> File đính kèm
+                                                </a>
+                                            @endif
+
+                                        </li>
+                                    </ul>
+                                </div>
+                                {{-- <div class="col-12 col-md-12 mb-3">
                                     <div class="card-title">File đã
                                         tải lên</div>
                                     <div class="upload_wrapper-items">
@@ -295,7 +333,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div> --}}
 
                             </div>
                         </div>
