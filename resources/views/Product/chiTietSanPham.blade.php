@@ -265,6 +265,8 @@
 
                                 </div>
 
+                                
+
                                 <div class="card_template-body-bottom">
                                     <div class="row">
                                         <div class="col-12 modal-title">Sản phẩm liên quan</div>
@@ -433,7 +435,6 @@
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
 
-
     <script>
         $(document).on('click', '.editRowBtn', function() {
             var fileInputDiv = $('#fileInput');
@@ -512,15 +513,11 @@
 
 
     <script>
-        // Lắng nghe sự kiện click cho nút plus
-        var plusButton = document.querySelector(".bi-plus-circle");
-        plusButton.addEventListener("click", function() {
-            var count = document.querySelectorAll('div.countData').length;
-            var index = count / 2;
-            // Tạo phần tử div mới
-            var newDivElement = document.createElement("div");
-            newDivElement.className = "col-md-4 mb-3 d-flex align-items-center";
-            newDivElement.innerHTML = `
+// Hàm thêm phần tử
+function addNewElement(index) {
+    var newDivElement = document.createElement("div");
+    newDivElement.className = `col-md-4 mb-3 d-flex align-items-center item-${index + 1}`;
+    newDivElement.innerHTML = `
         <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center" style="width:45%">
             <textarea rows="1" type="text" placeholder="Độ dài" class="card-title-black form-control textareaResize" name="listProducts[${index}][key]"></textarea>
         </div>
@@ -532,26 +529,46 @@
         </div>
     `;
 
-            // Tìm phần tử chứa lớp col-md-4
-            var colMd4Element = document.querySelector(".item-1");
+    var colMd4Elements = document.querySelectorAll(".item-" + index);
+    var lastColMd4Element = colMd4Elements[colMd4Elements.length - 1];
 
-            // Thêm phần tử div vào sau phần tử chứa lớp col-md-4
-            colMd4Element.parentNode.insertBefore(newDivElement, colMd4Element.nextSibling);
+    lastColMd4Element.parentNode.insertBefore(newDivElement, lastColMd4Element.nextSibling);
+
+    // Gắn sự kiện xóa vào nút delete trong phần tử mới
+    var deleteButton = newDivElement.querySelector('[data-repeater-delete]');
+    deleteButton.addEventListener('click', function(event) {
+        deleteElement(newDivElement);
+    });
+}
+
+// Hàm xóa phần tử
+function deleteElement(element) {
+    var index = element.classList[2].split('-')[1]; // Lấy index từ class
+    var itemElement = document.querySelector(`.item-${index}`);
+    if (itemElement) {
+        itemElement.remove();
+    }
+    element.remove();
+}
+
+// Sự kiện thêm
+var plusButton = document.querySelector(".bi-plus-circle");
+plusButton.addEventListener("click", function() {
+    var count = document.querySelectorAll('.countData').length / 2;
+    addNewElement(count);
+});
+
+// Sự kiện xóa
+document.addEventListener('click', function(event) {
+    if (event.target && event.target.getAttribute('data-repeater-delete')) {
+        var col2Element = event.target.closest('.col-2');
+        var colMd4Element = col2Element.closest('.col-md-4');
+        deleteElement(colMd4Element);
+    }
+});
 
 
-            // Lắng nghe sự kiện click cho nút xoá
-            var deleteButton = document.querySelector('[data-repeater-delete]');
-            deleteButton.addEventListener('click', function() {
-                // Tìm phần tử cha có lớp col-2
-                var col2Element = this.closest('.col-2');
-    
-                // Tìm phần tử cha có lớp col-md-4
-                var colMd4Element = col2Element.closest('.col-md-4');
-    
-                // Xóa phần tử col-md-4
-                colMd4Element.remove();
-            });
-        });
+
     </script>
 
 
