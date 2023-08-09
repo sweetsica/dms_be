@@ -106,7 +106,8 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($listProduct as $item)
-                                                    <tr class="table-row" data-href="/chi-tiet-san-pham" role="button">
+                                                    <tr class="table-row" data-href="/chi-tiet-san-pham/{{ $item->id }}"
+                                                        role="button">
                                                         <td>
                                                             <div class="overText text-center">
                                                                 {{ $listProduct->total() - $loop->index - ($listProduct->currentPage() - 1) * $listProduct->perPage() }}
@@ -128,8 +129,7 @@
                                                         <td class="list_img">
                                                             <div class="d-flex justify-content-center align-items-center"
                                                                 style="padding:10px">
-                                                                <img class=""
-                                                                    src="{{ $item->thumbnail }}" />
+                                                                <img class="" src="{{ $item->thumbnail }}" />
                                                             </div>
                                                         </td>
 
@@ -318,7 +318,8 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Thêm sản phẩm</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="formThemCapPhat" method="POST" action="{{ route('product.store') }}" enctype="multipart/form-data">
+                <form id="formThemCapPhat" method="POST" action="{{ route('product.store') }}"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -376,9 +377,9 @@
                                                     <img style="width:16px;height:16px"
                                                         src="{{ asset('assets/img/upload-file.svg') }}" />
                                                     Tải file lên
-                                                    <input accept=".png, .jpeg, .jpg" required role="button" type="file"
-                                                        class="modal_upload-input modal_upload-file" name="file"
-                                                        onchange="updateList(event)">
+                                                    <input accept=".png, .jpeg, .jpg" required role="button"
+                                                        type="file" class="modal_upload-input modal_upload-file"
+                                                        name="file" onchange="updateList(event)">
                                                 </button>
                                             </div>
 

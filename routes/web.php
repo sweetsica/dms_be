@@ -96,6 +96,11 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('them-moi-san-pham', [ProductController::class, 'store'])->name('product.store');
     Route::put('sua-san-pham/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('xoa-san-pham/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
+    
+    Route::get('chi-tiet-san-pham/{id}', [ProductController::class, 'show'])->name('product.show');
+    Route::post('them-moi-chi-tiet/{id}', [ProductController::class, 'create'])->name('product.create');
+    Route::post('them-san-pham-lien-quan/{id}', [ProductController::class, 'related'])->name('product.related');
+    Route::delete('xoa-chi-tiet/{id}', [ProductController::class, 'delete'])->name('product.deleted');
 
     Route::get('danh-sach-phien-ban', [VersionController::class, 'index'])->name('version.list');
     Route::post('them-moi-phien-ban', [VersionController::class, 'store'])->name('version.store');
@@ -122,12 +127,8 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('danh-sach-khu-vuc/{id}', [AreaController::class, 'update'])->name('area.update');
     Route::post('danh-sach-khu-vucx/{id}', [AreaController::class, 'destroy'])->name('area.destroy');
 
-    Route::get('chi-tiet-san-pham', function () {
-        return view('Product.chiTietSanPham');
-    });
 
-
-    Route::get('chi-tiet-khach-hang/{id}', [CustomerController::class, 'show'])->name('customer.list');
+    Route::get('chi-tiet-khach-hang/{id}', [CustomerController::class, 'show'])->name('customer-detail.list');
 
     Route::get('department', [DepartmentController::class, 'index'])->name('department.index');
     Route::post('department', [DepartmentController::class, 'store'])->name('department.store');
@@ -155,6 +156,7 @@ Route::middleware(['auth.role'])->group(function () {
     Route::get('nhan_suv/{department_id}', [PersonnelController::class, 'show'])->name('Personnel.show');
     Route::get('nhan_suvtri/{position_id}', [PersonnelController::class, 'showVtri'])->name('Personnel.show.vtri');
     Route::get('nhan_su_dia_ban/{area_id}', [PersonnelController::class, 'showDiaBan'])->name('Personnel.show.diaban');
+    Route::get('nhan_su_vung/{department_id}', [PersonnelController::class, 'showVung'])->name('Personnel.show.vung');
 
     Route::get('vai-tro', [RoleController::class, 'index'])->name('Role.index');
     Route::post('vai-tro', [RoleController::class, 'store'])->name('Role.store');
