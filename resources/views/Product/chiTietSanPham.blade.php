@@ -28,7 +28,12 @@
         }
     </style>
 @endsection
-
+@php
+    $checkSubmition = false;
+    if ($details->images != null || $details->description != null || $details->attachments != null || $details->data != null || $details->related != null || $details->price != 0) {
+        $checkSubmition = true;
+    }
+@endphp
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
     <div id="mainWrap" class="mainWrap">
@@ -88,7 +93,7 @@
                                                                 <img style="width:16px;height:16px"
                                                                     src="{{ asset('assets/img/upload-file.svg') }}" />
                                                                 Tải file lên
-                                                                <input role="button" type="file"
+                                                                <input required role="button" type="file"
                                                                     class="modal_upload-input modal_upload-file"
                                                                     name="files[]" multiple onchange="updateList(event)">
                                                             </button>
@@ -146,10 +151,13 @@
                                             @endif
 
                                             @if (!$details->price)
-                                                <div class="col-md-12 mb-3">
-                                                    <button type="button" class="btn btn-danger" id="showPriceButton">Giá
-                                                        bán</button>
-                                                </div>
+                                                @if (!$checkSubmition)
+                                                    <div class="col-md-12 mb-3">
+                                                        <button type="button" class="btn btn-danger"
+                                                            id="showPriceButton">Giá
+                                                            bán</button>
+                                                    </div>
+                                                @endif
                                                 <div class="col-md-12 mb-3" id="priceSection" style="display: none;">
                                                     <div
                                                         class="card_template-title d-flex align-items-center justify-content-center">
@@ -239,21 +247,17 @@
                                             </div>
                                         @endif
 
-
-                                        <div class="">
-                                            <div class="d-flex justify-content-start">
-                                                <div role="button" class="fs-5 text-danger"><i
-                                                        class="bi bi-plus-circle"></i></div>
+                                        @if (!$checkSubmition)
+                                            <div class="">
+                                                <div class="d-flex justify-content-start">
+                                                    <div role="button" class="fs-5 text-danger"><i
+                                                            class="bi bi-plus-circle"></i></div>
+                                                </div>
                                             </div>
-                                        </div>
+                                        @endif
                                     </div>
 
-
-
                                 </div>
-
-                                {{-- Giao diện hiển thị --}}
-
 
                                 <div class="card_template-body-bottom">
                                     <div class="row">
@@ -297,21 +301,25 @@
                                                 </div>
                                             @endforeach
                                         @endif
-                                        <div class="col-12 mt-3">
-                                            <button type="button" class="btn btn-danger d-block" data-bs-toggle="modal"
-                                                data-bs-target="#add">+ Thêm thông số</button>
-                                        </div>
+                                        @if (!$checkSubmition)
+                                            <div class="col-12 mt-3">
+                                                <button type="button" class="btn btn-danger d-block"
+                                                    data-bs-toggle="modal" data-bs-target="#add">+ Thêm thông số</button>
+                                            </div>
+                                        @endif
 
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-flex justify-content-end">
-                                <div class="card_template-footer">
-                                    <a href="/danh-sach-san-pham" class="btn btn-outline-danger ps-5 pe-5 me-3"
-                                        role="button">Hủy</a>
-                                    <button type="submit" class="btn btn-danger ps-5 pe-5">Lưu</button>
+                            @if (!$checkSubmition)
+                                <div class="d-flex justify-content-end">
+                                    <div class="card_template-footer">
+                                        <a href="/danh-sach-san-pham" class="btn btn-outline-danger ps-5 pe-5 me-3"
+                                            role="button">Hủy</a>
+                                        <button type="submit" class="btn btn-danger ps-5 pe-5">Lưu</button>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                         </div>
                     </form>
                 </div>
