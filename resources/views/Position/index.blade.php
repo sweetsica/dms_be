@@ -70,8 +70,10 @@
                                                             <th class="text-nowrap" style="width:10%">Định biên</th>
                                                             <th class="text-nowrap" style="width:10%">Quỹ lương năm</th>
                                                             <th class="text-nowrap" style="width:8%">Gói trang bị</th>
+                                                            @if ((session('user')['role_id'] == '1') )
                                                             <th class="text-nowrap" style="width:3%"><span>Thao tác</span>
                                                             </th>
+                                                            @endif
                                                         </tr>
                                                     </thead>
                                                     <?php $g = 1; ?>
@@ -140,6 +142,7 @@
                                                                     </div>
 
                                                                 </td>
+                                                                @if ((session('user')['role_id'] == '1') )
                                                                 <td>
                                                                     <div class="table_actions d-flex justify-content-end">
                                                                         <div data-bs-toggle="tooltip"
@@ -160,6 +163,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </td>
+                                                                @endif
                                                             </tr>
                                                         </tbody>
 
@@ -187,7 +191,7 @@
                                                                                         title="Nhập tên vị trí/chức danh*"
                                                                                         name="name" type="text"
                                                                                         class="form-control"
-                                                                                        value="{{ $item->name }}">
+                                                                                        value="{{ $item->name }}" required>
                                                                                 </div>
                                                                                 <div class="col-6 mb-3">
                                                                                     <input data-bs-toggle="tooltip"
@@ -195,7 +199,7 @@
                                                                                         title="Nhập mã vị trí/chức danh*"
                                                                                         name="code" type="text"
                                                                                         class="form-control"
-                                                                                        value="{{ $item->code }}">
+                                                                                        value="{{ $item->code }}" required>
                                                                                 </div>
 
                                                                                 <div class="col-6 mb-3">

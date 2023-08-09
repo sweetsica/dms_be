@@ -103,8 +103,9 @@
                                                     <th class="text-nowrap text-center" style="width:30%">Tên địa bàn</th>
                                                     <th class="text-nowrap text-center" style="width:30%">Khu vực</th>
                                                     <th class="text-nowrap text-center" style="width:30%">Mô tả</th>
+                                                    @if ((session('user')['role_id'] == '1') || (session('user')['role_id'] == '2') )
                                                     <th class="text-nowrap text-center" style="width:4%">Hành động</th>
-
+                                                    @endif
                                                 </tr>
                                             </thead>
                                             <?php $a = 1; ?>
@@ -141,6 +142,7 @@
                                                                 {{ $item->description }}
                                                             </div>
                                                         </td>
+                                                         @if ((session('user')['role_id'] == '1') || (session('user')['role_id'] == '2') )
                                                         <td>
                                                             <div class="table_actions d-flex justify-content-center">
                                                                 <div data-bs-toggle="tooltip" data-bs-placement="top"
@@ -162,9 +164,8 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-
-
                                                         </td>
+                                                        @endif
                                                     </tr>
                                                 @endforeach
                                             </tbody>

@@ -64,8 +64,10 @@
                                                             <th class="text-nowrap" style="width:10%">Mã cấp nhân sự</th>
                                                             <th class="text-nowrap" style="width:10%">Tên cấp nhân sự</th>
                                                             <th class="text-nowrap" style="width:20%">Mô tả</th>
+                                                            @if ((session('user')['role_id'] == '1') )
                                                             <th class="text-center" style="width:1%"><span>Thao tác</span>
                                                             </th>
+                                                            @endif
                                                         </tr>
                                                     </thead>
                                                     <?php $i = 1; ?>
@@ -84,6 +86,7 @@
                                                                 <td class="">
                                                                     {{ $item->description }}
                                                                 </td>
+                                                                @if ((session('user')['role_id'] == '1') )
                                                                 <td>
                                                                     <div class="table_actions d-flex justify-content-end">
 
@@ -105,6 +108,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </td>
+                                                                @endif
                                                             </tr>
                                                         </tbody>
 

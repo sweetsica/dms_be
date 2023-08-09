@@ -72,8 +72,10 @@
                                                             <th class="text-nowrap">Số điện thoại</th>
                                                             <th class="text-nowrap">Hình thức</th>
                                                             <th class="text-nowrap">Trạng thái</th>
+                                                            @if ((session('user')['role_id'] == '1') )
                                                             <th class="text-nowrap"><span>Hành động</span>
                                                             </th>
+                                                            @endif
                                                         </tr>
                                                     </thead>
                                                     <?php $a = 1; ?>
@@ -99,7 +101,7 @@
                                                                     {{ $item->personnel_level_name }}
                                                                 </td>
                                                                 <td class="">
-                                                                    {{ $item->role }}
+                                                                    {{ $item->role_name }}
                                                                 </td>
                                                                 <td class="">
                                                                     {{ $item->locality_name }}
@@ -116,6 +118,7 @@
                                                                 <td class="">
                                                                     {{ $item->status }}
                                                                 </td>
+                                                                @if ((session('user')['role_id'] == '1') )
                                                                 <td>
                                                                     <div class="table_actions d-flex justify-content-end">
 
@@ -137,6 +140,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </td>
+                                                                @endif
                                                             </tr>
                                                         </tbody>
 
