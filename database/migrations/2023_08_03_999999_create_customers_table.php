@@ -42,6 +42,9 @@ return new class extends Migration {
             $table->string('district', 255)->nullable();
             $table->string('guide', 255)->nullable();
             $table->string('address', 255)->nullable();
+            $table->text('coordinatesX')->nullable();
+            $table->text('coordinatesY')->nullable();
+
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
 //            $table->timestamp('created_at')->useCurrent();

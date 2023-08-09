@@ -35,6 +35,8 @@ class Customer extends Model
        'groupId',
        'chanelId',
        'status',
+       'coordinatesX',
+       'coordinatesY'
    ];
 
     public function route()
