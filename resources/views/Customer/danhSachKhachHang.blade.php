@@ -577,7 +577,7 @@
                                 <div class="card-title">1. Thông tin chung</div>
                             </div>
                             <div class="col-md-3 mb-3">
-                                <input type="text" name="code" data-bs-toggle="tooltip" required
+                                <input type="text" name="code" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Mã khách hàng" placeholder="Mã khách hàng*"
                                     class="form-control">
                             </div>
@@ -593,7 +593,7 @@
                                     class="form-control">
                             </div>
                             <div class="col-md-3 mb-3">
-                                <input type="text" name="email" data-bs-toggle="tooltip" required
+                                <input type="text" name="email" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Email" placeholder="Email*" class="form-control">
                             </div>
                             <div class="col-md-12 mb-3">
@@ -642,7 +642,7 @@
                             </div>
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Tỉnh/thành">
-                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Tỉnh/thành*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="city" id="city"
                                     data-live-search-placeholder="Tìm kiếm...">
@@ -650,7 +650,7 @@
                             </div>
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Quận/huyện">
-                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Quận/huyện*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="district" id="district"
                                     data-live-search-placeholder="Tìm kiếm...">
@@ -658,7 +658,7 @@
                             </div>
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Phường/xã">
-                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Phường/xã*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="guide" id="guide"
                                     data-live-search-placeholder="Tìm kiếm...">
@@ -675,15 +675,12 @@
 
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Nhân sự thu thập">
-                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
-                                    data-live-search="true" title="Nhân sự thu thập*" data-select-all-text="Chọn tất cả"
-                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="personId" id="personId"
-                                    data-live-search-placeholder="Tìm kiếm...">
-                                </select>
+                                <input value="{{ session('user')['name'] }}" readonly type="text" name="personId" data-bs-toggle="tooltip" required
+                                    data-bs-placement="top" title="Nhân sự thu thập" placeholder="Nhân sự thu thập*" class="form-control">
                             </div>
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Sản phẩm quan tâm">
-                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Sản phẩm quan tâm*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="productId[]" id="productId"
                                     data-live-search-placeholder="Tìm kiếm..." multiple>

@@ -125,7 +125,7 @@ class CustomerController extends Controller
         $district = $request->get('district');
         $guide = $request->get('guide');
         $address = $request->get('address');
-        $personId = $request->get('personId');
+        $personId = session('user')['id'];
         $productId = $request->get('productId');
         $groupId = $request->get('groupId');
         $chanelId = $request->get('chanelId');
