@@ -47,12 +47,13 @@
                                                         <i class="bi bi-funnel"></i>
                                                     </button>
                                                 </div>
-
+                                                @if ((session('user')['role_id'] == '1')  )
                                                 <div class="action_export order-md-4">
                                                     <button class="btn btn-danger d-block testCreateUser"
                                                         data-bs-toggle="modal" data-bs-target="#taoDeXuat">Thêm vai
                                                         trò</button>
                                                 </div>
+                                                @endif
                                             </div>
 
                                             <div class="table-responsive">
@@ -64,8 +65,10 @@
                                                             <th class="text-nowrap" style="width:10%">Mã vai trò</th>
                                                             <th class="text-nowrap" style="width:10%">Tên vai trò</th>
                                                             <th class="text-nowrap" style="width:20%">Mô tả</th>
+                                                            @if ((session('user')['role_id'] == '1')  )
                                                             <th class=" text-center" style="width:1%"><span>Thao tác</span>
                                                             </th>
+                                                            @endif
                                                         </tr>
                                                     </thead>
                                                     <?php $i = 1; ?>
