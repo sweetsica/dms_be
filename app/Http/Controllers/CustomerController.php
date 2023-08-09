@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\RouteDirection;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CustomerController extends Controller
 {
@@ -69,7 +70,7 @@ class CustomerController extends Controller
             $listData = Customer::query()->with('channel', 'route', 'person');
             if ($q) {
                 $listData = $listData->where('code', 'like', '%' . $q . '%')
-                ->orWhere('name', 'like', '%' . $q . '%');
+                    ->orWhere('name', 'like', '%' . $q . '%');
             }
             switch (session('user')['role_id']) {
                 case 2:
@@ -108,56 +109,65 @@ class CustomerController extends Controller
 
     public function create(Request $request)
     {
-        // dd($request);
-        $code = $request->get('code');
-        $name = $request->get('name');
-        $phone = $request->get('phone');
-        $email = $request->get('email');
-        $companyName = $request->get('companyName');
-        $personContact = $request->get('personContact');
-        $career = $request->get('career');
-        $taxCode = $request->get('taxCode');
-        $companyPhoneNumber = $request->get('companyPhoneNumber');
-        $companyEmail = $request->get('companyEmail');
-        $accountNumber = $request->get('accountNumber');
-        $bankOpen = $request->get('bankOpen');
-        $city = $request->get('city');
-        $district = $request->get('district');
-        $guide = $request->get('guide');
-        $address = $request->get('address');
-        $personId = $request->get('personId');
-        $productId = $request->get('productId');
-        $groupId = $request->get('groupId');
-        $chanelId = $request->get('chanelId');
-        $routeId = $request->get('routeId');
-        $status = $request->get('status');
-        $data = new Customer();
-        $data->code = $code;
-        $data->name = $name;
-        $data->phone = $phone;
-        $data->email = $email;
-        $data->companyName = $companyName;
-        $data->personContact = $personContact;
-        $data->career = $career;
-        $data->taxCode = $taxCode;
-        $data->companyPhoneNumber = $companyPhoneNumber;
-        $data->companyEmail = $companyEmail;
-        $data->accountNumber = $accountNumber;
-        $data->bankOpen = $bankOpen;
-        $data->city = $city;
-        $data->district = $district;
-        $data->guide = $guide;
-        $data->address = $address;
-        $data->personId = $personId;
-        $data->productId = json_encode($productId);
-        $data->group = $groupId;
-        $data->chanelId = $chanelId;
-        $data->routeId = $routeId;
-        $data->status = $status;
-        $data->save();
-        $listData = Customer::all();
-        return redirect()->route('customers', compact('listData'));
-        // return view('customer.danhSachKhachHang', compact('listData'));
+        try {
+
+            $data = $request->validate([
+                'code' => 'required|unique:customers,code',
+            ]);
+            // dd($request);
+            $code = $data['code'];
+            $name = $request->get('name');
+            $phone = $request->get('phone');
+            $email = $request->get('email');
+            $companyName = $request->get('companyName');
+            $personContact = $request->get('personContact');
+            $career = $request->get('career');
+            $taxCode = $request->get('taxCode');
+            $companyPhoneNumber = $request->get('companyPhoneNumber');
+            $companyEmail = $request->get('companyEmail');
+            $accountNumber = $request->get('accountNumber');
+            $bankOpen = $request->get('bankOpen');
+            $city = $request->get('city');
+            $district = $request->get('district');
+            $guide = $request->get('guide');
+            $address = $request->get('address');
+            $personId = session('user')['id'];
+            $productId = $request->get('productId');
+            $groupId = $request->get('groupId');
+            $chanelId = $request->get('chanelId');
+            $routeId = $request->get('routeId');
+            $status = $request->get('status');
+            $data = new Customer();
+            $data->code = $code;
+            $data->name = $name;
+            $data->phone = $phone;
+            $data->email = $email;
+            $data->companyName = $companyName;
+            $data->personContact = $personContact;
+            $data->career = $career;
+            $data->taxCode = $taxCode;
+            $data->companyPhoneNumber = $companyPhoneNumber;
+            $data->companyEmail = $companyEmail;
+            $data->accountNumber = $accountNumber;
+            $data->bankOpen = $bankOpen;
+            $data->city = $city;
+            $data->district = $district;
+            $data->guide = $guide;
+            $data->address = $address;
+            $data->personId = $personId;
+            $data->productId = json_encode($productId);
+            $data->group = $groupId;
+            $data->chanelId = $chanelId;
+            $data->routeId = $routeId;
+            $data->status = $status;
+            $data->save();
+            $listData = Customer::all();
+            return redirect()->route('customers', compact('listData'));
+            // return view('customer.danhSachKhachHang', compact('listData'));
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Session::flash("error", $e->getMessage());
+            return redirect()->back()->withInput();
+        }
     }
 
     public function update(Request $request, $id)

@@ -81,12 +81,13 @@
                                                 href={{ route('print.dwtUser', ['date' => request()->userDate ?? date('m-Y')]) }}
                                                 class="btn-export"><i class="bi bi-download"></i></a>
                                         </div> --}}
-
+                                        @if ((session('user')['role_id'] == '1') || (session('user')['role_id'] == '2') )
                                         <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                             aria-label="Thêm tuyến" data-bs-original-title="Thêm tuyến">
                                             <button class="btn btn-danger d-block testCreateUser" data-bs-toggle="modal"
                                                 data-bs-target="#add">Thêm tuyến</button>
                                         </div>
+                                        @endif
                                     </div>
                                     <div class="table-responsive">
                                         <table id="dsDaoTao"
