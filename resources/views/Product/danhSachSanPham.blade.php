@@ -128,8 +128,7 @@
                                                         </td>
 
                                                         <td class="list_img">
-                                                            <div class="d-flex justify-content-center align-items-center"
-                                                                style="padding:10px">
+                                                            <div class=" img-product-item d-flex justify-content-center align-items-center"">
                                                                 <img class="" src="{{ $item->thumbnail }}" />
                                                             </div>
                                                         </td>
