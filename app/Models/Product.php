@@ -13,18 +13,14 @@ class Product extends Model
     protected $fillable = [
         'code',
         'name',
+        'thumbnail',
         'type',
         'branch',
-        'created_by',
         'status',
         'created_at',
         'deleted_at',
     ];
 
-    public function creators()
-    {
-        return $this->belongsTo(Personnel::class, 'created_by');
-    }
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'productId');

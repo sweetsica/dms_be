@@ -27,7 +27,8 @@
                                 <li style=" margin: 5px; padding: 0;">
                                     <div class="d-flex align-items-center"
                                         style=" background-color: #EBEBEB; height: 30px; display: flex; font-size: 15px; border-radius: 5px;">
-                                        <a href="{{ route('Personnel.indexDiaBan') }}" style="color:black;padding-left:10px;">Cơ
+                                        <a href="{{ route('Personnel.indexDiaBan') }}"
+                                            style="color:black;padding-left:10px;">Cơ
                                             cấu địa bàn</a>
                                     </div>
                                 </li>
@@ -54,7 +55,8 @@
                         <ul id="tree1">
                             @foreach ($positionListTree as $donVi)
                                 <li class="parent" style=" margin: 10px; padding: 0;" data-id="{{ $donVi->id }}">
-                                    <a href="{{ route('Personnel.show.vtri',['position_id' => $donVi->id]) }}" class="title-child">{{ $donVi->name }}</a>
+                                    <a href="{{ route('Personnel.show.vtri', ['position_id' => $donVi->id]) }}"
+                                        class="title-child">{{ $donVi->name }}</a>
                                     @if ($donVi->donViCon->count() > 0)
                                         @include('template.sidebar.sidebarPosition.child', [
                                             'donViCon' => $donVi->donViCon,
@@ -163,9 +165,11 @@
                 listContainer.style.display = 'none';
             }
         });
-
         $.fn.extend({
             treed: function(o) {
+
+                // var openedClass = 'bi-plus-square';
+                // var closedClass = 'bi-dash-square';
 
                 var openedClass = 'bi-dash-square';
                 var closedClass = 'bi-plus-square';
@@ -182,8 +186,12 @@
                 //initialize each of the top levels
                 var tree = $(this);
                 tree.addClass("tree");
+
                 tree.find('li').has("ul").each(function() {
                     var branch = $(this); //li with children ul
+
+                    // $(this).children().children().toggle();
+
                     branch.prepend("<i class='indicator bi " + closedClass + "'></i>");
                     branch.addClass('branch');
                     branch.on('click', function(e) {
@@ -202,15 +210,14 @@
                         $(this).closest('li').click();
                     });
                 });
-                //fire event to open branch if the li contains an anchor instead of text
-                // tree.find('.branch>a').each(function() {
-                //     $(this).on('click', function(e) {
-                //         $(this).closest('li').click();
-                //         e.preventDefault();
-                //     });
-                // });
             }
         });
+
+        $(document).ready(function() {
+            console.log("vao day dau tien");
+            $("#tree1").children("li:first-child").click();
+            // $("#tree1").children("li:last-child").click();
+        })
 
         $('#tree1').treed();
     </script>

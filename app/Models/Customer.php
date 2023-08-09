@@ -11,30 +11,33 @@ class Customer extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table = 'customers';
-    protected $fillable = [
-        'code',
-        'name',
-        'phone',
-        'email',
-        'personContact',
-        'companyName',
-        'career',
-        'taxCode',
-        'companyPhoneNumber',
-        'companyEmail',
-        'accountNumber',
-        'bankOpen',
-        'city',
-        'district',
-        'guide',
-        'address',
-        'personId',
-        'productId',
-        'routeId',
-        'group',
-        'chanelId',
-        'status',
-    ];
+    // protected $guarded = [''];
+   protected $fillable = [
+       'code',
+       'name',
+       'phone',
+       'email',
+       'personContact',
+       'companyName',
+       'career',
+       'taxCode',
+       'companyPhoneNumber',
+       'companyEmail',
+       'accountNumber',
+       'bankOpen',
+       'city',
+       'district',
+       'guide',
+       'address',
+       'personId',
+       'productId',
+       'routeId',
+       'groupId',
+       'chanelId',
+       'status',
+       'coordinatesX',
+       'coordinatesY'
+   ];
 
     public function route()
     {
@@ -43,7 +46,7 @@ class Customer extends Model
 
     public function products()
     {
-        $productIds = json_decode($this->productId);
+        $productIds = json_decode($this->productId) ?? [];
 
         return Product::whereIn('id', $productIds)->get();
     }

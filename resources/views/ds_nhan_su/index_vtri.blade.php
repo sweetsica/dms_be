@@ -214,8 +214,7 @@
                                                                                         value="{{ $item->code }}">
                                                                                 </div>
                                                                                 <div class="col-8 mb-3">
-                                                                                    <input name="address"
-                                                                                        type="text"
+                                                                                    <input name="address" type="text"
                                                                                         placeholder="Địa chỉ"
                                                                                         class="form-control"
                                                                                         data-bs-toggle="tooltip"
@@ -564,7 +563,7 @@
             @include('template.footer.footer')
         </div>
     </div>
-    @include('template.sidebar.sidebarPosition.sidebarRight')
+    @include('template.sidebar.sidebarMaster.sidebarRight')
 
 
     <!-- Modal Thêm Tao De Xuat -->
