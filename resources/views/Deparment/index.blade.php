@@ -47,12 +47,13 @@
                                                         <i class="bi bi-funnel"></i>
                                                     </button>
                                                 </div>
-
+                                                @if ((session('user')['role_id'] == '1') )
                                                 <div class="action_export order-md-4">
                                                     <button class="btn btn-danger d-block testCreateUser"
                                                         data-bs-toggle="modal" data-bs-target="#taoDeXuat">Thêm đơn
                                                         vị</button>
                                                 </div>
+                                                @endif
                                             </div>
                                             <div class="table-responsive">
                                                 <table id="dsDaoTao"
