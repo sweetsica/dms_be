@@ -23,7 +23,7 @@ class CustomersImport implements ToModel, WithStartRow, WithStrictNullComparison
         }
 
         return new Customer([
-            'code' => 'KH-' . $row['0'],
+            'code' => null,
             'name' => $row['1'],
             'address' => $row['2'],
             'category' => $row['3'],
