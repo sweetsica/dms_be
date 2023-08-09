@@ -100,7 +100,7 @@ Route::middleware(['auth.role'])->group(function () {
     Route::get('chi-tiet-san-pham/{id}', [ProductController::class, 'show'])->name('product.show');
     Route::post('them-moi-chi-tiet/{id}', [ProductController::class, 'create'])->name('product.create');
     Route::post('them-san-pham-lien-quan/{id}', [ProductController::class, 'related'])->name('product.related');
-    Route::delete('xoa-chi-tiet/{id}', [ProductController::class, 'delete'])->name('product.deleted');
+    Route::post('xoa-chi-tiet/{id}', [ProductController::class, 'delete'])->name('product.deleted');
 
     Route::get('danh-sach-phien-ban', [VersionController::class, 'index'])->name('version.list');
     Route::post('them-moi-phien-ban', [VersionController::class, 'store'])->name('version.store');

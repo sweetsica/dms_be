@@ -108,12 +108,39 @@ class ProductController extends Controller
             }
         }
 
-        if($request->description){
+        if ($request->description) {
             $details->description = $request->description;
         }
-        
-        if($request->price){
+
+        if ($request->price) {
             $details->price = $request->price;
+        }
+        if ($request->listProducts) {
+            $hasNonNullValue = false;
+            foreach ($request->listProducts as $element) {
+                if ($element['key'] !== null || $element['value'] !== null) {
+                    $hasNonNullValue = true;
+                    break; // Exit the loop if a non-null value is found
+                }
+            }
+            if ($hasNonNullValue) {
+                $newList = [];
+
+                foreach ($request->listProducts as $item) {
+                    $newItem = [];
+
+                    foreach ($item as $key => $value) {
+                        if ($value == null) {
+                            $newItem[$key] = null;
+                        } else {
+                            $newItem[$key] = $value;
+                        }
+                    }
+
+                    $newList[] = $newItem;
+                }
+                $details->data = json_encode($newList);
+            }
         }
 
         $details->save();
@@ -194,7 +221,7 @@ class ProductController extends Controller
     public function related(Request $request, $id)
     {
         $details = ProductDetails::where('product_id', $id)->first();
-        if($request->related){
+        if ($request->related) {
             $details->related = json_encode($request->related);
             $details->save();
             Session::flash('success', "Thêm sản phẩm liên quan thành công");
@@ -249,11 +276,10 @@ class ProductController extends Controller
         $productList = Product::all();
         return $productList;
     }
-    
-    public function delete($id)
+
+    public function delete($id, Request $request)
     {
-        dd($id);
-        $details = ProductDetails::findOrFail($id);
+        $details = ProductDetails::findOrFail($request->detail_id);
         $relatedArray = json_decode($details->related);
         if (count($relatedArray) > 1) {
             $details_array = array_diff($relatedArray, [$id]);
@@ -268,7 +294,7 @@ class ProductController extends Controller
             $details->related = $details_json;
             // dd($taskDetails->prev_tasks);
             $details->save();
-        }else{
+        } else {
             $details->related = null;
             // dd($taskDetails->prev_tasks);
             $details->save();

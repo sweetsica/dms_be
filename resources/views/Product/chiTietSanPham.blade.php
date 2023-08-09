@@ -187,56 +187,63 @@
                                             @endif
                                         </div>
                                     </div>
-
-
-
                                     <div class="col-md-12 mb-3">
                                         <div class="mb-3">
                                             <div class="modal-title">Thông số kỹ thuật:</div>
                                         </div>
-
-                                        <div class="DNTU_repeater">
-                                            <div data-repeater-list="DNTU_list">
-                                                <div class="row repeater_wrapper d-flex align-items-center"
-                                                    style="position: relative" data-repeater-item>
-                                                    <div class="col-md-5 mb-3 d-flex align-items-center">
-                                                        <div class=" card_template-sub with_input d-flex justify-content-center align-items-center"
-                                                            style="width:30%">
-                                                            <input type="text" placeholder=""
-                                                                class="card-title-black form-control"
-                                                                name="listDetail[0][key]">
-                                                        </div>
-                                                        <div class=" card_template-sub with_input d-flex justify-content-center align-items-center"
-                                                            style="width:70%">
-                                                            <input type="text" placeholder="" class=" form-control"
-                                                                name="listDetail[0][value]">
-                                                        </div>
+                                        @php
+                                            $hasNonNullValue = false;
+                                            $data = json_decode($details->data);
+                                            if ($data) {
+                                                foreach ($data as $key => $element) {
+                                                    if ($element->key !== null || $element->value !== null) {
+                                                        $hasNonNullValue = true;
+                                                        break; // Exit the loop if a non-null value is found
+                                                    }
+                                                }
+                                            }
+                                        @endphp
+                                        @if (!$hasNonNullValue)
+                                            <div class="row d-flex align-items-center" style="position: relative">
+                                                <div class="col-md-4 mb-3 d-flex align-items-center item-1">
+                                                    <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center"
+                                                        style="width:30%">
+                                                        <input type="text" placeholder="Độ dài"
+                                                            class="card-title-black form-control"
+                                                            name="listProducts[0][key]">
                                                     </div>
-                                                    <div class="col-md-5 mb-3 d-flex align-items-center">
-                                                        <div class=" card_template-sub with_input d-flex justify-content-center align-items-center"
-                                                            style="width:30%">
-                                                            <input type="text" placeholder=""
-                                                                class="card-title-black form-control"
-                                                                name="listDetail[0][key]">
-                                                        </div>
-                                                        <div class=" card_template-sub with_input d-flex justify-content-center align-items-center"
-                                                            style="width:70%">
-                                                            <input type="text" placeholder="" class=" form-control"
-                                                                name="listDetail[0][value]">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-2 mb-3">
-                                                        <img data-repeater-delete role="button"
-                                                            src="{{ asset('/assets/img/trash.svg') }}" width="20px"
-                                                            height="20px" />
+                                                    <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center"
+                                                        style="width:60%">
+                                                        <input type="text" placeholder="Catalogue mô tả"
+                                                            class=" form-control" name="listProducts[0][value]">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="">
-                                                <div class="d-flex justify-content-start">
-                                                    <div role="button" class="fs-5 text-danger" data-repeater-create><i
-                                                            class="bi bi-plus-circle"></i></div>
+                                        @else
+                                            <div class="row d-flex align-items-center" style="position: relative">
+                                                <div class="col-md-4 mb-3 d-flex align-items-center item-1">
+                                                    @foreach ($data as $key => $element)
+                                                        <div class=" card_template-sub with_input d-flex  align-items-center"
+                                                            style="width:30%">
+                                                            <div class="text-break card-title-black "
+                                                                style="margin-left: 4px">{{ $element->key }}
+                                                            </div>
+                                                        </div>
+                                                        <div class=" card_template-sub with_input d-flex  align-items-center"
+                                                            style="width:70%">
+                                                            <div class="text-break " style="margin-left: 4px">
+                                                                {{ $element->value }}</div>
+                                                        </div>
+                                                    @endforeach
                                                 </div>
+                                            </div>
+                                        @endif
+
+
+                                        <div class="">
+                                            <div class="d-flex justify-content-start">
+                                                <div role="button" class="fs-5 text-danger"><i
+                                                        class="bi bi-plus-circle"></i></div>
                                             </div>
                                         </div>
                                     </div>
@@ -246,33 +253,6 @@
                                 </div>
 
                                 {{-- Giao diện hiển thị --}}
-                                {{-- <div class="row card_template-body-middle mb-3">                                    
-
-                                    <div class="col-md-12 mb-3">
-                                            <div class="mb-3">
-                                                <div class="modal-title">Thông số kỹ thuật:</div>
-                                            </div>
-
-                                            <div class="row d-flex align-items-center" style="position: relative">
-                                                <div class="col-md-4 mb-3 d-flex align-items-center item-1">
-                                                    <div class=" card_template-sub with_input d-flex justify-content-center align-items-center" style="width:30%">
-                                                        <input type="text" value="Độ dài" placeholder="" class="card-title-black form-control" name="proposalNo">
-                                                    </div>
-                                                    <div class=" card_template-sub with_input d-flex justify-content-center align-items-center" style="width:60%">
-                                                        <input type="text" value="Catalogue mô tả" placeholder="" class=" form-control" name="proposalNo">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="">
-                                                <div class="d-flex justify-content-start">
-                                                    <div role="button" class="fs-5 text-danger"><i class="bi bi-plus-circle"></i></div>
-                                                </div>
-                                            </div>
-                                    </div>
-
-
-                                    
-                                </div> --}}
 
 
                                 <div class="card_template-body-bottom">
@@ -288,7 +268,7 @@
                                                     $detailsPro = \App\Models\ProductDetails::where('id', $related->id)->first();
                                                 @endphp
                                                 <div class="col-4 mt-3">
-                                                    <div class=" control_product">
+                                                    <div class="control_product">
                                                         <div href="/chi-tiet-san-pham/{{ $related->id }}"
                                                             class="control_product_link" id="control_link-1">
 
@@ -306,52 +286,13 @@
                                                                 <a href="/chi-tiet-san-pham/{{ $related->id }}"
                                                                     class="over_info1">Xem chi tiết</a>
                                                             </div>
-                                                            <div class="col btn test_btn-remove custom-btn" href="#"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#xoaDetail{{ $related->id }}"
-                                                                style="width: 10%">
-                                                                <button type="button" class="btn-close"
-                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            <div class="btn test_btn-remove-{{ $related->id }}"
+                                                                href="#" data-bs-toggle="modal"
+                                                                data-bs-target="#xoaSanPham{{ $related->id }}">
+                                                                <img style="width:16px;height:16px"
+                                                                    src="{{ asset('assets/img/trash.svg') }}" />
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-
-
-                                            @foreach ($relatedProducts as $related)
-                                                {{-- delete --}}
-                                                <div class="modal fade" id="xoaDetail{{ $related->id }}" tabindex="-1"
-                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered">
-                                                        <form
-                                                            action="{{ route('product.deleted', ['id' => $related->id]) }}">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <div class="modal-content">
-                                                                <div class="modal-header text-center">
-                                                                    <h5 class="modal-title w-100" id="exampleModalLabel">
-                                                                        XOÁ
-                                                                    </h5>
-                                                                    <button type="button" class="btn-close"
-                                                                        data-bs-dismiss="modal"
-                                                                        aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="fs-5">Bạn có thực sự muốn xoá sản phẩm
-                                                                        liên
-                                                                        quan này không?</div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-outline-danger"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-dismiss="modal">Hủy</button>
-                                                                    <button type="submit" class="btn btn-danger"
-                                                                        id="deleteRowElement">Có, tôi muốn
-                                                                        xóa</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -379,7 +320,38 @@
         </div>
     </div>
     @include('template.sidebar.sidebarDeXuat.sidebarRight')
-
+    @if (isset($relatedProducts))
+        @foreach ($relatedProducts as $related)
+            {{-- delete --}}
+            <div class="modal fade" id="xoaSanPham{{ $related->id }}" tabindex="-1"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <form method="POST" action="{{ route('product.deleted', ['id' => $related->id]) }}">
+                        @csrf
+                        <input type="hidden" name="detail_id" value="{{ $details->id }}">
+                        <div class="modal-content">
+                            <div class="modal-header text-center">
+                                <h5 class="modal-title w-100" id="exampleModalLabel">
+                                    XOÁ</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="fs-5">Bạn có thực sự muốn xoá sản phẩm liên quan
+                                    này không?</div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-danger"
+                                    data-bs-dismiss="modal">Hủy</button>
+                                <button type="submit" class="btn btn-danger" id="deleteRowElement">Có, tôi muốn
+                                    xóa</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        @endforeach
+    @endif
 
     {{-- Modal thêm sản phẩm liên quan --}}
     <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -455,9 +427,9 @@
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
 
-    
-    
-    
+
+
+
     <script>
         document.getElementById('showPriceButton').addEventListener('click', function() {
             document.getElementById('showPriceButton').style.display = 'none';
@@ -509,47 +481,48 @@
     </script>
 
 
-<script>
-    // Lắng nghe sự kiện click cho nút plus
-var plusButton = document.querySelector(".bi-plus-circle");
-plusButton.addEventListener("click", function () {
-    // Tạo phần tử div mới
-    var newDivElement = document.createElement("div");
-    newDivElement.className = "col-md-4 mb-3 d-flex align-items-center";
-    newDivElement.innerHTML = `
-        <div class=" card_template-sub with_input d-flex justify-content-center align-items-center" style="width:30%">
-            <input type="text" value="Độ dài" placeholder="" class="card-title-black form-control" name="proposalNo">
+    <script>
+        // Lắng nghe sự kiện click cho nút plus
+        var plusButton = document.querySelector(".bi-plus-circle");
+        plusButton.addEventListener("click", function() {
+            var count = document.querySelectorAll('div.countData').length;
+            var index = count / 2;
+            // Tạo phần tử div mới
+            var newDivElement = document.createElement("div");
+            newDivElement.className = "col-md-4 mb-3 d-flex align-items-center";
+            newDivElement.innerHTML = `
+        <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center" style="width:30%">
+            <input type="text" placeholder="Độ dài" class="card-title-black form-control" name="listProducts[${index}][key]">
         </div>
-        <div class=" card_template-sub with_input d-flex justify-content-center align-items-center" style="width:60%">
-            <input type="text" value="Catalogue mô tả" placeholder="" class=" form-control" name="proposalNo">
+        <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center" style="width:60%">
+            <input type="text" placeholder="Catalogue mô tả" class=" form-control" name="listProducts[${index}][value]">
         </div>
         <div class="col-2 mb-3" style="width:10%">
             <img data-repeater-delete role="button" src="{{ asset('/assets/img/trash.svg') }}" width="20px" height="20px" />
         </div>
     `;
 
-    // Tìm phần tử chứa lớp col-md-4
-    var colMd4Element = document.querySelector(".item-1");
+            // Tìm phần tử chứa lớp col-md-4
+            var colMd4Element = document.querySelector(".item-1");
 
-    // Thêm phần tử div vào sau phần tử chứa lớp col-md-4
-    colMd4Element.parentNode.insertBefore(newDivElement, colMd4Element.nextSibling);
+            // Thêm phần tử div vào sau phần tử chứa lớp col-md-4
+            colMd4Element.parentNode.insertBefore(newDivElement, colMd4Element.nextSibling);
 
 
-    // Lắng nghe sự kiện click cho nút xoá
-    var deleteButton = document.querySelector('[data-repeater-delete]');
-    deleteButton.addEventListener('click', function() {
-    // Tìm phần tử cha có lớp col-2
-    var col2Element = this.closest('.col-2');
-    
-    // Tìm phần tử cha có lớp col-md-4
-    var colMd4Element = col2Element.closest('.col-md-4');
-    
-    // Xóa phần tử col-md-4
-    colMd4Element.remove();
-});
-});
+            // Lắng nghe sự kiện click cho nút xoá
+            var deleteButton = document.querySelector('[data-repeater-delete]');
+            deleteButton.addEventListener('click', function() {
+                // Tìm phần tử cha có lớp col-2
+                var col2Element = this.closest('.col-2');
 
-</script>
+                // Tìm phần tử cha có lớp col-md-4
+                var colMd4Element = col2Element.closest('.col-md-4');
+
+                // Xóa phần tử col-md-4
+                colMd4Element.remove();
+            });
+        });
+    </script>
 
 
 
