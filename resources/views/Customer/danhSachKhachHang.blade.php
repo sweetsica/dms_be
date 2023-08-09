@@ -332,18 +332,23 @@
                                 <div class="col-md-12 mb-3">
                                     <div class="card-title">1. Thông tin chung</div>
                                 </div>
-                                <div class="col-md-4 mb-3">
+                                <div class="col-md-3 mb-3">
+                                    <input type="text" value="{{ $item->code }}" name="code"
+                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã khách hàng"
+                                        placeholder="Mã khách hàng*" class="form-control">
+                                </div>
+                                <div class="col-md-3 mb-3">
                                     <input type="text" value="{{ $item->name }}" name="name"
                                         data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên khách hàng"
                                         placeholder="Tên khách hàng*" class="form-control">
                                 </div>
 
-                                <div class="col-md-4 mb-3">
+                                <div class="col-md-3 mb-3">
                                     <input type="text" value="{{ $item->phone }}" name="phone"
                                         data-bs-toggle="tooltip" data-bs-placement="top" title="Số điện thoại"
                                         placeholder="Số điện thoại*" class="form-control">
                                 </div>
-                                <div class="col-md-4 mb-3">
+                                <div class="col-md-3 mb-3">
                                     <input type="text" value="{{ $item->email }}" name="email"
                                         data-bs-toggle="tooltip" data-bs-placement="top" title="Email"
                                         placeholder="Email*" class="form-control">
@@ -577,63 +582,63 @@
                                 <div class="card-title">1. Thông tin chung</div>
                             </div>
                             <div class="col-md-3 mb-3">
-                                <input type="text" name="code" data-bs-toggle="tooltip"
+                                <input value="{{ old('code') }}" type="text" name="code" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Mã khách hàng" placeholder="Mã khách hàng*"
                                     class="form-control">
                             </div>
                             <div class="col-md-3 mb-3">
-                                <input type="text" name="name" data-bs-toggle="tooltip" required
+                                <input value="{{ old('name') }}" type="text" name="name" data-bs-toggle="tooltip" required
                                     data-bs-placement="top" title="Tên khách hàng" placeholder="Tên khách hàng*"
                                     class="form-control">
                             </div>
 
                             <div class="col-md-3 mb-3">
-                                <input type="text" name="phone" data-bs-toggle="tooltip" required
+                                <input value="{{ old('phone') }}" type="text" name="phone" data-bs-toggle="tooltip" required
                                     data-bs-placement="top" title="Số điện thoại" placeholder="Số điện thoại*"
                                     class="form-control">
                             </div>
                             <div class="col-md-3 mb-3">
-                                <input type="text" name="email" data-bs-toggle="tooltip"
+                                <input value="{{ old('email') }}" type="text" name="email" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Email" placeholder="Email*" class="form-control">
                             </div>
                             <div class="col-md-12 mb-3">
                                 <div class="card-title">2. Tổ chức</div>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <input type="text" name="companyName" data-bs-toggle="tooltip"
+                                <input value="{{ old('companyName') }}" type="text" name="companyName" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Tên công ty" placeholder="Tên công ty"
                                     class="form-control">
                             </div>
                             <div class="col-md-4 mb-3">
-                                <input type="text" name="personContact" data-bs-toggle="tooltip"
+                                <input value="{{ old('personContact') }}" type="text" name="personContact" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Người đại diện" placeholder="Người đại diện"
                                     class="form-control">
                             </div>
                             <div class="col-md-4 mb-3">
-                                <input type="text" name="career" data-bs-toggle="tooltip" data-bs-placement="top"
+                                <input value="{{ old('career') }}" type="text" name="career" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Chức danh" placeholder="Chức danh" class="form-control">
                             </div>
                             <div class="col-md-4 mb-3">
-                                <input type="text" name="taxCode" data-bs-toggle="tooltip" data-bs-placement="top"
+                                <input value="{{ old('taxCode') }}" type="text" name="taxCode" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Mã số thuế" placeholder="Mã số thuế" class="form-control">
                             </div>
                             <div class="col-md-4 mb-3">
-                                <input type="text" name="companyPhoneNumber" data-bs-toggle="tooltip"
+                                <input value="{{ old('companyPhoneNumber') }}" type="text" name="companyPhoneNumber" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Số điện thoại công ty"
                                     placeholder="Số điện thoại công ty" class="form-control">
                             </div>
                             <div class="col-md-4 mb-3">
-                                <input type="text" name="companyEmail" data-bs-toggle="tooltip"
+                                <input value="{{ old('companyEmail') }}" type="text" name="companyEmail" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Email công ty" placeholder="Email công ty"
                                     class="form-control">
                             </div>
                             <div class="col-md-4 mb-3">
-                                <input type="text" name="accountNumber" data-bs-toggle="tooltip"
+                                <input value="{{ old('accountNumber') }}" type="text" name="accountNumber" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Số tài khoản" placeholder="Số tài khoản"
                                     class="form-control">
                             </div>
                             <div class="col-md-8 mb-3">
-                                <input type="text" name="bankOpen" data-bs-toggle="tooltip" data-bs-placement="top"
+                                <input value="{{ old('bankOpen') }}" type="text" name="bankOpen" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Mở tại ngân hàng" placeholder="Mở tại ngân hàng" class="form-control">
                             </div>
 
