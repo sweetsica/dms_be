@@ -2677,7 +2677,7 @@ ul.modal_upload-list li:last-child {
 
 
 .list_img {
-    width: 60px;
+    max-width: 60px;
     height: 80px;
     margin: 2px;
     
@@ -2848,7 +2848,7 @@ input[type="radio"]:checked ~ .tabBody {
 
 
 .control_product_img {
-    width: 140px;
+    min-width: 80px;
     height: 80px;
     margin: 2px;
 
@@ -2860,22 +2860,9 @@ input[type="radio"]:checked ~ .tabBody {
     position: relative;
 }
 
-/* .list_img {
-    width: 60px;
-    height: 80px;
-    margin: 2px;
-    
-
-}
-.list_img img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    border: 1px solid #ECEFF1;
-    position: relative;
+/* .control-info {
+    max-width: 200px
 } */
-
-
 
 .over_info1 {
     display: -webkit-box;

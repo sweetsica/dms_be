@@ -5,7 +5,7 @@
     <style>
         .carousel-indicators button.thumbnail {
             width: 200px;
-            max-height: 6vh;
+            height: 6vh;
             object-fit: contain;
         }
 
@@ -40,6 +40,8 @@
             width: auto;
             object-fit: contain;
         }
+
+        
 
         @media screen and (min-width: 200px) {
             .carousel {
@@ -223,12 +225,12 @@
                                             <div class="row d-flex align-items-center" style="position: relative">
                                                 <div class="col-md-4 mb-3 d-flex align-items-center item-1">
                                                     <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center"
-                                                        style="width:30%">
+                                                        style="width:50%">
                                                         <textarea rows="1" type="text" placeholder="Độ dài" class="card-title-black form-control textareaResize"
                                                             name="listProducts[0][key]"></textarea>
                                                     </div>
                                                     <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center"
-                                                        style="width:70%">
+                                                        style="width:50%">
                                                         <textarea rows="1" type="text" placeholder="Catalogue mô tả" class="form-control textareaResize"
                                                             name="listProducts[0][value]"></textarea>
                                                     </div>
@@ -239,12 +241,12 @@
                                                 @foreach ($data as $key => $element)
                                                     <div class="col-md-4 mb-3 d-flex align-items-center item-1">
                                                         <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center"
-                                                            style="width:30%">
+                                                            style="width:50%">
                                                             <textarea rows="1" style="pointer-events: none;" type="text" placeholder="Độ dài"
                                                                 class="card-title-black form-control textareaResize" name="listProducts[0][key]">{{ $element->key }}</textarea>
                                                         </div>
                                                         <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center"
-                                                            style="width:70%">
+                                                            style="width:50%">
                                                             <textarea rows="1" style="pointer-events: none;" type="text" placeholder="Catalogue mô tả"
                                                                 class="form-control textareaResize" name="listProducts[0][value]">{{ $element->value }}</textarea>
                                                         </div>
@@ -276,14 +278,12 @@
                                                     $detailsPro = \App\Models\ProductDetails::where('id', $related->id)->first();
                                                 @endphp
                                                 <div class="col-4 mt-3">
-                                                    <div class="control_product">
-                                                        <div href="/chi-tiet-san-pham/{{ $related->id }}"
-                                                            class="control_product_link" id="control_link-1">
-
-                                                            <div class="control_product_img" style="width: 30%">
+                                                    <div class="row control_product">
+                                                        <div href="/chi-tiet-san-pham/{{ $related->id }}" class="control_product_link d-flex justify-content-between" id="control_link-1">
+                                                            <div class="col-3 control_product_img">
                                                                 <img src="{{ $related->thumbnail }}" alt="">
                                                             </div>
-                                                            <div class="control-info ms-2" style="width: 60%">
+                                                            <div class="col-5 control-info ms-2">
 
                                                                 <div class="over_info1 card-title-black fs-5">
                                                                     {{ $related->name }} - {{ $related->code }}
@@ -294,11 +294,8 @@
                                                                 <a href="/chi-tiet-san-pham/{{ $related->id }}"
                                                                     class="over_info1">Xem chi tiết</a>
                                                             </div>
-                                                            <div class="btn test_btn-remove-{{ $related->id }}"
-                                                                href="#" data-bs-toggle="modal"
-                                                                data-bs-target="#xoaSanPham{{ $related->id }}">
-                                                                <img style="width:16px;height:16px"
-                                                                    src="{{ asset('assets/img/trash.svg') }}" />
+                                                            <div class="col-2 btn test_btn-remove-{{ $related->id }}"href="#" data-bs-toggle="modal" data-bs-target="#xoaSanPham{{ $related->id }}" >
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -524,10 +521,10 @@
             var newDivElement = document.createElement("div");
             newDivElement.className = "col-md-4 mb-3 d-flex align-items-center";
             newDivElement.innerHTML = `
-        <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center" style="width:30%">
+        <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center" style="width:45%">
             <textarea rows="1" type="text" placeholder="Độ dài" class="card-title-black form-control textareaResize" name="listProducts[${index}][key]"></textarea>
         </div>
-        <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center" style="width:60%">
+        <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center" style="width:45%">
             <textarea rows="1" type="text" placeholder="Catalogue mô tả" class="form-control textareaResize" name="listProducts[${index}][value]"></textarea>
         </div>
         <div class="col-2 mb-3" style="width:10%">
@@ -547,10 +544,10 @@
             deleteButton.addEventListener('click', function() {
                 // Tìm phần tử cha có lớp col-2
                 var col2Element = this.closest('.col-2');
-
+    
                 // Tìm phần tử cha có lớp col-md-4
                 var colMd4Element = col2Element.closest('.col-md-4');
-
+    
                 // Xóa phần tử col-md-4
                 colMd4Element.remove();
             });
