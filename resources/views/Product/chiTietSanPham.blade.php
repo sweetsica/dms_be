@@ -250,8 +250,8 @@
                                             </div>
                                         @else
                                             <div class="row d-flex align-items-center" style="position: relative">
-                                                <div class="col-md-4 mb-3 d-flex align-items-center item-1">
-                                                    @foreach ($data as $key => $element)
+                                                @foreach ($data as $key => $element)
+                                                    <div class="col-md-4 mb-3 d-flex align-items-center item-1">
                                                         <div class=" card_template-sub with_input d-flex  align-items-center"
                                                             style="width:30%">
                                                             <div class="text-break card-title-black "
@@ -263,8 +263,8 @@
                                                             <div class="text-break " style="margin-left: 4px">
                                                                 {{ $element->value }}</div>
                                                         </div>
-                                                    @endforeach
-                                                </div>
+                                                    </div>
+                                                @endforeach
                                             </div>
                                         @endif
 

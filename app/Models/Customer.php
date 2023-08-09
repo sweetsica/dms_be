@@ -44,7 +44,7 @@ class Customer extends Model
 
     public function products()
     {
-        $productIds = json_decode($this->productId);
+        $productIds = json_decode($this->productId) ?? [];
 
         return Product::whereIn('id', $productIds)->get();
     }
