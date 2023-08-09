@@ -226,7 +226,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form id="formThemCapPhat" method="POST"
-                        action="{{ route('product.update', ['id' => $item->id]) }}">
+                        action="{{ route('product.update', ['id' => $item->id]) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="modal-body">
@@ -289,7 +289,7 @@
                                                 <img style="width:16px;height:16px"
                                                     src="{{ asset('assets/img/upload-file.svg') }}" />
                                                 <span class="ps-2">Đính kèm tài liệu</span>
-                                                <input role="button" type="file"
+                                                <input accept=".png, .jpeg, .jpg" role="button" type="file"
                                                     class="modal_upload-input modal_upload-file" name="file"
                                                     onchange="updateList(event)" />
                                             </button>
@@ -308,32 +308,15 @@
                                     <ul class="modal_upload-list"
                                         style="max-height: 200px; overflow-y: scroll; overflow-x: hidden;">
                                         <li>
-                                            @if ($item->file)
-                                                <a href="{{ $item->file }}" target="_blank" class="fs-5">
-                                                    <i class="bi bi-link-45deg"></i> File đính kèm
+                                            @if ($item->thumbnail)
+                                                <a href="{{ $item->thumbnail }}" target="_blank" class="fs-5">
+                                                    <i class="bi bi-link-45deg"></i> Thumbnail sản phẩm
                                                 </a>
                                             @endif
 
                                         </li>
                                     </ul>
                                 </div>
-                                {{-- <div class="col-12 col-md-12 mb-3">
-                                    <div class="card-title">File đã
-                                        tải lên</div>
-                                    <div class="upload_wrapper-items">
-                                        <ul class="modal_upload-list"
-                                            style="max-height: 134px; overflow-y: scroll; overflow-x: hidden;">
-                                            <li>
-                                                <a href="#" target="_blank">
-                                                    <span class="fs-5">
-                                                        <i class="bi bi-link-45deg"></i>
-                                                        209-40.json
-                                                    </span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div> --}}
 
                             </div>
                         </div>

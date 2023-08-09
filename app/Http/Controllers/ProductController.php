@@ -243,6 +243,8 @@ class ProductController extends Controller
                 'status' => 'required'
             ]);
 
+            $data['thumbnail'] = $this->uploadFileToRemoteHost($request->file);
+
             $product = Product::findOrFail($id);
             if ($product) {
                 $product->update($data);
