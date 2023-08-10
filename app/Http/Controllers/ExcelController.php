@@ -12,7 +12,7 @@ class ExcelController extends Controller
     public function setImportCustomter(Request $request)
     {
         $url = $request->file('file');
-        Excel::import(new CustomersImport,$url,null,\Maatwebsite\Excel\Excel::XLSX);
+        Excel::import(new CustomersImport, $url, null, \Maatwebsite\Excel\Excel::XLSX);
 
         dd('Thành công!');
     }

@@ -22,14 +22,11 @@ class AuthenticateController extends Controller
 
     public function login(Request $request)
     {
-
-
         try {
             $email = $request->input('email');
             $password = $request->input('password');
 
-            $account = Personnel::where('email', $email)->where('password',$password)->firstOrFail();
-
+            $account = Personnel::where('email', $email)->where('password', $password)->firstOrFail();
             if ($account) {
                 if ($account->status == "Đang làm việc") {
                     $request->session()->put('user', $account);
