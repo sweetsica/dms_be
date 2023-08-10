@@ -282,11 +282,11 @@
                         </li>
                     </ul>
                 </li>
-                <li class="header_submenu-items more position-relative">
+                {{-- <li class="header_submenu-items more position-relative">
                     <a href="#" class="header_submenu-link">
                         Hồ sơ nhân sự
                     </a>
-                </li>
+                </li> --}}
                 <li class="header_submenu-items more position-relative">
                     <a href="#" class="header_submenu-link more_btn">
                         Phạm vi kinh doanh<i class="bi bi-chevron-right"></i>
