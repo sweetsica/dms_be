@@ -589,7 +589,9 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Thêm khách hàng</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="formThemCapPhat" method="POST" action="{{ route('create-customer') }}">
+                <form id="customerForm"
+                method="POST" action="{{ route('create-customer') }}"
+                >
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -597,23 +599,26 @@
                                 <div class="card-title">1. Thông tin chung</div>
                             </div>
                             <div class="col-md-3 mb-3">
-                                <input type="text" name="code" data-bs-toggle="tooltip" required
+                                <input type="text" name="code" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Mã khách hàng" placeholder="Mã khách hàng*"
                                     class="form-control">
+                                    {{-- <div class="error-text" id="codeError" style="color: red;"></div> --}}
                             </div>
                             <div class="col-md-3 mb-3">
-                                <input type="text" name="name" data-bs-toggle="tooltip" required
+                                <input type="text" name="name" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Tên khách hàng" placeholder="Tên khách hàng*"
                                     class="form-control">
+                                    <div class="error-text" id="nameError" style="color: red;"></div>
                             </div>
 
                             <div class="col-md-3 mb-3">
-                                <input type="text" name="phone" data-bs-toggle="tooltip" required
+                                <input type="text" name="phone" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Số điện thoại" placeholder="Số điện thoại*"
                                     class="form-control">
+                                    <div class="error-text" id="phoneError" style="color: red;"></div>
                             </div>
                             <div class="col-md-3 mb-3">
-                                <input type="text" name="email" data-bs-toggle="tooltip" required
+                                <input type="text" name="email" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Email" placeholder="Email*" class="form-control">
                             </div>
                             <div class="col-md-12 mb-3">
@@ -662,31 +667,35 @@
                             </div>
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Tỉnh/thành">
-                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
+                                <select class="selectpicker"  data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Tỉnh/thành*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="city" id="city"
                                     data-live-search-placeholder="Tìm kiếm...">
                                 </select>
+                                <div class="error-text" id="cityError" style="color: red;"></div>
                             </div>
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Quận/huyện">
-                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
+                                <select class="selectpicker"  data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Quận/huyện*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="district" id="district"
                                     data-live-search-placeholder="Tìm kiếm...">
                                 </select>
+                                <div class="error-text" id="districtError" style="color: red;"></div>
                             </div>
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Phường/xã">
-                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
+                                <select class="selectpicker"  data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Phường/xã*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="guide" id="guide"
                                     data-live-search-placeholder="Tìm kiếm...">
                                 </select>
+                                <div class="error-text" id="guideError" style="color: red;"></div>
                             </div>
                             <div class="col-md-12 mb-3">
-                                <input type="text" id="addressInput" name="address" data-bs-toggle="tooltip" required
+                                <input type="text" id="addressInput" name="address" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ*" class="form-control">
+                                    <div class="error-text" id="addressError" style="color: red;"></div>
                             </div>
                             <div id="map" style="height: 300px; display: none"></div>
                             <div class="col-md-12 mb-3">
@@ -695,19 +704,29 @@
 
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Nhân sự thu thập">
-                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
-                                    data-live-search="true" title="Nhân sự thu thập*" data-select-all-text="Chọn tất cả"
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
+                                    data-live-search="true"  data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="personId" id="personId"
                                     data-live-search-placeholder="Tìm kiếm...">
+                                    @if((session('user')['role_id'] == '1'))
+                                    <option>{{ session('user')['name'] ?? "" }}</option>
+                                    @foreach ($listPerson as  $Person)
+                                        <option value="{{$Person->id}}">{{$Person->name}}</option>
+                                    @endforeach
+                                    @elseif ((session('user')['role_id'] != '1'))
+                                    <option>{{ session('user')['name'] ?? "" }}</option>
+                                    @endif
                                 </select>
+                                <div class="error-text" id="personIdError" style="color: red;"></div>
                             </div>
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Sản phẩm quan tâm">
-                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Sản phẩm quan tâm*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="productId[]" id="productId"
                                     data-live-search-placeholder="Tìm kiếm..." multiple>
                                 </select>
+                                <div class="error-text" id="productIdError" style="color: red;"></div>
                             </div>
 
 
@@ -717,49 +736,44 @@
 
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Nhóm khách hàng">
-                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Nhóm khách hàng*" data-select-all-text="Chọn tất cả"
-                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="groupId" id="groupId"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="group" id="group"
                                     data-live-search-placeholder="Tìm kiếm...">
-                                    <option value="Nhà thuốc">Nhà thuốc</option>
-                                    <option value="Phòng khám/Trung tâm tế">Phòng khám/Trung tâm tế</option>
-                                    <option value="Bệnh viện">Bệnh viện</option>
-                                    <option value="Nhà phân phối">Nhà phân phối</option>
-                                    <option value="Online">Online</option>
-                                    <option value="Khách sạn">Khách sạn</option>
-                                    <option value="Nhà thuốc S">Nhà thuốc S</option>
-                                    <option value="Siêu thị/Cửa hàng bán lẻ">Siêu thị/Cửa hàng bán lẻ</option>
-                                    <option value="Chuỗi nhà thuốc">Chuỗi nhà thuốc</option>
-                                    <option value="Đại siêu thị">Đại siêu thị</option>
-                                    <option value="Làm đẹp/Phòng tập thể dục/Thể thao">Làm đẹp/Phòng tập thể dục/Thể thao
-                                    </option>
+                                    {{-- <option value=""></option> --}}
+                                    @foreach ($listgroup as  $gr)
+                                        <option value="{{$gr->id}}">{{$gr->name}}</option>
+                                    @endforeach
+
                                 </select>
+                                <div class="error-text" id="groupError" style="color: red;"></div>
                             </div>
 
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Tuyến">
-                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Tuyến*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="routeId" id="routeId"
-                                    data-live-search-placeholder="Tìm kiếm...">
+                                    data-live-search-placeholder="Tìm kiếm..." >
                                 </select>
+                                <div class="error-text" id="routeIdError" style="color: red;"></div>
                             </div>
 
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Kênh khách hàng">
-                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Kênh khách hàng*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="chanelId" id="chanelId"
                                     data-live-search-placeholder="Tìm kiếm...">
                                 </select>
+                                <div class="error-text" id="chanelIdError" style="color: red;"></div>
                             </div>
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Trạng thái">
-                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
-                                    data-live-search="true" title="Trạng thái*" data-select-all-text="Chọn tất cả"
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
+                                    data-live-search="true"  data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="status"
                                     data-live-search-placeholder="Tìm kiếm...">
                                     <option value="Trinh sát">Trinh sát</option>
-                                    <option value="Tiềm năng">Tiềm năng</option>
                                     <option value="Cơ hội">Cơ hội</option>
                                     <option value="Khách hàng">Khách hàng</option>
                                 </select>
@@ -768,9 +782,10 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
-                        <button type="submit" class="btn btn-danger">Lưu</button>
+                        <button type="button" class="btn btn-danger" id="submitButton"> Lưu</button>
                     </div>
                 </form>
+                <div id="errorContainer" class="alert alert-danger" style="display: none;"></div>
             </div>
         </div>
     </div>
@@ -901,26 +916,26 @@
         });
         $("#guide").change(() => {})
 
-        //load data nhan su api
-        function loadPersonnelData() {
-            const apiUrl = '/nhan_su';
-            const selectElement = document.getElementById('personId');
-            fetch(apiUrl)
-                .then((response) => response.json())
-                .then((data) => {
-                    selectElement.innerHTML = '';
-                    data.forEach((person) => {
-                        const option = document.createElement('option');
-                        option.value = person.id;
-                        option.textContent = person.name;
-                        selectElement.appendChild(option);
-                    });
+        // load data nhan su api
+        // function loadPersonnelData() {
+        //     const apiUrl = '/nhan_su';
+        //     const selectElement = document.getElementById('personId');
+        //     fetch(apiUrl)
+        //         .then((response) => response.json())
+        //         .then((data) => {
+        //             selectElement.innerHTML = '';
+        //             data.forEach((person) => {
+        //                 const option = document.createElement('option');
+        //                 option.value = person.id;
+        //                 option.textContent = person.name;
+        //                 selectElement.appendChild(option);
+        //             });
 
-                    $('#personId').selectpicker('refresh');
-                })
-                .catch((error) => console.error('Lỗi khi gọi API:', error));
-        }
-        window.addEventListener('load', loadPersonnelData);
+        //             $('#personId').selectpicker('refresh');
+        //         })
+        //         .catch((error) => console.error('Lỗi khi gọi API:', error));
+        // }
+        // window.addEventListener('load', loadPersonnelData);
 
         //load data san pham api
         function loadProductData() {
@@ -1275,4 +1290,70 @@
             });
         });
     </script>
+<script>
+    document.getElementById("submitButton").addEventListener("click", function() {
+        const formData = new FormData(document.getElementById("customerForm"));
+
+        fetch("{{ route('create-customer') }}", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            // const codeError = document.getElementById("codeError");
+            const nameError = document.getElementById("nameError");
+            const phoneError = document.getElementById("phoneError");
+            const cityError = document.getElementById("cityError");
+            const addressError = document.getElementById("addressError");
+            const districtError = document.getElementById("districtError");
+            const guideError = document.getElementById("guideError");
+            const personIdError = document.getElementById("personIdError");
+            const productIdError = document.getElementById("productIdError");
+            const groupError = document.getElementById("groupError");
+            const chanelIdError = document.getElementById("chanelIdError");
+            const routeIdError = document.getElementById("routeIdError");
+
+
+
+
+            if (data.success) {
+                addressError.innerHTML = "";
+                nameError.innerHTML = "";
+                phoneError.innerHTML = "";
+                cityError.innerHTML = "";
+                districtError.innerHTML = "";
+                guideError.innerHTML = "";
+                personIdError.innerHTML = "";
+                productIdError.innerHTML = "";
+                groupError.innerHTML = "";
+                chanelIdError.innerHTML = "";
+                routeIdError.innerHTML= "";
+                // nameError.innerHTML = '';
+                closeModal(); // Gọi hàm đóng modal
+                window.location.href = "{{ route('customers') }}"; // Điều hướng trang khách hàng
+            } else {
+
+                addressError.innerHTML = data.errors.address;
+                nameError.innerHTML = data.errors.name;
+                phoneError.innerHTML = data.errors.phone;
+                cityError.innerHTML = data.errors.city;
+                districtError.innerHTML = data.errors.district;
+                guideError.innerHTML = data.errors.guide;
+                personIdError.innerHTML = data.errors.personId;
+                productIdError.innerHTML = data.errors.productId;
+                groupError.innerHTML = data.errors.group;
+                chanelIdError.innerHTML = data.errors.chanelId;
+                routeIdError.innerHTML = data.errors.routeId;
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+    });
+
+    function closeModal() {
+        const modal = document.getElementById("add");
+        modal.style.display = "none";
+    }
+</script>
 @endsection
