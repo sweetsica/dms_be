@@ -195,7 +195,7 @@
                                         </div>
                                     
                                         <div id="preview" class="d-flex mt-3"></div>
-                                        <ul id="attachments" class="file-list" style="padding: 0px"></ul>
+                                        <ul id="attachments" class="file-list" style="padding: 0 0 4px 0; word-break: break-all;"></ul>
 
                                     </div>
 
