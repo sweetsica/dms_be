@@ -34,6 +34,34 @@
             cursor: pointer;
             margin-left: 10px;
         }
+
+        #fileInput {
+            display: none; /* Ẩn input thực tế */
+        }
+
+        #fileButton {
+            position: relative;
+            border: 1px solid #ced4da;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        #fileButton img {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+        }
+
+        #fileButton span {
+            flex-grow: 1;
+            margin-right: 8px;
+        }
+
+
+
         .carousel-indicators button.thumbnail {
             width: 200px;
             height: 6vh;
@@ -156,9 +184,17 @@
                                     </div> --}}
 
                                     <div class="col-md-6">
-
-                                        <input type="file" id="fileInput" multiple />
-                                        <div id="preview" class="d-flex"></div>
+                                        <div class="upload_wrapper-items">
+                                            <input type="hidden" value="" />
+                                            <label for="fileInput" id="fileButton" class="btn position-relative border d-flex w-50">
+                                                <img src="{{ asset('assets/img/upload-file.svg') }}" />
+                                                <span class="ps-2">Đính kèm tài liệu</span>
+                                            </label>
+                                            <input id="fileInput" multiple role="button" type="file"
+                                                class="modal_upload-input modal_upload-file" name="file" onchange="updateList(event)" />
+                                        </div>
+                                    
+                                        <div id="preview" class="d-flex mt-3"></div>
                                         <ul id="attachments" class="file-list" style="padding: 0px"></ul>
 
                                     </div>
