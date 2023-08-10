@@ -242,8 +242,9 @@ class ProductController extends Controller
                 'branch' => 'required',
                 'status' => 'required'
             ]);
-
-            $data['thumbnail'] = $this->uploadFileToRemoteHost($request->file);
+            if($request->file){
+                $data['thumbnail'] = $this->uploadFileToRemoteHost($request->file);
+            }
 
             $product = Product::findOrFail($id);
             if ($product) {

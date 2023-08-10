@@ -73,13 +73,13 @@ class CustomerController extends Controller
                     ->orWhere('name', 'like', '%' . $q . '%');
             }
             switch (session('user')['role_id']) {
-                case 2:
+                case 3:
                     $listData = $listData->whereHas('person', function ($query) {
                         $query->where('department_id', '=', session('user')['department_id']);
                     });
                     break;
 
-                case 3:
+                case 2:
                     $listData = $listData->where('personId', session('user')['id']);
                     break;
             }

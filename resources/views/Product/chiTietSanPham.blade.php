@@ -230,7 +230,7 @@
                                                             class="card_template-sub with_input d-flex justify-content-center align-items-center">
 
                                                             <textarea style="pointer-events: none;" rows="1" type="text" placeholder="Nhập giá tiền" class="form-control textareaResize"
-                                                                name="price">{{ number_format($details->price) }}</textarea>
+                                                                name="price">{{ $details->price }}</textarea>
                                                         </div>
                                                     </div>
                                                 </div>
