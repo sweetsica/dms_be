@@ -72,6 +72,7 @@ class ProductController extends Controller
      */
     public function create(Request $request, $id)
     {
+        // dd($request->all());
         $details = ProductDetails::where('product_id', $id)->first();
 
         if ($request->hasFile('files')) {
