@@ -385,7 +385,7 @@
                                         @endif
                                         <div class="col-12 mt-3">
                                             <button type="button" class="btn btn-danger d-block" data-bs-toggle="modal"
-                                                data-bs-target="#add">+ Thêm thông số</button>
+                                                data-bs-target="#add">+ Link sản phẩm liên quan</button>
                                         </div>
 
                                     </div>
