@@ -52,10 +52,10 @@ class CustomersExport implements FromCollection, WithHeadings, WithTitle, WithMa
         $customerData['Số công ty'] = $customer->companyPhoneNumber;
         $customerData['Số di dộng'] = $customer->phone;
         $customerData['Người đại diện'] = $customer->personContact;
-        $customerData['Zalo'] = $customer->personContact;
-        $customerData['Ghi chú'] = null;
+        $customerData['Zalo'] = $customer->phone;
+        $customerData['Ghi chú'] = $customer->note;
         $customerData['Email'] = $customer->companyEmail;
-        $customerData['Website'] = null;
+        $customerData['Website'] = $customer->website;
         $customerData['Tỉnh/TP'] = $customer->city;
         $customerData['Quận/Huyện'] = $customer->district;
         $customerData['Phường/Xã'] = $customer->guide;

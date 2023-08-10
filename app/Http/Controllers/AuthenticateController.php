@@ -41,7 +41,7 @@ class AuthenticateController extends Controller
                     ->withInput()->with('loginError', 'Sai tài khoản hoặc mật khẩu');
             }
         } catch (Exception $e) {
-            return back()->with('loginError', 'Có gì đó sai sai');
+            return back()->with('loginError', 'Sai tài khoản hoặc mật khẩu');
         }
     }
 

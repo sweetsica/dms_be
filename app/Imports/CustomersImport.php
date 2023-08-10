@@ -24,6 +24,17 @@ class CustomersImport implements ToModel, WithStartRow, WithStrictNullComparison
             }
         }
 
+        // Check if the phone value already exists in the database
+        if ($row['5'] && Customer::where('phone', $row['5'])->exists()) {
+            // Handle the duplication error
+            throw new \Exception('Trùng số điện thoại trong file Excel: ' . $row['5']);
+        }
+
+        if ($row['5'] && Customer::where('email', $row['9'])->exists()) {
+            // Handle the duplication error
+            throw new \Exception('Trùng gmail file Excel: ' . $row['9']);
+        }
+
         return new Customer([
             'code' => null,
             'name' => $row['1'],
