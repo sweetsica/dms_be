@@ -128,7 +128,8 @@
                                                         </td>
 
                                                         <td class="list_img">
-                                                            <div class=" img-product-item d-flex justify-content-center align-items-center"">
+                                                            <div
+                                                                class=" img-product-item d-flex justify-content-center align-items-center"">
                                                                 <img class="" src="{{ $item->thumbnail }}" />
                                                             </div>
                                                         </td>
@@ -423,7 +424,7 @@
                         <button id="loadingBtn" style="display: none;" class="btn btn-danger" type="button" disabled>
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             Loading...
-                          </button>
+                        </button>
                         <button id="submitBtn" type="submit" class="btn btn-danger">Lưu</button>
                     </div>
                 </form>
@@ -616,11 +617,11 @@
             $('#addForm').submit(function(event) {
                 // Prevent the default form submission
                 event.preventDefault();
-    
+
                 // Show the loading button and hide the submit button
                 $('#submitBtn').hide();
                 $('#loadingBtn').show();
-    
+
                 // Submit the form
                 $(this).unbind('submit').submit();
             });
