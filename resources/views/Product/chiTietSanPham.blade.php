@@ -188,9 +188,9 @@
                                             <input type="hidden" value="" />
                                             <label for="fileInput" id="fileButton" class="btn position-relative border d-flex w-50">
                                                 <img src="{{ asset('assets/img/upload-file.svg') }}" />
-                                                <span class="ps-2">Đính kèm tài liệu</span>
+                                                <span class="ps-2">Đính kèm tài liệu, ảnh sản phẩm</span>
                                             </label>
-                                            <input id="fileInput" multiple role="button" type="file"
+                                            <input accept=".pdf,.xlsx,.docx,image/jpeg,image/png" id="fileInput" multiple role="button" type="file"
                                                 class="modal_upload-input modal_upload-file" name="file" onchange="updateList(event)" />
                                         </div>
                                     
@@ -322,12 +322,12 @@
                                                         <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center"
                                                             style="width:50%">
                                                             <textarea rows="1" style="pointer-events: none;" type="text" placeholder="Độ dài"
-                                                                class="card-title-black form-control textareaResize" name="listProducts[0][key]">{{ $element->key }}</textarea>
+                                                                class="card-title-black form-control textareaResize auto-resize" name="listProducts[0][key]">{{ $element->key }}</textarea>
                                                         </div>
                                                         <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center"
                                                             style="width:50%">
                                                             <textarea rows="1" style="pointer-events: none;" type="text" placeholder="Catalogue mô tả"
-                                                                class="form-control textareaResize" name="listProducts[0][value]">{{ $element->value }}</textarea>
+                                                                class="form-control textareaResize auto-resize" name="listProducts[0][value]">{{ $element->value }}</textarea>
                                                         </div>
                                                     </div>
                                                 @endforeach
@@ -517,6 +517,16 @@
     <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var textareas = document.querySelectorAll('.auto-resize');
+            textareas.forEach(function(textarea) {
+                textarea.style.height = 'auto';
+                textarea.style.height = (textarea.scrollHeight) + 'px';
+            });
+        });
+    </script>
+
+    <script>
         $(document).ready(function() {
             $('#fileInput').on('change', function(e) {
                 $('#preview').empty();
@@ -663,6 +673,7 @@ function addNewElement(index) {
     `;
 
     var colMd4Elements = document.querySelectorAll(".item-" + index);
+    console.log(colMd4Elements);
     var lastColMd4Element = colMd4Elements[colMd4Elements.length - 1];
 
     lastColMd4Element.parentNode.insertBefore(newDivElement, lastColMd4Element.nextSibling);
