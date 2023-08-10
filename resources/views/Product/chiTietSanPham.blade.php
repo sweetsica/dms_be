@@ -183,7 +183,7 @@
                                         </div>
                                     </div> --}}
 
-                                    <div id="fileInput" class="col-md-6 {{ empty($details->images) ? 'd-block' : 'd-none' }}">
+                                    <div id="fileInputDiv" class="col-md-6 {{ empty($details->images) ? 'd-block' : 'd-none' }}">
                                         <div class="upload_wrapper-items">
                                             <input type="hidden" value="" />
                                             <label for="fileInput" id="fileButton" class="btn position-relative border d-flex w-50">
@@ -580,7 +580,7 @@
 
     <script>
         $(document).on('click', '.editRowBtn', function() {
-            var fileInputDiv = $('#fileInput');
+            var fileInputDiv = $('#fileInputDiv');
             var caroselDiv = $('#caroselImg');
 
             if (fileInputDiv.hasClass('d-none')) {
