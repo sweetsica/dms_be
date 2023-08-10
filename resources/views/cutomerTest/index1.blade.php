@@ -145,7 +145,7 @@
                                                         <h2 class="text-color_pimary mt-4">Liên hệ</h2>
                                                         <div class="row">
                                                             <div class="col-lg-4">
-                                                                <div class="layout_90">
+                                                                <div class="layout_120">
                                                                     <span class="fw-bold text-content">Người liên
                                                                         hệ:</span>
                                                                     <input class="input-contact"
@@ -153,15 +153,16 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
-                                                                <div class="layout_90">
+                                                                <div class="layout_120">
                                                                     <span class="fw-bold text-content">Số điện
                                                                         thoại:</span>
                                                                     <input class="input-contact" value="123456789" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
-                                                                <div class="layout_45">
-                                                                    <span class="fw-bold text-content">Email:</span>
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold text-content">Email cá
+                                                                        nhân:</span>
                                                                     <input class="input-contact"
                                                                         value="npthuan2000@gmail.com" />
                                                                 </div>
@@ -174,27 +175,27 @@
                                                         </h2>
                                                         <div class="row">
                                                             <div class="col-lg-6">
-                                                                <div class="mb-4 layout_90">
+                                                                <div class="mb-4 layout_120">
                                                                     <span class="fw-bold text-content">Tên công ty:</span>
                                                                     <input class="input-contact"
                                                                         value="CÔNG TY TNHH KINH DOANH VÀ XÂY DỰNG BM" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6">
-                                                                <div class="mb-4 layout_90">
+                                                                <div class="mb-4 layout_120">
                                                                     <span class="fw-bold text-content">SDT công
                                                                         ty:</span>
                                                                     <input class="input-contact" value="123456789" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6">
-                                                                <div class="mb-4 layout_90">
+                                                                <div class="mb-4 layout_120">
                                                                     <span class="fw-bold text-content">Mã số thuế:</span>
                                                                     <input class="input-contact" value="10101010001" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6">
-                                                                <div class="mb-4 layout_90">
+                                                                <div class="mb-4 layout_120">
                                                                     <span class="fw-bold text-content">Email công
                                                                         ty:</span>
                                                                     <input class="input-contact"
@@ -202,25 +203,25 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6">
-                                                                <div class="mb-4 layout_90">
+                                                                <div class="mb-4 layout_120">
                                                                     <span class="fw-bold text-content">Đại diện:</span>
                                                                     <input class="input-contact" value="Nguyễn Văn A" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6">
-                                                                <div class="mb-4 layout_90">
+                                                                <div class="mb-4 layout_120">
                                                                     <span class="fw-bold text-content">Chức danh:</span>
                                                                     <input class="input-contact" value="Chủ tịch" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6">
-                                                                <div class="mb-4 layout_90">
+                                                                <div class="mb-4 layout_120">
                                                                     <span class="fw-bold text-content">Số tài khoản:</span>
                                                                     <input class="input-contact" value="99999999" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6">
-                                                                <div class="mb-4 layout_90">
+                                                                <div class="mb-4 layout_120">
                                                                     <span class="fw-bold text-content">Ngân hàng:</span>
                                                                     <input class="input-contact" value="BIDV" />
                                                                 </div>
@@ -234,25 +235,25 @@
                                                         </h2>
                                                         <div class="row">
                                                             <div class="col-lg-4">
-                                                                <div class="mb-4 layout_90">
+                                                                <div class="mb-4 layout_120">
                                                                     <span class="fw-bold text-content">Tỉnh/thành</span>
                                                                     <input class="input-contact" value="Hà Nội" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
-                                                                <div class="mb-4 layout_90">
+                                                                <div class="mb-4 layout_120">
                                                                     <span class="fw-bold text-content">Quận/huyện:</span>
                                                                     <input class="input-contact" value="Sóc Sơn" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
-                                                                <div class="mb-4 layout_90">
+                                                                <div class="mb-4 layout_120">
                                                                     <span class="fw-bold text-content">Phường/xã:</span>
                                                                     <input class="input-contact" value="Phù Lỗ" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-12">
-                                                                <div class="mb-4 layout_90">
+                                                                <div class="mb-4 layout_120">
                                                                     <span class="fw-bold text-content">Địa chỉ:</span>
                                                                     <input class="input-contact"
                                                                         value="Phù Lỗ - Sóc Sơn - Hà Nội" />
@@ -261,6 +262,7 @@
                                                         </div>
                                                     </div>
 
+
                                                     {{-- Mô tả --}}
                                                     <div class="mb-5">
                                                         <h2 class="text-color_pimary">Mô tả
@@ -268,7 +270,7 @@
 
                                                         <div class="row">
                                                             <div class="col-lg-6">
-                                                                <div class="mb-4 layout_auto">
+                                                                <div class="mb-4 layout_120">
                                                                     <span class="fw-bold text-content">Nhân sự thu
                                                                         thập:</span>
                                                                     <input class="input-contact"
@@ -276,8 +278,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6">
-                                                                <div class="mb-4 layout_auto">
-                                                                    <span class="fw-bold text-content">Sản phẩm quan
+                                                                <div class="mb-4 layout_120">
+                                                                    <span class="fw-bold text-content">SP quan
                                                                         tâm:</span>
                                                                     <input class="input-contact" value="XSR155S" />
                                                                 </div>
@@ -291,26 +293,31 @@
                                                         </h2>
                                                         <div class="row">
                                                             <div class="col-lg-4">
-                                                                <div class="mb-4 layout_auto">
+                                                                <div class="mb-4 layout_120">
                                                                     <span class="fw-bold text-content">Nhóm khách
                                                                         hàng:</span>
                                                                     <input class="input-contact" value="Tiềm năng" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
-                                                                <div class="mb-4 layout_auto">
+                                                                <div class="mb-4 layout_120">
                                                                     <span class="fw-bold text-content">Kênh khách
                                                                         hàng:</span>
                                                                     <input class="input-contact" value="OTC" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
-                                                                <div class="mb-4 layout_auto">
+                                                                <div class="mb-4 layout_120">
                                                                     <span class="fw-bold text-content">Tuyến:</span>
                                                                     <input class="input-contact"
                                                                         value="Hà Nội - Hải Phòng" />
                                                                 </div>
                                                             </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mb-5">
+                                                        <div id="map" style="height: 300px; display: none">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -373,6 +380,11 @@
             font-size: 14px
         }
 
+        .layout_120 {
+            display: grid;
+            grid-template-columns: 120px auto;
+        }
+
         .layout_90 {
             display: grid;
             grid-template-columns: 90px auto;
@@ -395,7 +407,6 @@
             border-bottom: 1px solid #969393 !important;
             line-height: 15px;
             width: 100%;
-            text-align: center;
             font-size: 12px;
             font-style: italic
         }
