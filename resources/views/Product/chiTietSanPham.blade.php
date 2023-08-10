@@ -2,7 +2,38 @@
 {{-- Trang chủ GIao Ban --}}
 @section('title', 'Chi tiết sản phẩm')
 @section('header-style')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+
     <style>
+        #preview {
+            width: 100px;
+            height: 10vh;
+            object-fit: contain;
+        }
+        #fileInput {
+            margin-bottom: 10px;
+        }
+
+        #preview img {
+            max-height: 100%;
+            object-fit: contain;
+            margin: 2px;
+            display: block;
+        }
+
+        #attachments a {
+            display: block;
+            margin: 2px;
+        }
+
+        .file-list li {
+            margin: 2px;
+        }
+
+        .file-list span.modal_upload-remote {
+            cursor: pointer;
+            margin-left: 10px;
+        }
         .carousel-indicators button.thumbnail {
             width: 200px;
             height: 6vh;
@@ -49,6 +80,8 @@
                 margin: 0 auto;
             }
         }
+
+
     </style>
 @endsection
 @section('content')
@@ -87,7 +120,7 @@
 
                                 {{-- Giao diện nhập input --}}
                                 <div class="row card_template-body-middle mb-3">
-                                    <div id="fileInput" class="col-md-6 mb-3 {{ empty($details->images) ? 'd-block' : 'd-none' }}">
+                                    {{-- <div id="fileInput" class="col-md-6 mb-3 {{ empty($details->images) ? 'd-block' : 'd-none' }}">
                                         <div class="upload_wrapper-items">
                                             <div class="alert alert-danger alertNotSupport" role="alert"
                                                 style="display:none">
@@ -120,8 +153,18 @@
                                             <ul class="modal_upload-list"
                                                 style="max-height: 134px; overflow-y: scroll; overflow-x: hidden;"></ul>
                                         </div>
+                                    </div> --}}
+
+                                    <div class="col-md-6">
+
+                                        <input type="file" id="fileInput" multiple />
+                                        <div id="preview" class="d-flex"></div>
+                                        <ul id="attachments" class="file-list" style="padding: 0px"></ul>
+
                                     </div>
-                                    @if (!empty($details->images))
+
+
+                                    {{-- @if (!empty($details->images))
                                         <div id="caroselImg" class="col-md-6 mb-3 {{ !empty($details->images) ? 'd-block' : 'd-none' }}" style="overflow: hidden;">
                                             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                                                 <div class="carousel-inner">
@@ -143,7 +186,7 @@
                                             </div>
                                         </div>
                                         
-                                    @endif
+                                    @endif --}}
 
                                     <div class="col-md-6 mb-3">
                                         <div class="row">
@@ -310,6 +353,8 @@
                                         </div>
 
                                     </div>
+
+
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end">
@@ -434,6 +479,58 @@
     <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_chiPhi.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#fileInput').on('change', function(e) {
+                $('#preview').empty();
+                $('#attachments').empty();
+
+                var files = e.target.files;
+
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    var reader = new FileReader();
+
+                    if (file.type.startsWith('image/')) {
+                        reader.onload = (function(file) {
+                            return function(e) {
+                                var img = document.createElement('img');
+                                img.src = e.target.result;
+                                $('#preview').append(img);
+                            };
+                        })(file);
+
+                        if (file) {
+                            reader.readAsDataURL(file);
+                        }
+                    } else {
+                        var li = document.createElement('li');
+                        li.innerHTML = `
+                            <span class="fs-5">
+                                <i class="bi bi-link-45deg"></i> ${file.name}
+                            </span>
+                            <span class="modal_upload-remote" onclick="removeFileFromFileList(this)">
+                                <img style="width:18px;height:18px" src="{{ asset('assets/img/trash.svg') }}" />
+                            </span>
+                        `;
+                        $('#attachments').append(li);
+                    }
+                }
+            });
+        });
+
+        function removeFileFromFileList(deleteButton) {
+            var liEl = deleteButton.parentNode;
+            var fileList = document.querySelectorAll('.file-list li');
+            var index = Array.prototype.indexOf.call(fileList, liEl);
+
+            if (index >= 0) {
+                liEl.remove();
+            }
+        }
+    </script>
+
 
     <script>
         $(document).on('click', '.editRowBtn', function() {
@@ -574,7 +671,7 @@ document.addEventListener('click', function(event) {
 
 
 
-    <script>
+    {{-- <script>
         updateList = function(e) {
             const input = e.target;
             const outPut = input.parentNode.parentNode.parentNode.parentNode.parentNode.querySelector(
@@ -584,11 +681,10 @@ document.addEventListener('click', function(event) {
             let children = '';
             console.log(children);
             const allowedTypes = ['image/jpeg', 'image/png', 'application/pdf'];
-            const maxFileSize = 10485760; //10MB in bytes
+            const maxFileSize = 10485760; 
 
             for (let i = 0; i < input.files.length; ++i) {
                 const file = input.files.item(i);
-                //allowedTypes.includes(file.type) &&
                 if (file.size <= maxFileSize) {
                     children += `<li>
             <span class="fs-5">
@@ -608,11 +704,8 @@ document.addEventListener('click', function(event) {
             }
             outPut.innerHTML = children;
         }
-
-        //delete file from input
         function removeFileFromFileList(event, index) {
             const deleteButton = event.target;
-            //get tag name
             const tagName = deleteButton.tagName.toLowerCase();
             let liEl;
             if (tagName == "img") {
@@ -632,16 +725,15 @@ document.addEventListener('click', function(event) {
             for (let i = 0; i < files.length; i++) {
                 const file = files[i]
                 if (index !== i)
-                    dt.items.add(file) // here you exclude the file. thus removing it.
+                    dt.items.add(file)
             }
 
-            inputEl.files = dt.files // Assign the updates list
+            inputEl.files = dt.files 
             liEl.remove();
         }
 
         function removeUploaded(event) {
             const deleteButton = event.target;
-            //get tag name
             const tagName = deleteButton.tagName.toLowerCase();
             let liEl;
             if (tagName == "img") {
@@ -652,7 +744,7 @@ document.addEventListener('click', function(event) {
             }
             liEl.remove();
         }
-    </script>
+    </script> --}}
     <script>
         const select = document.querySelector('#filter_status');
         const rows = document.querySelectorAll('.table-row');
