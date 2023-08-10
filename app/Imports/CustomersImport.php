@@ -14,11 +14,13 @@ class CustomersImport implements ToModel, WithStartRow, WithStrictNullComparison
     {
         // $row['ngay_sinh'] = ($row['ngay_sinh'] == '') ? '0' : $row['ngay_sinh'];
         $nullableColumns = range(0, 30); // Generate a range from 0 to 30 as nullable columns
-        
+
         // Iterate over the nullable columns and check if the index exists
         foreach ($nullableColumns as $index) {
             if (!isset($row[$index])) {
                 $row[$index] = null; // Set the value to null if the index is undefined
+            } else if (is_string($row[$index]) && strpos($row[$index], '=') === 0) {
+                $row[$index] = 'N/A'; // Set the value to "N/A" if it starts with "=" (indicating a formula)
             }
         }
 
