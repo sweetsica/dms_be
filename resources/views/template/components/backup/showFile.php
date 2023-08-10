@@ -188,9 +188,9 @@
                                             <input type="hidden" value="" />
                                             <label for="fileInput" id="fileButton" class="btn position-relative border d-flex w-50">
                                                 <img src="{{ asset('assets/img/upload-file.svg') }}" />
-                                                <span class="ps-2">Đính kèm tài liệu, ảnh sản phẩm</span>
+                                                <span class="ps-2">Đính kèm tài liệu</span>
                                             </label>
-                                            <input accept=".pdf,.xlsx,.docx,image/jpeg,image/png" id="fileInput" multiple role="button" type="file"
+                                            <input id="fileInput" multiple role="button" type="file"
                                                 class="modal_upload-input modal_upload-file" name="file" onchange="updateList(event)" />
                                         </div>
                                     
@@ -322,12 +322,12 @@
                                                         <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center"
                                                             style="width:50%">
                                                             <textarea rows="1" style="pointer-events: none;" type="text" placeholder="Độ dài"
-                                                                class="card-title-black form-control textareaResize auto-resize" name="listProducts[0][key]">{{ $element->key }}</textarea>
+                                                                class="card-title-black form-control textareaResize" name="listProducts[0][key]">{{ $element->key }}</textarea>
                                                         </div>
                                                         <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center"
                                                             style="width:50%">
                                                             <textarea rows="1" style="pointer-events: none;" type="text" placeholder="Catalogue mô tả"
-                                                                class="form-control textareaResize auto-resize" name="listProducts[0][value]">{{ $element->value }}</textarea>
+                                                                class="form-control textareaResize" name="listProducts[0][value]">{{ $element->value }}</textarea>
                                                         </div>
                                                     </div>
                                                 @endforeach
@@ -385,7 +385,7 @@
                                         @endif
                                         <div class="col-12 mt-3">
                                             <button type="button" class="btn btn-danger d-block" data-bs-toggle="modal"
-                                                data-bs-target="#add">+ Link sản phẩm liên quan</button>
+                                                data-bs-target="#add">+ Thêm thông số</button>
                                         </div>
 
                                     </div>
@@ -515,16 +515,6 @@
     <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_chiPhi.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var textareas = document.querySelectorAll('.auto-resize');
-            textareas.forEach(function(textarea) {
-                textarea.style.height = 'auto';
-                textarea.style.height = (textarea.scrollHeight) + 'px';
-            });
-        });
-    </script>
 
     <script>
         $(document).ready(function() {
@@ -673,7 +663,6 @@ function addNewElement(index) {
     `;
 
     var colMd4Elements = document.querySelectorAll(".item-" + index);
-    console.log(colMd4Elements);
     var lastColMd4Element = colMd4Elements[colMd4Elements.length - 1];
 
     lastColMd4Element.parentNode.insertBefore(newDivElement, lastColMd4Element.nextSibling);
