@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ForgotPasswordController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\CustomController;
+use App\Http\Controllers\CustomerTestController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerGroupController;
 use App\Http\Controllers\DepartmentController;
@@ -47,6 +48,9 @@ Route::middleware(['guest'])->group(function () {
     // Quên MK
     Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
 });
+
+Route::get('/test-customer-1', [CustomerTestController::class, 'index1'])->name('index1');
+Route::get('/test-customer-2', [CustomerTestController::class, 'index2'])->name('index2');
 
 Route::middleware(['auth.role'])->group(function () {
 
