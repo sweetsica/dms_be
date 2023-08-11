@@ -6,7 +6,6 @@ use App\Http\Controllers\Api\ForgotPasswordController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\CustomController;
-use App\Http\Controllers\CustomerTestController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerGroupController;
 use App\Http\Controllers\DepartmentController;
@@ -48,9 +47,6 @@ Route::middleware(['guest'])->group(function () {
     // Quên MK
     Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
 });
-
-Route::get('/test-customer-1', [CustomerTestController::class, 'index1'])->name('index1');
-Route::get('/test-customer-2', [CustomerTestController::class, 'index2'])->name('index2');
 
 Route::middleware(['auth.role'])->group(function () {
 
@@ -95,6 +91,7 @@ Route::middleware(['auth.role'])->group(function () {
     Route::get('danh-sach-vi-tri', [PositionController::class, 'index'])->name('position.list');
 
     Route::get('danh-sach-khach-hang', [CustomerController::class, 'index'])->name('customer.list');
+    Route::get('chi-tiet-khach-hang/{id}', [CustomerController::class, 'show'])->name('customer-detail.list');
 
 
     Route::get('danh-sach-san-pham', [ProductController::class, 'index'])->name('product.list');
@@ -131,9 +128,6 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('danh-sach-khu-vuc', [AreaController::class, 'store'])->name('area.store');
     Route::post('danh-sach-khu-vuc/{id}', [AreaController::class, 'update'])->name('area.update');
     Route::post('danh-sach-khu-vucx/{id}', [AreaController::class, 'destroy'])->name('area.destroy');
-
-
-    Route::get('chi-tiet-khach-hang/{id}', [CustomerController::class, 'show'])->name('customer-detail.list');
 
     Route::get('department', [DepartmentController::class, 'index'])->name('department.index');
     Route::post('department', [DepartmentController::class, 'store'])->name('department.store');

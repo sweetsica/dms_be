@@ -315,7 +315,7 @@
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <input type="text" value="{{ $item->code }}" name="code"
-                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã khách hàng"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Mã khách hàng"
                                         placeholder="Mã khách hàng*" class="form-control">
                                 </div>
                                 <div class="col-md-3 mb-3">
@@ -326,7 +326,7 @@
 
                                 <div class="col-md-3 mb-3">
                                     <input type="text" value="{{ $item->phone }}" name="phone"
-                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Số điện thoại"
+                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Số điện thoại"
                                         placeholder="Số điện thoại*" class="form-control">
                                 </div>
                                 <div class="col-md-3 mb-3">
@@ -454,7 +454,7 @@
                                 @endphp
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Sản phẩm quan tâm">
-                                    <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
+                                    <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                         data-live-search="true" title="Sản phẩm quan tâm*"
                                         data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
                                         data-size="3" name="productId[]" data-live-search-placeholder="Tìm kiếm..."
@@ -472,7 +472,7 @@
                                 </div>
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Nhóm khách hàng">
-                                    <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
+                                    <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                         data-live-search="true" title="Nhóm khách hàng*"
                                         data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
                                         data-size="3" name="groupId" data-live-search-placeholder="Tìm kiếm...">
@@ -507,7 +507,7 @@
 
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Tuyến">
-                                    <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
+                                    <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                         data-live-search="true" title="Tuyến*" data-select-all-text="Chọn tất cả"
                                         data-deselect-all-text="Bỏ chọn" data-size="3" name="routeId"
                                         data-live-search-placeholder="Tìm kiếm...">
@@ -522,7 +522,7 @@
 
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Kênh khách hàng">
-                                    <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
+                                    <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                         data-live-search="true" title="Kênh khách hàng*"
                                         data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
                                         data-size="3" name="chanelId" data-live-search-placeholder="Tìm kiếm...">

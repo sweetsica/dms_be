@@ -1,5 +1,5 @@
 @extends('template.master')
-@section('title', 'Danh sách khách hàng')
+@section('title', 'Chi tiết khách hàng')
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
@@ -8,330 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"
         integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-@endsection
-@section('content')
-    @include('template.sidebar.sidebarMaster.sidebarLeft')
-    <div id="mainWrap" class="mainWrap">
-        <div class="mainSection">
-            <div class="main">
-                <div class="container">
-                    <div class="mainSection_heading">
-
-                        <h5 class="mainSection_heading-title">Chi tiết khách hàng</h5>
-                        @include('template.components.sectionCard')
-                    </div>
-                    <div class="card mb-3">
-                        <div class="card-body card-warpper">
-                            <div class="border rounded">
-                                <div class="container">
-                                    <h1 class="mb-5 fw-bold text-center text-color_pimary">CÔNG TY
-                                        TNHH
-                                        KINH DOANH VÀ XÂY
-                                        DỰNG BM</h1>
-                                    <div class="mb-5 warpper-search">
-                                        <div class="input-group input-item">
-                                            <span class="input-group-text" id="addon-wrapping"><i
-                                                    class="bi bi-search"></i></span>
-                                            <input type="text" class="form-control" placeholder="Tìm kiếm..."
-                                                aria-label="Username" aria-describedby="addon-wrapping">
-                                        </div>
-                                        <button type="button" class="btn btn-outline-danger ms-2"><i
-                                                class="bi bi-funnel"></i></button>
-                                        <button type="button" class="btn btn-danger ms-2"><i
-                                                class="bi bi-plus-circle"></i></button>
-                                        <button type="button" class="btn btn-secondary ms-2"><i
-                                                class="bi bi-three-dots"></i></button>
-                                    </div>
-
-                                    <div class="container">
-                                        <div class="rev_slider">
-                                            <div class="rev_slide">
-                                                <div class="img-slide">
-                                                    <img
-                                                        src="https://images.pexels.com/photos/842711/pexels-photo-842711.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
-                                                </div>
-                                            </div>
-
-                                            <div class="rev_slide">
-                                                <div class="img-slide">
-                                                    <img
-                                                        src="https://images.pexels.com/photos/1525041/pexels-photo-1525041.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
-                                                </div>
-                                            </div>
-                                            <div class="rev_slide">
-                                                <div class="img-slide">
-                                                    <img
-                                                        src="https://images.pexels.com/photos/1379636/pexels-photo-1379636.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <div class="row ">
-                                            <div class="col-lg-12">
-                                                <div class="layout_120">
-                                                    <span class="fw-bold text-content">Người liên
-                                                        hệ:</span>
-                                                    <input class="input-contact" value="Nguyễn Phương Thuận" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row ">
-                                            <div class="col-lg-6 mt-4">
-                                                <div class="layout_120">
-                                                    <span class="fw-bold text-content">Số điện thoại:</span>
-                                                    <input class="input-contact" value="12345789" />
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 mt-4">
-                                                <div class="layout_120">
-                                                    <span class="fw-bold text-content">
-                                                        Email:</span>
-                                                    <input class="input-contact" value="npthuan2000@gmail.com" />
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 mt-4">
-                                                <div class="layout_120">
-                                                    <span class="fw-bold text-content">Giai đoạn:</span>
-                                                    <input class="input-contact" value="Giai đoạn 1" />
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 mt-4">
-                                                <div class="layout_120">
-                                                    <span class="fw-bold text-content">Tỷ lệ thành công:
-                                                    </span>
-                                                    <input class="input-contact" value="100%" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="viewport mt-5">
-                                    <ul class="tabs">
-                                        <li class="label-item">
-                                            <input type="radio" name="tab" id="playlists" value="playlists" checked>
-                                            <label class="label-info header_menu-link" for="playlists">
-                                                Thông tin chi tiết
-                                            </label>
-                                            <div class="tabBody">
-                                                <div class="container">
-                                                    {{-- Liên hệ --}}
-                                                    <div class="mb-5">
-                                                        <h2 class="text-color_pimary mt-4"> Liên hệ</h2>
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Người liên
-                                                                        hệ:</span>
-                                                                    <input class="input-contact"
-                                                                        value="Nguyễn Phương Thuận" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 mt-5">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Số điện
-                                                                        thoại:</span>
-                                                                    <input class="input-contact" value="123456789" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 mt-5">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Email:</span>
-                                                                    <input class="input-contact"
-                                                                        value="npthuan2000@gmail.com" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    {{-- Tổ chức --}}
-                                                    <div class="mb-5">
-                                                        <h2 class="text-color_pimary">Tổ chức
-                                                        </h2>
-                                                        <div class="row">
-                                                            <div class="col-lg-6">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Tên công ty:</span>
-                                                                    <input class="input-contact"
-                                                                        value="CÔNG TY TNHH KINH DOANH VÀ XÂY DỰNG BM" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">SDT công
-                                                                        ty:</span>
-                                                                    <input class="input-contact" value="123456789" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 mt-5">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Mã số thuế:</span>
-                                                                    <input class="input-contact" value="10101010001" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 mt-5">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Email công
-                                                                        ty:</span>
-                                                                    <input class="input-contact"
-                                                                        value="congtya@gmail.com" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 mt-5">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Đại diện:</span>
-                                                                    <input class="input-contact" value="Nguyễn Văn A" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 mt-5">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Chức danh:</span>
-                                                                    <input class="input-contact" value="Chủ tịch" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 mt-5">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Số tài khoản:</span>
-                                                                    <input class="input-contact" value="99999999" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 mt-5">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Ngân hàng:</span>
-                                                                    <input class="input-contact" value="BIDV" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    {{-- Địa chỉ --}}
-                                                    <div class="mb-5">
-                                                        <h2 class="text-color_pimary">Địa chỉ
-                                                        </h2>
-                                                        <div class="row">
-                                                            <div class="col-lg-4">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Tỉnh/thành</span>
-                                                                    <input class="input-contact" value="Hà Nội" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Quận/huyện:</span>
-                                                                    <input class="input-contact" value="Sóc Sơn" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Phường/xã:</span>
-                                                                    <input class="input-contact" value="Phù Lỗ" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-12">
-                                                                <div class="mt-5 layout_120">
-                                                                    <span class="fw-bold text-content">Địa chỉ:</span>
-                                                                    <input class="input-contact"
-                                                                        value="Phù Lỗ - Sóc Sơn - Hà Nội" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-                                                    {{-- Mô tả --}}
-                                                    <div class="mb-5">
-                                                        <h2 class="text-color_pimary">Mô tả
-                                                        </h2>
-
-                                                        <div class="row">
-                                                            <div class="col-lg-6">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Nhân sự thu
-                                                                        thập:</span>
-                                                                    <input class="input-contact"
-                                                                        value="Nguyễn Phương Thuận" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">SP quan
-                                                                        tâm:</span>
-                                                                    <input class="input-contact" value="XSR155S" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    {{-- Phân loại --}}
-                                                    <div class="mb-5">
-                                                        <h2 class="text-color_pimary">Phân loại
-                                                        </h2>
-                                                        <div class="row">
-                                                            <div class="col-lg-4">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Nhóm khách
-                                                                        hàng:</span>
-                                                                    <input class="input-contact" value="Tiềm năng" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Kênh khách
-                                                                        hàng:</span>
-                                                                    <input class="input-contact" value="OTC" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Tuyến:</span>
-                                                                    <input class="input-contact"
-                                                                        value="Hà Nội - Hải Phòng" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="mb-5">
-                                                        <div id="map" style="height: 300px; display: none">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="label-item">
-                                            <input type="radio" name="tab" id="artists" value="artists">
-                                            <label class=" label-info header_menu-link" for="artists">Chào
-                                                hàng</label>
-                                            <div class="tabBody">
-
-                                            </div>
-                                        </li>
-                                        <li class="label-item">
-                                            <input type="radio" name="tab" id="albums" value="albums">
-                                            <label class="label-info header_menu-link" for="albums">Cơ hội</label>
-                                            <div class="tabBody">
-
-                                            </div>
-                                        </li>
-                                        <li class="label-item">
-                                            <input type="radio" name="tab" id="baogia" value="baogia">
-                                            <label class=" label-info header_menu-link" for="baogia">Báo giá</label>
-                                            <div class="tabBody">
-
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @include('template.footer.footer')
-        </div>
-    </div>
-    @include('template.sidebar.sidebarMaster.sidebarRight')
 
     <style>
         .slick-slider {
@@ -455,7 +131,8 @@
             line-height: 15px;
             width: 100%;
             font-size: 12px;
-            font-style: italic
+            font-style: italic;
+            pointer-events: none;
         }
 
         .input-contact:focus {
@@ -467,6 +144,353 @@
             box-shadow: none !important;
         }
     </style>
+
+@endsection
+@section('content')
+    @include('template.sidebar.sidebarMaster.sidebarLeft')
+    <div id="mainWrap" class="mainWrap">
+        <div class="mainSection">
+            <div class="main">
+                <div class="container">
+                    <div class="mainSection_heading">
+
+                        <h5 class="mainSection_heading-title">Chi tiết khách hàng</h5>
+                        @include('template.components.sectionCard')
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body card-warpper">
+                            <div class="border rounded">
+                                <div class="container">
+                                    <h1 class="mb-5 fw-bold text-center text-color_pimary text-uppercase">CÔNG TY
+                                        {{ $customer->companyName ?? ($customer->name ?? 'Trống') }}</h1>
+                                    <div class="mb-5 warpper-search">
+                                        <div class="input-group input-item">
+                                            <span class="input-group-text" id="addon-wrapping"><i
+                                                    class="bi bi-search"></i></span>
+                                            <input type="text" class="form-control" placeholder="Tìm kiếm..."
+                                                aria-label="Username" aria-describedby="addon-wrapping">
+                                        </div>
+                                        <button type="button" class="btn btn-outline-danger ms-2"><i
+                                                class="bi bi-funnel"></i></button>
+                                        <button type="button" class="btn btn-danger ms-2"><i
+                                                class="bi bi-plus-circle"></i></button>
+                                        <button type="button" class="btn btn-secondary ms-2"><i
+                                                class="bi bi-three-dots"></i></button>
+                                    </div>
+
+                                    <div class="container">
+                                        <div class="rev_slider">
+                                            <div class="rev_slide">
+                                                <div class="img-slide">
+                                                    <img
+                                                        src="https://images.pexels.com/photos/842711/pexels-photo-842711.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+                                                </div>
+                                            </div>
+
+                                            <div class="rev_slide">
+                                                <div class="img-slide">
+                                                    <img
+                                                        src="https://images.pexels.com/photos/1525041/pexels-photo-1525041.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+                                                </div>
+                                            </div>
+                                            <div class="rev_slide">
+                                                <div class="img-slide">
+                                                    <img
+                                                        src="https://images.pexels.com/photos/1379636/pexels-photo-1379636.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="row ">
+                                            <div class="col-lg-12">
+                                                <div class="layout_120">
+                                                    <span class="fw-bold text-content">Người liên
+                                                        hệ:</span>
+                                                    <input class="input-contact"
+                                                        value="{{ $customer->companyName ?? ($customer->name ?? 'Trống') }}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row ">
+                                            <div class="col-lg-6 mt-4">
+                                                <div class="layout_120">
+                                                    <span class="fw-bold text-content">Số điện thoại:</span>
+                                                    <input class="input-contact"
+                                                        value="{{ $customer->companyPhoneNumber ?? ($customer->phone ?? 'Trống') }}" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 mt-4">
+                                                <div class="layout_120">
+                                                    <span class="fw-bold text-content">
+                                                        Email:</span>
+                                                    <input class="input-contact"
+                                                        value="{{ $customer->companyEmail ?? ($customer->email ?? 'Trống') }}" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 mt-4">
+                                                <div class="layout_120">
+                                                    <span class="fw-bold text-content">Giai đoạn:</span>
+                                                    <input class="input-contact" value="{{ $customer->status ?? '' }}" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 mt-4">
+                                                <div class="layout_120">
+                                                    <span class="fw-bold text-content">Tỷ lệ thành công:
+                                                    </span>
+                                                    <input class="input-contact" value="100%" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="viewport mt-5">
+                                    <ul class="tabs">
+                                        <li class="label-item">
+                                            <input type="radio" name="tab" id="playlists" value="playlists" checked>
+                                            <label class="label-info header_menu-link" for="playlists">
+                                                Thông tin chi tiết
+                                            </label>
+                                            <div class="tabBody">
+                                                <div class="container">
+                                                    {{-- Liên hệ --}}
+                                                    <div class="mb-5">
+                                                        <h2 class="text-color_pimary mt-4"> Liên hệ</h2>
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold text-content">Người liên
+                                                                        hệ:</span>
+                                                                    <input class="input-contact"
+                                                                        value="{{ $customer->name ?? '' }}" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 mt-5">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold text-content">Số điện
+                                                                        thoại:</span>
+                                                                    <input class="input-contact"
+                                                                        value="{{ $customer->phone }}" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 mt-5">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold text-content">Email:</span>
+                                                                    <input class="input-contact"
+                                                                        value="{{ $customer->email }}" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {{-- Tổ chức --}}
+                                                    <div class="mb-5">
+                                                        <h2 class="text-color_pimary">Tổ chức
+                                                        </h2>
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold text-content">Tên công ty:</span>
+                                                                    <input class="input-contact"
+                                                                        value="{{ $customer->companyName ?? '' }}" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold text-content">SDT công
+                                                                        ty:</span>
+                                                                    <input class="input-contact"
+                                                                        value="{{ $customer->companyPhoneNumber ?? '' }}" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 mt-5">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold text-content">Mã số thuế:</span>
+                                                                    <input class="input-contact"
+                                                                        value="{{ $customer->taxCode ?? '' }}" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 mt-5">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold text-content">Email công
+                                                                        ty:</span>
+                                                                    <input class="input-contact"
+                                                                        value="{{ $customer->companyEmail ?? '' }}" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 mt-5">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold text-content">Đại diện:</span>
+                                                                    <input class="input-contact"
+                                                                        value="{{ $customer->personContact ?? '' }}" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 mt-5">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold text-content">Chức danh:</span>
+                                                                    <input class="input-contact"
+                                                                        value="{{ $customer->career ?? '' }}" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 mt-5">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold text-content">Số tài khoản:</span>
+                                                                    <input class="input-contact"
+                                                                        value="{{ $customer->accountNumber ?? '' }}" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 mt-5">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold text-content">Ngân hàng:</span>
+                                                                    <input class="input-contact"
+                                                                        value="{{ $customer->bankOpen ?? '' }}" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    {{-- Địa chỉ --}}
+                                                    <div class="mb-5">
+                                                        <h2 class="text-color_pimary">Địa chỉ
+                                                        </h2>
+                                                        <div class="row">
+                                                            <div class="col-lg-4">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold text-content">Tỉnh/thành</span>
+                                                                    <input class="input-contact"
+                                                                        value="{{ $customer->city ?? '' }}" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold text-content">Quận/huyện:</span>
+                                                                    <input class="input-contact"
+                                                                        value="{{ $customer->district ?? '' }}" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold text-content">Phường/xã:</span>
+                                                                    <input class="input-contact"
+                                                                        value="{{ $customer->guide ?? '' }}" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="mt-5 layout_120">
+                                                                    <span class="fw-bold text-content">Địa chỉ:</span>
+                                                                    <input id="addressTxt" class="input-contact"
+                                                                        value="{{ $customer->address ?? '' }}" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    {{-- Mô tả --}}
+                                                    <div class="mb-5">
+                                                        <h2 class="text-color_pimary">Mô tả
+                                                        </h2>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold text-content">Nhân sự thu
+                                                                        thập:</span>
+                                                                    <input class="input-contact"
+                                                                        value="{{ $customer->person->name ?? '' }}" />
+                                                                </div>
+                                                            </div>
+                                                            @php
+                                                                $products = $customer->products();
+                                                                $productNames = [];
+                                                                foreach ($products as $product) {
+                                                                    $productNames[] = $product->name;
+                                                                }
+                                                                $productList = implode(', ', $productNames);
+                                                            @endphp
+                                                            <div class="col-lg-6">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold text-content">SP quan
+                                                                        tâm:</span>
+                                                                    <input class="input-contact"
+                                                                        value="{{ $productList }}" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    {{-- Phân loại --}}
+                                                    <div class="mb-5">
+                                                        <h2 class="text-color_pimary">Phân loại
+                                                        </h2>
+                                                        <div class="row">
+                                                            <div class="col-lg-4">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold text-content">Nhóm khách
+                                                                        hàng:</span>
+                                                                    <input class="input-contact"
+                                                                        value="{{ $customer->group }}" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold text-content">Kênh khách
+                                                                        hàng:</span>
+                                                                    <input class="input-contact"
+                                                                        value="{{ $customer->channel->name ?? '' }}" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold text-content">Tuyến:</span>
+                                                                    <input class="input-contact"
+                                                                        value="{{ $customer->route->name ?? '' }} - {{ $customer->route->travel_time ?? '' }}" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mb-5">
+                                                        <div id="map" style="height: 300px; display: none">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="label-item">
+                                            <input type="radio" name="tab" id="artists" value="artists">
+                                            <label class=" label-info header_menu-link" for="artists">Chào
+                                                hàng</label>
+                                            <div class="tabBody">
+
+                                            </div>
+                                        </li>
+                                        <li class="label-item">
+                                            <input type="radio" name="tab" id="albums" value="albums">
+                                            <label class="label-info header_menu-link" for="albums">Cơ hội</label>
+                                            <div class="tabBody">
+
+                                            </div>
+                                        </li>
+                                        <li class="label-item">
+                                            <input type="radio" name="tab" id="baogia" value="baogia">
+                                            <label class=" label-info header_menu-link" for="baogia">Báo giá</label>
+                                            <div class="tabBody">
+
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @include('template.footer.footer')
+        </div>
+    </div>
+    @include('template.sidebar.sidebarMaster.sidebarRight')
 
 @section('footer-script')
 
@@ -547,6 +571,61 @@
             customPaging: function(slider, i) {
                 return '';
             },
+        });
+    </script>
+
+
+    <script>
+        $(document).ready(function() {
+            var apiKey = "b5b7553f4280465482f4a03273fb8813";
+            var map;
+            var marker;
+            var address = $("#addressTxt").val().trim();
+            $("#map").show();
+            geocodeAddress(address);
+
+            // Function to geocode address
+            function geocodeAddress(address) {
+                $.ajax({
+                    url: 'https://api.opencagedata.com/geocode/v1/json',
+                    method: 'GET',
+                    dataType: 'json',
+                    data: {
+                        q: address,
+                        key: apiKey
+                    },
+                    success: function(response) {
+                        if (response.total_results > 0) {
+                            var latitude = response.results[0].geometry.lat;
+                            var longitude = response.results[0].geometry.lng;
+
+                            // Display map
+                            if (!map) {
+                                map = L.map('map').setView([latitude, longitude], 13);
+                                L.tileLayer(
+                                    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+
+                                    }).addTo(map);
+                            } else {
+                                map.setView([latitude, longitude], 13);
+                            }
+
+                            // Add or update marker
+                            if (!marker) {
+                                marker = L.marker([latitude, longitude]).addTo(map);
+                            } else {
+                                marker.setLatLng([latitude, longitude]);
+                            }
+                        } else {
+                            alert("Please check the address.");
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.log("An error occurred while geocoding: " + error);
+                    }
+                });
+            }
+
         });
     </script>
 @endsection

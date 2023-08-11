@@ -42,7 +42,7 @@ class CustomerController extends Controller
     public function show($id)
     {
         $customer = Customer::with('channel', 'route', 'person')->findOrFail($id);
-        return view('other.chiTietKhachHang')->with(compact(
+        return view('Customer.chiTietKhachHang')->with(compact(
             "customer"
         ));
     }
