@@ -12,11 +12,13 @@
 @php
     function getPaginationLink($link, $pageName)
     {
-        if (!isset($link->url)) {
+        if (!isset($link['url'])) {
             return '#';
         }
     
-        $pageNumber = explode('?page=', $link->url)[1];
+        $pageNumber = explode('?page=', $link['url'])[1];
+    
+        $queryString = request()->query();
     
         $queryString[$pageName] = $pageNumber;
         return route('customers', $queryString);
@@ -245,31 +247,18 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
-                                        <nav aria-label="Page navigation example" class="float-end mt-3"
-                                            id="target-pagination">
-                                            <ul class="pagination">
-                                                {{-- @foreach ($documents->links as $link)
-                                            <li class="page-item {{ $link->active ? 'active' : '' }}">
-                                                <a class="page-link" href="{{ getPaginationLink($link, 'page') }}"
-                                                    aria-label="Previous">
-                                                    <span aria-hidden="true">{!! $link->label !!}</span>
-                                                </a>
-                                            </li>
-                                            @endforeach --}}
-                                            </ul>
-                                        </nav>
                                     </div>
                                     <nav aria-label="Page navigation example" class="float-end mt-3"
                                         id="target-pagination">
                                         <ul class="pagination">
-                                            {{-- @foreach ($listUsers->links as $link)
-                                        <li class="page-item {{ $link->active ? 'active' : '' }}">
-                                            <a class="page-link" href="{{ getPaginationLink($link, 'page') }}"
-                                                aria-label="Previous">
-                                                <span aria-hidden="true">{!! $link->label !!}</span>
-                                            </a>
-                                        </li>
-                                        @endforeach --}}
+                                            @foreach ($pagination['links'] as $link)
+                                                <li class="page-item {{ $link['active'] ? 'active' : '' }}">
+                                                    <a class="page-link" href="{{ getPaginationLink($link, 'page') }}"
+                                                        aria-label="Previous">
+                                                        <span aria-hidden="true">{!! $link['label'] !!}</span>
+                                                    </a>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </nav>
                                 </div>
@@ -447,10 +436,11 @@
 
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Nhân sự thu thập">
-                                    <select {{ session('user')['role_id'] != '1' ? "disabled" :"" }} class="selectpicker" data-dropup-auto="false" data-width="100%" required
-                                        data-live-search="true" title="Nhân sự thu thập*"
-                                        data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
-                                        data-size="3" name="personId" data-live-search-placeholder="Tìm kiếm...">
+                                    <select {{ session('user')['role_id'] != '1' ? 'disabled' : '' }} class="selectpicker"
+                                        data-dropup-auto="false" data-width="100%" required data-live-search="true"
+                                        title="Nhân sự thu thập*" data-select-all-text="Chọn tất cả"
+                                        data-deselect-all-text="Bỏ chọn" data-size="3" name="personId"
+                                        data-live-search-placeholder="Tìm kiếm...">
                                         @foreach ($listPerson as $per)
                                             <option value="{{ $per->id }}"
                                                 {{ $per->id == $item->personId ? 'selected' : '' }}>

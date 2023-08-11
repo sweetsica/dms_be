@@ -91,7 +91,7 @@ class CustomerController extends Controller
                     $listData = $listData->where('personId', session('user')['id']);
                     break;
             }
-            $listData = $listData->paginate($limit);
+            $listData = $listData->orderBy('id', 'desc')->paginate($limit);
 
             $groupIDs = $listData->pluck('groupId')->toArray();
             $listPerson = Personnel::all();
