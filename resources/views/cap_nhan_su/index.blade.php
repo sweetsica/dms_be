@@ -79,13 +79,23 @@
                                                                     {{ $i++ }}
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->code }}">
                                                                     {{ $item->code }}
+                                                                </div>
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->name }}">
                                                                     {{ $item->name }}
+                                                                </div>
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top"
+                                                                    title="{{ $item->description }}">
                                                                     {{ $item->description }}
+                                                                </div>
                                                                 </td>
                                                                 @if ((session('user')['role_id'] == '1') )
                                                                 <td>
@@ -202,9 +212,17 @@
                                                         </div>
                                                     @endforeach
                                                 </table>
-                                                {{ $personnelLevelList->appends([
+                                                {{-- {{ $personnelLevelList->appends([
                                                         'search' => $search,
-                                                    ])->links() }}
+                                                    ])->links() }} --}}
+                                                       <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                       id="target-pagination">
+                                                       <ul class="pagination">
+                                                           {{ $personnelLevelList->appends([
+                                                                   'search' => $search,
+                                                               ])->links() }}
+                                                       </ul>
+                                                   </nav>
                                             </div>
                                         </div>
                                     </div>
@@ -250,7 +268,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-outline-danger"
                                     data-bs-dismiss="modal">Hủy</button>
-                                <button type="submit" class="btn btn-danger">Tạo</button>
+                                <button type="submit" class="btn btn-danger" id="submitButton">Tạo</button>
                             </div>
                 </form>
             </div>
@@ -294,4 +312,9 @@
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}"></script>
 
+    {{-- <script>
+     document.querySelector('#submitButton').addEventListener('click', function () {
+    this.disabled = true; // Tắt nút sau khi click
+});
+    </script> --}}
 @endsection

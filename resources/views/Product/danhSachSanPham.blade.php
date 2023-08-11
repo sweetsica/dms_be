@@ -8,21 +8,21 @@
     </style>
 @endsection
 @php
-
+    
     function getPaginationLink($link, $pageName)
     {
         if (!isset($link['url'])) {
             return '#';
         }
-
+    
         $pageNumber = explode('?page=', $link['url'])[1];
-
+    
         $queryString = request()->query();
-
+    
         $queryString[$pageName] = $pageNumber;
         return route('product.list', $queryString);
     }
-
+    
     // function isFiltering($filterNames)
     // {
     //     $filters = request()->query();
@@ -33,7 +33,7 @@
     //     }
     //     return false;
     // }
-
+    
 @endphp
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
@@ -94,6 +94,7 @@
                                             style="width: 100%">
                                             <thead>
                                                 <tr>
+<<<<<<< HEAD
                                                     <th class="text-nowrap text-center" style="width:3%">STT</th>
                                                     <th class="text-nowrap text-center" style="width:5%">Mã </th>
                                                     <th class="text-nowrap text-center" style="width:15%">Tên sản phẩm</th>
@@ -103,6 +104,17 @@
                                                     <th class="text-nowrap text-center" style="width:8%">Thời gian</th>
                                                     <th class="text-nowrap text-center" style="width:4%">Hành động</th>
 
+=======
+                                                    <th class="text-nowrap text-center" style="width:2%">STT</th>
+                                                    <th class="text-nowrap text-center" style="width:5%">Mã hiệu</th>
+                                                    <th class="text-nowrap text-center" style="width:12%">Tên sản phẩm</th>
+                                                    <th class="text-nowrap text-center" style="width:4%">Ảnh sản phẩm</th>
+                                                    <th class="text-nowrap text-center" style="width:6%">Phân loại</th>
+                                                    <th class="text-nowrap text-center" style="width:6%">Thời gian</th>
+                                                    @if (session('user')['role_id'] == '1' || session('user')['role_id'] == '2')
+                                                        <th class="text-nowrap text-center" style="width:4%">Hành động</th>
+                                                    @endif
+>>>>>>> origin/tung-branch-3
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -125,6 +137,16 @@
                                                                 {{ $item->name }}
                                                             </div>
                                                         </td>
+<<<<<<< HEAD
+=======
+
+                                                        <td class="list_img">
+                                                            <div class=" img-product-item d-flex justify-content-center align-items-center"">
+                                                                <img class="" src="{{ $item->thumbnail }}" />
+                                                            </div>
+                                                        </td>
+
+>>>>>>> origin/tung-branch-3
                                                         <td>
                                                             <div class="overText" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="{{ $item->type }}">
@@ -152,6 +174,7 @@
                                                                 {{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y') }}
                                                             </div>
                                                         </td>
+<<<<<<< HEAD
                                                         <td>
                                                             <div class="table_actions d-flex justify-content-center">
                                                                 <div class="btn test_btn-edit-{{ $item->id }}"
@@ -168,6 +191,26 @@
                                                                 </div>
                                                             </div>
                                                         </td>
+=======
+                                                        @if (session('user')['role_id'] == '1' || session('user')['role_id'] == '2')
+                                                            <td>
+                                                                <div class="table_actions d-flex justify-content-center">
+                                                                    <div class="btn test_btn-edit-{{ $item->id }}"
+                                                                        href="#" data-bs-toggle="modal"
+                                                                        data-bs-target="#suaSanPham{{ $item->id }}">
+                                                                        <img style="width:16px;height:16px"
+                                                                            src="{{ asset('assets/img/edit.svg') }}" />
+                                                                    </div>
+                                                                    <div class="btn test_btn-remove-{{ $item->id }}"
+                                                                        href="#" data-bs-toggle="modal"
+                                                                        data-bs-target="#xoaSanPham{{ $item->id }}">
+                                                                        <img style="width:16px;height:16px"
+                                                                            src="{{ asset('assets/img/trash.svg') }}" />
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        @endif
+>>>>>>> origin/tung-branch-3
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -255,6 +298,10 @@
                                         data-width="100%" title="Phân loại" data-size="3">
                                         <option value="Sản phẩm" {{ $item->type == 'Sản phẩm' ? 'selected' : '' }}>Sản
                                             phẩm</option>
+                                        <option value="Phiên bản" {{ $item->type == 'Phiên bản' ? 'selected' : '' }}>Phiên
+                                            bản</option>
+                                        <option value="Tuỳ chọn" {{ $item->type == 'Tuỳ chọn' ? 'selected' : '' }}>Tuỳ
+                                            chọn</option>
                                         <option value="Vật tư MKT" {{ $item->type == 'Vật tư MKT' ? 'selected' : '' }}>Vật
                                             tư MKT</option>
                                     </select>

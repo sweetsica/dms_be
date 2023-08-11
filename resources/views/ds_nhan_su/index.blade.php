@@ -63,7 +63,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th class="text-nowrap text-center" style="width:2%">STT</th>
-                                                            <th class="text-nowrap">Mã nhân sự</th>
+                                                            <th class="text-nowrap" >Mã nhân sự</th>
                                                             <th class="text-nowrap">Tên nhân sự</th>
                                                             <th class="text-nowrap">Đơn vị công tác (phòng ban)</th>
                                                             <th class="text-nowrap">Vị trí/ chức danh</th>
@@ -88,37 +88,78 @@
                                                                     {{ $a++ }}
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->code }}">
                                                                     {{ $item->code }}
+                                                                </div>
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->name }}">
                                                                     {{ $item->name }}
+                                                                </div>
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->department_name }}">
                                                                     {{ $item->department_name }}
+                                                                </div>
+
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->position_name }}">
                                                                     {{ $item->position_name }}
+                                                                </div>
+
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->personnel_level_name }}">
                                                                     {{ $item->personnel_level_name }}
+                                                                </div>
+
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->role_name }}">
                                                                     {{ $item->role_name }}
+                                                                </div>
+
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->locality_name }}">
                                                                     {{ $item->locality_name }}
+                                                                </div>
+
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->email }}">
                                                                     {{ $item->email }}
+                                                                </div>
+
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->phone }}">
                                                                     {{ $item->phone }}
+                                                                </div>
+
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title=" {{ $item->working_form }}">
                                                                     {{ $item->working_form }}
+                                                                </div>
+
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->status }}">
                                                                     {{ $item->status }}
+                                                                </div>
                                                                 </td>
                                                                 @if ((session('user')['role_id'] == '1') )
                                                                 <td>
@@ -445,13 +486,27 @@
                                                                                         value="{{ $item->annual_salary }}">
                                                                                 </div>
                                                                                 <div class="col-6 mb-3">
-                                                                                    <input name="pack" type="text"
+                                                                                    {{-- <input name="pack" type="text"
                                                                                         placeholder="Gói trang bị"
                                                                                         class="form-control"
                                                                                         data-bs-toggle="tooltip"
                                                                                         data-bs-placement="top"
                                                                                         title="Gói trang bị"
-                                                                                        value="{{ $item->pack }}">
+                                                                                        value="{{ $item->pack }}"> --}}
+                                                                                        <div data-bs-toggle="tooltip"
+                                                                                        data-bs-placement="top"
+                                                                                        title="Gói trang bị" >
+                                                                                        <select name="pack"
+                                                                                            class="selectpicker"
+                                                                                            data-dropup-auto="false"
+                                                                                            >
+                                                                                            <option
+                                                                                                value="{{ $item->pack }}">
+                                                                                                {{ $item->pack }}
+                                                                                            </option>
+
+                                                                                        </select>
+                                                                                    </div>
                                                                                 </div>
                                                                                 <div class="col-6 mb-3">
                                                                                     <div data-bs-toggle="tooltip"
@@ -731,8 +786,13 @@
                                     title="Quỹ lương năm">
                             </div>
                             <div class="col-6 mb-3">
-                                <input name="pack" type="text" placeholder="Gói trang bị" class="form-control"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Gói trang bị">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Gói trang bị">
+                                    <select name="pack" class="selectpicker" data-dropup-auto="false" required>
+                                        <option value="">Gói trang bị</option>
+                                    </select>
+                                </div>
+                                {{-- <input name="pack" type="text" placeholder="Gói trang bị" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Gói trang bị"> --}}
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Hình thức làm việc">

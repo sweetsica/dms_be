@@ -241,7 +241,8 @@
                                                                                                 {{ $item->leader_name }}
                                                                                             </option>
                                                                                             <?php } ?>
-
+                                                                                            <option value="0">Chọn
+                                                                                                trưởng bộ phận</option>
                                                                                             @foreach ($UnitLeaderList as $av)
                                                                                                 <option
                                                                                                     value="{{ $av->id }}">

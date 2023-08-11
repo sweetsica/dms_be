@@ -12,7 +12,7 @@
             <div class="main">
                 <div class="container-fluid">
                     <div class="mainSection_heading">
-                        <h5 class="mainSection_heading-title">Danh sách vị trí</h5>
+                        <h5 class="mainSection_heading-title">Danh sách vị trí/chức danh</h5>
                         @include('template.components.sectionCard')
                     </div>
 
@@ -25,7 +25,7 @@
                                             <div
                                                 class="action_wrapper d-flex flex-wrap justify-content-between align-items-center mb-3">
                                                 <div class="order-2 order-md-1" style="font-size: 15px;">
-                                                    <b>Danh sách vị trí</b>
+                                                    <b>Danh sách vị trí/chức danh</b>
                                                 </div>
                                                 <div
                                                     class="order-1 order-md-2  justify-content-between align-items-center flex-grow-1 mb-2 mb-md-0">
@@ -51,7 +51,7 @@
                                                 <div class="action_export order-md-4">
                                                     <button class="btn btn-danger d-block testCreateUser"
                                                         data-bs-toggle="modal" data-bs-target="#taoDeXuat">Thêm vị
-                                                        trí
+                                                        trí/chức danh
                                                     </button>
                                                 </div>
                                                 @endif
@@ -176,7 +176,7 @@
                                                                 <div class="modal-content">
                                                                     <div class="modal-header text-center">
                                                                         <h5 class="modal-title w-100"
-                                                                            id="exampleModalLabel">Sửa vị trí</h5>
+                                                                            id="exampleModalLabel">Sửa vị trí/chức danh</h5>
                                                                         <button type="button" class="btn-close"
                                                                             data-bs-dismiss="modal"
                                                                             aria-label="Close"></button>
@@ -206,13 +206,13 @@
                                                                                 <div class="col-6 mb-3">
                                                                                     <div data-bs-toggle="tooltip"
                                                                                         data-bs-placement="top"
-                                                                                        title="Chọn đơn vị công tác">
+                                                                                        title="Chọn đơn vị công tác*">
                                                                                         <select name="department_id"
                                                                                             required class="selectpicker"
                                                                                             data-dropup-auto="false">
                                                                                             <?php if ($item->department_id == null){ ?>
                                                                                             <option>Chọn đơn vị công
-                                                                                                tác
+                                                                                                tác*
                                                                                             </option>
                                                                                             <?php
                                                                                             } else { ?>
@@ -240,12 +240,12 @@
                                                                                 <div class="col-6 mb-3">
                                                                                     <div data-bs-toggle="tooltip"
                                                                                         data-bs-placement="top"
-                                                                                        title="Chọn cấp nhân sự">
+                                                                                        title="Chọn cấp nhân sự*">
                                                                                         <select name="personnel_level"
                                                                                             required class="selectpicker"
                                                                                             data-dropup-auto="false">
                                                                                             <?php if ($item->personnel_level == null){ ?>
-                                                                                            <option>Chọn cấp nhân sự
+                                                                                            <option>Chọn cấp nhân sự*
                                                                                             </option>
                                                                                             <?php } else { ?>
                                                                                             <?php } ?>
@@ -266,13 +266,12 @@
 
                                                                                     <div data-bs-toggle="tooltip"
                                                                                         data-bs-placement="top"
-                                                                                        title="Chọn đơn vị mẹ">
+                                                                                        title="Chọn cấp quản lý">
                                                                                         <select name="parent"
                                                                                             class="selectpicker"
                                                                                             data-dropup-auto="false">
                                                                                             <?php if ($item->parent == null){ ?>
-                                                                                            <option value="0">Chọn đơn
-                                                                                                vị mẹ
+                                                                                            <option value="0">Chọn cấp quản lý
                                                                                             </option>
                                                                                             <?php } else { ?>
                                                                                             <?php } ?>
@@ -324,20 +323,20 @@
                                                                                 </div>
                                                                                 <div class="col-6 mb-3">
                                                                                     <input name="staffing" type="text"
-                                                                                        placeholder="Định biên*"
+                                                                                        placeholder="Định biên"
                                                                                         class="form-control"
                                                                                         data-bs-toggle="tooltip"
                                                                                         data-bs-placement="top"
-                                                                                        title="Định biên*"
+                                                                                        title="Định biên"
                                                                                         value="{{ $item->staffing }}">
                                                                                 </div>
                                                                                 <div class="col-6 mb-3">
                                                                                     <input name="wage" type="text"
-                                                                                        placeholder="Quỹ lương năm*"
+                                                                                        placeholder="Quỹ lương năm"
                                                                                         class="form-control"
                                                                                         data-bs-toggle="tooltip"
                                                                                         data-bs-placement="top"
-                                                                                        title="Quỹ lương năm*"
+                                                                                        title="Quỹ lương năm"
                                                                                         value="{{ $item->wage }}">
                                                                                 </div>
                                                                             </div>
@@ -364,13 +363,13 @@
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title text-danger"
-                                                                            id="exampleModalLabel">Xóa vị trí</h5>
+                                                                            id="exampleModalLabel">Xóa vị trí/chức danh</h5>
                                                                         <button type="button" class="btn-close"
                                                                             data-bs-dismiss="modal"
                                                                             aria-label="Close"></button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        Bạn có thực sự muốn xoá vị trí này không?
+                                                                        Bạn có thực sự muốn xoá vị trí/chức danh này không?
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button"
@@ -420,7 +419,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">Thêm mới</h5>
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Thêm mới vị trí/chức danh</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="{{ route('position.store') }}" method="POST">
@@ -438,7 +437,7 @@
                                     required>
                             </div>
                             <div class="col-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn đơn vị công tác">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn đơn vị công tác*">
                                     <select name="department_id" required class="selectpicker" data-dropup-auto="false">
                                         <option value="">Chọn đơn vị công tác*</option>
                                         @foreach ($departmentlists as $item)
@@ -505,12 +504,12 @@
 
                             </div>
                             <div class="col-6 mb-3">
-                                <input name="staffing" type="text" placeholder="Định biên*" class="form-control"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Định biên*">
+                                <input name="staffing" type="text" placeholder="Định biên" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Định biên">
                             </div>
                             <div class="col-6 mb-3">
-                                <input name="wage" type="text" placeholder="Quỹ lương năm*" class="form-control"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Quỹ lương năm*">
+                                <input name="wage" type="text" placeholder="Quỹ lương năm" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Quỹ lương năm">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy

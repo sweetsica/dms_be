@@ -87,37 +87,78 @@
                                                                     {{ $a++ }}
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->code }}">
                                                                     {{ $item->code }}
+                                                                </div>
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->name }}">
                                                                     {{ $item->name }}
+                                                                </div>
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->department_name }}">
                                                                     {{ $item->department_name }}
+                                                                </div>
+
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->position_name }}">
                                                                     {{ $item->position_name }}
+                                                                </div>
+
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->personnel_level_name }}">
                                                                     {{ $item->personnel_level_name }}
+                                                                </div>
+
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->role_name }}">
                                                                     {{ $item->role_name }}
+                                                                </div>
+
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->locality_name }}">
                                                                     {{ $item->locality_name }}
+                                                                </div>
+
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->email }}">
                                                                     {{ $item->email }}
+                                                                </div>
+
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->phone }}">
                                                                     {{ $item->phone }}
+                                                                </div>
+
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title=" {{ $item->working_form }}">
                                                                     {{ $item->working_form }}
+                                                                </div>
+
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->status }}">
                                                                     {{ $item->status }}
+                                                                </div>
                                                                 </td>
                                                                 @if ((session('user')['role_id'] == '1') )
                                                                 <td>

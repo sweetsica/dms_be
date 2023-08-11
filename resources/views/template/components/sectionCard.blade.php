@@ -4,7 +4,7 @@
         <div class="col-md-3">
             <div class="text-nowrap">Đơn vị: </div>
         </div>
-        <div class="col-md-9"><strong class="text-nowrap">Tên phòng ban</strong>
+        <div class="col-md-9"><strong class="text-nowrap">{{ Session::get('department_name') }}</strong>
         </div>
         <div class="col-md-3">
             <div class="text-nowrap">Họ và tên: </div>

@@ -242,16 +242,16 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <input type="text" value="{{ $item->name }}" name="name"
-                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên địa bàn"
+                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên địa bàn*"
                                         placeholder="Tên địa bàn*" class="form-control">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <input type="text" value="{{ $item->code }}" name="code"
-                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã địa bàn"
+                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã địa bàn*"
                                         placeholder="Mã địa bàn*" class="form-control">
                                 </div>
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Khu vực">
+                                    title="Khu vực*">
                                     {{-- <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Khu vực*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
                                     <option value="1" selected>1</option>
                                 </select> --}}
@@ -298,15 +298,15 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <input type="text" name="name" data-bs-toggle="tooltip" required
-                                    data-bs-placement="top" title="Tên địa bàn" placeholder="Tên địa bàn*"
+                                    data-bs-placement="top" title="Tên địa bàn*" placeholder="Tên địa bàn*"
                                     class="form-control">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <input type="text" name="code" data-bs-toggle="tooltip" required
-                                    data-bs-placement="top" title="Mã địa bàn" placeholder="Mã địa bàn*"
+                                    data-bs-placement="top" title="Mã địa bàn*" placeholder="Mã địa bàn*"
                                     class="form-control">
                             </div>
-                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Khu vực">
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Khu vực*">
                                 {{-- <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Khu vực*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
                                     <option value="1">1</option>
                                 </select> --}}

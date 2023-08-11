@@ -14,16 +14,29 @@ class CustomersImport implements ToModel, WithStartRow, WithStrictNullComparison
     {
         // $row['ngay_sinh'] = ($row['ngay_sinh'] == '') ? '0' : $row['ngay_sinh'];
         $nullableColumns = range(0, 30); // Generate a range from 0 to 30 as nullable columns
-        
+
         // Iterate over the nullable columns and check if the index exists
         foreach ($nullableColumns as $index) {
             if (!isset($row[$index])) {
                 $row[$index] = null; // Set the value to null if the index is undefined
+            } else if (is_string($row[$index]) && strpos($row[$index], '=') === 0) {
+                $row[$index] = 'N/A'; // Set the value to "N/A" if it starts with "=" (indicating a formula)
             }
         }
 
+        // Check if the phone value already exists in the database
+        if ($row['5'] && Customer::where('phone', $row['5'])->exists()) {
+            // Handle the duplication error
+            throw new \Exception('Trùng số điện thoại trong file Excel: ' . $row['5']);
+        }
+
+        if ($row['5'] && Customer::where('email', $row['9'])->exists()) {
+            // Handle the duplication error
+            throw new \Exception('Trùng gmail file Excel: ' . $row['9']);
+        }
+
         return new Customer([
-            'code' => 'KH-' . $row['0'],
+            'code' => null,
             'name' => $row['1'],
             'address' => $row['2'],
             'category' => $row['3'],

@@ -916,26 +916,26 @@
         });
         $("#guide").change(() => {})
 
-        // load data nhan su api
-        // function loadPersonnelData() {
-        //     const apiUrl = '/nhan_su';
-        //     const selectElement = document.getElementById('personId');
-        //     fetch(apiUrl)
-        //         .then((response) => response.json())
-        //         .then((data) => {
-        //             selectElement.innerHTML = '';
-        //             data.forEach((person) => {
-        //                 const option = document.createElement('option');
-        //                 option.value = person.id;
-        //                 option.textContent = person.name;
-        //                 selectElement.appendChild(option);
-        //             });
+        load data nhan su api
+        function loadPersonnelData() {
+            const apiUrl = '/nhan_su';
+            const selectElement = document.getElementById('personId');
+            fetch(apiUrl)
+                .then((response) => response.json())
+                .then((data) => {
+                    selectElement.innerHTML = '';
+                    data.forEach((person) => {
+                        const option = document.createElement('option');
+                        option.value = person.id;
+                        option.textContent = person.name;
+                        selectElement.appendChild(option);
+                    });
 
-        //             $('#personId').selectpicker('refresh');
-        //         })
-        //         .catch((error) => console.error('Lỗi khi gọi API:', error));
-        // }
-        // window.addEventListener('load', loadPersonnelData);
+                    $('#personId').selectpicker('refresh');
+                })
+                .catch((error) => console.error('Lỗi khi gọi API:', error));
+        }
+        window.addEventListener('load', loadPersonnelData);
 
         //load data san pham api
         function loadProductData() {
@@ -1312,9 +1312,6 @@
             const groupError = document.getElementById("groupError");
             const chanelIdError = document.getElementById("chanelIdError");
             const routeIdError = document.getElementById("routeIdError");
-
-
-
 
             if (data.success) {
                 addressError.innerHTML = "";

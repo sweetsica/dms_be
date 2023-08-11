@@ -221,16 +221,16 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <input type="text" value="{{ $item->name }}" name="name"
-                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên khu vực"
+                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên khu vực*"
                                         placeholder="Tên khu vực*" class="form-control">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <input type="text" value="{{ $item->code }}" name="code"
-                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã khu vực"
+                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã khu vực*"
                                         placeholder="Mã khu vực*" class="form-control">
                                 </div>
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Vùng">
+                                    title="Vùng*">
                                     {{-- <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Vùng*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="area" data-live-search-placeholder="Tìm kiếm..."> --}}
                                     <select name="area" required class="selectpicker" data-dropup-auto="false">
                                         <option value="{{ $item->area }}">{{ $item->department_name }}</option>
@@ -273,15 +273,15 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <input type="text" name="name" data-bs-toggle="tooltip" required
-                                    data-bs-placement="top" title="Tên khu vực" placeholder="Tên khu vực*"
+                                    data-bs-placement="top" title="Tên khu vực*" placeholder="Tên khu vực*"
                                     class="form-control">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <input type="text" name="code" data-bs-toggle="tooltip" required
-                                    data-bs-placement="top" title="Mã khu vực" placeholder="Mã khu vực*"
+                                    data-bs-placement="top" title="Mã khu vực*" placeholder="Mã khu vực*"
                                     class="form-control">
                             </div>
-                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Vùng">
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Vùng*">
                                 <select name="area" required class="selectpicker" data-dropup-auto="false">
                                     <option value="">Chọn vùng*</option>
                                     @foreach ($department as $item)

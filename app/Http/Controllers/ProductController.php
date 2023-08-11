@@ -169,7 +169,7 @@ class ProductController extends Controller
                     'product_id' => $product->id
                 ]);
                 Session::flash('success', "Thêm sản phẩm thành công");
-                return back();
+                return redirect()->route('product.show', $product->id);
             } else {
                 Session::flash('error', "Vui lòng thử lại sau!!");
                 return back();
@@ -242,8 +242,9 @@ class ProductController extends Controller
                 'branch' => 'required',
                 'status' => 'required'
             ]);
-
-            $data['thumbnail'] = $this->uploadFileToRemoteHost($request->file);
+            if($request->file){
+                $data['thumbnail'] = $this->uploadFileToRemoteHost($request->file);
+            }
 
             $product = Product::findOrFail($id);
             if ($product) {
