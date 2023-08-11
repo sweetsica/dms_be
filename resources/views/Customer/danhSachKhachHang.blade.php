@@ -193,15 +193,16 @@
                                                         </td>
                                                         <td>
                                                             <div class="overText center" data-bs-toggle="tooltip"
-                                                                data-bs-placement="top" title="{{ $item->route->name }}">
-                                                                {{ $item->route->name }}
+                                                                data-bs-placement="top"
+                                                                title="{{ $item->route->name ?? '' }}">
+                                                                {{ $item->route->name ?? '' }}
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="overText center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top"
-                                                                title="{{ $item->person->name }}">
-                                                                {{ $item->person->name }}
+                                                                title="{{ $item->person->name ?? '' }}">
+                                                                {{ $item->person->name ?? '' }}
                                                             </div>
                                                         </td>
                                                         <td>
@@ -446,7 +447,7 @@
 
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Nhân sự thu thập">
-                                    <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
+                                    <select {{ session('user')['role_id'] != '1' ? "disabled" :"" }} class="selectpicker" data-dropup-auto="false" data-width="100%" required
                                         data-live-search="true" title="Nhân sự thu thập*"
                                         data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
                                         data-size="3" name="personId" data-live-search-placeholder="Tìm kiếm...">
@@ -459,7 +460,7 @@
                                     </select>
                                 </div>
                                 @php
-                                    $selectedValues = json_decode($item->productId);
+                                    $selectedValues = json_decode($item->productId) ?? [];
                                 @endphp
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Sản phẩm quan tâm">
@@ -702,12 +703,14 @@
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="personId" id="personId"
                                     data-live-search-placeholder="Tìm kiếm...">
                                     @if (session('user')['role_id'] == '1')
-                                        <option>{{ session('user')['name'] ?? '' }}</option>
                                         @foreach ($listPerson as $Person)
-                                            <option value="{{ $Person->id }}">{{ $Person->name }}</option>
+                                            <option value="{{ $Person->id }}"
+                                                {{ $Person->id == session('user')['id'] ? 'selected' : '' }}>
+                                                {{ $Person->name }}</option>
                                         @endforeach
-                                    @elseif (session('user')['role_id'] != '1')
-                                        <option>{{ session('user')['name'] ?? '' }}</option>
+                                    @else
+                                        <option disabled selected value="{{ session('user')['id'] }}">
+                                            {{ session('user')['name'] ?? '' }}</option>
                                     @endif
                                 </select>
                                 <div class="error-text" id="personIdError" style="color: red;"></div>
