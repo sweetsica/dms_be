@@ -272,7 +272,7 @@ class ProductController extends Controller
         $product->delete();
 
         Session::flash('success', "Xoá sản phẩm thành công");
-        return back();
+        return redirect()->route('product.list');
     }
 
     public function getAll()

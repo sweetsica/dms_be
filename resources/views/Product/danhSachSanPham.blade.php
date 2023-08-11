@@ -249,7 +249,9 @@
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Phân loại">
                                     <select name="type" required class="selectpicker" data-dropup-auto="false"
-                                        data-width="100%" title="Phân loại" data-size="3">
+                                        data-width="100%" data-size="3" data-live-search="true"
+                                        data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
+                                        data-live-search-placeholder="Tìm kiếm...">
                                         <option value="Sản phẩm" {{ $item->type == 'Sản phẩm' ? 'selected' : '' }}>Sản
                                             phẩm</option>
                                         <option value="Phiên bản" {{ $item->type == 'Phiên bản' ? 'selected' : '' }}>Phiên
@@ -263,7 +265,9 @@
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Ngành hàng">
                                     <select name="branch" required class="selectpicker" data-dropup-auto="false"
-                                        data-width="100%" title="Ngành hàng" data-size="3">
+                                        data-width="100%" data-size="3" data-live-search="true"
+                                        data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
+                                        data-live-search-placeholder="Tìm kiếm...">
                                         <option value="Sản phẩm dẫn"
                                             {{ $item->branch == 'Sản phẩm dẫn' ? 'selected' : '' }}>Sản phẩm dẫn</option>
                                         <option value="Sản phẩm tư vấn"
@@ -278,9 +282,9 @@
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Trạng thái">
                                     <select required name="status" class="selectpicker" data-dropup-auto="false"
-                                        data-width="100%" data-live-search="true" title="Trạng thái"
-                                        data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
-                                        data-size="3" data-live-search-placeholder="Tìm kiếm...">
+                                        data-width="100%" data-live-search="true" data-select-all-text="Chọn tất cả"
+                                        data-deselect-all-text="Bỏ chọn" data-size="3"
+                                        data-live-search-placeholder="Tìm kiếm...">
                                         <option value="1" {{ $item->status == 1 ? 'selected' : '' }}>Hoạt động
                                         </option>
                                         <option value="0" {{ $item->status == 0 ? 'selected' : '' }}>Khoá</option>
@@ -365,7 +369,9 @@
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Phân loại*">
                                 <select required name="type" class="selectpicker" data-dropup-auto="false"
-                                    data-width="100%" title="Phân loại*" data-size="3">
+                                    data-width="100%" data-size="3" data-live-search="true"
+                                    data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
+                                    data-live-search-placeholder="Tìm kiếm...">
                                     <option value="Sản phẩm">Sản phẩm</option>
                                     <option value="Phiên bản">Phiên bản</option>
                                     <option value="Tuỳ chọn">Tuỳ chọn</option>
@@ -375,7 +381,9 @@
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Ngành hàng*">
                                 <select required name="branch" class="selectpicker" data-dropup-auto="false"
-                                    data-width="100%" title="Ngành hàng*" data-size="3">
+                                    data-width="100%" data-size="3" data-live-search="true"
+                                    data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
+                                    data-live-search-placeholder="Tìm kiếm...">
                                     <option value="Sản phẩm dẫn">Sản phẩm dẫn</option>
                                     <option value="Sản phẩm tư vấn">Sản phẩm tư vấn</option>
                                     <option value="Sản phẩm mới">Sản phẩm mới</option>
