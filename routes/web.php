@@ -114,6 +114,7 @@ Route::middleware(['auth.role'])->group(function () {
 
     Route::get('danh-sach-tuyen', [RouteDirectionController::class, 'view'])->name('routeDirection.view');
     Route::post('danh-sach-tuyen', [RouteDirectionController::class, 'store'])->name('routeDirection.store');
+    Route::get('chi-tiet-tuyen/{id}', [RouteDirectionController::class, 'show'])->name('routeDirection.show');
     Route::put('sua-tuyen/{id}', [RouteDirectionController::class, 'update'])->name('routeDirection.update');
     Route::delete('xoa-tuyen/{id}', [RouteDirectionController::class, 'destroy'])->name('routeDirection.destroy');
 

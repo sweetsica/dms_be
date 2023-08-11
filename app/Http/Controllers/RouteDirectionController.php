@@ -139,4 +139,8 @@ class RouteDirectionController extends Controller
         $routeList = RouteDirection::all();
         return $routeList;
     }
+
+    public function show($id) {
+        return view('RouteDirection.detailTuyen');
+    }
 }
