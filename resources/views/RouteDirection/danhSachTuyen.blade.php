@@ -116,7 +116,7 @@
                                                             ->pluck('count', 'routeId');
                                                     @endphp
                                                     <tr class="table-row" data-bs-toggle="modal"
-                                                        data-bs-target="#info{{ $item->id }}" role="button">
+                                                    data-href="/route_direction_getInfo/{{ $item['id'] }}" role="button">
 
                                                         <td>
                                                             <div class="overText text-center">

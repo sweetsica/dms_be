@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 255);
             $table->string('description', 255)->nullable();
-            $table->unsignedBigInteger('parent');
+            $table->unsignedBigInteger('parent')->nullable();
             $table->string('code', 255);
             $table->unsignedBigInteger('staffing')->nullable();
             $table->unsignedBigInteger('wage')->nullable();

@@ -63,6 +63,8 @@ Route::middleware(['auth.role'])->group(function () {
 
     Route::post('/delete-customer/{id}', [CustomerController::class, 'delete'])->name('delete.customer');
 
+    Route::get('chi-tiet-khach-hang/{id}', [CustomerController::class, 'show'])->name('customer-detail.list');
+
     Route::get('/nhan_su', [PersonnelController::class, 'view'])->name('personel.view');
 
     Route::get('/danh_sach_san_pham_cho_select', [ProductController::class, 'getAll'])->name('personal.getAll');
@@ -70,6 +72,10 @@ Route::middleware(['auth.role'])->group(function () {
     Route::get('/department_getAll', [DepartmentController::class, 'getAll'])->name('department.getAll');
 
     Route::get('/route_direction_getAll', [RouteDirectionController::class, 'getAll'])->name('routeDirection.getAll');
+
+    Route::get('/route_direction_getDirection/{id}', [RouteDirectionController::class, 'getCoordinatesDirection'])->name('routeDirection.getDirection');
+
+    Route::get('/route_direction_getInfo/{id}', [RouteDirectionController::class, 'getInfo'])->name('routeDirection.getInfo');
 
     // Route::get('/map/{id}', [RouteDirectionController::class, 'showMap'])->name('map');
 
@@ -96,7 +102,7 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('them-moi-san-pham', [ProductController::class, 'store'])->name('product.store');
     Route::put('sua-san-pham/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('xoa-san-pham/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
-    
+
     Route::get('chi-tiet-san-pham/{id}', [ProductController::class, 'show'])->name('product.show');
     Route::post('them-moi-chi-tiet/{id}', [ProductController::class, 'create'])->name('product.create');
     Route::post('them-san-pham-lien-quan/{id}', [ProductController::class, 'related'])->name('product.related');
@@ -128,7 +134,6 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('danh-sach-khu-vucx/{id}', [AreaController::class, 'destroy'])->name('area.destroy');
 
 
-    Route::get('chi-tiet-khach-hang/{id}', [CustomerController::class, 'show'])->name('customer-detail.list');
 
     Route::get('department', [DepartmentController::class, 'index'])->name('department.index');
     Route::post('department', [DepartmentController::class, 'store'])->name('department.store');
@@ -173,5 +178,3 @@ Route::middleware(['auth.role'])->group(function () {
 Route::fallback(function () {
     return view('404');
 });
-
-

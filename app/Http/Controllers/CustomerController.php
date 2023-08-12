@@ -35,9 +35,11 @@ class CustomerController extends Controller
     public function show($id)
     {
         $customer = Customer::with('channel', 'route', 'person')->findOrFail($id);
-        return view('other.chiTietKhachHang')->with(compact(
-            "customer"
-        ));
+        return view('Customer.chiTietKhachHang')->with(
+            compact(
+                "customer"
+            )
+        );
     }
 
     public function store(Request $request)
@@ -100,8 +102,9 @@ class CustomerController extends Controller
                 'listRoute',
                 'listChannel',
                 "pagination"
-            ));
-        } catch (Exception $e) {
+            )
+            );
+        } catch (\Exception $e) {
             Session::flash('error', $e);
             return back();
         }

@@ -9,7 +9,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
-class PositionDepartmentSeeder extends Seeder
+class PositionDepartmentTBSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -26,7 +26,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '1',
             'wage' => '4000000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             //2
@@ -38,7 +38,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '1',
             'wage' => '80000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             //3
@@ -50,7 +50,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '1',
             'wage' => '80000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -61,7 +61,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '1',
             'wage' => '80000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -72,7 +72,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '1',
             'wage' => '80000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -83,7 +83,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '1',
             'wage' => '80000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -94,7 +94,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '1',
             'wage' => '80000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -105,7 +105,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '1',
             'wage' => '80000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -116,7 +116,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '1',
             'wage' => '80000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -127,7 +127,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '8',
             'wage' => '4000000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -138,7 +138,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '1',
             'wage' => '80000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -149,7 +149,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '1',
             'wage' => '80000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -160,7 +160,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '1',
             'wage' => '80000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -171,7 +171,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '1',
             'wage' => '80000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -182,7 +182,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '5',
             'wage' => '20000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -193,7 +193,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '5',
             'wage' => '20000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -204,7 +204,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '1',
             'wage' => '20000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -215,7 +215,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '1',
             'wage' => '20000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -226,7 +226,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '1',
             'wage' => '20000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -237,7 +237,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '1',
             'wage' => '200000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -248,7 +248,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '1',
             'wage' => '300000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -259,7 +259,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '1',
             'wage' => '300000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -270,7 +270,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '1',
             'wage' => '3000000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -281,7 +281,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '1',
             'wage' => '200000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -292,7 +292,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '2',
             'wage' => '300000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -303,7 +303,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '2',
             'wage' => '200000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -314,7 +314,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '2',
             'wage' => '200000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -325,7 +325,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '10',
             'wage' => '400000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -336,7 +336,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '2',
             'wage' => '300000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -347,7 +347,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '3',
             'wage' => '200000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -358,7 +358,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '1',
             'wage' => '300000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -369,7 +369,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '3',
             'wage' => '300000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -380,7 +380,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '5',
             'wage' => '500000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -391,7 +391,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '5',
             'wage' => '300000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -402,7 +402,7 @@ class PositionDepartmentSeeder extends Seeder
             'staffing' => '2',
             'wage' => '80000000',
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -410,21 +410,21 @@ class PositionDepartmentSeeder extends Seeder
             'personnel_level' => 'Nhân viên',
             'department_id' => '19',
             'description' => '',
-            'staffing' => '',
-            'wage' => '',
+            'staffing' => null,
+            'wage' => null,
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
             'name' => 'CTV',
             'personnel_level' => 'Nhân viên',
-            'department_id' => '',
+            'department_id' => '8',
             'description' => '',
-            'staffing' => '',
-            'wage' => '',
+            'staffing' => null,
+            'wage' => null,
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -432,10 +432,10 @@ class PositionDepartmentSeeder extends Seeder
             'personnel_level' => 'Nhân viên',
             'department_id' => '16',
             'description' => '',
-            'staffing' => '',
-            'wage' => '',
+            'staffing' => null,
+            'wage' => null,
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
         Position::create([
             'code' => '',
@@ -443,10 +443,10 @@ class PositionDepartmentSeeder extends Seeder
             'personnel_level' => 'Nhân viên',
             'department_id' => '8',
             'description' => '',
-            'staffing' => '',
-            'wage' => '',
+            'staffing' => null,
+            'wage' => null,
             'pack' => 'Pack Quản lý',
-            'parent' => '',
+            'parent' => null,
         ]);
     }
 }
