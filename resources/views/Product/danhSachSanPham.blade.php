@@ -20,7 +20,7 @@
         $queryString = request()->query();
     
         $queryString[$pageName] = $pageNumber;
-        return route('customers', $queryString);
+        return route('product.list', $queryString);
     }
     
     // function isFiltering($filterNames)
@@ -128,7 +128,8 @@
                                                         </td>
 
                                                         <td class="list_img">
-                                                            <div class=" img-product-item d-flex justify-content-center align-items-center"">
+                                                            <div
+                                                                class=" img-product-item d-flex justify-content-center align-items-center"">
                                                                 <img class="" src="{{ $item->thumbnail }}" />
                                                             </div>
                                                         </td>
@@ -248,7 +249,9 @@
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Phân loại">
                                     <select name="type" required class="selectpicker" data-dropup-auto="false"
-                                        data-width="100%" title="Phân loại" data-size="3">
+                                        data-width="100%" data-size="3" data-live-search="true"
+                                        data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
+                                        data-live-search-placeholder="Tìm kiếm...">
                                         <option value="Sản phẩm" {{ $item->type == 'Sản phẩm' ? 'selected' : '' }}>Sản
                                             phẩm</option>
                                         <option value="Phiên bản" {{ $item->type == 'Phiên bản' ? 'selected' : '' }}>Phiên
@@ -262,7 +265,9 @@
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Ngành hàng">
                                     <select name="branch" required class="selectpicker" data-dropup-auto="false"
-                                        data-width="100%" title="Ngành hàng" data-size="3">
+                                        data-width="100%" data-size="3" data-live-search="true"
+                                        data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
+                                        data-live-search-placeholder="Tìm kiếm...">
                                         <option value="Sản phẩm dẫn"
                                             {{ $item->branch == 'Sản phẩm dẫn' ? 'selected' : '' }}>Sản phẩm dẫn</option>
                                         <option value="Sản phẩm tư vấn"
@@ -277,9 +282,9 @@
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Trạng thái">
                                     <select required name="status" class="selectpicker" data-dropup-auto="false"
-                                        data-width="100%" data-live-search="true" title="Trạng thái"
-                                        data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
-                                        data-size="3" data-live-search-placeholder="Tìm kiếm...">
+                                        data-width="100%" data-live-search="true" data-select-all-text="Chọn tất cả"
+                                        data-deselect-all-text="Bỏ chọn" data-size="3"
+                                        data-live-search-placeholder="Tìm kiếm...">
                                         <option value="1" {{ $item->status == 1 ? 'selected' : '' }}>Hoạt động
                                         </option>
                                         <option value="0" {{ $item->status == 0 ? 'selected' : '' }}>Khoá</option>
@@ -345,7 +350,7 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Thêm sản phẩm</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="formThemCapPhat" method="POST" action="{{ route('product.store') }}"
+                <form id="addForm" method="POST" action="{{ route('product.store') }}"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
@@ -364,7 +369,9 @@
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Phân loại*">
                                 <select required name="type" class="selectpicker" data-dropup-auto="false"
-                                    data-width="100%" title="Phân loại*" data-size="3">
+                                    data-width="100%" data-size="3" data-live-search="true"
+                                    data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
+                                    data-live-search-placeholder="Tìm kiếm...">
                                     <option value="Sản phẩm">Sản phẩm</option>
                                     <option value="Phiên bản">Phiên bản</option>
                                     <option value="Tuỳ chọn">Tuỳ chọn</option>
@@ -374,7 +381,9 @@
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Ngành hàng*">
                                 <select required name="branch" class="selectpicker" data-dropup-auto="false"
-                                    data-width="100%" title="Ngành hàng*" data-size="3">
+                                    data-width="100%" data-size="3" data-live-search="true"
+                                    data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
+                                    data-live-search-placeholder="Tìm kiếm...">
                                     <option value="Sản phẩm dẫn">Sản phẩm dẫn</option>
                                     <option value="Sản phẩm tư vấn">Sản phẩm tư vấn</option>
                                     <option value="Sản phẩm mới">Sản phẩm mới</option>
@@ -420,7 +429,11 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
-                        <button type="submit" class="btn btn-danger">Lưu</button>
+                        <button id="loadingBtn" style="display: none;" class="btn btn-danger" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button>
+                        <button id="submitBtn" type="submit" class="btn btn-danger">Lưu</button>
                     </div>
                 </form>
             </div>
@@ -606,4 +619,20 @@
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/components/dataHrefTable.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            // Handle form submission
+            $('#addForm').submit(function(event) {
+                // Prevent the default form submission
+                event.preventDefault();
+
+                // Show the loading button and hide the submit button
+                $('#submitBtn').hide();
+                $('#loadingBtn').show();
+
+                // Submit the form
+                $(this).unbind('submit').submit();
+            });
+        });
+    </script>
 @endsection

@@ -11,7 +11,7 @@
     </style>
 @endsection
 @php
-    
+
 @endphp
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
@@ -20,7 +20,7 @@
             <div class="main">
                 <div class="container-fluid">
                     {{-- <div class="card_template-wrapper">
-                        
+
                     </div> --}}
                     <div class="mainSection_heading">
                         <h5 class="mainSection_heading-title">Chi tiết khách hàng</h5>

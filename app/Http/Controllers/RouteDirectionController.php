@@ -128,7 +128,7 @@ class RouteDirectionController extends Controller
         $route->delete();
 
         Session::flash('success', "Xoá tuyến thành công");
-        return back();
+        return redirect()->route('routeDirection.view');
     }
 
     public function getAll()

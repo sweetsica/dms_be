@@ -20,7 +20,7 @@
         $queryString = request()->query();
 
         $queryString[$pageName] = $pageNumber;
-        return route('version.list', $queryString);
+        return route('routeDirection.view', $queryString);
     }
 
     // function isFiltering($filterNames)
