@@ -43,7 +43,13 @@ class RouteDirectionController extends Controller
             $listRoute = RouteDirection::query();
             if ($q) {
                 $listRoute = $listRoute->where('code', 'like', '%' . $q . '%')
-                    ->orWhere('name', 'like', '%' . $q . '%');
+                    ->orWhere('name', 'like', '%' . $q . '%')
+                    ->orWhereHas('personnel', function ($routeQuery) use ($q) {
+                        $routeQuery->where('name', 'like', '%' . $q . '%');
+                    })
+                    ->orWhereHas('areas', function ($routeQuery) use ($q) {
+                        $routeQuery->where('name', 'like', '%' . $q . '%');
+                    });
             }
 
             $listRoute = $listRoute->with('personnel', 'areas')->orderByDesc('id')->paginate($limit);
@@ -141,10 +147,10 @@ class RouteDirectionController extends Controller
     {
         $route = RouteDirection::find($routeId);
         $routeList = RouteDirection::join('personnel', 'personnel.id', '=', 'route_directions.personId')
-            ->join('area', 'area.id', '=', 'route_directions.areaId')
+            ->join('locality', 'locality.id', '=', 'route_directions.areaId')
             ->select(
                 'personnel.name as personnel_name',
-                'area.name as area_name'
+                'locality.name as area_name'
             )
             ->where('route_directions.id', '=', $routeId)
             ->get();
