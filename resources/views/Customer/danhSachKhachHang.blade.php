@@ -10,31 +10,19 @@
     </style>
 @endsection
 @php
+    function getPaginationLink($link, $pageName)
+    {
+        if (!isset($link['url'])) {
+            return '#';
+        }
 
-    // function getPaginationLink($link, $pageName)
-    // {
-    // if (!isset($link->url)) {
-    // return '#';
-    // }
+        $pageNumber = explode('?page=', $link['url'])[1];
 
-    // $pageNumber = explode('?page=', $link->url)[1];
+        $queryString = request()->query();
 
-    // $queryString = request()->query();
-
-    // $queryString[$pageName] = $pageNumber;
-    // return route('timekeeping.list', $queryString);
-    // }
-
-    // function isFiltering($filterNames)
-    // {
-    // $filters = request()->query();
-    // foreach ($filterNames as $filterName) {
-    // if (isset($filters[$filterName]) && $filters[$filterName] != '') {
-    // return true;
-    // }
-    // }
-    // return false;
-    // }
+        $queryString[$pageName] = $pageNumber;
+        return route('customers', $queryString);
+    }
 @endphp
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
@@ -207,15 +195,16 @@
                                                         </td>
                                                         <td>
                                                             <div class="overText center" data-bs-toggle="tooltip"
-                                                                data-bs-placement="top" title="{{ $item->route->name }}">
-                                                                {{ $item->route->name }}
+                                                                data-bs-placement="top"
+                                                                title="{{ $item->route->name ?? '' }}">
+                                                                {{ $item->route->name ?? '' }}
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="overText center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top"
-                                                                title="{{ $item->person->name }}">
-                                                                {{ $item->person->name }}
+                                                                title="{{ $item->person->name ?? '' }}">
+                                                                {{ $item->person->name ?? '' }}
                                                             </div>
                                                         </td>
                                                         <td>
@@ -258,31 +247,18 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
-                                        <nav aria-label="Page navigation example" class="float-end mt-3"
-                                            id="target-pagination">
-                                            <ul class="pagination">
-                                                {{-- @foreach ($documents->links as $link)
-                                            <li class="page-item {{ $link->active ? 'active' : '' }}">
-                                                <a class="page-link" href="{{ getPaginationLink($link, 'page') }}"
-                                                    aria-label="Previous">
-                                                    <span aria-hidden="true">{!! $link->label !!}</span>
-                                                </a>
-                                            </li>
-                                            @endforeach --}}
-                                            </ul>
-                                        </nav>
                                     </div>
                                     <nav aria-label="Page navigation example" class="float-end mt-3"
                                         id="target-pagination">
                                         <ul class="pagination">
-                                            {{-- @foreach ($listUsers->links as $link)
-                                        <li class="page-item {{ $link->active ? 'active' : '' }}">
-                                            <a class="page-link" href="{{ getPaginationLink($link, 'page') }}"
-                                                aria-label="Previous">
-                                                <span aria-hidden="true">{!! $link->label !!}</span>
-                                            </a>
-                                        </li>
-                                        @endforeach --}}
+                                            @foreach ($pagination['links'] as $link)
+                                                <li class="page-item {{ $link['active'] ? 'active' : '' }}">
+                                                    <a class="page-link" href="{{ getPaginationLink($link, 'page') }}"
+                                                        aria-label="Previous">
+                                                        <span aria-hidden="true">{!! $link['label'] !!}</span>
+                                                    </a>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </nav>
                                 </div>
@@ -337,7 +313,12 @@
                                 <div class="col-md-12 mb-3">
                                     <div class="card-title">1. Thông tin chung</div>
                                 </div>
-                                <div class="col-md-4 mb-3">
+                                <div class="col-md-3 mb-3">
+                                    <input type="text" value="{{ $item->code }}" name="code"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Mã khách hàng"
+                                        placeholder="Mã khách hàng*" class="form-control">
+                                </div>
+                                <div class="col-md-3 mb-3">
                                     <input type="text" value="{{ $item->name }}" name="name"
                                         data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên khách hàng"
                                         placeholder="Tên khách hàng*" class="form-control">
@@ -345,7 +326,7 @@
 
                                 <div class="col-md-4 mb-3">
                                     <input type="text" value="{{ $item->phone }}" name="phone"
-                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Số điện thoại"
+                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Số điện thoại"
                                         placeholder="Số điện thoại*" class="form-control">
                                 </div>
                                 <div class="col-md-4 mb-3">
@@ -455,10 +436,11 @@
 
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Nhân sự thu thập">
-                                    <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
-                                        data-live-search="true" title="Nhân sự thu thập*"
-                                        data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
-                                        data-size="3" name="personId" data-live-search-placeholder="Tìm kiếm...">
+                                    <select {{ session('user')['role_id'] != '1' ? 'disabled' : '' }} class="selectpicker"
+                                        data-dropup-auto="false" data-width="100%" required data-live-search="true"
+                                        title="Nhân sự thu thập*" data-select-all-text="Chọn tất cả"
+                                        data-deselect-all-text="Bỏ chọn" data-size="3" name="personId"
+                                        data-live-search-placeholder="Tìm kiếm...">
                                         @foreach ($listPerson as $per)
                                             <option value="{{ $per->id }}"
                                                 {{ $per->id == $item->personId ? 'selected' : '' }}>
@@ -468,11 +450,11 @@
                                     </select>
                                 </div>
                                 @php
-                                    $selectedValues = json_decode($item->productId);
+                                    $selectedValues = json_decode($item->productId) ?? [];
                                 @endphp
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Sản phẩm quan tâm">
-                                    <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
+                                    <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                         data-live-search="true" title="Sản phẩm quan tâm*"
                                         data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
                                         data-size="3" name="productId[]" data-live-search-placeholder="Tìm kiếm..."
@@ -490,7 +472,7 @@
                                 </div>
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Nhóm khách hàng">
-                                    <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
+                                    <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                         data-live-search="true" title="Nhóm khách hàng*"
                                         data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
                                         data-size="3" name="groupId" data-live-search-placeholder="Tìm kiếm...">
@@ -525,7 +507,7 @@
 
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Tuyến">
-                                    <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
+                                    <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                         data-live-search="true" title="Tuyến*" data-select-all-text="Chọn tất cả"
                                         data-deselect-all-text="Bỏ chọn" data-size="3" name="routeId"
                                         data-live-search-placeholder="Tìm kiếm...">
@@ -540,7 +522,7 @@
 
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Kênh khách hàng">
-                                    <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
+                                    <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                         data-live-search="true" title="Kênh khách hàng*"
                                         data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
                                         data-size="3" name="chanelId" data-live-search-placeholder="Tìm kiếm...">
@@ -589,9 +571,7 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Thêm khách hàng</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="customerForm"
-                method="POST" action="{{ route('create-customer') }}"
-                >
+                <form id="customerForm" method="POST" action="{{ route('create-customer') }}">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -599,67 +579,71 @@
                                 <div class="card-title">1. Thông tin chung</div>
                             </div>
                             <div class="col-md-3 mb-3">
-                                <input type="text" name="code" data-bs-toggle="tooltip"
-                                    data-bs-placement="top" title="Mã khách hàng" placeholder="Mã khách hàng*"
-                                    class="form-control">
-                                    {{-- <div class="error-text" id="codeError" style="color: red;"></div> --}}
+                                <input value="{{ old('code') }}" type="text" name="code"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Mã khách hàng"
+                                    placeholder="Mã khách hàng*" class="form-control">
+                                {{-- <div class="error-text" id="codeError" style="color: red;"></div> --}}
                             </div>
                             <div class="col-md-3 mb-3">
-                                <input type="text" name="name" data-bs-toggle="tooltip"
-                                    data-bs-placement="top" title="Tên khách hàng" placeholder="Tên khách hàng*"
-                                    class="form-control">
-                                    <div class="error-text" id="nameError" style="color: red;"></div>
+                                <input value="{{ old('name') }}" type="text" name="name"
+                                    data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên khách hàng"
+                                    placeholder="Tên khách hàng*" class="form-control">
+                                <div class="error-text" id="nameError" style="color: red;"></div>
                             </div>
 
                             <div class="col-md-3 mb-3">
-                                <input type="text" name="phone" data-bs-toggle="tooltip"
-                                    data-bs-placement="top" title="Số điện thoại" placeholder="Số điện thoại*"
-                                    class="form-control">
-                                    <div class="error-text" id="phoneError" style="color: red;"></div>
+                                <input value="{{ old('phone') }}" type="text" name="phone"
+                                    data-bs-toggle="tooltip" required data-bs-placement="top" title="Số điện thoại"
+                                    placeholder="Số điện thoại*" class="form-control">
+                                <div class="error-text" id="phoneError" style="color: red;"></div>
                             </div>
                             <div class="col-md-3 mb-3">
-                                <input type="text" name="email" data-bs-toggle="tooltip"
-                                    data-bs-placement="top" title="Email" placeholder="Email*" class="form-control">
+                                <input value="{{ old('email') }}" type="text" name="email"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Email" placeholder="Email*"
+                                    class="form-control">
                             </div>
                             <div class="col-md-12 mb-3">
                                 <div class="card-title">2. Tổ chức</div>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <input type="text" name="companyName" data-bs-toggle="tooltip"
-                                    data-bs-placement="top" title="Tên công ty" placeholder="Tên công ty"
-                                    class="form-control">
+                                <input value="{{ old('companyName') }}" type="text" name="companyName"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Tên công ty"
+                                    placeholder="Tên công ty" class="form-control">
                             </div>
                             <div class="col-md-4 mb-3">
-                                <input type="text" name="personContact" data-bs-toggle="tooltip"
-                                    data-bs-placement="top" title="Người đại diện" placeholder="Người đại diện"
-                                    class="form-control">
+                                <input value="{{ old('personContact') }}" type="text" name="personContact"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Người đại diện"
+                                    placeholder="Người đại diện" class="form-control">
                             </div>
                             <div class="col-md-4 mb-3">
-                                <input type="text" name="career" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Chức danh" placeholder="Chức danh" class="form-control">
+                                <input value="{{ old('career') }}" type="text" name="career"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Chức danh"
+                                    placeholder="Chức danh" class="form-control">
                             </div>
                             <div class="col-md-4 mb-3">
-                                <input type="text" name="taxCode" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Mã số thuế" placeholder="Mã số thuế" class="form-control">
+                                <input value="{{ old('taxCode') }}" type="text" name="taxCode"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Mã số thuế"
+                                    placeholder="Mã số thuế" class="form-control">
                             </div>
                             <div class="col-md-4 mb-3">
-                                <input type="text" name="companyPhoneNumber" data-bs-toggle="tooltip"
-                                    data-bs-placement="top" title="Số điện thoại công ty"
+                                <input value="{{ old('companyPhoneNumber') }}" type="text" name="companyPhoneNumber"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Số điện thoại công ty"
                                     placeholder="Số điện thoại công ty" class="form-control">
                             </div>
                             <div class="col-md-4 mb-3">
-                                <input type="text" name="companyEmail" data-bs-toggle="tooltip"
-                                    data-bs-placement="top" title="Email công ty" placeholder="Email công ty"
-                                    class="form-control">
+                                <input value="{{ old('companyEmail') }}" type="text" name="companyEmail"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Email công ty"
+                                    placeholder="Email công ty" class="form-control">
                             </div>
                             <div class="col-md-4 mb-3">
-                                <input type="text" name="accountNumber" data-bs-toggle="tooltip"
-                                    data-bs-placement="top" title="Số tài khoản" placeholder="Số tài khoản"
-                                    class="form-control">
+                                <input value="{{ old('accountNumber') }}" type="text" name="accountNumber"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Số tài khoản"
+                                    placeholder="Số tài khoản" class="form-control">
                             </div>
                             <div class="col-md-8 mb-3">
-                                <input type="text" name="bankOpen" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Mở tại ngân hàng" placeholder="Mở tại ngân hàng" class="form-control">
+                                <input value="{{ old('bankOpen') }}" type="text" name="bankOpen"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Mở tại ngân hàng"
+                                    placeholder="Mở tại ngân hàng" class="form-control">
                             </div>
 
                             <div class="col-md-12 mb-3">
@@ -667,7 +651,7 @@
                             </div>
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Tỉnh/thành">
-                                <select class="selectpicker"  data-dropup-auto="false" data-width="100%"
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Tỉnh/thành*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="city" id="city"
                                     data-live-search-placeholder="Tìm kiếm...">
@@ -676,7 +660,7 @@
                             </div>
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Quận/huyện">
-                                <select class="selectpicker"  data-dropup-auto="false" data-width="100%"
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Quận/huyện*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="district" id="district"
                                     data-live-search-placeholder="Tìm kiếm...">
@@ -685,7 +669,7 @@
                             </div>
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Phường/xã">
-                                <select class="selectpicker"  data-dropup-auto="false" data-width="100%"
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Phường/xã*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="guide" id="guide"
                                     data-live-search-placeholder="Tìm kiếm...">
@@ -695,7 +679,7 @@
                             <div class="col-md-12 mb-3">
                                 <input type="text" id="addressInput" name="address" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ*" class="form-control">
-                                    <div class="error-text" id="addressError" style="color: red;"></div>
+                                <div class="error-text" id="addressError" style="color: red;"></div>
                             </div>
                             <div id="map" style="height: 300px; display: none"></div>
                             <div class="col-md-12 mb-3">
@@ -705,16 +689,18 @@
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Nhân sự thu thập">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                    data-live-search="true"  data-select-all-text="Chọn tất cả"
+                                    data-live-search="true" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="personId" id="personId"
                                     data-live-search-placeholder="Tìm kiếm...">
-                                    @if((session('user')['role_id'] == '1'))
-                                    <option>{{ session('user')['name'] ?? "" }}</option>
-                                    @foreach ($listPerson as  $Person)
-                                        <option value="{{$Person->id}}">{{$Person->name}}</option>
-                                    @endforeach
-                                    @elseif ((session('user')['role_id'] != '1'))
-                                    <option>{{ session('user')['name'] ?? "" }}</option>
+                                    @if (session('user')['role_id'] == '1')
+                                        @foreach ($listPerson as $Person)
+                                            <option value="{{ $Person->id }}"
+                                                {{ $Person->id == session('user')['id'] ? 'selected' : '' }}>
+                                                {{ $Person->name }}</option>
+                                        @endforeach
+                                    @else
+                                        <option disabled selected value="{{ session('user')['id'] }}">
+                                            {{ session('user')['name'] ?? '' }}</option>
                                     @endif
                                 </select>
                                 <div class="error-text" id="personIdError" style="color: red;"></div>
@@ -741,8 +727,8 @@
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="group" id="group"
                                     data-live-search-placeholder="Tìm kiếm...">
                                     {{-- <option value=""></option> --}}
-                                    @foreach ($listgroup as  $gr)
-                                        <option value="{{$gr->id}}">{{$gr->name}}</option>
+                                    @foreach ($listgroup as $gr)
+                                        <option value="{{ $gr->id }}">{{ $gr->name }}</option>
                                     @endforeach
 
                                 </select>
@@ -753,7 +739,7 @@
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Tuyến*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="routeId" id="routeId"
-                                    data-live-search-placeholder="Tìm kiếm..." >
+                                    data-live-search-placeholder="Tìm kiếm...">
                                 </select>
                                 <div class="error-text" id="routeIdError" style="color: red;"></div>
                             </div>
@@ -770,7 +756,7 @@
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Trạng thái">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                    data-live-search="true"  data-select-all-text="Chọn tất cả"
+                                    data-live-search="true" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="status"
                                     data-live-search-placeholder="Tìm kiếm...">
                                     <option value="Trinh sát">Trinh sát</option>
@@ -1013,8 +999,10 @@
     <script type="text/javascript" src="{{ asset('assets/plugins/jquery-repeater/custom-repeater.js') }}"></script>
     <!-- Chart Js -->
     <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chart.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-stacked100@1.0.0.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-datalabels@2.0.0.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-stacked100@1.0.0.js') }}">
+    </script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-datalabels@2.0.0.js') }}">
+    </script>
 
     <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_khachHangActive.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_khachHangMoi.js') }}"></script>
@@ -1290,67 +1278,70 @@
             });
         });
     </script>
-<script>
-    document.getElementById("submitButton").addEventListener("click", function() {
-        const formData = new FormData(document.getElementById("customerForm"));
+    <script>
+        document.getElementById("submitButton").addEventListener("click", function() {
+            const formData = new FormData(document.getElementById("customerForm"));
 
-        fetch("{{ route('create-customer') }}", {
-            method: "POST",
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            // const codeError = document.getElementById("codeError");
-            const nameError = document.getElementById("nameError");
-            const phoneError = document.getElementById("phoneError");
-            const cityError = document.getElementById("cityError");
-            const addressError = document.getElementById("addressError");
-            const districtError = document.getElementById("districtError");
-            const guideError = document.getElementById("guideError");
-            const personIdError = document.getElementById("personIdError");
-            const productIdError = document.getElementById("productIdError");
-            const groupError = document.getElementById("groupError");
-            const chanelIdError = document.getElementById("chanelIdError");
-            const routeIdError = document.getElementById("routeIdError");
+            fetch("{{ route('create-customer') }}", {
+                    method: "POST",
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // const codeError = document.getElementById("codeError");
+                    const nameError = document.getElementById("nameError");
+                    const phoneError = document.getElementById("phoneError");
+                    const cityError = document.getElementById("cityError");
+                    const addressError = document.getElementById("addressError");
+                    const districtError = document.getElementById("districtError");
+                    const guideError = document.getElementById("guideError");
+                    const personIdError = document.getElementById("personIdError");
+                    const productIdError = document.getElementById("productIdError");
+                    const groupError = document.getElementById("groupError");
+                    const chanelIdError = document.getElementById("chanelIdError");
+                    const routeIdError = document.getElementById("routeIdError");
 
-            if (data.success) {
-                addressError.innerHTML = "";
-                nameError.innerHTML = "";
-                phoneError.innerHTML = "";
-                cityError.innerHTML = "";
-                districtError.innerHTML = "";
-                guideError.innerHTML = "";
-                personIdError.innerHTML = "";
-                productIdError.innerHTML = "";
-                groupError.innerHTML = "";
-                chanelIdError.innerHTML = "";
-                routeIdError.innerHTML= "";
-                // nameError.innerHTML = '';
-                closeModal(); // Gọi hàm đóng modal
-                window.location.href = "{{ route('customers') }}"; // Điều hướng trang khách hàng
-            } else {
 
-                addressError.innerHTML = data.errors.address;
-                nameError.innerHTML = data.errors.name;
-                phoneError.innerHTML = data.errors.phone;
-                cityError.innerHTML = data.errors.city;
-                districtError.innerHTML = data.errors.district;
-                guideError.innerHTML = data.errors.guide;
-                personIdError.innerHTML = data.errors.personId;
-                productIdError.innerHTML = data.errors.productId;
-                groupError.innerHTML = data.errors.group;
-                chanelIdError.innerHTML = data.errors.chanelId;
-                routeIdError.innerHTML = data.errors.routeId;
-            }
-        })
-        .catch(error => {
-            console.error("Error:", error);
+
+
+                    if (data.success) {
+                        addressError.innerHTML = "";
+                        nameError.innerHTML = "";
+                        phoneError.innerHTML = "";
+                        cityError.innerHTML = "";
+                        districtError.innerHTML = "";
+                        guideError.innerHTML = "";
+                        personIdError.innerHTML = "";
+                        productIdError.innerHTML = "";
+                        groupError.innerHTML = "";
+                        chanelIdError.innerHTML = "";
+                        routeIdError.innerHTML = "";
+                        // nameError.innerHTML = '';
+                        closeModal(); // Gọi hàm đóng modal
+                        window.location.href = "{{ route('customers') }}"; // Điều hướng trang khách hàng
+                    } else {
+
+                        addressError.innerHTML = data.errors.address;
+                        nameError.innerHTML = data.errors.name;
+                        phoneError.innerHTML = data.errors.phone;
+                        cityError.innerHTML = data.errors.city;
+                        districtError.innerHTML = data.errors.district;
+                        guideError.innerHTML = data.errors.guide;
+                        personIdError.innerHTML = data.errors.personId;
+                        productIdError.innerHTML = data.errors.productId;
+                        groupError.innerHTML = data.errors.group;
+                        chanelIdError.innerHTML = data.errors.chanelId;
+                        routeIdError.innerHTML = data.errors.routeId;
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
         });
-    });
 
-    function closeModal() {
-        const modal = document.getElementById("add");
-        modal.style.display = "none";
-    }
-</script>
+        function closeModal() {
+            const modal = document.getElementById("add");
+            modal.style.display = "none";
+        }
+    </script>
 @endsection

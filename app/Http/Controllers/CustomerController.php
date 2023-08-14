@@ -14,6 +14,7 @@ use Exception;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -41,7 +42,7 @@ class CustomerController extends Controller
     public function show($id)
     {
         $customer = Customer::with('channel', 'route', 'person')->findOrFail($id);
-        return view('other.chiTietKhachHang')->with(compact(
+        return view('Customer.chiTietKhachHang')->with(compact(
             "customer"
         ));
     }
@@ -110,146 +111,146 @@ class CustomerController extends Controller
     {
 
 
-            $status = $request->get('status');
-            if ($status === 'Trinh sát') {
-                $validator = Validator::make($request->all(), [
+        $status = $request->get('status');
+        if ($status === 'Trinh sát') {
+            $validator = Validator::make($request->all(), [
 
-                            'name' => 'required|string|max:255',
-                            'phone' => 'required|string|max:20',
-                            'city' => 'required',
-                            'district' => 'required',
-                            'guide' => 'required',
-                            'address' => 'required',
-                            'personId' => 'required',
+                'name' => 'required|string|max:255',
+                'phone' => 'required|string|max:20',
+                'city' => 'required',
+                'district' => 'required',
+                'guide' => 'required',
+                'address' => 'required',
+                'personId' => 'required',
 
-                ],[
-                    'name.required' => 'Trường này không được để trống.',
-                    'phone.required' => 'Trường này không được để trống.',
-                    'city.required' => 'trường này không được để trống.',
-                    'district.required' => 'Trường này không được để trống.',
-                    'guide.required' => 'Trường này không được để trống.',
-                    'address.required' =>'Trường này không được để trống.',
-                    'personId.required' => 'Trường này không được để trống.',
-                ]);
-            } elseif ($status === 'Cơ hội') {
-                $validator = Validator::make($request->all(), [
-                    'name' => 'required|string|max:255',
-                    'phone' => 'required|string|max:20',
-                    'city' => 'required',
-                    'district' => 'required',
-                    'guide' => 'required',
-                    'address' => 'required',
-                    'personId' => 'required',
-                    'productId' => 'required',
-                ],[
-                    'name.required' => 'Trường này không được để trống.',
-                    'phone.required' => 'Trường này không được để trống.',
-                    'city.required' => 'Trường này không được để trống.',
-                    'district.required' => 'Trường này không được để trống.',
-                    'guide.required' => 'Trường này không được để trống.',
-                    'address.required' =>'Trường này không được để trống.',
-                    'personId.required' => 'Trường này không được để trống.',
-                    'productId.required' =>  'Trường này không được để trống.',
-                ]);
-            } else{
-                $validator = Validator::make($request->all(), [
-                    'name' => 'required|string|max:255',
-                    'phone' => 'required|string|max:20',
-                    'city' => 'required',
-                    'district' => 'required',
-                    'guide' => 'required',
-                    'address' => 'required',
-                    'personId' => 'required',
-                    'productId' => 'required',
-                    'group' => 'required',
-                   'chanelId' => 'required',
-                    'routeId' =>'required',
-                ],[
-                    'name.required' => 'Trường này không được để trống.',
-                    'phone.required' => 'Trường này không được để trống.',
-                    'city.required' => 'Trường này không được để trống.',
-                    'district.required' => 'Trường này không được để trống.',
-                    'guide.required' => 'Trường này không được để trống.',
-                    'address.required' =>'Trường này không được để trống.',
-                    'personId.required' => 'Trường này không được để trống.',
-                    'productId.required' =>  'Trường này không được để trống.',
-                    'group.required' =>  'Trường này không được để trống.',
-                    'chanelId.required' =>  'Trường này không được để trống.',
-                    'routeId.required' =>  'Trường này không được để trống.',
-                ]);
-            }
+            ], [
+                'name.required' => 'Trường này không được để trống.',
+                'phone.required' => 'Trường này không được để trống.',
+                'city.required' => 'trường này không được để trống.',
+                'district.required' => 'Trường này không được để trống.',
+                'guide.required' => 'Trường này không được để trống.',
+                'address.required' => 'Trường này không được để trống.',
+                'personId.required' => 'Trường này không được để trống.',
+            ]);
+        } elseif ($status === 'Cơ hội') {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:255',
+                'phone' => 'required|string|max:20',
+                'city' => 'required',
+                'district' => 'required',
+                'guide' => 'required',
+                'address' => 'required',
+                'personId' => 'required',
+                'productId' => 'required',
+            ], [
+                'name.required' => 'Trường này không được để trống.',
+                'phone.required' => 'Trường này không được để trống.',
+                'city.required' => 'Trường này không được để trống.',
+                'district.required' => 'Trường này không được để trống.',
+                'guide.required' => 'Trường này không được để trống.',
+                'address.required' => 'Trường này không được để trống.',
+                'personId.required' => 'Trường này không được để trống.',
+                'productId.required' =>  'Trường này không được để trống.',
+            ]);
+        } else {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:255',
+                'phone' => 'required|string|max:20',
+                'city' => 'required',
+                'district' => 'required',
+                'guide' => 'required',
+                'address' => 'required',
+                'personId' => 'required',
+                'productId' => 'required',
+                'group' => 'required',
+                'chanelId' => 'required',
+                'routeId' => 'required',
+            ], [
+                'name.required' => 'Trường này không được để trống.',
+                'phone.required' => 'Trường này không được để trống.',
+                'city.required' => 'Trường này không được để trống.',
+                'district.required' => 'Trường này không được để trống.',
+                'guide.required' => 'Trường này không được để trống.',
+                'address.required' => 'Trường này không được để trống.',
+                'personId.required' => 'Trường này không được để trống.',
+                'productId.required' =>  'Trường này không được để trống.',
+                'group.required' =>  'Trường này không được để trống.',
+                'chanelId.required' =>  'Trường này không được để trống.',
+                'routeId.required' =>  'Trường này không được để trống.',
+            ]);
+        }
 
-            if ($validator->fails()) {
-                return response()->json(['success' => false, 'errors' => [
-                    'name' => $validator->errors()->first('name'),
-                    'phone' => $validator->errors()->first('phone'),
-                    'city' => $validator->errors()->first('city'),
-                    'district' => $validator->errors()->first('district'),
-                    'guide' => $validator->errors()->first('guide'),
-                    'address' => $validator->errors()->first('address'),
-                    'personId' => $validator->errors()->first('personId'),
-                    'productId' => $validator->errors()->first('productId'),
-                    'group' => $validator->errors()->first('group'),
-                    'chanelId' => $validator->errors()->first('chanelId'),
-                    'routeId' => $validator->errors()->first('routeId'),
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'errors' => [
+                'name' => $validator->errors()->first('name'),
+                'phone' => $validator->errors()->first('phone'),
+                'city' => $validator->errors()->first('city'),
+                'district' => $validator->errors()->first('district'),
+                'guide' => $validator->errors()->first('guide'),
+                'address' => $validator->errors()->first('address'),
+                'personId' => $validator->errors()->first('personId'),
+                'productId' => $validator->errors()->first('productId'),
+                'group' => $validator->errors()->first('group'),
+                'chanelId' => $validator->errors()->first('chanelId'),
+                'routeId' => $validator->errors()->first('routeId'),
 
-                ]]);
-            }
-
-
-            $code = $request->get('code');
-            $name = $request->get('name');
-            $phone = $request->get('phone');
-            $email = $request->get('email');
-            $companyName = $request->get('companyName');
-            $personContact = $request->get('personContact');
-            $career = $request->get('career');
-            $taxCode = $request->get('taxCode');
-            $companyPhoneNumber = $request->get('companyPhoneNumber');
-            $companyEmail = $request->get('companyEmail');
-            $accountNumber = $request->get('accountNumber');
-            $bankOpen = $request->get('bankOpen');
-            $city = $request->get('city');
-            $district = $request->get('district');
-            $guide = $request->get('guide');
-            $address = $request->get('address');
-            $personId = $request->get('personId');
-            $productId = $request->get('productId');
-            $group = $request->get('group');
-            $chanelId = $request->get('chanelId');
-            $routeId = $request->get('routeId');
-            $status = $request->get('status');
-            $data = new Customer();
-            $data->code = $code;
-            $data->name = $name;
-            $data->phone = $phone;
-            $data->email = $email;
-            $data->companyName = $companyName;
-            $data->personContact = $personContact;
-            $data->career = $career;
-            $data->taxCode = $taxCode;
-            $data->companyPhoneNumber = $companyPhoneNumber;
-            $data->companyEmail = $companyEmail;
-            $data->accountNumber = $accountNumber;
-            $data->bankOpen = $bankOpen;
-            $data->city = $city;
-            $data->district = $district;
-            $data->guide = $guide;
-            $data->address = $address;
-            $data->personId = $personId;
-            $data->productId = $productId;
-            $data->group = $group;
-            $data->chanelId = $chanelId;
-            $data->routeId = $routeId;
-            $data->status = $status;
-            $data->save();
-            $listData = Customer::all();
+            ]]);
+        }
 
 
-            // Xử lý lưu dữ liệu và trả về kết quả dưới dạng JSON
-            return response()->json(['success' => true]);
-            // return redirect()->route('customers', compact('listData'));
-            // return view('customer.danhSachKhachHang', compact('listData'));
+        $code = $request->get('code');
+        $name = $request->get('name');
+        $phone = $request->get('phone');
+        $email = $request->get('email');
+        $companyName = $request->get('companyName');
+        $personContact = $request->get('personContact');
+        $career = $request->get('career');
+        $taxCode = $request->get('taxCode');
+        $companyPhoneNumber = $request->get('companyPhoneNumber');
+        $companyEmail = $request->get('companyEmail');
+        $accountNumber = $request->get('accountNumber');
+        $bankOpen = $request->get('bankOpen');
+        $city = $request->get('city');
+        $district = $request->get('district');
+        $guide = $request->get('guide');
+        $address = $request->get('address');
+        $personId = $request->get('personId');
+        $productId = $request->get('productId');
+        $group = $request->get('group');
+        $chanelId = $request->get('chanelId');
+        $routeId = $request->get('routeId');
+        $status = $request->get('status');
+        $data = new Customer();
+        $data->code = $code;
+        $data->name = $name;
+        $data->phone = $phone;
+        $data->email = $email;
+        $data->companyName = $companyName;
+        $data->personContact = $personContact;
+        $data->career = $career;
+        $data->taxCode = $taxCode;
+        $data->companyPhoneNumber = $companyPhoneNumber;
+        $data->companyEmail = $companyEmail;
+        $data->accountNumber = $accountNumber;
+        $data->bankOpen = $bankOpen;
+        $data->city = $city;
+        $data->district = $district;
+        $data->guide = $guide;
+        $data->address = $address;
+        $data->personId = $personId;
+        $data->productId = json_encode($productId);
+        $data->group = $group;
+        $data->chanelId = $chanelId;
+        $data->routeId = $routeId;
+        $data->status = $status;
+        $data->save();
+        $listData = Customer::all();
+
+
+        // Xử lý lưu dữ liệu và trả về kết quả dưới dạng JSON
+        return response()->json(['success' => true]);
+        // return redirect()->route('customers', compact('listData'));
+        // return view('customer.danhSachKhachHang', compact('listData'));
 
 
     }

@@ -91,6 +91,7 @@ Route::middleware(['auth.role'])->group(function () {
     Route::get('danh-sach-vi-tri', [PositionController::class, 'index'])->name('position.list');
 
     Route::get('danh-sach-khach-hang', [CustomerController::class, 'index'])->name('customer.list');
+    Route::get('chi-tiet-khach-hang/{id}', [CustomerController::class, 'show'])->name('customer-detail.list');
 
 
     Route::get('danh-sach-san-pham', [ProductController::class, 'index'])->name('product.list');
@@ -127,9 +128,6 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('danh-sach-khu-vuc', [AreaController::class, 'store'])->name('area.store');
     Route::post('danh-sach-khu-vuc/{id}', [AreaController::class, 'update'])->name('area.update');
     Route::post('danh-sach-khu-vucx/{id}', [AreaController::class, 'destroy'])->name('area.destroy');
-
-
-    Route::get('chi-tiet-khach-hang/{id}', [CustomerController::class, 'show'])->name('customer-detail.list');
 
     Route::get('department', [DepartmentController::class, 'index'])->name('department.index');
     Route::post('department', [DepartmentController::class, 'store'])->name('department.store');

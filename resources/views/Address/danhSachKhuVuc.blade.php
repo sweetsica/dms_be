@@ -295,8 +295,6 @@
                                 <input type="text" name="description" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Ghi chú" placeholder="Ghi chú" class="form-control">
                             </div>
-
-
                         </div>
                     </div>
                     <div class="modal-footer">

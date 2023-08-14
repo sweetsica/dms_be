@@ -30,7 +30,7 @@ class CustomersImport implements ToModel, WithStartRow, WithStrictNullComparison
             throw new \Exception('Trùng số điện thoại trong file Excel: ' . $row['5']);
         }
 
-        if ($row['5'] && Customer::where('email', $row['9'])->exists()) {
+        if ($row['9'] && Customer::where('email', $row['9'])->exists()) {
             // Handle the duplication error
             throw new \Exception('Trùng gmail file Excel: ' . $row['9']);
         }

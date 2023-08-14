@@ -183,7 +183,7 @@
                                         </div>
                                     </div> --}}
 
-                                    <div class="col-md-6">
+                                    <div id="fileInputDiv" class="col-md-6 {{ empty($details->images) ? 'd-block' : 'd-none' }}">
                                         <div class="upload_wrapper-items">
                                             <input type="hidden" value="" />
                                             <label for="fileInput" id="fileButton" class="btn position-relative border d-flex w-50">
@@ -191,7 +191,7 @@
                                                 <span class="ps-2">Đính kèm tài liệu, ảnh sản phẩm</span>
                                             </label>
                                             <input accept=".pdf,.xlsx,.docx,image/jpeg,image/png" id="fileInput" multiple role="button" type="file"
-                                                class="modal_upload-input modal_upload-file" name="file" onchange="updateList(event)" />
+                                                class="modal_upload-input modal_upload-file" name="files[]" onchange="updateList(event)" />
                                         </div>
                                     
                                         <div id="preview" class="d-flex mt-3"></div>
@@ -200,7 +200,7 @@
                                     </div>
 
 
-                                    {{-- @if (!empty($details->images))
+                                    @if (!empty($details->images))
                                         <div id="caroselImg" class="col-md-6 mb-3 {{ !empty($details->images) ? 'd-block' : 'd-none' }}" style="overflow: hidden;">
                                             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                                                 <div class="carousel-inner">
@@ -222,7 +222,7 @@
                                             </div>
                                         </div>
                                         
-                                    @endif --}}
+                                    @endif
 
                                     <div class="col-md-6 mb-3">
                                         <div class="row">
@@ -322,12 +322,12 @@
                                                         <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center"
                                                             style="width:50%">
                                                             <textarea rows="1" style="pointer-events: none;" type="text" placeholder="Độ dài"
-                                                                class="card-title-black form-control textareaResize auto-resize" name="listProducts[0][key]">{{ $element->key }}</textarea>
+                                                                class="card-title-black form-control textareaResize auto-resize" name="listProducts[{{$key}}][key]">{{ $element->key }}</textarea>
                                                         </div>
                                                         <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center"
                                                             style="width:50%">
                                                             <textarea rows="1" style="pointer-events: none;" type="text" placeholder="Catalogue mô tả"
-                                                                class="form-control textareaResize auto-resize" name="listProducts[0][value]">{{ $element->value }}</textarea>
+                                                                class="form-control textareaResize auto-resize" name="listProducts[{{$key}}][value]">{{ $element->value }}</textarea>
                                                         </div>
                                                     </div>
                                                 @endforeach
@@ -580,7 +580,7 @@
 
     <script>
         $(document).on('click', '.editRowBtn', function() {
-            var fileInputDiv = $('#fileInput');
+            var fileInputDiv = $('#fileInputDiv');
             var caroselDiv = $('#caroselImg');
 
             if (fileInputDiv.hasClass('d-none')) {
