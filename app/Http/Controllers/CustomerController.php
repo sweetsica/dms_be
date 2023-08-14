@@ -42,9 +42,11 @@ class CustomerController extends Controller
     public function show($id)
     {
         $customer = Customer::with('channel', 'route', 'person')->findOrFail($id);
-        return view('Customer.chiTietKhachHang')->with(compact(
-            "customer"
-        ));
+        return view('Customer.chiTietKhachHang')->with(
+            compact(
+                "customer"
+            )
+        );
     }
 
     public function store(Request $request)
@@ -70,20 +72,78 @@ class CustomerController extends Controller
         // ]);
     }
 
-    public function view()
+    public function view(Request $request)
     {
-        $limit = 30;
-        $listData = Customer::query()->with('channel', 'route', 'person');
-        switch (session('user')['role_id']) {
-            case 2:
-                $listData = $listData->whereHas('person', function ($query) {
-                    $query->where('department_id', '=', session('user')['department_id']);
-                });
-                break;
+        try {
+            $q = $request->query('q');
+            $limit = 30;
+            $listData = Customer::query()->with('channel', 'route', 'person');
+            if ($q) {
+                $listData = $listData->where('code', 'like', '%' . $q . '%')
+                    ->orWhere('name', 'like', '%' . $q . '%')
+                    ->orWhere('phone', 'like', '%' . $q . '%')
+                    ->orWhere('email', 'like', '%' . $q . '%')
+                    ->orWhere('personContact', 'like', '%' . $q . '%')
+                    ->orWhere('companyName', 'like', '%' . $q . '%')
+                    ->orWhere('career', 'like', '%' . $q . '%')
+                    ->orWhere('taxCode', 'like', '%' . $q . '%')
+                    ->orWhere('companyPhoneNumber', 'like', '%' . $q . '%')
+                    ->orWhere('companyEmail', 'like', '%' . $q . '%')
+                    ->orWhere('accountNumber', 'like', '%' . $q . '%')
+                    ->orWhere('bankOpen', 'like', '%' . $q . '%')
+                    ->orWhere('city', 'like', '%' . $q . '%')
+                    ->orWhere('district', 'like', '%' . $q . '%')
+                    ->orWhere('guide', 'like', '%' . $q . '%')
+                    ->orWhere('address', 'like', '%' . $q . '%')
+                    ->orWhere('status', 'like', '%' . $q . '%')
+                    ->orWhere('group', 'like', '%' . $q . '%')
+                    ->orWhereHas('route', function ($customerQuery) use ($q) {
+                        $customerQuery->where('name', 'like', '%' . $q . '%');
+                    })
+                    ->orWhereHas('person', function ($customerQuery) use ($q) {
+                        $customerQuery->where('name', 'like', '%' . $q . '%');
+                    })
+                    ->orWhereHas('channel', function ($customerQuery) use ($q) {
+                        $customerQuery->where('name', 'like', '%' . $q . '%');
+                    });
+            }
+            switch (session('user')['role_id']) {
+                case 3:
+                    $listData = $listData->whereHas('person', function ($query) {
+                        $query->where('department_id', '=', session('user')['department_id']);
+                    });
+                    break;
 
-            case 3:
-                $listData = $listData->where('personId', session('user')['id']);
-                break;
+                case 2:
+                    $listData = $listData->where('personId', session('user')['id']);
+                    break;
+            }
+            $listData = $listData->orderBy('id', 'desc')->paginate($limit);
+
+            $groupIDs = $listData->pluck('groupId')->toArray();
+            $listPerson = Personnel::all();
+            $listProduct = Product::all();
+            $listRoute = RouteDirection::all();
+            $listChannel = Department::all();
+            $listgroup = CustomerGroup::all();
+
+            $pagination = $this->pagination($listData);
+
+            return view(
+                'Customer.danhSachKhachHang',
+                compact(
+                    'listData',
+                    'listPerson',
+                    'listProduct',
+                    'listRoute',
+                    'listChannel',
+                    'listgroup',
+                    "pagination"
+                )
+            );
+        } catch (\Exception $e) {
+            Session::flash('error', $e);
+            return back();
         }
         $listData = $listData->paginate($limit);
 
@@ -150,7 +210,7 @@ class CustomerController extends Controller
                 'guide.required' => 'Trường này không được để trống.',
                 'address.required' => 'Trường này không được để trống.',
                 'personId.required' => 'Trường này không được để trống.',
-                'productId.required' =>  'Trường này không được để trống.',
+                'productId.required' => 'Trường này không được để trống.',
             ]);
         } else {
             $validator = Validator::make($request->all(), [
@@ -173,28 +233,31 @@ class CustomerController extends Controller
                 'guide.required' => 'Trường này không được để trống.',
                 'address.required' => 'Trường này không được để trống.',
                 'personId.required' => 'Trường này không được để trống.',
-                'productId.required' =>  'Trường này không được để trống.',
-                'group.required' =>  'Trường này không được để trống.',
-                'chanelId.required' =>  'Trường này không được để trống.',
-                'routeId.required' =>  'Trường này không được để trống.',
+                'productId.required' => 'Trường này không được để trống.',
+                'group.required' => 'Trường này không được để trống.',
+                'chanelId.required' => 'Trường này không được để trống.',
+                'routeId.required' => 'Trường này không được để trống.',
             ]);
         }
 
         if ($validator->fails()) {
-            return response()->json(['success' => false, 'errors' => [
-                'name' => $validator->errors()->first('name'),
-                'phone' => $validator->errors()->first('phone'),
-                'city' => $validator->errors()->first('city'),
-                'district' => $validator->errors()->first('district'),
-                'guide' => $validator->errors()->first('guide'),
-                'address' => $validator->errors()->first('address'),
-                'personId' => $validator->errors()->first('personId'),
-                'productId' => $validator->errors()->first('productId'),
-                'group' => $validator->errors()->first('group'),
-                'chanelId' => $validator->errors()->first('chanelId'),
-                'routeId' => $validator->errors()->first('routeId'),
+            return response()->json([
+                'success' => false,
+                'errors' => [
+                    'name' => $validator->errors()->first('name'),
+                    'phone' => $validator->errors()->first('phone'),
+                    'city' => $validator->errors()->first('city'),
+                    'district' => $validator->errors()->first('district'),
+                    'guide' => $validator->errors()->first('guide'),
+                    'address' => $validator->errors()->first('address'),
+                    'personId' => $validator->errors()->first('personId'),
+                    'productId' => $validator->errors()->first('productId'),
+                    'group' => $validator->errors()->first('group'),
+                    'chanelId' => $validator->errors()->first('chanelId'),
+                    'routeId' => $validator->errors()->first('routeId'),
 
-            ]]);
+                ]
+            ]);
         }
 
 

@@ -18,7 +18,7 @@ class PositionDepartmentTBSeeder extends Seeder
     {
         Position::create([
             //1
-            'code' => null,
+            'code' => '',
             'name' => 'Tổng giám đốc',
             'personnel_level' => 'Ban lãnh đạo',
             'department_id' => '18',
@@ -30,7 +30,7 @@ class PositionDepartmentTBSeeder extends Seeder
         ]);
         Position::create([
             //2
-            'code' => null,
+            'code' => '',
             'name' => 'Kiểm soát',
             'personnel_level' => 'Giám sát',
             'department_id' => '17',
@@ -42,7 +42,7 @@ class PositionDepartmentTBSeeder extends Seeder
         ]);
         Position::create([
             //3
-            'code' => null,
+            'code' => '',
             'name' => 'Giám đốc dự án',
             'personnel_level' => 'Quản lý cấp cao',
             'department_id' => '14',
@@ -53,7 +53,7 @@ class PositionDepartmentTBSeeder extends Seeder
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Giám đốc tài chính',
             'personnel_level' => 'Quản lý cấp cao',
             'department_id' => '11',
@@ -64,7 +64,7 @@ class PositionDepartmentTBSeeder extends Seeder
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'TTrưởng phòng Mua hàng',
             'personnel_level' => 'Quản lý cấp trung',
             'department_id' => '12',
@@ -75,7 +75,7 @@ class PositionDepartmentTBSeeder extends Seeder
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Kế toán trưởng',
             'personnel_level' => 'Quản lý cấp trung',
             'department_id' => '11',
@@ -86,7 +86,7 @@ class PositionDepartmentTBSeeder extends Seeder
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Trưởng phòng Kinh doanh',
             'personnel_level' => 'Quản lý cấp trung',
             'department_id' => '15',
@@ -97,7 +97,7 @@ class PositionDepartmentTBSeeder extends Seeder
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Trưởng phòng Kỹ thuật và phát triển sản phẩm',
             'personnel_level' => 'Quản lý cấp trung',
             'department_id' => '7',
@@ -108,7 +108,7 @@ class PositionDepartmentTBSeeder extends Seeder
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Trưởng phòng Hành chính Nhân sự',
             'personnel_level' => 'Quản lý cấp trung',
             'department_id' => '10',
@@ -119,7 +119,7 @@ class PositionDepartmentTBSeeder extends Seeder
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Trưởng phòng IT và Phân tích kinh doanh',
             'personnel_level' => 'Quản lý cấp trung',
             'department_id' => '2',
@@ -130,7 +130,7 @@ class PositionDepartmentTBSeeder extends Seeder
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Trưởng phòng Marketing',
             'personnel_level' => 'Quản lý cấp trung',
             'department_id' => '9',
@@ -141,7 +141,7 @@ class PositionDepartmentTBSeeder extends Seeder
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Tổ trưởng tổ Vận hành',
             'personnel_level' => 'Quản lý cấp trung',
             'department_id' => '5',
@@ -152,7 +152,7 @@ class PositionDepartmentTBSeeder extends Seeder
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Tổ trưởng tổ Sửa chữa',
             'personnel_level' => 'Quản lý cấp trung',
             'department_id' => '4',
@@ -163,7 +163,7 @@ class PositionDepartmentTBSeeder extends Seeder
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Tổ trưởng tổ Lắp ráp',
             'personnel_level' => 'Quản lý cấp trung',
             'department_id' => '3',
@@ -174,7 +174,7 @@ class PositionDepartmentTBSeeder extends Seeder
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Nhân viên Kế toán tổng hợp',
             'personnel_level' => 'Nhân viên',
             'department_id' => '11',
@@ -185,7 +185,7 @@ class PositionDepartmentTBSeeder extends Seeder
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Nhân viên hành chính nhân sự',
             'personnel_level' => 'Nhân viên',
             'department_id' => '10',
@@ -196,7 +196,7 @@ class PositionDepartmentTBSeeder extends Seeder
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Nhân viên pháp chế',
             'personnel_level' => 'Nhân viên',
             'department_id' => '10',
@@ -207,7 +207,7 @@ class PositionDepartmentTBSeeder extends Seeder
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Nhân viên Phân tích kinh doanh',
             'personnel_level' => 'Nhân viên',
             'department_id' => '8',
@@ -218,7 +218,7 @@ class PositionDepartmentTBSeeder extends Seeder
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Công nhân kỹ thuật',
             'personnel_level' => 'Nhân viên',
             'department_id' => '5',
@@ -229,7 +229,7 @@ class PositionDepartmentTBSeeder extends Seeder
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Nhân viên nấu ăn',
             'personnel_level' => 'Nhân viên',
             'department_id' => '10',
@@ -240,209 +240,209 @@ class PositionDepartmentTBSeeder extends Seeder
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Tổ trưởng nhóm thợ',
             'personnel_level' => 'Trưởng tổ/đội/nhóm',
             'department_id' => '5',
-            'description' => null,
+            'description' => '',
             'staffing' => '1',
             'wage' => '300000000',
             'pack' => 'Pack Quản lý',
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Tổ trưởng Điện nước',
             'personnel_level' => 'Trưởng tổ/đội/nhóm',
             'department_id' => '5',
-            'description' => null,
+            'description' => '',
             'staffing' => '1',
             'wage' => '300000000',
             'pack' => 'Pack Quản lý',
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Tổ trưởng Cơ khí',
             'personnel_level' => 'Trưởng tổ/đội/nhóm',
             'department_id' => '5',
-            'description' => null,
+            'description' => '',
             'staffing' => '1',
             'wage' => '3000000000',
             'pack' => 'Pack Quản lý',
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Nhân viên tạp vụ',
             'personnel_level' => 'Lao động phổ thông',
             'department_id' => '10',
-            'description' => null,
+            'description' => '',
             'staffing' => '1',
             'wage' => '200000000',
             'pack' => 'Pack Quản lý',
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Nhân viên kế toán Kho - công nợ',
             'personnel_level' => 'Nhân viên',
             'department_id' => '11',
-            'description' => null,
+            'description' => '',
             'staffing' => '2',
             'wage' => '300000000',
             'pack' => 'Pack Quản lý',
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Nhân viên kế toán dự án',
             'personnel_level' => 'Nhân viên',
             'department_id' => '11',
-            'description' => null,
+            'description' => '',
             'staffing' => '2',
             'wage' => '200000000',
             'pack' => 'Pack Quản lý',
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Nhân viên kế toán',
             'personnel_level' => 'Nhân viên',
             'department_id' => '11',
-            'description' => null,
+            'description' => '',
             'staffing' => '2',
             'wage' => '200000000',
             'pack' => 'Pack Quản lý',
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Nhân viên Kinh doanh',
             'personnel_level' => 'Nhân viên',
             'department_id' => '15',
-            'description' => null,
+            'description' => '',
             'staffing' => '10',
             'wage' => '400000000',
             'pack' => 'Pack Quản lý',
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Thủ kho',
             'personnel_level' => 'Nhân viên',
             'department_id' => '10',
-            'description' => null,
+            'description' => '',
             'staffing' => '2',
             'wage' => '300000000',
             'pack' => 'Pack Quản lý',
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Nhân viên Kho',
             'personnel_level' => 'Nhân viên',
             'department_id' => '10',
-            'description' => null,
+            'description' => '',
             'staffing' => '3',
             'wage' => '200000000',
             'pack' => 'Pack Quản lý',
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Trợ lý Tổng giám đốc',
             'personnel_level' => 'Quản lý cấp trung',
             'department_id' => '18',
-            'description' => null,
+            'description' => '',
             'staffing' => '1',
             'wage' => '300000000',
             'pack' => 'Pack Quản lý',
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Nhân viên mua hàng',
             'personnel_level' => 'Nhân viên',
             'department_id' => '12',
-            'description' => null,
+            'description' => '',
             'staffing' => '3',
             'wage' => '300000000',
             'pack' => 'Pack Quản lý',
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Kỹ sư thiết kế',
             'personnel_level' => 'Nhân viên',
             'department_id' => '7',
-            'description' => null,
+            'description' => '',
             'staffing' => '5',
             'wage' => '500000000',
             'pack' => 'Pack Quản lý',
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Kỹ sư ô tô',
             'personnel_level' => 'Nhân viên',
             'department_id' => '7',
-            'description' => null,
+            'description' => '',
             'staffing' => '5',
             'wage' => '300000000',
             'pack' => 'Pack Quản lý',
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Nhân viên IT',
             'personnel_level' => 'Nhân viên',
             'department_id' => '8',
-            'description' => null,
+            'description' => '',
             'staffing' => '2',
             'wage' => '80000000',
             'pack' => 'Pack Quản lý',
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Nhân viên bảo vệ',
             'personnel_level' => 'Nhân viên',
             'department_id' => '19',
-            'description' => null,
+            'description' => '',
             'staffing' => null,
             'wage' => null,
             'pack' => 'Pack Quản lý',
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'CTV',
             'personnel_level' => 'Nhân viên',
-            'department_id' => null,
-            'description' => null,
+            'department_id' => '8',
+            'description' => '',
             'staffing' => null,
             'wage' => null,
             'pack' => 'Pack Quản lý',
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Nhân viên Sales Admin',
             'personnel_level' => 'Nhân viên',
             'department_id' => '16',
-            'description' => null,
+            'description' => '',
             'staffing' => null,
             'wage' => null,
             'pack' => 'Pack Quản lý',
             'parent' => null,
         ]);
         Position::create([
-            'code' => null,
+            'code' => '',
             'name' => 'Nhân viên Tester',
             'personnel_level' => 'Nhân viên',
             'department_id' => '8',
-            'description' => null,
+            'description' => '',
             'staffing' => null,
             'wage' => null,
             'pack' => 'Pack Quản lý',

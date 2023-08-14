@@ -1,486 +1,382 @@
 @extends('template.master')
-@section('title', 'Chi tiết khách hàng')
+{{-- Trang chủ GIao Ban --}}
+@section('title', 'Danh sách khách hàng')
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css.map">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"
-        integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
-        .slick-slider {
-            margin-left: -12%;
-            margin-right: -12%;
-            width: 70%;
-            margin: auto;
-        }
 
-        .slick-list {
-            padding-top: 10% !important;
-            padding-bottom: 10% !important;
-            padding-left: 15% !important;
-            padding-right: 15% !important;
-        }
-
-        .slick-dots {
-            text-align: right;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-        }
-
-        .slick-track {
-            max-width: 100% !important;
-            transform: translate3d(0, 0, 0) !important;
-            perspective: 100px;
-        }
-
-        .slick-slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            margin: auto;
-            opacity: 0;
-            width: 100% !important;
-            transform: translate3d(0, 0, 0);
-            transition: transform 1s, opacity 1s;
-        }
-
-        .slick-current {
-            opacity: 1;
-            position: relative;
-            display: block;
-            transform: translate3d(0, 0, 20px);
-            z-index: 2;
-        }
-
-        .slick-snext {
-            opacity: 1;
-            transform: translate3d(20%, 0, 0px);
-            z-index: 1;
-        }
-
-        .slick-sprev {
-            opacity: 1;
-            transform: translate3d(-20%, 0, 0px);
-        }
-
-        .slick-arrow {
-            display: none !important;
-        }
-
-        .img-slide img {
-            object-fit: contain;
-            width: 100%;
-            height: 100%;
-        }
-
-
-        .warpper-search {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-        }
-
-        .input-item {
-            width: 200px !important;
-        }
-
-        .card-body {
-            padding: 50px !important;
-        }
-
-        .text-color_pimary {
-            color: var(--primary-color)
-        }
-
-        .text-content {
-            font-size: 14px
-        }
-
-        .layout_120 {
-            display: grid;
-            grid-template-columns: 120px auto;
-        }
-
-        .layout_90 {
-            display: grid;
-            grid-template-columns: 90px auto;
-        }
-
-        .layout_45 {
-            display: grid;
-            grid-template-columns: 45px auto;
-        }
-
-        .layout_auto {
-            display: grid;
-            grid-template-columns: auto auto;
-        }
-
-        .input-contact {
-            border-top: none !important;
-            border-left: none !important;
-            border-right: none !important;
-            border-bottom: 1px solid #969393 !important;
-            line-height: 15px;
-            width: 100%;
-            font-size: 12px;
-            font-style: italic;
-            pointer-events: none;
-        }
-
-        .input-contact:focus {
-            outline: none !important;
-            border-top: none !important;
-            border-left: none !important;
-            border-right: none !important;
-            border-bottom: 1px solid #969393 !important;
-            box-shadow: none !important;
-        }
     </style>
-
 @endsection
+@php
+
+@endphp
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
     <div id="mainWrap" class="mainWrap">
         <div class="mainSection">
             <div class="main">
-                <div class="container">
-                    <div class="mainSection_heading">
+                <div class="container-fluid">
+                    {{-- <div class="card_template-wrapper">
 
+                    </div> --}}
+                    <div class="mainSection_heading">
                         <h5 class="mainSection_heading-title">Chi tiết khách hàng</h5>
                         @include('template.components.sectionCard')
                     </div>
                     <div class="card mb-3">
-                        <div class="card-body card-warpper">
-                            <div class="border rounded">
-                                <div class="container">
-                                    <h1 class="mb-5 fw-bold text-center text-color_pimary text-uppercase">CÔNG TY
-                                        {{ $customer->companyName ?? ($customer->name ?? 'Trống') }}</h1>
-                                    <div class="mb-5 warpper-search">
-                                        <div class="input-group input-item">
-                                            <span class="input-group-text" id="addon-wrapping"><i
-                                                    class="bi bi-search"></i></span>
-                                            <input type="text" class="form-control" placeholder="Tìm kiếm..."
-                                                aria-label="Username" aria-describedby="addon-wrapping">
+                        <div class="card-body">
+                            <div class='row'>
+                                <div class="col-md-12">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center mb-3">
+
+                                            <div class="card-title"> <i class="bi bi-briefcase"
+                                                    style="padding-right: 6px"></i>{{ $customer->companyName ?? $customer->name }}
+                                            </div>
+
                                         </div>
-                                        <button type="button" class="btn btn-outline-danger ms-2"><i
-                                                class="bi bi-funnel"></i></button>
-                                        <button type="button" class="btn btn-danger ms-2"><i
-                                                class="bi bi-plus-circle"></i></button>
-                                        <button type="button" class="btn btn-secondary ms-2"><i
-                                                class="bi bi-three-dots"></i></button>
+
+                                        <div class="action_wrapper">
+
+
+                                            <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                aria-label="Về danh sách" data-bs-original-title="Về danh sách">
+                                                <a class="btn btn-outline-danger d-block testCreateUser" href="/customer"
+                                                    role="button" role="button">Về danh sách</a>
+                                            </div>
+                                            <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                aria-label="Tạo đơn hàng" data-bs-original-title="Tạo đơn hàng">
+                                                <button class="btn btn-danger d-block testCreateUser" data-bs-toggle="modal"
+                                                    data-bs-target="#">Tạo đơn hàng</button>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="row mb-3 d-flex align-items-center mt-3">
+
+                                        <div class="col-4">
+                                            <div class="card_template-title d-flex align-items-center">
+                                                <div class="text-nowrap me-4">Người liên hệ:</div>
+                                                <div class="card_template-sub d-flex align-items-center">
+                                                    <div class="card_template-sub-text">
+                                                        {{ $customer->companyName ?? $customer->name }}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="card_template-title d-flex align-items-center">
+                                                <div class="text-nowrap me-4 ">Số điện thoại:</div>
+                                                <div class="card_template-sub d-flex align-items-center">
+                                                    <div class="card_template-sub-text">
+                                                        {{ $customer->companyPhoneNumber ?? $customer->phone }}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="card_template-title d-flex align-items-center">
+                                                <div class="text-nowrap me-4">Email:</div>
+                                                <div class="card_template-sub d-flex align-items-center">
+                                                    <div class="card_template-sub-text">
+                                                        {{ $customer->companyEmail ?? $customer->email }}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
 
-                                    <div class="container">
-                                        <div class="rev_slider">
-                                            <div class="rev_slide">
-                                                <div class="img-slide">
-                                                    <img
-                                                        src="https://images.pexels.com/photos/842711/pexels-photo-842711.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
-                                                </div>
-                                            </div>
+                                    <div class="row mb-3 d-flex align-items-center mt-3">
 
-                                            <div class="rev_slide">
-                                                <div class="img-slide">
-                                                    <img
-                                                        src="https://images.pexels.com/photos/1525041/pexels-photo-1525041.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
-                                                </div>
-                                            </div>
-                                            <div class="rev_slide">
-                                                <div class="img-slide">
-                                                    <img
-                                                        src="https://images.pexels.com/photos/1379636/pexels-photo-1379636.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+                                        <div class="col-4">
+                                            <div class="card_template-title d-flex align-items-center">
+                                                <div class="text-nowrap me-4">Giai đoạn:</div>
+                                                <div class="card_template-sub d-flex align-items-center">
+                                                    <div class="card_template-sub-text">{{ $customer->status }}</div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-4">
+                                            <div class="card_template-title d-flex align-items-center">
+                                                <div class="text-nowrap me-4 ">Tỷ lệ thành công:</div>
+                                                <div class="card_template-sub d-flex align-items-center">
+                                                    <div class="card_template-sub-text">100%</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
 
-                                    <div>
-                                        <div class="row ">
-                                            <div class="col-lg-12">
-                                                <div class="layout_120">
-                                                    <span class="fw-bold text-content">Người liên
-                                                        hệ:</span>
-                                                    <input class="input-contact"
-                                                        value="{{ $customer->companyName ?? ($customer->name ?? 'Trống') }}" />
+                                    <div class="viewport mt-3">
+                                        <ul class="tabs">
+                                            <li class="label-item">
+                                                <input type="radio" name="tab" id="playlists" value="playlists"
+                                                    checked>
+                                                <label class="label-info header_menu-link" for="playlists">
+                                                    Thông tin chi tiết
+                                                </label>
+                                                <div class="tabBody">
+                                                    <div class="row">
+                                                        <div class="col-sm-12 card-title mt-3">1. Liên hệ</div>
+                                                        <div class="col-4 mt-3">
+                                                            <div class="card_template-title d-flex align-items-center">
+                                                                <div class="text-nowrap me-4">Người liên hệ:</div>
+                                                                <div class="card_template-sub d-flex align-items-center">
+                                                                    <div class="card_template-sub-text">
+                                                                        {{ $customer->name }}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4 mt-3">
+                                                            <div class="card_template-title d-flex align-items-center">
+                                                                <div class="text-nowrap me-4 ">Số điện thoại:</div>
+                                                                <div class="card_template-sub d-flex align-items-center">
+                                                                    <div class="card_template-sub-text">
+                                                                        {{ $customer->phone }}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4 mt-3">
+                                                            <div class="card_template-title d-flex align-items-center">
+                                                                <div class="text-nowrap me-4">Email:</div>
+                                                                <div class="card_template-sub d-flex align-items-center">
+                                                                    <div class="card_template-sub-text">
+                                                                        {{ $customer->email }}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12 card-title mt-3">2. Tổ chức</div>
+                                                        <div class="col-6 mt-3">
+                                                            <div class="card_template-title d-flex align-items-center">
+                                                                <div class="text-nowrap me-4">Tên công ty:</div>
+                                                                <div class="card_template-sub d-flex align-items-center">
+                                                                    <div class="card_template-sub-text">
+                                                                        {{ $customer->companyName ?? '' }}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 mt-3">
+                                                            <div class="card_template-title d-flex align-items-center">
+                                                                <div class="text-nowrap me-4">Số điện thoại công ty:</div>
+                                                                <div class="card_template-sub d-flex align-items-center">
+                                                                    <div class="card_template-sub-text">
+                                                                        {{ $customer->companyPhoneNumber ?? '' }}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 mt-3">
+                                                            <div class="card_template-title d-flex align-items-center">
+                                                                <div class="text-nowrap me-4">Mã số thuế:</div>
+                                                                <div class="card_template-sub d-flex align-items-center">
+                                                                    <div class="card_template-sub-text">
+                                                                        {{ $customer->taxCode ?? '' }}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 mt-3">
+                                                            <div class="card_template-title d-flex align-items-center">
+                                                                <div class="text-nowrap me-4">Email công ty:</div>
+                                                                <div class="card_template-sub d-flex align-items-center">
+                                                                    <div class="card_template-sub-text">
+                                                                        {{ $customer->companyEmail ?? '' }}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 mt-3">
+                                                            <div class="card_template-title d-flex align-items-center">
+                                                                <div class="text-nowrap me-4">Người đại diện:</div>
+                                                                <div class="card_template-sub d-flex align-items-center">
+                                                                    <div class="card_template-sub-text fw-bolder">
+                                                                        {{ $customer->personContact ?? '' }}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 mt-3">
+                                                            <div class="card_template-title d-flex align-items-center">
+                                                                <div class="text-nowrap me-4">Chức danh:</div>
+                                                                <div class="card_template-sub d-flex align-items-center">
+                                                                    <div class="card_template-sub-text fw-bolder">
+                                                                        {{ $customer->career ?? '' }}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 mt-3">
+                                                            <div class="card_template-title d-flex align-items-center">
+                                                                <div class="text-nowrap me-4">Số tài khoản: </div>
+                                                                <div class="card_template-sub d-flex align-items-center">
+                                                                    <div class="card_template-sub-text">
+                                                                        {{ $customer->accountNumber ?? '' }}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 mt-3">
+                                                            <div class="card_template-title d-flex align-items-center">
+                                                                <div class="text-nowrap me-4">Mở tại ngân hàng:</div>
+                                                                <div class="card_template-sub d-flex align-items-center">
+                                                                    <div class="card_template-sub-text">
+                                                                        {{ $customer->bankOpen ?? '' }}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12 card-title mt-3">3. Địa chỉ</div>
+                                                        <div class="col-6 mt-3">
+                                                            <div class="card_template-title d-flex align-items-center">
+                                                                <div class="text-nowrap me-4">Tỉnh/thành:</div>
+                                                                <div class="card_template-sub d-flex align-items-center">
+                                                                    <div class="card_template-sub-text">
+                                                                        {{ $customer->city ?? '' }}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 mt-3">
+                                                            <div class="card_template-title d-flex align-items-center">
+                                                                <div class="text-nowrap me-4 ">Quận/huyện:</div>
+                                                                <div class="card_template-sub d-flex align-items-center">
+                                                                    <div class="card_template-sub-text">
+                                                                        {{ $customer->district ?? '' }}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 mt-3">
+                                                            <div class="card_template-title d-flex align-items-center">
+                                                                <div class="text-nowrap me-4">Phường/xã:</div>
+                                                                <div class="card_template-sub d-flex align-items-center">
+                                                                    <div class="card_template-sub-text">
+                                                                        {{ $customer->guide ?? '' }}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 mt-3">
+                                                            <div class="card_template-title d-flex align-items-center">
+                                                                <div class="text-nowrap me-4">Địa chỉ:</div>
+                                                                <div class="card_template-sub d-flex align-items-center">
+                                                                    <div id="addressTxt" class="card_template-sub-text">
+                                                                        {{ $customer->address ?? '' }}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 mt-3">
+                                                            <div id="map" style="height: 300px; display: none">
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12 card-title mt-3">4. Mô tả</div>
+                                                        <div class="col-6 mt-3">
+                                                            <div class="card_template-title d-flex align-items-center">
+                                                                <div class="text-nowrap me-4">Nhân sự thu thập: </div>
+                                                                <div class="card_template-sub d-flex align-items-center">
+                                                                    <div class="card_template-sub-text">
+                                                                        {{ $customer->person->name ?? '' }}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        @php
+                                                            $products = $customer->products();
+                                                            $productNames = [];
+                                                            foreach ($products as $product) {
+                                                                $productNames[] = $product->name;
+                                                            }
+                                                            $productList = implode(', ', $productNames);
+                                                        @endphp
+                                                        <div class="col-6 mt-3">
+                                                            <div class="card_template-title d-flex align-items-center">
+                                                                <div class="text-nowrap me-4 ">Sản phẩm quan tâm: </div>
+                                                                <div class="card_template-sub d-flex align-items-center">
+                                                                    <div class="card_template-sub-text">
+                                                                        {{ $productList }}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12 card-title mt-3">5. Phân loại</div>
+                                                        <div class="col-4 mt-3">
+                                                            <div class="card_template-title d-flex align-items-center">
+                                                                <div class="text-nowrap me-4">Nhóm khách hàng: </div>
+                                                                <div class="card_template-sub d-flex align-items-center">
+                                                                    <div class="card_template-sub-text">
+                                                                        {{ $customer->group }}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4 mt-3">
+                                                            <div class="card_template-title d-flex align-items-center">
+                                                                <div class="text-nowrap me-4 ">Kênh khách hàng:</div>
+                                                                <div class="card_template-sub d-flex align-items-center">
+                                                                    <div class="card_template-sub-text">
+                                                                        {{ $customer->channel->name ?? '' }}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4 mt-3">
+                                                            <div class="card_template-title d-flex align-items-center">
+                                                                <div class="text-nowrap me-4 ">Tuyến:</div>
+                                                                <div class="card_template-sub d-flex align-items-center">
+                                                                    <div class="card_template-sub-text">
+                                                                        {{ $customer->route->name ?? '' }} -
+                                                                        {{ $customer->route->travel_time ?? '' }}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="row ">
-                                            <div class="col-lg-6 mt-4">
-                                                <div class="layout_120">
-                                                    <span class="fw-bold text-content">Số điện thoại:</span>
-                                                    <input class="input-contact"
-                                                        value="{{ $customer->companyPhoneNumber ?? ($customer->phone ?? 'Trống') }}" />
+                                            </li>
+                                            <li class="label-item">
+                                                <input type="radio" name="tab" id="artists" value="artists">
+                                                <label class=" label-info header_menu-link" for="artists">Chào
+                                                    hàng</label>
+                                                <div class="tabBody">
+
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-6 mt-4">
-                                                <div class="layout_120">
-                                                    <span class="fw-bold text-content">
-                                                        Email:</span>
-                                                    <input class="input-contact"
-                                                        value="{{ $customer->companyEmail ?? ($customer->email ?? 'Trống') }}" />
+                                            </li>
+                                            <li class="label-item">
+                                                <input type="radio" name="tab" id="albums" value="albums">
+                                                <label class="label-info header_menu-link" for="albums">Cơ hội</label>
+                                                <div class="tabBody">
+
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-6 mt-4">
-                                                <div class="layout_120">
-                                                    <span class="fw-bold text-content">Giai đoạn:</span>
-                                                    <input class="input-contact" value="{{ $customer->status ?? '' }}" />
+                                            </li>
+                                            <li class="label-item">
+                                                <input type="radio" name="tab" id="baogia" value="baogia">
+                                                <label class=" label-info header_menu-link" for="baogia">Báo giá</label>
+                                                <div class="tabBody">
+
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-6 mt-4">
-                                                <div class="layout_120">
-                                                    <span class="fw-bold text-content">Tỷ lệ thành công:
-                                                    </span>
-                                                    <input class="input-contact" value="100%" />
-                                                </div>
-                                            </div>
-                                        </div>
+                                            </li>
+                                        </ul>
                                     </div>
-                                </div>
-
-                                <div class="viewport mt-5">
-                                    <ul class="tabs">
-                                        <li class="label-item">
-                                            <input type="radio" name="tab" id="playlists" value="playlists" checked>
-                                            <label class="label-info header_menu-link" for="playlists">
-                                                Thông tin chi tiết
-                                            </label>
-                                            <div class="tabBody">
-                                                <div class="container">
-                                                    {{-- Liên hệ --}}
-                                                    <div class="mb-5">
-                                                        <h2 class="text-color_pimary mt-4"> Liên hệ</h2>
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Người liên
-                                                                        hệ:</span>
-                                                                    <input class="input-contact"
-                                                                        value="{{ $customer->name ?? '' }}" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 mt-5">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Số điện
-                                                                        thoại:</span>
-                                                                    <input class="input-contact"
-                                                                        value="{{ $customer->phone }}" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 mt-5">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Email:</span>
-                                                                    <input class="input-contact"
-                                                                        value="{{ $customer->email }}" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    {{-- Tổ chức --}}
-                                                    <div class="mb-5">
-                                                        <h2 class="text-color_pimary">Tổ chức
-                                                        </h2>
-                                                        <div class="row">
-                                                            <div class="col-lg-6">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Tên công ty:</span>
-                                                                    <input class="input-contact"
-                                                                        value="{{ $customer->companyName ?? '' }}" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">SDT công
-                                                                        ty:</span>
-                                                                    <input class="input-contact"
-                                                                        value="{{ $customer->companyPhoneNumber ?? '' }}" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 mt-5">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Mã số thuế:</span>
-                                                                    <input class="input-contact"
-                                                                        value="{{ $customer->taxCode ?? '' }}" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 mt-5">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Email công
-                                                                        ty:</span>
-                                                                    <input class="input-contact"
-                                                                        value="{{ $customer->companyEmail ?? '' }}" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 mt-5">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Đại diện:</span>
-                                                                    <input class="input-contact"
-                                                                        value="{{ $customer->personContact ?? '' }}" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 mt-5">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Chức danh:</span>
-                                                                    <input class="input-contact"
-                                                                        value="{{ $customer->career ?? '' }}" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 mt-5">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Số tài khoản:</span>
-                                                                    <input class="input-contact"
-                                                                        value="{{ $customer->accountNumber ?? '' }}" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 mt-5">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Ngân hàng:</span>
-                                                                    <input class="input-contact"
-                                                                        value="{{ $customer->bankOpen ?? '' }}" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    {{-- Địa chỉ --}}
-                                                    <div class="mb-5">
-                                                        <h2 class="text-color_pimary">Địa chỉ
-                                                        </h2>
-                                                        <div class="row">
-                                                            <div class="col-lg-4">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Tỉnh/thành</span>
-                                                                    <input class="input-contact"
-                                                                        value="{{ $customer->city ?? '' }}" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Quận/huyện:</span>
-                                                                    <input class="input-contact"
-                                                                        value="{{ $customer->district ?? '' }}" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Phường/xã:</span>
-                                                                    <input class="input-contact"
-                                                                        value="{{ $customer->guide ?? '' }}" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-12">
-                                                                <div class="mt-5 layout_120">
-                                                                    <span class="fw-bold text-content">Địa chỉ:</span>
-                                                                    <input id="addressTxt" class="input-contact"
-                                                                        value="{{ $customer->address ?? '' }}" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
 
 
-                                                    {{-- Mô tả --}}
-                                                    <div class="mb-5">
-                                                        <h2 class="text-color_pimary">Mô tả
-                                                        </h2>
 
-                                                        <div class="row">
-                                                            <div class="col-lg-6">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Nhân sự thu
-                                                                        thập:</span>
-                                                                    <input class="input-contact"
-                                                                        value="{{ $customer->person->name ?? '' }}" />
-                                                                </div>
-                                                            </div>
-                                                            @php
-                                                                $products = $customer->products();
-                                                                $productNames = [];
-                                                                foreach ($products as $product) {
-                                                                    $productNames[] = $product->name;
-                                                                }
-                                                                $productList = implode(', ', $productNames);
-                                                            @endphp
-                                                            <div class="col-lg-6">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">SP quan
-                                                                        tâm:</span>
-                                                                    <input class="input-contact"
-                                                                        value="{{ $productList }}" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
 
-                                                    {{-- Phân loại --}}
-                                                    <div class="mb-5">
-                                                        <h2 class="text-color_pimary">Phân loại
-                                                        </h2>
-                                                        <div class="row">
-                                                            <div class="col-lg-4">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Nhóm khách
-                                                                        hàng:</span>
-                                                                    <input class="input-contact"
-                                                                        value="{{ $customer->group }}" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Kênh khách
-                                                                        hàng:</span>
-                                                                    <input class="input-contact"
-                                                                        value="{{ $customer->channel->name ?? '' }}" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold text-content">Tuyến:</span>
-                                                                    <input class="input-contact"
-                                                                        value="{{ $customer->route->name ?? '' }} - {{ $customer->route->travel_time ?? '' }}" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="mb-5">
-                                                        <div id="map" style="height: 300px; display: none">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="label-item">
-                                            <input type="radio" name="tab" id="artists" value="artists">
-                                            <label class=" label-info header_menu-link" for="artists">Chào
-                                                hàng</label>
-                                            <div class="tabBody">
-
-                                            </div>
-                                        </li>
-                                        <li class="label-item">
-                                            <input type="radio" name="tab" id="albums" value="albums">
-                                            <label class="label-info header_menu-link" for="albums">Cơ hội</label>
-                                            <div class="tabBody">
-
-                                            </div>
-                                        </li>
-                                        <li class="label-item">
-                                            <input type="radio" name="tab" id="baogia" value="baogia">
-                                            <label class=" label-info header_menu-link" for="baogia">Báo giá</label>
-                                            <div class="tabBody">
-
-                                            </div>
-                                        </li>
-                                    </ul>
+                                    <nav aria-label="Page navigation example" class="float-end mt-3"
+                                        id="target-pagination">
+                                        <ul class="pagination">
+                                            {{-- @foreach ($listUsers->links as $link)
+                                                <li class="page-item {{ $link->active ? 'active' : '' }}">
+                                                    <a class="page-link" href="{{ getPaginationLink($link, 'page') }}" aria-label="Previous">
+                                                        <span aria-hidden="true">{!! $link->label !!}</span>
+                                                    </a>
+                                                </li>
+                                            @endforeach --}}
+                                        </ul>
+                                    </nav>
                                 </div>
                             </div>
                         </div>
@@ -492,8 +388,294 @@
     </div>
     @include('template.sidebar.sidebarMaster.sidebarRight')
 
-@section('footer-script')
+    <!-- Modal thêm khách hàng -->
+    <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Thêm khách hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="formThemCapPhat" method="POST" action="#">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <div class="card-title">1. Thông tin chung</div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="topic" data-bs-toggle="tooltip" required
+                                    data-bs-placement="top" title="Tên khách hàng" placeholder="Tên khách hàng*"
+                                    class="form-control">
+                            </div>
 
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Số điện thoại" placeholder="Số điện thoại*" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Email" placeholder="Email*" class="form-control">
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <div class="card-title">2. Tổ chức</div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Tên công ty" placeholder="Tên công ty" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Người đại diện" placeholder="Người đại diện" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Chức danh" placeholder="Chức danh" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Mã số thuế" placeholder="Mã số thuế" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Số điện thoại công ty" placeholder="Số điện thoại công ty"
+                                    class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Email công ty" placeholder="Email công ty" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Số tài khoản" placeholder="Số tài khoản" class="form-control">
+                            </div>
+                            <div class="col-md-8 mb-3">
+                                <input type="text" name="topic" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Mở tại ngân hàng" placeholder="Mở tại ngân hàng" class="form-control">
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <div class="card-title">3. Địa chỉ</div>
+                            </div>
+                            <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Tỉnh/thành">
+                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
+                                    data-live-search="true" title="Tỉnh/thành*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="1">1</option>
+                                    <option value="1">1</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Quận/huyện">
+                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
+                                    data-live-search="true" title="Quận/huyện*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="1">1</option>
+                                    <option value="1">1</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Phường/xã">
+                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
+                                    data-live-search="true" title="Phường/xã*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="1">1</option>
+                                    <option value="1">1</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <input type="text" name="topic" data-bs-toggle="tooltip" required
+                                    data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ*" class="form-control">
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <div class="card-title">4. Mô tả</div>
+                            </div>
+
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Nhân sự thu thập">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
+                                    data-live-search="true" title="Nhân sự thu thập*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="1">1</option>
+                                    <option value="1">1</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Sản phẩm quan tâm">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
+                                    data-live-search="true" title="Sản phẩm quan tâm*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="1">1</option>
+                                    <option value="1">1</option>
+                                </select>
+                            </div>
+
+
+                            <div class="col-md-12 mb-3">
+                                <div class="card-title">5. Phân loại</div>
+                            </div>
+
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Nhóm khách hàng">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
+                                    data-live-search="true" title="Nhóm khách hàng*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="Nhà thuốc">Nhà thuốc</option>
+                                    <option value="Phòng khám/Trung tâm tế">Phòng khám/Trung tâm tế</option>
+                                    <option value="Bệnh viện">Bệnh viện</option>
+                                    <option value="Nhà phân phối">Nhà phân phối</option>
+                                    <option value="Online">Online</option>
+                                    <option value="Khách sạn">Khách sạn</option>
+                                    <option value="Nhà thuốc S">Nhà thuốc S</option>
+                                    <option value="Siêu thị/Cửa hàng bán lẻ">Siêu thị/Cửa hàng bán lẻ</option>
+                                    <option value="Chuỗi nhà thuốc">Chuỗi nhà thuốc</option>
+                                    <option value="Đại siêu thị">Đại siêu thị</option>
+                                    <option value="Làm đẹp/Phòng tập thể dục/Thể thao">Làm đẹp/Phòng tập thể dục/Thể thao
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Tuyến">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
+                                    data-live-search="true" title="Tuyến*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="1">1</option>
+                                    <option value="1">1</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Kênh khách hàng">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
+                                    data-live-search="true" title="Kênh khách hàng*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="OTC">OTC</option>
+                                    <option value="ETC">ETC</option>
+                                    <option value="MT">MT</option>
+                                    <option value="Đại lý cá nhân">Đại lý cá nhân</option>
+
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Trạng thái">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
+                                    data-live-search="true" title="Trạng thái*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="Trinh sát">Trinh sát</option>
+                                    <option value="Tiềm năng">Tiềm năng</option>
+                                    <option value="Cơ hội">Cơ hội</option>
+                                    <option value="Khách hàng">Khách hàng</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-danger">Lưu</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {{-- Thông tin khách hàng --}}
+    <div class="modal fade" id="info" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Thông tin khách hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12 mt-3">
+                            <div class="d-flex align-items-center">
+                                <div class="modal-title">Thông tin chung</div>
+                            </div>
+                            <div class="modal_list row">
+                                <div class="modal_items col-sm-6">
+                                    Tên khách hàng: <span class="text-danger">Nguyễn Văn A</span>
+                                </div>
+                                <div class="modal_items col-sm-6">
+                                    Mã khách hàng:<span class="text-danger">KH0001</span>
+                                </div>
+                                <div class="modal_items col-sm-6">
+                                    Số điện thoại: <span class="text-danger">098888888888</span>
+                                </div>
+                                <div class="modal_items col-sm-6">
+                                    Email:<span class="text-danger">khtbht@gmail.com</span>
+                                </div>
+                                <div class="modal_items col-sm-6">
+                                    Địa chỉ:<span class="text-danger">219 Trung Kính, Cầu Giấy, Hà Nội</span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mt-3">
+                            <div class="d-flex align-items-center">
+                                <div class="modal-title">Thông tin đầu mối liên hệ</div>
+                            </div>
+                            <div class="modal_list row">
+                                <div class="modal_items col-sm-6">
+                                    Tên người liên hệ: <span class="text-danger">Nguyễn Văn A</span>
+                                </div>
+                                <div class="modal_items col-sm-6">
+                                    Danh xưng:<span class="text-danger">Chị</span>
+                                </div>
+                                <div class="modal_items col-sm-6">
+                                    Số điện thoại: <span class="text-danger">098888888888</span>
+                                </div>
+                                <div class="modal_items col-sm-6">
+                                    Email:<span class="text-danger">khtbht@gmail.com</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mt-3">
+                            <div class="d-flex align-items-center">
+                                <div class="modal-title">Quản lý khách hàng</div>
+                            </div>
+                            <div class="modal_list row">
+                                <div class="modal_items col-sm-6">
+                                    Nhân sự phụ trách: <span class="text-danger">Nguyễn Văn A</span>
+                                </div>
+                                <div class="modal_items col-sm-6">
+                                    Nhóm khách hàng <span class="text-danger"></span>
+                                </div>
+                                <div class="modal_items col-sm-6">
+                                    Kênh khách hàng: <span class="text-danger">Nhà thuốc</span>
+                                </div>
+                                <div class="modal_items col-sm-6">
+                                    Tuyến:<span class="text-danger">Thứ 2</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+@endsection
+@section('footer-script')
     <!-- Plugins -->
     <script src="{{ asset('assets/plugins/jquery-datetimepicker/custom-datetimepicker.js') }}"></script>
 
@@ -515,72 +697,162 @@
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
 
-
-    <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
-
-
-    <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/components/dataHrefTable.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"
-        integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        var rev = $('.rev_slider');
-        rev.on('init', function(event, slick, currentSlide) {
-            var
-                cur = $(slick.$slides[slick.currentSlide]),
-                next = cur.next(),
-                prev = cur.prev();
-            prev.addClass('slick-sprev');
-            next.addClass('slick-snext');
-            cur.removeClass('slick-snext').removeClass('slick-sprev');
-            slick.$prev = prev;
-            slick.$next = next;
-        }).on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-            //console.log('beforeChange');
-            var
-                cur = $(slick.$slides[nextSlide]);
-            //console.log(slick.$prev, slick.$next);
-            slick.$prev.removeClass('slick-sprev');
-            slick.$next.removeClass('slick-snext');
-            next = cur.next(),
-                prev = cur.prev();
-            prev.prev();
-            prev.next();
-            prev.addClass('slick-sprev');
-            next.addClass('slick-snext');
-            slick.$prev = prev;
-            slick.$next = next;
-            cur.removeClass('slick-next').removeClass('slick-sprev');
-        });
+        updateList = function(e) {
+            const input = e.target;
+            const outPut = input.parentNode.parentNode.parentNode.parentNode.parentNode.querySelector(
+                '.modal_upload-list');
+            const notSupport = outPut.parentNode.parentNode.querySelector('.alertNotSupport');
 
-        rev.slick({
-            speed: 1000,
-            arrows: true,
-            dots: false,
-            focusOnSelect: true,
-            prevArrow: '<button> prev</button>',
-            nextArrow: '<button> next</button>',
-            infinite: true,
-            centerMode: true,
-            slidesPerRow: 1,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            centerPadding: '0',
-            swipe: true,
-            customPaging: function(slider, i) {
-                return '';
-            },
+            let children = '';
+            console.log(children);
+            // const allowedTypes = ['application/pdf'];
+            // const allowedExtensions = ['.pdf'];
+            const maxFileSize = 10485760; //10MB in bytes
+
+            for (let i = 0; i < input.files.length; ++i) {
+                const file = input.files.item(i);
+                // if (file.size <= maxFileSize && allowedTypes.includes(file.type) && allowedExtensions.includes(
+                //         getFileExtension(file.name))) {
+                if (file.size <= maxFileSize) {
+                    children += `<li>
+            <span class="fs-5">
+                <i class="bi bi-link-45deg"></i> ${file.name}
+            </span>
+            <span class="modal_upload-remote" onclick="removeFileFromFileList(event, ${i})">
+                <img style="width:18px;height:18px" src="{{ asset('assets/img/trash.svg') }}" />
+            </span>
+        </li>`;
+                } else {
+
+                    notSupport.style.display = 'block';
+                    //remove all files from input
+                    input.value = '';
+
+                    setTimeout(() => {
+                        notSupport.style.display = 'none';
+                    }, 5000);
+                }
+            }
+            outPut.innerHTML = children;
+        }
+
+        //delete file from input
+        function removeFileFromFileList(event, index) {
+            const deleteButton = event.target;
+            //get tag name
+            const tagName = deleteButton.tagName.toLowerCase();
+            let liEl;
+            if (tagName == "img") {
+                liEl = deleteButton.parentNode.parentNode;
+            }
+            if (tagName == "span") {
+                liEl = deleteButton.parentNode;
+            }
+
+            const inputEl = liEl.parentNode.parentNode.parentNode.querySelector('.modal_upload-input');
+            const dt = new DataTransfer()
+
+            const {
+                files
+            } = inputEl
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i]
+                if (index !== i)
+                    dt.items.add(file) // here you exclude the file. thus removing it.
+            }
+
+            inputEl.files = dt.files // Assign the updates list
+            liEl.remove();
+        }
+
+        function removeUploaded(event) {
+            const deleteButton = event.target;
+            //get tag name
+            const tagName = deleteButton.tagName.toLowerCase();
+            let liEl;
+            if (tagName == "img") {
+                liEl = deleteButton.parentNode.parentNode;
+            }
+            if (tagName == "span") {
+                liEl = deleteButton.parentNode;
+            }
+            liEl.remove();
+        }
+
+        function getFileExtension(filename) {
+            return '.' + filename.split('.').pop();
+        }
+    </script>
+
+    <script>
+        $(document).ready(function() {
+
+            $('.datePicker').daterangepicker({
+                singleDatePicker: false,
+                timePicker: false,
+                locale: {
+                    format: 'DD/MM/YYYY '
+                }
+            });
+
+            $(".locDuLieuPick").datepicker({
+                format: "mm-yyyy",
+                orientation: 'top',
+                autoclose: true,
+                startView: "months",
+                minViewMode: "months",
+                locale: 'vi',
+            });
+
+            $('.timepicker').daterangepicker({
+                timePicker: true,
+                singleDatePicker: true,
+                timePicker24Hour: true,
+                timePickerIncrement: 1,
+                timePickerSeconds: false,
+                locale: {
+                    format: 'HH:mm'
+                },
+                timePickerminTime: '08:00',
+                timePickermaxTime: '17:00'
+            }).on('show.daterangepicker', function(ev, picker) {
+                picker.container.find(".calendar-table").hide();
+            });
+
         });
     </script>
 
+    <script>
+        function reloadWithoutParams() {
+            const currentUrl = window.location.pathname;
+            window.location.href = currentUrl;
+        }
+    </script>
+
+
+
+    <script>
+        function resetTaskFilters(queryNames) {
+            console.log("reset filters", queryNames);
+            const urlParams = new URLSearchParams(window.location.search);
+            queryNames.forEach(queryName => {
+
+                urlParams.delete(queryName);
+
+
+            })
+            window.location.search = urlParams;
+        }
+    </script>
 
     <script>
         $(document).ready(function() {
             var apiKey = "b5b7553f4280465482f4a03273fb8813";
             var map;
             var marker;
-            var address = $("#addressTxt").val().trim();
+            var address = $("#addressTxt").text().trim();
             $("#map").show();
             geocodeAddress(address);
 
@@ -602,10 +874,9 @@
                             // Display map
                             if (!map) {
                                 map = L.map('map').setView([latitude, longitude], 13);
-                                L.tileLayer(
-                                    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
-                                    }).addTo(map);
+                                }).addTo(map);
                             } else {
                                 map.setView([latitude, longitude], 13);
                             }
@@ -627,5 +898,15 @@
             }
 
         });
+    </script>
+
+
+    <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
+
+
+    <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}">
+        < /scrip> <
+        script type = "text/javascript"
+        src = "{{ asset('/assets/js/components/dataHrefTable.js') }}" >
     </script>
 @endsection
