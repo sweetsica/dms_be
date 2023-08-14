@@ -42,7 +42,9 @@ class Customer extends Model
        'chanelId',
        'status',
        'coordinatesX',
-       'coordinatesY'
+       'coordinatesY',
+       'filePath',
+       'fileName',
    ];
 
     public function route()

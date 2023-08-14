@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class CustomerController extends Controller
 {
@@ -368,5 +369,38 @@ class CustomerController extends Controller
     {
         Customer::destroy($id);
         return redirect()->back()->with('mess', 'Đã xóa!');
+    }
+
+    public function upload(Request $request, $id)
+    {
+        $files = $request->file('file');
+        $customer = Customer::find($id);
+        $existingFileName = json_decode($customer->fileName, true) ?? [];
+        $existingFilePath = json_decode($customer->filePath, true) ?? [];
+        foreach ($files as $file) {
+            $path = $file->store('upload', 'public');
+            $existingFileName[] = $file->getClientOriginalName();
+            $existingFilePath[] = $path;
+        }
+        // Cập nhật giá trị mới cho fileName và filePath
+        $customer->fileName = json_encode($existingFileName);
+        $customer->filePath = json_encode($existingFilePath);
+        $customer->save();
+        return response()->json(['success' => true, 'customers' => $customer]);
+    }
+
+    public function download($id, $name)
+    {
+        $customer = Customer::find($id);
+
+        if (!$customer) {
+            abort(404, 'Không tìm thấy khách hàng.');
+        }
+        $fileNames = json_decode($customer->fileName, true);
+        $filePaths = json_decode($customer->filePath, true);
+
+        $fileIndex = array_search($name, $fileNames);
+        $filePath = storage_path('app/public/' . $filePaths[$fileIndex]);
+        return response()->download($filePath, $name);
     }
 }
