@@ -79,13 +79,23 @@
                                                                     {{ $i++ }}
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->code }}">
                                                                     {{ $item->code }}
+                                                                </div>
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->name }}">
                                                                     {{ $item->name }}
+                                                                </div>
                                                                 </td>
                                                                 <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top"
+                                                                    title="{{ $item->description }}">
                                                                     {{ $item->description }}
+                                                                </div>
                                                                 </td>
                                                                 <td>
                                                                     <div class="table_actions d-flex justify-content-end">
@@ -201,9 +211,17 @@
                                                         </div>
                                                     @endforeach
                                                 </table>
-                                                {{ $roleList->appends([
+                                                {{-- {{ $roleList->appends([
                                                         'search' => $search,
-                                                    ])->links() }}
+                                                    ])->links() }} --}}
+                                                        <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                        id="target-pagination">
+                                                        <ul class="pagination">
+                                                            {{ $roleList->appends([
+                                                                    'search' => $search,
+                                                                ])->links() }}
+                                                        </ul>
+                                                    </nav>
                                             </div>
                                         </div>
                                     </div>
@@ -242,7 +260,7 @@
                             <div class="col-6 mb-3">
                                 <input name="code" required type="text" placeholder="Nhập mã vai trò*"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Nhập mã vai trò**">
+                                    title="Nhập mã vai trò*">
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top">

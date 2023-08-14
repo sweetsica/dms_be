@@ -47,6 +47,7 @@
                                                         <i class="bi bi-funnel"></i>
                                                     </button>
                                                 </div>
+
                                                 @if ((session('user')['role_id'] == '1') )
                                                 <div class="action_export order-md-4">
                                                     <button class="btn btn-danger d-block testCreateUser"
@@ -241,7 +242,8 @@
                                                                                                 {{ $item->leader_name }}
                                                                                             </option>
                                                                                             <?php } ?>
-
+                                                                                            <option value="0">Chọn
+                                                                                                trưởng bộ phận</option>
                                                                                             @foreach ($UnitLeaderList as $av)
                                                                                                 <option
                                                                                                     value="{{ $av->id }}">
@@ -410,12 +412,62 @@
                                     data-bs-dismiss="modal">Hủy</button>
                                 <button type="submit" class="btn btn-danger">Tạo</button>
                             </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 
+      {{-- Filter --}}
+      <div class="modal fade" id="filterOptions" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Lọc dữ liệu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
 
+                <form action="" method="GET">
+                    {{-- @foreach (request()->query() as $key => $value)
+                        @if (!in_array($key, [ 'don_vi_me']))
+                            <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                        @endif
+                    @endforeach --}}
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-original-title="Lọc theo trưởng đơn vị">
+                                    <select id="select-status" class="selectpicker select_filter"
+                                        data-dropup-auto="false" title="Lọc theo trưởng đơn vị" name='leader_name'>
+                                      @foreach ($UnitLeaderList as $item )
+                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                      @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-original-title="Lọc theo đơn vị mẹ">
+                                    <select id="select-status" class="selectpicker select_filter"
+                                        data-dropup-auto="false" title="Lọc theo đơn vị mẹ" name='don_vi_me'>
+                                      @foreach ($departmentList as $item )
+                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                      @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="reset" class="btn btn-outline-danger">Làm
+                            mới</button>
+                        <button type="submit" class="btn btn-danger">Lọc</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 @endsection
 @section('footer-script')

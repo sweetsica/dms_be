@@ -15,11 +15,11 @@
         if (!isset($link['url'])) {
             return '#';
         }
-    
+
         $pageNumber = explode('?page=', $link['url'])[1];
-    
+
         $queryString = request()->query();
-    
+
         $queryString[$pageName] = $pageNumber;
         return route('customers', $queryString);
     }
@@ -116,7 +116,7 @@
                                                         data-href="/chi-tiet-khach-hang/{{ $item['id'] }}" role="button">
                                                         <td>
                                                             <div class="overText text-center">
-                                                                {{ $listData->total() - $loop->index - ($listData->currentPage() - 1) * $listData->perPage() }}
+                                                                {{ $loop->iteration }}
                                                             </div>
                                                         </td>
                                                         <td>
@@ -324,12 +324,12 @@
                                         placeholder="Tên khách hàng*" class="form-control">
                                 </div>
 
-                                <div class="col-md-3 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <input type="text" value="{{ $item->phone }}" name="phone"
                                         data-bs-toggle="tooltip" required data-bs-placement="top" title="Số điện thoại"
                                         placeholder="Số điện thoại*" class="form-control">
                                 </div>
-                                <div class="col-md-3 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <input type="text" value="{{ $item->email }}" name="email"
                                         data-bs-toggle="tooltip" data-bs-placement="top" title="Email"
                                         placeholder="Email*" class="form-control">
@@ -902,26 +902,26 @@
         });
         $("#guide").change(() => {})
 
-        // load data nhan su api
-        // function loadPersonnelData() {
-        //     const apiUrl = '/nhan_su';
-        //     const selectElement = document.getElementById('personId');
-        //     fetch(apiUrl)
-        //         .then((response) => response.json())
-        //         .then((data) => {
-        //             selectElement.innerHTML = '';
-        //             data.forEach((person) => {
-        //                 const option = document.createElement('option');
-        //                 option.value = person.id;
-        //                 option.textContent = person.name;
-        //                 selectElement.appendChild(option);
-        //             });
+        load data nhan su api
+        function loadPersonnelData() {
+            const apiUrl = '/nhan_su';
+            const selectElement = document.getElementById('personId');
+            fetch(apiUrl)
+                .then((response) => response.json())
+                .then((data) => {
+                    selectElement.innerHTML = '';
+                    data.forEach((person) => {
+                        const option = document.createElement('option');
+                        option.value = person.id;
+                        option.textContent = person.name;
+                        selectElement.appendChild(option);
+                    });
 
-        //             $('#personId').selectpicker('refresh');
-        //         })
-        //         .catch((error) => console.error('Lỗi khi gọi API:', error));
-        // }
-        // window.addEventListener('load', loadPersonnelData);
+                    $('#personId').selectpicker('refresh');
+                })
+                .catch((error) => console.error('Lỗi khi gọi API:', error));
+        }
+        window.addEventListener('load', loadPersonnelData);
 
         //load data san pham api
         function loadProductData() {

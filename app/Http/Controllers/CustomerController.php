@@ -146,6 +146,26 @@ class CustomerController extends Controller
             Session::flash('error', $e);
             return back();
         }
+        $listData = $listData->paginate($limit);
+
+        $groupIDs = $listData->pluck('groupId')->toArray();
+        $listPerson = Personnel::all();
+        $listProduct = Product::all();
+        $listRoute = RouteDirection::all();
+        $listChannel = Department::all();
+        $listgroup = CustomerGroup::all();
+
+        $pagination = $this->pagination($listData);
+
+        return view('Customer.danhSachKhachHang', compact(
+            'listData',
+            'listPerson',
+            'listProduct',
+            'listRoute',
+            'listChannel',
+            'listgroup',
+            "pagination"
+        ));
     }
 
     public function create(Request $request)

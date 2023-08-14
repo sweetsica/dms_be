@@ -12,7 +12,9 @@ class LocalityController extends Controller
 
     public function index(Request $request){
         $search = $request->get('search');
-        $localityList = Locality::join('area','area.id','=','locality.area_id')
+        $khu_vuc = $request->get('khu_vuc');
+        $query = Locality::query();
+        $query->join('area','area.id','=','locality.area_id')
         ->select(
             'locality.id',
             'locality.name',
@@ -20,14 +22,24 @@ class LocalityController extends Controller
             'locality.code',
             'locality.area_id',
             'area.name as area_name'
-        )
-        ->where("locality.code", "like", "%$search%")->paginate(5);
+        );
+        if($search != NULL) {
+            $query->where("locality.name", "like", "%$search%");
+        }
+        if($search != NULL) {
+            $query->orWhere("locality.code", "like", "%$search%");
+        }
+        if($khu_vuc != NULL) {
+            $query->where("area.name", "like", "%$khu_vuc%");
+        }
+        $localityList=$query->paginate(10);
         $area = Area::all();
         $areaTree =  Department::with('khuVucs.diaBans.tuyens')->where('code', 'like', 'VUNG%')->get();
         return view("Address.danhSachDiaBan",[
             "localityList"=>$localityList,
             'search' => $search,
             'area' => $area,
+            'khu_vuc' => $khu_vuc,
             'areaTree' => $areaTree,
 
         ]);

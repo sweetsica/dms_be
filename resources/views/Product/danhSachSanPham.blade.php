@@ -8,21 +8,21 @@
     </style>
 @endsection
 @php
-    
+
     function getPaginationLink($link, $pageName)
     {
         if (!isset($link['url'])) {
             return '#';
         }
-    
+
         $pageNumber = explode('?page=', $link['url'])[1];
-    
+
         $queryString = request()->query();
-    
+
         $queryString[$pageName] = $pageNumber;
         return route('product.list', $queryString);
     }
-    
+
     // function isFiltering($filterNames)
     // {
     //     $filters = request()->query();
@@ -33,7 +33,7 @@
     //     }
     //     return false;
     // }
-    
+
 @endphp
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
@@ -133,7 +133,6 @@
                                                                 <img class="" src="{{ $item->thumbnail }}" />
                                                             </div>
                                                         </td>
-
                                                         <td>
                                                             <div class="overText" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="{{ $item->type }}">
@@ -333,7 +332,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-danger me-3"
-                                data-bs-dismiss="modal">Hủy</button>
+                                data-bs-dismiss="modal"> Hủy </button>
                             <button type="submit" class="btn btn-danger">Lưu</button>
                         </div>
                     </form>

@@ -17,7 +17,15 @@ class PersonnelController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search');
-        $personnelList = Personnel::leftJoin('department', 'department.id', '=', 'personnel.department_id')
+        $dv_cong_tac = $request->get('dv_cong_tac');
+        $vt_lam_vc = $request->get('vt_lam_vc');
+        $cap_nhan_su = $request->get('cap_nhan_su');
+        $vai_tro = $request->get('vai_tro');
+        $dia_ban = $request->get('dia_ban');
+        $trang_thai = $request->get('trang_thai');
+        $query = Personnel::query();
+        // $personnelList = Personnel::
+        $query->leftJoin('department', 'department.id', '=', 'personnel.department_id')
             ->leftJoin('position', 'position.id', '=', 'personnel.position_id')
             ->leftJoin('personnel_level', 'personnel_level.id', '=', 'personnel.personnel_lv_id')
             ->leftJoin('role', 'role.id', '=', 'personnel.role_id')
@@ -48,8 +56,36 @@ class PersonnelController extends Controller
                 'locality.name as locality_name',
                 'personnel.area_id'
                 // 'personnel.id',
-            )
-            ->where("personnel.code", "like", "%$search%")->paginate(10);
+            );
+            if($search != NULL) {
+                $query->where("personnel.code", "like", "%$search%");
+            }
+            if($search != NULL) {
+                $query->orWhere("personnel.name", "like", "%$search%");
+            }
+            if($search != NULL) {
+                $query->orWhere("personnel.phone", "like", "%$search%");
+            }
+            if($dv_cong_tac != NULL) {
+                $query->where("department.name", "like", "%$dv_cong_tac%");
+            }
+            if($vt_lam_vc != NULL) {
+                $query->where("position.name", "like", "%$vt_lam_vc%");
+            }
+            if($cap_nhan_su != NULL) {
+                $query->where("personnel_level.name", "like", "%$cap_nhan_su%");
+            }
+            if($vai_tro != NULL) {
+                $query->where("role.name", "like", "%$vai_tro%");
+            }
+            if($dia_ban != NULL) {
+                $query->where("locality.name", "like", "%$dia_ban%");
+            }
+            if($trang_thai != NULL) {
+                $query->where("personnel.status", "like", "%$trang_thai%");
+            }
+            // ->where("personnel.code", "like", "%$search%")
+        $personnelList =$query->paginate(15);
         $departmentlists = $this->getDepartment();
         $positionlists = $this->getPosition();
         $personnellists = $this->getPersonnel();
@@ -66,6 +102,12 @@ class PersonnelController extends Controller
             "personnellists"=>$personnellists,
             "personnelLevelList"=>$personnelLevelList,
             "roleList"=>$roleList,
+            "dv_cong_tac"=>$dv_cong_tac,
+            "vt_lam_vc"=>$vt_lam_vc,
+            "cap_nhan_su"=>$cap_nhan_su,
+            "vai_tro"=>$vai_tro,
+            "dia_ban"=>$dia_ban,
+            "trang_thai"=>$trang_thai,
             "departmentListTree"=>$departmentListTree,
             'search' => $search
         ]);
@@ -74,7 +116,15 @@ class PersonnelController extends Controller
     public function indexvtri(Request $request)
     {
         $search = $request->get('search');
-        $personnelList = Personnel::leftJoin('department', 'department.id', '=', 'personnel.department_id')
+        $dv_cong_tac = $request->get('dv_cong_tac');
+        $vt_lam_vc = $request->get('vt_lam_vc');
+        $cap_nhan_su = $request->get('cap_nhan_su');
+        $vai_tro = $request->get('vai_tro');
+        $dia_ban = $request->get('dia_ban');
+        $trang_thai = $request->get('trang_thai');
+        $query = Personnel::query();
+        // $personnelList = Personnel::
+        $query->leftJoin('department', 'department.id', '=', 'personnel.department_id')
             ->leftJoin('position', 'position.id', '=', 'personnel.position_id')
             ->leftJoin('personnel_level', 'personnel_level.id', '=', 'personnel.personnel_lv_id')
             ->leftJoin('role', 'role.id', '=', 'personnel.role_id')
@@ -105,8 +155,36 @@ class PersonnelController extends Controller
                 'locality.name as locality_name',
                 'personnel.area_id'
                 // 'personnel.id',
-            )
-            ->where("personnel.code", "like", "%$search%")->paginate(10);
+            );
+            if($search != NULL) {
+                $query->where("personnel.code", "like", "%$search%");
+            }
+            if($search != NULL) {
+                $query->orWhere("personnel.name", "like", "%$search%");
+            }
+            if($search != NULL) {
+                $query->orWhere("personnel.phone", "like", "%$search%");
+            }
+            if($dv_cong_tac != NULL) {
+                $query->where("department.name", "like", "%$dv_cong_tac%");
+            }
+            if($vt_lam_vc != NULL) {
+                $query->where("position.name", "like", "%$vt_lam_vc%");
+            }
+            if($cap_nhan_su != NULL) {
+                $query->where("personnel_level.name", "like", "%$cap_nhan_su%");
+            }
+            if($vai_tro != NULL) {
+                $query->where("role.name", "like", "%$vai_tro%");
+            }
+            if($dia_ban != NULL) {
+                $query->where("locality.name", "like", "%$dia_ban%");
+            }
+            if($trang_thai != NULL) {
+                $query->where("personnel.status", "like", "%$trang_thai%");
+            }
+            // ->where("personnel.code", "like", "%$search%")
+        $personnelList =$query->paginate(15);
         $departmentlists = $this->getDepartment();
         $positionlists = $this->getPosition();
         $personnellists = $this->getPersonnel();
@@ -123,6 +201,12 @@ class PersonnelController extends Controller
             "personnellists"=>$personnellists,
             "personnelLevelList"=>$personnelLevelList,
             "roleList"=>$roleList,
+            "dv_cong_tac"=>$dv_cong_tac,
+            "vt_lam_vc"=>$vt_lam_vc,
+            "cap_nhan_su"=>$cap_nhan_su,
+            "vai_tro"=>$vai_tro,
+            "dia_ban"=>$dia_ban,
+            "trang_thai"=>$trang_thai,
             "positionListTree"=>$positionListTree,
             'search' => $search
         ]);
@@ -131,7 +215,15 @@ class PersonnelController extends Controller
     public function indexDiaBan(Request $request)
     {
         $search = $request->get('search');
-        $personnelList = Personnel::leftJoin('department', 'department.id', '=', 'personnel.department_id')
+        $dv_cong_tac = $request->get('dv_cong_tac');
+        $vt_lam_vc = $request->get('vt_lam_vc');
+        $cap_nhan_su = $request->get('cap_nhan_su');
+        $vai_tro = $request->get('vai_tro');
+        $dia_ban = $request->get('dia_ban');
+        $trang_thai = $request->get('trang_thai');
+        $query = Personnel::query();
+        // $personnelList = Personnel::
+        $query->leftJoin('department', 'department.id', '=', 'personnel.department_id')
             ->leftJoin('position', 'position.id', '=', 'personnel.position_id')
             ->leftJoin('personnel_level', 'personnel_level.id', '=', 'personnel.personnel_lv_id')
             ->leftJoin('role', 'role.id', '=', 'personnel.role_id')
@@ -162,9 +254,36 @@ class PersonnelController extends Controller
                 'locality.name as locality_name',
                 'personnel.area_id'
                 // 'personnel.id',
-            )
-
-            ->where("personnel.code", "like", "%$search%")->paginate(10);
+            );
+            if($search != NULL) {
+                $query->where("personnel.code", "like", "%$search%");
+            }
+            if($search != NULL) {
+                $query->orWhere("personnel.name", "like", "%$search%");
+            }
+            if($search != NULL) {
+                $query->orWhere("personnel.phone", "like", "%$search%");
+            }
+            if($dv_cong_tac != NULL) {
+                $query->where("department.name", "like", "%$dv_cong_tac%");
+            }
+            if($vt_lam_vc != NULL) {
+                $query->where("position.name", "like", "%$vt_lam_vc%");
+            }
+            if($cap_nhan_su != NULL) {
+                $query->where("personnel_level.name", "like", "%$cap_nhan_su%");
+            }
+            if($vai_tro != NULL) {
+                $query->where("role.name", "like", "%$vai_tro%");
+            }
+            if($dia_ban != NULL) {
+                $query->where("locality.name", "like", "%$dia_ban%");
+            }
+            if($trang_thai != NULL) {
+                $query->where("personnel.status", "like", "%$trang_thai%");
+            }
+            // ->where("personnel.code", "like", "%$search%")
+        $personnelList =$query->paginate(15);
         $departmentlists = $this->getDepartment();
         $positionlists = $this->getPosition();
         $personnellists = $this->getPersonnel();
@@ -181,6 +300,12 @@ class PersonnelController extends Controller
             "personnellists"=>$personnellists,
             "personnelLevelList"=>$personnelLevelList,
             "roleList"=>$roleList,
+            "dv_cong_tac"=>$dv_cong_tac,
+            "vt_lam_vc"=>$vt_lam_vc,
+            "cap_nhan_su"=>$cap_nhan_su,
+            "vai_tro"=>$vai_tro,
+            "dia_ban"=>$dia_ban,
+            "trang_thai"=>$trang_thai,
             "areaTree"=>$areaTree,
             'search' => $search
         ]);
@@ -190,7 +315,14 @@ class PersonnelController extends Controller
     public function show(Request $request ,$department_id)
     {
         $search = $request->get('search');
-        $personnelList = Personnel::leftJoin('department', 'department.id', '=', 'personnel.department_id')
+        $dv_cong_tac = $request->get('dv_cong_tac');
+        $vt_lam_vc = $request->get('vt_lam_vc');
+        $cap_nhan_su = $request->get('cap_nhan_su');
+        $vai_tro = $request->get('vai_tro');
+        $dia_ban = $request->get('dia_ban');
+        $trang_thai = $request->get('trang_thai');
+        $query = Personnel::query();
+        $query-> Personnel::leftJoin('department', 'department.id', '=', 'personnel.department_id')
             ->leftJoin('position', 'position.id', '=', 'personnel.position_id')
             ->leftJoin('personnel_level', 'personnel_level.id', '=', 'personnel.personnel_lv_id')
             ->leftJoin('role', 'role.id', '=', 'personnel.role_id')
@@ -222,15 +354,45 @@ class PersonnelController extends Controller
                 'department.parent',
                 'personnel.area_id'
                 // 'personnel.id',
-            )
-            ->where("personnel.code", "like", "%$search%")
-            ->where("personnel.department_id", $department_id)
+            );
+            if($search != NULL) {
+                $query->where("personnel.code", "like", "%$search%");
+            }
+            if($search != NULL) {
+                $query->orWhere("personnel.name", "like", "%$search%");
+            }
+            if($search != NULL) {
+                $query->orWhere("personnel.phone", "like", "%$search%");
+            }
+            if($dv_cong_tac != NULL) {
+                $query->where("department.name", "like", "%$dv_cong_tac%");
+            }
+            if($vt_lam_vc != NULL) {
+                $query->where("position.name", "like", "%$vt_lam_vc%");
+            }
+            if($cap_nhan_su != NULL) {
+                $query->where("personnel_level.name", "like", "%$cap_nhan_su%");
+            }
+            if($vai_tro != NULL) {
+                $query->where("role.name", "like", "%$vai_tro%");
+            }
+            if($dia_ban != NULL) {
+                $query->where("locality.name", "like", "%$dia_ban%");
+            }
+            if($trang_thai != NULL) {
+                $query->where("personnel.status", "like", "%$trang_thai%");
+            }
+            // ->where("personnel.code", "like", "%$search%")
+            // ->where("personnel.department_id", $department_id)
 
+            // ->orWhereHas('department', function ($query) use ($department_id) {
+            //     $query->where('department.parent', $department_id);
+            // })
+            // ->Where("personnel.department_id", $department_id)
+            $personnelList =$query->where("personnel.department_id", $department_id)
             ->orWhereHas('department', function ($query) use ($department_id) {
                 $query->where('department.parent', $department_id);
-            })
-            // ->Where("personnel.department_id", $department_id)
-            ->paginate(10);
+            })->paginate(15);
         $departmentlists = $this->getDepartment();
         $positionlists = $this->getPosition();
         $personnellists = $this->getPersonnel();
@@ -247,6 +409,12 @@ class PersonnelController extends Controller
             "personnellists"=>$personnellists,
             "personnelLevelList"=>$personnelLevelList,
             "roleList"=>$roleList,
+            "dv_cong_tac"=>$dv_cong_tac,
+            "vt_lam_vc"=>$vt_lam_vc,
+            "cap_nhan_su"=>$cap_nhan_su,
+            "vai_tro"=>$vai_tro,
+            "dia_ban"=>$dia_ban,
+            "trang_thai"=>$trang_thai,
             "departmentListTree"=>$departmentListTree,
             'search' => $search
         ]);
@@ -255,47 +423,84 @@ class PersonnelController extends Controller
     public function showVung(Request $request ,$department_id)
     {
         $search = $request->get('search');
-        $personnelList = Personnel::leftJoin('department', 'department.id', '=', 'personnel.department_id')
-            ->leftJoin('position', 'position.id', '=', 'personnel.position_id')
-            ->leftJoin('personnel_level', 'personnel_level.id', '=', 'personnel.personnel_lv_id')
-            ->leftJoin('role', 'role.id', '=', 'personnel.role_id')
-            ->leftJoin('locality', 'locality.id', '=', 'personnel.area_id')
-            ->select(
-                'personnel.id',
-                'personnel.name',
-                'personnel.address',
-                'personnel.gender',
-                'personnel.birthday',
-                'personnel.password',
-                'personnel.code',
-                'personnel.email',
-                'personnel.annual_salary',
-                'personnel.pack',
-                'personnel.manage',
-                'personnel.phone',
-                'personnel.working_form',
-                'personnel.status',
-                'personnel.department_id',
-                'personnel.personnel_lv_id',
-                'personnel.position_id',
-                'department.name as department_name',
-                'position.name as position_name',
-                'personnel_level.name as personnel_level_name',
-                'personnel.role_id',
-                'role.name as role_name',
-                'locality.name as locality_name',
-                'department.parent',
-                'personnel.area_id'
-                // 'personnel.id',
-            )
-            ->where("personnel.code", "like", "%$search%")
-            ->where("personnel.department_id", $department_id)
+        $dv_cong_tac = $request->get('dv_cong_tac');
+        $vt_lam_vc = $request->get('vt_lam_vc');
+        $cap_nhan_su = $request->get('cap_nhan_su');
+        $vai_tro = $request->get('vai_tro');
+        $dia_ban = $request->get('dia_ban');
+        $trang_thai = $request->get('trang_thai');
+        $query = Personnel::query();
+        $query->leftJoin('department', 'department.id', '=', 'personnel.department_id')
+        ->leftJoin('position', 'position.id', '=', 'personnel.position_id')
+        ->leftJoin('personnel_level', 'personnel_level.id', '=', 'personnel.personnel_lv_id')
+        ->leftJoin('role', 'role.id', '=', 'personnel.role_id')
+        ->leftJoin('locality', 'locality.id', '=', 'personnel.area_id')
+        ->select(
+            'personnel.id',
+            'personnel.name',
+            'personnel.address',
+            'personnel.gender',
+            'personnel.birthday',
+            'personnel.password',
+            'personnel.code',
+            'personnel.email',
+            'personnel.annual_salary',
+            'personnel.pack',
+            'personnel.manage',
+            'personnel.phone',
+            'personnel.working_form',
+            'personnel.status',
+            'personnel.department_id',
+            'personnel.personnel_lv_id',
+            'personnel.position_id',
+            'department.name as department_name',
+            'position.name as position_name',
+            'personnel_level.name as personnel_level_name',
+            'personnel.role_id',
+            'role.name as role_name',
+            'locality.name as locality_name',
+            'personnel.area_id'
+            // 'personnel.id',
+        );
+        if($search != NULL) {
+            $query->where("personnel.code", "like", "%$search%");
+        }
+        if($search != NULL) {
+            $query->orWhere("personnel.name", "like", "%$search%");
+        }
+        if($search != NULL) {
+            $query->orWhere("personnel.phone", "like", "%$search%");
+        }
+        if($dv_cong_tac != NULL) {
+            $query->where("department.name", "like", "%$dv_cong_tac%");
+        }
+        if($vt_lam_vc != NULL) {
+            $query->where("position.name", "like", "%$vt_lam_vc%");
+        }
+        if($cap_nhan_su != NULL) {
+            $query->where("personnel_level.name", "like", "%$cap_nhan_su%");
+        }
+        if($vai_tro != NULL) {
+            $query->where("role.name", "like", "%$vai_tro%");
+        }
+        if($dia_ban != NULL) {
+            $query->where("locality.name", "like", "%$dia_ban%");
+        }
+        if($trang_thai != NULL) {
+            $query->where("personnel.status", "like", "%$trang_thai%");
+        }
+            // ->where("personnel.code", "like", "%$search%")
+            // ->where("personnel.department_id", $department_id)
 
+            // ->orWhereHas('department', function ($query) use ($department_id) {
+            //     $query->where('department.parent', $department_id);
+            // })
+            // ->Where("personnel.department_id", $department_id)
+            $personnelList =$query->where("personnel.department_id", $department_id)
             ->orWhereHas('department', function ($query) use ($department_id) {
                 $query->where('department.parent', $department_id);
             })
-            // ->Where("personnel.department_id", $department_id)
-            ->paginate(10);
+            ->paginate(15);
         $departmentlists = $this->getDepartment();
         $positionlists = $this->getPosition();
         $personnellists = $this->getPersonnel();
@@ -312,6 +517,12 @@ class PersonnelController extends Controller
             "personnellists"=>$personnellists,
             "personnelLevelList"=>$personnelLevelList,
             "roleList"=>$roleList,
+            "dv_cong_tac"=>$dv_cong_tac,
+            "vt_lam_vc"=>$vt_lam_vc,
+            "cap_nhan_su"=>$cap_nhan_su,
+            "vai_tro"=>$vai_tro,
+            "dia_ban"=>$dia_ban,
+            "trang_thai"=>$trang_thai,
             "areaTree"=>$areaTree,
             'search' => $search
         ]);
@@ -320,7 +531,14 @@ class PersonnelController extends Controller
     public function showVTri(Request $request ,$position_id)
     {
         $search = $request->get('search');
-        $personnelList = Personnel::leftJoin('department', 'department.id', '=', 'personnel.department_id')
+        $dv_cong_tac = $request->get('dv_cong_tac');
+        $vt_lam_vc = $request->get('vt_lam_vc');
+        $cap_nhan_su = $request->get('cap_nhan_su');
+        $vai_tro = $request->get('vai_tro');
+        $dia_ban = $request->get('dia_ban');
+        $trang_thai = $request->get('trang_thai');
+        $query = Personnel::query();
+        $query->leftJoin('department', 'department.id', '=', 'personnel.department_id')
             ->leftJoin('position', 'position.id', '=', 'personnel.position_id')
             ->leftJoin('personnel_level', 'personnel_level.id', '=', 'personnel.personnel_lv_id')
             ->leftJoin('role', 'role.id', '=', 'personnel.role_id')
@@ -351,14 +569,40 @@ class PersonnelController extends Controller
                 'locality.name as locality_name',
                 'personnel.area_id'
                 // 'personnel.id',
-            )
-            ->where("personnel.code", "like", "%$search%")
-            ->where("personnel.position_id", $position_id)
+            );
+            if($search != NULL) {
+                $query->where("personnel.code", "like", "%$search%");
+            }
+            if($search != NULL) {
+                $query->orWhere("personnel.name", "like", "%$search%");
+            }
+            if($search != NULL) {
+                $query->orWhere("personnel.phone", "like", "%$search%");
+            }
+            if($dv_cong_tac != NULL) {
+                $query->where("department.name", "like", "%$dv_cong_tac%");
+            }
+            if($vt_lam_vc != NULL) {
+                $query->where("position.name", "like", "%$vt_lam_vc%");
+            }
+            if($cap_nhan_su != NULL) {
+                $query->where("personnel_level.name", "like", "%$cap_nhan_su%");
+            }
+            if($vai_tro != NULL) {
+                $query->where("role.name", "like", "%$vai_tro%");
+            }
+            if($dia_ban != NULL) {
+                $query->where("locality.name", "like", "%$dia_ban%");
+            }
+            if($trang_thai != NULL) {
+                $query->where("personnel.status", "like", "%$trang_thai%");
+            }
 
+            $personnelList =$query->where("personnel.position_id", $position_id)
             ->orWhereHas('position', function ($query) use ($position_id) {
                 $query->where('position.parent', $position_id);
             })
-            ->paginate(10);
+            ->paginate(15);
         $departmentlists = $this->getDepartment();
         $positionlists = $this->getPosition();
         $personnellists = $this->getPersonnel();
@@ -375,6 +619,12 @@ class PersonnelController extends Controller
             "personnellists"=>$personnellists,
             "personnelLevelList"=>$personnelLevelList,
             "roleList"=>$roleList,
+            "dv_cong_tac"=>$dv_cong_tac,
+            "vt_lam_vc"=>$vt_lam_vc,
+            "cap_nhan_su"=>$cap_nhan_su,
+            "vai_tro"=>$vai_tro,
+            "dia_ban"=>$dia_ban,
+            "trang_thai"=>$trang_thai,
             "positionListTree"=>$positionListTree,
             'search' => $search
         ]);
@@ -383,41 +633,75 @@ class PersonnelController extends Controller
     public function showDiaBan(Request $request ,$area_id)
     {
         $search = $request->get('search');
-        $personnelList = Personnel::leftJoin('department', 'department.id', '=', 'personnel.department_id')
-            ->leftJoin('position', 'position.id', '=', 'personnel.position_id')
-            ->leftJoin('personnel_level', 'personnel_level.id', '=', 'personnel.personnel_lv_id')
-            ->leftJoin('role', 'role.id', '=', 'personnel.role_id')
-            ->leftJoin('locality', 'locality.id', '=', 'personnel.area_id')
-            ->select(
-                'personnel.id',
-                'personnel.name',
-                'personnel.address',
-                'personnel.gender',
-                'personnel.birthday',
-                'personnel.password',
-                'personnel.code',
-                'personnel.email',
-                'personnel.annual_salary',
-                'personnel.pack',
-                'personnel.manage',
-                'personnel.phone',
-                'personnel.working_form',
-                'personnel.status',
-                'personnel.department_id',
-                'personnel.personnel_lv_id',
-                'personnel.position_id',
-                'department.name as department_name',
-                'position.name as position_name',
-                'personnel_level.name as personnel_level_name',
-                'personnel.role_id',
-                'role.name as role_name',
-                'locality.name as locality_name',
-                'personnel.area_id'
-                // 'personnel.id',
-            )
-            ->where("personnel.code", "like", "%$search%")
-            ->where("personnel.area_id", $area_id)
-            ->paginate(10);
+        $dv_cong_tac = $request->get('dv_cong_tac');
+        $vt_lam_vc = $request->get('vt_lam_vc');
+        $cap_nhan_su = $request->get('cap_nhan_su');
+        $vai_tro = $request->get('vai_tro');
+        $dia_ban = $request->get('dia_ban');
+        $trang_thai = $request->get('trang_thai');
+        $query = Personnel::query();
+        $query->leftJoin('department', 'department.id', '=', 'personnel.department_id')
+        ->leftJoin('position', 'position.id', '=', 'personnel.position_id')
+        ->leftJoin('personnel_level', 'personnel_level.id', '=', 'personnel.personnel_lv_id')
+        ->leftJoin('role', 'role.id', '=', 'personnel.role_id')
+        ->leftJoin('locality', 'locality.id', '=', 'personnel.area_id')
+        ->select(
+            'personnel.id',
+            'personnel.name',
+            'personnel.address',
+            'personnel.gender',
+            'personnel.birthday',
+            'personnel.password',
+            'personnel.code',
+            'personnel.email',
+            'personnel.annual_salary',
+            'personnel.pack',
+            'personnel.manage',
+            'personnel.phone',
+            'personnel.working_form',
+            'personnel.status',
+            'personnel.department_id',
+            'personnel.personnel_lv_id',
+            'personnel.position_id',
+            'department.name as department_name',
+            'position.name as position_name',
+            'personnel_level.name as personnel_level_name',
+            'personnel.role_id',
+            'role.name as role_name',
+            'locality.name as locality_name',
+            'personnel.area_id'
+            // 'personnel.id',
+        );
+        if($search != NULL) {
+            $query->where("personnel.code", "like", "%$search%");
+        }
+        if($search != NULL) {
+            $query->orWhere("personnel.name", "like", "%$search%");
+        }
+        if($search != NULL) {
+            $query->orWhere("personnel.phone", "like", "%$search%");
+        }
+        if($dv_cong_tac != NULL) {
+            $query->where("department.name", "like", "%$dv_cong_tac%");
+        }
+        if($vt_lam_vc != NULL) {
+            $query->where("position.name", "like", "%$vt_lam_vc%");
+        }
+        if($cap_nhan_su != NULL) {
+            $query->where("personnel_level.name", "like", "%$cap_nhan_su%");
+        }
+        if($vai_tro != NULL) {
+            $query->where("role.name", "like", "%$vai_tro%");
+        }
+        if($dia_ban != NULL) {
+            $query->where("locality.name", "like", "%$dia_ban%");
+        }
+        if($trang_thai != NULL) {
+            $query->where("personnel.status", "like", "%$trang_thai%");
+        }
+
+        $personnelList =$query->where("personnel.area_id", $area_id)
+            ->paginate(15);
         $departmentlists = $this->getDepartment();
         $positionlists = $this->getPosition();
         $personnellists = $this->getPersonnel();
@@ -434,6 +718,12 @@ class PersonnelController extends Controller
             "personnellists"=>$personnellists,
             "personnelLevelList"=>$personnelLevelList,
             "roleList"=>$roleList,
+            "dv_cong_tac"=>$dv_cong_tac,
+            "vt_lam_vc"=>$vt_lam_vc,
+            "cap_nhan_su"=>$cap_nhan_su,
+            "vai_tro"=>$vai_tro,
+            "dia_ban"=>$dia_ban,
+            "trang_thai"=>$trang_thai,
             "areaTree"=>$areaTree,
             'search' => $search
         ]);

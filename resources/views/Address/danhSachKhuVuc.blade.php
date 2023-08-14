@@ -48,12 +48,13 @@
                                             </div> --}}
 
                                         </div>
-                                        {{-- <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                            title="Xuất file Excel">
-                                            <a role="button" target="_blank"
-                                                href={{ route('print.dwtUser', ['date' => request()->userDate ?? date('m-Y')]) }}
-                                                class="btn-export"><i class="bi bi-download"></i></a>
-                                        </div> --}}
+                                        <div class="action_export mx-3 " data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Lọc">
+                                        <button class="btn btn-outline-danger" data-bs-toggle="modal"
+                                            data-bs-target="#filterOptions">
+                                            <i class="bi bi-funnel"></i>
+                                        </button>
+                                    </div>
                                         @if ((session('user')['role_id'] == '1') || (session('user')['role_id'] == '2') )
                                         <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                             aria-label="Thêm khu vực" data-bs-original-title="Thêm khu vực">
@@ -221,16 +222,16 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <input type="text" value="{{ $item->name }}" name="name"
-                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên khu vực"
+                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên khu vực*"
                                         placeholder="Tên khu vực*" class="form-control">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <input type="text" value="{{ $item->code }}" name="code"
-                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã khu vực"
+                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã khu vực*"
                                         placeholder="Mã khu vực*" class="form-control">
                                 </div>
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Vùng">
+                                    title="Vùng*">
                                     {{-- <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Vùng*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="area" data-live-search-placeholder="Tìm kiếm..."> --}}
                                     <select name="area" required class="selectpicker" data-dropup-auto="false">
                                         <option value="{{ $item->area }}">{{ $item->department_name }}</option>
@@ -273,15 +274,15 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <input type="text" name="name" data-bs-toggle="tooltip" required
-                                    data-bs-placement="top" title="Tên khu vực" placeholder="Tên khu vực*"
+                                    data-bs-placement="top" title="Tên khu vực*" placeholder="Tên khu vực*"
                                     class="form-control">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <input type="text" name="code" data-bs-toggle="tooltip" required
-                                    data-bs-placement="top" title="Mã khu vực" placeholder="Mã khu vực*"
+                                    data-bs-placement="top" title="Mã khu vực*" placeholder="Mã khu vực*"
                                     class="form-control">
                             </div>
-                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Vùng">
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Vùng*">
                                 <select name="area" required class="selectpicker" data-dropup-auto="false">
                                     <option value="">Chọn vùng*</option>
                                     @foreach ($department as $item)
@@ -295,8 +296,6 @@
                                 <input type="text" name="description" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Ghi chú" placeholder="Ghi chú" class="form-control">
                             </div>
-
-
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -309,7 +308,45 @@
     </div>
 
 
+    {{-- Filter --}}
+    <div class="modal fade" id="filterOptions" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Lọc dữ liệu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
 
+                <form action="" method="GET">
+                    {{-- @foreach (request()->query() as $key => $value)
+                        @if (!in_array($key, [ 'don_vi_me']))
+                            <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                        @endif
+                    @endforeach --}}
+                    <div class="modal-body">
+                        <div class="row">
+                           <div class="col-12 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-original-title="Lọc theo vùng">
+                                    <select id="select-status" class="selectpicker select_filter"
+                                        data-dropup-auto="false" title="Lọc theo vùng" name='vung'>
+                                      @foreach ($department as $item )
+                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                      @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="reset" class="btn btn-outline-danger">Làm
+                            mới</button>
+                        <button type="submit" class="btn btn-danger">Lọc</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 @endsection
 @section('footer-script')

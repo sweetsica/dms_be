@@ -13,7 +13,11 @@ class PositionController extends Controller
 
     public function index(Request $request){
         $search = $request->get('search');
-        $positionList = Position::join('department','department.id','=','position.department_id')
+        $cap_nhan_su = $request->get('cap_nhan_su');
+        $dv_cong_tac = $request->get('dv_cong_tac');
+        $query = Position::query();
+        // $positionList = Position::s
+        $query->join('department','department.id','=','position.department_id')
         ->join('personnel_level','personnel_level.id','=','position.personnel_level')
         ->select(
             'position.id',
@@ -28,9 +32,21 @@ class PositionController extends Controller
             'personnel_level.name as personnel_level_name',
             'department.name as department_name',
             'position.staffing'
-        )
+        );
+        if($search != NULL) {
+            $query->where("position.name", "like", "%$search%");
+        }
+        if($search != NULL) {
+            $query->orWhere("position.code", "like", "%$search%");
+        }
+        if($dv_cong_tac != NULL) {
+            $query->where("department.name", "like", "%$dv_cong_tac%");
+        }
+        if($cap_nhan_su != NULL) {
+            $query->where("personnel_level.name", "like", "%$cap_nhan_su%");
+        }
 
-        ->where("position.code", "like", "%$search%")->paginate(10);
+        $positionList =$query->paginate(15);
         // dd($positionList);
         $UnitLeaderList = UnitLeader::all();
         $positionListTree = Position::where('parent',0)->with('donViCon')->get();
@@ -45,6 +61,8 @@ class PositionController extends Controller
             "personnelLevelList"=>$personnelLevelList,
             'search' => $search,
             'UnitLeaderList' => $UnitLeaderList,
+            'dv_cong_tac' => $dv_cong_tac,
+            'cap_nhan_su' => $cap_nhan_su,
             "positionListTree"=>$positionListTree
         ]);
     }
