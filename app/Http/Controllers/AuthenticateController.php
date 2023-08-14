@@ -23,6 +23,7 @@ class AuthenticateController extends Controller
     public function login(Request $request)
     {
         try {
+            $intendedUrl = $request->session()->get('url.intended');
             $email = $request->input('email');
             $password = $request->input('password');
 
@@ -34,6 +35,10 @@ class AuthenticateController extends Controller
                     $request->session()->put('department_name', $departmentName);
                     $request->session()->put('user', $account);
                     $request->session()->put('statsus', $account->role_id);
+
+                    if ($intendedUrl) {
+                        return redirect()->intended($intendedUrl);
+                    }
                     return redirect()->route('home');
                 } else {
                     return redirect()->back()
