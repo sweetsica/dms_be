@@ -77,6 +77,10 @@ class CustomerController extends Controller
     {
         try {
             $q = $request->query('q');
+            $nhomKH = $request->query('nhomKH');
+            $kenhKH = $request->query('kenhKH');
+            $tuyenKH = $request->query('tuyenKH');
+            $nhansutt = $request->query('nhansutt');
             $limit = 30;
             $listData = Customer::query()->with('channel', 'route', 'person');
             if ($q) {
@@ -107,6 +111,24 @@ class CustomerController extends Controller
                     ->orWhereHas('channel', function ($customerQuery) use ($q) {
                         $customerQuery->where('name', 'like', '%' . $q . '%');
                     });
+            }
+            if ($nhomKH) {
+                $listData = $listData->where('group', $nhomKH);
+            }
+            if ($kenhKH) {
+                $listData = $listData->whereHas('channel', function ($customerQuery) use ($kenhKH) {
+                    $customerQuery->where('name', 'like', '%' . $kenhKH . '%');
+                });
+            }
+            if ($tuyenKH) {
+                $listData = $listData->whereHas('route', function ($customerQuery) use ($tuyenKH) {
+                    $customerQuery->where('name', 'like', '%' . $tuyenKH . '%');
+                });
+            }
+            if ($nhansutt) {
+                $listData = $listData->whereHas('person', function ($customerQuery) use ($nhansutt) {
+                    $customerQuery->where('name', 'like', '%' . $nhansutt . '%');
+                });
             }
             switch (session('user')['role_id']) {
                 case 3:
@@ -157,15 +179,18 @@ class CustomerController extends Controller
 
         $pagination = $this->pagination($listData);
 
-        return view('Customer.danhSachKhachHang', compact(
-            'listData',
-            'listPerson',
-            'listProduct',
-            'listRoute',
-            'listChannel',
-            'listgroup',
-            "pagination"
-        ));
+        return view(
+            'Customer.danhSachKhachHang',
+            compact(
+                'listData',
+                'listPerson',
+                'listProduct',
+                'listRoute',
+                'listChannel',
+                'listgroup',
+                "pagination"
+            )
+        );
     }
 
     public function create(Request $request)
