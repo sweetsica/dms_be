@@ -523,6 +523,56 @@
         </div>
     </div>
 
+          {{-- Filter --}}
+          <div class="modal fade" id="filterOptions" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h5 class="modal-title w-100" id="exampleModalLabel">Lọc dữ liệu</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <form action="" method="GET">
+                        {{-- @foreach (request()->query() as $key => $value)
+                            @if (!in_array($key, [ 'don_vi_me']))
+                                <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                            @endif
+                        @endforeach --}}
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-12 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                        data-bs-original-title="Lọc theo cấp nhân sự">
+                                        <select id="select-status" class="selectpicker select_filter"
+                                            data-dropup-auto="false" title="Lọc theo cấp nhân sự" name='cap_nhan_su'>
+                                          @foreach ($personnelLevelList as $item )
+                                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                          @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                        data-bs-original-title="Lọc theo đơn vị công tác">
+                                        <select id="select-status" class="selectpicker select_filter"
+                                            data-dropup-auto="false" title="Lọc theo đơn vị công tác" name='dv_cong_tac'>
+                                          @foreach ($departmentlists as $item )
+                                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                          @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="reset" class="btn btn-outline-danger">Làm
+                                mới</button>
+                            <button type="submit" class="btn btn-danger">Lọc</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
 @endsection
 @section('footer-script')
     <!-- Plugins -->

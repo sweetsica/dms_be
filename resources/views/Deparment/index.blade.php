@@ -47,6 +47,7 @@
                                                         <i class="bi bi-funnel"></i>
                                                     </button>
                                                 </div>
+
                                                 @if ((session('user')['role_id'] == '1') )
                                                 <div class="action_export order-md-4">
                                                     <button class="btn btn-danger d-block testCreateUser"
@@ -411,13 +412,15 @@
                                     data-bs-dismiss="modal">Hủy</button>
                                 <button type="submit" class="btn btn-danger">Tạo</button>
                             </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 
-    {{-- Filter --}}
-    <div class="modal fade" id="filterOptions" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      {{-- Filter --}}
+      <div class="modal fade" id="filterOptions" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-sm">
             <div class="modal-content">
                 <div class="modal-header text-center">
@@ -425,87 +428,39 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form action="#" method="GET">
-                    @foreach (request()->query() as $key => $value)
-                        @if (!in_array($key, ['department', 'status', 'form', 'page', 'sender_id', 'receiver_id', 'startDate']))
+                <form action="" method="GET">
+                    {{-- @foreach (request()->query() as $key => $value)
+                        @if (!in_array($key, [ 'don_vi_me']))
                             <input type="hidden" name="{{ $key }}" value="{{ $value }}">
                         @endif
-                    @endforeach
+                    @endforeach --}}
                     <div class="modal-body">
                         <div class="row">
-
                             <div class="col-12 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top"
-                                    data-bs-original-title="Lọc theo trạng thái">
+                                    data-bs-original-title="Lọc theo trưởng đơn vị">
                                     <select id="select-status" class="selectpicker select_filter"
-                                        data-dropup-auto="false" title="Lọc theo trạng thái" name='status'>
-                                        <option value="">Tất cả</option>
-                                        <option value="1">ok
-                                        </option>
+                                        data-dropup-auto="false" title="Lọc theo trưởng đơn vị" name='leader_name'>
+                                      @foreach ($UnitLeaderList as $item )
+                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                      @endforeach
                                     </select>
                                 </div>
                             </div>
-
                             <div class="col-12 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top"
-                                    data-bs-original-title="Lọc theo phòng ban">
-                                    <select class="selectpicker select_filter" data-dropup-auto="false"
-                                        title="Lọc theo phòng ban" name="department" data-size="5"
-                                        data-live-search="true">
-                                        <option value="">Tất cả</option>
-                                        <option value="1">Name
-                                        </option>
-
+                                    data-bs-original-title="Lọc theo đơn vị mẹ">
+                                    <select id="select-status" class="selectpicker select_filter"
+                                        data-dropup-auto="false" title="Lọc theo đơn vị mẹ" name='don_vi_me'>
+                                      @foreach ($departmentList as $item )
+                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                      @endforeach
                                     </select>
                                 </div>
                             </div>
-
-                            <div class="col-12 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top"
-                                    data-bs-original-title="Lọc theo người phê duyệt">
-                                    <select class="selectpicker select_filter" data-dropup-auto="false"
-                                        title="Lọc theo người phê duyệt" name='receiver_id' data-size="5"
-                                        data-live-search="true">
-                                        <option value="">Tất cả</option>
-                                        <option value="1">Name</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-12 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top"
-                                    data-bs-original-title="Lọc theo người tạo">
-                                    <select class="selectpicker select_filter" data-dropup-auto="false"
-                                        title="Lọc theo người tạo" name='sender_id' data-size="5"
-                                        data-live-search="true">
-                                        <option value="">Tất cả</option>
-                                        <option value="1">Name</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-12 mb-3 position-relative">
-                                <input type="text" name="startDate" class="form-control locDuLieuPick"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Thời gian"
-                                    name="" placeholder="Chọn thời gian" value="{{ request()->startDate }}" />
-                                <i class="bi bi-calendar-plus style_pickdate"></i>
-                            </div>
-
-                            <div class="col-12">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top"
-                                    data-bs-original-title="Lọc theo mẫu form">
-                                    <select class="selectpicker select_filter" data-dropup-auto="false"
-                                        title="Lọc theo mẫu form" name='form' data-size="5">
-                                        <option value="">Tất cả</option>
-                                        <option value="1">ok
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-outline-danger">Làm
+                        <button type="reset" class="btn btn-outline-danger">Làm
                             mới</button>
                         <button type="submit" class="btn btn-danger">Lọc</button>
                     </div>
@@ -513,8 +468,6 @@
             </div>
         </div>
     </div>
-
-
 
 @endsection
 @section('footer-script')

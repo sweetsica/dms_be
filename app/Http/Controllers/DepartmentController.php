@@ -13,7 +13,11 @@ class DepartmentController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search');
-        $departmentList = Department::leftJoin('personnel', 'personnel.id', '=', 'department.ib_lead')
+        $don_vi_me = $request->get('don_vi_me');
+        $leader_name = $request->get('leader_name');
+        $query = Department::query();
+        // $departmentList = Department::
+        $query->leftJoin('personnel', 'personnel.id', '=', 'department.ib_lead')
             ->select(
                 'department.id',
                 'department.name',
@@ -22,8 +26,17 @@ class DepartmentController extends Controller
                 'department.parent',
                 'department.ib_lead',
                 'personnel.name as leader_name'
-            )
-            ->where("department.code", "like", "%$search%")->paginate(10);
+            );
+            if($search != NULL) {
+                $query->where("department.name", "like", "%$search%");
+            }
+            if($don_vi_me != NULL) {
+                $query->where("department.name", "like", "%$don_vi_me%");
+            }
+            if($leader_name != NULL) {
+                $query->where("personnel.name", "like", "%$leader_name%");
+            }
+            $departmentList=$query->paginate(15);
         // dd($departmentList);
         $UnitLeaderList = Personnel::all();
 
@@ -33,6 +46,8 @@ class DepartmentController extends Controller
 
         return view("Deparment.index", [
             "departmentList" => $departmentList,
+            'don_vi_me' => $don_vi_me,
+            'leader_name' => $leader_name,
             "departmentlists" => $departmentlists,
             'search' => $search,
             'UnitLeaderList' => $UnitLeaderList,

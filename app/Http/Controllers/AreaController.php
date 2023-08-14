@@ -11,7 +11,9 @@ class AreaController extends Controller
 {
     public function index(Request $request){
         $search = $request->get('search');
-        $areaList = Area::join('department','department.id','=','area.area')
+        $vung = $request->get('vung');
+        $query = Area::query();
+        $query->join('department','department.id','=','area.area')
         ->select(
             'area.id',
             'area.name',
@@ -19,16 +21,25 @@ class AreaController extends Controller
             'area.code',
             'area.area',
             'department.name as department_name'
-        )
-        ->where("area.code", "like", "%$search%")->paginate(5);
+        );
+        if($search != NULL) {
+            $query->where("area.name", "like", "%$search%");
+        }
+        if($search != NULL) {
+            $query->orWhere("area.code", "like", "%$search%");
+        }
+        if($vung != NULL) {
+            $query->where("department.name", "like", "%$vung%");
+        }
+        $areaList =$query->paginate(10);
         $department = Department::where('code', 'like', 'VUNG%')->get();
-
         $areaTree =  Department::with('khuVucs.diaBans.tuyens')->where('code', 'like', 'VUNG%')->get();
         // dd()
         return view("Address.danhSachKhuVuc",[
             "areaList"=>$areaList,
             'search' => $search,
             'department' => $department,
+            'vung' => $vung,
             'areaTree' => $areaTree,
 
         ]);

@@ -47,12 +47,12 @@
                                                         <i class="bi bi-funnel"></i>
                                                     </button>
                                                 </div>
-                                                @if ((session('user')['role_id'] == '1') )
-                                                <div class="action_export order-md-4">
-                                                    <button class="btn btn-danger d-block testCreateUser"
-                                                        data-bs-toggle="modal" data-bs-target="#taoDeXuat">Thêm cấp nhân
-                                                        sự</button>
-                                                </div>
+                                                @if (session('user')['role_id'] == '1')
+                                                    <div class="action_export order-md-4">
+                                                        <button class="btn btn-danger d-block testCreateUser"
+                                                            data-bs-toggle="modal" data-bs-target="#taoDeXuat">Thêm cấp nhân
+                                                            sự</button>
+                                                    </div>
                                                 @endif
                                             </div>
 
@@ -65,9 +65,10 @@
                                                             <th class="text-nowrap" style="width:10%">Mã cấp nhân sự</th>
                                                             <th class="text-nowrap" style="width:10%">Tên cấp nhân sự</th>
                                                             <th class="text-nowrap" style="width:20%">Mô tả</th>
-                                                            @if ((session('user')['role_id'] == '1') )
-                                                            <th class="text-center" style="width:1%"><span>Thao tác</span>
-                                                            </th>
+                                                            @if (session('user')['role_id'] == '1')
+                                                                <th class="text-center" style="width:1%"><span>Thao
+                                                                        tác</span>
+                                                                </th>
                                                             @endif
                                                         </tr>
                                                     </thead>
@@ -80,45 +81,46 @@
                                                                 </td>
                                                                 <td class="">
                                                                     <div class="overText" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top" title="{{ $item->code }}">
-                                                                    {{ $item->code }}
-                                                                </div>
-                                                                </td>
-                                                                <td class="">
-                                                                    <div class="overText" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top" title="{{ $item->name }}">
-                                                                    {{ $item->name }}
-                                                                </div>
-                                                                </td>
-                                                                <td class="">
-                                                                    <div class="overText" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top"
-                                                                    title="{{ $item->description }}">
-                                                                    {{ $item->description }}
-                                                                </div>
-                                                                </td>
-                                                                @if ((session('user')['role_id'] == '1') )
-                                                                <td>
-                                                                    <div class="table_actions d-flex justify-content-end">
-
-                                                                        <div data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top" title="Sửa">
-                                                                            <div class="btn" data-bs-toggle="modal"
-                                                                                data-bs-target="#sua{{ $item->id }}">
-                                                                                <img style="width:16px;height:16px"
-                                                                                    src="{{ asset('assets/img/edit.svg') }}" />
-                                                                            </div>
-                                                                        </div>
-                                                                        <div data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top" title="Xóa">
-                                                                            <div class="btn" data-bs-toggle="modal"
-                                                                                data-bs-target="#xoa{{ $item->id }}">
-                                                                                <img style="width:16px;height:16px"
-                                                                                    src="{{ asset('assets/img/trash.svg') }}" />
-                                                                            </div>
-                                                                        </div>
+                                                                        data-bs-placement="top" title="{{ $item->code }}">
+                                                                        {{ $item->code }}
                                                                     </div>
                                                                 </td>
+                                                                <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                        data-bs-placement="top" title="{{ $item->name }}">
+                                                                        {{ $item->name }}
+                                                                    </div>
+                                                                </td>
+                                                                <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                        data-bs-placement="top"
+                                                                        title="{{ $item->description }}">
+                                                                        {{ $item->description }}
+                                                                    </div>
+                                                                </td>
+                                                                @if (session('user')['role_id'] == '1')
+                                                                    <td>
+                                                                        <div
+                                                                            class="table_actions d-flex justify-content-end">
+
+                                                                            <div data-bs-toggle="tooltip"
+                                                                                data-bs-placement="top" title="Sửa">
+                                                                                <div class="btn" data-bs-toggle="modal"
+                                                                                    data-bs-target="#sua{{ $item->id }}">
+                                                                                    <img style="width:16px;height:16px"
+                                                                                        src="{{ asset('assets/img/edit.svg') }}" />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div data-bs-toggle="tooltip"
+                                                                                data-bs-placement="top" title="Xóa">
+                                                                                <div class="btn" data-bs-toggle="modal"
+                                                                                    data-bs-target="#xoa{{ $item->id }}">
+                                                                                    <img style="width:16px;height:16px"
+                                                                                        src="{{ asset('assets/img/trash.svg') }}" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
                                                                 @endif
                                                             </tr>
                                                         </tbody>
@@ -215,14 +217,14 @@
                                                 {{-- {{ $personnelLevelList->appends([
                                                         'search' => $search,
                                                     ])->links() }} --}}
-                                                       <nav aria-label="Page navigation example" class="float-end mt-3"
-                                                       id="target-pagination">
-                                                       <ul class="pagination">
-                                                           {{ $personnelLevelList->appends([
-                                                                   'search' => $search,
-                                                               ])->links() }}
-                                                       </ul>
-                                                   </nav>
+                                                <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                    id="target-pagination">
+                                                    <ul class="pagination">
+                                                        {{ $personnelLevelList->appends([
+                                                                'search' => $search,
+                                                            ])->links() }}
+                                                    </ul>
+                                                </nav>
                                             </div>
                                         </div>
                                     </div>
@@ -270,10 +272,62 @@
                                     data-bs-dismiss="modal">Hủy</button>
                                 <button type="submit" class="btn btn-danger" id="submitButton">Tạo</button>
                             </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
+    {{-- Filter --}}
+    <div class="modal fade" id="filterOptions" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Lọc dữ liệu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form action="" method="GET">
+                    {{-- @foreach (request()->query() as $key => $value)
+                            @if (!in_array($key, ['don_vi_me']))
+                                <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                            @endif
+                        @endforeach --}}
+                    <div class="modal-body">
+                        <div class="row">
+                            {{-- <div class="col-12 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-original-title="Lọc theo trưởng đơn vị">
+                                    <select id="select-status" class="selectpicker select_filter"
+                                        data-dropup-auto="false" title="Lọc theo trưởng đơn vị" name='leader_name'>
+                                        @foreach ($UnitLeaderList as $item)
+                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div> --}}
+                            {{-- <div class="col-12 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-original-title="Lọc theo đơn vị mẹ">
+                                    <select id="select-status" class="selectpicker select_filter"
+                                        data-dropup-auto="false" title="Lọc theo đơn vị mẹ" name='don_vi_me'>
+                                        @foreach ($departmentList as $item)
+                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div> --}}
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="reset" class="btn btn-outline-danger">Làm
+                                mới</button>
+                            <button type="submit" class="btn btn-danger">Lọc</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
 @endsection
 @section('footer-script')
