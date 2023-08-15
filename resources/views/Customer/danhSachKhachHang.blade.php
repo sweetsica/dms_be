@@ -572,16 +572,16 @@
 
     <!-- Modal thêm khách hàng -->
     <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-centered modal-lg" style="width: 40%">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">Thêm khách hàng</h5>
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Thêm mới khách hàng</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="formThemCapPhat" method="POST" action="{{ route('create-customer') }}">
                     @csrf
                     <div class="modal-body">
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-md-12 mb-3">
                                 <div class="card-title">1. Thông tin chung</div>
                             </div>
@@ -753,9 +753,247 @@
                                     <option value="Khách hàng">Khách hàng</option>
                                 </select>
                             </div>
+                        </div> --}}
+
+                        <div class="row">
+                            <div class="col-lg-6 mb-3">
+                                <input type="text" name="name" data-bs-toggle="tooltip" required
+                                    data-bs-placement="top" title="Tên khách hàng" placeholder="Tên khách hàng*"
+                                    class="form-control">
+                            </div>
+                            <div class="col-lg-6 mb-3">
+                                <input type="text" name="name" data-bs-toggle="tooltip" required
+                                    data-bs-placement="top" title="Người liên hệ" placeholder="Tên người liên hệ*"
+                                    class="form-control">
+                            </div>
+                            <div class="col-lg-6 mb-3">
+                                <input type="text" name="phone" data-bs-toggle="tooltip" required
+                                    data-bs-placement="top" title="Số điện thoại" placeholder="Số điện thoại*"
+                                    class="form-control">
+                            </div>
+                            <div class="col-lg-6 mb-3">
+                                <input type="text" name="email" data-bs-toggle="tooltip" required
+                                    data-bs-placement="top" title="Email" placeholder="Email" class="form-control">
+                            </div>
+                            <div class="col-lg-12 mb-3">
+                                <input type="text" name="email" data-bs-toggle="tooltip" required
+                                    data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ" class="form-control">
+                            </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer d-flex align-items-center justify-content-between">
+                        <div>
+                            <button type="submit" class="btn btn-danger">Lưu và thêm</button>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-outline-danger me-3"
+                                data-bs-dismiss="modal">Hủy</button>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#addDetail">Thêm chi tiết</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    {{-- Thêm chi tiết khách hàng --}}
+    <div class="modal fade" id="addDetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Thêm chi tiết khách hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="formThemCapPhat" method="POST" action="{{ route('create-customer') }}">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <div class="card-title">1. Tổ chức</div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="companyName" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="Tên công ty" placeholder="Tên công ty"
+                                    class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="personContact" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="Người đại diện" placeholder="Người đại diện"
+                                    class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="career" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Chức danh" placeholder="Chức danh" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="taxCode" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Mã số thuế" placeholder="Mã số thuế" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="companyPhoneNumber" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="Số điện thoại công ty"
+                                    placeholder="Số điện thoại công ty" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="companyEmail" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="Email công ty" placeholder="Email công ty"
+                                    class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="accountNumber" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="Số tài khoản" placeholder="Số tài khoản"
+                                    class="form-control">
+                            </div>
+                            <div class="col-md-8 mb-3">
+                                <input type="text" name="bankOpen" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Mở tại ngân hàng" placeholder="Mở tại ngân hàng" class="form-control">
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <div class="card-title">2. Địa chỉ</div>
+                            </div>
+                            <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Tỉnh/thành">
+                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
+                                    data-live-search="true" title="Tỉnh/thành*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="city" id="city"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Quận/huyện">
+                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
+                                    data-live-search="true" title="Quận/huyện*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="district" id="district"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Phường/xã">
+                                <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
+                                    data-live-search="true" title="Phường/xã*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="guide" id="guide"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                </select>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <input type="text" id="addressInput" name="address" data-bs-toggle="tooltip" required
+                                    data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ*" class="form-control">
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <div id="map" style="height: 300px; display: block" class="border"></div>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <div class="card-title">3. Mô tả</div>
+                            </div>
+
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Nhân sự thu thập">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
+                                    data-live-search="true" title="Nhân sự thu thập*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="personId" id="personId"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Sản phẩm quan tâm">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
+                                    data-live-search="true" title="Sản phẩm quan tâm*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="productId[]" id="productId"
+                                    data-live-search-placeholder="Tìm kiếm..." multiple>
+                                </select>
+                            </div>
+
+
+                            <div class="col-md-12 mb-3">
+                                <div class="card-title">4. Phân loại</div>
+                            </div>
+
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Nhóm khách hàng">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
+                                    data-live-search="true" title="Nhóm khách hàng*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="groupId" id="groupId"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="Nhà thuốc">Nhà thuốc</option>
+                                    <option value="Phòng khám/Trung tâm tế">Phòng khám/Trung tâm tế</option>
+                                    <option value="Bệnh viện">Bệnh viện</option>
+                                    <option value="Nhà phân phối">Nhà phân phối</option>
+                                    <option value="Online">Online</option>
+                                    <option value="Khách sạn">Khách sạn</option>
+                                    <option value="Nhà thuốc S">Nhà thuốc S</option>
+                                    <option value="Siêu thị/Cửa hàng bán lẻ">Siêu thị/Cửa hàng bán lẻ</option>
+                                    <option value="Chuỗi nhà thuốc">Chuỗi nhà thuốc</option>
+                                    <option value="Đại siêu thị">Đại siêu thị</option>
+                                    <option value="Làm đẹp/Phòng tập thể dục/Thể thao">Làm đẹp/Phòng tập thể dục/Thể thao
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Tuyến">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
+                                    data-live-search="true" title="Tuyến*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="routeId" id="routeId"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Kênh khách hàng">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
+                                    data-live-search="true" title="Kênh khách hàng*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="chanelId" id="chanelId"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Trạng thái">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
+                                    data-live-search="true" title="Trạng thái*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="status"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="Trinh sát">Trinh sát</option>
+                                    <option value="Tiềm năng">Tiềm năng</option>
+                                    <option value="Cơ hội">Cơ hội</option>
+                                    <option value="Khách hàng">Khách hàng</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <div class="card-title">5. Hình ảnh</div>
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <div class="upload-files-container">
+                                    <div class="drag-file-area">
+                                        <span class="material-icons-outlined upload-icon fs-3 mt-4">Tải file ảnh tại
+                                            đây</span>
+                                        <h3 class="dynamic-message fs-5 text-secondary">Hỗ trợ định dạng JPG hoặc PNG kích
+                                            thước không quá
+                                            10MB</h3>
+                                        <label class="label">
+                                            <input type="file" class="default-file-input" style="display: none" />
+                                            <span class="btn btn-outline-danger mb-4"><i
+                                                    class="bi bi-cloud-arrow-up"></i>Tải file lên</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <div class="input-group align-items-center">
+                                    <input type="file" class="form-control" id="attachment" name="attachment"
+                                        style="display: none">
+                                    <i class="bi bi-link-45deg text-color_pimary fs-3 fw-bold"></i>
+                                    <label class="input-label text-color_pimary fs-4 fw-bold ms-2" for="attachment"
+                                        style="cursor: pointer">Đính kèm file</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer ">
                         <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
                         <button type="submit" class="btn btn-danger">Lưu</button>
                     </div>
@@ -764,6 +1002,145 @@
         </div>
     </div>
 
+    <style>
+        .text-color_pimary {
+            color: var(--primary-color);
+        }
+
+        .upload-files-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .drag-file-area {
+            border: 2px dashed var(--primary-color);
+            border-radius: 10px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .drag-file-area .upload-icon {
+            font-size: 2rem;
+        }
+
+        .drag-file-area h3 {
+            font-size: 26px;
+            margin: 15px 0;
+        }
+
+        .drag-file-area label {
+            font-size: 19px;
+        }
+
+        .drag-file-area label .browse-files-text {
+            color: var(--primary-color);
+            font-weight: bolder;
+            cursor: pointer;
+        }
+
+        .browse-files span {
+            position: relative;
+            top: -25px;
+        }
+
+        .default-file-input {
+            opacity: 0;
+        }
+
+        .cannot-upload-message {
+            background-color: #ffc6c4;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+            padding: 5px 10px 5px 30px;
+            border-radius: 5px;
+            color: #BB0000;
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .cannot-upload-message span,
+        .upload-button-icon {
+            padding-right: 10px;
+        }
+
+        .cannot-upload-message span:last-child {
+            padding-left: 20px;
+            cursor: pointer;
+        }
+
+        .file-block {
+            color: #f7fff7;
+            background-color: var(--primary-color);
+            transition: all 1s;
+            width: 390px;
+            position: relative;
+            display: none;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0 15px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            font-size: 15px;
+        }
+
+        .file-icon {
+            margin-right: 10px;
+        }
+
+        .file-name,
+        .file-size {
+            padding: 0 3px;
+        }
+
+        .remove-file-icon {
+            cursor: pointer;
+        }
+
+        .progress-bar {
+            display: flex;
+            position: absolute;
+            bottom: 0;
+            left: 4.5%;
+            width: 0;
+            height: 5px;
+            border-radius: 25px;
+            background-color: #4BB543;
+        }
+
+        .upload-button {
+            font-family: 'Montserrat';
+            background-color: var(--primary-color);
+            color: #f7fff7;
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            border: none;
+            border-radius: 20px;
+            margin: 10px;
+            padding: 7.5px 50px;
+            cursor: pointer;
+        }
+    </style>
     {{-- Thông tin khách hàng --}}
     <div class="modal fade" id="info" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -1017,6 +1394,120 @@
                 .catch((error) => console.error('Lỗi khi gọi API:', error));
         }
         window.addEventListener('load', loadRouteData);
+
+        var isAdvancedUpload = function() {
+            var div = document.createElement('div');
+            return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window &&
+                'FileReader' in window;
+        }();
+
+        let draggableFileArea = document.querySelector(".drag-file-area");
+        let browseFileText = document.querySelector(".browse-files");
+        let uploadIcon = document.querySelector(".upload-icon");
+        let dragDropText = document.querySelector(".dynamic-message");
+        let fileInput = document.querySelector(".default-file-input");
+        let cannotUploadMessage = document.querySelector(".cannot-upload-message");
+        let cancelAlertButton = document.querySelector(".cancel-alert-button");
+        let uploadedFile = document.querySelector(".file-block");
+        let fileName = document.querySelector(".file-name");
+        let fileSize = document.querySelector(".file-size");
+        let progressBar = document.querySelector(".progress-bar");
+        let removeFileButton = document.querySelector(".remove-file-icon");
+        let uploadButton = document.querySelector(".upload-button");
+        let fileFlag = 0;
+
+        fileInput.addEventListener("click", () => {
+            fileInput.value = '';
+            console.log(fileInput.value);
+        });
+
+        fileInput.addEventListener("change", e => {
+            console.log(" > " + fileInput.value)
+            uploadIcon.innerHTML = 'Tải file lên';
+            dragDropText.innerHTML = 'File Dropped Successfully!';
+            document.querySelector(".label").innerHTML =
+                `<input type="file" class="default-file-input" style=""/>`;
+            uploadButton.innerHTML = `Upload`;
+            fileName.innerHTML = fileInput.files[0].name;
+            fileSize.innerHTML = (fileInput.files[0].size / 1024).toFixed(1) + " KB";
+            uploadedFile.style.cssText = "display: flex;";
+            progressBar.style.width = 0;
+            fileFlag = 0;
+        });
+
+        uploadButton.addEventListener("click", () => {
+            let isFileUploaded = fileInput.value;
+            if (isFileUploaded != '') {
+                if (fileFlag == 0) {
+                    fileFlag = 1;
+                    var width = 0;
+                    var id = setInterval(frame, 50);
+
+                    function frame() {
+                        if (width >= 390) {
+                            clearInterval(id);
+                            uploadButton.innerHTML =
+                                `<span class="material-icons-outlined upload-button-icon"> check_circle </span> Uploaded`;
+                        } else {
+                            width += 5;
+                            progressBar.style.width = width + "px";
+                        }
+                    }
+                }
+            } else {
+                cannotUploadMessage.style.cssText = "display: flex; animation: fadeIn linear 1.5s;";
+            }
+        });
+
+        cancelAlertButton.addEventListener("click", () => {
+            cannotUploadMessage.style.cssText = "display: none;";
+        });
+
+        if (isAdvancedUpload) {
+            ["drag", "dragstart", "dragend", "dragover", "dragenter", "dragleave", "drop"].forEach(evt =>
+                draggableFileArea.addEventListener(evt, e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                })
+            );
+
+            ["dragover", "dragenter"].forEach(evt => {
+                draggableFileArea.addEventListener(evt, e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    uploadIcon.innerHTML = 'file_download';
+                    dragDropText.innerHTML = 'Drop your file here!';
+                });
+            });
+
+            draggableFileArea.addEventListener("drop", e => {
+                uploadIcon.innerHTML = 'check_circle';
+                dragDropText.innerHTML = 'File Dropped Successfully!';
+                document.querySelector(".label").innerHTML =
+                    `drag & drop or <span class="browse-files"> <input type="file" class="default-file-input" style=""/> <span class="browse-files-text" style="top: -23px; left: -20px;"> browse file</span> </span>`;
+                uploadButton.innerHTML = `Upload`;
+
+                let files = e.dataTransfer.files;
+                fileInput.files = files;
+                console.log(files[0].name + " " + files[0].size);
+                console.log(document.querySelector(".default-file-input").value);
+                fileName.innerHTML = files[0].name;
+                fileSize.innerHTML = (files[0].size / 1024).toFixed(1) + " KB";
+                uploadedFile.style.cssText = "display: flex;";
+                progressBar.style.width = 0;
+                fileFlag = 0;
+            });
+        }
+
+        removeFileButton.addEventListener("click", () => {
+            uploadedFile.style.cssText = "display: none;";
+            fileInput.value = '';
+            uploadIcon.innerHTML = 'file_upload';
+            dragDropText.innerHTML = 'Drag & drop any file here';
+            document.querySelector(".label").innerHTML =
+                `or <span class="browse-files"> <input type="file" class="default-file-input"/> <span class="browse-files-text">browse file</span> <span>from device</span> </span>`;
+            uploadButton.innerHTML = `Upload`;
+        });
     </script>
 @endsection
 @section('footer-script')
