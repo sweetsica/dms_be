@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class CustomerController extends Controller
 {
@@ -76,9 +77,18 @@ class CustomerController extends Controller
     {
         try {
             $q = $request->query('q');
+            $nhomKH = $request->query('nhomKH');
+            $kenhKH = $request->query('kenhKH');
+            $tuyenKH = $request->query('tuyenKH');
+            $nhansutt = $request->query('nhansutt');
             $limit = 30;
             $listData = Customer::query()->with('channel', 'route', 'person');
             if ($q) {
+                $pattern = '/^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)\s+.*/';
+                if (preg_match($pattern, $q)) {
+                    Session::flash('error', 'Lỗi đầu vào khi search');
+                    return back();
+                }
                 $listData = $listData->where('code', 'like', '%' . $q . '%')
                     ->orWhere('name', 'like', '%' . $q . '%')
                     ->orWhere('phone', 'like', '%' . $q . '%')
@@ -107,6 +117,24 @@ class CustomerController extends Controller
                         $customerQuery->where('name', 'like', '%' . $q . '%');
                     });
             }
+            if ($nhomKH) {
+                $listData = $listData->where('group', $nhomKH);
+            }
+            if ($kenhKH) {
+                $listData = $listData->whereHas('channel', function ($customerQuery) use ($kenhKH) {
+                    $customerQuery->where('name', 'like', '%' . $kenhKH . '%');
+                });
+            }
+            if ($tuyenKH) {
+                $listData = $listData->whereHas('route', function ($customerQuery) use ($tuyenKH) {
+                    $customerQuery->where('name', 'like', '%' . $tuyenKH . '%');
+                });
+            }
+            if ($nhansutt) {
+                $listData = $listData->whereHas('person', function ($customerQuery) use ($nhansutt) {
+                    $customerQuery->where('name', 'like', '%' . $nhansutt . '%');
+                });
+            }
             switch (session('user')['role_id']) {
                 case 3:
                     $listData = $listData->whereHas('person', function ($query) {
@@ -121,7 +149,7 @@ class CustomerController extends Controller
             $listData = $listData->orderBy('id', 'desc')->paginate($limit);
 
             $groupIDs = $listData->pluck('groupId')->toArray();
-            $listPerson = Personnel::all();
+            $listPersons = Personnel::all();
             $listProduct = Product::all();
             $listRoute = RouteDirection::all();
             $listChannel = Department::all();
@@ -133,7 +161,7 @@ class CustomerController extends Controller
                 'Customer.danhSachKhachHang',
                 compact(
                     'listData',
-                    'listPerson',
+                    'listPersons',
                     'listProduct',
                     'listRoute',
                     'listChannel',
@@ -145,26 +173,6 @@ class CustomerController extends Controller
             Session::flash('error', $e);
             return back();
         }
-        $listData = $listData->paginate($limit);
-
-        $groupIDs = $listData->pluck('groupId')->toArray();
-        $listPerson = Personnel::all();
-        $listProduct = Product::all();
-        $listRoute = RouteDirection::all();
-        $listChannel = Department::all();
-        $listgroup = CustomerGroup::all();
-
-        $pagination = $this->pagination($listData);
-
-        return view('Customer.danhSachKhachHang', compact(
-            'listData',
-            'listPerson',
-            'listProduct',
-            'listRoute',
-            'listChannel',
-            'listgroup',
-            "pagination"
-        ));
     }
 
     public function create(Request $request)
@@ -388,5 +396,38 @@ class CustomerController extends Controller
     {
         Customer::destroy($id);
         return redirect()->back()->with('mess', 'Đã xóa!');
+    }
+
+    public function upload(Request $request, $id)
+    {
+        $files = $request->file('file');
+        $customer = Customer::find($id);
+        $existingFileName = json_decode($customer->fileName, true) ?? [];
+        $existingFilePath = json_decode($customer->filePath, true) ?? [];
+        foreach ($files as $file) {
+            $path = $file->store('upload', 'public');
+            $existingFileName[] = $file->getClientOriginalName();
+            $existingFilePath[] = $path;
+        }
+        // Cập nhật giá trị mới cho fileName và filePath
+        $customer->fileName = json_encode($existingFileName);
+        $customer->filePath = json_encode($existingFilePath);
+        $customer->save();
+        return response()->json(['success' => true, 'customers' => $customer]);
+    }
+
+    public function download($id, $name)
+    {
+        $customer = Customer::find($id);
+
+        if (!$customer) {
+            abort(404, 'Không tìm thấy khách hàng.');
+        }
+        $fileNames = json_decode($customer->fileName, true);
+        $filePaths = json_decode($customer->filePath, true);
+
+        $fileIndex = array_search($name, $fileNames);
+        $filePath = storage_path('app/public/' . $filePaths[$fileIndex]);
+        return response()->download($filePath, $name);
     }
 }

@@ -64,6 +64,10 @@ Route::middleware(['auth.role'])->group(function () {
 
     Route::post('/delete-customer/{id}', [CustomerController::class, 'delete'])->name('delete.customer');
 
+    Route::post('/customer_upload/{id}', [CustomerController::class, 'upload'])->name('customer.upload');
+
+    Route::get('/customer/{id}/download/{name}', [CustomerController::class, 'download'])->name('customer.download');
+
     Route::get('chi-tiet-khach-hang/{id}', [CustomerController::class, 'show'])->name('customer-detail.list');
 
     Route::get('/nhan_su', [PersonnelController::class, 'view'])->name('personel.view');
@@ -183,7 +187,7 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('xoa-nhom-khach-hang/{id}', [CustomerGroupController::class, 'destroy'])->name('CustomerGroup.destroy');
 });
 
-Route::get('/export/customer',[ExcelController::class,'setExportCustomter']);
+Route::get('/export/customer', [ExcelController::class, 'setExportCustomter']);
 
 // 404
 Route::fallback(function () {

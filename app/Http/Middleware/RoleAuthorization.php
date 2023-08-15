@@ -16,7 +16,7 @@ class RoleAuthorization
     public function handle(Request $request, Closure $next): Response
     {
         if (!$request->session()->has('user')) {
-            return redirect()->route('login');
+            return redirect()->guest('/login');
         }
     
         return $next($request);

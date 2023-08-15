@@ -48,6 +48,11 @@ class ProductController extends Controller
             $limit = 10;
             $listProduct = Product::query();
             if ($q) {
+                $pattern = '/^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)\s+.*/';
+                if (preg_match($pattern, $q)) {
+                    Session::flash('error', 'Lỗi đầu vào khi search');
+                    return back();
+                }
                 $listProduct = $listProduct->where('code', 'like', '%' . $q . '%')
                     ->orWhere('name', 'like', '%' . $q . '%');
             }
@@ -77,13 +82,6 @@ class ProductController extends Controller
 
         if ($request->hasFile('files')) {
             $files = $request->file('files');
-            $directory = 'product/' . $id;
-
-            // Check if the directory exists
-            if (!Storage::exists($directory)) {
-                // Create the directory
-                Storage::makeDirectory($directory);
-            }
 
             $uploadedImages = [];
             $uploadedFiles = [];
@@ -243,7 +241,7 @@ class ProductController extends Controller
                 'branch' => 'required',
                 'status' => 'required'
             ]);
-            if($request->file){
+            if ($request->file) {
                 $data['thumbnail'] = $this->uploadFileToRemoteHost($request->file);
             }
 

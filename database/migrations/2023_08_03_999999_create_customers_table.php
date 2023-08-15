@@ -37,7 +37,7 @@ return new class extends Migration {
             $table->string('status', 255)->nullable()->default(1);
             $table->unsignedBigInteger('personId')->nullable();
             $table->text('productId')->nullable();
-            
+
             $table->string('city', 255)->nullable();
             $table->string('district', 255)->nullable();
             $table->string('guide', 255)->nullable();
@@ -53,6 +53,9 @@ return new class extends Migration {
             $table->foreign('routeId')->references('id')->on('route_directions')->onDelete('cascade');
             $table->foreign('chanelId')->references('id')->on('department')->onDelete('cascade');
             $table->foreign('personId')->references('id')->on('personnel')->onDelete('cascade');
+
+            $table->string('filePath', 255)->nullable();
+            $table->string('fileName', 255)->nullable();
         });
     }
 
