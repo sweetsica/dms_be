@@ -69,10 +69,13 @@
                                                 </form>
                                             </div>
 
-                                            {{-- <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Lọc">
-                                                <button class="btn btn-outline-danger {{ isFiltering(['department', 'user', 'adminDate']) ? 'active' : '' }}" data-bs-toggle="modal" data-bs-target="#filterAdmin"><i class="bi bi-funnel"></i>
+                                            <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Lọc">
+                                                <button class="btn btn-outline-danger" data-bs-toggle="modal"
+                                                    data-bs-target="#filterOptions">
+                                                    <i class="bi bi-funnel"></i>
                                                 </button>
-                                            </div> --}}
+                                            </div>
 
                                         </div>
                                         {{-- <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
@@ -550,6 +553,51 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
                         <button type="submit" class="btn btn-danger">Lưu</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lọc  -->
+    <div class="modal fade" id="filterOptions" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Lọc dữ liệu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="" method="GET">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-original-title="Lọc theo địa bàn">
+                                    <select id="select-status" class="selectpicker select_filter"
+                                        data-dropup-auto="false" title="Lọc theo địa bàn" name='diaban'>
+                                        @foreach ($listLocality as $item)
+                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-original-title="Lọc theo nhân sự phụ trách">
+                                    <select id="select-status" class="selectpicker select_filter"
+                                        data-dropup-auto="false" title="Lọc theo nhân sự phụ trách" name='nhansupt'>
+                                        @foreach ($listNS as $item)
+                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="reset" class="btn btn-outline-danger">Làm
+                                mới</button>
+                            <button type="submit" class="btn btn-danger">Lọc</button>
+                        </div>
                     </div>
                 </form>
             </div>

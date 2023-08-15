@@ -39,8 +39,10 @@ class RouteDirectionController extends Controller
 
         try {
             $q = $request->query('q');
+            $diaban = $request->query('diaban');
+            $nhansupt = $request->query('nhansupt');
             $limit = 10;
-            $listRoute = RouteDirection::query();
+            $listRoute = RouteDirection::query()->with('personnel', 'areas');
             if ($q) {
                 $listRoute = $listRoute->where('code', 'like', '%' . $q . '%')
                     ->orWhere('name', 'like', '%' . $q . '%')
@@ -51,8 +53,17 @@ class RouteDirectionController extends Controller
                         $routeQuery->where('name', 'like', '%' . $q . '%');
                     });
             }
-
-            $listRoute = $listRoute->with('personnel', 'areas')->orderByDesc('id')->paginate($limit);
+            if ($diaban) {
+                $listRoute = $listRoute->whereHas('areas', function ($customerQuery) use ($diaban) {
+                    $customerQuery->where('name', 'like', '%' . $diaban . '%');
+                });
+            }
+            if ($nhansupt) {
+                $listRoute = $listRoute->whereHas('personnel', function ($customerQuery) use ($nhansupt) {
+                    $customerQuery->where('name', 'like', '%' . $nhansupt . '%');
+                });
+            }
+            $listRoute = $listRoute->orderByDesc('id')->paginate($limit);
 
             $listNS = Personnel::all();
 

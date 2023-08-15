@@ -58,14 +58,13 @@
                                                 </form>
                                             </div>
 
-                                            {{-- <div class="action_export ms-3" data-bs-toggle="tooltip"
+                                            <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
                                             data-bs-placement="top" title="Lọc">
-                                            <button
-                                                class="btn btn-outline-danger {{ isFiltering(['department', 'user', 'adminDate']) ? 'active' : '' }}"
-                                                data-bs-toggle="modal" data-bs-target="#filterAdmin"><i
-                                                    class="bi bi-funnel"></i>
-                                            </button>
-                                        </div> --}}
+                                                <button class="btn btn-outline-danger" data-bs-toggle="modal"
+                                                    data-bs-target="#filterOptions">
+                                                    <i class="bi bi-funnel"></i>
+                                                </button>
+                                            </div>
 
                                         </div>
                                         {{-- <div class="action_export ms-3" data-bs-toggle="tooltip"
@@ -776,6 +775,73 @@
         </div>
     </div>
 
+    <!-- Lọc  -->
+    <div class="modal fade" id="filterOptions" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Lọc dữ liệu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="" method="GET">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-original-title="Lọc theo nhóm khách hàng">
+                                    <select id="select-status" class="selectpicker select_filter"
+                                        data-dropup-auto="false" title="Lọc theo nhóm khách hàng" name='nhomKH'>
+                                        @foreach ($listgroup as $item)
+                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-original-title="Lọc theo kênh khách hàng">
+                                    <select id="select-status" class="selectpicker select_filter"
+                                        data-dropup-auto="false" title="Lọc theo kênh khách hàng" name='kenhKH'>
+                                        @foreach ($listChannel as $item)
+                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-original-title="Lọc theo tuyến khách hàng">
+                                    <select id="select-status" class="selectpicker select_filter"
+                                        data-dropup-auto="false" title="Lọc theo tuyến khách hàng" name='tuyenKH'>
+                                        @foreach ($listRoute as $item)
+                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-original-title="Lọc theo nhân sự thu thập">
+                                    <select id="select-status" class="selectpicker select_filter"
+                                        data-dropup-auto="false" title="Lọc theo nhân sự thu thập" name='nhansutt'>
+                                        @foreach ($listPerson as $item)
+                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="reset" class="btn btn-outline-danger">Làm
+                                mới</button>
+                            <button type="submit" class="btn btn-danger">Lọc</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     {{-- Thông tin khách hàng --}}
     <div class="modal fade" id="info" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -902,7 +968,6 @@
         });
         $("#guide").change(() => {})
 
-        load data nhan su api
         function loadPersonnelData() {
             const apiUrl = '/nhan_su';
             const selectElement = document.getElementById('personId');

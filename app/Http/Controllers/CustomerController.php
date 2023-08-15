@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class CustomerController extends Controller
 {
@@ -76,6 +77,10 @@ class CustomerController extends Controller
     {
         try {
             $q = $request->query('q');
+            $nhomKH = $request->query('nhomKH');
+            $kenhKH = $request->query('kenhKH');
+            $tuyenKH = $request->query('tuyenKH');
+            $nhansutt = $request->query('nhansutt');
             $limit = 30;
             $listData = Customer::query()->with('channel', 'route', 'person');
             if ($q) {
@@ -106,6 +111,24 @@ class CustomerController extends Controller
                     ->orWhereHas('channel', function ($customerQuery) use ($q) {
                         $customerQuery->where('name', 'like', '%' . $q . '%');
                     });
+            }
+            if ($nhomKH) {
+                $listData = $listData->where('group', $nhomKH);
+            }
+            if ($kenhKH) {
+                $listData = $listData->whereHas('channel', function ($customerQuery) use ($kenhKH) {
+                    $customerQuery->where('name', 'like', '%' . $kenhKH . '%');
+                });
+            }
+            if ($tuyenKH) {
+                $listData = $listData->whereHas('route', function ($customerQuery) use ($tuyenKH) {
+                    $customerQuery->where('name', 'like', '%' . $tuyenKH . '%');
+                });
+            }
+            if ($nhansutt) {
+                $listData = $listData->whereHas('person', function ($customerQuery) use ($nhansutt) {
+                    $customerQuery->where('name', 'like', '%' . $nhansutt . '%');
+                });
             }
             switch (session('user')['role_id']) {
                 case 3:
@@ -156,15 +179,18 @@ class CustomerController extends Controller
 
         $pagination = $this->pagination($listData);
 
-        return view('Customer.danhSachKhachHang', compact(
-            'listData',
-            'listPerson',
-            'listProduct',
-            'listRoute',
-            'listChannel',
-            'listgroup',
-            "pagination"
-        ));
+        return view(
+            'Customer.danhSachKhachHang',
+            compact(
+                'listData',
+                'listPerson',
+                'listProduct',
+                'listRoute',
+                'listChannel',
+                'listgroup',
+                "pagination"
+            )
+        );
     }
 
     public function create(Request $request)
@@ -388,5 +414,38 @@ class CustomerController extends Controller
     {
         Customer::destroy($id);
         return redirect()->back()->with('mess', 'Đã xóa!');
+    }
+
+    public function upload(Request $request, $id)
+    {
+        $files = $request->file('file');
+        $customer = Customer::find($id);
+        $existingFileName = json_decode($customer->fileName, true) ?? [];
+        $existingFilePath = json_decode($customer->filePath, true) ?? [];
+        foreach ($files as $file) {
+            $path = $file->store('upload', 'public');
+            $existingFileName[] = $file->getClientOriginalName();
+            $existingFilePath[] = $path;
+        }
+        // Cập nhật giá trị mới cho fileName và filePath
+        $customer->fileName = json_encode($existingFileName);
+        $customer->filePath = json_encode($existingFilePath);
+        $customer->save();
+        return response()->json(['success' => true, 'customers' => $customer]);
+    }
+
+    public function download($id, $name)
+    {
+        $customer = Customer::find($id);
+
+        if (!$customer) {
+            abort(404, 'Không tìm thấy khách hàng.');
+        }
+        $fileNames = json_decode($customer->fileName, true);
+        $filePaths = json_decode($customer->filePath, true);
+
+        $fileIndex = array_search($name, $fileNames);
+        $filePath = storage_path('app/public/' . $filePaths[$fileIndex]);
+        return response()->download($filePath, $name);
     }
 }
