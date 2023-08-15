@@ -115,7 +115,7 @@
                                                         data-href="/chi-tiet-khach-hang/{{ $item['id'] }}" role="button">
                                                         <td>
                                                             <div class="overText text-center">
-                                                                {{ $loop->iteration }}
+                                                                {{ $listData->total() - $loop->index - ($listData->currentPage() - 1) * $listData->perPage() }}
                                                             </div>
                                                         </td>
                                                         <td>
