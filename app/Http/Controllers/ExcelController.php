@@ -7,6 +7,7 @@ use App\Exports\ErrorRowsExport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\CustomersImport;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
@@ -25,13 +26,21 @@ class ExcelController extends Controller
                 $errors = $import->getErrors();
 
                 $export = new ErrorRowsExport($errors);
-                $fileName = 'error_file.xlsx';
 
-                // Store the export file to local storage
-                $storageUrl = $this->uploadFileToRemoteHost($export);
+                // Specify the file path where you want to store the exported file
+                $filePath = 'exports/error_' . Str::uuid() . '.xlsx'; // Update with your desired file path
 
-                // Return the storage URL as the response
-                return $storageUrl;
+                // Store the file using the Excel facade and specify the disk ('public' in this example)
+                Excel::store($export, $filePath, 'public');
+
+                // Alternatively, if you want to store the file using the default disk specified in your configuration file:
+                // Excel::store($export, $filePath);
+
+                // Retrieve the full URL of the stored file
+                $fileUrl = asset('storage/' . $filePath);
+                dd($fileUrl);
+                // $storageUrl = $this->uploadFileToRemoteHost($filess);
+                // return $storageUrl;
             }
             dd('Thành công!');
         } catch (\Exception $e) {
@@ -61,7 +70,7 @@ class ExcelController extends Controller
         //send form data
         $response = Http::attach(
             'files',
-            $fileStream,
+            file_get_contents($file),
             $file->getClientOriginalName()
         )->post($url);
 
