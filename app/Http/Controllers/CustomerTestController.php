@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
 
 
 
@@ -14,4 +15,13 @@ class CustomerTestController extends Controller
     return view('cutomerTest.index2');
 
    }
+
+   public function index3(Request $request) {
+      $search = $request->get('search');
+
+      return view('cutomerTest.index3' , [
+         'search' => $search,
+     ]);
+  
+     }
 }

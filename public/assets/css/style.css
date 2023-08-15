@@ -2699,7 +2699,7 @@ ul.modal_upload-list li:last-child {
 .viewport {
     position: relative;
     display: block;
-    height: 100rem;
+    height: 78rem;
     background-color: #fff;
     /* padding: 1rem 1.5rem; */
     animation-name: popAnim;
