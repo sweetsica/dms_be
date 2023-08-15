@@ -15,11 +15,11 @@
         if (!isset($link['url'])) {
             return '#';
         }
-
+    
         $pageNumber = explode('?page=', $link['url'])[1];
-
+    
         $queryString = request()->query();
-
+    
         $queryString[$pageName] = $pageNumber;
         return route('customers', $queryString);
     }
@@ -59,7 +59,7 @@
                                             </div>
 
                                             <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Lọc">
+                                                data-bs-placement="top" title="Lọc">
                                                 <button class="btn btn-outline-danger" data-bs-toggle="modal"
                                                     data-bs-target="#filterOptions">
                                                     <i class="bi bi-funnel"></i>
@@ -440,7 +440,7 @@
                                         title="Nhân sự thu thập*" data-select-all-text="Chọn tất cả"
                                         data-deselect-all-text="Bỏ chọn" data-size="3" name="personId"
                                         data-live-search-placeholder="Tìm kiếm...">
-                                        @foreach ($listPerson as $per)
+                                        @foreach ($listPersons as $per)
                                             <option value="{{ $per->id }}"
                                                 {{ $per->id == $item->personId ? 'selected' : '' }}>
                                                 {{ $per->name }}
@@ -579,26 +579,26 @@
                             </div>
                             <div class="col-md-3 mb-3">
                                 <input value="{{ old('code') }}" type="text" name="code"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Mã khách hàng"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Mã khách hàng*"
                                     placeholder="Mã khách hàng*" class="form-control">
                                 {{-- <div class="error-text" id="codeError" style="color: red;"></div> --}}
                             </div>
                             <div class="col-md-3 mb-3">
                                 <input value="{{ old('name') }}" type="text" name="name"
-                                    data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên khách hàng"
+                                    data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên khách hàng*"
                                     placeholder="Tên khách hàng*" class="form-control">
                                 <div class="error-text" id="nameError" style="color: red;"></div>
                             </div>
 
                             <div class="col-md-3 mb-3">
                                 <input value="{{ old('phone') }}" type="text" name="phone"
-                                    data-bs-toggle="tooltip" required data-bs-placement="top" title="Số điện thoại"
+                                    data-bs-toggle="tooltip" required data-bs-placement="top" title="Số điện thoại*"
                                     placeholder="Số điện thoại*" class="form-control">
                                 <div class="error-text" id="phoneError" style="color: red;"></div>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <input value="{{ old('email') }}" type="text" name="email"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Email" placeholder="Email*"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Email*" placeholder="Email*"
                                     class="form-control">
                             </div>
                             <div class="col-md-12 mb-3">
@@ -649,7 +649,7 @@
                                 <div class="card-title">3. Địa chỉ</div>
                             </div>
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Tỉnh/thành">
+                                title="Tỉnh/thành*">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Tỉnh/thành*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="city" id="city"
@@ -658,7 +658,7 @@
                                 <div class="error-text" id="cityError" style="color: red;"></div>
                             </div>
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Quận/huyện">
+                                title="Quận/huyện*">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Quận/huyện*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="district" id="district"
@@ -667,7 +667,7 @@
                                 <div class="error-text" id="districtError" style="color: red;"></div>
                             </div>
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Phường/xã">
+                                title="Phường/xã*">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Phường/xã*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="guide" id="guide"
@@ -686,26 +686,24 @@
                             </div>
 
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Nhân sự thu thập">
-                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                    data-live-search="true" data-select-all-text="Chọn tất cả"
-                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="personId" id="personId"
+                                title="Nhân sự thu thập*">
+
+                                <select {{ session('user')['role_id'] != '1' ? 'disabled' : '' }} class="selectpicker"
+                                    data-dropup-auto="false" data-width="100%" required data-live-search="true"
+                                    title="Nhân sự thu thập*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="personId"
                                     data-live-search-placeholder="Tìm kiếm...">
-                                    @if (session('user')['role_id'] == '1')
-                                        @foreach ($listPerson as $Person)
-                                            <option value="{{ $Person->id }}"
-                                                {{ $Person->id == session('user')['id'] ? 'selected' : '' }}>
-                                                {{ $Person->name }}</option>
-                                        @endforeach
-                                    @else
-                                        <option disabled selected value="{{ session('user')['id'] }}">
-                                            {{ session('user')['name'] ?? '' }}</option>
-                                    @endif
+                                    @foreach ($listPersons as $per)
+                                        <option value="{{ $per->id }}"
+                                            {{ $per->id == session('user')['id'] ? 'selected' : '' }}>
+                                            {{ $per->name }}
+                                        </option>
+                                    @endforeach
                                 </select>
                                 <div class="error-text" id="personIdError" style="color: red;"></div>
                             </div>
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Sản phẩm quan tâm">
+                                title="Sản phẩm quan tâm*">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Sản phẩm quan tâm*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="productId[]" id="productId"
@@ -720,7 +718,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Nhóm khách hàng">
+                                title="Nhóm khách hàng*">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Nhóm khách hàng*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="group" id="group"
@@ -734,7 +732,7 @@
                                 <div class="error-text" id="groupError" style="color: red;"></div>
                             </div>
 
-                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Tuyến">
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Tuyến*">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Tuyến*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="routeId" id="routeId"
@@ -744,7 +742,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Kênh khách hàng">
+                                title="Kênh khách hàng*">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Kênh khách hàng*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="chanelId" id="chanelId"
@@ -753,7 +751,7 @@
                                 <div class="error-text" id="chanelIdError" style="color: red;"></div>
                             </div>
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Trạng thái">
+                                title="Trạng thái*">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="status"
@@ -824,7 +822,7 @@
                                     data-bs-original-title="Lọc theo nhân sự thu thập">
                                     <select id="select-status" class="selectpicker select_filter"
                                         data-dropup-auto="false" title="Lọc theo nhân sự thu thập" name='nhansutt'>
-                                        @foreach ($listPerson as $item)
+                                        @foreach ($listPersons as $item)
                                             <option value="{{ $item->name }}">{{ $item->name }}</option>
                                         @endforeach
                                     </select>
