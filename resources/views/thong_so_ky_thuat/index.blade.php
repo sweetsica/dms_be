@@ -1,18 +1,18 @@
 @extends('template.master')
 {{-- Trang chủ GIao Ban --}}
-@section('title', 'Đề xuất theo mẫu')
+@section('title', 'Danh sách nhóm khách hàng')
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 @endsection
 
 @section('content')
-    @include('template.sidebar.sidebarDepartment.sidebarLeft')
+@include('template.sidebar.sidebarMaster.sidebarLeft')
     <div id="mainWrap" class="mainWrap">
         <div class="mainSection">
             <div class="main">
                 <div class="container-fluid">
                     <div class="mainSection_heading">
-                        <h5 class="mainSection_heading-title">Danh sách vai trò</h5>
+                        <h5 class="mainSection_heading-title">Danh sách nhóm khách hàng</h5>
                         @include('template.components.sectionCard')
                     </div>
 
@@ -24,9 +24,9 @@
                                         <div class="col-md-12">
                                             <div
                                                 class="action_wrapper d-flex flex-wrap justify-content-between align-items-center mb-3">
-                                                <div class="order-2 order-md-1" style="font-size: 15px;">
-                                                    <b>Danh sách vai trò</b>
-                                                </div>
+                                                {{-- <div class="order-2 order-md-1" style="font-size: 15px;">
+                                                    <b>Danh sách nhóm thông số</b>
+                                                </div> --}}
                                                 <div
                                                     class="order-1 order-md-2  justify-content-between align-items-center flex-grow-1 mb-2 mb-md-0">
                                                     <form method="GET" action="">
@@ -47,22 +47,21 @@
                                                         <i class="bi bi-funnel"></i>
                                                     </button>
                                                 </div>
-                                                @if ((session('user')['role_id'] == '1')  )
+
                                                 <div class="action_export order-md-4">
                                                     <button class="btn btn-danger d-block testCreateUser"
-                                                        data-bs-toggle="modal" data-bs-target="#taoDeXuat">Thêm vai
-                                                        trò</button>
+                                                        data-bs-toggle="modal" data-bs-target="#taoDeXuat">Thêm thông số </button>
                                                 </div>
-                                                @endif
                                             </div>
-                                            <form id="select-form" action="{{ route('Role.delete') }}"
+                                            <form id="select-form" action="{{ route('Specifications.delete') }}"
                                             method="POST">
                                             @csrf
-                                            <div class="action_export mx-3 order-md-1" data-bs-toggle="tooltip"
-                                                data-bs-placement="top" title="Xóa">
+                                            <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" title="Xóa" >
                                                 <button class="btn btn-danger  " type="submit"
-                                                    onclick="return confirm('Bạn có muốn xóa không?')"
-                                                    id="delete-selected-button" style="display: none;">Xóa</button>
+                                                    onclick="return confirm('Bạn có muốn xóa không?')" id="delete-selected-button"
+                                                    style="display: none;"
+                                                    >Xóa</button>
                                             </div><br>
                                             <div class="table-responsive">
                                                 <table id="dsDaoTao"
@@ -72,17 +71,16 @@
                                                             <th class="text-nowrap text-center" style="width:1%"><input
                                                                 type="checkbox" id="select-all"></th>
                                                             <th class="text-nowrap text-center" style="width:2%">STT</th>
-                                                            <th class="text-nowrap" style="width:10%">Mã vai trò</th>
-                                                            <th class="text-nowrap" style="width:10%">Tên vai trò</th>
+                                                            <th class="text-nowrap" style="width:10%">Mã thông số</th>
+                                                            <th class="text-nowrap" style="width:10%">Tên thông số</th>
+                                                            <th class="text-nowrap" style="width:10%">Nhóm thông số</th>
                                                             <th class="text-nowrap" style="width:20%">Mô tả</th>
-                                                            @if ((session('user')['role_id'] == '1')  )
-                                                            <th class=" text-center" style="width:1%"><span>Thao tác</span>
+                                                            <th class="text-center" style="width:2%"><span>Thao tác</span>
                                                             </th>
-                                                            @endif
                                                         </tr>
                                                     </thead>
                                                     <?php $i = 1; ?>
-                                                    @foreach ($roleList as $item)
+                                                    @foreach ($SpecificationsList as $item)
                                                         <tbody>
                                                             <tr>
                                                                 <td class=" text-center"> <input type="checkbox" name="selected_items[]"
@@ -98,32 +96,40 @@
                                                                 </td>
                                                                 <td class="">
                                                                     <div class="overText" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top" title="{{ $item->name }}">
+                                                                    data-bs-placement="top" title=" {{ $item->name }}">
                                                                     {{ $item->name }}
                                                                 </div>
+
                                                                 </td>
                                                                 <td class="">
                                                                     <div class="overText" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top"
-                                                                    title="{{ $item->description }}">
+                                                                    data-bs-placement="top" title=" {{ $item->name_group }}">
+                                                                    {{ $item->name_group }}
+                                                                </div>
+
+                                                                </td>
+                                                                <td class="">
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->description }}">
                                                                     {{ $item->description }}
                                                                 </div>
+
                                                                 </td>
                                                                 <td>
                                                                     <div class="table_actions d-flex justify-content-end">
 
                                                                         <div data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top" title="Sửa ">
+                                                                            data-bs-placement="top" title="Sửa">
                                                                             <div class="btn" data-bs-toggle="modal"
-                                                                                data-bs-target="#sua{{ $item['id'] }}">
+                                                                                data-bs-target="#sua{{$item['id']}}">
                                                                                 <img style="width:16px;height:16px"
                                                                                     src="{{ asset('assets/img/edit.svg') }}" />
                                                                             </div>
                                                                         </div>
                                                                         <div data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top" title="Xóa ">
+                                                                            data-bs-placement="top" title="Xóa">
                                                                             <div class="btn" data-bs-toggle="modal"
-                                                                                data-bs-target="#xoa{{ $item->id }}">
+                                                                                data-bs-target="#xoa{{$item->id}}">
                                                                                 <img style="width:16px;height:16px"
                                                                                     src="{{ asset('assets/img/trash.svg') }}" />
                                                                             </div>
@@ -132,19 +138,13 @@
                                                                 </td>
                                                             </tr>
                                                         </tbody>
+
+
                                                     @endforeach
                                                 </table>
-                                                {{-- {{ $roleList->appends([
+                                                {{ $SpecificationsList->appends([
                                                         'search' => $search,
-                                                    ])->links() }} --}}
-                                                        <nav aria-label="Page navigation example" class="float-end mt-3"
-                                                        id="target-pagination">
-                                                        <ul class="pagination">
-                                                            {{ $roleList->appends([
-                                                                    'search' => $search,
-                                                                ])->links() }}
-                                                        </ul>
-                                                    </nav>
+                                                    ])->links() }}
                                             </div>
                                             </form>
                                         </div>
@@ -160,126 +160,146 @@
     </div>
     @include('template.sidebar.sidebarPosition.sidebarRight')
 
+    @foreach ($SpecificationsList as $item)
 
-    @foreach ($roleList as $item)
+       {{-- Sửa  --}}
+       <div class="modal fade" id="sua{{ $item['id'] }}" tabindex="-1"
+       aria-labelledby="exampleModalLabel" aria-hidden="true">
+       <div class="modal-dialog modal-dialog-centered">
+           <div class="modal-content">
+               <div class="modal-header text-center">
+                   <h5 class="modal-title w-100"
+                       id="exampleModalLabel">Sửa thông số kỹ thuật</h5>
+                   <button type="button" class="btn-close"
+                       data-bs-dismiss="modal"
+                       aria-label="Close"></button>
+               </div>
+               <form method="POST"
+               action="{{ route('Specifications.update', $item->id) }}"
+               >
+                   @csrf
+                   <div class="modal-body">
+                       <div class="row">
+                           <div class="col-6 mb-3">
+                               <input data-bs-toggle="tooltip"
+                                   data-bs-placement="top" required
+                                   title="Nhập tên thông số*" name="name"
+                                   type="text" placeholder="Nhập tên thông số*"
+                                   class="form-control"
+                                   value="{{$item->name}}">
+                           </div>
+                           <div class="col-6 mb-3">
+                               <input data-bs-toggle="tooltip" required
+                                   data-bs-placement="top"
+                                   title="Nhập mã thông số*" name="code"
+                                   type="text" placeholder="Nhập mã thông số*"
+                                   class="form-control"
+                                   value="{{$item->code}}">
+                           </div>
 
-     {{-- Sửa đề xuất --}}
-     <div class="modal fade" id="sua{{ $item['id'] }}" tabindex="-1"
-     aria-labelledby="exampleModalLabel" aria-hidden="true">
-     <div class="modal-dialog modal-dialog-centered">
-         <div class="modal-content">
-             <div class="modal-header text-center">
-                 <h5 class="modal-title w-100"
-                     id="exampleModalLabel">Sửa vai trò</h5>
-                 <button type="button" class="btn-close"
-                     data-bs-dismiss="modal"
-                     aria-label="Close"></button>
-             </div>
-             <form method="POST"
-                 action="{{ route('Rolex.update', $item->id) }}">
-                 @csrf
-                 <div class="modal-body">
-                     <div class="row">
-                         <div class="col-6 mb-3">
-                             <input data-bs-toggle="tooltip" required
-                                 data-bs-placement="top"
-                                 title="Nhập tên vai trò*"
-                                 name="name" type="text"
-                                 placeholder="Nhập tên vai trò"
-                                 class="form-control"
-                                 value="{{ $item->name }}">
-                         </div>
-                         <div class="col-6 mb-3">
-                             <input data-bs-toggle="tooltip"
-                                 required data-bs-placement="top"
-                                 title="Nhập mã vai trò*"
-                                 name="code" type="text"
-                                 placeholder="Nhập mã vai trò"
-                                 class="form-control"
-                                 value="{{ $item->code }}">
-                         </div>
-                         <div class="col-6 mb-3">
-                             <div data-bs-toggle="tooltip"
-                                 data-bs-placement="top">
-                                 <textarea name="description" type="text" placeholder="Chức năng nhiệm vụ" class="form-control "
-                                     data-bs-toggle="tooltip" data-bs-placement="top" title="Mô tả" style="width: 450px;height: 80px;">{{ $item->description }}</textarea>
+                           <div class="col-6 mb-3">
+                             <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn nhóm thông số*">
+                                 <select name="group_id" required class="selectpicker"
+                                     data-dropup-auto="false">
+                                     <option value="{{ $item->group_id }}">{{ $item->group_name }}</option>
+                                     @foreach ($TechnicalSpecificationsGroupList as $tsg)
+                                         <option value="{{ $tsg->id }}">
+                                             {{ $tsg->name }}
+                                         </option>
+                                     @endforeach
+                                 </select>
                              </div>
                          </div>
-                     </div>
+                           <div class="col-6 mb-3">
+                                 <input type="text" value="{{ $item->description }}" name="description"
+                                 data-bs-toggle="tooltip" data-bs-placement="top" title="Mô tả"
+                                  placeholder="Mô tả" class="form-control">
+                           </div>
+                       </div>
+                   </div>
+                   <div class="modal-footer">
+                       <button type="button"
+                           class="btn btn-outline-danger"
+                           data-bs-dismiss="modal">Hủy</button>
+                       <button type="submit"
+                           class="btn btn-danger">Lưu</button>
+                   </div>
+               </form>
+           </div>
+       </div>
+   </div>
+
+     {{-- Xóa đề xuất --}}
+     <div class="modal fade" id="xoa{{$item->id}}" tabindex="-1"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-centered">
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <h5 class="modal-title text-danger"
+                         id="exampleModalLabel">Xóa thông số kỹ thuật</h5>
+                     <button type="button" class="btn-close"
+                         data-bs-dismiss="modal"
+                         aria-label="Close"></button>
+                 </div>
+                 <div class="modal-body">
+                     Bạn có thực sự muốn xoá thông số này không?
                  </div>
                  <div class="modal-footer">
                      <button type="button"
                          class="btn btn-outline-danger"
                          data-bs-dismiss="modal">Hủy</button>
-                     <button type="submit"
-                         class="btn btn-danger">Lưu</button>
-                 </div>
-             </form>
-         </div>
-     </div>
- </div>
-
- {{-- Xóa đề xuất --}}
- <div class="modal fade" id="xoa{{ $item->id }}"
-     tabindex="-1" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-     <div class="modal-dialog modal-dialog-centered">
-         <div class="modal-content">
-             <div class="modal-header">
-                 <h5 class="modal-title text-danger"
-                     id="exampleModalLabel">Xóa vai trò</h5>
-                 <button type="button" class="btn-close"
-                     data-bs-dismiss="modal"
-                     aria-label="Close"></button>
-             </div>
-             <div class="modal-body">
-                 Bạn có thực sự muốn xoá vai trò này không?
-             </div>
-             <div class="modal-footer">
-                 <button type="button"
-                     class="btn btn-outline-danger"
-                     data-bs-dismiss="modal">Hủy</button>
-                 <form
-                     action="{{ route('Role.destroy', $item->id) }}"
+                     <form
+                     action="{{ route('Specifications.destroy',$item->id) }}"
                      method="POST">
-                     @csrf
-                     <button type="submit"
-                         class="btn btn-danger">Xóa</button>
-                 </form>
+                         @csrf
+                         <button type="submit"
+                             class="btn btn-danger">Xóa</button>
+                     </form>
+                 </div>
              </div>
          </div>
      </div>
- </div>
-
-    @endforeach
-
+@endforeach
 
     <!-- Modal Thêm Tao De Xuat -->
     <div class="modal fade" id="taoDeXuat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">Thêm mới</h5>
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Thêm mới thông số kỹ thuật</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('Role.store') }}" method="POST">
+                <form action="{{ route('Specifications.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-6 mb-3">
-                                <input name="name" required type="text" placeholder="Nhập tên vai trò*"
+                                <input name="name" required type="text" placeholder="Nhập tên thông số*"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Nhập tên vai trò*">
+                                    title="Nhập tên thông số*">
                             </div>
                             <div class="col-6 mb-3">
-                                <input name="code" required type="text" placeholder="Nhập mã vai trò*"
+                                <input name="code" required type="text" placeholder="Nhập mã thông số*"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Nhập mã vai trò*">
+                                    title="Nhập mã thông số*">
+                            </div>
+                            <div class="col-6 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn nhóm thông số*">
+                                    <select name="group_id" required class="selectpicker"
+                                        data-dropup-auto="false">
+                                        <option value="">Chọn nhóm thông số*</option>
+                                        @foreach ($TechnicalSpecificationsGroupList as $item)
+                                            <option value="{{ $item->id }}">
+                                                {{ $item->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top">
-                                    <textarea name="description" type="text" placeholder="Mô tả" class="form-control " data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Mô tả" style="width: 450px;height: 80px;"></textarea>
+                                    <input type="text" name="description" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="Mô tả" placeholder="Mô tả" class="form-control">
                                 </div>
                             </div>
                             <div class="modal-footer">

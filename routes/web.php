@@ -19,8 +19,8 @@ use App\Http\Controllers\VersionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RouteDirectionController;
 use App\Http\Controllers\ExcelController;
-
-
+use App\Http\Controllers\SpecificationsController;
+use App\Http\Controllers\TechnicalSpecificationsGroupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -185,6 +185,19 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('them-nhom-khach-hang', [CustomerGroupController::class, 'store'])->name('CustomerGroup.store');
     Route::post('sua-nhom-khach-hang/{id}', [CustomerGroupController::class, 'update'])->name('CustomerGroup.update');
     Route::post('xoa-nhom-khach-hang/{id}', [CustomerGroupController::class, 'destroy'])->name('CustomerGroup.destroy');
+
+    Route::get('nhom-thong-so-ky-thuat', [TechnicalSpecificationsGroupController::class, 'index'])->name('TechnicalSpecificationsGroup.index');
+    Route::post('them-nhom-thong-so-ky-thuat', [TechnicalSpecificationsGroupController::class, 'store'])->name('TechnicalSpecificationsGroup.store');
+    Route::post('sua-nhom-thong-so-ky-thuat/{id}', [TechnicalSpecificationsGroupController::class, 'update'])->name('TechnicalSpecificationsGroup.update');
+    Route::post('xoa-nhom-thong-so-ky-thuat/{id}', [TechnicalSpecificationsGroupController::class, 'destroy'])->name('TechnicalSpecificationsGroup.destroy');
+    Route::post('nhom-thong-so-ky-thuat-delete', [TechnicalSpecificationsGroupController::class, 'delete'])->name('TechnicalSpecificationsGroup.delete');
+
+    Route::get('thong-so-ky-thuat', [SpecificationsController::class, 'index'])->name('Specifications.index');
+    Route::post('them-thong-so-ky-thuat', [SpecificationsController::class, 'store'])->name('Specifications.store');
+    Route::post('sua-thong-so-ky-thuat/{id}', [SpecificationsController::class, 'update'])->name('Specifications.update');
+    Route::post('xoa-thong-so-ky-thuat/{id}', [SpecificationsController::class, 'destroy'])->name('Specifications.destroy');
+    Route::post('thong-so-ky-thuat-delete', [SpecificationsController::class, 'delete'])->name('Specifications.delete');
+
 });
 
 Route::get('/export/customer', [ExcelController::class, 'setExportCustomter']);
