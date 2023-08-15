@@ -77,13 +77,6 @@ class ProductController extends Controller
 
         if ($request->hasFile('files')) {
             $files = $request->file('files');
-            $directory = 'product/' . $id;
-
-            // Check if the directory exists
-            if (!Storage::exists($directory)) {
-                // Create the directory
-                Storage::makeDirectory($directory);
-            }
 
             $uploadedImages = [];
             $uploadedFiles = [];
