@@ -21,18 +21,17 @@
                             <div class="card mb-3">
                                 <div class="card-body">
                                     <div class='row'>
+
                                         <div class="col-md-12">
                                             <div
                                                 class="action_wrapper d-flex flex-wrap justify-content-between align-items-center mb-3">
-                                                <div class="order-2 order-md-1" style="font-size: 15px;">
+                                                {{-- <div class="order-2 order-md-1" style="font-size: 15px;">
                                                     <b>Danh sách đơn vị trực thuộc</b>
-                                                </div>
+                                                </div> --}}
                                                 <div
                                                     class="order-1 order-md-2  justify-content-between align-items-center flex-grow-1 mb-2 mb-md-0">
                                                     <form method="GET" action="">
                                                         <div class="form-group has-search">
-                                                            {{-- <span type="submit"
-                                                                class="bi bi-search  fs-5" style="float: left;;"></span> --}}
                                                             <input type="text" style="width: 150px; float: right;"
                                                                 class="form-control" value="{{ $search }}"
                                                                 placeholder="Tìm kiếm" name="search">
@@ -48,35 +47,53 @@
                                                     </button>
                                                 </div>
 
-                                                @if ((session('user')['role_id'] == '1') )
-                                                <div class="action_export order-md-4">
-                                                    <button class="btn btn-danger d-block testCreateUser"
-                                                        data-bs-toggle="modal" data-bs-target="#taoDeXuat">Thêm đơn
-                                                        vị</button>
-                                                </div>
+                                                @if (session('user')['role_id'] == '1')
+                                                    <div class="action_export order-md-4">
+                                                        <button class="btn btn-danger d-block testCreateUser"
+                                                            data-bs-toggle="modal" data-bs-target="#taoDeXuat">Thêm đơn
+                                                            vị</button>
+                                                    </div>
                                                 @endif
+
                                             </div>
+                                            <form id="select-form" action="{{ route('delete-selected-items') }}"
+                                            method="POST">
+                                            @csrf
+                                            <div class="action_export mx-3 order-md-1" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" title="Xóa">
+                                                <button class="btn btn-danger  " type="submit"
+                                                    onclick="return confirm('Bạn có muốn xóa không?')"
+                                                    id="delete-selected-button" style="display: none;">Xóa</button>
+                                            </div><br>
                                             <div class="table-responsive">
+
                                                 <table id="dsDaoTao"
                                                     class="table table-responsive table-hover table-bordered filter">
                                                     <thead>
                                                         <tr>
-                                                            <th class="text-nowrap text-center" style="width:2%">STT</th>
+                                                            <th class="text-nowrap text-center" style="width:1%"><input
+                                                                    type="checkbox" id="select-all"></th>
+                                                            <th class="text-nowrap text-center" style="width:2%">STT
+                                                            </th>
                                                             <th class="text-nowrap" style="width:10%">Mã đơn vị</th>
-                                                            <th class="text-nowrap" style="width:10%">Đơn vị </th>
+                                                            <th class="text-nowrap" style="width:10%">Tên đơn vị </th>
                                                             <th class="text-nowrap" style="width:10%">Đơn vị mẹ </th>
-                                                            <th class="text-nowrap" style="width:10%">Trưởng đơn vị </th>
+                                                            <th class="text-nowrap" style="width:10%">Trưởng đơn vị
+                                                            </th>
                                                             <th class="text-nowrap" style="width:20%">Chức năng nhiệm vụ
                                                             </th>
-                                                            @if ((session('user')['role_id'] == '1') )
-                                                            <th class="text-nowrap" style="width:3%"><span>Hành động</span></th>
-                                                             @endif
+                                                            @if (session('user')['role_id'] == '1')
+                                                                <th class="text-nowrap" style="width:3%"><span>Hành
+                                                                        động</span></th>
+                                                            @endif
                                                         </tr>
                                                     </thead>
                                                     <?php $t = 1; ?>
                                                     @foreach ($departmentList as $item)
                                                         <tbody>
                                                             <tr>
+                                                                <td class="text-center"> <input type="checkbox" name="selected_items[]"
+                                                                        value="{{ $item->id }}"></td>
                                                                 <td class=" text-center">
                                                                     {{ $t++ }}
                                                                 </td>
@@ -118,33 +135,34 @@
                                                                     </div>
 
                                                                 </td>
-                                                                @if ((session('user')['role_id'] == '1') )
-                                                                <td>
+                                                                @if (session('user')['role_id'] == '1')
+                                                                    <td>
 
-                                                                    <div class="table_actions d-flex justify-content-end">
-                                                                        <div class="btn" data-bs-toggle="modal"
-                                                                            data-bs-target="#qrCode">
-                                                                            <i class="bi bi-share-fill"
-                                                                                style="color: #787878;"></i>
-                                                                        </div>
-                                                                        <div data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top" title="Sửa ">
+                                                                        <div
+                                                                            class="table_actions d-flex justify-content-end">
                                                                             <div class="btn" data-bs-toggle="modal"
-                                                                                data-bs-target="#suaDeXuat{{ $item['id'] }}">
-                                                                                <img style="width:16px;height:16px"
-                                                                                    src="{{ asset('assets/img/edit.svg') }}" />
+                                                                                data-bs-target="#qrCode">
+                                                                                <i class="bi bi-share-fill"
+                                                                                    style="color: #787878;"></i>
+                                                                            </div>
+                                                                            <div data-bs-toggle="tooltip"
+                                                                                data-bs-placement="top" title="Sửa ">
+                                                                                <div class="btn" data-bs-toggle="modal"
+                                                                                    data-bs-target="#suaDeXuat{{ $item['id'] }}">
+                                                                                    <img style="width:16px;height:16px"
+                                                                                        src="{{ asset('assets/img/edit.svg') }}" />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div data-bs-toggle="tooltip"
+                                                                                data-bs-placement="top" title="Xóa">
+                                                                                <div class="btn" data-bs-toggle="modal"
+                                                                                    data-bs-target="#xoaDeXuat{{ $item->id }}">
+                                                                                    <img style="width:16px;height:16px"
+                                                                                        src="{{ asset('assets/img/trash.svg') }}" />
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-                                                                        <div data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top" title="Xóa">
-                                                                            <div class="btn" data-bs-toggle="modal"
-                                                                                data-bs-target="#xoaDeXuat{{ $item->id }}">
-                                                                                <img style="width:16px;height:16px"
-                                                                                    src="{{ asset('assets/img/trash.svg') }}" />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
+                                                                    </td>
                                                                 @endif
                                                             </tr>
                                                         </tbody>
@@ -195,7 +213,8 @@
                                                                                             class="selectpicker"
                                                                                             data-dropup-auto="false">
                                                                                             <?php if( $item->parent == 0){ ?>
-                                                                                            <option value="0">Chọn đơn
+                                                                                            <option value="0">Chọn
+                                                                                                đơn
                                                                                                 vị mẹ</option>
                                                                                             <?php
                                                                                             }else{ ?>
@@ -206,7 +225,8 @@
                                                                                                 @endif
                                                                                             </option>
                                                                                             <?php } ?>
-                                                                                            <option value="0">Chọn đơn
+                                                                                            <option value="0">Chọn
+                                                                                                đơn
                                                                                                 vị mẹ</option>
                                                                                             @foreach ($departmentlists as $ac)
                                                                                                 <option
@@ -316,21 +336,8 @@
                                                             ])->links() }}
                                                     </ul>
                                                 </nav>
-                                                {{-- <nav aria-label="Page navigation example" class="float-end mt-3"
-                                                    id="target-pagination">
-                                                    <ul class="pagination">
-                                                        <li class="page-item">
-
-                                                            <a class="page-link" href="" aria-label="Previous">
-                                                                <span aria-hidden="true">
-                                                                    << Previous</span>
-                                                                        <span>1</span>
-                                                                        <span aria-hidden="true">Next >></span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </nav> --}}
                                             </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -339,8 +346,10 @@
                     </div>
                 </div>
             </div>
-            @include('template.footer.footer')
         </div>
+    </div>
+    @include('template.footer.footer')
+    </div>
     </div>
     @include('template.sidebar.sidebarMaster.sidebarRight')
 
@@ -419,8 +428,8 @@
         </div>
     </div>
 
-      {{-- Filter --}}
-      <div class="modal fade" id="filterOptions" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- Filter --}}
+    <div class="modal fade" id="filterOptions" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-sm">
             <div class="modal-content">
                 <div class="modal-header text-center">
@@ -430,7 +439,7 @@
 
                 <form action="" method="GET">
                     {{-- @foreach (request()->query() as $key => $value)
-                        @if (!in_array($key, [ 'don_vi_me']))
+                        @if (!in_array($key, ['don_vi_me']))
                             <input type="hidden" name="{{ $key }}" value="{{ $value }}">
                         @endif
                     @endforeach --}}
@@ -441,9 +450,9 @@
                                     data-bs-original-title="Lọc theo trưởng đơn vị">
                                     <select id="select-status" class="selectpicker select_filter"
                                         data-dropup-auto="false" title="Lọc theo trưởng đơn vị" name='leader_name'>
-                                      @foreach ($UnitLeaderList as $item )
+                                        @foreach ($UnitLeaderList as $item)
                                             <option value="{{ $item->name }}">{{ $item->name }}</option>
-                                      @endforeach
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -452,18 +461,18 @@
                                     data-bs-original-title="Lọc theo đơn vị mẹ">
                                     <select id="select-status" class="selectpicker select_filter"
                                         data-dropup-auto="false" title="Lọc theo đơn vị mẹ" name='don_vi_me'>
-                                      @foreach ($departmentList as $item )
+                                        @foreach ($departmentList as $item)
                                             <option value="{{ $item->name }}">{{ $item->name }}</option>
-                                      @endforeach
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <button type="reset" class="btn btn-outline-danger">Làm
-                            mới</button>
-                        <button type="submit" class="btn btn-danger">Lọc</button>
-                    </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="reset" class="btn btn-outline-danger">Làm
+                                mới</button>
+                            <button type="submit" class="btn btn-danger">Lọc</button>
+                        </div>
                 </form>
             </div>
         </div>
@@ -507,5 +516,40 @@
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}"></script>
 
+
+    <script>
+        // Khi ô checkbox chọn/bỏ chọn tất cả được thay đổi
+        document.getElementById('select-all').addEventListener('change', function() {
+            // Lấy danh sách tất cả các ô checkbox trong bảng
+            const checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
+
+            // Đặt giá trị của tất cả các ô checkbox trong bảng theo giá trị của ô chọn/bỏ chọn tất cả
+            checkboxes.forEach((checkbox) => {
+                checkbox.checked = this.checked;
+            });
+        });
+    </script>
+
+    <script>
+        const checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
+        const selectAllCheckbox = document.getElementById('select-all');
+        const deleteButton = document.getElementById('delete-selected-button');
+
+        checkboxes.forEach((checkbox) => {
+            checkbox.addEventListener('change', updateDeleteButton);
+        });
+
+        selectAllCheckbox.addEventListener('change', () => {
+            checkboxes.forEach((checkbox) => {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+            updateDeleteButton();
+        });
+
+        function updateDeleteButton() {
+            const atLeastOneChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+            deleteButton.style.display = atLeastOneChecked ? 'block' : 'none';
+        }
+    </script>
 
 @endsection

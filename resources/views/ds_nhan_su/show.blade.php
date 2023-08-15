@@ -56,7 +56,15 @@
                                                     </div>
                                                 @endif
                                             </div>
-
+                                            <form id="select-form" action="{{ route('Personnel.delete') }}"
+                                            method="POST">
+                                            @csrf
+                                        <div class="action_export mx-3 order-md-1" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Xóa">
+                                            <button class="btn btn-danger  " type="submit"
+                                                onclick="return confirm('Bạn có muốn xóa không?')"
+                                                id="delete-selected-button" style="display: none;">Xóa</button>
+                                        </div><br>
                                             <div class="table-responsive">
                                                 <table id="dsDaoTao"
                                                     class="table table-responsive table-hover table-bordered filter">
@@ -606,6 +614,7 @@
                                                     </ul>
                                                 </nav>
                                             </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -782,8 +791,11 @@
                                     title="Quỹ lương năm">
                             </div>
                             <div class="col-6 mb-3">
-                                <input name="pack" type="text" placeholder="Gói trang bị" class="form-control"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Gói trang bị">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Gói trang bị">
+                                    <select name="pack" class="selectpicker" data-dropup-auto="false" >
+                                        <option value="">Gói trang bị</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Hình thức làm việc">
@@ -945,5 +957,38 @@
     </script>
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}"></script>
+    <script>
+        // Khi ô checkbox chọn/bỏ chọn tất cả được thay đổi
+        document.getElementById('select-all').addEventListener('change', function() {
+            // Lấy danh sách tất cả các ô checkbox trong bảng
+            const checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
 
+            // Đặt giá trị của tất cả các ô checkbox trong bảng theo giá trị của ô chọn/bỏ chọn tất cả
+            checkboxes.forEach((checkbox) => {
+                checkbox.checked = this.checked;
+            });
+        });
+    </script>
+
+    <script>
+        const checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
+        const selectAllCheckbox = document.getElementById('select-all');
+        const deleteButton = document.getElementById('delete-selected-button');
+
+        checkboxes.forEach((checkbox) => {
+            checkbox.addEventListener('change', updateDeleteButton);
+        });
+
+        selectAllCheckbox.addEventListener('change', () => {
+            checkboxes.forEach((checkbox) => {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+            updateDeleteButton();
+        });
+
+        function updateDeleteButton() {
+            const atLeastOneChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+            deleteButton.style.display = atLeastOneChecked ? 'block' : 'none';
+        }
+    </script>
 @endsection

@@ -52,40 +52,19 @@
                         <div class="card-body">
                             <div class='row'>
                                 <div class="col-md-12">
-                                    <div class="action_wrapper d-flex justify-content-end mb-3">
-
-                                        <div class="action_wrapper d-flex justify-content-end mb-3">
-
-                                            <div class="d-flex justify-content-between align-items-center">
+                                    <div class="action_wrapper d-flex flex-wrap justify-content-between align-items-center mb-3">
+                                            <div class="order-1 order-md-2  justify-content-between align-items-center flex-grow-1 mb-2 mb-md-0">
                                                 <form method="GET" action="#">
-                                                    {{-- @foreach (request()->query() as $key => $value)
-                                                        @if ($key != 'q' && $key != 'page')
-                                                            <input type="hidden" name="{{ $key }}" value="{{ $value }}">
-                                                        @endif
-                                                    @endforeach --}}
                                                     <div class="form-group has-search">
-                                                        <span type="submit"
-                                                            class="bi bi-search form-control-feedback fs-5"></span>
+                                                        {{-- <span type="submit"
+                                                            class="bi bi-search form-control-feedback fs-5"></span> --}}
                                                         <input type="text" style="width: 150px; float: right;"
                                                             class="form-control" value="{{ $search }}"
                                                             placeholder="Tìm kiếm" name="search">
                                                     </div>
                                                 </form>
                                             </div>
-
-                                            {{-- <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Lọc">
-                                                <button class="btn btn-outline-danger {{ isFiltering(['department', 'user', 'adminDate']) ? 'active' : '' }}" data-bs-toggle="modal" data-bs-target="#filterAdmin"><i class="bi bi-funnel"></i>
-                                                </button>
-                                            </div> --}}
-
-                                        </div>
-                                        {{-- <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                            title="Xuất file Excel">
-                                            <a role="button" target="_blank"
-                                                href={{ route('print.dwtUser', ['date' => request()->userDate ?? date('m-Y')]) }}
-                                                class="btn-export"><i class="bi bi-download"></i></a>
-                                        </div> --}}
-                                        <div class="action_export mx-3 " data-bs-toggle="tooltip"
+                                        <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
                                         data-bs-placement="top" title="Lọc">
                                         <button class="btn btn-outline-danger" data-bs-toggle="modal"
                                             data-bs-target="#filterOptions">
@@ -93,19 +72,32 @@
                                         </button>
                                     </div>
                                         @if ((session('user')['role_id'] == '1') || (session('user')['role_id'] == '2') )
-                                        <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        <div  class="action_export order-md-4" data-bs-toggle="tooltip" data-bs-placement="top"
                                             aria-label="Thêm địa bàn" data-bs-original-title="Thêm địa bàn">
                                             <button class="btn btn-danger d-block testCreateUser" data-bs-toggle="modal"
                                                 data-bs-target="#add">Thêm địa bàn</button>
                                         </div>
                                         @endif
+
                                     </div>
+                                    <form id="select-form" action="{{ route('locality.delete') }}"
+                                    method="POST">
+                                    @csrf
+                                    <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Xóa" >
+                                        <button class="btn btn-danger  " type="submit"
+                                            onclick="return confirm('Bạn có muốn xóa không?')" id="delete-selected-button"
+                                            style="display: none;"
+                                            >Xóa</button>
+                                    </div><br>
                                     <div class="table-responsive">
                                         <table id="dsDaoTao"
                                             class="table table-responsive table-hover table-bordered filter"
                                             style="width: 100%">
                                             <thead>
                                                 <tr>
+                                                    <th class="text-nowrap text-center" style="width:1%"><input
+                                                        type="checkbox" id="select-all"></th>
                                                     <th class="text-nowrap text-center" style="width:3%">STT</th>
                                                     <th class="text-nowrap text-center" style="width:8%">Mã địa bàn</th>
                                                     <th class="text-nowrap text-center" style="width:30%">Tên địa bàn</th>
@@ -120,7 +112,8 @@
                                             <tbody>
                                                 @foreach ($localityList as $item)
                                                     <tr class="table-row" role="button">
-
+                                                        <td class="text-center"> <input type="checkbox" name="selected_items[]"
+                                                            value="{{ $item->id }}"></td>
                                                         <td>
                                                             <div class="overText text-center">
                                                                 {{ $a++ }}
@@ -187,18 +180,9 @@
                                             </ul>
                                         </nav>
                                     </div>
-                                    <nav aria-label="Page navigation example" class="float-end mt-3" id="target-pagination">
-                                        <ul class="pagination">
-                                            {{-- @foreach ($listUsers->links as $link)
-                                                <li class="page-item {{ $link->active ? 'active' : '' }}">
-                                                    <a class="page-link" href="{{ getPaginationLink($link, 'page') }}" aria-label="Previous">
-                                                        <span aria-hidden="true">{!! $link->label !!}</span>
-                                                    </a>
-                                                </li>
-                                            @endforeach --}}
-                                        </ul>
-                                    </nav>
+                                </form>
                                 </div>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -564,4 +548,39 @@
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/components/dataHrefTable.js') }}"></script>
+
+    <script>
+        // Khi ô checkbox chọn/bỏ chọn tất cả được thay đổi
+        document.getElementById('select-all').addEventListener('change', function() {
+            // Lấy danh sách tất cả các ô checkbox trong bảng
+            const checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
+
+            // Đặt giá trị của tất cả các ô checkbox trong bảng theo giá trị của ô chọn/bỏ chọn tất cả
+            checkboxes.forEach((checkbox) => {
+                checkbox.checked = this.checked;
+            });
+        });
+    </script>
+
+    <script>
+        const checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
+        const selectAllCheckbox = document.getElementById('select-all');
+        const deleteButton = document.getElementById('delete-selected-button');
+
+        checkboxes.forEach((checkbox) => {
+            checkbox.addEventListener('change', updateDeleteButton);
+        });
+
+        selectAllCheckbox.addEventListener('change', () => {
+            checkboxes.forEach((checkbox) => {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+            updateDeleteButton();
+        });
+
+        function updateDeleteButton() {
+            const atLeastOneChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+            deleteButton.style.display = atLeastOneChecked ? 'block' : 'none';
+        }
+    </script>
 @endsection

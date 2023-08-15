@@ -80,4 +80,13 @@ class AreaController extends Controller
         Area::destroy($id);
         return redirect()->back()->with('mess', 'Đã xóa!');;
     }
+
+    public function delete(Request $request)
+    {
+        // Department::destroy($id);
+        $selectedItems = $request->input('selected_items', []);
+        Area::whereIn('id', $selectedItems)->delete();
+        return redirect()->back()->with('mess', 'Đã xóa!');
+        ;
+    }
 }

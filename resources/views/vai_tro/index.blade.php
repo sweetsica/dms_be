@@ -55,12 +55,22 @@
                                                 </div>
                                                 @endif
                                             </div>
-
+                                            <form id="select-form" action="{{ route('Role.delete') }}"
+                                            method="POST">
+                                            @csrf
+                                            <div class="action_export mx-3 order-md-1" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" title="Xóa">
+                                                <button class="btn btn-danger  " type="submit"
+                                                    onclick="return confirm('Bạn có muốn xóa không?')"
+                                                    id="delete-selected-button" style="display: none;">Xóa</button>
+                                            </div><br>
                                             <div class="table-responsive">
                                                 <table id="dsDaoTao"
                                                     class="table table-responsive table-hover table-bordered filter">
                                                     <thead>
                                                         <tr>
+                                                            <th class="text-nowrap text-center" style="width:1%"><input
+                                                                type="checkbox" id="select-all"></th>
                                                             <th class="text-nowrap text-center" style="width:2%">STT</th>
                                                             <th class="text-nowrap" style="width:10%">Mã vai trò</th>
                                                             <th class="text-nowrap" style="width:10%">Tên vai trò</th>
@@ -75,6 +85,8 @@
                                                     @foreach ($roleList as $item)
                                                         <tbody>
                                                             <tr>
+                                                                <td class=" text-center"> <input type="checkbox" name="selected_items[]"
+                                                                    value="{{ $item->id }}"></td>
                                                                 <td class=" text-center">
                                                                     {{ $i++ }}
                                                                 </td>
@@ -223,6 +235,7 @@
                                                         </ul>
                                                     </nav>
                                             </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -314,5 +327,40 @@
     </script>
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}"></script>
+
+    <script>
+        // Khi ô checkbox chọn/bỏ chọn tất cả được thay đổi
+        document.getElementById('select-all').addEventListener('change', function() {
+            // Lấy danh sách tất cả các ô checkbox trong bảng
+            const checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
+
+            // Đặt giá trị của tất cả các ô checkbox trong bảng theo giá trị của ô chọn/bỏ chọn tất cả
+            checkboxes.forEach((checkbox) => {
+                checkbox.checked = this.checked;
+            });
+        });
+    </script>
+
+    <script>
+        const checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
+        const selectAllCheckbox = document.getElementById('select-all');
+        const deleteButton = document.getElementById('delete-selected-button');
+
+        checkboxes.forEach((checkbox) => {
+            checkbox.addEventListener('change', updateDeleteButton);
+        });
+
+        selectAllCheckbox.addEventListener('change', () => {
+            checkboxes.forEach((checkbox) => {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+            updateDeleteButton();
+        });
+
+        function updateDeleteButton() {
+            const atLeastOneChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+            deleteButton.style.display = atLeastOneChecked ? 'block' : 'none';
+        }
+    </script>
 
 @endsection

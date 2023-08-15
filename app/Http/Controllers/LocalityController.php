@@ -79,4 +79,14 @@ class LocalityController extends Controller
         Locality::destroy($id);
         return redirect()->back()->with('mess', 'Đã xóa!');;
     }
+
+    public function delete(Request $request)
+    {
+        // Department::destroy($id);
+        $selectedItems = $request->input('selected_items', []);
+        Locality::whereIn('id', $selectedItems)->delete();
+        return redirect()->back()->with('mess', 'Đã xóa!');
+        ;
+    }
+
 }

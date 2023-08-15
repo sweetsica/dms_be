@@ -113,8 +113,18 @@ class DepartmentController extends Controller
     public function destroy($id)
     {
         Department::destroy($id);
+        // $selectedItems = $request->input('selected_items', []);
         return redirect()->back()->with('mess', 'Đã xóa!');
         ;
+    }
+
+    public function delete(Request $request)
+    {
+        // Department::destroy($id);
+        $selectedItems = $request->input('selected_items', []);
+        Department::whereIn('id', $selectedItems)->delete();
+        return redirect()->back()->with('mess', 'Đã xóa!');
+
     }
 
     public function getAll()

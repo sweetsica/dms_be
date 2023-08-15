@@ -51,4 +51,13 @@ class RoleController extends Controller
         Role::destroy($id);
         return redirect()->back()->with('mess', 'Đã xóa !');;
     }
+
+    public function delete(Request $request)
+    {
+
+        $selectedItems = $request->input('selected_items', []);
+        Role::whereIn('id', $selectedItems)->delete();
+        return redirect()->back()->with('mess', 'Đã xóa!');
+
+    }
 }
