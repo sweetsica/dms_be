@@ -23,15 +23,22 @@ class AuthenticateController extends Controller
     public function login(Request $request)
     {
         try {
+            $intendedUrl = $request->session()->get('url.intended');
             $email = $request->input('email');
             $password = $request->input('password');
 
-            $account = Personnel::where('email', $email)->first();
-            $checkPass = Personnel::where('password',$password)->first();
-            if ($account && $checkPass ) {
+            $account = Personnel::where('email', $email)->where('password', $password)->firstOrFail();
+            if ($account) {
                 if ($account->status == "Đang làm việc") {
+                    $account->load('department');
+                    $departmentName = $account->department ? $account->department->name : "Unknown";
+                    $request->session()->put('department_name', $departmentName);
                     $request->session()->put('user', $account);
+                    $request->session()->put('statsus', $account->role_id);
 
+                    if ($intendedUrl) {
+                        return redirect()->intended($intendedUrl);
+                    }
                     return redirect()->route('home');
                 } else {
                     return redirect()->back()
@@ -42,7 +49,7 @@ class AuthenticateController extends Controller
                     ->withInput()->with('loginError', 'Sai tài khoản hoặc mật khẩu');
             }
         } catch (Exception $e) {
-            return back()->with('loginError', 'Có gì đó sai sai');
+            return back()->with('loginError', 'Sai tài khoản hoặc mật khẩu');
         }
     }
 

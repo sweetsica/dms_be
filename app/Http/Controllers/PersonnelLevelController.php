@@ -11,7 +11,7 @@ class PersonnelLevelController extends Controller
 
     public function index(Request $request){
         $search = $request->get('search');
-        $personnelLevelList = PersonnelLevel::where("personnel_level.code", "like", "%$search%")->paginate(5);
+        $personnelLevelList = PersonnelLevel::where("personnel_level.code", "like", "%$search%")->orWhere("personnel_level.name", "like", "%$search%")->paginate(10);
         $departmentListTree = Position::where('parent',0)->with('donViCon')->get();
         return view("cap_nhan_su.index",[
             "personnelLevelList"=>$personnelLevelList,
@@ -51,4 +51,14 @@ class PersonnelLevelController extends Controller
         PersonnelLevel::destroy($id);
         return redirect()->back()->with('mess', 'Đã xóa !');;
     }
+
+    public function delete(Request $request)
+    {
+        // Department::destroy($id);
+        $selectedItems = $request->input('selected_items', []);
+        PersonnelLevel::whereIn('id', $selectedItems)->delete();
+        return redirect()->back()->with('mess', 'Đã xóa!');
+        ;
+    }
+
 }

@@ -8,7 +8,7 @@
         2 => 'Đã duyệt',
         3 => 'Đã từ chối',
     ];
-    
+
     function isFiltering($filterNames)
     {
         $filters = request()->query();
@@ -19,21 +19,21 @@
         }
         return false;
     }
-    
+
     function getPaginationLink($link, $pageName)
     {
         if (!isset($link->url)) {
             return '#';
         }
-    
+
         $pageNumber = explode('?page=', $link->url)[1];
         //get all query params
         $queryString = request()->query();
-    
+
         $queryString[$pageName] = $pageNumber;
         return route('freeProposal.list', $queryString);
     }
-    
+
 @endphp
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')

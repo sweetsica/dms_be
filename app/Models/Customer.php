@@ -15,8 +15,14 @@ class Customer extends Model
    protected $fillable = [
        'code',
        'name',
+       'type',
+       'class',
        'phone',
        'email',
+       'category',
+       'zalo',
+       'note',
+       'website',
        'personContact',
        'companyName',
        'career',
@@ -32,9 +38,13 @@ class Customer extends Model
        'personId',
        'productId',
        'routeId',
-       'groupId',
+       'group',
        'chanelId',
        'status',
+       'coordinatesX',
+       'coordinatesY',
+       'filePath',
+       'fileName',
    ];
 
     public function route()
@@ -44,7 +54,7 @@ class Customer extends Model
 
     public function products()
     {
-        $productIds = json_decode($this->productId);
+        $productIds = json_decode($this->productId) ?? [];
 
         return Product::whereIn('id', $productIds)->get();
     }
