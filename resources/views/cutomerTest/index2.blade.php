@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"
         integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"
+        integrity="sha512-wR4oNhLBHf7smjy0K4oqzdWumd+r5/+6QO/vDda76MW5iug4PT7v86FoEkySIJft3XA0Ae6axhIvHrqwm793Nw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 @endsection
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
@@ -16,7 +21,6 @@
             <div class="main">
                 <div class="container">
                     <div class="mainSection_heading">
-
                         <h5 class="mainSection_heading-title">Chi tiết khách hàng</h5>
                         @include('template.components.sectionCard')
                     </div>
@@ -24,8 +28,8 @@
                         <div class="card-body card-warpper">
                             <div class="container">
                                 {{-- Title Header --}}
-                                <div class="d-flex align-items-center justify-content-between mt-3">
-                                    <h1 class="text-color_pimary">CÔNG TY CỔ PHẦN ABC VIỆT NAM - ABC</h1>
+                                <div class="d-flex align-items-center justify-content-between my-3">
+                                    <h1 class="text-color_pimary fs-3">CÔNG TY CỔ PHẦN ABC VIỆT NAM - ABC</h1>
                                     <div>
                                         <button class="btn btn-outline-danger me-3">Về danh sách</button>
                                         <button class="btn btn-danger">Tạo đơn hàng</button>
@@ -34,90 +38,94 @@
 
                                 {{-- Thông tin liên hệ --}}
                                 <div class="row">
-                                    <div class="col-lg-4">
-                                        <div class="container">
-                                            <div class="mb-4">
-                                                <div class="mySlides">
-                                                    <img src="{{ asset('assets/img/oto-1.png') }}" style="width:100%">
-                                                </div>
-
-                                                <div class="mySlides">
-                                                    <img src="{{ asset('assets/img/oto-2.png') }}" style="width:100%">
-                                                </div>
-
-                                                <div class="mySlides">
-                                                    <img src="{{ asset('assets/img/oto-3.png') }}" style="width:100%">
-                                                </div>
-
-                                                <div class="mySlides">
-                                                    <img src="{{ asset('assets/img/oto-4.png') }}" style="width:100%">
+                                    <div class="col-lg-5">
+                                        <div class="row g-4">
+                                            <div class="col-lg-12">
+                                                <div class="slider slider-single">
+                                                    <div>
+                                                        <img class="img-slider" src="{{ asset('assets/img/oto-1.png') }}" />
+                                                    </div>
+                                                    <div>
+                                                        <img class="img-slider" src="{{ asset('assets/img/oto-2.png') }}" />
+                                                    </div>
+                                                    <div>
+                                                        <img class="img-slider" src="{{ asset('assets/img/oto-3.png') }}" />
+                                                    </div>
+                                                    <div>
+                                                        <img class="img-slider" src="{{ asset('assets/img/oto-4.png') }}" />
+                                                    </div>
                                                 </div>
                                             </div>
 
-                                            <div class="row g-1">
-                                                <div class="col-lg-3">
-                                                    <img class="demo cursor" src="{{ asset('assets/img/oto-1.png') }}"
-                                                        style="width:100%" onclick="currentSlide(1)" alt="The Woods">
+                                            <div class="col-lg-12">
+                                                <div class="slider slider-nav">
+                                                    <div>
+                                                        <img src="{{ asset('assets/img/oto-1.png') }}"
+                                                            class="img-slider_nav" />
+                                                    </div>
+                                                    <div>
+                                                        <img src="{{ asset('assets/img/oto-2.png') }}"
+                                                            class="img-slider_nav" />
+                                                    </div>
+                                                    <div>
+                                                        <img src="{{ asset('assets/img/oto-3.png') }}"
+                                                            class="img-slider_nav" />
+                                                    </div>
+                                                    <div>
+                                                        <img src="{{ asset('assets/img/oto-4.png') }}"
+                                                            class="img-slider_nav" />
+                                                    </div>
                                                 </div>
-                                                <div class="col-lg-3">
-                                                    <img class="demo cursor" src="{{ asset('assets/img/oto-2.png') }}"
-                                                        style="width:100%" onclick="currentSlide(2)" alt="Cinque Terre">
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <img class="demo cursor" src="{{ asset('assets/img/oto-3.png') }}"
-                                                        style="width:100%" onclick="currentSlide(3)"
-                                                        alt="Mountains and fjords">
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <img class="demo cursor" src="{{ asset('assets/img/oto-4.png') }}"
-                                                        style="width:100%" onclick="currentSlide(4)" alt="Northern Lights">
-                                                </div>
-
                                             </div>
+
                                         </div>
-
                                     </div>
-                                    <div class="col-lg-8">
+                                    <div class="col-lg-7">
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <div class="d-flex align-items-center justify-content-between">
+                                                <div class="d-flex justify-content-between">
                                                     <span>
-                                                        <h2 class="text-color_pimary fs-3 mb-4">Thông tin liên hệ</h2>
+                                                        <h2 class="text-color_pimary fs-3 mb-4">Thông tin liên
+                                                            hệ</h2>
                                                         <div class="layout_120">
                                                             <span class="fw-bold fs-4">Người liên hệ:</span>
-                                                            <input class="input-contact" value="Hà Anh" />
+                                                            <span class="fs-4">Hà Anh</span>
                                                         </div>
                                                     </span>
                                                     <img src="{{ asset('assets/img/Qr-code.png') }}"
-                                                        style="width: 104px; height: 104px;" />
+                                                        style="width: 65px; height: 65px;" />
                                                 </div>
                                             </div>
 
-                                            <div class="col-lg-12">
+                                            <div class="col-lg-12 mt-4">
                                                 <div class="layout_120">
                                                     <span class="fw-bold fs-4">Email:</span>
-                                                    <input class="input-contact" value="haanhvt@gmail.com" />
+                                                    <span class="fs-4">haanhvt@gmail.com</span>
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-12 mt-4">
                                                 <div class="layout_120">
                                                     <span class="fw-bold fs-4">Số điện thoại:</span>
-                                                    <input class="input-contact" value="0989099088" />
+                                                    <span class="fs-4">0989099088</span>
                                                 </div>
                                             </div>
 
-                                            <div class="col-lg-6 mt-4">
+                                            <div class="col-lg-5 mt-4">
                                                 <div class="layout_120">
                                                     <span class="fw-bold fs-4">Giai đoạn:</span>
-                                                    <input class="input-contact text-color_pimary" value="Trinh sát" />
+                                                    <span class="fs-4 text-color_pimary">Trinh sát</span>
                                                 </div>
                                             </div>
 
-                                            <div class="col-lg-6 mt-4">
-                                                <div class="layout_120">
-                                                    <span class="fw-bold fs-4">Tỷ lệ thành công:</span>
-                                                    <input class="input-contact" value="Tỷ lệ thành công:" />
+                                            <div class="col-lg-7 mt-4">
+                                                <div class="row">
+                                                    <div class="col-lg-6 ">
+                                                        <span class="fw-bold fs-4 title-contact">Tỷ lệ:</span>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <span class="fs-4">100%</span>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -137,299 +145,221 @@
                                                     <input type="file" class="form-control" id="attachment"
                                                         name="attachment" style="display: none">
                                                     <i class="bi bi-link-45deg text-color_pimary fs-3 fw-bold"></i>
-                                                    <label class="input-label text-color_pimary fs-4 fw-bold"
-                                                        for="attachment" style="cursor: pointer">Đính kèm file</label>
+                                                    <label class="input-label text-color_pimary fs-4 fw-bold ms-2"
+                                                        for="attachment" style="cursor: pointer">Đính kèm
+                                                        file</label>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                {{-- <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6 col-md-offset-3">
-                                            <div id="aniimated-thumbnials" class="slider-for">
-                                                <a href="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg">
-                                                    <img
-                                                        src="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg" />
-                                                </a>
-                                                <a href="http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_b.jpg">
-                                                    <img
-                                                        src="http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_b.jpg" />
-                                                </a>
-                                                <a href="http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_b.jpg">
-                                                    <img
-                                                        src="http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_b.jpg" />
-                                                </a>
-                                                <a href="http://farm9.staticflickr.com/8383/8563475581_df05e9906d_b.jpg">
-                                                    <img
-                                                        src="http://farm9.staticflickr.com/8383/8563475581_df05e9906d_b.jpg" />
-                                                </a>
-                                            </div>
-
-                                            <div class="slider-nav">
-                                                <div class="item-slick">
-                                                    <img src="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg"
-                                                        alt="Alt">
-                                                </div>
-                                                <div class="item-slick">
-                                                    <img src="http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_b.jpg"
-                                                        alt="Alt">
-                                                </div>
-                                                <div class="item-slick">
-                                                    <img src="http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_b.jpg"
-                                                        alt="Alt">
-                                                </div>
-                                                <div class="item-slick">
-                                                    <img src="http://farm9.staticflickr.com/8383/8563475581_df05e9906d_b.jpg"
-                                                        alt="Alt">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
-                                {{-- <div class="container">
-                                    <div class="rev_slider">
-                                        <div class="rev_slide">
-                                            <div class="img-slide">
-                                                <img
-                                                    src="https://images.pexels.com/photos/842711/pexels-photo-842711.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
-                                            </div>
-                                        </div>
-
-                                        <div class="rev_slide">
-                                            <div class="img-slide">
-                                                <img
-                                                    src="https://images.pexels.com/photos/1525041/pexels-photo-1525041.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
-                                            </div>
-                                        </div>
-                                        <div class="rev_slide">
-                                            <div class="img-slide">
-                                                <img
-                                                    src="https://images.pexels.com/photos/1379636/pexels-photo-1379636.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <div class="row ">
-                                        <div class="col-lg-12">
-                                            <div class="layout_120">
-                                                <span class="fw-bold text-content">Người liên
-                                                    hệ:</span>
-                                                <input class="input-contact" value="Nguyễn Phương Thuận" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row ">
-                                        <div class="col-lg-6 mt-4">
-                                            <div class="layout_120">
-                                                <span class="fw-bold text-content">Số điện thoại:</span>
-                                                <input class="input-contact" value="12345789" />
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 mt-4">
-                                            <div class="layout_120">
-                                                <span class="fw-bold text-content">
-                                                    Email:</span>
-                                                <input class="input-contact" value="npthuan2000@gmail.com" />
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 mt-4">
-                                            <div class="layout_120">
-                                                <span class="fw-bold text-content">Giai đoạn:</span>
-                                                <input class="input-contact" value="Giai đoạn 1" />
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 mt-4">
-                                            <div class="layout_120">
-                                                <span class="fw-bold text-content">Tỷ lệ thành công:
-                                                </span>
-                                                <input class="input-contact" value="100%" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
                             </div>
 
                             <div class="viewport mt-5">
-                                <ul class="tabs">
-                                    <li class="label-item">
-                                        <input type="radio" name="tab" id="playlists" value="playlists" checked>
-                                        <label class="label-info header_menu-link" for="playlists">
-                                            Thông tin chi tiết
-                                        </label>
-                                        <div class="tabBody">
-                                            <div class="container">
-                                                {{-- Thông tin chung --}}
-                                                <div class="my-3 wapper-contact">
-                                                    <h2 class="text-color_pimary fs-3">1. Thông tin chung</h2>
-                                                    <div class="row mt-5">
-                                                        <div class="col-lg-4">
-                                                            <div class="layout_120">
-                                                                <span class="fw-bold fs-4">Tên khách hàng:</span>
-                                                                <input class="input-contact" value="Công ty cp abc" />
+                                <div class="container">
+                                    <ul class="tabs">
+                                        <li class="label-item">
+                                            <input type="radio" name="tab" id="playlists" value="playlists"
+                                                checked>
+                                            <label class="label-info header_menu-link" for="playlists">
+                                                Thông tin chi tiết
+                                            </label>
+                                            <div class="tabBody">
+                                                <div class="container">
+                                                    {{-- Thông tin chung --}}
+                                                    <div class="my-3 wapper-contact mt-5">
+                                                        <h2 class="text-color_pimary fs-3">1. Thông tin chung</h2>
+                                                        <div class="row mt-5">
+                                                            <div class="col-lg-5">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold fs-4">Tên KH:</span>
+                                                                    <span class="fs-4">Công ty cp abc</span>
+                                                                </div>
                                                             </div>
-                                                        </div>
 
-                                                        <div class="col-lg-4">
-                                                            <div class="layout_120">
-                                                                <span class="fw-bold fs-4">Số điện
-                                                                    thoại:</span>
-                                                                <input class="input-contact" value="0989099088" />
+                                                            <div class="col-lg-3">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold fs-4">Số điện
+                                                                        thoại:</span>
+                                                                    <span class="fs-4">0989099088</span>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="layout_120">
-                                                                <span class="fw-bold fs-4">Email:</span>
-                                                                <input class="input-contact" value="haanhvt@gmail.com" />
+                                                            <div class="col-lg-4">
+                                                                <div class="row g-0 ">
+                                                                    <div class="col-lg-5">
+                                                                        <span
+                                                                            class="fw-bold fs-4 title-contact">Email:</span>
+                                                                    </div>
+                                                                    <div class="col-lg-7 text-end">
+                                                                        <span class="fs-4">haanhvt@gmail.com</span>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                {{-- Tổ chức --}}
-                                                <div class="mb-3 wapper-contact">
-                                                    <h2 class="text-color_pimary fs-3">2. Tổ chức</h2>
-                                                    </h2>
-                                                    <div class="row mt-5">
-                                                        <div class="col-lg-4">
-                                                            <div class="layout_120">
-                                                                <span class="fw-bold fs-4">Tên công ty:</span>
-                                                                <input class="input-contact" value="Công ty cp abc" />
+                                                    {{-- Tổ chức --}}
+                                                    <div class="mb-3 wapper-contact">
+                                                        <h2 class="text-color_pimary fs-3">2. Tổ chức</h2>
+                                                        </h2>
+                                                        <div class="row mt-3">
+                                                            <div class="col-lg-5">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold fs-4">Tên công ty:</span>
+                                                                    <span class="fs-4">Công ty cp abc</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold fs-4">SĐT công ty:</span>
+                                                                    <span class="fs-4">0989099088</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="row g-0">
+                                                                    <div class="col-lg-5 ">
+                                                                        <span class="fw-bold fs-4 title-contact">Email công
+                                                                            ty:</span>
+                                                                    </div>
+                                                                    <div class="col-lg-7 text-end">
+                                                                        <span class="fs-4">haanhvt@gmail.com</span>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="layout_120">
-                                                                <span class="fw-bold fs-4">SĐT công ty:</span>
-                                                                <input class="input-contact" value="0989099088" />
+
+                                                        <div class="row mt-3">
+                                                            <div class="col-lg-5 mt-4">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold fs-4">Mã số thuế:</span>
+                                                                    <span class="fs-4">0107465382</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3 mt-4">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold fs-4">Đại diện:</span>
+                                                                    <span class="fs-4">Trần Minh Nam</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4 mt-4">
+                                                                <div class="row g-0">
+                                                                    <div class="col-lg-5">
+                                                                        <span class="fw-bold fs-4 title-contact">Chức
+                                                                            danh:</span>
+                                                                    </div>
+                                                                    <div class="col-lg-7 text-end">
+                                                                        <span class="fs-4">Giám đốc</span>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="layout_120">
-                                                                <span class="fw-bold fs-4">Email công ty:</span>
-                                                                <input class="input-contact" value="haanhvt@gmail.com" />
+
+                                                        <div class="row mt-3">
+                                                            <div class="col-lg-5 mt-4">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold fs-4">Số tài khoản:</span>
+                                                                    <span class="fs-4">103988291</span>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-lg-4 mt-5">
-                                                            <div class="layout_120">
-                                                                <span class="fw-bold fs-4">Mã số thuế:</span>
-                                                                <input class="input-contact" value="0107465382" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4 mt-5">
-                                                            <div class="layout_120">
-                                                                <span class="fw-bold fs-4">Đại diện:</span>
-                                                                <input class="input-contact" value="Trần Minh Nam" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4 mt-5">
-                                                            <div class="layout_120">
-                                                                <span class="fw-bold fs-4">Chức danh:</span>
-                                                                <input class="input-contact" value="Giám đốc" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4 mt-5">
-                                                            <div class="layout_120">
-                                                                <span class="fw-bold fs-4">Số tài khoản:</span>
-                                                                <input class="input-contact" value="103988291" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-8 mt-5">
-                                                            <div class="layout_120">
-                                                                <span class="fw-bold fs-4">Ngân hàng:</span>
-                                                                <input class="input-contact"
-                                                                    value="Ngân hàng TMCP Việt Nam Thịnh vượng - Chinh nhánh Hà Nội" />
+                                                            <div class="col-lg-7 mt-4">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold fs-4">Ngân hàng:</span>
+                                                                    <span class="fs-4">Ngân hàng TMCP Việt Nam
+                                                                        Thịnh vượng -
+                                                                        Chinh nhánh Hà Nội</span>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
 
 
-                                                <div class="row">
-                                                    <h2 class="text-color_pimary fs-3 pb-4">3. Địa chỉ</h2>
-                                                    {{-- Địa chỉ --}}
-                                                    <div class="col-lg-4">
-                                                        <div class="mb-3 wapper-contact">
+                                                    <div class="row">
+                                                        <h2 class="text-color_pimary fs-3 pb-4">3. Địa chỉ</h2>
+                                                        {{-- Địa chỉ --}}
+                                                        <div class="col-lg-5">
+                                                            <div class="mb-3 wapper-contact">
+                                                                <div class="row">
+                                                                    <div class="col-lg-12">
+                                                                        <div class="layout_120">
+                                                                            <span class="fw-bold fs-4">Tỉnh/thành:</span>
+                                                                            <span class="fs-4">Hà Nội</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-12 mt-4">
+                                                                        <div class="layout_120">
+                                                                            <span class="fw-bold fs-4">Quận/huyện:</span>
+                                                                            <span class="fs-4">Cầu Giấy</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-12 mt-4">
+                                                                        <div class="layout_120">
+                                                                            <span class="fw-bold fs-4">Phường/xã:</span>
+                                                                            <span class="fs-4">Yên Hòa</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            {{-- Mô tả --}}
+                                                            <div class="mb-3 wapper-contact">
+                                                                <div class="row">
+                                                                    <h2 class="text-color_pimary fs-3">4. Mô tả
+                                                                    </h2>
+                                                                    <div class="col-lg-12 mt-4">
+                                                                        <div class="layout_120">
+                                                                            <span class="fw-bold fs-4">NS thu
+                                                                                thập:</span>
+                                                                            <span class="fs-4">Admin</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-12 mt-4">
+                                                                        <div class="layout_120">
+                                                                            <span class="fw-bold fs-4">SP quan
+                                                                                tâm:</span>
+                                                                            <span class="fs-4">Xe điện, xe
+                                                                                golf</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            {{-- Phân loại --}}
+                                                            <div class="row">
+                                                                <h2 class="text-color_pimary fs-3">5. Phân loại
+                                                                </h2>
+                                                                <div class="col-lg-12 mt-4">
+                                                                    <div class="layout_120">
+                                                                        <span class="fw-bold fs-4">Nhóm KH:</span>
+                                                                        <span class="fs-4">1,3</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-12 mt-4">
+                                                                    <div class="layout_120">
+                                                                        <span class="fw-bold fs-4">Kênh KH:</span>
+                                                                        <span class="fs-4">OTC</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-12 mt-4">
+                                                                    <div class="layout_120">
+                                                                        <span class="fw-bold fs-4">Tuyến:</span>
+                                                                        <span class="fs-4">Hà Nội - Thứ 2</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {{-- Địa chỉ và map --}}
+                                                        <div class="col-lg-7">
                                                             <div class="row">
                                                                 <div class="col-lg-12">
                                                                     <div class="layout_120">
-                                                                        <span class="fw-bold fs-4">Tỉnh/thành:</span>
-                                                                        <input class="input-contact" value="Hà Nội" />
+                                                                        <span class="fw-bold fs-4">Địa chỉ:</span>
+                                                                        <span class="fs-4">219 Trung Kính, Yên
+                                                                            Hòa, Cầu Giấy
+                                                                            ,Hà Nội</span>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-12 mt-4">
-                                                                    <div class="layout_120">
-                                                                        <span class="fw-bold fs-4">Quận/huyện:</span>
-                                                                        <input class="input-contact" value="Cầu Giấy" />
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-12 mt-4">
-                                                                    <div class="layout_120">
-                                                                        <span class="fw-bold fs-4">Phường/xã:</span>
-                                                                        <input class="input-contact" value="Yên Hòa" />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        {{-- Mô tả --}}
-                                                        <div class="mb-3 wapper-contact">
-                                                            <div class="row">
-                                                                <h2 class="text-color_pimary fs-3">4. Mô tả</h2>
-                                                                <div class="col-lg-12 mt-4">
-                                                                    <div class="layout_120">
-                                                                        <span class="fw-bold fs-4">NS thu thập:</span>
-                                                                        <input class="input-contact" value="Admin" />
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-12 mt-4">
-                                                                    <div class="layout_120">
-                                                                        <span class="fw-bold fs-4">SP quan tâm:</span>
-                                                                        <input class="input-contact"
-                                                                            value="Xe điện, xe golf" />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        {{-- Phân loại --}}
-                                                        <div class="row">
-                                                            <h2 class="text-color_pimary fs-3">5. Phân loại</h2>
-                                                            <div class="col-lg-12 mt-4">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold fs-4">Nhóm KH:</span>
-                                                                    <input class="input-contact" value="1,3" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-12 mt-4">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold fs-4">Kênh KH:</span>
-                                                                    <input class="input-contact" value="OTC" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-12 mt-4">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold fs-4">Tuyến:</span>
-                                                                    <input class="input-contact" value="Hà Nội - Thứ 2" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    {{-- Địa chỉ và map --}}
-                                                    <div class="col-lg-8">
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold fs-4">Địa chỉ:</span>
-                                                                    <input class="input-contact"
-                                                                        value="219 Trung Kính, Yên Hòa, Cầu Giấy ,Hà Nội" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-12 mt-4">
-                                                                <div>
-                                                                    <div id="map"
-                                                                        style="height: 345px; display: block;background: red">
+                                                                    <div id="map" class="border"
+                                                                        style="height: 345px; display: block">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -437,31 +367,33 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                    <li class="label-item">
-                                        <input type="radio" name="tab" id="artists" value="artists">
-                                        <label class=" label-info header_menu-link" for="artists">Chào
-                                            hàng</label>
-                                        <div class="tabBody">
+                                        </li>
+                                        <li class="label-item">
+                                            <input type="radio" name="tab" id="artists" value="artists">
+                                            <label class=" label-info header_menu-link" for="artists">Chào
+                                                hàng</label>
+                                            <div class="tabBody">
 
-                                        </div>
-                                    </li>
-                                    <li class="label-item">
-                                        <input type="radio" name="tab" id="albums" value="albums">
-                                        <label class="label-info header_menu-link" for="albums">Cơ hội</label>
-                                        <div class="tabBody">
+                                            </div>
+                                        </li>
+                                        <li class="label-item">
+                                            <input type="radio" name="tab" id="albums" value="albums">
+                                            <label class="label-info header_menu-link" for="albums">Cơ
+                                                hội</label>
+                                            <div class="tabBody">
 
-                                        </div>
-                                    </li>
-                                    <li class="label-item">
-                                        <input type="radio" name="tab" id="baogia" value="baogia">
-                                        <label class=" label-info header_menu-link" for="baogia">Báo giá</label>
-                                        <div class="tabBody">
+                                            </div>
+                                        </li>
+                                        <li class="label-item">
+                                            <input type="radio" name="tab" id="baogia" value="baogia">
+                                            <label class=" label-info header_menu-link" for="baogia">Báo
+                                                giá</label>
+                                            <div class="tabBody">
 
-                                        </div>
-                                    </li>
-                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -473,78 +405,22 @@
     @include('template.sidebar.sidebarMaster.sidebarRight')
 
     <style>
-        img {
-            vertical-align: middle;
+        .title-contact {
+            padding-left: 25px;
         }
 
-        /* Hide the images by default */
-        .mySlides {
-            display: none;
+        .img-slider {
+            width: 100%;
+            object-fit: cover;
+            height: 100%;
         }
 
-        /* Add a pointer when hovering over the thumbnail images */
-        .cursor {
-            cursor: pointer;
-        }
-
-        /* Next & previous buttons */
-        .prev,
-        .next {
-            cursor: pointer;
-            position: absolute;
-            top: 40%;
-            width: auto;
-            padding: 16px;
-            margin-top: -50px;
-            color: white;
-            font-weight: bold;
-            font-size: 20px;
-            border-radius: 0 3px 3px 0;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
-        /* Position the "next button" to the right */
-        .next {
-            right: 0;
-            border-radius: 3px 0 0 3px;
-        }
-
-        /* On hover, add a black background color with a little bit see-through */
-        .prev:hover,
-        .next:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        /* Number text (1/3 etc) */
-        .numbertext {
-            color: #f2f2f2;
-            font-size: 12px;
-            padding: 8px 12px;
-            position: absolute;
-            top: 0;
-        }
-
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-        }
-
-        /* Six columns side by side */
-        .column {
-            float: left;
-            width: 16.66%;
-        }
-
-        /* Add a transparency effect for thumnbail images */
-        .demo {
-            opacity: 0.6;
-        }
-
-        .active,
-        .demo:hover {
-            opacity: 1;
+        .img-slider_nav {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            margin-right: 10px;
+            padding: 12%;
         }
 
         .header_menu-link {
@@ -553,30 +429,6 @@
 
         .action_wrapper-search {
             position: relative;
-        }
-
-
-        .input-group {
-            position: relative;
-        }
-
-        .input-group .input-group-text {
-            background-color: #f8f9fa;
-            border: none;
-            padding: 0.375rem 0.75rem;
-            font-size: 1rem;
-        }
-
-        .form-control {
-            border: none;
-            border-radius: 0;
-            box-shadow: none;
-        }
-
-        .input-label {
-            margin-left: 10px;
-            line-height: calc(1.5em + 0.75rem + 2px);
-            font-size: 1rem;
         }
 
         #progress {
@@ -589,20 +441,23 @@
             text-align: center;
         }
 
-        #progress li {
-            float: left;
-            padding: 10px 30px 10px 40px;
-            background: #333;
-            color: #fff;
-            position: relative;
-            border-top: 1px solid #666;
-            border-bottom: 1px solid #666;
-            width: 16%;
-            margin: 0 1px;
-            font-size: 8px
+        #progress li:first-child {
+            border-radius: 20px 0 0 20px;
         }
 
-        #progress li:before {
+        #progress li {
+            float: left;
+            padding: 10px 10px 10px 10px;
+            background: #c1c4c1;
+            color: #fff;
+            position: relative;
+            width: calc(16% - 1px);
+            margin: 0 1px;
+            font-size: 12px;
+        }
+
+
+        #progress li:nth-child(n + 2):before {
             content: '';
             border-left: 16px solid #fff;
             border-top: 16px solid transparent;
@@ -615,9 +470,9 @@
 
         #progress li:after {
             content: '';
-            border-left: 16px solid #333;
+            border-left: 16px solid #c1c4c1;
             border-top: 16px solid transparent;
-            border-bottom: 16px solid transparent;
+            border-bottom: 15px solid transparent;
             position: absolute;
             top: 0;
             left: 100%;
@@ -625,11 +480,11 @@
         }
 
         #progress li.active {
-            background: #555;
+            background: #46ab2b;
         }
 
         #progress li.active:after {
-            border-left-color: #555;
+            border-left-color: #46ab2b;
         }
 
         .wapper-contact {
@@ -637,23 +492,6 @@
             border-bottom: 1px solid #07060633;
         }
 
-        .img-header {
-            width: 40%;
-            height: auto;
-            margin: auto
-        }
-
-        .title-hearder {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 3.5rem;
-        }
-
-        .input-item {
-            width: 200px !important;
-        }
 
         .card-body {
             padding: 15px 30px 30px 30px !important;
@@ -663,21 +501,9 @@
             color: var(--primary-color);
         }
 
-        .text-title_header {
-            font-size: 2rem
-        }
-
-        .text-content {
-            font-size: 1.6rem
-        }
-
-        .title-pdf {
-            font-size: 1.5rem
-        }
-
         .layout_120 {
             display: grid;
-            grid-template-columns: 120px auto;
+            grid-template-columns: 100px auto;
         }
 
         .layout_90 {
@@ -694,28 +520,8 @@
             display: grid;
             grid-template-columns: auto auto;
         }
-
-        .input-contact {
-            border-top: none !important;
-            border-left: none !important;
-            border-right: none !important;
-            border-bottom: none !important;
-            /* border-bottom: 1px solid #969393 !important; */
-            line-height: 15px;
-            width: 100%;
-            font-size: 1.5rem;
-        }
-
-        .input-contact:focus {
-            outline: none !important;
-            border-top: none !important;
-            border-left: none !important;
-            border-right: none !important;
-            border-bottom: none !important;
-            /* border-bottom: 1px solid #969393 !important; */
-            box-shadow: none !important;
-        }
     </style>
+
 
 
 @section('footer-script')
@@ -747,107 +553,32 @@
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/components/dataHrefTable.js') }}"></script>
+
+    {{-- Slick --}}
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"
         integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
     <script>
-        // Show Slider
-        let slideIndex = 1;
-        showSlides(slideIndex);
-
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
-        }
-
-        function currentSlide(n) {
-            showSlides(slideIndex = n);
-        }
-
-        function showSlides(n) {
-            let i;
-            let slides = document.getElementsByClassName("mySlides");
-            let dots = document.getElementsByClassName("demo");
-            let captionText = document.getElementById("caption");
-            if (n > slides.length) {
-                slideIndex = 1
-            }
-            if (n < 1) {
-                slideIndex = slides.length
-            }
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
-            }
-            slides[slideIndex - 1].style.display = "block";
-            dots[slideIndex - 1].className += " active";
-            captionText.innerHTML = dots[slideIndex - 1].alt;
-        }
-
-        $('.slider').owlCarousel({
-            loop: true,
-            margin: 10,
-            items: 1,
+        $(".slider-single").slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            fade: true,
+            useTransform: false,
+            asNavFor: ".slider-nav",
+        });
+        $(".slider-nav").slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            asNavFor: ".slider-single",
             dots: false,
-            URLhashListener: true
-        })
-        $('.slider2').owlCarousel({
-            loop: true,
-            margin: 10,
-            nav: true,
-            items: 3,
-            dots: false,
-            center: true,
-            URLhashListener: true
-        })
-
-        // var rev = $('.rev_slider');
-        // rev.on('init', function(event, slick, currentSlide) {
-        //     var
-        //         cur = $(slick.$slides[slick.currentSlide]),
-        //         next = cur.next(),
-        //         prev = cur.prev();
-        //     prev.addClass('slick-sprev');
-        //     next.addClass('slick-snext');
-        //     cur.removeClass('slick-snext').removeClass('slick-sprev');
-        //     slick.$prev = prev;
-        //     slick.$next = next;
-        // }).on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-        //     //console.log('beforeChange');
-        //     var
-        //         cur = $(slick.$slides[nextSlide]);
-        //     //console.log(slick.$prev, slick.$next);
-        //     slick.$prev.removeClass('slick-sprev');
-        //     slick.$next.removeClass('slick-snext');
-        //     next = cur.next(),
-        //         prev = cur.prev();
-        //     prev.prev();
-        //     prev.next();
-        //     prev.addClass('slick-sprev');
-        //     next.addClass('slick-snext');
-        //     slick.$prev = prev;
-        //     slick.$next = next;
-        //     cur.removeClass('slick-next').removeClass('slick-sprev');
-        // });
-
-        // rev.slick({
-        //     speed: 1000,
-        //     arrows: true,
-        //     dots: false,
-        //     focusOnSelect: true,
-        //     prevArrow: '<button> prev</button>',
-        //     nextArrow: '<button> next</button>',
-        //     infinite: true,
-        //     centerMode: true,
-        //     slidesPerRow: 1,
-        //     slidesToShow: 1,
-        //     slidesToScroll: 1,
-        //     centerPadding: '0',
-        //     swipe: true,
-        //     customPaging: function(slider, i) {
-        //         return '';
-        //     },
-        // });
+            focusOnSelect: true,
+            arrows: true,
+            prevArrow: '<button type="button" class="slick-prev bg-transparent" style="position: absolute;left: -3%; top: 40%; z-index: 9;"><i class="bi bi-arrow-left-short fs-2 text-color_pimary"></i></button>',
+            nextArrow: '<button type="button" class="slick-prev bg-transparent" style="position: absolute;right: -3%; top: 40%; z-index: 9;"><i class="bi bi-arrow-right-short fs-2 text-color_pimary"></i></button>'
+        });
     </script>
 @endsection
