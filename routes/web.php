@@ -48,6 +48,10 @@ Route::middleware(['guest'])->group(function () {
     Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
 });
 
+Route::get('/test-customer-1', [CustomerTestController::class, 'index1'])->name('index1');
+Route::get('/test-customer-2', [CustomerTestController::class, 'index2'])->name('index2');
+Route::get('/test-customer-3', [CustomerTestController::class, 'index3'])->name('index3');
+
 Route::middleware(['auth.role'])->group(function () {
 
     Route::get('/', function () {
