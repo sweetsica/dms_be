@@ -17,7 +17,7 @@
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
     <div id="mainWrap" class="mainWrap">
-        <div class="mainSection">
+        <div class="mainSection" style="height: 145rem">
             <div class="main">
                 <div class="container">
                     <div class="mainSection_heading">
@@ -28,12 +28,9 @@
                         <div class="card-body card-warpper">
                             <div class="container">
                                 {{-- Title Header --}}
-                                <div class="d-flex align-items-center justify-content-between my-3">
+                                <div class="d-flex align-items-center justify-content-start my-3">
                                     <h1 class="text-color_pimary fs-3">CÔNG TY CỔ PHẦN ABC VIỆT NAM - ABC</h1>
-                                    <div>
-                                        <button class="btn btn-outline-danger me-3">Về danh sách</button>
-                                        <button class="btn btn-danger">Tạo đơn hàng</button>
-                                    </div>
+
                                 </div>
 
                                 {{-- Thông tin liên hệ --}}
@@ -159,8 +156,7 @@
                                 <div class="container">
                                     <ul class="tabs">
                                         <li class="label-item">
-                                            <input type="radio" name="tab" id="playlists" value="playlists"
-                                                checked>
+                                            <input type="radio" name="tab" id="playlists" value="playlists" checked>
                                             <label class="label-info header_menu-link" for="playlists">
                                                 Thông tin chi tiết
                                             </label>
@@ -396,6 +392,12 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-end">
+                        <button class="btn btn-danger me-3 px-5">In</button>
+                        <button class="btn btn-outline-danger me-3">Về danh sách</button>
+                        <button class="btn btn-danger">Tạo đơn hàng</button>
                     </div>
                 </div>
             </div>
