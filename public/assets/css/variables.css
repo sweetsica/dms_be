@@ -180,7 +180,7 @@ body.modal-open {
 
 .background_white {
     background-color: #ffff !important;
-    
+
 }
 
 .settable {
@@ -193,22 +193,22 @@ body.modal-open {
 
 .background_pink {
     background-color: rgba(246, 201, 196, 1) !important;
-    
+
 }
 
 .background_green2 {
     background-color: #bbf7d0 !important;
-    
+
 }
 
 .background_yellow {
     background-color: #fef08a !important;
-    
+
 }
 
 .background_blue {
     background-color: #bfdbfe !important;
-    
+
 }
 
 
@@ -316,10 +316,10 @@ option:hover,
     border-spacing: 0;
 }
 
-svg {
+/* svg {
     width: 100% !important;
     height: 100% !important;
-}
+} */
 
 /* DATA TABLES */
 .dataTables_length {
@@ -703,5 +703,5 @@ body.modal-open {
         max-width: 100%;
         padding: 0!important;
     }
-    
-}   
+
+}

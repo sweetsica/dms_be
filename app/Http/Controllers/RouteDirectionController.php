@@ -39,14 +39,31 @@ class RouteDirectionController extends Controller
 
         try {
             $q = $request->query('q');
+            $diaban = $request->query('diaban');
+            $nhansupt = $request->query('nhansupt');
             $limit = 10;
-            $listRoute = RouteDirection::query();
+            $listRoute = RouteDirection::query()->with('personnel', 'areas');
             if ($q) {
                 $listRoute = $listRoute->where('code', 'like', '%' . $q . '%')
-                    ->orWhere('name', 'like', '%' . $q . '%');
+                    ->orWhere('name', 'like', '%' . $q . '%')
+                    ->orWhereHas('personnel', function ($routeQuery) use ($q) {
+                        $routeQuery->where('name', 'like', '%' . $q . '%');
+                    })
+                    ->orWhereHas('areas', function ($routeQuery) use ($q) {
+                        $routeQuery->where('name', 'like', '%' . $q . '%');
+                    });
             }
-
-            $listRoute = $listRoute->with('personnel', 'areas')->orderByDesc('id')->paginate($limit);
+            if ($diaban) {
+                $listRoute = $listRoute->whereHas('areas', function ($customerQuery) use ($diaban) {
+                    $customerQuery->where('name', 'like', '%' . $diaban . '%');
+                });
+            }
+            if ($nhansupt) {
+                $listRoute = $listRoute->whereHas('personnel', function ($customerQuery) use ($nhansupt) {
+                    $customerQuery->where('name', 'like', '%' . $nhansupt . '%');
+                });
+            }
+            $listRoute = $listRoute->orderByDesc('id')->paginate($limit);
 
             $listNS = Personnel::all();
 
@@ -54,21 +71,18 @@ class RouteDirectionController extends Controller
 
             $pagination = $this->pagination($listRoute);
 
-            return view('RouteDirection.danhSachTuyen')->with(compact(
-                "listRoute",
-                "listLocality",
-                "listNS",
-                "pagination"
-            ));
-        } catch (Exception $e) {
+            return view('RouteDirection.danhSachTuyen')->with(
+                compact(
+                    "listRoute",
+                    "listLocality",
+                    "listNS",
+                    "pagination"
+                )
+            );
+        } catch (\Exception $e) {
             Session::flash('error', $e);
             return back();
         }
-    }
-
-    public function showMap($id)
-    {
-        return view('map', ['id' => $id]);
     }
 
     public function store(Request $request)
@@ -96,7 +110,7 @@ class RouteDirectionController extends Controller
             return redirect()->back()->withInput();
         }
     }
-    
+
     public function update(Request $request, $id)
     {
         try {
@@ -131,12 +145,65 @@ class RouteDirectionController extends Controller
         $route->delete();
 
         Session::flash('success', "Xoá tuyến thành công");
-        return back();
+        return redirect()->route('routeDirection.view');
     }
 
     public function getAll()
     {
         $routeList = RouteDirection::all();
         return $routeList;
+    }
+
+    public function getInfo($routeId)
+    {
+        $route = RouteDirection::find($routeId);
+        $routeList = RouteDirection::join('personnel', 'personnel.id', '=', 'route_directions.personId')
+            ->join('locality', 'locality.id', '=', 'route_directions.areaId')
+            ->select(
+                'personnel.name as personnel_name',
+                'locality.name as area_name'
+            )
+            ->where('route_directions.id', '=', $routeId)
+            ->get();
+        $customers = Customer::where('routeId', '=', $routeId)->get();
+        if (!$route) {
+            return response()->json(['message' => 'Không tìm thấy thông tin'], 404);
+        }
+        return view('RouteDirection.detailTuyen', [
+            'route' => $route,
+            'routeList' => $routeList,
+            'customers' => $customers
+        ]);
+    }
+
+    public function getCoordinatesDirection(Request $request, $routeId)
+    {
+        $customers = Customer::where('routeId', $routeId)->get();
+        if ($customers->isEmpty()) {
+            return response()->json(['error' => 'Không tìm thấy khách hàng với routeId cụ thể'], 404);
+        }
+        $coordinates = [];
+        foreach ($customers as $customer) {
+            $address = $customer->address;
+            $status = $customer->status;
+            $encodedAddress = urlencode($address);
+            $nominatimUrl = 'https://nominatim.openstreetmap.org/search?q=' . $encodedAddress . '&format=json';
+            $response = Http::get($nominatimUrl);
+            if ($response->successful()) {
+                $jsonData = $response->json();
+                if (!empty($jsonData)) {
+                    $result = $jsonData[0];
+                    $lat = isset($result['lat']) ? (float) $result['lat'] : null;
+                    $lon = isset($result['lon']) ? (float) $result['lon'] : null;
+
+                    if ($lat !== null && $lon !== null) {
+                        $coordinates[] = ['lat' => $lat, 'lon' => $lon, 'status' => $status];
+                    }
+                }
+            } else {
+                return response()->json(['error' => 'Lỗi tìm vị trí'], 500);
+            }
+        }
+        return response()->json($coordinates);
     }
 }

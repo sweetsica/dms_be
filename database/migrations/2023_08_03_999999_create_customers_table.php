@@ -13,10 +13,10 @@ return new class extends Migration {
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->string('code', 255)->default(time());
+            $table->string('code', 255)->nullable()->default(time());
             $table->string('name', 255)->nullable();
-            $table->string('type')->default(0);
-            $table->string('class')->default(0);
+            $table->string('type')->nullable()->default(0);
+            $table->string('class')->nullable()->default(0);
             $table->string('phone', 255)->nullable();
             $table->string('email', 255)->nullable();
             $table->string('category')->nullable();
@@ -37,11 +37,14 @@ return new class extends Migration {
             $table->string('status', 255)->nullable()->default(1);
             $table->unsignedBigInteger('personId')->nullable();
             $table->text('productId')->nullable();
-            
+
             $table->string('city', 255)->nullable();
             $table->string('district', 255)->nullable();
             $table->string('guide', 255)->nullable();
             $table->string('address', 255)->nullable();
+            $table->text('coordinatesX')->nullable();
+            $table->text('coordinatesY')->nullable();
+
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
 //            $table->timestamp('created_at')->useCurrent();
@@ -50,6 +53,9 @@ return new class extends Migration {
             $table->foreign('routeId')->references('id')->on('route_directions')->onDelete('cascade');
             $table->foreign('chanelId')->references('id')->on('department')->onDelete('cascade');
             $table->foreign('personId')->references('id')->on('personnel')->onDelete('cascade');
+
+            $table->string('filePath', 255)->nullable();
+            $table->string('fileName', 255)->nullable();
         });
     }
 

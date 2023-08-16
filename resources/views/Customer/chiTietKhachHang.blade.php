@@ -11,7 +11,7 @@
     </style>
 @endsection
 @php
-    
+
 @endphp
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
@@ -20,7 +20,7 @@
             <div class="main">
                 <div class="container-fluid">
                     {{-- <div class="card_template-wrapper">
-                        
+
                     </div> --}}
                     <div class="mainSection_heading">
                         <h5 class="mainSection_heading-title">Chi tiết khách hàng</h5>
@@ -40,7 +40,14 @@
                                         </div>
 
                                         <div class="action_wrapper">
-
+                                            <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                aria-label="Về danh sách" data-bs-original-title="Về danh sách">
+                                                <form class="btn btn-outline-danger d-block testCreateUser" action="{{ route('customer.upload', ['id' => $customer->id]) }}" method="post" enctype="multipart/form-data">
+                                                    @csrf
+                                                    <input type="file" name="file[]" id="fileupload" multiple>
+                                                    <input type="submit" value="Đăng file" name="submit">
+                                                </form>
+                                            </div>
 
                                             <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                                 aria-label="Về danh sách" data-bs-original-title="Về danh sách">
@@ -119,6 +126,7 @@
                                                 </label>
                                                 <div class="tabBody">
                                                     <div class="row">
+
                                                         <div class="col-sm-12 card-title mt-3">1. Liên hệ</div>
                                                         <div class="col-4 mt-3">
                                                             <div class="card_template-title d-flex align-items-center">
@@ -334,10 +342,15 @@
                                                         </div>
 
                                                     </div>
-
-
-
-
+                                                    <div class="row">
+                                                        <div class="col-sm-12 card-title mt-3">6. File đính kèm</div>
+                                                        <div class="col-4 mt-3">
+                                                            @foreach(json_decode($customer->fileName) ?? [] as $file)
+                                                                <a href="{{ route('customer.download', ['id' => $customer->id, 'name' => $file]) }}">{{ $file }}</a>
+                                                                <br>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </li>
                                             <li class="label-item">
@@ -908,8 +921,8 @@
 
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}">
-        < /scrip> <
-        script type = "text/javascript"
+    </script>
+    <script type = "text/javascript"
         src = "{{ asset('/assets/js/components/dataHrefTable.js') }}" >
     </script>
 @endsection

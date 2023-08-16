@@ -8,21 +8,21 @@
     </style>
 @endsection
 @php
-    
+
     function getPaginationLink($link, $pageName)
     {
         if (!isset($link['url'])) {
             return '#';
         }
-    
+
         $pageNumber = explode('?page=', $link['url'])[1];
-    
+
         $queryString = request()->query();
-    
+
         $queryString[$pageName] = $pageNumber;
-        return route('version.list', $queryString);
+        return route('routeDirection.view', $queryString);
     }
-    
+
     // function isFiltering($filterNames)
     // {
     //     $filters = request()->query();
@@ -33,7 +33,7 @@
     //     }
     //     return false;
     // }
-    
+
 @endphp
 @section('content')
     @include('template.sidebar.sidebarDia_ban.sidebarLeft')
@@ -69,10 +69,13 @@
                                                 </form>
                                             </div>
 
-                                            {{-- <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Lọc">
-                                                <button class="btn btn-outline-danger {{ isFiltering(['department', 'user', 'adminDate']) ? 'active' : '' }}" data-bs-toggle="modal" data-bs-target="#filterAdmin"><i class="bi bi-funnel"></i>
+                                            <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Lọc">
+                                                <button class="btn btn-outline-danger" data-bs-toggle="modal"
+                                                    data-bs-target="#filterOptions">
+                                                    <i class="bi bi-funnel"></i>
                                                 </button>
-                                            </div> --}}
+                                            </div>
 
                                         </div>
                                         {{-- <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
@@ -81,12 +84,13 @@
                                                 href={{ route('print.dwtUser', ['date' => request()->userDate ?? date('m-Y')]) }}
                                                 class="btn-export"><i class="bi bi-download"></i></a>
                                         </div> --}}
-
+                                        @if ((session('user')['role_id'] == '1') || (session('user')['role_id'] == '2') )
                                         <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                             aria-label="Thêm tuyến" data-bs-original-title="Thêm tuyến">
                                             <button class="btn btn-danger d-block testCreateUser" data-bs-toggle="modal"
                                                 data-bs-target="#add">Thêm tuyến</button>
                                         </div>
+                                        @endif
                                     </div>
                                     <div class="table-responsive">
                                         <table id="dsDaoTao"
@@ -101,8 +105,9 @@
                                                     <th class="text-nowrap text-center" style="width:12%">Nhân sự phụ trách
                                                     </th>
                                                     <th class="text-nowrap text-center" style="width:10%">Số khách hàng</th>
+                                                    @if ((session('user')['role_id'] == '1') || (session('user')['role_id'] == '2') )
                                                     <th class="text-nowrap text-center" style="width:4%">Hành động</th>
-
+                                                    @endif
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -114,7 +119,7 @@
                                                             ->pluck('count', 'routeId');
                                                     @endphp
                                                     <tr class="table-row" data-bs-toggle="modal"
-                                                        data-bs-target="#info{{ $item->id }}" role="button">
+                                                    data-href="/route_direction_getInfo/{{ $item['id'] }}" role="button">
 
                                                         <td>
                                                             <div class="overText text-center">
@@ -155,6 +160,7 @@
                                                                 {{ $routeCounts[$item->id] ?? 0 }}
                                                             </div>
                                                         </td>
+                                                        @if ((session('user')['role_id'] == '1') || (session('user')['role_id'] == '2') )
                                                         <td>
                                                             <div class="table_actions d-flex justify-content-center">
                                                                 <div class="btn test_btn-edit-{{ $item['id'] }}"
@@ -173,6 +179,7 @@
 
 
                                                         </td>
+                                                        @endif
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -546,6 +553,51 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
                         <button type="submit" class="btn btn-danger">Lưu</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lọc  -->
+    <div class="modal fade" id="filterOptions" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Lọc dữ liệu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="" method="GET">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-original-title="Lọc theo địa bàn">
+                                    <select id="select-status" class="selectpicker select_filter"
+                                        data-dropup-auto="false" title="Lọc theo địa bàn" name='diaban'>
+                                        @foreach ($listLocality as $item)
+                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-original-title="Lọc theo nhân sự phụ trách">
+                                    <select id="select-status" class="selectpicker select_filter"
+                                        data-dropup-auto="false" title="Lọc theo nhân sự phụ trách" name='nhansupt'>
+                                        @foreach ($listNS as $item)
+                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="reset" class="btn btn-outline-danger">Làm
+                                mới</button>
+                            <button type="submit" class="btn btn-danger">Lọc</button>
+                        </div>
                     </div>
                 </form>
             </div>

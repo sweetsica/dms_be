@@ -100,8 +100,9 @@
                                                     <th class="text-nowrap text-center" style="width:4%">Ảnh sản phẩm</th>
                                                     <th class="text-nowrap text-center" style="width:6%">Phân loại</th>
                                                     <th class="text-nowrap text-center" style="width:6%">Thời gian</th>
-                                                    <th class="text-nowrap text-center" style="width:4%">Hành động</th>
-
+                                                    @if (session('user')['role_id'] == '1' || session('user')['role_id'] == '2')
+                                                        <th class="text-nowrap text-center" style="width:4%">Hành động</th>
+                                                    @endif
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -127,12 +128,11 @@
                                                         </td>
 
                                                         <td class="list_img">
-                                                            <div class="d-flex justify-content-center align-items-center"
-                                                                style="padding:10px">
+                                                            <div
+                                                                class=" img-product-item d-flex justify-content-center align-items-center"">
                                                                 <img class="" src="{{ $item->thumbnail }}" />
                                                             </div>
                                                         </td>
-
                                                         <td>
                                                             <div class="overText" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="{{ $item->type }}">
@@ -147,22 +147,28 @@
                                                                 {{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y') }}
                                                             </div>
                                                         </td>
-                                                        <td>
-                                                            <div class="table_actions d-flex justify-content-center">
-                                                                <div class="btn test_btn-edit-{{ $item->id }}"
-                                                                    href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#suaSanPham{{ $item->id }}">
-                                                                    <img style="width:16px;height:16px"
-                                                                        src="{{ asset('assets/img/edit.svg') }}" />
+                                                        @if (session('user')['role_id'] == '1' || session('user')['role_id'] == '2')
+                                                            <td>
+                                                                <div class="table_actions d-flex justify-content-center">
+                                                                    <div class="btn test_btn-edit-{{ $item->id }}"
+                                                                        href="#" data-bs-toggle="modal"
+                                                                        data-bs-target="#suaSanPham{{ $item->id }}">
+                                                                        <img data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top" title="Sửa sản phẩm"
+                                                                            style="width:16px;height:16px"
+                                                                            src="{{ asset('assets/img/edit.svg') }}" />
+                                                                    </div>
+                                                                    <div class="btn test_btn-remove-{{ $item->id }}"
+                                                                        href="#" data-bs-toggle="modal"
+                                                                        data-bs-target="#xoaSanPham{{ $item->id }}">
+                                                                        <img data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top" title="Xóa sản phẩm"
+                                                                            style="width:16px;height:16px"
+                                                                            src="{{ asset('assets/img/trash.svg') }}" />
+                                                                    </div>
                                                                 </div>
-                                                                <div class="btn test_btn-remove-{{ $item->id }}"
-                                                                    href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#xoaSanPham{{ $item->id }}">
-                                                                    <img style="width:16px;height:16px"
-                                                                        src="{{ asset('assets/img/trash.svg') }}" />
-                                                                </div>
-                                                            </div>
-                                                        </td>
+                                                            </td>
+                                                        @endif
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -226,37 +232,45 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form id="formThemCapPhat" method="POST"
-                        action="{{ route('product.update', ['id' => $item->id]) }}">
+                        action="{{ route('product.update', ['id' => $item->id]) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <input type="text" value="{{ $item->name }}" name="name"
-                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên sản phẩm"
-                                        placeholder="Tên sản phẩm" class="form-control">
+                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên sản phẩm*"
+                                        placeholder="Tên sản phẩm*" class="form-control">
                                 </div>
 
                                 <div class="col-md-6 mb-3">
                                     <input type="text" value="{{ $item->code }}" name="code"
-                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã sản phẩm"
-                                        placeholder="Mã sản phẩm" class="form-control">
+                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã sản phẩm*"
+                                        placeholder="Mã sản phẩm*" class="form-control">
                                 </div>
 
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Phân loại">
+                                    title="Phân loại*">
                                     <select name="type" required class="selectpicker" data-dropup-auto="false"
-                                        data-width="100%" title="Phân loại" data-size="3">
+                                        data-width="100%" data-size="3" data-live-search="true"
+                                        data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
+                                        data-live-search-placeholder="Tìm kiếm...">
                                         <option value="Sản phẩm" {{ $item->type == 'Sản phẩm' ? 'selected' : '' }}>Sản
                                             phẩm</option>
+                                        <option value="Phiên bản" {{ $item->type == 'Phiên bản' ? 'selected' : '' }}>Phiên
+                                            bản</option>
+                                        <option value="Tuỳ chọn" {{ $item->type == 'Tuỳ chọn' ? 'selected' : '' }}>Tuỳ
+                                            chọn</option>
                                         <option value="Vật tư MKT" {{ $item->type == 'Vật tư MKT' ? 'selected' : '' }}>Vật
                                             tư MKT</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Ngành hàng">
+                                    title="Ngành hàng*">
                                     <select name="branch" required class="selectpicker" data-dropup-auto="false"
-                                        data-width="100%" title="Ngành hàng" data-size="3">
+                                        data-width="100%" data-size="3" data-live-search="true"
+                                        data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
+                                        data-live-search-placeholder="Tìm kiếm...">
                                         <option value="Sản phẩm dẫn"
                                             {{ $item->branch == 'Sản phẩm dẫn' ? 'selected' : '' }}>Sản phẩm dẫn</option>
                                         <option value="Sản phẩm tư vấn"
@@ -271,37 +285,58 @@
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Trạng thái">
                                     <select required name="status" class="selectpicker" data-dropup-auto="false"
-                                        data-width="100%" data-live-search="true" title="Trạng thái"
-                                        data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
-                                        data-size="3" data-live-search-placeholder="Tìm kiếm...">
+                                        data-width="100%" data-live-search="true" data-select-all-text="Chọn tất cả"
+                                        data-deselect-all-text="Bỏ chọn" data-size="3"
+                                        data-live-search-placeholder="Tìm kiếm...">
                                         <option value="1" {{ $item->status == 1 ? 'selected' : '' }}>Hoạt động
                                         </option>
                                         <option value="0" {{ $item->status == 0 ? 'selected' : '' }}>Khoá</option>
                                     </select>
                                 </div>
-                                <div class="col-12 col-md-12 mb-3">
+
+                                <div class="col-md-6 mb-3">
+                                    <div class="d-flex flex-column">
+                                        <div class="upload_wrapper-items">
+                                            <input type="hidden" value="" />
+                                            <button role="button" type="button"
+                                                class="btn position-relative border d-flex w-100">
+                                                <img style="width:16px;height:16px"
+                                                    src="{{ asset('assets/img/upload-file.svg') }}" />
+                                                <span class="ps-2">Đính kèm tài liệu</span>
+                                                <input accept=".png, .jpeg, .jpg" role="button" type="file"
+                                                    class="modal_upload-input modal_upload-file" name="file"
+                                                    onchange="updateList(event)" />
+                                            </button>
+                                        </div>
+                                        <div class="alert alert-danger alertNotSupport" role="alert"
+                                            style="display:none">
+                                            File bạn tải lên hiện tại không hỗ trợ !
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
                                     <div class="card-title">File đã
                                         tải lên</div>
-                                    <div class="upload_wrapper-items">
-                                        <ul class="modal_upload-list"
-                                            style="max-height: 134px; overflow-y: scroll; overflow-x: hidden;">
-                                            <li>
-                                                <a href="#" target="_blank">
-                                                    <span class="fs-5">
-                                                        <i class="bi bi-link-45deg"></i>
-                                                        209-40.json
-                                                    </span>
+                                    <ul class="modal_upload-list"
+                                        style="max-height: 200px; overflow-y: scroll; overflow-x: hidden;">
+                                        <li>
+                                            @if ($item->thumbnail)
+                                                <a href="{{ $item->thumbnail }}" target="_blank" class="fs-5">
+                                                    <i class="bi bi-link-45deg"></i> Thumbnail sản phẩm
                                                 </a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                            @endif
+
+                                        </li>
+                                    </ul>
                                 </div>
 
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-danger me-3"
-                                data-bs-dismiss="modal">Hủy</button>
+                            <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal"> Hủy
+                            </button>
                             <button type="submit" class="btn btn-danger">Lưu</button>
                         </div>
                     </form>
@@ -318,7 +353,7 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Thêm sản phẩm</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="formThemCapPhat" method="POST" action="{{ route('product.store') }}"
+                <form id="addForm" method="POST" action="{{ route('product.store') }}"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
@@ -337,7 +372,10 @@
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Phân loại*">
                                 <select required name="type" class="selectpicker" data-dropup-auto="false"
-                                    data-width="100%" title="Phân loại*" data-size="3">
+                                    data-width="100%" data-size="3" data-live-search="true"
+                                    data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="" disabled selected>Chọn phân loại</option>
                                     <option value="Sản phẩm">Sản phẩm</option>
                                     <option value="Phiên bản">Phiên bản</option>
                                     <option value="Tuỳ chọn">Tuỳ chọn</option>
@@ -347,7 +385,10 @@
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Ngành hàng*">
                                 <select required name="branch" class="selectpicker" data-dropup-auto="false"
-                                    data-width="100%" title="Ngành hàng*" data-size="3">
+                                    data-width="100%" data-size="3" data-live-search="true"
+                                    data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="" disabled selected>Chọn ngành hàng</option>
                                     <option value="Sản phẩm dẫn">Sản phẩm dẫn</option>
                                     <option value="Sản phẩm tư vấn">Sản phẩm tư vấn</option>
                                     <option value="Sản phẩm mới">Sản phẩm mới</option>
@@ -393,7 +434,11 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
-                        <button type="submit" class="btn btn-danger">Lưu</button>
+                        <button id="loadingBtn" style="display: none;" class="btn btn-danger" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button>
+                        <button id="submitBtn" type="submit" class="btn btn-danger">Lưu</button>
                     </div>
                 </form>
             </div>
@@ -789,4 +834,20 @@
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/components/dataHrefTable.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            // Handle form submission
+            $('#addForm').submit(function(event) {
+                // Prevent the default form submission
+                event.preventDefault();
+
+                // Show the loading button and hide the submit button
+                $('#submitBtn').hide();
+                $('#loadingBtn').show();
+
+                // Submit the form
+                $(this).unbind('submit').submit();
+            });
+        });
+    </script>
 @endsection
