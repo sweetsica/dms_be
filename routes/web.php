@@ -145,6 +145,7 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('danh-sach-khu-vuc-delete', [AreaController::class, 'delete'])->name('area.delete');
 
     Route::get('chi-tiet-khach-hang/{id}', [CustomerController::class, 'show'])->name('customer-detail.list');
+    Route::get('department-profile', [DepartmentController::class, 'index2'])->name('department.index2');
     Route::get('department', [DepartmentController::class, 'index'])->name('department.index');
     Route::post('department', [DepartmentController::class, 'store'])->name('department.store');
     Route::post('department/{id}', [DepartmentController::class, 'edit'])->name('department.edit');
