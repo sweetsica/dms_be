@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Department;
 use App\Models\Personnel;
+use App\Models\PersonnelLevel;
 use App\Models\Position;
 use App\Models\UnitLeader;
 use Illuminate\Http\Request;
@@ -97,8 +98,11 @@ class DepartmentController extends Controller
             $getDept = Department::with('areas')->find($department_id);
             $listPosToDept = Position::where('department_id', $department_id)->get();
         }
-
+        $personnelLevelList = PersonnelLevel::all();
+        $positionlists = $this->getPosition();
         return view("Deparment.index2", [
+            "personnelLevelList"=>$personnelLevelList,
+            "positionlists"=>$positionlists,
             "departmentList" => $departmentList,
             'don_vi_me' => $don_vi_me,
             'leader_name' => $leader_name,
@@ -110,8 +114,15 @@ class DepartmentController extends Controller
             'listPosToDept' => $listPosToDept
         ]);
     }
+    
+    public function getPosition(){
+        $position = Position::orderBy('id','DESC')->get();
+        $positionlists = [];
+        Position::recursive($position, $parents = 0,$level = 1, $positionlists);
+        return $positionlists;
+    }
 
-    public function assignUser(Request $request)
+    public function assignUser(Request $request, $id)
     {
         $search = $request->get('search');
         $don_vi_me = $request->get('don_vi_me');
@@ -145,6 +156,9 @@ class DepartmentController extends Controller
         // dd($departmentListTree);
         $departmentlists = $this->getDepartment();
 
+        $getPos = Position::with('department.areas')->find($id);
+        $listUsers = Personnel::with('department', 'position', 'level', 'role')->where('position_id', $id)->get();
+
         return view("Deparment.assignUser", [
             "departmentList" => $departmentList,
             'don_vi_me' => $don_vi_me,
@@ -152,7 +166,9 @@ class DepartmentController extends Controller
             "departmentlists" => $departmentlists,
             'search' => $search,
             'UnitLeaderList' => $UnitLeaderList,
-            "departmentListTree" => $departmentListTree
+            "departmentListTree" => $departmentListTree,
+            'listUsers' => $listUsers,
+            'getPos' => $getPos
         ]);
     }
 

@@ -1,6 +1,6 @@
 @extends('template.master')
 {{-- Trang chủ GIao Ban --}}
-@section('title', 'Danh sách tổ chức')
+@section('title', 'Thông tin vị trí')
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 @endsection
@@ -12,7 +12,7 @@
             <div class="main">
                 <div class="container-fluid">
                     <div class="mainSection_heading">
-                        <h5 class="mainSection_heading-title">Hồ sơ phòng ban</h5>
+                        <h5 class="mainSection_heading-title">Thông tin vị trí - {{ $getPos->name ?? "" }}</h5>
                         @include('template.components.sectionCard')
                     </div>
                     <div class="row">
@@ -53,9 +53,9 @@
                                                             sự</button>
                                                     </div>
                                                 @endif
-                                                <button class="btn btn-danger d-block testCreateUser" data-bs-toggle="modal"
+                                                {{-- <button class="btn btn-danger d-block testCreateUser" data-bs-toggle="modal"
                                                     data-bs-target="#infoUser">Gán nhân
-                                                    sự</button>
+                                                    sự</button> --}}
                                             </div>
 
                                             <div>
@@ -70,7 +70,8 @@
                                                                             danh:</span>
                                                                     </div>
                                                                     <div class="col-lg-8">
-                                                                        <span class="fs-5">ABC</span>
+                                                                        <span
+                                                                            class="fs-5">{{ $getPos->name ?? '' }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -84,7 +85,8 @@
                                                                             danh:</span>
                                                                     </div>
                                                                     <div class="col-lg-8">
-                                                                        <span class="fs-5">ABC</span>
+                                                                        <span
+                                                                            class="fs-5">{{ $getPos->code ?? '' }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -98,7 +100,7 @@
                                                                     </div>
                                                                     <div class="col-lg-8">
                                                                         <span class="fs-5">
-                                                                            Hà Nội
+                                                                            {{ $getPos->areas->name ?? '' }}
                                                                         </span>
                                                                     </div>
                                                                 </div>
@@ -114,10 +116,7 @@
                                                                     </div>
                                                                     <div class="col-lg-8">
                                                                         <span class="fs-5">
-                                                                            Quản lý doanh thu, tìm kiếm khách hàng, thương
-                                                                            thảo
-                                                                            hợp
-                                                                            đồng, phát triển thị trường
+                                                                            {{ $getPos->description ?? '' }}
                                                                         </span>
                                                                     </div>
                                                                 </div>
@@ -247,62 +246,90 @@
                                                                 @endif
                                                             </tr>
                                                         </thead>
-                                                        {{-- @foreach ($departmentList as $item)
+                                                        @foreach ($listUsers as $item)
                                                             <tbody>
                                                                 <tr>
                                                                     <td class="text-center"> <input type="checkbox"
                                                                             name="selected_items[]"
                                                                             value="{{ $item->id }}"></td>
                                                                     <td class=" text-center">
-                                                                        {{ $t++ }}
+                                                                        {{ $loop->iteration }}
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
-                                                                            title="{{ $item->code }}">
-                                                                            {{ $item->code }}
+                                                                            title="{{ $item->code ?? "" }}">
+                                                                            {{ $item->code ?? "" }}
                                                                         </div>
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
-                                                                            title="{{ $item->name }}">
-                                                                            {{ $item->name }}
+                                                                            title="{{ $item->name ?? "" }}">
+                                                                            {{ $item->name ?? "" }}
                                                                         </div>
                                                                     </td>
                                                                     <td>
-                                                                        @if ($item->donvime)
-                                                                            <div class="overText" data-bs-toggle="tooltip"
-                                                                                data-bs-placement="top"
-                                                                                title="{{ $item->donvime->name }}">
-                                                                                {{ $item->donvime->name }}
-                                                                            </div>
-                                                                        @else
-                                                                        @endif
+                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="{{ $item->department->name ?? "" }}">
+                                                                            {{ $item->department->name ?? "" }}
+                                                                        </div>
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
-                                                                            title="{{ $item->leader_name }}">
-                                                                            {{ $item->leader_name }}
+                                                                            title="{{ $item->level->name ?? "" }}">
+                                                                            {{ $item->level->name ?? "" }}
                                                                         </div>
 
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
-                                                                            title="{{ $item->description }}">
-                                                                            {{ $item->description }}
+                                                                            title="{{ $item->role->name ?? "" }}">
+                                                                            {{ $item->role->name ?? "" }}
                                                                         </div>
 
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
-                                                                            title="{{ $item->description }}">
-                                                                            {{ $item->description }}
+                                                                            title="{{ $item->area->name ?? "" }}">
+                                                                            {{ $item->area->name ?? "" }}
                                                                         </div>
-
+                                                                    </td>
+                                                                    
+                                                                    <td class="">
+                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="{{ $item->email ?? "" }}">
+                                                                            {{ $item->email ?? "" }}
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                    <td class="">
+                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="{{ $item->phone ?? "" }}">
+                                                                            {{ $item->phone ?? "" }}
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                    <td class="">
+                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="{{ $item->working_form ?? "" }}">
+                                                                            {{ $item->working_form ?? "" }}
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                    <td class="">
+                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="{{ $item->status ?? "" }}">
+                                                                            {{ $item->status ?? "" }}
+                                                                        </div>
                                                                     </td>
                                                                     @if (session('user')['role_id'] == '1')
                                                                         <td>
@@ -339,16 +366,16 @@
                                                                     @endif
                                                                 </tr>
                                                             </tbody>
-                                                        @endforeach --}}
+                                                        @endforeach
                                                     </table>
-                                                    <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                    {{-- <nav aria-label="Page navigation example" class="float-end mt-3"
                                                         id="target-pagination">
                                                         <ul class="pagination">
                                                             {{ $departmentList->appends([
                                                                     'search' => $search,
                                                                 ])->links() }}
                                                         </ul>
-                                                    </nav>
+                                                    </nav> --}}
                                                 </div>
                                             </form>
                                         </div>

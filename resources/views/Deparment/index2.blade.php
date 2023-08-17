@@ -12,7 +12,7 @@
             <div class="main">
                 <div class="container-fluid">
                     <div class="mainSection_heading">
-                        <h5 class="mainSection_heading-title">Hồ sơ phòng ban</h5>
+                        <h5 class="mainSection_heading-title">Hồ sơ phòng ban - {{ $getDept->name ?? '' }}</h5>
                         @include('template.components.sectionCard')
                     </div>
                     <div class="row">
@@ -49,7 +49,7 @@
                                                 @if (session('user')['role_id'] == '1')
                                                     <div class="action_export order-md-4">
                                                         <button class="btn btn-danger d-block testCreateUser"
-                                                            data-bs-toggle="modal" data-bs-target="#assignPosition">Gán vị
+                                                            data-bs-toggle="modal" data-bs-target="#taoDeXuat">Thêm vị
                                                             trí</button>
                                                     </div>
                                                 @endif
@@ -248,11 +248,13 @@
                                                                             {{ $item->code }}
                                                                         </div>
                                                                     </td>
-                                                                    <td class="">
+                                                                    <td>
                                                                         <div class="overText" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
                                                                             title="{{ $item->name }}">
-                                                                            {{ $item->name }}
+                                                                            <a style="color: black"
+                                                                                href="{{ route('department.assignUser', ['id' => $item->id]) }}">{{ $item->name }}</a>
+
                                                                         </div>
                                                                     </td>
                                                                     <td>
@@ -445,6 +447,110 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
                             <button type="submit" class="btn btn-danger">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Thêm Tao De Xuat -->
+        <div class="modal fade" id="taoDeXuat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h5 class="modal-title w-100" id="exampleModalLabel">Thêm mới vị trí/chức danh</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('position.store') }}" method="POST">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-6 mb-3">
+                                    <input name="name" required type="text"
+                                        placeholder="Nhập tên vị trí/chức danh*" class="form-control"
+                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Nhập tên vị trí/chức danh*" required>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <input name="code" required type="text" placeholder="Nhập mã vị trí/chức danh*"
+                                        class="form-control" data-bs-toggle="tooltip" title="Nhập mã vị trí/chức danh*"
+                                        required>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn đơn vị công tác*">
+                                        <select name="department_id" required class="selectpicker"
+                                            data-dropup-auto="false">
+                                            <option value="">Chọn đơn vị công tác*</option>
+                                            @foreach ($departmentlists as $item)
+                                                @if ($item->id == request()->department_id)
+                                                    <option selected value="{{ $item->id }}">
+                                                        {{ $item->name }}
+                                                    </option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn cấp nhân sự*">
+                                        <select name="personnel_level" required class="selectpicker"
+                                            data-dropup-auto="false">
+                                            <option value="">Chọn cấp nhân sự*</option>
+                                            @foreach ($personnelLevelList as $item)
+                                                <option value="{{ $item->id }}">
+                                                    {{ $item->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Chọn vị trí cấp quản lý">
+                                        <select name="parent" required class="selectpicker" data-dropup-auto="false">
+                                            <option value="0">Chọn vị trí cấp quản lý</option>
+                                            @foreach ($positionlists as $item)
+                                                <option value="{{ $item->id }}">
+                                                    @php
+                                                        $str = '';
+                                                        for ($i = 0; $i < $item->level; $i++) {
+                                                            echo $str;
+                                                            $str = '  --';
+                                                        }
+                                                    @endphp
+                                                    {{ $item->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn gói trang bị">
+                                        <select name="pack" class="selectpicker" data-dropup-auto="false">
+                                            <option value="">Chọn gói trang bị</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top">
+                                        <textarea name="description" type="text" placeholder="Mô tả công việc" class="form-control "
+                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Mô tả công việc" style="height: 80px;"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <input name="staffing" type="text" placeholder="Định biên" class="form-control"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Định biên">
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <input name="wage" type="text" placeholder="Quỹ lương năm"
+                                        class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Quỹ lương năm">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy
+                                    </button>
+                                    <button type="submit" class="btn btn-danger">Tạo</button>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
