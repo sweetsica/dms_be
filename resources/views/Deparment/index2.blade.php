@@ -67,7 +67,8 @@
                                                                         <span class="fs-5 fw-bold">Tên đơn vị:</span>
                                                                     </div>
                                                                     <div class="col-lg-8">
-                                                                        <span class="fs-5">ABC</span>
+                                                                        <span
+                                                                            class="fs-5">{{ $getDept->name ?? '' }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -80,7 +81,8 @@
                                                                         <span class="fs-5 fw-bold">Mã đơn vị:</span>
                                                                     </div>
                                                                     <div class="col-lg-8">
-                                                                        <span class="fs-5">ABC</span>
+                                                                        <span
+                                                                            class="fs-5">{{ $getDept->code ?? '' }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -94,7 +96,7 @@
                                                                     </div>
                                                                     <div class="col-lg-8">
                                                                         <span class="fs-5">
-                                                                            Hà Nội
+                                                                            {{ $getDept->areas->name ?? '' }}
                                                                         </span>
                                                                     </div>
                                                                 </div>
@@ -110,10 +112,7 @@
                                                                     </div>
                                                                     <div class="col-lg-8">
                                                                         <span class="fs-5">
-                                                                            Quản lý doanh thu, tìm kiếm khách hàng, thương
-                                                                            thảo
-                                                                            hợp
-                                                                            đồng, phát triển thị trường
+                                                                            {{ $getDept->description ?? '' }}
                                                                         </span>
                                                                     </div>
                                                                 </div>
@@ -126,7 +125,8 @@
                                                             <div class="col-lg-4">
                                                                 <div class="row">
                                                                     <div class="col-lg-6">
-                                                                        <span class="fs-5 fw-bold">Chính thức:</span>
+                                                                        <span class="fs-5 fw-bold">Trạng thái hoạt
+                                                                            động:</span>
                                                                     </div>
                                                                     <div class="col-lg-6">
                                                                         <span class="fs-5">avc</span>
@@ -232,14 +232,14 @@
                                                                 @endif
                                                             </tr>
                                                         </thead>
-                                                        {{-- @foreach ($departmentList as $item)
+                                                        @foreach ($listPosToDept as $item)
                                                             <tbody>
                                                                 <tr>
                                                                     <td class="text-center"> <input type="checkbox"
                                                                             name="selected_items[]"
                                                                             value="{{ $item->id }}"></td>
                                                                     <td class=" text-center">
-                                                                        {{ $t++ }}
+                                                                        {{ $loop->iteration }}
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
@@ -256,36 +256,37 @@
                                                                         </div>
                                                                     </td>
                                                                     <td>
-                                                                        @if ($item->donvime)
-                                                                            <div class="overText" data-bs-toggle="tooltip"
-                                                                                data-bs-placement="top"
-                                                                                title="{{ $item->donvime->name }}">
-                                                                                {{ $item->donvime->name }}
-                                                                            </div>
-                                                                        @else
-                                                                        @endif
+                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="{{ $item->description }}">
+                                                                            {{ $item->description }}
+                                                                        </div>
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
-                                                                            title="{{ $item->leader_name }}">
-                                                                            {{ $item->leader_name }}
+                                                                            title="{{ $item->wage }}">
+                                                                            {{ $item->wage }}
                                                                         </div>
 
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
-                                                                            title="{{ $item->description }}">
-                                                                            {{ $item->description }}
+                                                                            title="{{ $item->staffing }}">
+                                                                            {{ $item->staffing }}
                                                                         </div>
 
                                                                     </td>
+                                                                    @php
+                                                                        $getUser = \App\Models\Personnel::where('position_id', $item->id)->get();
+                                                                        $userNames = $getUser->pluck('name')->implode(', ');
+                                                                    @endphp
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
-                                                                            title="{{ $item->description }}">
-                                                                            {{ $item->description }}
+                                                                            title="{{ $userNames }}">
+                                                                            {{ $userNames }}
                                                                         </div>
 
                                                                     </td>
@@ -324,16 +325,16 @@
                                                                     @endif
                                                                 </tr>
                                                             </tbody>
-                                                        @endforeach --}}
+                                                        @endforeach
                                                     </table>
-                                                    <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                    {{-- <nav aria-label="Page navigation example" class="float-end mt-3"
                                                         id="target-pagination">
                                                         <ul class="pagination">
                                                             {{ $departmentList->appends([
                                                                     'search' => $search,
                                                                 ])->links() }}
                                                         </ul>
-                                                    </nav>
+                                                    </nav> --}}
                                                 </div>
                                             </form>
                                         </div>

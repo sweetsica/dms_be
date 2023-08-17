@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Department;
 use App\Models\Personnel;
+use App\Models\Position;
 use App\Models\UnitLeader;
 use Illuminate\Http\Request;
 
@@ -27,16 +28,16 @@ class DepartmentController extends Controller
                 'department.ib_lead',
                 'personnel.name as leader_name'
             );
-            if($search != NULL) {
-                $query->where("department.name", "like", "%$search%");
-            }
-            if($don_vi_me != NULL) {
-                $query->where("department.name", "like", "%$don_vi_me%");
-            }
-            if($leader_name != NULL) {
-                $query->where("personnel.name", "like", "%$leader_name%");
-            }
-            $departmentList=$query->paginate(15);
+        if ($search != NULL) {
+            $query->where("department.name", "like", "%$search%");
+        }
+        if ($don_vi_me != NULL) {
+            $query->where("department.name", "like", "%$don_vi_me%");
+        }
+        if ($leader_name != NULL) {
+            $query->where("personnel.name", "like", "%$leader_name%");
+        }
+        $departmentList = $query->paginate(15);
         // dd($departmentList);
         $UnitLeaderList = Personnel::all();
 
@@ -57,6 +58,7 @@ class DepartmentController extends Controller
 
     public function index2(Request $request)
     {
+        $department_id = $request->get('department_id');
         $search = $request->get('search');
         $don_vi_me = $request->get('don_vi_me');
         $leader_name = $request->get('leader_name');
@@ -72,22 +74,29 @@ class DepartmentController extends Controller
                 'department.ib_lead',
                 'personnel.name as leader_name'
             );
-            if($search != NULL) {
-                $query->where("department.name", "like", "%$search%");
-            }
-            if($don_vi_me != NULL) {
-                $query->where("department.name", "like", "%$don_vi_me%");
-            }
-            if($leader_name != NULL) {
-                $query->where("personnel.name", "like", "%$leader_name%");
-            }
-            $departmentList=$query->paginate(15);
+        if ($search != NULL) {
+            $query->where("department.name", "like", "%$search%");
+        }
+        if ($don_vi_me != NULL) {
+            $query->where("department.name", "like", "%$don_vi_me%");
+        }
+        if ($leader_name != NULL) {
+            $query->where("personnel.name", "like", "%$leader_name%");
+        }
+        $departmentList = $query->paginate(15);
         // dd($departmentList);
         $UnitLeaderList = Personnel::all();
 
         $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
         // dd($departmentListTree);
         $departmentlists = $this->getDepartment();
+
+        $getDept = [];
+        $listPosToDept = [];
+        if ($department_id) {
+            $getDept = Department::with('areas')->find($department_id);
+            $listPosToDept = Position::where('department_id', $department_id)->get();
+        }
 
         return view("Deparment.index2", [
             "departmentList" => $departmentList,
@@ -96,7 +105,9 @@ class DepartmentController extends Controller
             "departmentlists" => $departmentlists,
             'search' => $search,
             'UnitLeaderList' => $UnitLeaderList,
-            "departmentListTree" => $departmentListTree
+            "departmentListTree" => $departmentListTree,
+            'getDept' => $getDept,
+            'listPosToDept' => $listPosToDept
         ]);
     }
 
@@ -159,8 +170,7 @@ class DepartmentController extends Controller
     {
         Department::destroy($id);
         // $selectedItems = $request->input('selected_items', []);
-        return redirect()->back()->with('mess', 'Đã xóa!');
-        ;
+        return redirect()->back()->with('mess', 'Đã xóa!');;
     }
 
     public function delete(Request $request)
@@ -169,7 +179,6 @@ class DepartmentController extends Controller
         $selectedItems = $request->input('selected_items', []);
         Department::whereIn('id', $selectedItems)->delete();
         return redirect()->back()->with('mess', 'Đã xóa!');
-
     }
 
     public function getAll()

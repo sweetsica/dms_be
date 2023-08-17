@@ -155,14 +155,14 @@
                                                                         </div>
 
                                                                     </td>
-                                                                    <td class="">
+                                                                    {{-- <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
                                                                             title=" {{ $item->pack }}">
                                                                             {{ $item->pack }}
                                                                         </div>
 
-                                                                    </td>
+                                                                    </td> --}}
                                                                     @if (session('user')['role_id'] == '1')
                                                                         <td>
                                                                             <div
