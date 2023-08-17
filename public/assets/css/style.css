@@ -1797,7 +1797,7 @@ th {
 .modal-header,
 .modal-body,
 .modal-footer {
-    padding: 10px 20px;
+    /* padding: 10px 20px; */
 }
 
 .modal-footer .btn {
@@ -2682,9 +2682,8 @@ ul.modal_upload-list li:last-child {
     position: relative;
 }
 
-
 .img-product-item {
-    height: 12vh
+    height: 12vh;
 }
 
 .list_img img > div {
@@ -2855,7 +2854,6 @@ input[type="radio"]:checked ~ .tabBody {
     min-width: 80px;
     height: 80px;
     margin: 2px;
-
 }
 .control_product_img img {
     width: 100%;

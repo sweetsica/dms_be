@@ -573,16 +573,18 @@
                 <form id="customerForm" method="POST" action="{{ route('create-customer') }}">
                     @csrf
                     <div class="modal-body">
-                        {{-- <div class="row">
+                        <div class="row">
                             <div class="col-md-12 mb-3">
                                 <div class="card-title">1. Thông tin chung</div>
                             </div>
+
                             <div class="col-md-3 mb-3">
                                 <input value="{{ old('code') }}" type="text" name="code"
                                     data-bs-toggle="tooltip" data-bs-placement="top" title="Mã khách hàng*"
                                     placeholder="Mã khách hàng*" class="form-control">
-                                {{-- <div class="error-text" id="codeError" style="color: red;"></div> --}}
+                                <div class="error-text" id="codeError" style="color: red;"></div>
                             </div>
+
                             <div class="col-md-3 mb-3">
                                 <input value="{{ old('name') }}" type="text" name="name"
                                     data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên khách hàng*"
@@ -761,7 +763,7 @@
                                     <option value="Khách hàng">Khách hàng</option>
                                 </select>
                             </div>
-                        </div> --}}
+                        </div>
 
                         <div class="row">
                             <div class="col-lg-6 mb-3">
@@ -797,7 +799,8 @@
                             <button type="button" class="btn btn-outline-danger me-3"
                                 data-bs-dismiss="modal">Hủy</button>
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#addDetail">Thêm chi tiết</button>
+                                data-bs-target="#addDetail">Thêm
+                                chi tiết</button>
                         </div>
                     </div>
                 </form>
@@ -887,8 +890,9 @@
                                 </select>
                             </div>
                             <div class="col-md-12 mb-3">
-                                <input type="text" id="addressInput" name="address" data-bs-toggle="tooltip" required
-                                    data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ*" class="form-control">
+                                <input type="text" id="addressInput" name="address" data-bs-toggle="tooltip"
+                                    required data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ*"
+                                    class="form-control">
                             </div>
                             <div class="col-md-12 mb-3">
                                 <div id="map" style="height: 300px; display: block" class="border"></div>
@@ -900,17 +904,18 @@
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Nhân sự thu thập">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
-                                    data-live-search="true" title="Nhân sự thu thập*" data-select-all-text="Chọn tất cả"
-                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="personId" id="personId"
-                                    data-live-search-placeholder="Tìm kiếm...">
+                                    data-live-search="true" title="Nhân sự thu thập*"
+                                    data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3"
+                                    name="personId" id="personId" data-live-search-placeholder="Tìm kiếm...">
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Sản phẩm quan tâm">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
-                                    data-live-search="true" title="Sản phẩm quan tâm*" data-select-all-text="Chọn tất cả"
-                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="productId[]" id="productId"
-                                    data-live-search-placeholder="Tìm kiếm..." multiple>
+                                    data-live-search="true" title="Sản phẩm quan tâm*"
+                                    data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3"
+                                    name="productId[]" id="productId" data-live-search-placeholder="Tìm kiếm..."
+                                    multiple>
                                 </select>
                             </div>
 
@@ -922,9 +927,9 @@
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Nhóm khách hàng">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                    data-live-search="true" title="Nhóm khách hàng*" data-select-all-text="Chọn tất cả"
-                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="groupId" id="groupId"
-                                    data-live-search-placeholder="Tìm kiếm...">
+                                    data-live-search="true" title="Nhóm khách hàng*"
+                                    data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3"
+                                    name="groupId" id="groupId" data-live-search-placeholder="Tìm kiếm...">
                                     <option value="Nhà thuốc">Nhà thuốc</option>
                                     <option value="Phòng khám/Trung tâm tế">Phòng khám/Trung tâm tế</option>
                                     <option value="Bệnh viện">Bệnh viện</option>
@@ -940,7 +945,8 @@
                                 </select>
                             </div>
 
-                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Tuyến">
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Tuyến">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Tuyến*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="routeId" id="routeId"
@@ -951,9 +957,9 @@
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Kênh khách hàng">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                    data-live-search="true" title="Kênh khách hàng*" data-select-all-text="Chọn tất cả"
-                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="chanelId" id="chanelId"
-                                    data-live-search-placeholder="Tìm kiếm...">
+                                    data-live-search="true" title="Kênh khách hàng*"
+                                    data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3"
+                                    name="chanelId" id="chanelId" data-live-search-placeholder="Tìm kiếm...">
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
@@ -1002,7 +1008,8 @@
                         </div>
                     </div>
                     <div class="modal-footer ">
-                        <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
+                        <button type="button" class="btn btn-outline-danger me-3"
+                            data-bs-dismiss="modal">Hủy</button>
                         <button type="button" class="btn btn-danger" id="submitButton"> Lưu</button>
                     </div>
                 </form>
@@ -1012,7 +1019,8 @@
     </div>
 
     <!-- Lọc  -->
-    <div class="modal fade" id="filterOptions" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="filterOptions" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-sm">
             <div class="modal-content">
                 <div class="modal-header text-center">

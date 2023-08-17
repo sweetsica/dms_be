@@ -201,10 +201,10 @@
                                         placeholder="Nhập mã cấp nhân sự" class="form-control"
                                         value="{{ $item->code }}">
                                 </div>
-                                <div class="col-6 mb-3">
+                                <div class="col-12 mb-3">
                                     <div data-bs-toggle="tooltip" data-bs-placement="top">
                                         <textarea name="description" type="text" placeholder="Mô tả" class="form-control " data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Mô tả" style="width: 450px;height: 80px;">{{ $item->description }}</textarea>
+                                            data-bs-placement="top" title="Mô tả" style="height: 80px;">{{ $item->description }}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -264,10 +264,10 @@
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Nhập mã cấp nhân sự*">
                             </div>
-                            <div class="col-6 mb-3">
+                            <div class="col-12 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top">
                                     <textarea name="description" type="text" placeholder="Mô tả" class="form-control " data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Mô tả" style="width: 450px;height: 80px;"></textarea>
+                                        data-bs-placement="top" title="Mô tả" style="height: 80px;"></textarea>
                                 </div>
                             </div>
                             <div class="modal-footer">
