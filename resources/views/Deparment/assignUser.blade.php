@@ -12,9 +12,10 @@
             <div class="main">
                 <div class="container-fluid">
                     <div class="mainSection_heading">
-                        <h5 class="mainSection_heading-title">Hồ sơ phòng ban</h5>
+                        <h5 class="mainSection_heading-title">Danh sách tổ chức</h5>
                         @include('template.components.sectionCard')
                     </div>
+
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card mb-3">
@@ -24,9 +25,7 @@
                                         <div class="col-md-12">
                                             <div
                                                 class="action_wrapper d-flex flex-wrap justify-content-between align-items-center mb-3">
-                                                {{-- <div class="order-2 order-md-1" style="font-size: 15px;">
-                                                    <b>Danh sách đơn vị trực thuộc</b>
-                                                </div> --}}
+
                                                 <div
                                                     class="order-1 order-md-2  justify-content-between align-items-center flex-grow-1 mb-2 mb-md-0">
                                                     <form method="GET" action="">
@@ -38,26 +37,23 @@
                                                     </form>
                                                 </div>
 
-                                                <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
+                                                {{-- <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
                                                     data-bs-placement="top" title="Lọc">
                                                     <button class="btn btn-outline-danger" data-bs-toggle="modal"
-                                                        data-bs-target="#filterOptions">
+                                                        data-bs-target="#infoUser">
                                                         <i class="bi bi-funnel"></i>
                                                     </button>
-                                                </div>
+                                                </div> --}}
 
                                                 @if (session('user')['role_id'] == '1')
                                                     <div class="action_export order-md-4">
                                                         <button class="btn btn-danger d-block testCreateUser"
-                                                            data-bs-toggle="modal" data-bs-target="#assignPosition">Gán nhân
+                                                            data-bs-toggle="modal" data-bs-target="#assignUser">Gán nhân
                                                             sự</button>
                                                     </div>
                                                 @endif
-                                                <button class="btn btn-danger d-block testCreateUser" data-bs-toggle="modal"
-                                                    data-bs-target="#infoUser">Gán nhân
-                                                    sự</button>
-                                            </div>
 
+                                            </div>
                                             <div>
 
                                                 <div class="row g-2">
@@ -189,7 +185,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div class="fs-4 fw-bold mt-4" style="color: var(--primary-color)">
                                                 Danh sách nhân sự đảm nhiệm</div>
                                             <form id="select-form" action="{{ route('delete-selected-items') }}"
@@ -216,28 +211,30 @@
                                                                     nhân sự</th>
                                                                 <th class="text-nowrap text-center" style="width:10%">Tên
                                                                     nhân sự </th>
-                                                                <th class="text-nowrap text-center" style="width:30%">Đơn
-                                                                    vị công tác</th>
-                                                                <th class="text-nowrap text-center" style="width:8%">Cấp
+                                                                <th class="text-nowrap text-center" style="width:10%">Đơn
+                                                                    vị
+                                                                    công tác </th>
+                                                                <th class="text-nowrap text-center" style="width:10%">Cấp
                                                                     nhân sự
                                                                 </th>
-                                                                <th class="text-nowrap text-center" style="width:8%">
-                                                                    Vai trò
+                                                                <th class="text-nowrap text-center" style="width:20%">Vai
+                                                                    trò
                                                                 </th>
-                                                                <th class="text-nowrap text-center" style="width:8%">
-                                                                    Địa bàn
+                                                                <th class="text-nowrap text-center" style="width:20%">Địa
+                                                                    bàn
                                                                 </th>
-                                                                <th class="text-nowrap text-center" style="width:8%">
+                                                                <th class="text-nowrap text-center" style="width:20%">
                                                                     Email
                                                                 </th>
-                                                                <th class="text-nowrap text-center" style="width:8%">
-                                                                    Số điện thoại
+                                                                <th class="text-nowrap text-center" style="width:20%">Số
+                                                                    điện thoại
                                                                 </th>
-                                                                <th class="text-nowrap text-center" style="width:8%">
-                                                                    Hình thức
+                                                                <th class="text-nowrap text-center" style="width:20%">Hình
+                                                                    thức
                                                                 </th>
-                                                                <th class="text-nowrap text-center" style="width:8%">
-                                                                    Trạng thái
+                                                                <th class="text-nowrap text-center" style="width:20%">
+                                                                    Trạng
+                                                                    thái
                                                                 </th>
                                                                 @if (session('user')['role_id'] == '1')
                                                                     <th class="text-nowrap text-center" style="width:3%">
@@ -285,14 +282,6 @@
                                                                             data-bs-placement="top"
                                                                             title="{{ $item->leader_name }}">
                                                                             {{ $item->leader_name }}
-                                                                        </div>
-
-                                                                    </td>
-                                                                    <td class="">
-                                                                        <div class="overText" data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top"
-                                                                            title="{{ $item->description }}">
-                                                                            {{ $item->description }}
                                                                         </div>
 
                                                                     </td>
@@ -492,216 +481,75 @@
 
 
     <!-- Modal Thêm Tao De Xuat -->
-    {{-- <div class="modal fade" id="taoDeXuat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">Thêm Đơn Vị</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="{{ route('department.store') }}" method="POST">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-6 mb-3">
-                                <input name="name" required type="text" placeholder="Nhập tên đơn vị*"
-                                    class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Nhập tên đơn vị*">
-                            </div>
-                            <div class="col-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Mã đơn vị*">
-                                    <input name="code" required type="text" placeholder="Mã đơn vị*"
-                                        class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        title="Mã đơn vị*">
-                                </div>
-                            </div>
-                            <div class="col-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn đơn vị mẹ">
-                                    <select name="parent" required class="selectpicker" data-dropup-auto="false">
-                                        <option value="0">Chọn đơn vị mẹ</option>
-                                        @foreach ($departmentlists as $item)
-                                            <option value="{{ $item->id }}">
-                                                @php
-                                                    $str = '';
-                                                    for ($i = 0; $i < $item->level; $i++) {
-                                                        echo $str;
-                                                        $str = '  --';
-                                                    }
-                                                @endphp
-                                                {{ $item->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn trưởng bộ phận">
-                                    <select name="ib_lead" required class="selectpicker" data-dropup-auto="false">
-                                        <option value="0">Chọn trưởng bộ phận</option>
-                                        @foreach ($UnitLeaderList as $item)
-                                            <option value="{{ $item->id }}">
-                                                {{ $item->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-12 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top">
-                                    <textarea name="description" type="text" placeholder="Chức năng nhiệm vụ" class="form-control "
-                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Chức năng nhiệm vụ" style="height: 80px;"></textarea>
-                                </div>
-                            </div>
-                            <div class="modal-footer" style="padding: 10px -2px !important;">
-                                <button type="button" class="btn btn-outline-danger"
-                                    data-bs-dismiss="modal">Hủy</button>
-                                <button type="submit" class="btn btn-danger">Tạo</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div> --}}
-
-    {{-- Filter --}}
-    {{-- <div class="modal fade" id="filterOptions" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-sm">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">Lọc dữ liệu</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <form action="" method="GET">
-                    {{-- @foreach (request()->query() as $key => $value)
-                        @if (!in_array($key, ['don_vi_me']))
-                            <input type="hidden" name="{{ $key }}" value="{{ $value }}">
-                        @endif
-                    @endforeach --}}
-    {{-- <div class="modal-body">
-        <div class="row">
-            <div class="col-12 mb-3">
-                <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Lọc theo trưởng đơn vị">
-                    <select id="select-status" class="selectpicker select_filter" data-dropup-auto="false"
-                        title="Lọc theo trưởng đơn vị" name='leader_name'>
-                        @foreach ($UnitLeaderList as $item)
-                            <option value="{{ $item->name }}">{{ $item->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-            <div class="col-12 mb-3">
-                <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Lọc theo đơn vị mẹ">
-                    <select id="select-status" class="selectpicker select_filter" data-dropup-auto="false"
-                        title="Lọc theo đơn vị mẹ" name='don_vi_me'>
-                        @foreach ($departmentList as $item)
-                            <option value="{{ $item->name }}">{{ $item->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer justify-content-between">
-            <button type="reset" class="btn btn-outline-danger">Làm
-                mới</button>
-            <button type="submit" class="btn btn-danger">Lọc</button>
-        </div>
-        </form>
-    </div>
-    </div>
-    </div> --}}
-
-    {{-- Gán vị trí --}}
-    <div class="modal fade" id="assignPosition" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-sm">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">Gán nhân sự</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <form action="" method="GET">
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-12 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top"
-                                    data-bs-original-title="Chọn nhân sự đảm nhiệm">
-                                    <select id="select-status" class="selectpicker select_filter"
-                                        data-dropup-auto="false" title="Chọn nhân sự đảm nhiệm" name='assign_user'>
-                                        <option value="Nguyễn Văn A">Nguyễn Văn A</option>
-                                        <option value="Nguyễn Văn B">Nguyễn Văn B</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="reset" class="btn btn-outline-danger">Hủy</button>
-                            <button type="submit" class="btn btn-danger">Lưu</button>
-                        </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    {{-- Thông tin nhân sự --}}
     <div class="modal fade" id="infoUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">Thêm mới nhân sự</h5>
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Thông tin nhân sự</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST">
+                <form action="{{ route('Personnel.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
+                        <div>
+                            <h1 style="color: red;">Thông tin cá nhân</h1>
+                        </div>
                         <div class="row">
-                            <div>
-                                <h1 style="color: red;">Thông tin cá nhân</h1>
+                            <div class="col-lg-3">
+                                <img src="https://img.freepik.com/free-icon/user_318-159711.jpg"
+                                    class="rounded-circle w-100 h-auto" alt="img-avatar">
                             </div>
-                            <div class="col-4 mb-3">
-                                <input name="name" required type="text" placeholder="Họ và tên*"
-                                    class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Họ và tên*">
-                            </div>
-                            <div class="col-4 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Giới tính*">
-                                    <select name="gender" class="selectpicker" data-dropup-auto="false" required>
-                                        <option value="">Giới tính*</option>
-                                        <option value="Nam">Nam</option>
-                                        <option value="Nữ">Nữ</option>
-                                    </select>
+                            <div class="col-lg-9">
+                                <div class="row">
+
+                                    <div class="col-4 mb-3">
+                                        <input name="name" required type="text" placeholder="Họ và tên*"
+                                            class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="Họ và tên*">
+                                    </div>
+                                    <div class="col-4 mb-3">
+                                        <div data-bs-toggle="tooltip" data-bs-placement="top" title="Giới tính*">
+                                            <select name="gender" class="selectpicker" data-dropup-auto="false"
+                                                required>
+                                                <option value="">Giới tính*</option>
+                                                <option value="Nam">Nam</option>
+                                                <option value="Nữ">Nữ</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 mb-3">
+                                        <input name="birthday" required type="date" placeholder="Ngày sinh*"
+                                            class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="Ngày sinh*">
+                                    </div>
+                                    <div class="col-4 mb-3">
+                                        <input name="code" required type="text" placeholder="Mã nhân sự*"
+                                            class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="Nhập mã nhân sự*">
+                                    </div>
+                                    <div class="col-8 mb-3">
+                                        <input name="address" type="text" placeholder="Địa chỉ" class="form-control"
+                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Địa chỉ">
+                                    </div>
+                                    <div class="col-4 mb-3">
+                                        <input name="email" required type="email" placeholder="Email*"
+                                            class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="Email*">
+                                    </div>
+                                    <div class="col-4 mb-3">
+                                        <input name="password" required type="text" placeholder="Mật khẩu*"
+                                            class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="Mật khẩu*">
+                                    </div>
+                                    <div class="col-4 mb-3">
+                                        <input name="phone" required type="text" placeholder="Số điện thoại*"
+                                            class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="Số điện thoại*">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-4 mb-3">
-                                <input name="birthday" required type="date" placeholder="Ngày sinh*"
-                                    class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Ngày sinh*">
-                            </div>
-                            <div class="col-4 mb-3">
-                                <input name="code" required type="text" placeholder="Mã nhân sự*"
-                                    class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Nhập mã nhân sự*">
-                            </div>
-                            <div class="col-8 mb-3">
-                                <input name="address" type="text" placeholder="Địa chỉ" class="form-control"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Địa chỉ">
-                            </div>
-                            <div class="col-4 mb-3">
-                                <input name="email" required type="email" placeholder="Email*" class="form-control"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Email*">
-                            </div>
-                            <div class="col-4 mb-3">
-                                <input name="password" required type="text" placeholder="Mật khẩu*"
-                                    class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Mật khẩu*">
-                            </div>
-                            <div class="col-4 mb-3">
-                                <input name="phone" required type="text" placeholder="Số điện thoại*"
-                                    class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Số điện thoại*">
-                            </div>
                         </div>
+
                         <div class="row">
                             <div>
                                 <h1 style="color: red;">Thông tin công việc</h1>
@@ -729,7 +577,6 @@
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Cấp nhân sự">
                                     <select name="personnel_lv_id" class="selectpicker" data-dropup-auto="false">
                                         <option value="">Cấp nhân sự</option>
-                                        <option value="a">a</option>
                                         {{-- @foreach ($personnelLevelList as $item)
                                             <option value="{{ $item->id }}">
                                                 {{ $item->name }}
@@ -742,7 +589,6 @@
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Vị trí chức danh">
                                     <select name="position_id" class="selectpicker" data-dropup-auto="false">
                                         <option value="">Vị trí chức danh</option>
-                                        <option value="b">Vị trí chức danh</option>
                                         {{-- @foreach ($positionlists as $item)
                                             <option value="{{ $item->id }}">
                                                 @php
@@ -762,7 +608,6 @@
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Vai trò">
                                     <select name="role_id" class="selectpicker" data-dropup-auto="false">
                                         <option value="">Vai trò</option>
-                                        <option value="c">Vai trò</option>
                                         {{-- @foreach ($roleList as $item)
                                             <option value="{{ $item->id }}">
                                                 {{ $item->name }}
@@ -775,7 +620,6 @@
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Địa bàn">
                                     <select name="area_id" class="selectpicker" data-dropup-auto="false">
                                         <option value="">Địa bàn</option>
-                                        <option value="d">Địa bàn</option>
                                         {{-- @foreach ($localityList as $item)
                                             <option value="{{ $item->id }}">
                                                 {{ $item->name }}
@@ -789,7 +633,6 @@
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Quản lý trực tiếp">
                                     <select name="manage" class="selectpicker" data-dropup-auto="false">
                                         <option value="">Quản lý trực tiếp</option>
-                                        <option value="e">Quản lý trực tiếp</option>
                                         {{-- @foreach ($personnellists as $item)
                                             <option value="{{ $item->id }}">
                                                 @php
@@ -816,6 +659,8 @@
                                         <option value="">Gói trang bị</option>
                                     </select>
                                 </div>
+                                {{-- <input name="pack" type="text" placeholder="Gói trang bị" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Gói trang bị"> --}}
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Hình thức làm việc">
@@ -839,10 +684,41 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
-                            <button type="submit" class="btn btn-danger">Tạo</button>
+                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Đóng</button>
                         </div>
                     </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {{-- Gán nhân sự --}}
+    <div class="modal fade" id="assignUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Gán nhân sự</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form action="" method="GET">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-original-title="Chọn nhân sự">
+                                    <select id="select-status" class="selectpicker select_filter"
+                                        data-dropup-auto="false" title="Chọn nhân sự" name='assignUser'>
+                                        <option value="Nguyễn Văn A">Nguyễn Văn A</option>
+                                        <option value="Nguyễn Thị C">Nguyễn Thị C</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-outline-danger">Hủy</button>
+                            <button type="submit" class="btn btn-danger">Lưu</button>
+                        </div>
                 </form>
             </div>
         </div>
