@@ -43,7 +43,7 @@ class CustomerController extends Controller
     public function show($id)
     {
         $customer = Customer::with('channel', 'route', 'person')->findOrFail($id);
-        return view('Customer.chiTietKhachHang')->with(
+        return view('Customer.detailKhachHang')->with(
             compact(
                 "customer"
             )
@@ -293,6 +293,7 @@ class CustomerController extends Controller
         $email = $request->get('email');
         $companyName = $request->get('companyName');
         $personContact = $request->get('personContact');
+        $personCompany = $request->get('personCompany');
         $career = $request->get('career');
         $taxCode = $request->get('taxCode');
         $companyPhoneNumber = $request->get('companyPhoneNumber');
@@ -309,12 +310,15 @@ class CustomerController extends Controller
         $chanelId = $request->get('chanelId');
         $routeId = $request->get('routeId');
         $status = $request->get('status');
+        $uploadedFiles = $request->file('attachment');
+        $avatar = $request->file('avatar');
         $data = new Customer();
         $data->code = $code;
         $data->name = $name;
         $data->phone = $phone;
         $data->email = $email;
         $data->companyName = $companyName;
+        $data->personCompany = $personCompany;
         $data->personContact = $personContact;
         $data->career = $career;
         $data->taxCode = $taxCode;
@@ -332,13 +336,28 @@ class CustomerController extends Controller
         $data->chanelId = $chanelId;
         $data->routeId = $routeId;
         $data->status = $status;
+        $existingFileName = json_decode($data->fileName, true) ?? [];
+        $existingFilePath = json_decode($data->filePath, true) ?? [];
+        if ($uploadedFiles) {
+            foreach ($uploadedFiles as $file) {
+                $path = $file->store('upload', 'public');
+                $existingFileName[] = $file->getClientOriginalName();
+                $existingFilePath[] = $path;
+            }
+        }
+        if ($avatar) {
+            foreach ($avatar as $a) {
+                $path = $a->move(public_path('assets/img/avatar', 'public'));
+                $existingFileName[] = $a->getClientOriginalName();
+                $existingFilePath[] = $path;
+            }
+        }
+        $data->fileName = json_encode($existingFileName);
+        $data->filePath = json_encode($existingFilePath);
         $data->save();
         $listData = Customer::all();
-
-
-        // Xử lý lưu dữ liệu và trả về kết quả dưới dạng JSON
-        return response()->json(['success' => true]);
-        // return redirect()->route('customers', compact('listData'));
+        // return response()->json(['success' => true]);
+        return redirect()->route('customers', compact('listData'));
         // return view('customer.danhSachKhachHang', compact('listData'));
 
 
