@@ -75,16 +75,23 @@
                                                                         type="checkbox" id="select-all"></th>
                                                                 <th class="text-nowrap text-center" style="width:2%">STT
                                                                 </th>
-                                                                <th class="text-nowrap" style="width:10%">Mã đơn vị</th>
-                                                                <th class="text-nowrap" style="width:10%">Tên đơn vị </th>
-                                                                <th class="text-nowrap" style="width:10%">Đơn vị mẹ </th>
-                                                                <th class="text-nowrap" style="width:10%">Trưởng đơn vị
+                                                                <th class="text-nowrap text-center" style="width:10%">Mã đơn
+                                                                    vị</th>
+                                                                <th class="text-nowrap text-center" style="width:10%">Tên
+                                                                    đơn vị </th>
+                                                                <th class="text-nowrap text-center" style="width:10%">Đơn vị
+                                                                    mẹ </th>
+                                                                <th class="text-nowrap text-center" style="width:10%">Trưởng
+                                                                    đơn vị
                                                                 </th>
-                                                                <th class="text-nowrap" style="width:20%">Chức năng nhiệm vụ
+                                                                <th class="text-nowrap text-center" style="width:20%">Chức
+                                                                    năng nhiệm vụ
                                                                 </th>
                                                                 @if (session('user')['role_id'] == '1')
-                                                                    <th class="text-nowrap" style="width:3%"><span>Hành
-                                                                            động</span></th>
+                                                                    <th class="text-nowrap text-center" style="width:3%">
+                                                                        <span>Hành
+                                                                            động</span>
+                                                                    </th>
                                                                 @endif
                                                             </tr>
                                                         </thead>
@@ -142,7 +149,7 @@
                                                                         <td>
 
                                                                             <div
-                                                                                class="table_actions d-flex justify-content-end">
+                                                                                class="table_actions d-flex justify-content-center">
                                                                                 <div class="btn" data-bs-toggle="modal"
                                                                                     data-bs-target="#qrCode">
                                                                                     <i class="bi bi-share-fill"

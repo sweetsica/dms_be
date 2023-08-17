@@ -75,11 +75,14 @@
                                                                         type="checkbox" id="select-all"></th>
                                                                 <th class="text-nowrap text-center" style="width:2%">STT
                                                                 </th>
-                                                                <th class="text-nowrap" style="width:10%">Mã cấp nhân sự
+                                                                <th class="text-nowrap text-center" style="width:10%">Mã cấp
+                                                                    nhân sự
                                                                 </th>
-                                                                <th class="text-nowrap" style="width:10%">Tên cấp nhân sự
+                                                                <th class="text-nowrap text-center" style="width:10%">Tên
+                                                                    cấp nhân sự
                                                                 </th>
-                                                                <th class="text-nowrap" style="width:20%">Mô tả</th>
+                                                                <th class="text-nowrap text-center" style="width:20%">Mô tả
+                                                                </th>
                                                                 @if (session('user')['role_id'] == '1')
                                                                     <th class="text-center" style="width:1%"><span>Thao
                                                                             tác</span>
@@ -122,7 +125,7 @@
                                                                     @if (session('user')['role_id'] == '1')
                                                                         <td>
                                                                             <div
-                                                                                class="table_actions d-flex justify-content-end">
+                                                                                class="table_actions d-flex justify-content-center">
 
                                                                                 <div data-bs-toggle="tooltip"
                                                                                     data-bs-placement="top" title="Sửa">
