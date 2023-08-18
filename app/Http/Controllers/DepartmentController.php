@@ -98,7 +98,7 @@ class DepartmentController extends Controller
         $listPosToDept = [];
         if ($department_id) {
             $getDept = Department::with('areas')->find($department_id);
-            $listPosToDept = Position::where('department_id', $department_id)->get();
+            $listPosToDept = Position::with('levels')->where('department_id', $department_id)->get();
         }
         $personnelLevelList = PersonnelLevel::all();
         $positionlists = $this->getPosition();

@@ -209,6 +209,8 @@
                                                                 </th>
                                                                 <th class="text-nowrap text-center" style="width:2%">STT
                                                                 </th>
+                                                                <th class="text-nowrap text-center" style="width:10%">Mã
+                                                                    vị trí</th>
                                                                 <th class="text-nowrap text-center" style="width:10%">Tên
                                                                     vị trí</th>
                                                                 <th class="text-nowrap text-center" style="width:10%">Cấp
@@ -255,6 +257,13 @@
                                                                             <a style="color: black"
                                                                                 href="{{ route('department.assignUser', ['id' => $item->id]) }}">{{ $item->name }}</a>
 
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="{{ $item->levels->name }}">
+                                                                            {{ $item->levels->name }}
                                                                         </div>
                                                                     </td>
                                                                     <td>
