@@ -49,6 +49,10 @@ Route::middleware(['guest'])->group(function () {
     Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
 });
 
+Route::get('/test-customer-1', [CustomerTestController::class, 'index1'])->name('index1');
+Route::get('/test-customer-2', [CustomerTestController::class, 'index2'])->name('index2');
+Route::get('/test-customer-3', [CustomerTestController::class, 'index3'])->name('index3');
+
 Route::middleware(['auth.role'])->group(function () {
 
     Route::get('/', function () {
@@ -142,6 +146,8 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('danh-sach-khu-vuc-delete', [AreaController::class, 'delete'])->name('area.delete');
 
     Route::get('chi-tiet-khach-hang/{id}', [CustomerController::class, 'show'])->name('customer-detail.list');
+    Route::get('department-profile', [DepartmentController::class, 'index2'])->name('department.index2');
+    Route::get('department-assignUser/{id?}', [DepartmentController::class, 'assignUser'])->name('department.assignUser');
     Route::get('department', [DepartmentController::class, 'index'])->name('department.index');
     Route::post('department', [DepartmentController::class, 'store'])->name('department.store');
     Route::post('department/{id}', [DepartmentController::class, 'edit'])->name('department.edit');
@@ -198,6 +204,9 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('sua-thong-so-ky-thuat/{id}', [SpecificationsController::class, 'update'])->name('Specifications.update');
     Route::post('xoa-thong-so-ky-thuat/{id}', [SpecificationsController::class, 'destroy'])->name('Specifications.destroy');
     Route::post('thong-so-ky-thuat-delete', [SpecificationsController::class, 'delete'])->name('Specifications.delete');
+    
+    Route::post('them-vi-tri-nhan-su/{id?}', [PersonnelController::class, 'assignPosition'])->name('assign.user.position');
+    Route::delete('xoa-vi-tri-nhan-su/{user_id?}/{pos_id?}', [PersonnelController::class, 'removePosition'])->name('remove.user.position');
 
     Route::get('don-vi-tinh', [UnitController::class, 'index'])->name('Unit.index');
     Route::post('them-don-vi-tinh', [UnitController::class, 'store'])->name('Unit.store');

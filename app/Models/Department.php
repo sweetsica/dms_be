@@ -17,8 +17,13 @@ class Department extends Model
         'description',
         'parent',
         'ib_lead',
+        'area_id'
     ];
 
+    public function areas()
+    {
+        return $this->belongsTo(Area::class, 'area_id');
+    }
 
     public function donViMe()
     {

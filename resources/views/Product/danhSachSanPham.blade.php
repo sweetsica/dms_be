@@ -353,8 +353,8 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Thêm sản phẩm</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="addForm" method="POST" action="{{ route('product.store') }}"
-                    enctype="multipart/form-data">
+                <form id="addForm" method="POST" action="{{ route('product.store') }}" enctype="multipart/form-data"
+                    onsubmit="openModal()">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -418,7 +418,7 @@
                                                     <img style="width:16px;height:16px"
                                                         src="{{ asset('assets/img/upload-file.svg') }}" />
                                                     Tải file lên
-                                                    <input accept=".png, .jpeg, .jpg" required role="button"
+                                                    <input accept=".png, .jpeg, .jpg" role="button" required
                                                         type="file" class="modal_upload-input modal_upload-file"
                                                         name="file" onchange="updateList(event)">
                                                 </button>
@@ -445,6 +445,8 @@
         </div>
     </div>
 
+
+
 @endsection
 @section('footer-script')
 
@@ -468,6 +470,7 @@
     <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_nhanSu.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
+
 
     <script>
         updateList = function(e) {
@@ -624,7 +627,14 @@
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/components/dataHrefTable.js') }}"></script>
+
     <script>
+        $('#addForm').on('submit', function(e) {
+            $('#addDetailProduct').modal('show');
+            event.preventDefault();
+        });
+
+
         $(document).ready(function() {
             // Handle form submission
             $('#addForm').submit(function(event) {

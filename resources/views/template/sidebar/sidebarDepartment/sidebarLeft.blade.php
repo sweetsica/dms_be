@@ -5,8 +5,12 @@
                 <div class="sidebarBody_wrapper ">
                     <div class="sidebarBody_heading-wrapper  ">
                         <div class="wrapper">
-                            <h1 style="color: red;">Cơ cấu đơn vị <img src="{{ asset('assets/img/Vector.png') }}"
-                                    onclick="showList()" id="show-list-button" style="float: right"></h1>
+                            <a style="color: red;" href="{{ route('department.index') }}">
+
+                                <h1>Cơ cấu đơn vị
+                            </a> <img src="{{ asset('assets/img/Vector.png') }}" onclick="showList()"
+                                id="show-list-button" style="float: right"></h1>
+
                         </div>
                         <div id="list-container" style="display: none;">
                             <ul>
@@ -56,7 +60,7 @@
                         <ul id="tree1">
                             @foreach ($departmentListTree as $donVi)
                                 <li data-id="{{ $donVi->id }}">
-                                    <a href="{{ route('Personnel.show', ['department_id' => $donVi->id]) }}"
+                                    <a href="{{ route('department.index2', ['department_id' => $donVi->id]) }}"
                                         class="title-child">{{ $donVi->name }}</a>
                                     @if ($donVi->donViCon->count() > 0)
                                         @include('template.sidebar.sidebarDepartment.child', [

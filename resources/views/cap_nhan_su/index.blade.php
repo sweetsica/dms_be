@@ -75,11 +75,14 @@
                                                                         type="checkbox" id="select-all"></th>
                                                                 <th class="text-nowrap text-center" style="width:2%">STT
                                                                 </th>
-                                                                <th class="text-nowrap" style="width:10%">Mã cấp nhân sự
+                                                                <th class="text-nowrap text-center" style="width:10%">Mã cấp
+                                                                    nhân sự
                                                                 </th>
-                                                                <th class="text-nowrap" style="width:10%">Tên cấp nhân sự
+                                                                <th class="text-nowrap text-center" style="width:10%">Tên
+                                                                    cấp nhân sự
                                                                 </th>
-                                                                <th class="text-nowrap" style="width:20%">Mô tả</th>
+                                                                <th class="text-nowrap text-center" style="width:20%">Mô tả
+                                                                </th>
                                                                 @if (session('user')['role_id'] == '1')
                                                                     <th class="text-center" style="width:1%"><span>Thao
                                                                             tác</span>
@@ -122,7 +125,7 @@
                                                                     @if (session('user')['role_id'] == '1')
                                                                         <td>
                                                                             <div
-                                                                                class="table_actions d-flex justify-content-end">
+                                                                                class="table_actions d-flex justify-content-center">
 
                                                                                 <div data-bs-toggle="tooltip"
                                                                                     data-bs-placement="top" title="Sửa">
@@ -201,10 +204,10 @@
                                         placeholder="Nhập mã cấp nhân sự" class="form-control"
                                         value="{{ $item->code }}">
                                 </div>
-                                <div class="col-6 mb-3">
+                                <div class="col-12 mb-3">
                                     <div data-bs-toggle="tooltip" data-bs-placement="top">
                                         <textarea name="description" type="text" placeholder="Mô tả" class="form-control " data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Mô tả" style="width: 450px;height: 80px;">{{ $item->description }}</textarea>
+                                            data-bs-placement="top" title="Mô tả" style="height: 80px;">{{ $item->description }}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -264,10 +267,10 @@
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Nhập mã cấp nhân sự*">
                             </div>
-                            <div class="col-6 mb-3">
+                            <div class="col-12 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top">
                                     <textarea name="description" type="text" placeholder="Mô tả" class="form-control " data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Mô tả" style="width: 450px;height: 80px;"></textarea>
+                                        data-bs-placement="top" title="Mô tả" style="height: 80px;"></textarea>
                                 </div>
                             </div>
                             <div class="modal-footer">

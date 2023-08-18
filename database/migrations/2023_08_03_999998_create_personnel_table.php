@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('code', 50)->unique();
             $table->string('name', 50);
             $table->unsignedBigInteger('department_id')->nullable();
-            $table->unsignedBigInteger('position_id')->nullable();
+            $table->text('position_id')->nullable();
             $table->unsignedBigInteger('personnel_lv_id')->nullable();
             $table->unsignedBigInteger('role_id')->nullable();
             $table->unsignedBigInteger('area_id')->nullable();
@@ -33,7 +33,6 @@ return new class extends Migration
             $table->unsignedBigInteger('manage')->nullable();
 
             $table->foreign('department_id')->references('id')->on('department')->onDelete('cascade');
-            $table->foreign('position_id')->references('id')->on('position')->onDelete('cascade');
             $table->foreign('personnel_lv_id')->references('id')->on('personnel_level')->onDelete('cascade');
             $table->foreign('role_id')->references('id')->on('role')->onDelete('cascade');
             $table->foreign('area_id')->references('id')->on('area')->onDelete('cascade');

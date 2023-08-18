@@ -121,7 +121,7 @@ class PositionController extends Controller
         $data->manage=$manage;
         $data->description=$description;
         $data->save();
-        return redirect()->route('position.index');
+        return back();
     }
 
     public function update(Request $request,$id)
