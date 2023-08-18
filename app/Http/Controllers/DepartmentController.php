@@ -48,6 +48,14 @@ class DepartmentController extends Controller
         // dd($departmentListTree);
         $departmentlists = $this->getDepartment();
 
+        $positionlists = $this->getPosition();
+        $personnellists = $this->getPersonnel();
+        $roleList = Role::all();
+        $localityList = Locality::all();
+        $personnelLevelList = PersonnelLevel::all();
+
+        $listUsers = Personnel::all();
+
         return view("Deparment.index", [
             "departmentList" => $departmentList,
             'don_vi_me' => $don_vi_me,
@@ -55,7 +63,13 @@ class DepartmentController extends Controller
             "departmentlists" => $departmentlists,
             'search' => $search,
             'UnitLeaderList' => $UnitLeaderList,
-            "departmentListTree" => $departmentListTree
+            "departmentListTree" => $departmentListTree,
+            'listUsers' => $listUsers,
+            'personnelLevelList' => $personnelLevelList,
+            'positionlists' => $positionlists,
+            'roleList' => $roleList,
+            'localityList' => $localityList,
+            'personnellists' => $personnellists,
         ]);
     }
 

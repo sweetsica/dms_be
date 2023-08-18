@@ -122,7 +122,7 @@
 
                                                     <div class="col-lg-6 border">
                                                         <div class="row my-2">
-                                                            <div class="col-lg-4">
+                                                            <div class="col-lg-8">
                                                                 <div class="row">
                                                                     <div class="col-lg-6">
                                                                         <span class="fs-5 fw-bold">Trạng thái:</span>
@@ -253,7 +253,7 @@
                                                                         <div class="overText" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
                                                                             title="{{ $item->name }}">
-                                                                            <a style="color: black"
+                                                                            <a style="color: black; text-decoration: underline"
                                                                                 href="{{ route('department.assignUser', ['id' => $item->id]) }}">{{ $item->name }}</a>
 
                                                                         </div>
@@ -261,8 +261,8 @@
                                                                     <td>
                                                                         <div class="overText" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
-                                                                            title="{{ $item->levels->name }}">
-                                                                            {{ $item->levels->name }}
+                                                                            title="{{ $item->levels->name ?? "" }}">
+                                                                            {{ $item->levels->name ?? "" }}
                                                                         </div>
                                                                     </td>
                                                                     <td>

@@ -122,17 +122,17 @@
 
                                                     <div class="col-lg-6 border">
                                                         <div class="row my-2">
-                                                            <div class="col-lg-4">
+                                                            <div class="col-lg-8">
                                                                 <div class="row">
                                                                     <div class="col-lg-6">
-                                                                        <span class="fs-5 fw-bold">Chính thức:</span>
+                                                                        <span class="fs-5 fw-bold">Trạng thái:</span>
                                                                     </div>
                                                                     <div class="col-lg-6">
-                                                                        <span class="fs-5">avc</span>
+                                                                        <span class="fs-5">Hoạt động</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-lg-4">
+                                                            {{-- <div class="col-lg-4">
                                                                 <div class="row">
                                                                     <div class="col-lg-6">
                                                                         <span class="fs-5 fw-bold">Thử việc:</span>
@@ -155,7 +155,7 @@
                                                                         </span>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            </div> --}}
                                                         </div>
                                                         <div class="row my-2">
                                                             <div class="col-lg-12">
@@ -164,7 +164,7 @@
                                                                         <span class="fs-5 fw-bold">Định biên/thực tế:</span>
                                                                     </div>
                                                                     <div class="col-lg-8">
-                                                                        <span class="fs-5">avc</span>
+                                                                        <span class="fs-5">10 người</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -176,7 +176,7 @@
                                                                         <span class="fs-5 fw-bold">Quỹ lương năm:</span>
                                                                     </div>
                                                                     <div class="col-lg-8">
-                                                                        <span class="fs-5">1000</span>
+                                                                        <span class="fs-5">100.000.000 VNĐ</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
