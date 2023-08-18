@@ -35,10 +35,6 @@
 .txt_blue {
     color: #000080 !important;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/mix-branch-2
 .export_wrapper {
     font-size: 1.2rem;
 }
@@ -59,12 +55,6 @@
         transform: scale(0.5);
     }
     body {
-<<<<<<< HEAD
-        /* -webkit-print-color-adjust: exact; */
-        /* overflow: hidden!important; */
-        transform: none;
-    }
-=======
         -webkit-print-color-adjust: exact;
         /* overflow: hidden!important; */
         transform: none;
@@ -72,7 +62,6 @@
     .table>:not(caption)>*>* {
         padding: 3px 5px 2px;
     }
->>>>>>> origin/mix-branch-2
     .export_container {
         padding: 0 !important;
         box-shadow: none !important;
@@ -82,10 +71,6 @@
         background-color: var(--white-color);
     }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/mix-branch-2
     .export_wrapper {
         font-size: 1rem;
     }
