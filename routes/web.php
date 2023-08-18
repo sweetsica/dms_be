@@ -48,10 +48,6 @@ Route::middleware(['guest'])->group(function () {
     Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
 });
 
-Route::get('/test-customer-1', [CustomerTestController::class, 'index1'])->name('index1');
-Route::get('/test-customer-2', [CustomerTestController::class, 'index2'])->name('index2');
-Route::get('/test-customer-3', [CustomerTestController::class, 'index3'])->name('index3');
-
 Route::middleware(['auth.role'])->group(function () {
 
     Route::get('/', function () {
@@ -165,7 +161,6 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('cap_nhan_sux/{id}', [PersonnelLevelController::class, 'update'])->name('PersonnelLevel.update');
     Route::post('cap_nhan_su/{id}', [PersonnelLevelController::class, 'destroy'])->name('PersonnelLevelx.destroy');
     Route::post('cap_nhan_su-delete', [PersonnelLevelController::class, 'delete'])->name('PersonnelLevel.delete');
-
 
     Route::get('nhan-su', [PersonnelController::class, 'index'])->name('Personnel.index');
     Route::get('nhan-su-vitri', [PersonnelController::class, 'indexvtri'])->name('Personnel.indexvtri');

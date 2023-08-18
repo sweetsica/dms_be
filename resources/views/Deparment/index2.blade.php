@@ -22,28 +22,75 @@
                                     <div class='row'>
 
                                         <div class="col-md-12">
-                                            <div
-                                                class="action_wrapper d-flex flex-wrap justify-content-between align-items-center mb-3">
-                                                {{-- <div class="order-2 order-md-1" style="font-size: 15px;">
-                                                    <b>Danh sách đơn vị trực thuộc</b>
-                                                </div> --}}
-                                                <div
-                                                    class="order-1 order-md-2  justify-content-between align-items-center flex-grow-1 mb-2 mb-md-0">
+                                            <div class="action_wrapper align-items-center mb-3 justify-content-between">
+                                                <div class="justify-content-between align-items-center">
                                                     <form method="GET" action="">
                                                         <div class="form-group has-search">
-                                                            <input type="text" style="width: 150px; float: right;"
+                                                            <input type="text" style="width: 170px; float: right;"
                                                                 class="form-control" value="{{ $search }}"
                                                                 placeholder="Tìm kiếm" name="search">
                                                         </div>
                                                     </form>
                                                 </div>
 
-                                                <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" title="Lọc">
-                                                    <button class="btn btn-outline-danger" data-bs-toggle="modal"
-                                                        data-bs-target="#filterOptions">
-                                                        <i class="bi bi-funnel"></i>
-                                                    </button>
+                                                <div class=" justify-content-between align-items-center mb-2 mb-md-0">
+                                                    <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="Lọc mã vị trí" style="width: 170px; float: right;">
+                                                        <select name="filter_personnel_level" required class="selectpicker"
+                                                            data-dropup-auto="false">
+                                                            <option value="">Lọc mã vị trí</option>
+                                                            {{-- @foreach ($personnelLevelList as $item)
+                                                                <option value="{{ $item->id }}">
+                                                                    {{ $item->name }}
+                                                                </option>
+                                                            @endforeach --}}
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class=" justify-content-between align-items-center mb-2 mb-md-0">
+                                                    <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="Lọc cấp nhân sự" style="width: 170px; float: right;">
+                                                        <select name="filter_personnel_level" required class="selectpicker"
+                                                            data-dropup-auto="false">
+                                                            <option value="">Lọc cấp nhân sự</option>
+                                                            {{-- @foreach ($personnelLevelList as $item)
+                                                                <option value="{{ $item->id }}">
+                                                                    {{ $item->name }}
+                                                                </option>
+                                                            @endforeach --}}
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class=" justify-content-between align-items-center mb-2 mb-md-0">
+                                                    <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="Lọc tên vị trí" style="width: 170px; float: right;">
+                                                        <select name="filter_personnel_level" required class="selectpicker"
+                                                            data-dropup-auto="false">
+                                                            <option value="">Lọc tên vị trí</option>
+                                                            {{-- @foreach ($personnelLevelList as $item)
+                                                                <option value="{{ $item->id }}">
+                                                                    {{ $item->name }}
+                                                                </option>
+                                                            @endforeach --}}
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class=" justify-content-between align-items-center mb-2 mb-md-0">
+                                                    <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="Lọc người đảm nhiệm" style="width: 170px; float: right;">
+                                                        <select name="filter_personnel_level" required class="selectpicker"
+                                                            data-dropup-auto="false">
+                                                            <option value="">Lọc người đảm nhiệm</option>
+                                                            {{-- @foreach ($personnelLevelList as $item)
+                                                                <option value="{{ $item->id }}">
+                                                                    {{ $item->name }}
+                                                                </option>
+                                                            @endforeach --}}
+                                                        </select>
+                                                    </div>
                                                 </div>
 
                                                 @if (session('user')['role_id'] == '1')
@@ -161,7 +208,8 @@
                                                             <div class="col-lg-12">
                                                                 <div class="row">
                                                                     <div class="col-lg-4">
-                                                                        <span class="fs-5 fw-bold">Định biên/thực tế:</span>
+                                                                        <span class="fs-5 fw-bold">Định biên/thực
+                                                                            tế:</span>
                                                                     </div>
                                                                     <div class="col-lg-8">
                                                                         <span class="fs-5">10 người</span>
@@ -261,8 +309,8 @@
                                                                     <td>
                                                                         <div class="overText" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
-                                                                            title="{{ $item->levels->name ?? "" }}">
-                                                                            {{ $item->levels->name ?? "" }}
+                                                                            title="{{ $item->levels->name ?? '' }}">
+                                                                            {{ $item->levels->name ?? '' }}
                                                                         </div>
                                                                     </td>
                                                                     <td>
