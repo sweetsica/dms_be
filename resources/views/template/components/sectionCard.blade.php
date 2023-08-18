@@ -1,4 +1,3 @@
-
 <div class="mainSection_card d-none d-sm-block">
     <div class="row">
         <div class="col-md-3">
