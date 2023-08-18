@@ -59,7 +59,7 @@
                         <ul id="tree1">
                             @foreach ($departmentListTree as $donVi)
                                 <li data-id="{{ $donVi->id }}">
-                                    <a href="{{ route('Personnel.show', ['department_id' => $donVi->id]) }}"
+                                    <a href="{{ route('department.index2', ['department_id' => $donVi->id]) }}"
                                         class="title-child">{{ $donVi->name }}</a>
                                     @if ($donVi->donViCon->count() > 0)
                                         @include('template.sidebar.sidebarDepartment.child', [

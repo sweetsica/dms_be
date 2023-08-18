@@ -1,6 +1,6 @@
 @extends('template.master')
 {{-- Trang chủ GIao Ban --}}
-@section('title', 'Danh sách tổ chức')
+@section('title', 'Thông tin vị trí')
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 @endsection
@@ -12,7 +12,7 @@
             <div class="main">
                 <div class="container-fluid">
                     <div class="mainSection_heading">
-                        <h5 class="mainSection_heading-title">Danh sách tổ chức</h5>
+                        <h5 class="mainSection_heading-title">Thông tin vị trí - {{ $getPos->name ?? '' }}</h5>
                         @include('template.components.sectionCard')
                     </div>
 
@@ -66,7 +66,8 @@
                                                                             danh:</span>
                                                                     </div>
                                                                     <div class="col-lg-8">
-                                                                        <span class="fs-5">ABC</span>
+                                                                        <span
+                                                                            class="fs-5">{{ $getPos->name ?? '' }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -80,7 +81,8 @@
                                                                             danh:</span>
                                                                     </div>
                                                                     <div class="col-lg-8">
-                                                                        <span class="fs-5">ABC</span>
+                                                                        <span
+                                                                            class="fs-5">{{ $getPos->code ?? '' }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -94,7 +96,7 @@
                                                                     </div>
                                                                     <div class="col-lg-8">
                                                                         <span class="fs-5">
-                                                                            Hà Nội
+                                                                            {{ $getPos->areas->name ?? '' }}
                                                                         </span>
                                                                     </div>
                                                                 </div>
@@ -110,10 +112,7 @@
                                                                     </div>
                                                                     <div class="col-lg-8">
                                                                         <span class="fs-5">
-                                                                            Quản lý doanh thu, tìm kiếm khách hàng, thương
-                                                                            thảo
-                                                                            hợp
-                                                                            đồng, phát triển thị trường
+                                                                            {{ $getPos->description ?? '' }}
                                                                         </span>
                                                                     </div>
                                                                 </div>
@@ -123,17 +122,17 @@
 
                                                     <div class="col-lg-6 border">
                                                         <div class="row my-2">
-                                                            <div class="col-lg-4">
+                                                            <div class="col-lg-8">
                                                                 <div class="row">
                                                                     <div class="col-lg-6">
-                                                                        <span class="fs-5 fw-bold">Chính thức:</span>
+                                                                        <span class="fs-5 fw-bold">Trạng thái:</span>
                                                                     </div>
                                                                     <div class="col-lg-6">
-                                                                        <span class="fs-5">avc</span>
+                                                                        <span class="fs-5">Hoạt động</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-lg-4">
+                                                            {{-- <div class="col-lg-4">
                                                                 <div class="row">
                                                                     <div class="col-lg-6">
                                                                         <span class="fs-5 fw-bold">Thử việc:</span>
@@ -156,7 +155,7 @@
                                                                         </span>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            </div> --}}
                                                         </div>
                                                         <div class="row my-2">
                                                             <div class="col-lg-12">
@@ -165,7 +164,7 @@
                                                                         <span class="fs-5 fw-bold">Định biên/thực tế:</span>
                                                                     </div>
                                                                     <div class="col-lg-8">
-                                                                        <span class="fs-5">avc</span>
+                                                                        <span class="fs-5">10 người</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -177,7 +176,7 @@
                                                                         <span class="fs-5 fw-bold">Quỹ lương năm:</span>
                                                                     </div>
                                                                     <div class="col-lg-8">
-                                                                        <span class="fs-5">1000</span>
+                                                                        <span class="fs-5">100.000.000 VNĐ</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -244,71 +243,104 @@
                                                                 @endif
                                                             </tr>
                                                         </thead>
-                                                        {{-- @foreach ($departmentList as $item)
+                                                        @foreach ($listUsers as $item)
                                                             <tbody>
                                                                 <tr>
                                                                     <td class="text-center"> <input type="checkbox"
                                                                             name="selected_items[]"
                                                                             value="{{ $item->id }}"></td>
                                                                     <td class=" text-center">
-                                                                        {{ $t++ }}
+                                                                        {{ $loop->iteration }}
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
-                                                                            title="{{ $item->code }}">
-                                                                            {{ $item->code }}
+                                                                            title="{{ $item->code ?? '' }}">
+                                                                            {{ $item->code ?? '' }}
                                                                         </div>
                                                                     </td>
-                                                                    <td class="">
+                                                                    <td data-bs-toggle="modal"
+                                                                        data-bs-target="#infoUser{{ $item->id }}"
+                                                                        role="button" class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
-                                                                            title="{{ $item->name }}">
-                                                                            {{ $item->name }}
+                                                                            title="{{ $item->name ?? '' }}">
+                                                                            {{ $item->name ?? '' }}
                                                                         </div>
                                                                     </td>
                                                                     <td>
-                                                                        @if ($item->donvime)
-                                                                            <div class="overText" data-bs-toggle="tooltip"
-                                                                                data-bs-placement="top"
-                                                                                title="{{ $item->donvime->name }}">
-                                                                                {{ $item->donvime->name }}
-                                                                            </div>
-                                                                        @else
-                                                                        @endif
+                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="{{ $item->department->name ?? '' }}">
+                                                                            {{ $item->department->name ?? '' }}
+                                                                        </div>
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
-                                                                            title="{{ $item->leader_name }}">
-                                                                            {{ $item->leader_name }}
+                                                                            title="{{ $item->level->name ?? '' }}">
+                                                                            {{ $item->level->name ?? '' }}
                                                                         </div>
 
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
-                                                                            title="{{ $item->description }}">
-                                                                            {{ $item->description }}
+                                                                            title="{{ $item->role->name ?? '' }}">
+                                                                            {{ $item->role->name ?? '' }}
                                                                         </div>
 
+                                                                    </td>
+                                                                    <td class="">
+                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="{{ $item->area->name ?? '' }}">
+                                                                            {{ $item->area->name ?? '' }}
+                                                                        </div>
+                                                                    </td>
+
+                                                                    <td class="">
+                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="{{ $item->email ?? '' }}">
+                                                                            {{ $item->email ?? '' }}
+                                                                        </div>
+                                                                    </td>
+
+                                                                    <td class="">
+                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="{{ $item->phone ?? '' }}">
+                                                                            {{ $item->phone ?? '' }}
+                                                                        </div>
+                                                                    </td>
+
+                                                                    <td class="">
+                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="{{ $item->working_form ?? '' }}">
+                                                                            {{ $item->working_form ?? '' }}
+                                                                        </div>
+                                                                    </td>
+
+                                                                    <td class="">
+                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="{{ $item->status ?? '' }}">
+                                                                            {{ $item->status ?? '' }}
+                                                                        </div>
                                                                     </td>
                                                                     @if (session('user')['role_id'] == '1')
                                                                         <td>
 
                                                                             <div
                                                                                 class="table_actions d-flex justify-content-center">
-                                                                                <div class="btn" data-bs-toggle="modal"
-                                                                                    data-bs-target="#qrCode">
-                                                                                    <i class="bi bi-share-fill"
-                                                                                        style="color: #787878;"></i>
-                                                                                </div>
                                                                                 <div data-bs-toggle="tooltip"
                                                                                     data-bs-placement="top"
                                                                                     title="Sửa ">
                                                                                     <div class="btn"
                                                                                         data-bs-toggle="modal"
-                                                                                        data-bs-target="#suaDeXuat{{ $item['id'] }}">
+                                                                                        data-bs-target="#suaDeXuat{{ $item->id }}">
                                                                                         <img style="width:16px;height:16px"
                                                                                             src="{{ asset('assets/img/edit.svg') }}" />
                                                                                     </div>
@@ -328,16 +360,16 @@
                                                                     @endif
                                                                 </tr>
                                                             </tbody>
-                                                        @endforeach --}}
+                                                        @endforeach
                                                     </table>
-                                                    <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                    {{-- <nav aria-label="Page navigation example" class="float-end mt-3"
                                                         id="target-pagination">
                                                         <ul class="pagination">
                                                             {{ $departmentList->appends([
                                                                     'search' => $search,
                                                                 ])->links() }}
                                                         </ul>
-                                                    </nav>
+                                                    </nav> --}}
                                                 </div>
                                             </form>
                                         </div>
@@ -355,96 +387,251 @@
     </div>
     @include('template.sidebar.sidebarMaster.sidebarRight')
 
-    @foreach ($departmentList as $item)
-        {{-- Sửa đề xuất --}}
+    @foreach ($listUsers as $item)
         <div class="modal fade" id="suaDeXuat{{ $item['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header text-center">
-                        <h5 class="modal-title w-100" id="exampleModalLabel">Sửa đơn vị</h5>
+                        <h5 class="modal-title w-100" id="exampleModalLabel">Sửa nhân sự</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form method="POST" action="{{ route('department.update', $item->id) }}">
+                    <form method="POST" action="{{ route('Personnel.update', $item->id) }}">
                         @csrf
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-6 mb-3">
-                                    <input data-bs-toggle="tooltip" data-bs-placement="top" title="Nhập tên đơn vị*"
-                                        name="name" type="text" placeholder="Tên đơn vị" class="form-control"
-                                        value="{{ $item->name }}" required>
+                                <div>
+                                    <h1 style="color: red;">Thông tin cá
+                                        nhân</h1>
                                 </div>
-                                <div class="col-6 mb-3">
-                                    <input data-bs-toggle="tooltip" data-bs-placement="top" title="Mã đơn vị"
-                                        name="code" type="text" placeholder="Mã đơn vị" class="form-control"
-                                        value="{{ $item->code }}" required>
+                                <div class="col-4 mb-3">
+                                    <input name="name" required type="text" placeholder="Họ và tên*"
+                                        class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Họ và tên*" value="{{ $item->name }}">
                                 </div>
-                                <div class="col-6 mb-3">
-
-                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn đơn vị mẹ">
-                                        <select name="parent" required class="selectpicker" data-dropup-auto="false">
-                                            <?php if( $item->parent == 0){ ?>
-                                            <option value="0">Chọn
-                                                đơn
-                                                vị mẹ</option>
-                                            <?php
-                                      }else{ ?>
-                                            <option value="{{ $item->parent }}">
-                                                @if ($item->donvime)
-                                                    {{ $item->donvime->name }}
-                                                @endif
+                                <div class="col-4 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Giới tính*">
+                                        <select name="gender" class="selectpicker" data-dropup-auto="false" required>
+                                            <option value="{{ $item->gender }}">
+                                                {{ $item->gender }}
                                             </option>
+                                            <option value="Nam">Nam
+                                            </option>
+                                            <option value="Nữ">Nữ
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-4 mb-3">
+                                    <input name="birthday" required type="date" placeholder="Ngày sinh*"
+                                        class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Ngày sinh*" value="{{ $item->birthday }}">
+                                </div>
+                                <div class="col-4 mb-3">
+                                    <input name="code" required type="text" placeholder="Mã nhân sự*"
+                                        class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Nhập mã nhân sự*" value="{{ $item->code }}">
+                                </div>
+                                <div class="col-8 mb-3">
+                                    <input name="address" type="text" placeholder="Địa chỉ" class="form-control"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Địa chỉ"
+                                        value="{{ $item->address }}">
+                                </div>
+                                <div class="col-4 mb-3">
+                                    <input name="email" required type="text" placeholder="Email*"
+                                        class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Email*" value="{{ $item->email }}">
+                                </div>
+                                <div class="col-4 mb-3">
+                                    <input name="password" required type="password" placeholder="Mật khẩu*"
+                                        class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Mật khẩu*" value="{{ $item->password }}">
+                                </div>
+                                <div class="col-4 mb-3">
+                                    <input name="phone" required type="text" placeholder="Số điện thoại*"
+                                        class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Số điện thoại*" value="{{ $item->phone }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div>
+                                    <h1 style="color: red;">Thông tin công
+                                        việc</h1>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Đơn vị công tác">
+                                        <select name="department_id" class="selectpicker" data-dropup-auto="false">
+                                            <?php if( $item->department_id == null){ ?>
+                                            <option value="">Chọn đơn
+                                                vị công tác</option>
+                                            <?php }else{ ?>
                                             <?php } ?>
-                                            <option value="0">Chọn
-                                                đơn
-                                                vị mẹ</option>
-                                            @foreach ($departmentlists as $ac)
-                                                <option value="{{ $ac->id }}">
+                                            @foreach ($departmentlists as $dmList)
+                                                <option {{ $dmList->id == $item->department_id ? 'selected' : '' }}
+                                                    value="{{ $dmList->id }}">
                                                     @php
                                                         $str = '';
-                                                        for ($i = 0; $i < $ac->level; $i++) {
+                                                        for ($i = 0; $i < $dmList->level; $i++) {
                                                             echo $str;
                                                             $str = '  --';
                                                         }
                                                     @endphp
-                                                    {{ $ac->name }}
+                                                    {{ $dmList->name }}
                                                 </option>
                                             @endforeach
                                         </select>
                                     </div>
-
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn trưởng bộ phận">
-                                        <select name="ib_lead" class="selectpicker" data-dropup-auto="false">
-                                            <?php if( $item->ib_lead == 0){ ?>
-                                            <option value="0">Chọn
-                                                trưởng bộ phận
-                                            </option>
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Cấp nhân sự">
+                                        <select name="personnel_lv_id" class="selectpicker" data-dropup-auto="false">
+                                            <?php if( $item->personnel_lv_id == null){ ?>
+                                            <option value="">Cấp nhân
+                                                sự</option>
                                             <?php }else{ ?>
-                                            <option value="{{ $item->ib_lead }}">
-                                                {{ $item->leader_name }}
-                                            </option>
                                             <?php } ?>
-                                            <option value="0">Chọn
-                                                trưởng bộ phận</option>
-                                            @foreach ($UnitLeaderList as $av)
-                                                <option value="{{ $av->id }}">
-                                                    {{ $av->name }}
+                                            @foreach ($personnelLevelList as $perLvList)
+                                                <option {{ $perLvList->id == $item->position_level_id ? 'selected' : '' }}
+                                                    value="{{ $perLvList->id }}">
+                                                    {{ $perLvList->name }}
                                                 </option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top">
-                                    <textarea name="description" type="text" placeholder="Chức năng nhiệm vụ" class="form-control "
-                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Mô tả" style="height: 80px;">{{ $item->description }}</textarea>
+                                <div class="col-6 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Vị trí chức danh">
+                                        <select name="position_id" class="selectpicker" data-dropup-auto="false"
+                                            multiple>
+                                            <?php if( $item->position_id == null){ ?>
+                                            <option value="">Vị trí
+                                                chức danh</option>
+                                            <?php }else{ ?>
+                                            <?php } ?>
+                                            @php
+                                                $positionIds = json_decode($item->position_id, true);
+                                            @endphp
+                                            @foreach ($positionlists as $posiList)
+                                                <option {{ in_array($posiList->id, $positionIds) ? ' selected' : '' }}
+                                                    value="{{ $posiList->id }}">
+                                                    @php
+                                                        $str = '';
+                                                        for ($i = 0; $i < $posiList->level; $i++) {
+                                                            echo $str;
+                                                            $str = '  --';
+                                                        }
+                                                    @endphp
+                                                    {{ $posiList->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Vai trò">
+                                        <select name="role_id" class="selectpicker" data-dropup-auto="false">
+                                            <?php if( $item->role_id == null){ ?>
+                                            <option value="">Vai trò
+                                            </option>
+                                            <?php }else{ ?>
+                                            <?php } ?>
+                                            @foreach ($roleList as $roleLit)
+                                                <option {{ $roleLit->id == $item->role_id ? 'selected' : '' }}
+                                                    value="{{ $roleLit->id }}">
+                                                    {{ $roleLit->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Địa bàn">
+                                        <select name="area_id" class="selectpicker" data-dropup-auto="false">
+                                            <?php if( $item->area_id == null){ ?>
+                                            <option value="">Địa bàn
+                                            </option>
+                                            <?php }else{ ?>
+                                            <?php } ?>
+                                            @foreach ($localityList as $localList)
+                                                <option value="{{ $localList->id }}">
+                                                    {{ $localList->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Quản lý trực tiếp">
+                                        <select name="manage" class="selectpicker" data-dropup-auto="false">
+                                            <?php if( $item->manage == null){ ?>
+                                            <option value="">Quản lý
+                                                trực tiếp</option>
+                                            <?php }else{ ?>
+                                            <?php } ?>
+                                            @foreach ($personnellists as $perllists)
+                                                <option value="{{ $perllists->id }}">
+                                                    @php
+                                                        $str = '';
+                                                        for ($i = 0; $i < $perllists->level; $i++) {
+                                                            echo $str;
+                                                            $str = '  --';
+                                                        }
+                                                    @endphp
+                                                    {{ $perllists->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <input name="annual_salary" type="text" placeholder="Quỹ lương năm"
+                                        class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Quỹ lương năm" value="{{ $item->annual_salary }}">
+                                </div>
+                                {{-- <div class="col-6 mb-3"> --}}
+                                    {{-- <input name="pack" type="text"
+                            placeholder="Gói trang bị"
+                            class="form-control"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            title="Gói trang bị"
+                            value="{{ $item->pack }}"> --}}
+                                    {{-- <div data-bs-toggle="tooltip" data-bs-placement="top" title="Gói trang bị">
+                                        <select name="pack" class="selectpicker" data-dropup-auto="false">
+                                            <option value="{{ $item->pack }}">
+                                                {{ $item->pack }}
+                                            </option>
+
+                                        </select>
+                                    </div>
+                                </div> --}}
+                                <div class="col-6 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Hình thức làm việc">
+                                        <select name="working_form" class="selectpicker" data-dropup-auto="false"
+                                            required>
+                                            <option value="Chính thức" {{ $item->working_form == "Chính thức" ? "selected" : "" }}>
+                                                Chính thức</option>
+                                            <option value="Thử việc" {{ $item->working_form == "Thử việc" ? "selected" : "" }}>Thử
+                                                việc</option>
+                                            <option value="Cộng tác viên" {{ $item->working_form == "Cộng tác viên" ? "selected" : "" }}>
+                                                Cộng tác viên</option>
+                                            <option value="Thực tập sinh" {{ $item->working_form == "Thực tập sinh" ? "selected" : "" }}>
+                                                Thực tập sinh</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Trạng thái">
+                                        <select name="status" class="selectpicker" data-dropup-auto="false" required>
+                                            <option value="Đang làm việc" {{ $item->status == "Đang làm việc" ? "selected" : "" }}>
+                                                Đang làm việc</option>
+                                            <option value="Đã nghỉ việc" {{ $item->status == "Đã nghỉ việc" ? "selected" : "" }}>Đã
+                                                nghỉ việc</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
                             <button type="submit" class="btn btn-danger">Lưu</button>
@@ -454,42 +641,42 @@
             </div>
         </div>
 
-
         {{-- Xóa đề xuất --}}
         <div class="modal fade" id="xoaDeXuat{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title text-danger" id="exampleModalLabel">Xóa đơn vị </h5>
+                        <h5 class="modal-title text-danger" id="exampleModalLabel">Gỡ nhân sự khỏi ví trí </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Bạn có thực sự muốn xoá đơn vị này không?
+                        Bạn có thực sự muốn gỡ nhân sự khỏi ví trí này không?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
-                        <form action="{{ route('departmentr.destroy', $item->id) }}" method="POST">
+                        <form
+                            action="{{ route('remove.user.position', ['user_id' => $item->id, 'pos_id' => $getPos->id]) }}"
+                            method="POST">
                             @csrf
+                            @method('DELETE')
                             <button type="submit" class="btn btn-danger">Xóa</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    @endforeach
 
 
-    <!-- Modal Thêm Tao De Xuat -->
-    <div class="modal fade" id="infoUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">Thông tin nhân sự</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="{{ route('Personnel.store') }}" method="POST">
-                    @csrf
+        <!-- Modal Thêm Tao De Xuat -->
+        <div class="modal fade" id="infoUser{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h5 class="modal-title w-100" id="exampleModalLabel">Thông tin nhân sự</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
                     <div class="modal-body">
                         <div>
                             <h1 style="color: red;">Thông tin cá nhân</h1>
@@ -503,46 +690,53 @@
                                 <div class="row">
 
                                     <div class="col-4 mb-3">
-                                        <input name="name" required type="text" placeholder="Họ và tên*"
+                                        <input value="{{ $item->name ?? '' }}" style="pointer-events: none"
+                                            name="name" required type="text" placeholder="Họ và tên*"
                                             class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
                                             title="Họ và tên*">
                                     </div>
                                     <div class="col-4 mb-3">
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" title="Giới tính*">
-                                            <select name="gender" class="selectpicker" data-dropup-auto="false"
+                                            <select disabled name="gender" class="selectpicker" data-dropup-auto="false"
                                                 required>
-                                                <option value="">Giới tính*</option>
-                                                <option value="Nam">Nam</option>
-                                                <option value="Nữ">Nữ</option>
+                                                <option value="Nam" {{ $item->gender == 'Nam' ? 'selected' : '' }}>Nam
+                                                </option>
+                                                <option value="Nữ" {{ $item->gender == 'Nữ' ? 'selected' : '' }}>Nữ
+                                                </option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-4 mb-3">
-                                        <input name="birthday" required type="date" placeholder="Ngày sinh*"
+                                        <input value="{{ $item->birthday ?? '' }}" style="pointer-events: none"
+                                            name="birthday" required type="date" placeholder="Ngày sinh*"
                                             class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
                                             title="Ngày sinh*">
                                     </div>
                                     <div class="col-4 mb-3">
-                                        <input name="code" required type="text" placeholder="Mã nhân sự*"
+                                        <input value="{{ $item->code ?? '' }}" style="pointer-events: none"
+                                            name="code" required type="text" placeholder="Mã nhân sự*"
                                             class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
                                             title="Nhập mã nhân sự*">
                                     </div>
                                     <div class="col-8 mb-3">
-                                        <input name="address" type="text" placeholder="Địa chỉ" class="form-control"
+                                        <input value="{{ $item->address ?? '' }}" style="pointer-events: none"
+                                            name="address" type="text" placeholder="Địa chỉ" class="form-control"
                                             data-bs-toggle="tooltip" data-bs-placement="top" title="Địa chỉ">
                                     </div>
                                     <div class="col-4 mb-3">
-                                        <input name="email" required type="email" placeholder="Email*"
+                                        <input value="{{ $item->email ?? '' }}" style="pointer-events: none"
+                                            name="email" required type="email" placeholder="Email*"
                                             class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
                                             title="Email*">
                                     </div>
                                     <div class="col-4 mb-3">
-                                        <input name="password" required type="text" placeholder="Mật khẩu*"
-                                            class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
-                                            title="Mật khẩu*">
+                                        <input value="********" style="pointer-events: none" name="password" required
+                                            type="password" placeholder="Mật khẩu*" class="form-control"
+                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Mật khẩu*">
                                     </div>
                                     <div class="col-4 mb-3">
-                                        <input name="phone" required type="text" placeholder="Số điện thoại*"
+                                        <input value="{{ $item->phone ?? '' }}" style="pointer-events: none"
+                                            name="phone" required type="text" placeholder="Số điện thoại*"
                                             class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
                                             title="Số điện thoại*">
                                     </div>
@@ -552,133 +746,190 @@
 
                         <div class="row">
                             <div>
-                                <h1 style="color: red;">Thông tin công việc</h1>
+                                <h1 style="color: red;">Thông tin công
+                                    việc</h1>
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Đơn vị công tác">
-                                    <select name="department_id" class="selectpicker" data-dropup-auto="false">
-                                        <option value="">Đơn vị công tác</option>
-                                        {{-- @foreach ($departmentlists as $item)
-                                            <option value="{{ $item->id }}">
+                                    <select disabled name="department_id" class="selectpicker" data-dropup-auto="false">
+                                        <?php if( $item->department_id == null){ ?>
+                                        <option value="">Chọn đơn
+                                            vị công tác</option>
+                                        <?php }else{ ?>
+                                        <?php } ?>
+                                        <option value="{{ $item->department_id }}">
+                                            {{ $item->department_name }}
+                                        </option>
+                                        @foreach ($departmentlists as $dmList)
+                                            <option {{ $dmList->id == $item->department_id ? 'selected' : '' }}
+                                                value="{{ $dmList->id }}">
                                                 @php
                                                     $str = '';
-                                                    for ($i = 0; $i < $item->level; $i++) {
+                                                    for ($i = 0; $i < $dmList->level; $i++) {
                                                         echo $str;
                                                         $str = '  --';
                                                     }
                                                 @endphp
-                                                {{ $item->name }}
+                                                {{ $dmList->name }}
                                             </option>
-                                        @endforeach --}}
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Cấp nhân sự">
-                                    <select name="personnel_lv_id" class="selectpicker" data-dropup-auto="false">
-                                        <option value="">Cấp nhân sự</option>
-                                        {{-- @foreach ($personnelLevelList as $item)
-                                            <option value="{{ $item->id }}">
-                                                {{ $item->name }}
+                                    <select disabled name="personnel_lv_id" class="selectpicker" data-dropup-auto="false">
+                                        <?php if( $item->personnel_lv_id == null){ ?>
+                                        <option value="">Cấp nhân
+                                            sự</option>
+                                        <?php }else{ ?>
+                                        <?php } ?>
+                                        <option value="{{ $item->personnel_lv_id }}">
+                                            {{ $item->personnel_level_name }}
+                                        </option>
+                                        @foreach ($personnelLevelList as $perLvList)
+                                            <option {{ $perLvList->id == $item->position_level_id ? 'selected' : '' }}
+                                                value="{{ $perLvList->id }}">
+                                                {{ $perLvList->name }}
                                             </option>
-                                        @endforeach --}}
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Vị trí chức danh">
-                                    <select name="position_id" class="selectpicker" data-dropup-auto="false">
-                                        <option value="">Vị trí chức danh</option>
-                                        {{-- @foreach ($positionlists as $item)
-                                            <option value="{{ $item->id }}">
+                                    <select disabled name="position_id" class="selectpicker" data-dropup-auto="false" multiple>
+                                        <?php if( $item->position_id == null){ ?>
+                                        <option value="">Vị trí
+                                            chức danh</option>
+                                        <?php }else{ ?>
+                                        <?php } ?>
+                                        <option value="{{ $item->position_id }}">
+                                            {{ $item->position_name }}
+                                        </option>
+                                        @php
+                                            $positionIds = json_decode($item->position_id, true);
+                                        @endphp
+                                        @foreach ($positionlists as $posiList)
+                                            <option {{ in_array($posiList->id, $positionIds) ? ' selected' : '' }}
+                                                value="{{ $posiList->id }}">
                                                 @php
                                                     $str = '';
-                                                    for ($i = 0; $i < $item->level; $i++) {
+                                                    for ($i = 0; $i < $posiList->level; $i++) {
                                                         echo $str;
                                                         $str = '  --';
                                                     }
                                                 @endphp
-                                                {{ $item->name }}
+                                                {{ $posiList->name }}
                                             </option>
-                                        @endforeach --}}
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Vai trò">
-                                    <select name="role_id" class="selectpicker" data-dropup-auto="false">
-                                        <option value="">Vai trò</option>
-                                        {{-- @foreach ($roleList as $item)
-                                            <option value="{{ $item->id }}">
-                                                {{ $item->name }}
+                                    <select disabled name="role_id" class="selectpicker" data-dropup-auto="false">
+                                        <?php if( $item->role_id == null){ ?>
+                                        <option value="">Vai trò
+                                        </option>
+                                        <?php }else{ ?>
+                                        <?php } ?>
+                                        <option value="{{ $item->role_id }}">
+                                            {{ $item->role_name }}
+                                        </option>
+                                        @foreach ($roleList as $roleLit)
+                                            <option {{ $roleLit->id == $item->role_id ? 'selected' : '' }}
+                                                value="{{ $roleLit->id }}">
+                                                {{ $roleLit->name }}
                                             </option>
-                                        @endforeach --}}
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Địa bàn">
-                                    <select name="area_id" class="selectpicker" data-dropup-auto="false">
-                                        <option value="">Địa bàn</option>
-                                        {{-- @foreach ($localityList as $item)
-                                            <option value="{{ $item->id }}">
-                                                {{ $item->name }}
+                                    <select disabled name="area_id" class="selectpicker" data-dropup-auto="false">
+                                        <?php if( $item->area_id == null){ ?>
+                                        <option value="">Địa bàn
+                                        </option>
+                                        <?php }else{ ?>
+                                        <?php } ?>
+                                        <option value="{{ $item->area_id }}">
+                                            {{ $item->locality_name }}
+                                        </option>
+                                        @foreach ($localityList as $localList)
+                                            <option value="{{ $localList->id }}">
+                                                {{ $localList->name }}
                                             </option>
-                                        @endforeach --}}
-
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Quản lý trực tiếp">
-                                    <select name="manage" class="selectpicker" data-dropup-auto="false">
-                                        <option value="">Quản lý trực tiếp</option>
-                                        {{-- @foreach ($personnellists as $item)
-                                            <option value="{{ $item->id }}">
+                                    <select disabled name="manage" class="selectpicker" data-dropup-auto="false">
+                                        <?php if( $item->manage == null){ ?>
+                                        <option value="">Quản lý
+                                            trực tiếp</option>
+                                        <?php }else{ ?>
+                                        <?php } ?>
+                                        <option value="{{ $item->manage }}">
+                                            @if ($item->donvime)
+                                                {{ $item->donvime->name }}
+                                            @endif
+                                        </option>
+                                        @foreach ($personnellists as $perllists)
+                                            <option value="{{ $perllists->id }}">
                                                 @php
                                                     $str = '';
-                                                    for ($i = 0; $i < $item->level; $i++) {
+                                                    for ($i = 0; $i < $perllists->level; $i++) {
                                                         echo $str;
                                                         $str = '  --';
                                                     }
                                                 @endphp
-                                                {{ $item->name }}
+                                                {{ $perllists->name }}
                                             </option>
-                                        @endforeach --}}
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-6 mb-3">
-                                <input name="annual_salary" type="text" placeholder="Quỹ lương năm"
+                                <input value="{{ $item->annual_salary ?? "" }}" style="pointer-events: none" name="annual_salary" type="text" placeholder="Quỹ lương năm"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Quỹ lương năm">
                             </div>
-                            <div class="col-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Gói trang bị">
-                                    <select name="pack" class="selectpicker" data-dropup-auto="false">
-                                        <option value="">Gói trang bị</option>
+                            {{-- <div class="col-6 mb-3"> --}}
+                                {{-- <input name="pack" type="text"
+                        placeholder="Gói trang bị"
+                        class="form-control"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="top"
+                        title="Gói trang bị"
+                        value="{{ $item->pack }}"> --}}
+                                {{-- <div data-bs-toggle="tooltip" data-bs-placement="top" title="Gói trang bị">
+                                    <select disabled name="pack" class="selectpicker" data-dropup-auto="false">
+                                        <option value="{{ $item->pack }}">
+                                            {{ $item->pack }}
+                                        </option>
+
                                     </select>
                                 </div>
-                                {{-- <input name="pack" type="text" placeholder="Gói trang bị" class="form-control"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Gói trang bị"> --}}
-                            </div>
+                            </div> --}}
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Hình thức làm việc">
-                                    <select name="working_form" class="selectpicker" data-dropup-auto="false" required>
-                                        <option value="">Hình thức làm việc*</option>
-                                        <option value="Chính thức">Chính thức</option>
-                                        <option value="Thử việc">Thử việc</option>
-                                        <option value="Cộng tác viên">Cộng tác viên</option>
-                                        <option value="Thực tập sinh">Thực tập sinh</option>
+                                    <select disabled name="working_form" class="selectpicker" data-dropup-auto="false" required>
+                                        <option value="{{ $item->working_form }}">
+                                            {{ $item->working_form }}
+                                        </option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Trạng thái">
-                                    <select name="status" class="selectpicker" data-dropup-auto="false" required>
-                                        <option value="">Trạng thái*</option>
-                                        <option value="Đang làm việc">Đang làm việc</option>
-                                        <option value="Đã nghỉ việc">Đã nghỉ việc</option>
+                                    <select disabled name="status" class="selectpicker" data-dropup-auto="false" required>
+                                        <option value="{{ $item->status }}">
+                                            {{ $item->status }}
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -687,10 +938,11 @@
                             <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Đóng</button>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
+    @endforeach
+
 
     {{-- Gán nhân sự --}}
     <div class="modal fade" id="assignUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -701,16 +953,22 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form action="" method="GET">
+                <form action="{{ route('assign.user.position', ['id' => $getPos->id]) }}" method="POST">
+                    @csrf
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-12 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top"
                                     data-bs-original-title="Chọn nhân sự">
                                     <select id="select-status" class="selectpicker select_filter"
-                                        data-dropup-auto="false" title="Chọn nhân sự" name='assignUser'>
-                                        <option value="Nguyễn Văn A">Nguyễn Văn A</option>
-                                        <option value="Nguyễn Thị C">Nguyễn Thị C</option>
+                                        data-dropup-auto="false" data-width="100%" data-size="3"
+                                        data-live-search="true" data-select-all-text="Chọn tất cả"
+                                        data-deselect-all-text="Bỏ chọn" data-live-search-placeholder="Tìm kiếm..."
+                                        title="Chọn nhân sự" name='assignUser'>
+                                        @foreach ($selectableUser as $user)
+                                            <option value="{{ $user->id }}">{{ $user->name }} -
+                                                {{ $user->code }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -734,8 +992,10 @@
 
     <!-- Chart Js -->
     <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chart.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-stacked100@1.0.0.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-datalabels@2.0.0.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-stacked100@1.0.0.js') }}">
+    </script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-datalabels@2.0.0.js') }}">
+    </script>
 
     <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_khachHangActive.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_khachHangMoi.js') }}"></script>

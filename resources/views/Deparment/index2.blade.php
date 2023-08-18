@@ -12,7 +12,7 @@
             <div class="main">
                 <div class="container-fluid">
                     <div class="mainSection_heading">
-                        <h5 class="mainSection_heading-title">Hồ sơ phòng ban</h5>
+                        <h5 class="mainSection_heading-title">Hồ sơ phòng ban - {{ $getDept->name ?? '' }}</h5>
                         @include('template.components.sectionCard')
                     </div>
                     <div class="row">
@@ -49,7 +49,7 @@
                                                 @if (session('user')['role_id'] == '1')
                                                     <div class="action_export order-md-4">
                                                         <button class="btn btn-danger d-block testCreateUser"
-                                                            data-bs-toggle="modal" data-bs-target="#assignPosition">Gán vị
+                                                            data-bs-toggle="modal" data-bs-target="#taoDeXuat">Thêm vị
                                                             trí</button>
                                                     </div>
                                                 @endif
@@ -67,7 +67,8 @@
                                                                         <span class="fs-5 fw-bold">Tên đơn vị:</span>
                                                                     </div>
                                                                     <div class="col-lg-8">
-                                                                        <span class="fs-5">ABC</span>
+                                                                        <span
+                                                                            class="fs-5">{{ $getDept->name ?? '' }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -80,7 +81,8 @@
                                                                         <span class="fs-5 fw-bold">Mã đơn vị:</span>
                                                                     </div>
                                                                     <div class="col-lg-8">
-                                                                        <span class="fs-5">ABC</span>
+                                                                        <span
+                                                                            class="fs-5">{{ $getDept->code ?? '' }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -94,7 +96,7 @@
                                                                     </div>
                                                                     <div class="col-lg-8">
                                                                         <span class="fs-5">
-                                                                            Hà Nội
+                                                                            {{ $getDept->areas->name ?? '' }}
                                                                         </span>
                                                                     </div>
                                                                 </div>
@@ -110,10 +112,7 @@
                                                                     </div>
                                                                     <div class="col-lg-8">
                                                                         <span class="fs-5">
-                                                                            Quản lý doanh thu, tìm kiếm khách hàng, thương
-                                                                            thảo
-                                                                            hợp
-                                                                            đồng, phát triển thị trường
+                                                                            {{ $getDept->description ?? '' }}
                                                                         </span>
                                                                     </div>
                                                                 </div>
@@ -123,38 +122,38 @@
 
                                                     <div class="col-lg-6 border">
                                                         <div class="row my-2">
-                                                            <div class="col-lg-4">
+                                                            <div class="col-lg-8">
                                                                 <div class="row">
                                                                     <div class="col-lg-6">
-                                                                        <span class="fs-5 fw-bold">Chính thức:</span>
+                                                                        <span class="fs-5 fw-bold">Trạng thái:</span>
                                                                     </div>
                                                                     <div class="col-lg-6">
-                                                                        <span class="fs-5">avc</span>
+                                                                        <span class="fs-5">Hoạt động</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="row">
-                                                                    <div class="col-lg-6">
-                                                                        <span class="fs-5 fw-bold">Thử việc:</span>
-                                                                    </div>
-                                                                    <div class="col-lg-6">
-                                                                        <span class="fs-5">
-                                                                            Thử việc
-                                                                        </span>
-                                                                    </div>
+{{--                                                                    <div class="col-lg-6">--}}
+{{--                                                                        <span class="fs-5 fw-bold">Thử việc:</span>--}}
+{{--                                                                    </div>--}}
+{{--                                                                    <div class="col-lg-6">--}}
+{{--                                                                        <span class="fs-5">--}}
+{{--                                                                            Thử việc--}}
+{{--                                                                        </span>--}}
+{{--                                                                    </div>--}}
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="row">
-                                                                    <div class="col-lg-6">
-                                                                        <span class="fs-5 fw-bold">Cộng tác:</span>
-                                                                    </div>
-                                                                    <div class="col-lg-6">
-                                                                        <span class="fs-5">
-                                                                            abc
-                                                                        </span>
-                                                                    </div>
+{{--                                                                    <div class="col-lg-6">--}}
+{{--                                                                        <span class="fs-5 fw-bold">Cộng tác:</span>--}}
+{{--                                                                    </div>--}}
+{{--                                                                    <div class="col-lg-6">--}}
+{{--                                                                        <span class="fs-5">--}}
+{{--                                                                            abc--}}
+{{--                                                                        </span>--}}
+{{--                                                                    </div>--}}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -165,7 +164,7 @@
                                                                         <span class="fs-5 fw-bold">Định biên/thực tế:</span>
                                                                     </div>
                                                                     <div class="col-lg-8">
-                                                                        <span class="fs-5">avc</span>
+                                                                        <span class="fs-5">10 người</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -177,7 +176,7 @@
                                                                         <span class="fs-5 fw-bold">Quỹ lương năm:</span>
                                                                     </div>
                                                                     <div class="col-lg-8">
-                                                                        <span class="fs-5">1000</span>
+                                                                        <span class="fs-5">120.000.000 VND</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -209,6 +208,8 @@
                                                                 </th>
                                                                 <th class="text-nowrap text-center" style="width:2%">STT
                                                                 </th>
+                                                                <th class="text-nowrap text-center" style="width:10%">Mã
+                                                                    vị trí</th>
                                                                 <th class="text-nowrap text-center" style="width:10%">Tên
                                                                     vị trí</th>
                                                                 <th class="text-nowrap text-center" style="width:10%">Cấp
@@ -232,14 +233,14 @@
                                                                 @endif
                                                             </tr>
                                                         </thead>
-                                                        {{-- @foreach ($departmentList as $item)
+                                                        @foreach ($listPosToDept as $item)
                                                             <tbody>
                                                                 <tr>
                                                                     <td class="text-center"> <input type="checkbox"
                                                                             name="selected_items[]"
                                                                             value="{{ $item->id }}"></td>
                                                                     <td class=" text-center">
-                                                                        {{ $t++ }}
+                                                                        {{ $loop->iteration }}
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
@@ -248,44 +249,54 @@
                                                                             {{ $item->code }}
                                                                         </div>
                                                                     </td>
-                                                                    <td class="">
+                                                                    <td>
                                                                         <div class="overText" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
                                                                             title="{{ $item->name }}">
-                                                                            {{ $item->name }}
+                                                                            <a style="color: black; text-decoration: underline"
+                                                                                href="{{ route('department.assignUser', ['id' => $item->id]) }}">{{ $item->name }}</a>
+
                                                                         </div>
                                                                     </td>
                                                                     <td>
-                                                                        @if ($item->donvime)
-                                                                            <div class="overText" data-bs-toggle="tooltip"
-                                                                                data-bs-placement="top"
-                                                                                title="{{ $item->donvime->name }}">
-                                                                                {{ $item->donvime->name }}
-                                                                            </div>
-                                                                        @else
-                                                                        @endif
+                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="{{ $item->levels->name ?? "" }}">
+                                                                            {{ $item->levels->name ?? "" }}
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="{{ $item->description }}">
+                                                                            {{ $item->description }}
+                                                                        </div>
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
-                                                                            title="{{ $item->leader_name }}">
-                                                                            {{ $item->leader_name }}
+                                                                            title="{{ $item->wage }}">
+                                                                            {{ $item->wage }}
                                                                         </div>
 
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
-                                                                            title="{{ $item->description }}">
-                                                                            {{ $item->description }}
+                                                                            title="{{ $item->staffing }}">
+                                                                            {{ $item->staffing }}
                                                                         </div>
 
                                                                     </td>
+                                                                    @php
+                                                                        $getUser = \App\Models\Personnel::where('position_id', $item->id)->get();
+                                                                        $userNames = $getUser->pluck('name')->implode(', ');
+                                                                    @endphp
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
-                                                                            title="{{ $item->description }}">
-                                                                            {{ $item->description }}
+                                                                            title="{{ $userNames }}">
+                                                                            {{ $userNames }}
                                                                         </div>
 
                                                                     </td>
@@ -324,16 +335,16 @@
                                                                     @endif
                                                                 </tr>
                                                             </tbody>
-                                                        @endforeach --}}
+                                                        @endforeach
                                                     </table>
-                                                    <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                    {{-- <nav aria-label="Page navigation example" class="float-end mt-3"
                                                         id="target-pagination">
                                                         <ul class="pagination">
                                                             {{ $departmentList->appends([
                                                                     'search' => $search,
                                                                 ])->links() }}
                                                         </ul>
-                                                    </nav>
+                                                    </nav> --}}
                                                 </div>
                                             </form>
                                         </div>
@@ -444,6 +455,110 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
                             <button type="submit" class="btn btn-danger">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Thêm Tao De Xuat -->
+        <div class="modal fade" id="taoDeXuat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h5 class="modal-title w-100" id="exampleModalLabel">Thêm mới vị trí/chức danh</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('position.store') }}" method="POST">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-6 mb-3">
+                                    <input name="name" required type="text"
+                                        placeholder="Nhập tên vị trí/chức danh*" class="form-control"
+                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Nhập tên vị trí/chức danh*" required>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <input name="code" required type="text" placeholder="Nhập mã vị trí/chức danh*"
+                                        class="form-control" data-bs-toggle="tooltip" title="Nhập mã vị trí/chức danh*"
+                                        required>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn đơn vị công tác*">
+                                        <select name="department_id" required class="selectpicker"
+                                            data-dropup-auto="false">
+                                            <option value="">Chọn đơn vị công tác*</option>
+                                            @foreach ($departmentlists as $item)
+                                                @if ($item->id == request()->department_id)
+                                                    <option selected value="{{ $item->id }}">
+                                                        {{ $item->name }}
+                                                    </option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn cấp nhân sự*">
+                                        <select name="personnel_level" required class="selectpicker"
+                                            data-dropup-auto="false">
+                                            <option value="">Chọn cấp nhân sự*</option>
+                                            @foreach ($personnelLevelList as $item)
+                                                <option value="{{ $item->id }}">
+                                                    {{ $item->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Chọn vị trí cấp quản lý">
+                                        <select name="parent" required class="selectpicker" data-dropup-auto="false">
+                                            <option value="0">Chọn vị trí cấp quản lý</option>
+                                            @foreach ($positionlists as $item)
+                                                <option value="{{ $item->id }}">
+                                                    @php
+                                                        $str = '';
+                                                        for ($i = 0; $i < $item->level; $i++) {
+                                                            echo $str;
+                                                            $str = '  --';
+                                                        }
+                                                    @endphp
+                                                    {{ $item->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn gói trang bị">
+                                        <select name="pack" class="selectpicker" data-dropup-auto="false">
+                                            <option value="">Chọn gói trang bị</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top">
+                                        <textarea name="description" type="text" placeholder="Mô tả công việc" class="form-control "
+                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Mô tả công việc" style="height: 80px;"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <input name="staffing" type="text" placeholder="Định biên" class="form-control"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Định biên">
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <input name="wage" type="text" placeholder="Quỹ lương năm"
+                                        class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Quỹ lương năm">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy
+                                    </button>
+                                    <button type="submit" class="btn btn-danger">Tạo</button>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -564,7 +679,7 @@
                             <input type="hidden" name="{{ $key }}" value="{{ $value }}">
                         @endif
                     @endforeach --}}
-    <div class="modal-body">
+    {{-- <div class="modal-body">
         <div class="row">
             <div class="col-12 mb-3">
                 <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Lọc theo trưởng đơn vị">
@@ -595,7 +710,7 @@
         </form>
     </div>
     </div>
-    </div>
+    </div> --}}
 
     {{-- Gán vị trí --}}
     <div class="modal fade" id="assignPosition" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

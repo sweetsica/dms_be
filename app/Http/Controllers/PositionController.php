@@ -113,7 +113,7 @@ class PositionController extends Controller
         $data->wage=$wage;
         $data->description=$description;
         $data->save();
-        return redirect()->route('position.index');
+        return back();
     }
 
     public function update(Request $request,$id)

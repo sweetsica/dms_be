@@ -146,7 +146,7 @@ Route::middleware(['auth.role'])->group(function () {
 
     Route::get('chi-tiet-khach-hang/{id}', [CustomerController::class, 'show'])->name('customer-detail.list');
     Route::get('department-profile', [DepartmentController::class, 'index2'])->name('department.index2');
-    Route::get('department-assignUser', [DepartmentController::class, 'assignUser'])->name('department.assignUser');
+    Route::get('department-assignUser/{id?}', [DepartmentController::class, 'assignUser'])->name('department.assignUser');
     Route::get('department', [DepartmentController::class, 'index'])->name('department.index');
     Route::post('department', [DepartmentController::class, 'store'])->name('department.store');
     Route::post('department/{id}', [DepartmentController::class, 'edit'])->name('department.edit');
@@ -203,6 +203,9 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('sua-thong-so-ky-thuat/{id}', [SpecificationsController::class, 'update'])->name('Specifications.update');
     Route::post('xoa-thong-so-ky-thuat/{id}', [SpecificationsController::class, 'destroy'])->name('Specifications.destroy');
     Route::post('thong-so-ky-thuat-delete', [SpecificationsController::class, 'delete'])->name('Specifications.delete');
+    
+    Route::post('them-vi-tri-nhan-su/{id?}', [PersonnelController::class, 'assignPosition'])->name('assign.user.position');
+    Route::delete('xoa-vi-tri-nhan-su/{user_id?}/{pos_id?}', [PersonnelController::class, 'removePosition'])->name('remove.user.position');
 
 });
 
