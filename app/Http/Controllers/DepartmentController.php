@@ -19,6 +19,8 @@ class DepartmentController extends Controller
         $search = $request->get('search');
         $don_vi_me = $request->get('don_vi_me');
         $leader_name = $request->get('leader_name');
+
+        // dd($abc);
         $query = Department::query();
         // $departmentList = Department::
         $query->leftJoin('personnel', 'personnel.id', '=', 'department.ib_lead')
@@ -43,19 +45,34 @@ class DepartmentController extends Controller
         $departmentList = $query->paginate(15);
         // dd($departmentList);
         $UnitLeaderList = Personnel::all();
-
+        $Department = Department::all();
         $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
         // dd($departmentListTree);
         $departmentlists = $this->getDepartment();
 
+        $positionlists = $this->getPosition();
+        $personnellists = $this->getPersonnel();
+        $roleList = Role::all();
+        $localityList = Locality::all();
+        $personnelLevelList = PersonnelLevel::all();
+
+        $listUsers = Personnel::all();
+
         return view("Deparment.index", [
+            "Department" => $Department,
             "departmentList" => $departmentList,
             'don_vi_me' => $don_vi_me,
             'leader_name' => $leader_name,
             "departmentlists" => $departmentlists,
             'search' => $search,
             'UnitLeaderList' => $UnitLeaderList,
-            "departmentListTree" => $departmentListTree
+            "departmentListTree" => $departmentListTree,
+            'listUsers' => $listUsers,
+            'personnelLevelList' => $personnelLevelList,
+            'positionlists' => $positionlists,
+            'roleList' => $roleList,
+            'localityList' => $localityList,
+            'personnellists' => $personnellists,
         ]);
     }
 
