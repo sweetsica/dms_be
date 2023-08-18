@@ -21,6 +21,7 @@ use App\Http\Controllers\RouteDirectionController;
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\SpecificationsController;
 use App\Http\Controllers\TechnicalSpecificationsGroupController;
+use App\Http\Controllers\UnitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -206,6 +207,12 @@ Route::middleware(['auth.role'])->group(function () {
     
     Route::post('them-vi-tri-nhan-su/{id?}', [PersonnelController::class, 'assignPosition'])->name('assign.user.position');
     Route::delete('xoa-vi-tri-nhan-su/{user_id?}/{pos_id?}', [PersonnelController::class, 'removePosition'])->name('remove.user.position');
+
+    Route::get('don-vi-tinh', [UnitController::class, 'index'])->name('Unit.index');
+    Route::post('them-don-vi-tinh', [UnitController::class, 'store'])->name('Unit.store');
+    Route::post('sua-don-vi-tinh/{id}', [UnitController::class, 'update'])->name('Unit.update');
+    Route::post('xoa-don-vi-tinh/{id}', [UnitController::class, 'destroy'])->name('Unit.destroy');
+    Route::post('don-vi-tinh-delete', [UnitController::class, 'delete'])->name('Unit.delete');
 
 });
 

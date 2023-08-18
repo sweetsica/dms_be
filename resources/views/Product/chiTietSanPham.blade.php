@@ -2,7 +2,7 @@
 {{-- Trang chủ GIao Ban --}}
 @section('title', 'Chi tiết sản phẩm')
 @section('header-style')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <style>
         #preview {
@@ -100,7 +100,7 @@
             object-fit: contain;
         }
 
-        
+
 
         @media screen and (min-width: 200px) {
             .carousel {
@@ -193,7 +193,7 @@
                                             <input accept=".pdf,.xlsx,.docx,image/jpeg,image/png" id="fileInput" multiple role="button" type="file"
                                                 class="modal_upload-input modal_upload-file" name="files[]" onchange="updateList(event)" />
                                         </div>
-                                    
+
                                         <div id="preview" class="d-flex mt-3"></div>
                                         <ul id="attachments" class="file-list" style="padding: 0 0 4px 0; word-break: break-all;"></ul>
 
@@ -221,7 +221,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                     @endif
 
                                     <div class="col-md-6 mb-3">
@@ -344,7 +344,7 @@
 
                                 </div>
 
-                                
+
 
                                 <div class="card_template-body-bottom">
                                     <div class="row">
@@ -387,10 +387,7 @@
                                             <button type="button" class="btn btn-danger d-block" data-bs-toggle="modal"
                                                 data-bs-target="#add">+ Link sản phẩm liên quan</button>
                                         </div>
-
                                     </div>
-
-
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end">
@@ -586,7 +583,7 @@
             if (fileInputDiv.hasClass('d-none')) {
                 fileInputDiv.removeClass('d-none').addClass('d-block');
             }
-            
+
             if (caroselDiv.hasClass('d-block')) {
                 caroselDiv.removeClass('d-block').addClass('d-none');
             }
@@ -728,7 +725,7 @@ document.addEventListener('click', function(event) {
             let children = '';
             console.log(children);
             const allowedTypes = ['image/jpeg', 'image/png', 'application/pdf'];
-            const maxFileSize = 10485760; 
+            const maxFileSize = 10485760;
 
             for (let i = 0; i < input.files.length; ++i) {
                 const file = input.files.item(i);
@@ -775,7 +772,7 @@ document.addEventListener('click', function(event) {
                     dt.items.add(file)
             }
 
-            inputEl.files = dt.files 
+            inputEl.files = dt.files
             liEl.remove();
         }
 
