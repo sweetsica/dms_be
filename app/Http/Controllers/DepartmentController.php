@@ -187,8 +187,8 @@ class DepartmentController extends Controller
                     ->orWhere('code', 'like', '%' . $search . '%');
             });
         }
-        // $listUsers = $listUsers->with('department', 'level', 'role')
-        //     ->whereJsonContains('position_id', strval($id))->get();
+        $listUsers = $listUsers->with('department', 'level', 'role')
+            ->whereJsonContains('position_id', strval($id))->get();
 
         $selectableUser = Personnel::where(function ($query) use ($id) {
             $query->whereNull('position_id')
@@ -208,7 +208,7 @@ class DepartmentController extends Controller
             'positionlists' => $positionlists,
             'personnelLevelList' => $personnelLevelList,
             "departmentListTree" => $departmentListTree,
-            // 'listUsers' => $listUsers,
+            'listUsers' => $listUsers,
             'getPos' => $getPos,
             'selectableUser' => $selectableUser
         ]);
