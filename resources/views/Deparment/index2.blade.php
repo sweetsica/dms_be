@@ -125,36 +125,35 @@
                                                             <div class="col-lg-4">
                                                                 <div class="row">
                                                                     <div class="col-lg-6">
-                                                                        <span class="fs-5 fw-bold">Trạng thái hoạt
-                                                                            động:</span>
+                                                                        <span class="fs-5 fw-bold">Trạng thái:</span>
                                                                     </div>
                                                                     <div class="col-lg-6">
-                                                                        <span class="fs-5">avc</span>
+                                                                        <span class="fs-5">Hoạt động</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="row">
-                                                                    <div class="col-lg-6">
-                                                                        <span class="fs-5 fw-bold">Thử việc:</span>
-                                                                    </div>
-                                                                    <div class="col-lg-6">
-                                                                        <span class="fs-5">
-                                                                            Thử việc
-                                                                        </span>
-                                                                    </div>
+{{--                                                                    <div class="col-lg-6">--}}
+{{--                                                                        <span class="fs-5 fw-bold">Thử việc:</span>--}}
+{{--                                                                    </div>--}}
+{{--                                                                    <div class="col-lg-6">--}}
+{{--                                                                        <span class="fs-5">--}}
+{{--                                                                            Thử việc--}}
+{{--                                                                        </span>--}}
+{{--                                                                    </div>--}}
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="row">
-                                                                    <div class="col-lg-6">
-                                                                        <span class="fs-5 fw-bold">Cộng tác:</span>
-                                                                    </div>
-                                                                    <div class="col-lg-6">
-                                                                        <span class="fs-5">
-                                                                            abc
-                                                                        </span>
-                                                                    </div>
+{{--                                                                    <div class="col-lg-6">--}}
+{{--                                                                        <span class="fs-5 fw-bold">Cộng tác:</span>--}}
+{{--                                                                    </div>--}}
+{{--                                                                    <div class="col-lg-6">--}}
+{{--                                                                        <span class="fs-5">--}}
+{{--                                                                            abc--}}
+{{--                                                                        </span>--}}
+{{--                                                                    </div>--}}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -165,7 +164,7 @@
                                                                         <span class="fs-5 fw-bold">Định biên/thực tế:</span>
                                                                     </div>
                                                                     <div class="col-lg-8">
-                                                                        <span class="fs-5">avc</span>
+                                                                        <span class="fs-5">10 người</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -177,7 +176,7 @@
                                                                         <span class="fs-5 fw-bold">Quỹ lương năm:</span>
                                                                     </div>
                                                                     <div class="col-lg-8">
-                                                                        <span class="fs-5">1000</span>
+                                                                        <span class="fs-5">120.000.000 VND</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -209,6 +208,8 @@
                                                                 </th>
                                                                 <th class="text-nowrap text-center" style="width:2%">STT
                                                                 </th>
+                                                                <th class="text-nowrap text-center" style="width:10%">Mã
+                                                                    vị trí</th>
                                                                 <th class="text-nowrap text-center" style="width:10%">Tên
                                                                     vị trí</th>
                                                                 <th class="text-nowrap text-center" style="width:10%">Cấp
@@ -255,6 +256,13 @@
                                                                             <a style="color: black"
                                                                                 href="{{ route('department.assignUser', ['id' => $item->id]) }}">{{ $item->name }}</a>
 
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="{{ $item->levels->name }}">
+                                                                            {{ $item->levels->name }}
                                                                         </div>
                                                                     </td>
                                                                     <td>
@@ -671,7 +679,7 @@
                             <input type="hidden" name="{{ $key }}" value="{{ $value }}">
                         @endif
                     @endforeach --}}
-    <div class="modal-body">
+    {{-- <div class="modal-body">
         <div class="row">
             <div class="col-12 mb-3">
                 <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Lọc theo trưởng đơn vị">
@@ -702,7 +710,7 @@
         </form>
     </div>
     </div>
-    </div>
+    </div> --}}
 
     {{-- Gán vị trí --}}
     <div class="modal fade" id="assignPosition" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
