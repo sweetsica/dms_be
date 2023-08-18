@@ -12,14 +12,14 @@
             <div class="main">
                 <div class="container-fluid">
                     <div class="mainSection_heading">
-                        <h5 class="mainSection_heading-title">Danh sách nhóm khách hàng</h5>
+                        <h5 class="mainSection_heading-title">Danh sách thông số kỹ thuật</h5>
                         @include('template.components.sectionCard')
                     </div>
 
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card mb-3">
-                                <div class="card-body position-relative">
+                                <div class="card-body">
                                     <div class='row'>
                                         <div class="col-md-12">
                                             <div
@@ -55,11 +55,11 @@
                                                 </div>
                                             </div>
                                             <form id="select-form" action="{{ route('Specifications.delete') }}"
-                                                method="POST">
+                                                
+                                            method="POST">
                                                 @csrf
                                                 <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" title="Xóa"
-                                                    style="position: absolute; top: 10px; left: 0;">
+                                                    data-bs-placement="top" title="Xóa">
                                                     <button class="btn btn-danger  " type="submit"
                                                         onclick="return confirm('Bạn có muốn xóa không?')"
                                                         id="delete-selected-button" style="display: none;">Xóa</button>
@@ -110,8 +110,8 @@
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
-                                                                            title=" {{ $item->name_group }}">
-                                                                            {{ $item->name_group }}
+                                                                            title=" {{ $item->group_name }}">
+                                                                            {{ $item->group_name }}
                                                                         </div>
 
                                                                     </td>

@@ -618,45 +618,46 @@
                 <h5 class="modal-title w-100" id="exampleModalLabel">Thông tin khách hàng</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="formThemCapPhatChitiet" method="POST" action="{{ route('create-customer') }}" enctype="multipart/form-data">
-            @csrf
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-6 mb-3">
-                        <input type="text" name="name" data-bs-toggle="tooltip" required id="nameInput"
-                            data-bs-placement="top" title="Tên khách hàng" placeholder="Tên khách hàng*"
-                            class="form-control">
-                    </div>
-                    <div class="col-lg-6 mb-3">
-                        <input type="text" name="personContact" data-bs-toggle="tooltip" required
-                            id="personContactInput" data-bs-placement="top" title="Người liên hệ"
-                            placeholder="Tên người liên hệ*" class="form-control">
-                    </div>
-                    <div class="col-lg-6 mb-3">
-                        <input type="text" name="phone" data-bs-toggle="tooltip" required id="phoneInput"
-                            data-bs-placement="top" title="Số điện thoại" placeholder="Số điện thoại*"
-                            class="form-control">
-                    </div>
-                    <div class="col-lg-6 mb-3">
-                        <input type="text" name="email" data-bs-toggle="tooltip" required id="emailInput"
-                            data-bs-placement="top" title="Email" placeholder="Email" class="form-control">
-                    </div>
-                    <div class="col-lg-12 mb-3">
-                        <input type="text" name="address" data-bs-toggle="tooltip" required id="addressInputGeneral"
-                            data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ" class="form-control">
+            <form id="formThemCapPhatChitiet" method="POST" action="{{ route('create-customer-simple') }}"
+                enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-6 mb-3">
+                            <input type="text" name="name" data-bs-toggle="tooltip" required id="nameInput"
+                                data-bs-placement="top" title="Tên khách hàng" placeholder="Tên khách hàng*"
+                                class="form-control">
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <input type="text" name="personContact" data-bs-toggle="tooltip"
+                                id="personContactInput" data-bs-placement="top" title="Người liên hệ"
+                                placeholder="Tên người liên hệ*" class="form-control">
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <input type="text" name="phone" data-bs-toggle="tooltip" required id="phoneInput"
+                                data-bs-placement="top" title="Số điện thoại" placeholder="Số điện thoại*"
+                                class="form-control">
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <input type="text" name="email" data-bs-toggle="tooltip" id="emailInput"
+                                data-bs-placement="top" title="Email" placeholder="Email" class="form-control">
+                        </div>
+                        <div class="col-lg-12 mb-3">
+                            <input type="text" name="address" data-bs-toggle="tooltip" required id="addressInputGeneral"
+                                data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ" class="form-control">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer d-flex align-items-center justify-content-between">
-                <div>
-                    <button type="submit" class="btn btn-danger">Lưu và thêm</button>
+                <div class="modal-footer d-flex align-items-center justify-content-between">
+                    <div>
+                        <button type="submit" class="btn btn-danger">Lưu và thêm</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#themchitiet">Thêm chi tiết</button>
+                    </div>
                 </div>
-                <div>
-                    <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                        data-bs-target="#themchitiet">Thêm chi tiết</button>
-                </div>
-            </div>
             </form>
         </div>
     </div>
@@ -752,13 +753,23 @@
                         </div>
 
                         <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="Nhân sự thu thập">
-                            <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                data-live-search="true" title="Nhân sự thu thập*" data-select-all-text="Chọn tất cả"
-                                data-deselect-all-text="Bỏ chọn" data-size="3" name="personId" id="personId"
+                            title="Nhân sự thu thập*">
+
+                            <select {{ session('user')['role_id'] !='1' ? 'disabled' : '' }} class="selectpicker"
+                                data-dropup-auto="false" data-width="100%" required data-live-search="true"
+                                title="Nhân sự thu thập*" data-select-all-text="Chọn tất cả"
+                                data-deselect-all-text="Bỏ chọn" data-size="3" name="personId"
                                 data-live-search-placeholder="Tìm kiếm...">
+                                @foreach ($listPersons as $per)
+                                <option value="{{ $per->id }}" {{ $per->id == session('user')['id'] ? 'selected' : ''
+                                    }}>
+                                    {{ $per->name }}
+                                </option>
+                                @endforeach
                             </select>
+                            <div class="error-text" id="personIdError" style="color: red;"></div>
                         </div>
+
                         <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                             title="Sản phẩm quan tâm">
                             <select class="selectpicker" data-dropup-auto="false" data-width="100%"
@@ -810,13 +821,12 @@
                                 data-live-search-placeholder="Tìm kiếm...">
                             </select>
                         </div>
-                        <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Trạng thái">
+                        <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Trạng thái*">
                             <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                data-live-search="true" title="Trạng thái*" data-select-all-text="Chọn tất cả"
+                                data-live-search="true" data-select-all-text="Chọn tất cả"
                                 data-deselect-all-text="Bỏ chọn" data-size="3" name="status"
                                 data-live-search-placeholder="Tìm kiếm...">
-                                <option value="Trinh sát">Trinh sát</option>
-                                <option value="Tiềm năng">Tiềm năng</option>
+                                <option value="Trinh sát" selected>Trinh sát</option>
                                 <option value="Cơ hội">Cơ hội</option>
                                 <option value="Khách hàng">Khách hàng</option>
                             </select>
@@ -1255,6 +1265,120 @@
             .catch((error) => console.error('Lỗi khi gọi API:', error));
     }
     window.addEventListener('load', loadRouteData);
+
+    var isAdvancedUpload = function() {
+            var div = document.createElement('div');
+            return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window &&
+                'FileReader' in window;
+        }();
+
+        let draggableFileArea = document.querySelector(".drag-file-area");
+        let browseFileText = document.querySelector(".browse-files");
+        let uploadIcon = document.querySelector(".upload-icon");
+        let dragDropText = document.querySelector(".dynamic-message");
+        let fileInput = document.querySelector(".default-file-input");
+        let cannotUploadMessage = document.querySelector(".cannot-upload-message");
+        let cancelAlertButton = document.querySelector(".cancel-alert-button");
+        let uploadedFile = document.querySelector(".file-block");
+        let fileName = document.querySelector(".file-name");
+        let fileSize = document.querySelector(".file-size");
+        let progressBar = document.querySelector(".progress-bar");
+        let removeFileButton = document.querySelector(".remove-file-icon");
+        let uploadButton = document.querySelector(".upload-button");
+        let fileFlag = 0;
+
+        fileInput.addEventListener("click", () => {
+            fileInput.value = '';
+            console.log(fileInput.value);
+        });
+
+        fileInput.addEventListener("change", e => {
+            console.log(" > " + fileInput.value)
+            uploadIcon.innerHTML = 'Tải file lên';
+            dragDropText.innerHTML = 'File Dropped Successfully!';
+            document.querySelector(".label").innerHTML =
+                `<input type="file" class="default-file-input" style=""/>`;
+            uploadButton.innerHTML = `Upload`;
+            fileName.innerHTML = fileInput.files[0].name;
+            fileSize.innerHTML = (fileInput.files[0].size / 1024).toFixed(1) + " KB";
+            uploadedFile.style.cssText = "display: flex;";
+            progressBar.style.width = 0;
+            fileFlag = 0;
+        });
+
+        uploadButton.addEventListener("click", () => {
+            let isFileUploaded = fileInput.value;
+            if (isFileUploaded != '') {
+                if (fileFlag == 0) {
+                    fileFlag = 1;
+                    var width = 0;
+                    var id = setInterval(frame, 50);
+
+                    function frame() {
+                        if (width >= 390) {
+                            clearInterval(id);
+                            uploadButton.innerHTML =
+                                `<span class="material-icons-outlined upload-button-icon"> check_circle </span> Uploaded`;
+                        } else {
+                            width += 5;
+                            progressBar.style.width = width + "px";
+                        }
+                    }
+                }
+            } else {
+                cannotUploadMessage.style.cssText = "display: flex; animation: fadeIn linear 1.5s;";
+            }
+        });
+
+        cancelAlertButton.addEventListener("click", () => {
+            cannotUploadMessage.style.cssText = "display: none;";
+        });
+
+        if (isAdvancedUpload) {
+            ["drag", "dragstart", "dragend", "dragover", "dragenter", "dragleave", "drop"].forEach(evt =>
+                draggableFileArea.addEventListener(evt, e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                })
+            );
+
+            ["dragover", "dragenter"].forEach(evt => {
+                draggableFileArea.addEventListener(evt, e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    uploadIcon.innerHTML = 'file_download';
+                    dragDropText.innerHTML = 'Drop your file here!';
+                });
+            });
+
+            draggableFileArea.addEventListener("drop", e => {
+                uploadIcon.innerHTML = 'check_circle';
+                dragDropText.innerHTML = 'File Dropped Successfully!';
+                // document.querySelector(".label").innerHTML =
+                //     `drag & drop or <span class="browse-files"> <input type="file" class="default-file-input" style=""/> <span class="browse-files-text" style="top: -23px; left: -20px;"> browse file</span> </span>`;
+                uploadButton.innerHTML = `Upload`;
+
+                let files = e.dataTransfer.files;
+                fileInput.files = files;
+                console.log(files[0].name + " " + files[0].size);
+                console.log(document.querySelector(".default-file-input").value);
+                fileName.innerHTML = files[0].name;
+                fileSize.innerHTML = (files[0].size / 1024).toFixed(1) + " KB";
+                uploadedFile.style.cssText = "display: flex;";
+                progressBar.style.width = 0;
+                fileFlag = 0;
+            });
+        }
+
+        removeFileButton.addEventListener("click", () => {
+            uploadedFile.style.cssText = "display: none;";
+            fileInput.value = '';
+            uploadIcon.innerHTML = 'file_upload';
+            dragDropText.innerHTML = 'Drag & drop any file here';
+            document.querySelector(".label").innerHTML =
+                `or <span class="browse-files"> <input type="file" class="default-file-input"/> <span class="browse-files-text">browse file</span> <span>from device</span> </span>`;
+            uploadButton.innerHTML = `Upload`;
+        });
 </script>
 @endsection
 @section('footer-script')

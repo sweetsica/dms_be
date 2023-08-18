@@ -19,7 +19,7 @@ class SpecificationsController extends Controller
             'specifications.code',
             'specifications.description',
             'specifications.group_id',
-            'technical_specifications_group.name as group_name'
+            'technical_specifications_group.name as group_name',
         )
         ->where("specifications.code", "like", "%$search%")
         ->orWhere("specifications.name", "like", "%$search%")

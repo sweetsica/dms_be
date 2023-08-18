@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductDetails;
+use App\Models\Specifications;
+use App\Models\TechnicalSpecificationsGroup;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -79,12 +82,13 @@ class ProductController extends Controller
     {
         // dd($request->all());
         $details = ProductDetails::where('product_id', $id)->first();
+        // $tableValue = ProductDetails::find($id)->value;
 
         if ($request->hasFile('files')) {
             $files = $request->file('files');
 
             $uploadedImages = [];
-            $uploadedFiles = [];
+            // $uploadedFiles = [];
 
             foreach ($files as $file) {
                 $extension = $file->getClientOriginalExtension();
@@ -93,13 +97,34 @@ class ProductController extends Controller
 
                 if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif'])) {
                     $uploadedImages[] = $this->uploadFileToRemoteHost($file);
-                } else {
-                    $uploadedFiles[] = $this->uploadFileToRemoteHost($file);
                 }
+                // else {
+                //     $uploadedFiles[] = $this->uploadFileToRemoteHost($file);
+                // }
             }
 
             if (!empty($uploadedImages)) {
                 $details->images = json_encode($uploadedImages);
+            }
+
+            // if (!empty($uploadedFiles)) {
+            //     $details->attachments = json_encode($uploadedFiles);
+            // }
+        }
+
+        if ($request->hasFile('attachments')) {
+            $attachments = $request->file('attachments');
+
+            $uploadedFiles = [];
+
+            foreach ($attachments as $attachment) {
+                $extension = $attachment->getClientOriginalExtension();
+
+                // Additional logic if needed
+
+                // if (in_array($extension, ['.pdf', '.xlsx', '.docx'])) {
+                    $uploadedFiles[] = $this->uploadFileToRemoteHost($attachment);
+                // }
             }
 
             if (!empty($uploadedFiles)) {
@@ -114,34 +139,41 @@ class ProductController extends Controller
         if ($request->price) {
             $details->price = $request->price;
         }
-        if ($request->listProducts) {
-            $hasNonNullValue = false;
-            foreach ($request->listProducts as $element) {
-                if ($element['key'] !== null || $element['value'] !== null) {
-                    $hasNonNullValue = true;
-                    break; // Exit the loop if a non-null value is found
-                }
-            }
-            if ($hasNonNullValue) {
-                $newList = [];
+        // if ($request->listProducts) {
+        //     $hasNonNullValue = false;
+        //     foreach ($request->listProducts as $element) {
+        //         if ($element['key'] !== null || $element['value'] !== null) {
+        //             $hasNonNullValue = true;
+        //             break; // Exit the loop if a non-null value is found
+        //         }
+        //     }
+        //     if ($hasNonNullValue) {
+        //         $newList = [];
 
-                foreach ($request->listProducts as $item) {
-                    $newItem = [];
+        //         foreach ($request->listProducts as $item) {
+        //             $newItem = [];
 
-                    foreach ($item as $key => $value) {
-                        if ($value == null) {
-                            $newItem[$key] = null;
-                        } else {
-                            $newItem[$key] = $value;
-                        }
-                    }
+        //             foreach ($item as $key => $value) {
+        //                 if ($value == null) {
+        //                     $newItem[$key] = null;
+        //                 } else {
+        //                     $newItem[$key] = $value;
+        //                 }
+        //             }
 
-                    $newList[] = $newItem;
-                }
-                $details->data = json_encode($newList);
+        //             $newList[] = $newItem;
+        //         }
+        //         $details->data = json_encode($newList);
+        //     }
+        // }
+        $combinedData = [];
+        foreach ($request->data as $array) {
+            if (is_array($array)) {
+                $combinedData[] = $array;
             }
         }
-
+        $jsonCombinedData = json_encode($combinedData);
+        $details->data  = $jsonCombinedData;
         $details->save();
         Session::flash('success', "Cập nhật thành công");
         return back();
@@ -204,12 +236,21 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         $details = ProductDetails::where('product_id', $id)->first();
-
+        $jsonCombinedData = $details->data;
+        $combinedData = json_decode($jsonCombinedData);
+        $productLQ = Product::all();
         $other_product = Product::where('id', '!=', $id)->get();
+        $SpecificationsList = Specifications::all();
+        $TechnicalSpecificationsGroupList = TechnicalSpecificationsGroup::all();
 
-        return view("Product.chiTietSanPham")->with(compact(
+        // return view("Product.chiTietSanPham")->with(compact(
+            return view("Product.chi_tiet_san_pham")->with(compact(
             "product",
             "details",
+            "SpecificationsList",
+            "TechnicalSpecificationsGroupList",
+            "combinedData",
+            "productLQ",
             "other_product"
         ));
     }

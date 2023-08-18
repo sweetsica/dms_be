@@ -823,9 +823,10 @@
                                     data-bs-original-title="Lọc theo trạng thái">
                                     <select id="select-status" class="selectpicker select_filter"
                                         data-dropup-auto="false" title="Lọc theo trạng thái" name='trang_thai'>
-                                        @foreach ($personnelList as $item)
-                                            <option value="{{ $item->status }}">{{ $item->status }}</option>
-                                        @endforeach
+                                        {{-- @foreach ($personnel as $item) --}}
+                                            <option value="Đang làm việc">Đang làm việc</option>
+                                            <option value="Đã nghỉ việc">Đã nghỉ việc</option>
+                                        {{-- @endforeach --}}
                                     </select>
                                 </div>
                             </div>
