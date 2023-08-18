@@ -21,6 +21,7 @@ use App\Http\Controllers\RouteDirectionController;
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\SpecificationsController;
 use App\Http\Controllers\TechnicalSpecificationsGroupController;
+use App\Http\Controllers\UnitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -197,6 +198,12 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('sua-thong-so-ky-thuat/{id}', [SpecificationsController::class, 'update'])->name('Specifications.update');
     Route::post('xoa-thong-so-ky-thuat/{id}', [SpecificationsController::class, 'destroy'])->name('Specifications.destroy');
     Route::post('thong-so-ky-thuat-delete', [SpecificationsController::class, 'delete'])->name('Specifications.delete');
+
+    Route::get('don-vi-tinh', [UnitController::class, 'index'])->name('Unit.index');
+    Route::post('them-don-vi-tinh', [UnitController::class, 'store'])->name('Unit.store');
+    Route::post('sua-don-vi-tinh/{id}', [UnitController::class, 'update'])->name('Unit.update');
+    Route::post('xoa-don-vi-tinh/{id}', [UnitController::class, 'destroy'])->name('Unit.destroy');
+    Route::post('don-vi-tinh-delete', [UnitController::class, 'delete'])->name('Unit.delete');
 
 });
 

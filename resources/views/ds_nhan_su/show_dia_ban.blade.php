@@ -83,7 +83,7 @@
                                                             <th class="text-nowrap">Hình thức</th>
                                                             <th class="text-nowrap">Trạng thái</th>
                                                             @if (session('user')['role_id'] == '1')
-                                                                <th class="text-nowrap"><span>Hành động</span>
+                                                                <th class="text-nowrap text-center"><span>Hành động</span>
                                                                 </th>
                                                             @endif
                                                         </tr>
@@ -918,11 +918,12 @@
                                 <div data-bs-toggle="tooltip" data-bs-placement="top"
                                     data-bs-original-title="Lọc theo trạng thái">
                                     <select id="select-status" class="selectpicker select_filter"
-                                        data-dropup-auto="false" title="Lọc theo trạng thái" name='trang_thai'>
-                                        @foreach ($personnelList as $item)
-                                            <option value="{{ $item->status }}">{{ $item->status }}</option>
-                                        @endforeach
-                                    </select>
+                                    data-dropup-auto="false" title="Lọc theo trạng thái" name='trang_thai'>
+                                    {{-- @foreach ($personnel as $item) --}}
+                                        <option value="Đang làm việc">Đang làm việc</option>
+                                        <option value="Đã nghỉ việc">Đã nghỉ việc</option>
+                                    {{-- @endforeach --}}
+                                </select>
                                 </div>
                             </div>
                         </div>

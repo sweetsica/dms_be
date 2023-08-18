@@ -450,7 +450,7 @@
                     @endforeach --}}
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-12 mb-3">
+                            {{-- <div class="col-12 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top"
                                     data-bs-original-title="Lọc theo trưởng đơn vị">
                                     <select id="select-status" class="selectpicker select_filter"
@@ -460,13 +460,13 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-12 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top"
                                     data-bs-original-title="Lọc theo đơn vị mẹ">
                                     <select id="select-status" class="selectpicker select_filter"
                                         data-dropup-auto="false" title="Lọc theo đơn vị mẹ" name='don_vi_me'>
-                                        @foreach ($departmentList as $item)
+                                        @foreach ($Department as $item)
                                             <option value="{{ $item->name }}">{{ $item->name }}</option>
                                         @endforeach
                                     </select>

@@ -74,12 +74,13 @@
                                                             <th class="text-nowrap text-center" style="width:1%"><input
                                                                 type="checkbox" id="select-all"></th>
                                                             <th class="text-nowrap text-center" style="width:2%">STT</th>
-                                                            <th class="text-nowrap" style="width:10%">Mã vị trí</th>
+                                                            <th class="text-nowrap" style="width:5%">Mã vị trí</th>
                                                             <th class="text-nowrap" style="width:10%">Tên vị trí/chức danh
                                                             </th>
                                                             <th class="text-nowrap" style="width:10%">Cấp nhân sự</th>
                                                             <th class="text-nowrap" style="width:10%">Đơn vị công tác</th>
                                                             <th class="text-nowrap" style="width:20%">Mô tả</th>
+                                                            {{-- <th class="text-nowrap" style="width:10%">Người đảm nhiệm</th> --}}
                                                             <th class="text-nowrap" style="width:10%">Định biên</th>
                                                             <th class="text-nowrap" style="width:10%">Quỹ lương năm</th>
                                                             <th class="text-nowrap" style="width:8%">Gói trang bị</th>
@@ -125,6 +126,7 @@
                                                                     </div>
 
                                                                 </td>
+
                                                                 <td class="">
                                                                     <div class="overText" data-bs-toggle="tooltip"
                                                                         data-bs-placement="top"
@@ -133,6 +135,14 @@
                                                                     </div>
 
                                                                 </td>
+                                                                {{-- <td>
+                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                        data-bs-placement="top"
+                                                                        title="{{ $item->personnel_name }}">
+                                                                        {{ $item->personnel_name }}
+                                                                    </div>
+
+                                                                </td> --}}
                                                                 <td class="">
                                                                     <div class="overText" data-bs-toggle="tooltip"
                                                                         data-bs-placement="top"
@@ -286,14 +296,16 @@
                                       required class="selectpicker"
                                       data-dropup-auto="false">
                                       <?php if ($item->personnel_level == null){ ?>
-                                      <option>Chọn cấp nhân sự*
+                                      <option value="">Chọn cấp nhân sự*
                                       </option>
                                       <?php } else { ?>
+                                        <option
+                                        value="{{ $item->personnel_level }}">
+                                        {{ $item->personnel_level_name }}
+                                    </option>
                                       <?php } ?>
-                                      <option
-                                          value="{{ $item->personnel_level }}">
-                                          {{ $item->personnel_level_name }}
-                                      </option>
+                                      <option value="">Chọn cấp nhân sự*
+                                    </option>
                                       @foreach ($personnelLevelList as $av)
                                           <option
                                               value="{{ $av->id }}">
@@ -307,7 +319,7 @@
 
                               <div data-bs-toggle="tooltip"
                                   data-bs-placement="top"
-                                  title="Chọn cấp quản lý">
+                                  title="Chọn vị trí cấp quản lý">
                                   <select name="parent"
                                       class="selectpicker"
                                       data-dropup-auto="false">
@@ -315,13 +327,15 @@
                                       <option value="0">Chọn cấp quản lý
                                       </option>
                                       <?php } else { ?>
+                                        <option
+                                        value="{{ $item->parent }}">
+                                        @if ($item->donvime)
+                                            {{ $item->donvime->name }}
+                                        @endif
+                                    </option>
                                       <?php } ?>
-                                      <option
-                                          value="{{ $item->parent }}">
-                                          @if ($item->donvime)
-                                              {{ $item->donvime->name }}
-                                          @endif
-                                      </option>
+                                      <option value="0">Chọn cấp quản lý
+                                    </option>
                                       @foreach ($positionlists as $ac)
                                           <option
                                               value="{{ $ac->id }}">
@@ -372,7 +386,7 @@
                                   value="{{ $item->staffing }}">
                           </div>
                           <div class="col-6 mb-3">
-                              <input name="wage" type="text"
+                              <input name="wage" type="number"
                                   placeholder="Quỹ lương năm"
                                   class="form-control"
                                   data-bs-toggle="tooltip"
@@ -380,6 +394,7 @@
                                   title="Quỹ lương năm"
                                   value="{{ $item->wage }}">
                           </div>
+                       -
                       </div>
                   </div>
                   <div class="modal-footer">
@@ -526,9 +541,10 @@
                                     data-bs-toggle="tooltip" data-bs-placement="top" title="Định biên">
                             </div>
                             <div class="col-6 mb-3">
-                                <input name="wage" type="text" placeholder="Quỹ lương năm" class="form-control"
+                                <input name="wage" type="number" placeholder="Quỹ lương năm" class="form-control"
                                     data-bs-toggle="tooltip" data-bs-placement="top" title="Quỹ lương năm">
                             </div>
+
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy
                                 </button>

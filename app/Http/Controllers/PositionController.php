@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
+use App\Models\Personnel;
 use App\Models\PersonnelLevel;
 use App\Models\Position;
 use App\Models\UnitLeader;
@@ -19,18 +20,21 @@ class PositionController extends Controller
         // $positionList = Position::s
         $query->join('department','department.id','=','position.department_id')
         ->join('personnel_level','personnel_level.id','=','position.personnel_level')
+
         ->select(
             'position.id',
             'position.name',
             'position.description',
             'position.code',
             'position.parent',
+
             'position.wage',
             'position.pack',
             'position.department_id',
             'position.personnel_level',
             'personnel_level.name as personnel_level_name',
             'department.name as department_name',
+
             'position.staffing'
         );
         if($search != NULL) {
@@ -54,6 +58,7 @@ class PositionController extends Controller
         $departmentlists = $this->getDepartment();
         $personnelLevelList = PersonnelLevel::all();
 
+
         return view("Position.index",[
             "positionList"=>$positionList,
             "positionlists"=>$positionlists,
@@ -63,6 +68,7 @@ class PositionController extends Controller
             'UnitLeaderList' => $UnitLeaderList,
             'dv_cong_tac' => $dv_cong_tac,
             'cap_nhan_su' => $cap_nhan_su,
+
             "positionListTree"=>$positionListTree
         ]);
     }
@@ -102,6 +108,7 @@ class PositionController extends Controller
         $pack  = $request->get('pack');
         $wage  = $request->get('wage');
         $description  = $request->get('description');
+        $manage  = $request->get('manage');
         $data = new Position();
         $data->name = $name;
         $data->parent=$parent;
@@ -111,6 +118,7 @@ class PositionController extends Controller
         $data->personnel_level=$personnel_level;
         $data->pack=$pack;
         $data->wage=$wage;
+        $data->manage=$manage;
         $data->description=$description;
         $data->save();
         return redirect()->route('position.index');
@@ -126,6 +134,7 @@ class PositionController extends Controller
         $personnel_level  = $request->get('personnel_level');
         $pack  = $request->get('pack');
         $wage  = $request->get('wage');
+        $manage  = $request->get('manage');
         $description  = $request->get('description');
         $data = Position::find($id);
         $data->name = $name;
@@ -136,6 +145,7 @@ class PositionController extends Controller
         $data->personnel_level=$personnel_level;
         $data->pack=$pack;
         $data->wage=$wage;
+        $data->manage=$manage;
         $data->description=$description;
         $data->save();
         return redirect()->route('position.index');

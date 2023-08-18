@@ -86,6 +86,8 @@ class PersonnelController extends Controller
             }
             // ->where("personnel.code", "like", "%$search%")
         $personnelList =$query->paginate(15);
+        // $personnel =Personnel::select('personnel.status')->get();
+        // dd($personnel);
         $departmentlists = $this->getDepartment();
         $positionlists = $this->getPosition();
         $personnellists = $this->getPersonnel();
@@ -107,6 +109,7 @@ class PersonnelController extends Controller
             "cap_nhan_su"=>$cap_nhan_su,
             "vai_tro"=>$vai_tro,
             "dia_ban"=>$dia_ban,
+            // "personnel"=>$personnel,
             "trang_thai"=>$trang_thai,
             "departmentListTree"=>$departmentListTree,
             'search' => $search

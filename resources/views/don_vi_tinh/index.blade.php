@@ -12,7 +12,7 @@
             <div class="main">
                 <div class="container-fluid">
                     <div class="mainSection_heading">
-                        <h5 class="mainSection_heading-title">Danh sách nhóm thông số kỹ thuật</h5>
+                        <h5 class="mainSection_heading-title">Danh sách đơn vị tính</h5>
                         @include('template.components.sectionCard')
                     </div>
 
@@ -50,10 +50,10 @@
 
                                                 <div class="action_export order-md-4">
                                                     <button class="btn btn-danger d-block testCreateUser"
-                                                        data-bs-toggle="modal" data-bs-target="#taoDeXuat">Thêm nhóm thông số</button>
+                                                        data-bs-toggle="modal" data-bs-target="#taoDeXuat">Thêm đơn vị</button>
                                                 </div>
                                             </div>
-                                            <form id="select-form" action="{{ route('TechnicalSpecificationsGroup.delete') }}"
+                                            <form id="select-form" action="{{ route('Unit.delete') }}"
                                             method="POST">
                                             @csrf
                                             <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
@@ -71,15 +71,14 @@
                                                             <th class="text-nowrap text-center" style="width:1%"><input
                                                                 type="checkbox" id="select-all"></th>
                                                             <th class="text-nowrap text-center" style="width:2%">STT</th>
-                                                            <th class="text-nowrap" style="width:10%">Mã nhóm thông số</th>
-                                                            <th class="text-nowrap" style="width:10%">Tên nhóm thông số</th>
-                                                            <th class="text-nowrap" style="width:20%">Mô tả</th>
+                                                            <th class="text-nowrap text-center" style="width:10%">Mã đơn vị tính</th>
+                                                            <th class="text-nowrap text-center" style="width:10%">Tên đơn vị tính</th>
                                                             <th class="text-center" style="width:2%"><span>Thao tác</span>
                                                             </th>
                                                         </tr>
                                                     </thead>
                                                     <?php $i = 1; ?>
-                                                    @foreach ($TechnicalSpecificationsGroupList as $item)
+                                                    @foreach ($UnitList as $item)
                                                         <tbody>
                                                             <tr>
                                                                 <td class=" text-center"> <input type="checkbox" name="selected_items[]"
@@ -88,22 +87,15 @@
                                                                     {{ $i++ }}
                                                                 </td>
                                                                 <td class="">
-                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    <div class="overText text-center" data-bs-toggle="tooltip"
                                                                     data-bs-placement="top" title="{{ $item->code }}">
                                                                     {{ $item->code }}
                                                                 </div>
                                                                 </td>
                                                                 <td class="">
-                                                                    <div class="overText" data-bs-toggle="tooltip"
+                                                                    <div class="overText text-center" data-bs-toggle="tooltip"
                                                                     data-bs-placement="top" title=" {{ $item->name }}">
                                                                     {{ $item->name }}
-                                                                </div>
-
-                                                                </td>
-                                                                <td class="">
-                                                                    <div class="overText" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top" title="{{ $item->description }}">
-                                                                    {{ $item->description }}
                                                                 </div>
 
                                                                 </td>
@@ -132,7 +124,7 @@
                                                         </tbody>
                                                     @endforeach
                                                 </table>
-                                                {{ $TechnicalSpecificationsGroupList->appends([
+                                                {{ $UnitList->appends([
                                                         'search' => $search,
                                                     ])->links() }}
                                             </div>
@@ -150,7 +142,7 @@
     </div>
     @include('template.sidebar.sidebarPosition.sidebarRight')
 
-    @foreach ($TechnicalSpecificationsGroupList as $item)
+    @foreach ($UnitList as $item)
      {{-- Sửa đề xuất --}}
      <div class="modal fade" id="sua{{ $item['id'] }}" tabindex="-1"
      aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -158,13 +150,13 @@
          <div class="modal-content">
              <div class="modal-header text-center">
                  <h5 class="modal-title w-100"
-                     id="exampleModalLabel">Sửa nhóm thông số kỹ thuật</h5>
+                     id="exampleModalLabel">Sửa đơn vị tính</h5>
                  <button type="button" class="btn-close"
                      data-bs-dismiss="modal"
                      aria-label="Close"></button>
              </div>
              <form method="POST"
-             action="{{ route('TechnicalSpecificationsGroup.update', $item->id) }}"
+             action="{{ route('Unit.update', $item->id) }}"
              >
                  @csrf
                  <div class="modal-body">
@@ -172,25 +164,18 @@
                          <div class="col-6 mb-3">
                              <input data-bs-toggle="tooltip"
                                  data-bs-placement="top" required
-                                 title="Nhập tên nhóm thông số*" name="name"
-                                 type="text" placeholder="Nhập tên nhóm thông số*"
+                                 title="Nhập tên đơn vị tính*" name="name"
+                                 type="text" placeholder="Nhập tên đơnn vị tính*"
                                  class="form-control"
                                  value="{{$item->name}}">
                          </div>
                          <div class="col-6 mb-3">
                              <input data-bs-toggle="tooltip" required
                                  data-bs-placement="top"
-                                 title="Nhập mã nhóm thông số*" name="code"
-                                 type="text" placeholder="Nhập mã nhóm thông số*"
+                                 title="Nhập mã đơn vị tính*" name="code"
+                                 type="text" placeholder="Nhập mã đơn vị tính*"
                                  class="form-control"
                                  value="{{$item->code}}">
-                         </div>
-                         <div class="col-6 mb-3">
-                             <div data-bs-toggle="tooltip" data-bs-placement="top" >
-                                 <textarea name="description" type="text" placeholder="Mô tả"
-                                     class="form-control " data-bs-toggle="tooltip" data-bs-placement="top"
-                                     title="Mô tả" style="width: 450px;height: 80px;">{{ $item->description }}</textarea>
-                             </div>
                          </div>
                      </div>
                  </div>
@@ -214,20 +199,20 @@
            <div class="modal-content">
                <div class="modal-header">
                    <h5 class="modal-title text-danger"
-                       id="exampleModalLabel">Xóa nhóm thông số kỹ thuật</h5>
+                       id="exampleModalLabel">Xóa đơn vị tính</h5>
                    <button type="button" class="btn-close"
                        data-bs-dismiss="modal"
                        aria-label="Close"></button>
                </div>
                <div class="modal-body">
-                   Bạn có thực sự muốn xoá nhóm thông số này không?
+                   Bạn có thực sự muốn xoá đơn vị tính này không?
                </div>
                <div class="modal-footer">
                    <button type="button"
                        class="btn btn-outline-danger"
                        data-bs-dismiss="modal">Hủy</button>
                    <form
-                   action="{{ route('TechnicalSpecificationsGroup.destroy',$item->id) }}"
+                   action="{{ route('Unit.destroy',$item->id) }}"
                    method="POST">
                        @csrf
                        <button type="submit"
@@ -243,28 +228,22 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">Thêm mới nhóm thông số kỹ thuật</h5>
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Thêm mới đơn vị tính</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('TechnicalSpecificationsGroup.store') }}" method="POST">
+                <form action="{{ route('Unit.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-6 mb-3">
-                                <input name="name" required type="text" placeholder="Nhập tên nhóm thông số*"
+                                <input name="name" required type="text" placeholder="Nhập tên đơn vị tính*"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Nhập tên nhóm thông số*">
+                                    title="Nhập tên đơn vị tính*">
                             </div>
                             <div class="col-6 mb-3">
-                                <input name="code" required type="text" placeholder="Nhập mã nhóm thông số*"
+                                <input name="code" required type="text" placeholder="Nhập mã đơn vị tính*"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Nhập mã nhóm thông số*">
-                            </div>
-                            <div class="col-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top">
-                                    <textarea name="description" type="text" placeholder="Mô tả" class="form-control " data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Mô tả" style="width: 450px;height: 80px;"></textarea>
-                                </div>
+                                    title="Nhập mã đơn vị tính*">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-outline-danger"
