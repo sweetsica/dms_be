@@ -315,7 +315,8 @@
                     <ul class="header_more">
 
                         <li class="header_more-item">
-                            <a href="#" class="header_more-link">Nhóm khách hàng</a>
+                            <a href="{{ route('CustomerGroup.index') }}" class="header_more-link">Nhóm khách
+                                hàng</a>
                         </li>
                         <li class="header_more-item">
                             <a href="#" class="header_more-link">Loại khách hàng</a>
@@ -331,10 +332,18 @@
                             <a href="#" class="header_more-link">Nhóm sản phẩm</a>
                         </li>
                         <li class="header_more-item">
-                            <a href="#" class="header_more-link">Đơn vị tính</a>
+                            <a href="{{ route('Unit.index') }}" class="header_more-link">Đơn vị tính</a>
                         </li>
                         <li class="header_more-item">
                             <a href="#" class="header_more-link">Ngành hàng</a>
+                        </li>
+                        <li class="header_more-item">
+                            <a href="{{ route('TechnicalSpecificationsGroup.index') }}" class="header_more-link">Nhóm
+                                thông số kỹ thuật</a>
+                        </li>
+                        <li class="header_more-item">
+                            <a href="{{ route('Specifications.index') }}" class="header_more-link">Thông số kỹ
+                                thuật</a>
                         </li>
                     </ul>
                 </li>
