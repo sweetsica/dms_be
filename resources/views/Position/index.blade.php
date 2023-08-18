@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card mb-3">
-                                <div class="card-body">
+                                <div class="card-body position-relative">
                                     <div class='row'>
                                         <div class="col-md-12">
                                             <div
@@ -60,7 +60,8 @@
                                             <form id="select-form" action="{{ route('Position.delete') }}" method="POST">
                                                 @csrf
                                                 <div class="action_export mx-3 order-md-1" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" title="Xóa">
+                                                    data-bs-placement="top" title="Xóa"
+                                                    style="position: absolute; top: 10px; left: 0;">
                                                     <button class="btn btn-danger  " type="submit"
                                                         onclick="return confirm('Bạn có muốn xóa không?')"
                                                         id="delete-selected-button" style="display: none;">Xóa</button>
