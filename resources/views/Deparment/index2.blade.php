@@ -679,7 +679,7 @@
                             <input type="hidden" name="{{ $key }}" value="{{ $value }}">
                         @endif
                     @endforeach --}}
-    <div class="modal-body">
+    {{-- <div class="modal-body">
         <div class="row">
             <div class="col-12 mb-3">
                 <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Lọc theo trưởng đơn vị">
@@ -710,7 +710,7 @@
         </form>
     </div>
     </div>
-    </div>
+    </div> --}}
 
     {{-- Gán vị trí --}}
     <div class="modal fade" id="assignPosition" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

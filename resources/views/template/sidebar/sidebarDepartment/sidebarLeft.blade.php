@@ -5,8 +5,12 @@
                 <div class="sidebarBody_wrapper ">
                     <div class="sidebarBody_heading-wrapper  ">
                         <div class="wrapper">
-                            <h1 style="color: red;">Cơ cấu đơn vị <img src="{{ asset('assets/img/Vector.png') }}"
-                                    onclick="showList()" id="show-list-button" style="float: right"></h1>
+                            <a style="color: red;" href="{{ route('department.index') }}">
+
+                                <h1>Cơ cấu đơn vị
+                            </a> <img src="{{ asset('assets/img/Vector.png') }}" onclick="showList()"
+                                id="show-list-button" style="float: right"></h1>
+
                         </div>
                         <div id="list-container" style="display: none;">
                             <ul>
