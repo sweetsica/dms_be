@@ -62,6 +62,8 @@ Route::middleware(['auth.role'])->group(function () {
 
     Route::post('/create-customer', [CustomerController::class, 'create'])->name('create-customer');
 
+    Route::post('/create-customer-simple', [CustomerController::class, 'createSimple'])->name('create-customer-simple');
+
     Route::get('/customer', [CustomerController::class, 'view'])->name('customers');
 
     Route::post('/update-customer/{id}', [CustomerController::class, 'update'])->name('update.customer');
@@ -203,7 +205,7 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('sua-thong-so-ky-thuat/{id}', [SpecificationsController::class, 'update'])->name('Specifications.update');
     Route::post('xoa-thong-so-ky-thuat/{id}', [SpecificationsController::class, 'destroy'])->name('Specifications.destroy');
     Route::post('thong-so-ky-thuat-delete', [SpecificationsController::class, 'delete'])->name('Specifications.delete');
-    
+
     Route::post('them-vi-tri-nhan-su/{id?}', [PersonnelController::class, 'assignPosition'])->name('assign.user.position');
     Route::delete('xoa-vi-tri-nhan-su/{user_id?}/{pos_id?}', [PersonnelController::class, 'removePosition'])->name('remove.user.position');
 

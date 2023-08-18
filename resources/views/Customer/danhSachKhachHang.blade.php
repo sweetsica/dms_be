@@ -618,45 +618,46 @@
                 <h5 class="modal-title w-100" id="exampleModalLabel">Thông tin khách hàng</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="formThemCapPhatChitiet" method="POST" action="{{ route('create-customer') }}" enctype="multipart/form-data">
-            @csrf
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-6 mb-3">
-                        <input type="text" name="name" data-bs-toggle="tooltip" required id="nameInput"
-                            data-bs-placement="top" title="Tên khách hàng" placeholder="Tên khách hàng*"
-                            class="form-control">
-                    </div>
-                    <div class="col-lg-6 mb-3">
-                        <input type="text" name="personContact" data-bs-toggle="tooltip" required
-                            id="personContactInput" data-bs-placement="top" title="Người liên hệ"
-                            placeholder="Tên người liên hệ*" class="form-control">
-                    </div>
-                    <div class="col-lg-6 mb-3">
-                        <input type="text" name="phone" data-bs-toggle="tooltip" required id="phoneInput"
-                            data-bs-placement="top" title="Số điện thoại" placeholder="Số điện thoại*"
-                            class="form-control">
-                    </div>
-                    <div class="col-lg-6 mb-3">
-                        <input type="text" name="email" data-bs-toggle="tooltip" required id="emailInput"
-                            data-bs-placement="top" title="Email" placeholder="Email" class="form-control">
-                    </div>
-                    <div class="col-lg-12 mb-3">
-                        <input type="text" name="address" data-bs-toggle="tooltip" required id="addressInputGeneral"
-                            data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ" class="form-control">
+            <form id="formThemCapPhatChitiet" method="POST" action="{{ route('create-customer-simple') }}"
+                enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-6 mb-3">
+                            <input type="text" name="name" data-bs-toggle="tooltip" required id="nameInput"
+                                data-bs-placement="top" title="Tên khách hàng" placeholder="Tên khách hàng*"
+                                class="form-control">
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <input type="text" name="personContact" data-bs-toggle="tooltip"
+                                id="personContactInput" data-bs-placement="top" title="Người liên hệ"
+                                placeholder="Tên người liên hệ*" class="form-control">
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <input type="text" name="phone" data-bs-toggle="tooltip" required id="phoneInput"
+                                data-bs-placement="top" title="Số điện thoại" placeholder="Số điện thoại*"
+                                class="form-control">
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <input type="text" name="email" data-bs-toggle="tooltip" id="emailInput"
+                                data-bs-placement="top" title="Email" placeholder="Email" class="form-control">
+                        </div>
+                        <div class="col-lg-12 mb-3">
+                            <input type="text" name="address" data-bs-toggle="tooltip" required id="addressInputGeneral"
+                                data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ" class="form-control">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer d-flex align-items-center justify-content-between">
-                <div>
-                    <button type="submit" class="btn btn-danger">Lưu và thêm</button>
+                <div class="modal-footer d-flex align-items-center justify-content-between">
+                    <div>
+                        <button type="submit" class="btn btn-danger">Lưu và thêm</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#themchitiet">Thêm chi tiết</button>
+                    </div>
                 </div>
-                <div>
-                    <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                        data-bs-target="#themchitiet">Thêm chi tiết</button>
-                </div>
-            </div>
             </form>
         </div>
     </div>
@@ -752,13 +753,23 @@
                         </div>
 
                         <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="Nhân sự thu thập">
-                            <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                data-live-search="true" title="Nhân sự thu thập*" data-select-all-text="Chọn tất cả"
-                                data-deselect-all-text="Bỏ chọn" data-size="3" name="personId" id="personId"
+                            title="Nhân sự thu thập*">
+
+                            <select {{ session('user')['role_id'] !='1' ? 'disabled' : '' }} class="selectpicker"
+                                data-dropup-auto="false" data-width="100%" required data-live-search="true"
+                                title="Nhân sự thu thập*" data-select-all-text="Chọn tất cả"
+                                data-deselect-all-text="Bỏ chọn" data-size="3" name="personId"
                                 data-live-search-placeholder="Tìm kiếm...">
+                                @foreach ($listPersons as $per)
+                                <option value="{{ $per->id }}" {{ $per->id == session('user')['id'] ? 'selected' : ''
+                                    }}>
+                                    {{ $per->name }}
+                                </option>
+                                @endforeach
                             </select>
+                            <div class="error-text" id="personIdError" style="color: red;"></div>
                         </div>
+
                         <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                             title="Sản phẩm quan tâm">
                             <select class="selectpicker" data-dropup-auto="false" data-width="100%"
@@ -810,13 +821,12 @@
                                 data-live-search-placeholder="Tìm kiếm...">
                             </select>
                         </div>
-                        <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Trạng thái">
+                        <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Trạng thái*">
                             <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                data-live-search="true" title="Trạng thái*" data-select-all-text="Chọn tất cả"
+                                data-live-search="true" data-select-all-text="Chọn tất cả"
                                 data-deselect-all-text="Bỏ chọn" data-size="3" name="status"
                                 data-live-search-placeholder="Tìm kiếm...">
-                                <option value="Trinh sát">Trinh sát</option>
-                                <option value="Tiềm năng">Tiềm năng</option>
+                                <option value="Trinh sát" selected>Trinh sát</option>
                                 <option value="Cơ hội">Cơ hội</option>
                                 <option value="Khách hàng">Khách hàng</option>
                             </select>
