@@ -81,8 +81,8 @@
                                                                     đơn vị </th>
                                                                 <th class="text-nowrap text-center" style="width:5%">Đơn vị
                                                                     cha </th>
-                                                                <th class="text-nowrap text-center" style="width:5%">
-                                                                    Người đảm nhiệm
+                                                                <th class="text-nowrap text-center" style="width:5%">Người
+                                                                    đảm nhiệm
                                                                 </th>
                                                                 <th class="text-nowrap text-center" style="width:20%">Chức
                                                                     năng nhiệm vụ
@@ -588,7 +588,6 @@
                                     <option value="{{ $item->pack }}">
                                         {{ $item->pack }}
                                     </option>
-
                                 </select>
                             </div>
                         </div> --}}
@@ -621,7 +620,6 @@
             </div>
         </div>
     @endforeach
-
 
     <!-- Modal Thêm Tao De Xuat -->
     <div class="modal fade" id="taoDeXuat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

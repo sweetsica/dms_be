@@ -370,4 +370,4 @@
                 $('.ui.accordion').accordion();
             });
         </script>
-    @endsection
+@endsection

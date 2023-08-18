@@ -86,7 +86,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'code' => 'PMH',
             'name' => 'Phòng Mua hàng',
             'parent' => '7',
-            'description' => 'Giám sát điều phối mua hàng. BỘ phận đưa ra các quy định về việc mua hàng',
+            'description' => 'Giám sát điều phối mua hàng. Bộ phận đưa ra các quy định về việc mua hàng',
             'ib_lead' => '',
         ]);
         Department::create([
@@ -111,7 +111,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'name' => 'Phòng Marketing',
             'parent' => '7',
             'description' => 'Phụ trách các hoạt động tiếp thị của doanh nghiệp',
-            'ib_lead' => '',
+            'ib_lead' => '11',
         ]);
         Department::create([
             //12

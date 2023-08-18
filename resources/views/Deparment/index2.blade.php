@@ -134,26 +134,26 @@
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="row">
-{{--                                                                    <div class="col-lg-6">--}}
-{{--                                                                        <span class="fs-5 fw-bold">Thử việc:</span>--}}
-{{--                                                                    </div>--}}
-{{--                                                                    <div class="col-lg-6">--}}
-{{--                                                                        <span class="fs-5">--}}
-{{--                                                                            Thử việc--}}
-{{--                                                                        </span>--}}
-{{--                                                                    </div>--}}
+                                                                    {{--                                                                    <div class="col-lg-6"> --}}
+                                                                    {{--                                                                        <span class="fs-5 fw-bold">Thử việc:</span> --}}
+                                                                    {{--                                                                    </div> --}}
+                                                                    {{--                                                                    <div class="col-lg-6"> --}}
+                                                                    {{--                                                                        <span class="fs-5"> --}}
+                                                                    {{--                                                                            Thử việc --}}
+                                                                    {{--                                                                        </span> --}}
+                                                                    {{--                                                                    </div> --}}
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="row">
-{{--                                                                    <div class="col-lg-6">--}}
-{{--                                                                        <span class="fs-5 fw-bold">Cộng tác:</span>--}}
-{{--                                                                    </div>--}}
-{{--                                                                    <div class="col-lg-6">--}}
-{{--                                                                        <span class="fs-5">--}}
-{{--                                                                            abc--}}
-{{--                                                                        </span>--}}
-{{--                                                                    </div>--}}
+                                                                    {{--                                                                    <div class="col-lg-6"> --}}
+                                                                    {{--                                                                        <span class="fs-5 fw-bold">Cộng tác:</span> --}}
+                                                                    {{--                                                                    </div> --}}
+                                                                    {{--                                                                    <div class="col-lg-6"> --}}
+                                                                    {{--                                                                        <span class="fs-5"> --}}
+                                                                    {{--                                                                            abc --}}
+                                                                    {{--                                                                        </span> --}}
+                                                                    {{--                                                                    </div> --}}
                                                                 </div>
                                                             </div>
                                                         </div>
