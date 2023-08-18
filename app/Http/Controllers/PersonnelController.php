@@ -58,39 +58,6 @@ class PersonnelController extends Controller
                 'personnel.area_id'
                 // 'personnel.id',
             );
-<<<<<<< HEAD
-            if($search != NULL) {
-                $query->where("personnel.code", "like", "%$search%");
-            }
-            if($search != NULL) {
-                $query->orWhere("personnel.name", "like", "%$search%");
-            }
-            if($search != NULL) {
-                $query->orWhere("personnel.phone", "like", "%$search%");
-            }
-            if($dv_cong_tac != NULL) {
-                $query->where("department.name", "like", "%$dv_cong_tac%");
-            }
-            if($vt_lam_vc != NULL) {
-                $query->where("position.name", "like", "%$vt_lam_vc%");
-            }
-            if($cap_nhan_su != NULL) {
-                $query->where("personnel_level.name", "like", "%$cap_nhan_su%");
-            }
-            if($vai_tro != NULL) {
-                $query->where("role.name", "like", "%$vai_tro%");
-            }
-            if($dia_ban != NULL) {
-                $query->where("locality.name", "like", "%$dia_ban%");
-            }
-            if($trang_thai != NULL) {
-                $query->where("personnel.status", "like", "%$trang_thai%");
-            }
-            // ->where("personnel.code", "like", "%$search%")
-        $personnelList =$query->paginate(15);
-        // $personnel =Personnel::select('personnel.status')->get();
-        // dd($personnel);
-=======
         if ($search != NULL) {
             $query->where("personnel.code", "like", "%$search%");
         }
@@ -120,7 +87,6 @@ class PersonnelController extends Controller
         }
         // ->where("personnel.code", "like", "%$search%")
         $personnelList = $query->paginate(15);
->>>>>>> origin/tung-branch-3
         $departmentlists = $this->getDepartment();
         $positionlists = $this->getPosition();
         $personnellists = $this->getPersonnel();
@@ -129,24 +95,6 @@ class PersonnelController extends Controller
         $localityList = Locality::all();
         $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
         // dd($personnelLevelList);
-<<<<<<< HEAD
-        return view("ds_nhan_su.index",[
-            "personnelList"=>$personnelList,
-            "departmentlists"=>$departmentlists,
-            "positionlists"=>$positionlists,
-            "localityList"=>$localityList,
-            "personnellists"=>$personnellists,
-            "personnelLevelList"=>$personnelLevelList,
-            "roleList"=>$roleList,
-            "dv_cong_tac"=>$dv_cong_tac,
-            "vt_lam_vc"=>$vt_lam_vc,
-            "cap_nhan_su"=>$cap_nhan_su,
-            "vai_tro"=>$vai_tro,
-            "dia_ban"=>$dia_ban,
-            // "personnel"=>$personnel,
-            "trang_thai"=>$trang_thai,
-            "departmentListTree"=>$departmentListTree,
-=======
         return view("ds_nhan_su.index", [
             "personnelList" => $personnelList,
             "departmentlists" => $departmentlists,
@@ -162,7 +110,6 @@ class PersonnelController extends Controller
             "dia_ban" => $dia_ban,
             "trang_thai" => $trang_thai,
             "departmentListTree" => $departmentListTree,
->>>>>>> origin/tung-branch-3
             'search' => $search
         ]);
     }

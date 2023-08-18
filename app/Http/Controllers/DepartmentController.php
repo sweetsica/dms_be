@@ -33,18 +33,6 @@ class DepartmentController extends Controller
                 'department.ib_lead',
                 'personnel.name as leader_name'
             );
-<<<<<<< HEAD
-            if($search != NULL) {
-                $query->where("department.name", "like", "%$search%");
-            }
-            if($don_vi_me != NULL) {
-                $query->where("department.name", "like", "%$don_vi_me%");
-            }
-            if($search != NULL) {
-                $query->orWhere("personnel.name", "like", "%$search%");
-            }
-            $departmentList=$query->paginate(15);
-=======
         if ($search != NULL) {
             $query->where("department.name", "like", "%$search%");
         }
@@ -55,7 +43,6 @@ class DepartmentController extends Controller
             $query->where("personnel.name", "like", "%$leader_name%");
         }
         $departmentList = $query->paginate(15);
->>>>>>> origin/tung-branch-3
         // dd($departmentList);
         $UnitLeaderList = Personnel::all();
         $Department = Department::all();
