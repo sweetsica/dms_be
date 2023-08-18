@@ -75,7 +75,8 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr class="table-row" data-href="/de-xuat-theo-mau/1" role="button">
+                                                        <tr class="table-row" data-href="/de-xuat-theo-mau/1"
+                                                            role="button">
                                                             <td class=" text-center">
                                                                 <div class="overText">
                                                                     1
@@ -134,11 +135,11 @@
 
                                                             <td>
                                                                 <div class="table_actions d-flex justify-content-end">
-                                                                    <div class="btn" data-bs-toggle="modal"
+                                                                    {{-- <div class="btn" data-bs-toggle="modal"
                                                                         data-bs-target="#qrCode">
                                                                         <i class="bi bi-share-fill"
                                                                             style="color: #787878;"></i>
-                                                                    </div>
+                                                                    </div> --}}
                                                                     <div data-bs-toggle="tooltip" data-bs-placement="top"
                                                                         title="Sửa đề xuất">
                                                                         <div class="btn" data-bs-toggle="modal"

@@ -12,113 +12,113 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"
         integrity="sha512-wR4oNhLBHf7smjy0K4oqzdWumd+r5/+6QO/vDda76MW5iug4PT7v86FoEkySIJft3XA0Ae6axhIvHrqwm793Nw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <style>
-            #preview {
-                width: 100px;
-                height: 10vh;
-                object-fit: contain;
+    <style>
+        #preview {
+            width: 100px;
+            height: 10vh;
+            object-fit: contain;
+        }
+
+        #fileInput {
+            margin-bottom: 10px;
+        }
+
+        #preview img {
+            max-height: 100%;
+            object-fit: contain;
+            margin: 2px;
+            display: block;
+        }
+
+        #attachments a {
+            display: block;
+            margin: 2px;
+        }
+
+        .file-list li {
+            margin: 2px;
+        }
+
+        .file-list span.modal_upload-remote {
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        #fileInput {
+            display: none;
+            /* Ẩn input thực tế */
+        }
+
+        #fileButton {
+            position: relative;
+            border: 1px solid #ced4da;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        #fileButton img {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+        }
+
+        #fileButton span {
+            flex-grow: 1;
+            margin-right: 8px;
+        }
+
+
+
+        .carousel-indicators button.thumbnail {
+            width: 200px;
+            height: 6vh;
+            object-fit: contain;
+        }
+
+        .carousel-indicators button.thumbnail img {
+            max-height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .carousel-indicators button.thumbnail:not(.active) {
+            opacity: 0.7;
+        }
+
+        .carousel-indicators {
+            position: static;
+        }
+
+
+        .carousel-indicators [data-bs-target] {
+            height: 40px;
+        }
+
+
+        .carousel-item {
+            height: 20vh;
+            background-size: 100%;
+            background-repeat: no-repeat
+        }
+
+        .carousel-item img {
+            max-height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+
+
+
+        @media screen and (min-width: 200px) {
+            .carousel {
+                max-width: 70%;
+                margin: 0 auto;
             }
-            #fileInput {
-                margin-bottom: 10px;
-            }
-
-            #preview img {
-                max-height: 100%;
-                object-fit: contain;
-                margin: 2px;
-                display: block;
-            }
-
-            #attachments a {
-                display: block;
-                margin: 2px;
-            }
-
-            .file-list li {
-                margin: 2px;
-            }
-
-            .file-list span.modal_upload-remote {
-                cursor: pointer;
-                margin-left: 10px;
-            }
-
-            #fileInput {
-                display: none; /* Ẩn input thực tế */
-            }
-
-            #fileButton {
-                position: relative;
-                border: 1px solid #ced4da;
-                width: 100%;
-                display: flex;
-                align-items: center;
-                padding: 5px 10px;
-                cursor: pointer;
-            }
-
-            #fileButton img {
-                width: 16px;
-                height: 16px;
-                margin-right: 8px;
-            }
-
-            #fileButton span {
-                flex-grow: 1;
-                margin-right: 8px;
-            }
-
-
-
-            .carousel-indicators button.thumbnail {
-                width: 200px;
-                height: 6vh;
-                object-fit: contain;
-            }
-
-            .carousel-indicators button.thumbnail img {
-                max-height: 100%;
-                width: auto;
-                object-fit: contain;
-            }
-
-            .carousel-indicators button.thumbnail:not(.active) {
-                opacity: 0.7;
-            }
-
-            .carousel-indicators {
-                position: static;
-            }
-
-
-            .carousel-indicators [data-bs-target] {
-                height: 40px;
-            }
-
-
-            .carousel-item {
-                height: 20vh;
-                background-size: 100%;
-                background-repeat: no-repeat
-            }
-
-            .carousel-item img {
-                max-height: 100%;
-                width: auto;
-                object-fit: contain;
-            }
-
-
-
-            @media screen and (min-width: 200px) {
-                .carousel {
-                    max-width: 70%;
-                    margin: 0 auto;
-                }
-            }
-
-
-        </style>
+        }
+    </style>
 @endsection
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
@@ -154,37 +154,36 @@
                                                             style="display: grid; grid-template-columns: auto">
                                                             <div class="border border-2 secondary mb-3 ">
                                                                 <img class="demo cursor h-100 w-100 "
-                                                                src="{{ $product->thumbnail }}"
-                                                                    style="width:100%" onclick="currentSlide(1)"
-                                                                    alt="The Woods">
+                                                                    src="{{ $product->thumbnail }}" style="width:100%"
+                                                                    onclick="currentSlide(1)" alt="The Woods">
                                                             </div>
 
-                                                            <?php $im=2; ?>
+                                                            <?php $im = 2; ?>
                                                             @if (!empty(json_decode($details->images)))
-                                                            @foreach (json_decode($details->images) as $key => $img)
-                                                            <div class="border border-2 secondary mb-3 ">
-                                                                <img class="demo cursor h-100 w-100 border border-1"
-                                                                        src="{{ $img }}"
-                                                                    style="width:100%" onclick="currentSlide({{$im++}})"
-                                                                    alt="Mountains and fjords">
-                                                            </div>
-                                                        @endforeach
-                                                        @endif
+                                                                @foreach (json_decode($details->images) as $key => $img)
+                                                                    <div class="border border-2 secondary mb-3 ">
+                                                                        <img class="demo cursor h-100 w-100 border border-1"
+                                                                            src="{{ $img }}" style="width:100%"
+                                                                            onclick="currentSlide({{ $im++ }})"
+                                                                            alt="Mountains and fjords">
+                                                                    </div>
+                                                                @endforeach
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-10">
                                                         <div>
                                                             <div class="mySlides">
-                                                                <img   src="{{ $product->thumbnail }}"
-                                                                    class="w-100" style="object-fit: contain;height: 100%">
+                                                                <img src="{{ $product->thumbnail }}" class="w-100"
+                                                                    style="object-fit: contain;height: 100%">
                                                             </div>
-                                                           @if (!empty(json_decode($details->images)))
-                                                           @foreach (json_decode($details->images) as $key => $img)
-                                                           <div class="mySlides">
-                                                               <img  src="{{ $img }}"
-                                                                   class="w-100" style="object-fit: contain;height: 100%">
-                                                           </div>
-                                                           @endforeach
+                                                            @if (!empty(json_decode($details->images)))
+                                                                @foreach (json_decode($details->images) as $key => $img)
+                                                                    <div class="mySlides">
+                                                                        <img src="{{ $img }}" class="w-100"
+                                                                            style="object-fit: contain;height: 100%">
+                                                                    </div>
+                                                                @endforeach
                                                             @endif
                                                         </div>
                                                     </div>
@@ -195,12 +194,13 @@
                                             <div class="d-flex justify-content-between mb-3">
                                                 <span>
                                                     <p class="m-0 fs-4 fw-bold">Giá bán</p>
-                                                    <p class="m-0 fs-5 fw-bold text-color_pimary">$ {{ $details->price }}</p>
+                                                    <p class="m-0 fs-5 fw-bold text-color_pimary">$ {{ $details->price }}
+                                                    </p>
                                                 </span>
                                                 <div class="col-4 d-flex align-items-center justify-content-end"
-                                                style="height: 70px;">
-                                                {!! QrCode::generate(route('product.show', $product->id)) !!}
-                                            </div>
+                                                    style="height: 70px;">
+                                                    {!! QrCode::generate(route('product.show', $product->id)) !!}
+                                                </div>
                                             </div>
 
                                             <div class="mb-2">
@@ -242,17 +242,17 @@
                                                         </a>
                                                     </div> --}}
                                                     @if (!empty(json_decode($details->attachments)))
-                                                    @foreach (json_decode($details->attachments) as $key => $file)
-                                                    <div class="col-lg-4 mb-3">
-                                                        <a href="#"
-                                                            class="text-color_pimary d-flex align-items-center">
-                                                            <img src="{{ asset('assets/img/icon-pdf.png') }}"
-                                                                class="img img-thumbnail"
-                                                                style="width:30%; border:none" />
-                                                            <span class="fw-bold fs-6">{{ $file }}</span>
-                                                        </a>
-                                                    </div>
-                                                    @endforeach
+                                                        @foreach (json_decode($details->attachments) as $key => $file)
+                                                            <div class="col-lg-4 mb-3">
+                                                                <a href="#"
+                                                                    class="text-color_pimary d-flex align-items-center">
+                                                                    <img src="{{ asset('assets/img/icon-pdf.png') }}"
+                                                                        class="img img-thumbnail"
+                                                                        style="width:30%; border:none" />
+                                                                    <span class="fw-bold fs-6">{{ $file }}</span>
+                                                                </a>
+                                                            </div>
+                                                        @endforeach
                                                     @endif
                                                 </div>
                                             </div>
@@ -298,31 +298,31 @@
                                                             style="background: #D9D9D9">KÍCH THƯỚC</th>
                                                     </tr>
                                                     @if (!empty($details->data))
-                                                     @foreach ($combinedData as $data  )
-                                                     @if ($data->key1 =='Kích thước')
-                                                        <tr style="height: 40px;">
-                                                            <td class="ps-5">{{ $data->key2}}
-                                                            </td>
-                                                            <td class="text-center">{{ $data->key3}}</td>
-                                                        </tr>
-                                                        @endif
-                                                    @endforeach
+                                                        @foreach ($combinedData as $data)
+                                                            @if ($data->key1 == 'Kích thước')
+                                                                <tr style="height: 40px;">
+                                                                    <td class="ps-5">{{ $data->key2 }}
+                                                                    </td>
+                                                                    <td class="text-center">{{ $data->key3 }}</td>
+                                                                </tr>
+                                                            @endif
+                                                        @endforeach
                                                     @endif
                                                     <tr style="height: 40px;">
                                                         <th colspan="2" class="ps-5 text-color_pimary fw-bold"
                                                             style="background: #D9D9D9">KHỐI LƯƠNG</th>
                                                     </tr>
                                                     @if (!empty($details->data))
-                                                    @foreach ($combinedData as $data  )
-                                                    @if ($data->key1 =='Khối lượng')
-                                                       <tr style="height: 40px;">
-                                                           <td class="ps-5">{{ $data->key2}}
-                                                           </td>
-                                                           <td class="text-center">{{ $data->key3}}</td>
-                                                       </tr>
-                                                       @endif
-                                                   @endforeach
-                                                   @endif
+                                                        @foreach ($combinedData as $data)
+                                                            @if ($data->key1 == 'Khối lượng')
+                                                                <tr style="height: 40px;">
+                                                                    <td class="ps-5">{{ $data->key2 }}
+                                                                    </td>
+                                                                    <td class="text-center">{{ $data->key3 }}</td>
+                                                                </tr>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
                                                 </table>
                                             </div>
                                             <div class="col-lg-6">
@@ -343,16 +343,16 @@
                                                             style="background: #D9D9D9">HIỆU NĂNG</th>
                                                     </tr>
                                                     @if (!empty($details->data))
-                                                    @foreach ($combinedData as $data  )
-                                                    @if ($data->key1 =='Hiệu năng')
-                                                       <tr style="height: 40px;">
-                                                           <td class="ps-5">{{ $data->key2}}
-                                                           </td>
-                                                           <td class="text-center">{{ $data->key3}}</td>
-                                                       </tr>
-                                                       @endif
-                                                   @endforeach
-                                                   @endif
+                                                        @foreach ($combinedData as $data)
+                                                            @if ($data->key1 == 'Hiệu năng')
+                                                                <tr style="height: 40px;">
+                                                                    <td class="ps-5">{{ $data->key2 }}
+                                                                    </td>
+                                                                    <td class="text-center">{{ $data->key3 }}</td>
+                                                                </tr>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
                                                 </table>
                                             </div>
                                         </div>
@@ -366,49 +366,56 @@
                                         </div>
 
                                         <div class="col-md-4 mb-3">
-                                        <div class="col-12 mt-3">
-                                            <button type="button" class="btn btn-danger d-block" data-bs-toggle="modal"
-                                                data-bs-target="#add">+ Link sản phẩm liên quan</button>
-                                        </div>
+                                            <div class="col-12 mt-3">
+                                                <button type="button" class="btn btn-danger d-block"
+                                                    data-bs-toggle="modal" data-bs-target="#add">+ Link sản phẩm liên
+                                                    quan</button>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="mb-4">
                                         {{-- <h2 class="text-color_pimary my-4">Sản phẩm liên quan</h2> --}}
                                         <div class="row">
                                             @if (!empty($details->related))
-                                            @php
-                                                $relatedProductIds = json_decode($details->related);
-                                                $relatedProducts = \App\Models\Product::whereIn('id', $relatedProductIds)->get();
-                                            @endphp
-                                            @foreach ($relatedProducts as $related)
                                                 @php
-                                                    $detailsPro = \App\Models\ProductDetails::where('id', $related->id)->first();
+                                                    $relatedProductIds = json_decode($details->related);
+                                                    $relatedProducts = \App\Models\Product::whereIn('id', $relatedProductIds)->get();
                                                 @endphp
-                                                <div class="col-4 mt-3">
-                                                    <div class="row control_product">
-                                                        <div href="/chi-tiet-san-pham/{{ $related->id }}" class="control_product_link d-flex justify-content-between" id="control_link-1">
-                                                            <div class="col-3 control_product_img">
-                                                                <img src="{{ $related->thumbnail }}" alt="">
-                                                            </div>
-                                                            <div class="col-5 control-info ms-2">
+                                                @foreach ($relatedProducts as $related)
+                                                    @php
+                                                        $detailsPro = \App\Models\ProductDetails::where('id', $related->id)->first();
+                                                    @endphp
+                                                    <div class="col-4 mt-3">
+                                                        <div class="row control_product">
+                                                            <div href="/chi-tiet-san-pham/{{ $related->id }}"
+                                                                class="control_product_link d-flex justify-content-between"
+                                                                id="control_link-1">
+                                                                <div class="col-3 control_product_img">
+                                                                    <img src="{{ $related->thumbnail }}" alt="">
+                                                                </div>
+                                                                <div class="col-5 control-info ms-2">
 
-                                                                <div class="over_info1 card-title-black fs-5">
-                                                                    {{ $related->name }} - {{ $related->code }}
+                                                                    <div class="over_info1 card-title-black fs-5">
+                                                                        {{ $related->name }} - {{ $related->code }}
+                                                                    </div>
+                                                                    <div class="over_info1">
+                                                                        {{ number_format($detailsPro->price ?? 0, 2, ',', '.') }}
+                                                                    </div>
+                                                                    <a href="/chi-tiet-san-pham/{{ $related->id }}"
+                                                                        class="over_info1">Xem chi tiết</a>
                                                                 </div>
-                                                                <div class="over_info1">
-                                                                    {{ number_format($detailsPro->price ?? 0, 2, ',', '.') }}
+                                                                <div class="col-2 btn test_btn-remove-{{ $related->id }}"href="#"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#xoaSanPham{{ $related->id }}">
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal"
+                                                                        aria-label="Close"></button>
                                                                 </div>
-                                                                <a href="/chi-tiet-san-pham/{{ $related->id }}"
-                                                                    class="over_info1">Xem chi tiết</a>
-                                                            </div>
-                                                            <div class="col-2 btn test_btn-remove-{{ $related->id }}"href="#" data-bs-toggle="modal" data-bs-target="#xoaSanPham{{ $related->id }}" >
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            @endforeach
-                                        @endif
+                                                @endforeach
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -435,7 +442,9 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
-                            <form id="addForm" method="POST" action="{{ route('product.create', ['id' => $product->id]) }}" enctype="multipart/form-data">
+                            <form id="addForm" method="POST"
+                                action="{{ route('product.create', ['id' => $product->id]) }}"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="modal-body">
                                     <div class="row mb-3">
@@ -468,18 +477,18 @@
                                         <div class="col-md-4 mb-3">
                                             <select name="data[0][key1]" class="selectpicker" data-dropup-auto="false"
                                                 data-width="100%" title="Chọn nhóm thông số" data-size="3">
-                                                @foreach ($TechnicalSpecificationsGroupList as $item )
+                                                @foreach ($TechnicalSpecificationsGroupList as $item)
                                                     <option value="{{ $item->name }}">{{ $item->name }}</option>
                                                 @endforeach
-                                        </select>
+                                            </select>
                                         </div>
                                         <div class="col-md-4 mb-3">
-                                        <select name="data[0][key2]" class="selectpicker" data-dropup-auto="false"
-                                            data-width="100%" title="Chọn thông số" data-size="3">
-                                            @foreach ($SpecificationsList as $item )
-                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
+                                            <select name="data[0][key2]" class="selectpicker" data-dropup-auto="false"
+                                                data-width="100%" title="Chọn thông số" data-size="3">
+                                                @foreach ($SpecificationsList as $item)
+                                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <div class="d-flex align-items-center">
@@ -517,18 +526,21 @@
                                                     <div
                                                         class="modal_upload-action mt-3 d-flex align-items-center justify-content-center">
                                                         <div class="modal_upload-addFile me-3">
-                                                            <label for="fileInput" id="fileButton" class="btn position-relative border d-flex w-500">
+                                                            <label for="fileInput" id="fileButton"
+                                                                class="btn position-relative border d-flex w-500">
                                                                 <img src="{{ asset('assets/img/upload-file.svg') }}" />
-                                                                <span class="ps-2">Đính kèm  ảnh sản phẩm</span>
+                                                                <span class="ps-2">Đính kèm ảnh sản phẩm</span>
                                                             </label>
-                                                                <input accept="image/jpeg,image/png" id="fileInput" multiple role="button" type="file"
-                                                             class="modal_upload-input modal_upload-file" name="files[]" onchange="updateList(event)" />
+                                                            <input accept="image/jpeg,image/png" id="fileInput" multiple
+                                                                role="button" type="file"
+                                                                class="modal_upload-input modal_upload-file"
+                                                                name="files[]" onchange="updateList(event)" />
 
                                                         </div>
 
                                                     </div>
                                                     <div id="preview" class="d-flex mt-3"></div>
-                                                        {{-- <ul id="attachments" class="file-list" style="padding: 0 0 4px 0; word-break: break-all;"></ul> --}}
+                                                    {{-- <ul id="attachments" class="file-list" style="padding: 0 0 4px 0; word-break: break-all;"></ul> --}}
                                                 </div>
                                                 <ul class="modal_upload-list"
                                                     style="max-height: 134px; overflow-y: scroll; overflow-x: hidden;">
@@ -546,10 +558,11 @@
                                                 <label class="input-label fs-4 fw-bold ms-2" for="attachment"
                                                     style="cursor: pointer;color: var(--primary-color)">Đính kèm
                                                     file</label>
-                                                    <input accept=".pdf,.xlsx,.docx" id="attachment" multiple role="button" type="file"
-                                                    class="modal_upload-input modal_upload-file" name="attachments[]" onchange="updateList(event)" />
+                                                <input accept=".pdf,.xlsx,.docx" id="attachment" multiple role="button"
+                                                    type="file" class="modal_upload-input modal_upload-file"
+                                                    name="attachments[]" onchange="updateAttachments(event)" />
                                             </div>
-                                            <ul id="attachments" class="file-list" style="padding: 0 0 4px 0; word-break: break-all;"></ul>
+                                            <div id="previewAttachments" class="row"></div>
                                         </div>
 
                                     </div>
@@ -734,6 +747,13 @@
         .text-secondary:hover {
             color: var(--primary-color) !important;
         }
+
+        .file-name {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            padding: 0 10px;
+            font-weight: 700;
+        }
     </style>
     <script>
         // Show Slider
@@ -770,56 +790,56 @@
             captionText.innerHTML = dots[slideIndex - 1].alt;
         }
     </script>
-        {{-- Modal thêm sản phẩm liên quan --}}
-        <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header text-center">
-                        <h5 class="modal-title w-100" id="exampleModalLabel">Link sản phẩm liên quan</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form method="POST" action="{{ route('product.related', ['id' => $product->id]) }}">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-sm-12 d-flex align-items-center pb-3 mt-2">
-                                    <div class="d-flex align-items-center">
-                                        <div class="card-title">Chọn sản phẩm liên quan</div>
+    {{-- Modal thêm sản phẩm liên quan --}}
+    <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Link sản phẩm liên quan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action="{{ route('product.related', ['id' => $product->id]) }}">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12 d-flex align-items-center pb-3 mt-2">
+                                <div class="d-flex align-items-center">
+                                    <div class="card-title">Chọn sản phẩm liên quan</div>
+                                </div>
+
+                                <div class="col-sm-7" style="padding-left: 10px">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Sản phẩm">
+                                        <select class="selectpicker" data-dropup-auto="false" data-width="100%"
+                                            data-live-search="true" title="Chọn sản phẩm ..."
+                                            data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
+                                            data-size="3" name="related[]" data-live-search-placeholder="Tìm kiếm..."
+                                            multiple>
+
+                                            @forelse ($other_product as $op)
+                                                <option value="{{ $op->id }}"
+                                                    @if (!empty($details->related) && in_array($op->id, json_decode($details->related, true))) selected @endif>{{ $op->name }}
+                                                    -
+                                                    {{ $op->code }}</option>
+                                            @empty
+                                                <option value="" selected disabled>Chưa có sản phẩm nào để chọn
+                                                </option>
+                                            @endforelse
+                                        </select>
                                     </div>
-
-                                    <div class="col-sm-7" style="padding-left: 10px">
-                                        <div data-bs-toggle="tooltip" data-bs-placement="top" title="Sản phẩm">
-                                            <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                                data-live-search="true" title="Chọn sản phẩm ..."
-                                                data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
-                                                data-size="3" name="related[]" data-live-search-placeholder="Tìm kiếm..."
-                                                multiple>
-
-                                                @forelse ($other_product as $op)
-                                                    <option value="{{ $op->id }}"
-                                                        @if (!empty($details->related) && in_array($op->id, json_decode($details->related, true))) selected @endif>{{ $op->name }}
-                                                        -
-                                                        {{ $op->code }}</option>
-                                                @empty
-                                                    <option value="" selected disabled>Chưa có sản phẩm nào để chọn
-                                                    </option>
-                                                @endforelse
-                                            </select>
-                                        </div>
-                                    </div>
-
                                 </div>
 
                             </div>
+
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
-                            <button type="submit" class="btn btn-danger">Lưu</button>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-danger">Lưu</button>
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
 
 
 
@@ -870,7 +890,7 @@
                     <div class="col-md-4 ">
                         <select name="data[${specCount}][key1]" class="selectpicker" data-dropup-auto="false"
                             data-width="100%" title="Nhập thông số" data-size="3">
-                            @foreach ($TechnicalSpecificationsGroupList as $item )
+                            @foreach ($TechnicalSpecificationsGroupList as $item)
                                 <option value="{{ $item->name }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
@@ -878,7 +898,7 @@
                     <div class="col-md-4 ">
                         <select name="data[${specCount}][key2]" class="selectpicker" data-dropup-auto="false"
                             data-width="100%" title="Tên thông số" data-size="3" >
-                            @foreach ($SpecificationsList as $item )
+                            @foreach ($SpecificationsList as $item)
                                 <option value="{{ $item->name }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
@@ -912,73 +932,85 @@
             });
         });
     </script>
-        <script>
-            $(document).ready(function() {
-                $('#fileInput').on('change', function(e) {
-                    $('#preview').empty();
-                    var files = e.target.files;
-                    for (var i = 0; i < files.length; i++) {
-                        var file = files[i];
-                        var reader = new FileReader();
-                        if (file.type.startsWith('image/')) {
-                            reader.onload = (function(file) {
-                                return function(e) {
-                                    var img = document.createElement('img');
-                                    img.src = e.target.result;
-                                    $('#preview').append(img);
-                                };
-                            })(file);
+    <script>
+        $(document).ready(function() {
+            $('#fileInput').on('change', function(e) {
+                $('#preview').empty();
+                var files = e.target.files;
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    var reader = new FileReader();
+                    if (file.type.startsWith('image/')) {
+                        reader.onload = (function(file) {
+                            return function(e) {
+                                var img = document.createElement('img');
+                                img.src = e.target.result;
+                                $('#preview').append(img);
+                            };
+                        })(file);
 
-                            if (file) {
-                                reader.readAsDataURL(file);
-                            }
+                        if (file) {
+                            reader.readAsDataURL(file);
                         }
                     }
-                });
-            });
-
-            function removeFileFromFileList(deleteButton) {
-                var liEl = deleteButton.parentNode;
-                var fileList = document.querySelectorAll('.file-list li');
-                var index = Array.prototype.indexOf.call(fileList, liEl);
-
-                if (index >= 0) {
-                    liEl.remove();
                 }
-            }
-        </script>
-
-<script>
-    $(document).ready(function() {
-        $('#attachment').on('change', function(e) {
-            $('#attachments').empty();
-            var attachments = e.target.attachments;
-            for (var i = 0; i < attachments.length; i++) {
-                // console.log("ádas");
-                var attachment = attachments[i];
-
-                    var li = document.createElement('li');
-                    li.innerHTML = `
-                        <span class="fs-5">
-                            <i class="bi bi-link-45deg"></i> ${attachment.name}
-                        </span>
-                        <span class="modal_upload-remote" onclick="removeFileFromFileList(this)">
-                            <img style="width:18px;height:18px" src="{{ asset('assets/img/trash.svg') }}" />
-                        </span>
-                    `;
-                    $('#attachments').append(li);
-            }
+            });
         });
-    });
 
-    function removeFileFromFileList(deleteButton) {
-        var liEl = deleteButton.parentNode;
-        var fileList = document.querySelectorAll('.file-list li');
-        var index = Array.prototype.indexOf.call(fileList, liEl);
-
-        if (index >= 0) {
-            liEl.remove();
+        function updateAttachments(event) {
+            $('#previewAttachments').empty();
+            var files = event.target.files;
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var p = document.createElement('p');
+                p.textContent = file.name;
+                p.className = 'file-name';
+                $('#previewAttachments').append(p);
+            }
         }
-    }
-</script>
+
+        function removeFileFromFileList(deleteButton) {
+            var liEl = deleteButton.parentNode;
+            var fileList = document.querySelectorAll('.file-list li');
+            var index = Array.prototype.indexOf.call(fileList, liEl);
+
+            if (index >= 0) {
+                liEl.remove();
+            }
+        }
+    </script>
+
+    <script>
+        // $(document).ready(function() {
+        //     $('#attachment').on('change', function(e) {
+        //         $('#attachments').empty();
+        //         var attachments = e.target.attachments;
+        //         for (var i = 0; i < attachments.length; i++) {
+        //             // console.log("ádas");
+        //             var attachment = attachments[i];
+
+        //             var li = document.createElement('li');
+        //             li.innerHTML = `
+    //                 <span class="fs-5">
+    //                     <i class="bi bi-link-45deg"></i> ${attachment.name}
+    //                 </span>
+    //                 <span class="modal_upload-remote" onclick="removeFileFromFileList(this)">
+    //                     <img style="width:18px;height:18px" src="{{ asset('assets/img/trash.svg') }}" />
+    //                 </span>
+    //             `;
+        //             $('#attachments').append(li);
+        //         }
+        //     });
+        // });
+
+        function removeFileFromFileList(deleteButton) {
+            var liEl = deleteButton.parentNode;
+            var fileList = document.querySelectorAll('.file-list li');
+            var index = Array.prototype.indexOf.call(fileList, liEl);
+
+            if (index >= 0) {
+                liEl.remove();
+            }
+        }
+    </script>
 @endsection
