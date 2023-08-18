@@ -47,6 +47,13 @@ class DepartmentController extends Controller
         $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
         // dd($departmentListTree);
         $departmentlists = $this->getDepartment();
+        $positionlists = $this->getPosition();
+        $personnellists = $this->getPersonnel();
+        $roleList = Role::all();
+        $localityList = Locality::all();
+        $personnelLevelList = PersonnelLevel::all();
+
+        $listUsers = Personnel::all();
 
         return view("Deparment.index", [
             "departmentList" => $departmentList,
@@ -54,8 +61,14 @@ class DepartmentController extends Controller
             'leader_name' => $leader_name,
             "departmentlists" => $departmentlists,
             'search' => $search,
-            'UnitLeaderList' => $UnitLeaderList,
-            "departmentListTree" => $departmentListTree
+            'UnitLeaderList' => $UnitLeaderList,            
+            "departmentListTree" => $departmentListTree,
+            'listUsers' => $listUsers,
+            'personnelLevelList' => $personnelLevelList,
+            'positionlists' => $positionlists,
+            'roleList' => $roleList,
+            'localityList' => $localityList,
+            'personnellists' => $personnellists,
         ]);
     }
 
