@@ -8,21 +8,21 @@
     </style>
 @endsection
 @php
-
+    
     function getPaginationLink($link, $pageName)
     {
         if (!isset($link['url'])) {
             return '#';
         }
-
+    
         $pageNumber = explode('?page=', $link['url'])[1];
-
+    
         $queryString = request()->query();
-
+    
         $queryString[$pageName] = $pageNumber;
         return route('product.list', $queryString);
     }
-
+    
     // function isFiltering($filterNames)
     // {
     //     $filters = request()->query();
@@ -33,7 +33,7 @@
     //     }
     //     return false;
     // }
-
+    
 @endphp
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
@@ -153,13 +153,17 @@
                                                                     <div class="btn test_btn-edit-{{ $item->id }}"
                                                                         href="#" data-bs-toggle="modal"
                                                                         data-bs-target="#suaSanPham{{ $item->id }}">
-                                                                        <img style="width:16px;height:16px"
+                                                                        <img data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top" title="Sửa sản phẩm"
+                                                                            style="width:16px;height:16px"
                                                                             src="{{ asset('assets/img/edit.svg') }}" />
                                                                     </div>
                                                                     <div class="btn test_btn-remove-{{ $item->id }}"
                                                                         href="#" data-bs-toggle="modal"
                                                                         data-bs-target="#xoaSanPham{{ $item->id }}">
-                                                                        <img style="width:16px;height:16px"
+                                                                        <img data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top" title="Xóa sản phẩm"
+                                                                            style="width:16px;height:16px"
                                                                             src="{{ asset('assets/img/trash.svg') }}" />
                                                                     </div>
                                                                 </div>
@@ -235,18 +239,18 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <input type="text" value="{{ $item->name }}" name="name"
-                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên sản phẩm"
-                                        placeholder="Tên sản phẩm" class="form-control">
+                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên sản phẩm*"
+                                        placeholder="Tên sản phẩm*" class="form-control">
                                 </div>
 
                                 <div class="col-md-6 mb-3">
                                     <input type="text" value="{{ $item->code }}" name="code"
-                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã sản phẩm"
-                                        placeholder="Mã sản phẩm" class="form-control">
+                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã sản phẩm*"
+                                        placeholder="Mã sản phẩm*" class="form-control">
                                 </div>
 
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Phân loại">
+                                    title="Phân loại*">
                                     <select name="type" required class="selectpicker" data-dropup-auto="false"
                                         data-width="100%" data-size="3" data-live-search="true"
                                         data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
@@ -262,7 +266,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Ngành hàng">
+                                    title="Ngành hàng*">
                                     <select name="branch" required class="selectpicker" data-dropup-auto="false"
                                         data-width="100%" data-size="3" data-live-search="true"
                                         data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
@@ -331,8 +335,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-danger me-3"
-                                data-bs-dismiss="modal"> Hủy </button>
+                            <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal"> Hủy
+                            </button>
                             <button type="submit" class="btn btn-danger">Lưu</button>
                         </div>
                     </form>
@@ -349,8 +353,8 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Thêm sản phẩm</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="addForm" method="POST" action="{{ route('product.store') }}"
-                    enctype="multipart/form-data">
+                <form id="addForm" method="POST" action="{{ route('product.store') }}" enctype="multipart/form-data"
+                    onsubmit="openModal()">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -371,6 +375,7 @@
                                     data-width="100%" data-size="3" data-live-search="true"
                                     data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
                                     data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="" disabled selected>Chọn phân loại</option>
                                     <option value="Sản phẩm">Sản phẩm</option>
                                     <option value="Phiên bản">Phiên bản</option>
                                     <option value="Tuỳ chọn">Tuỳ chọn</option>
@@ -383,6 +388,7 @@
                                     data-width="100%" data-size="3" data-live-search="true"
                                     data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
                                     data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="" disabled selected>Chọn ngành hàng</option>
                                     <option value="Sản phẩm dẫn">Sản phẩm dẫn</option>
                                     <option value="Sản phẩm tư vấn">Sản phẩm tư vấn</option>
                                     <option value="Sản phẩm mới">Sản phẩm mới</option>
@@ -412,7 +418,7 @@
                                                     <img style="width:16px;height:16px"
                                                         src="{{ asset('assets/img/upload-file.svg') }}" />
                                                     Tải file lên
-                                                    <input accept=".png, .jpeg, .jpg" required role="button"
+                                                    <input accept=".png, .jpeg, .jpg" role="button" required
                                                         type="file" class="modal_upload-input modal_upload-file"
                                                         name="file" onchange="updateList(event)">
                                                 </button>
@@ -439,6 +445,8 @@
         </div>
     </div>
 
+
+
 @endsection
 @section('footer-script')
 
@@ -462,6 +470,7 @@
     <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_nhanSu.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
+
 
     <script>
         updateList = function(e) {
@@ -618,7 +627,14 @@
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/components/dataHrefTable.js') }}"></script>
+
     <script>
+        $('#addForm').on('submit', function(e) {
+            $('#addDetailProduct').modal('show');
+            event.preventDefault();
+        });
+
+
         $(document).ready(function() {
             // Handle form submission
             $('#addForm').submit(function(event) {

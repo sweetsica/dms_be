@@ -19,8 +19,8 @@ use App\Http\Controllers\VersionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RouteDirectionController;
 use App\Http\Controllers\ExcelController;
-
-
+use App\Http\Controllers\SpecificationsController;
+use App\Http\Controllers\TechnicalSpecificationsGroupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +47,10 @@ Route::middleware(['guest'])->group(function () {
     // Quên MK
     Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
 });
+
+Route::get('/test-customer-1', [CustomerTestController::class, 'index1'])->name('index1');
+Route::get('/test-customer-2', [CustomerTestController::class, 'index2'])->name('index2');
+Route::get('/test-customer-3', [CustomerTestController::class, 'index3'])->name('index3');
 
 Route::middleware(['auth.role'])->group(function () {
 
@@ -132,28 +136,37 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('danh-sach-dia-ban', [LocalityController::class, 'store'])->name('locality.store');
     Route::post('danh-sach-dia-ban/{id}', [LocalityController::class, 'update'])->name('locality.update');
     Route::post('danh-sach-dia-banx/{id}', [LocalityController::class, 'destroy'])->name('locality.destroy');
+    Route::post('danh-sach-dia-ban-delete', [LocalityController::class, 'delete'])->name('locality.delete');
 
     Route::get('danh-sach-khu-vuc', [AreaController::class, 'index'])->name('area.index');
     Route::post('danh-sach-khu-vuc', [AreaController::class, 'store'])->name('area.store');
     Route::post('danh-sach-khu-vuc/{id}', [AreaController::class, 'update'])->name('area.update');
     Route::post('danh-sach-khu-vucx/{id}', [AreaController::class, 'destroy'])->name('area.destroy');
+    Route::post('danh-sach-khu-vuc-delete', [AreaController::class, 'delete'])->name('area.delete');
 
     Route::get('chi-tiet-khach-hang/{id}', [CustomerController::class, 'show'])->name('customer-detail.list');
+    Route::get('department-profile', [DepartmentController::class, 'index2'])->name('department.index2');
+    Route::get('department-assignUser/{id?}', [DepartmentController::class, 'assignUser'])->name('department.assignUser');
     Route::get('department', [DepartmentController::class, 'index'])->name('department.index');
     Route::post('department', [DepartmentController::class, 'store'])->name('department.store');
     Route::post('department/{id}', [DepartmentController::class, 'edit'])->name('department.edit');
     Route::post('department/{id}', [DepartmentController::class, 'update'])->name('department.update');
     Route::post('departmentr/{id}', [DepartmentController::class, 'destroy'])->name('departmentr.destroy');
+    Route::post('department-delete', [DepartmentController::class, 'delete'])->name('delete-selected-items');
 
     Route::get('position', [PositionController::class, 'index'])->name('position.index');
     Route::post('position', [PositionController::class, 'store'])->name('position.store');
     Route::post('position/{id}', [PositionController::class, 'update'])->name('position.update');
     Route::post('positionx/{id}', [PositionController::class, 'destroy'])->name('positionx.destroy');
+    Route::post('position-delete', [PositionController::class, 'delete'])->name('Position.delete');
 
     Route::get('cap-nhan-su', [PersonnelLevelController::class, 'index'])->name('PersonnelLevel.index');
     Route::post('cap-nhan-su', [PersonnelLevelController::class, 'store'])->name('PersonnelLevel.store');
     Route::post('cap_nhan_sux/{id}', [PersonnelLevelController::class, 'update'])->name('PersonnelLevel.update');
     Route::post('cap_nhan_su/{id}', [PersonnelLevelController::class, 'destroy'])->name('PersonnelLevelx.destroy');
+    Route::post('cap_nhan_su-delete', [PersonnelLevelController::class, 'delete'])->name('PersonnelLevel.delete');
+
+
     Route::get('nhan-su', [PersonnelController::class, 'index'])->name('Personnel.index');
     Route::get('nhan-su-vitri', [PersonnelController::class, 'indexvtri'])->name('Personnel.indexvtri');
     Route::get('nhan-su-dia-ban', [PersonnelController::class, 'indexDiaBan'])->name('Personnel.indexDiaBan');
@@ -166,16 +179,31 @@ Route::middleware(['auth.role'])->group(function () {
     Route::get('nhan_suvtri/{position_id}', [PersonnelController::class, 'showVtri'])->name('Personnel.show.vtri');
     Route::get('nhan_su_dia_ban/{area_id}', [PersonnelController::class, 'showDiaBan'])->name('Personnel.show.diaban');
     Route::get('nhan_su_vung/{department_id}', [PersonnelController::class, 'showVung'])->name('Personnel.show.vung');
+    Route::post('nhan_su-delete', [PersonnelController::class, 'delete'])->name('Personnel.delete');
 
     Route::get('vai-tro', [RoleController::class, 'index'])->name('Role.index');
     Route::post('vai-tro', [RoleController::class, 'store'])->name('Role.store');
     Route::post('vai-trox/{id}', [RoleController::class, 'update'])->name('Rolex.update');
     Route::post('vai-tro/{id}', [RoleController::class, 'destroy'])->name('Role.destroy');
+    Route::post('vai-tro-delete', [RoleController::class, 'delete'])->name('Role.delete');
 
     Route::get('nhom-khach-hang', [CustomerGroupController::class, 'index'])->name('CustomerGroup.index');
     Route::post('them-nhom-khach-hang', [CustomerGroupController::class, 'store'])->name('CustomerGroup.store');
     Route::post('sua-nhom-khach-hang/{id}', [CustomerGroupController::class, 'update'])->name('CustomerGroup.update');
     Route::post('xoa-nhom-khach-hang/{id}', [CustomerGroupController::class, 'destroy'])->name('CustomerGroup.destroy');
+
+    Route::get('nhom-thong-so-ky-thuat', [TechnicalSpecificationsGroupController::class, 'index'])->name('TechnicalSpecificationsGroup.index');
+    Route::post('them-nhom-thong-so-ky-thuat', [TechnicalSpecificationsGroupController::class, 'store'])->name('TechnicalSpecificationsGroup.store');
+    Route::post('sua-nhom-thong-so-ky-thuat/{id}', [TechnicalSpecificationsGroupController::class, 'update'])->name('TechnicalSpecificationsGroup.update');
+    Route::post('xoa-nhom-thong-so-ky-thuat/{id}', [TechnicalSpecificationsGroupController::class, 'destroy'])->name('TechnicalSpecificationsGroup.destroy');
+    Route::post('nhom-thong-so-ky-thuat-delete', [TechnicalSpecificationsGroupController::class, 'delete'])->name('TechnicalSpecificationsGroup.delete');
+
+    Route::get('thong-so-ky-thuat', [SpecificationsController::class, 'index'])->name('Specifications.index');
+    Route::post('them-thong-so-ky-thuat', [SpecificationsController::class, 'store'])->name('Specifications.store');
+    Route::post('sua-thong-so-ky-thuat/{id}', [SpecificationsController::class, 'update'])->name('Specifications.update');
+    Route::post('xoa-thong-so-ky-thuat/{id}', [SpecificationsController::class, 'destroy'])->name('Specifications.destroy');
+    Route::post('thong-so-ky-thuat-delete', [SpecificationsController::class, 'delete'])->name('Specifications.delete');
+
 });
 
 Route::get('/export/customer', [ExcelController::class, 'setExportCustomter']);

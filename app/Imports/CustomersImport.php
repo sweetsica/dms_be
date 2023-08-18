@@ -4,12 +4,19 @@ namespace App\Imports;
 
 use App\Models\Customer;
 use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\SkipsErrors;
+use Maatwebsite\Excel\Concerns\SkipsOnError;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
+use Throwable;
 
-class CustomersImport implements ToModel, WithStartRow, WithStrictNullComparison
+class CustomersImport implements ToModel, WithStartRow, WithStrictNullComparison, SkipsOnError
 {
+    use Importable, SkipsErrors;
+
+    private $importErrors = [];
+
     public function model(array $row)
     {
         // $row['ngay_sinh'] = ($row['ngay_sinh'] == '') ? '0' : $row['ngay_sinh'];
@@ -27,12 +34,18 @@ class CustomersImport implements ToModel, WithStartRow, WithStrictNullComparison
         // Check if the phone value already exists in the database
         if ($row['5'] && Customer::where('phone', $row['5'])->exists()) {
             // Handle the duplication error
-            throw new \Exception('Trùng số điện thoại trong file Excel: ' . $row['5']);
-        }
-
-        if ($row['9'] && Customer::where('email', $row['9'])->exists()) {
+            // throw new \Exception('Trùng số điện thoại trong file Excel: ' . $row['5']);
+            $this->importErrors[] = [
+                'row' => $row,
+                'message' => 'Trùng số điện thoại trong file Excel: ' . $row[5]
+            ];
+        } else if ($row['9'] && Customer::where('email', $row['9'])->exists()) {
             // Handle the duplication error
-            throw new \Exception('Trùng gmail file Excel: ' . $row['9']);
+            // throw new \Exception('Trùng gmail file Excel: ' . $row['9']);
+            $this->importErrors[] = [
+                'row' => $row,
+                'message' => 'Trùng gmail file Excel: ' . $row[9]
+            ];
         }
 
         return new Customer([
@@ -77,5 +90,15 @@ class CustomersImport implements ToModel, WithStartRow, WithStrictNullComparison
     public function startRow(): int
     {
         return 2;
+    }
+
+    public function hasErrors(): bool
+    {
+        return !empty($this->importErrors);
+    }
+
+    public function getErrors()
+    {
+        return $this->importErrors;
     }
 }

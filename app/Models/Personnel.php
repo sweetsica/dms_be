@@ -53,6 +53,20 @@ class Personnel extends Model implements Authenticatable
         return $this->belongsTo(Position::class, 'position_id');
     }
 
+    public function level()
+    {
+        return $this->belongsTo(PersonnelLevel::class, 'position_level_id');
+    }
+    
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+
+    public function area()
+    {
+        return $this->belongsTo(Area::class, 'area_id');
+    }
 
 
 

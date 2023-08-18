@@ -84,6 +84,11 @@ class CustomerController extends Controller
             $limit = 30;
             $listData = Customer::query()->with('channel', 'route', 'person');
             if ($q) {
+                $pattern = '/^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)\s+.*/';
+                if (preg_match($pattern, $q)) {
+                    Session::flash('error', 'Lỗi đầu vào khi search');
+                    return back();
+                }
                 $listData = $listData->where('code', 'like', '%' . $q . '%')
                     ->orWhere('name', 'like', '%' . $q . '%')
                     ->orWhere('phone', 'like', '%' . $q . '%')
@@ -144,7 +149,7 @@ class CustomerController extends Controller
             $listData = $listData->orderBy('id', 'desc')->paginate($limit);
 
             $groupIDs = $listData->pluck('groupId')->toArray();
-            $listPerson = Personnel::all();
+            $listPersons = Personnel::all();
             $listProduct = Product::all();
             $listRoute = RouteDirection::all();
             $listChannel = Department::all();
@@ -156,7 +161,7 @@ class CustomerController extends Controller
                 'Customer.danhSachKhachHang',
                 compact(
                     'listData',
-                    'listPerson',
+                    'listPersons',
                     'listProduct',
                     'listRoute',
                     'listChannel',
@@ -168,29 +173,6 @@ class CustomerController extends Controller
             Session::flash('error', $e);
             return back();
         }
-        $listData = $listData->paginate($limit);
-
-        $groupIDs = $listData->pluck('groupId')->toArray();
-        $listPerson = Personnel::all();
-        $listProduct = Product::all();
-        $listRoute = RouteDirection::all();
-        $listChannel = Department::all();
-        $listgroup = CustomerGroup::all();
-
-        $pagination = $this->pagination($listData);
-
-        return view(
-            'Customer.danhSachKhachHang',
-            compact(
-                'listData',
-                'listPerson',
-                'listProduct',
-                'listRoute',
-                'listChannel',
-                'listgroup',
-                "pagination"
-            )
-        );
     }
 
     public function create(Request $request)

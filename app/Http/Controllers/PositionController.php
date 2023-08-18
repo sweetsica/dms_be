@@ -147,4 +147,12 @@ class PositionController extends Controller
         return redirect()->back()->with('mess', 'Đã xóa!');
     }
 
+    public function delete(Request $request)
+    {
+
+        $selectedItems = $request->input('selected_items', []);
+        Position::whereIn('id', $selectedItems)->delete();
+        return redirect()->back()->with('mess', 'Đã xóa!');
+
+    }
 }

@@ -47,174 +47,105 @@
                                                         <i class="bi bi-funnel"></i>
                                                     </button>
                                                 </div>
-                                                @if ((session('user')['role_id'] == '1')  )
-                                                <div class="action_export order-md-4">
-                                                    <button class="btn btn-danger d-block testCreateUser"
-                                                        data-bs-toggle="modal" data-bs-target="#taoDeXuat">Thêm vai
-                                                        trò</button>
-                                                </div>
+                                                @if (session('user')['role_id'] == '1')
+                                                    <div class="action_export order-md-4">
+                                                        <button class="btn btn-danger d-block testCreateUser"
+                                                            data-bs-toggle="modal" data-bs-target="#taoDeXuat">Thêm vai
+                                                            trò</button>
+                                                    </div>
                                                 @endif
                                             </div>
-
-                                            <div class="table-responsive">
-                                                <table id="dsDaoTao"
-                                                    class="table table-responsive table-hover table-bordered filter">
-                                                    <thead>
-                                                        <tr>
-                                                            <th class="text-nowrap text-center" style="width:2%">STT</th>
-                                                            <th class="text-nowrap" style="width:10%">Mã vai trò</th>
-                                                            <th class="text-nowrap" style="width:10%">Tên vai trò</th>
-                                                            <th class="text-nowrap" style="width:20%">Mô tả</th>
-                                                            @if ((session('user')['role_id'] == '1')  )
-                                                            <th class=" text-center" style="width:1%"><span>Thao tác</span>
-                                                            </th>
-                                                            @endif
-                                                        </tr>
-                                                    </thead>
-                                                    <?php $i = 1; ?>
-                                                    @foreach ($roleList as $item)
-                                                        <tbody>
+                                            <form id="select-form" action="{{ route('Role.delete') }}" method="POST">
+                                                @csrf
+                                                <div class="action_export mx-3 order-md-1" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" title="Xóa">
+                                                    <button class="btn btn-danger  " type="submit"
+                                                        onclick="return confirm('Bạn có muốn xóa không?')"
+                                                        id="delete-selected-button" style="display: none;">Xóa</button>
+                                                </div><br>
+                                                <div class="table-responsive">
+                                                    <table id="dsDaoTao"
+                                                        class="table table-responsive table-hover table-bordered filter">
+                                                        <thead>
                                                             <tr>
-                                                                <td class=" text-center">
-                                                                    {{ $i++ }}
-                                                                </td>
-                                                                <td class="">
-                                                                    <div class="overText" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top" title="{{ $item->code }}">
-                                                                    {{ $item->code }}
-                                                                </div>
-                                                                </td>
-                                                                <td class="">
-                                                                    <div class="overText" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top" title="{{ $item->name }}">
-                                                                    {{ $item->name }}
-                                                                </div>
-                                                                </td>
-                                                                <td class="">
-                                                                    <div class="overText" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top"
-                                                                    title="{{ $item->description }}">
-                                                                    {{ $item->description }}
-                                                                </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="table_actions d-flex justify-content-end">
-
-                                                                        <div data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top" title="Sửa ">
-                                                                            <div class="btn" data-bs-toggle="modal"
-                                                                                data-bs-target="#sua{{ $item['id'] }}">
-                                                                                <img style="width:16px;height:16px"
-                                                                                    src="{{ asset('assets/img/edit.svg') }}" />
-                                                                            </div>
-                                                                        </div>
-                                                                        <div data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top" title="Xóa ">
-                                                                            <div class="btn" data-bs-toggle="modal"
-                                                                                data-bs-target="#xoa{{ $item->id }}">
-                                                                                <img style="width:16px;height:16px"
-                                                                                    src="{{ asset('assets/img/trash.svg') }}" />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
+                                                                <th class="text-nowrap text-center" style="width:1%"><input
+                                                                        type="checkbox" id="select-all"></th>
+                                                                <th class="text-nowrap text-center" style="width:2%">STT
+                                                                </th>
+                                                                <th class="text-nowrap text-center" style="width:10%">Mã vai
+                                                                    trò</th>
+                                                                <th class="text-nowrap text-center" style="width:10%">Tên
+                                                                    vai trò</th>
+                                                                <th class="text-nowrap text-center" style="width:20%">Mô tả
+                                                                </th>
+                                                                @if (session('user')['role_id'] == '1')
+                                                                    <th class=" text-center" style="width:1%"><span>Thao
+                                                                            tác</span>
+                                                                    </th>
+                                                                @endif
                                                             </tr>
-                                                        </tbody>
+                                                        </thead>
+                                                        <?php $i = 1; ?>
+                                                        @foreach ($roleList as $item)
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class=" text-center"> <input type="checkbox"
+                                                                            name="selected_items[]"
+                                                                            value="{{ $item->id }}"></td>
+                                                                    <td class=" text-center">
+                                                                        {{ $i++ }}
+                                                                    </td>
+                                                                    <td class="">
+                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="{{ $item->code }}">
+                                                                            {{ $item->code }}
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="">
+                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="{{ $item->name }}">
+                                                                            {{ $item->name }}
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="">
+                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="{{ $item->description }}">
+                                                                            {{ $item->description }}
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div
+                                                                            class="table_actions d-flex justify-content-center">
 
-
-                                                        {{-- Sửa đề xuất --}}
-                                                        <div class="modal fade" id="sua{{ $item['id'] }}" tabindex="-1"
-                                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header text-center">
-                                                                        <h5 class="modal-title w-100"
-                                                                            id="exampleModalLabel">Sửa vai trò</h5>
-                                                                        <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="modal"
-                                                                            aria-label="Close"></button>
-                                                                    </div>
-                                                                    <form method="POST"
-                                                                        action="{{ route('Rolex.update', $item->id) }}">
-                                                                        @csrf
-                                                                        <div class="modal-body">
-                                                                            <div class="row">
-                                                                                <div class="col-6 mb-3">
-                                                                                    <input data-bs-toggle="tooltip" required
-                                                                                        data-bs-placement="top"
-                                                                                        title="Nhập tên vai trò*"
-                                                                                        name="name" type="text"
-                                                                                        placeholder="Nhập tên vai trò"
-                                                                                        class="form-control"
-                                                                                        value="{{ $item->name }}">
+                                                                            <div data-bs-toggle="tooltip"
+                                                                                data-bs-placement="top" title="Sửa ">
+                                                                                <div class="btn" data-bs-toggle="modal"
+                                                                                    data-bs-target="#sua{{ $item['id'] }}">
+                                                                                    <img style="width:16px;height:16px"
+                                                                                        src="{{ asset('assets/img/edit.svg') }}" />
                                                                                 </div>
-                                                                                <div class="col-6 mb-3">
-                                                                                    <input data-bs-toggle="tooltip"
-                                                                                        required data-bs-placement="top"
-                                                                                        title="Nhập mã vai trò*"
-                                                                                        name="code" type="text"
-                                                                                        placeholder="Nhập mã vai trò"
-                                                                                        class="form-control"
-                                                                                        value="{{ $item->code }}">
-                                                                                </div>
-                                                                                <div class="col-6 mb-3">
-                                                                                    <div data-bs-toggle="tooltip"
-                                                                                        data-bs-placement="top">
-                                                                                        <textarea name="description" type="text" placeholder="Chức năng nhiệm vụ" class="form-control "
-                                                                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Mô tả" style="width: 450px;height: 80px;">{{ $item->description }}</textarea>
-                                                                                    </div>
+                                                                            </div>
+                                                                            <div data-bs-toggle="tooltip"
+                                                                                data-bs-placement="top" title="Xóa ">
+                                                                                <div class="btn" data-bs-toggle="modal"
+                                                                                    data-bs-target="#xoa{{ $item->id }}">
+                                                                                    <img style="width:16px;height:16px"
+                                                                                        src="{{ asset('assets/img/trash.svg') }}" />
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button"
-                                                                                class="btn btn-outline-danger"
-                                                                                data-bs-dismiss="modal">Hủy</button>
-                                                                            <button type="submit"
-                                                                                class="btn btn-danger">Lưu</button>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        {{-- Xóa đề xuất --}}
-                                                        <div class="modal fade" id="xoa{{ $item->id }}"
-                                                            tabindex="-1" aria-labelledby="exampleModalLabel"
-                                                            aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title text-danger"
-                                                                            id="exampleModalLabel">Xóa vai trò</h5>
-                                                                        <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="modal"
-                                                                            aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        Bạn có thực sự muốn xoá vai trò này không?
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button"
-                                                                            class="btn btn-outline-danger"
-                                                                            data-bs-dismiss="modal">Hủy</button>
-                                                                        <form
-                                                                            action="{{ route('Role.destroy', $item->id) }}"
-                                                                            method="POST">
-                                                                            @csrf
-                                                                            <button type="submit"
-                                                                                class="btn btn-danger">Xóa</button>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
-                                                </table>
-                                                {{-- {{ $roleList->appends([
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        @endforeach
+                                                    </table>
+                                                    {{-- {{ $roleList->appends([
                                                         'search' => $search,
                                                     ])->links() }} --}}
-                                                        <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                    <nav aria-label="Page navigation example" class="float-end mt-3"
                                                         id="target-pagination">
                                                         <ul class="pagination">
                                                             {{ $roleList->appends([
@@ -222,7 +153,8 @@
                                                                 ])->links() }}
                                                         </ul>
                                                     </nav>
-                                            </div>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -237,7 +169,70 @@
     @include('template.sidebar.sidebarPosition.sidebarRight')
 
 
+    @foreach ($roleList as $item)
+        {{-- Sửa đề xuất --}}
+        <div class="modal fade" id="sua{{ $item['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h5 class="modal-title w-100" id="exampleModalLabel">Sửa vai trò</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="POST" action="{{ route('Rolex.update', $item->id) }}">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-6 mb-3">
+                                    <input data-bs-toggle="tooltip" required data-bs-placement="top"
+                                        title="Nhập tên vai trò*" name="name" type="text"
+                                        placeholder="Nhập tên vai trò" class="form-control" value="{{ $item->name }}">
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <input data-bs-toggle="tooltip" required data-bs-placement="top"
+                                        title="Nhập mã vai trò*" name="code" type="text"
+                                        placeholder="Nhập mã vai trò" class="form-control" value="{{ $item->code }}">
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top">
+                                        <textarea name="description" type="text" placeholder="Chức năng nhiệm vụ" class="form-control "
+                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Mô tả" style="width: 450px;height: 80px;">{{ $item->description }}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
+                            <button type="submit" class="btn btn-danger">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
+        {{-- Xóa đề xuất --}}
+        <div class="modal fade" id="xoa{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-danger" id="exampleModalLabel">Xóa vai trò</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Bạn có thực sự muốn xoá vai trò này không?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
+                        <form action="{{ route('Role.destroy', $item->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Xóa</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
 
 
     <!-- Modal Thêm Tao De Xuat -->
@@ -314,5 +309,40 @@
     </script>
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}"></script>
+
+    <script>
+        // Khi ô checkbox chọn/bỏ chọn tất cả được thay đổi
+        document.getElementById('select-all').addEventListener('change', function() {
+            // Lấy danh sách tất cả các ô checkbox trong bảng
+            const checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
+
+            // Đặt giá trị của tất cả các ô checkbox trong bảng theo giá trị của ô chọn/bỏ chọn tất cả
+            checkboxes.forEach((checkbox) => {
+                checkbox.checked = this.checked;
+            });
+        });
+    </script>
+
+    <script>
+        const checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
+        const selectAllCheckbox = document.getElementById('select-all');
+        const deleteButton = document.getElementById('delete-selected-button');
+
+        checkboxes.forEach((checkbox) => {
+            checkbox.addEventListener('change', updateDeleteButton);
+        });
+
+        selectAllCheckbox.addEventListener('change', () => {
+            checkboxes.forEach((checkbox) => {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+            updateDeleteButton();
+        });
+
+        function updateDeleteButton() {
+            const atLeastOneChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+            deleteButton.style.display = atLeastOneChecked ? 'block' : 'none';
+        }
+    </script>
 
 @endsection

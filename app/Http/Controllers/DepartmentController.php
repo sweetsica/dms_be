@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Department;
 use App\Models\Personnel;
+use App\Models\PersonnelLevel;
+use App\Models\Position;
 use App\Models\UnitLeader;
 use Illuminate\Http\Request;
 
@@ -11,6 +13,116 @@ class DepartmentController extends Controller
 {
 
     public function index(Request $request)
+    {
+        $search = $request->get('search');
+        $don_vi_me = $request->get('don_vi_me');
+        $leader_name = $request->get('leader_name');
+        $query = Department::query();
+        // $departmentList = Department::
+        $query->leftJoin('personnel', 'personnel.id', '=', 'department.ib_lead')
+            ->select(
+                'department.id',
+                'department.name',
+                'department.description',
+                'department.code',
+                'department.parent',
+                'department.ib_lead',
+                'personnel.name as leader_name'
+            );
+        if ($search != NULL) {
+            $query->where("department.name", "like", "%$search%");
+        }
+        if ($don_vi_me != NULL) {
+            $query->where("department.name", "like", "%$don_vi_me%");
+        }
+        if ($leader_name != NULL) {
+            $query->where("personnel.name", "like", "%$leader_name%");
+        }
+        $departmentList = $query->paginate(15);
+        // dd($departmentList);
+        $UnitLeaderList = Personnel::all();
+
+        $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
+        // dd($departmentListTree);
+        $departmentlists = $this->getDepartment();
+
+        return view("Deparment.index", [
+            "departmentList" => $departmentList,
+            'don_vi_me' => $don_vi_me,
+            'leader_name' => $leader_name,
+            "departmentlists" => $departmentlists,
+            'search' => $search,
+            'UnitLeaderList' => $UnitLeaderList,
+            "departmentListTree" => $departmentListTree
+        ]);
+    }
+
+    public function index2(Request $request)
+    {
+        $department_id = $request->get('department_id');
+        $search = $request->get('search');
+        $don_vi_me = $request->get('don_vi_me');
+        $leader_name = $request->get('leader_name');
+        $query = Department::query();
+        // $departmentList = Department::
+        $query->leftJoin('personnel', 'personnel.id', '=', 'department.ib_lead')
+            ->select(
+                'department.id',
+                'department.name',
+                'department.description',
+                'department.code',
+                'department.parent',
+                'department.ib_lead',
+                'personnel.name as leader_name'
+            );
+        if ($search != NULL) {
+            $query->where("department.name", "like", "%$search%");
+        }
+        if ($don_vi_me != NULL) {
+            $query->where("department.name", "like", "%$don_vi_me%");
+        }
+        if ($leader_name != NULL) {
+            $query->where("personnel.name", "like", "%$leader_name%");
+        }
+        $departmentList = $query->paginate(15);
+        // dd($departmentList);
+        $UnitLeaderList = Personnel::all();
+
+        $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
+        // dd($departmentListTree);
+        $departmentlists = $this->getDepartment();
+
+        $getDept = [];
+        $listPosToDept = [];
+        if ($department_id) {
+            $getDept = Department::with('areas')->find($department_id);
+            $listPosToDept = Position::where('department_id', $department_id)->get();
+        }
+        $personnelLevelList = PersonnelLevel::all();
+        $positionlists = $this->getPosition();
+        return view("Deparment.index2", [
+            "personnelLevelList"=>$personnelLevelList,
+            "positionlists"=>$positionlists,
+            "departmentList" => $departmentList,
+            'don_vi_me' => $don_vi_me,
+            'leader_name' => $leader_name,
+            "departmentlists" => $departmentlists,
+            'search' => $search,
+            'UnitLeaderList' => $UnitLeaderList,
+            "departmentListTree" => $departmentListTree,
+            'getDept' => $getDept,
+            'listPosToDept' => $listPosToDept
+        ]);
+    }
+    
+    public function getPosition(){
+        $position = Position::orderBy('id','DESC')->get();
+        $positionlists = [];
+        Position::recursive($position, $parents = 0,$level = 1, $positionlists);
+        return $positionlists;
+    }
+
+    public function assignUser(Request $request, $id)
     {
         $search = $request->get('search');
         $don_vi_me = $request->get('don_vi_me');
@@ -44,14 +156,19 @@ class DepartmentController extends Controller
         // dd($departmentListTree);
         $departmentlists = $this->getDepartment();
 
-        return view("Deparment.index", [
+        $getPos = Position::with('department.areas')->find($id);
+        $listUsers = Personnel::with('department', 'position', 'level', 'role')->where('position_id', $id)->get();
+
+        return view("Deparment.assignUser", [
             "departmentList" => $departmentList,
             'don_vi_me' => $don_vi_me,
             'leader_name' => $leader_name,
             "departmentlists" => $departmentlists,
             'search' => $search,
             'UnitLeaderList' => $UnitLeaderList,
-            "departmentListTree" => $departmentListTree
+            "departmentListTree" => $departmentListTree,
+            'listUsers' => $listUsers,
+            'getPos' => $getPos
         ]);
     }
 
@@ -113,8 +230,16 @@ class DepartmentController extends Controller
     public function destroy($id)
     {
         Department::destroy($id);
+        // $selectedItems = $request->input('selected_items', []);
+        return redirect()->back()->with('mess', 'Đã xóa!');;
+    }
+
+    public function delete(Request $request)
+    {
+        // Department::destroy($id);
+        $selectedItems = $request->input('selected_items', []);
+        Department::whereIn('id', $selectedItems)->delete();
         return redirect()->back()->with('mess', 'Đã xóa!');
-        ;
     }
 
     public function getAll()

@@ -322,7 +322,7 @@ class PersonnelController extends Controller
         $dia_ban = $request->get('dia_ban');
         $trang_thai = $request->get('trang_thai');
         $query = Personnel::query();
-        $query-> Personnel::leftJoin('department', 'department.id', '=', 'personnel.department_id')
+        $query->leftJoin('department', 'department.id', '=', 'personnel.department_id')
             ->leftJoin('position', 'position.id', '=', 'personnel.position_id')
             ->leftJoin('personnel_level', 'personnel_level.id', '=', 'personnel.personnel_lv_id')
             ->leftJoin('role', 'role.id', '=', 'personnel.role_id')
@@ -847,6 +847,15 @@ class PersonnelController extends Controller
         Personnel::destroy($id);
         return redirect()->back()->with('mess', 'Đã xóa !');
         ;
+    }
+
+    public function delete(Request $request)
+    {
+
+        $selectedItems = $request->input('selected_items', []);
+        Personnel::whereIn('id', $selectedItems)->delete();
+        return redirect()->back()->with('mess', 'Đã xóa!');
+
     }
 
     public function view()

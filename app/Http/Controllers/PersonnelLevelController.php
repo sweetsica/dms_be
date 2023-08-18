@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PersonnelLevel;
+use App\Models\Department;
 use App\Models\Position;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class PersonnelLevelController extends Controller
     public function index(Request $request){
         $search = $request->get('search');
         $personnelLevelList = PersonnelLevel::where("personnel_level.code", "like", "%$search%")->orWhere("personnel_level.name", "like", "%$search%")->paginate(10);
-        $departmentListTree = Position::where('parent',0)->with('donViCon')->get();
+        $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
         return view("cap_nhan_su.index",[
             "personnelLevelList"=>$personnelLevelList,
             "departmentListTree"=>$departmentListTree,
@@ -51,4 +52,14 @@ class PersonnelLevelController extends Controller
         PersonnelLevel::destroy($id);
         return redirect()->back()->with('mess', 'Đã xóa !');;
     }
+
+    public function delete(Request $request)
+    {
+        // Department::destroy($id);
+        $selectedItems = $request->input('selected_items', []);
+        PersonnelLevel::whereIn('id', $selectedItems)->delete();
+        return redirect()->back()->with('mess', 'Đã xóa!');
+        ;
+    }
+
 }
