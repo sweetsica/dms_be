@@ -38,6 +38,10 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
 
     {{-- toastify --}}
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    {{-- Semantic ui --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/accordion.min.css"
+        integrity="sha512-EW5NoIdxRt4Kx9yB4sh9TKVYOveAOFf8WwjRwQs4ylh1hDueujFGLJtPNjm4zQKwlPk8Q2mYDLte7aK6NS+uoA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Base -->
     <link href="{{ asset('/assets/css/normalize.css') }}" rel="stylesheet" />
@@ -118,7 +122,8 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
         <header id="header" class="header fixed-top" data-scrollto-offset="0">
             <div class="container-fluid d-flex align-items-center justify-content-between">
                 <div class="header_logo" id="header_logo-wrapper">
-                    <a href="{{ route('home') }}" class="navbar-brand d-inline-flex align-items-center scrollto me-auto me-lg-0">
+                    <a href="{{ route('home') }}"
+                        class="navbar-brand d-inline-flex align-items-center scrollto me-auto me-lg-0">
                         <img class="header_logo" src="{{ env('LOGO_URL', '') }}" />
                     </a>
                 </div>
@@ -221,10 +226,10 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
                                 <div class="mb-3">
                                     <img class="header_user-img" src="{{ asset('assets/img/avatar.jpeg') }}" />
                                 </div>
-                                <span class="fw-bold">{{ session('user')['name'] ?? "" }}</span>
-                                <span>({{ session('user')['role'] ?? "" }})</span>
+                                <span class="fw-bold">{{ session('user')['name'] ?? '' }}</span>
+                                <span>({{ session('user')['role'] ?? '' }})</span>
                                 <div class="">
-                                    {{ session('user')['position'] ?? "" }}
+                                    {{ session('user')['position'] ?? '' }}
                                 </div>
                             </li>
                             <li class="header_user-item">
@@ -379,8 +384,8 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
                                             <div class="col-md-7 mb-3">
                                                 <select class='form-select' style="font-size:var(--fz-12)"
                                                     title="Tiêu chí" data-live-search="true" name="id">
-                                                            <option value="1">Name
-                                                            </option>
+                                                    <option value="1">Name
+                                                    </option>
                                                 </select>
                                             </div>
                                             <div class="col-md-4 mb-3">
@@ -427,27 +432,27 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
                 </div> --}}
                 <div class="modal-body p-2">
                     <div class="row">
-                            <div class="col-12 mb-3">
-                                <div class="changeLog">
-                                    <div class="changeLog-title mb-3">
-                                        <div class="d-flex align-items-center pb-1">
-                                            <div class="d-inline-block fs-5 text-uppercase fw-bold me-3">Version
-                                                Tên phiên bản</div>
-                                                <div class="background_green pt-1 pb-1 pe-2 ps-2 d-inline-block fs-5">
-                                                    Phiên bản mới</div>
-                                        </div>
-                                        <div class="fw-normal fs-6 text-black" id="exampleModalLabel">
-                                            Cập nhật
-                                            01/01/2001
-                                        </div>
+                        <div class="col-12 mb-3">
+                            <div class="changeLog">
+                                <div class="changeLog-title mb-3">
+                                    <div class="d-flex align-items-center pb-1">
+                                        <div class="d-inline-block fs-5 text-uppercase fw-bold me-3">Version
+                                            Tên phiên bản</div>
+                                        <div class="background_green pt-1 pb-1 pe-2 ps-2 d-inline-block fs-5">
+                                            Phiên bản mới</div>
                                     </div>
-                                    <div class="chageLog-list fs-5">
-                                        {{-- <li class="changeLog-items"> --}}
-                                        ...
-                                        {{-- </li> --}}
+                                    <div class="fw-normal fs-6 text-black" id="exampleModalLabel">
+                                        Cập nhật
+                                        01/01/2001
                                     </div>
                                 </div>
+                                <div class="chageLog-list fs-5">
+                                    {{-- <li class="changeLog-items"> --}}
+                                    ...
+                                    {{-- </li> --}}
+                                </div>
                             </div>
+                        </div>
                     </div>
                 </div>
 
@@ -497,6 +502,19 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
         var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl)
         })
+    </script>
+
+    {{-- Sematic ui  --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"
+        integrity="sha512-Xo0Jh8MsOn72LGV8kU5LsclG7SUzJsWGhXbWcYs2MAmChkQzwiW/yTQwdJ8w6UA9C6EVG18GHb/TrYpYCjyAQw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/accordion.min.js"
+        integrity="sha512-VZ9OKywfKY7qvZnTAsFqNHS6jZ79QmSdfXbzoS3aMy3FpNkDFrR2NJfrHEE4nPQROp4A9u/hB9rTwL0UP5tzHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(document).ready(function() {
+            $('.ui.accordion').accordion();
+        });
     </script>
 
     {{-- show toastify --}}
