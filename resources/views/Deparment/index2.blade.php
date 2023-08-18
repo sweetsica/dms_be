@@ -125,36 +125,35 @@
                                                             <div class="col-lg-4">
                                                                 <div class="row">
                                                                     <div class="col-lg-6">
-                                                                        <span class="fs-5 fw-bold">Trạng thái hoạt
-                                                                            động:</span>
+                                                                        <span class="fs-5 fw-bold">Trạng thái:</span>
                                                                     </div>
                                                                     <div class="col-lg-6">
-                                                                        <span class="fs-5">avc</span>
+                                                                        <span class="fs-5">Hoạt động</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="row">
-                                                                    <div class="col-lg-6">
-                                                                        <span class="fs-5 fw-bold">Thử việc:</span>
-                                                                    </div>
-                                                                    <div class="col-lg-6">
-                                                                        <span class="fs-5">
-                                                                            Thử việc
-                                                                        </span>
-                                                                    </div>
+{{--                                                                    <div class="col-lg-6">--}}
+{{--                                                                        <span class="fs-5 fw-bold">Thử việc:</span>--}}
+{{--                                                                    </div>--}}
+{{--                                                                    <div class="col-lg-6">--}}
+{{--                                                                        <span class="fs-5">--}}
+{{--                                                                            Thử việc--}}
+{{--                                                                        </span>--}}
+{{--                                                                    </div>--}}
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="row">
-                                                                    <div class="col-lg-6">
-                                                                        <span class="fs-5 fw-bold">Cộng tác:</span>
-                                                                    </div>
-                                                                    <div class="col-lg-6">
-                                                                        <span class="fs-5">
-                                                                            abc
-                                                                        </span>
-                                                                    </div>
+{{--                                                                    <div class="col-lg-6">--}}
+{{--                                                                        <span class="fs-5 fw-bold">Cộng tác:</span>--}}
+{{--                                                                    </div>--}}
+{{--                                                                    <div class="col-lg-6">--}}
+{{--                                                                        <span class="fs-5">--}}
+{{--                                                                            abc--}}
+{{--                                                                        </span>--}}
+{{--                                                                    </div>--}}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -165,7 +164,7 @@
                                                                         <span class="fs-5 fw-bold">Định biên/thực tế:</span>
                                                                     </div>
                                                                     <div class="col-lg-8">
-                                                                        <span class="fs-5">avc</span>
+                                                                        <span class="fs-5">10 người</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -177,7 +176,7 @@
                                                                         <span class="fs-5 fw-bold">Quỹ lương năm:</span>
                                                                     </div>
                                                                     <div class="col-lg-8">
-                                                                        <span class="fs-5">1000</span>
+                                                                        <span class="fs-5">120.000.000 VND</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
