@@ -259,7 +259,7 @@
                                                                             {{ $item->code ?? '' }}
                                                                         </div>
                                                                     </td>
-                                                                    <td data-bs-toggle="modal"
+                                                                    <td style="text-decoration: underline" data-bs-toggle="modal"
                                                                         data-bs-target="#infoUser{{ $item->id }}"
                                                                         role="button" class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
