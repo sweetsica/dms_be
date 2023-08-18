@@ -84,7 +84,7 @@
                                     <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                         aria-label="Thêm khách hàng" data-bs-original-title="Thêm khách hàng">
                                         <button class="btn btn-danger d-block testCreateUser" data-bs-toggle="modal"
-                                            data-bs-target="#add">Thêm khách hàng</button>
+                                            data-bs-target="#info">Thêm khách hàng</button>
                                     </div>
                                 </div>
                                 <div class="table-responsive">
@@ -541,212 +541,6 @@
 </div>
 @endforeach
 
-<!-- Modal thêm khách hàng -->
-<div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header text-center">
-                <h5 class="modal-title w-100" id="exampleModalLabel">Thêm khách hàng</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="customerForm" method="POST" action="{{ route('create-customer') }}">
-                @csrf
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <div class="card-title">1. Thông tin chung</div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <input value="{{ old('code') }}" type="text" name="code" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Mã khách hàng" placeholder="Mã khách hàng*"
-                                class="form-control">
-                            {{-- <div class="error-text" id="codeError" style="color: red;"></div> --}}
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <input value="{{ old('name') }}" type="text" name="name" data-bs-toggle="tooltip" required
-                                data-bs-placement="top" title="Tên khách hàng" placeholder="Tên khách hàng*"
-                                class="form-control">
-                            <div class="error-text" id="nameError" style="color: red;"></div>
-                        </div>
-
-                        <div class="col-md-3 mb-3">
-                            <input value="{{ old('phone') }}" type="text" name="phone" data-bs-toggle="tooltip" required
-                                data-bs-placement="top" title="Số điện thoại" placeholder="Số điện thoại*"
-                                class="form-control">
-                            <div class="error-text" id="phoneError" style="color: red;"></div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <input value="{{ old('email') }}" type="text" name="email" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Email" placeholder="Email*" class="form-control">
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <div class="card-title">2. Tổ chức</div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <input value="{{ old('companyName') }}" type="text" name="companyName"
-                                data-bs-toggle="tooltip" data-bs-placement="top" title="Tên công ty"
-                                placeholder="Tên công ty" class="form-control">
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <input value="{{ old('personContact') }}" type="text" name="personContact"
-                                data-bs-toggle="tooltip" data-bs-placement="top" title="Người đại diện"
-                                placeholder="Người đại diện" class="form-control">
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <input value="{{ old('career') }}" type="text" name="career" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Chức danh" placeholder="Chức danh" class="form-control">
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <input value="{{ old('taxCode') }}" type="text" name="taxCode" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Mã số thuế" placeholder="Mã số thuế"
-                                class="form-control">
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <input value="{{ old('companyPhoneNumber') }}" type="text" name="companyPhoneNumber"
-                                data-bs-toggle="tooltip" data-bs-placement="top" title="Số điện thoại công ty"
-                                placeholder="Số điện thoại công ty" class="form-control">
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <input value="{{ old('companyEmail') }}" type="text" name="companyEmail"
-                                data-bs-toggle="tooltip" data-bs-placement="top" title="Email công ty"
-                                placeholder="Email công ty" class="form-control">
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <input value="{{ old('accountNumber') }}" type="text" name="accountNumber"
-                                data-bs-toggle="tooltip" data-bs-placement="top" title="Số tài khoản"
-                                placeholder="Số tài khoản" class="form-control">
-                        </div>
-                        <div class="col-md-8 mb-3">
-                            <input value="{{ old('bankOpen') }}" type="text" name="bankOpen" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Mở tại ngân hàng" placeholder="Mở tại ngân hàng"
-                                class="form-control">
-                        </div>
-
-                        <div class="col-md-12 mb-3">
-                            <div class="card-title">3. Địa chỉ</div>
-                        </div>
-                        <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Tỉnh/thành">
-                            <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                data-live-search="true" title="Tỉnh/thành*" data-select-all-text="Chọn tất cả"
-                                data-deselect-all-text="Bỏ chọn" data-size="3" name="city" id="city"
-                                data-live-search-placeholder="Tìm kiếm...">
-                            </select>
-                            <div class="error-text" id="cityError" style="color: red;"></div>
-                        </div>
-                        <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Quận/huyện">
-                            <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                data-live-search="true" title="Quận/huyện*" data-select-all-text="Chọn tất cả"
-                                data-deselect-all-text="Bỏ chọn" data-size="3" name="district" id="district"
-                                data-live-search-placeholder="Tìm kiếm...">
-                            </select>
-                            <div class="error-text" id="districtError" style="color: red;"></div>
-                        </div>
-                        <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Phường/xã">
-                            <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                data-live-search="true" title="Phường/xã*" data-select-all-text="Chọn tất cả"
-                                data-deselect-all-text="Bỏ chọn" data-size="3" name="guide" id="guide"
-                                data-live-search-placeholder="Tìm kiếm...">
-                            </select>
-                            <div class="error-text" id="guideError" style="color: red;"></div>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <input type="text" id="addressInput" name="address" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ*" class="form-control">
-                            <div class="error-text" id="addressError" style="color: red;"></div>
-                        </div>
-                        <div id="map" style="height: 300px; display: none"></div>
-                        <div class="col-md-12 mb-3">
-                            <div class="card-title">4. Mô tả</div>
-                        </div>
-
-                        <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="Nhân sự thu thập">
-                            <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                data-live-search="true" data-select-all-text="Chọn tất cả"
-                                data-deselect-all-text="Bỏ chọn" data-size="3" name="personId" id="personId"
-                                data-live-search-placeholder="Tìm kiếm...">
-                                @if (session('user')['role_id'] == '1')
-                                @foreach ($listPersons as $Person)
-                                <option value="{{ $Person->id }}" {{ $Person->id == session('user')['id'] ? 'selected' :
-                                    '' }}>
-                                    {{ $Person->name }}</option>
-                                @endforeach
-                                @else
-                                <option disabled selected value="{{ session('user')['id'] }}">
-                                    {{ session('user')['name'] ?? '' }}</option>
-                                @endif
-                            </select>
-                            <div class="error-text" id="personIdError" style="color: red;"></div>
-                        </div>
-                        <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="Sản phẩm quan tâm">
-                            <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                data-live-search="true" title="Sản phẩm quan tâm*" data-select-all-text="Chọn tất cả"
-                                data-deselect-all-text="Bỏ chọn" data-size="3" name="productId[]" id="productId"
-                                data-live-search-placeholder="Tìm kiếm..." multiple>
-                            </select>
-                            <div class="error-text" id="productIdError" style="color: red;"></div>
-                        </div>
-
-
-                        <div class="col-md-12 mb-3">
-                            <div class="card-title">5. Phân loại</div>
-                        </div>
-
-                        <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="Nhóm khách hàng">
-                            <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                data-live-search="true" title="Nhóm khách hàng*" data-select-all-text="Chọn tất cả"
-                                data-deselect-all-text="Bỏ chọn" data-size="3" name="group" id="group"
-                                data-live-search-placeholder="Tìm kiếm...">
-                                {{-- <option value=""></option> --}}
-                                @foreach ($listgroup as $gr)
-                                <option value="{{ $gr->id }}">{{ $gr->name }}</option>
-                                @endforeach
-
-                            </select>
-                            <div class="error-text" id="groupError" style="color: red;"></div>
-                        </div>
-
-                        <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Tuyến">
-                            <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                data-live-search="true" title="Tuyến*" data-select-all-text="Chọn tất cả"
-                                data-deselect-all-text="Bỏ chọn" data-size="3" name="routeId" id="routeId"
-                                data-live-search-placeholder="Tìm kiếm...">
-                            </select>
-                            <div class="error-text" id="routeIdError" style="color: red;"></div>
-                        </div>
-
-                        <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="Kênh khách hàng">
-                            <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                data-live-search="true" title="Kênh khách hàng*" data-select-all-text="Chọn tất cả"
-                                data-deselect-all-text="Bỏ chọn" data-size="3" name="chanelId" id="chanelId"
-                                data-live-search-placeholder="Tìm kiếm...">
-                            </select>
-                            <div class="error-text" id="chanelIdError" style="color: red;"></div>
-                        </div>
-                        <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Trạng thái">
-                            <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                data-live-search="true" data-select-all-text="Chọn tất cả"
-                                data-deselect-all-text="Bỏ chọn" data-size="3" name="status"
-                                data-live-search-placeholder="Tìm kiếm...">
-                                <option value="Trinh sát">Trinh sát</option>
-                                <option value="Cơ hội">Cơ hội</option>
-                                <option value="Khách hàng">Khách hàng</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-danger" id="submitButton"> Lưu</button>
-                </div>
-            </form>
-            <div id="errorContainer" class="alert alert-danger" style="display: none;"></div>
-        </div>
-    </div>
-</div>
 
 <!-- Lọc  -->
 <div class="modal fade" id="filterOptions" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -756,7 +550,8 @@
                 <h5 class="modal-title w-100" id="exampleModalLabel">Lọc dữ liệu</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="" method="GET">
+            <form id="customerForm" method="POST" action="{{ route('create-customer') }}">
+                @csrf
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-12 mb-3">
@@ -823,6 +618,8 @@
                 <h5 class="modal-title w-100" id="exampleModalLabel">Thông tin khách hàng</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <form id="formThemCapPhatChitiet" method="POST" action="{{ route('create-customer') }}" enctype="multipart/form-data">
+            @csrf
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-6 mb-3">
