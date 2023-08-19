@@ -635,19 +635,19 @@
         // });
 
 
-        // $(document).ready(function() {
-        //     // Handle form submission
-        //     $('#addForm').submit(function(event) {
-        //         // Prevent the default form submission
-        //         event.preventDefault();
+        $(document).ready(function() {
+            // Handle form submission
+            $('#addForm').submit(function(event) {
+                // Prevent the default form submission
+                event.preventDefault();
 
-        //         // Show the loading button and hide the submit button
-        //         $('#submitBtn').hide();
-        //         $('#loadingBtn').show();
+                // Show the loading button and hide the submit button
+                $('#submitBtn').hide();
+                $('#loadingBtn').show();
 
-        //         // Submit the form
-        //         $(this).unbind('submit').submit();
-        //     });
-        // });
+                // Submit the form
+                $(this).unbind('submit').submit();
+            });
+        });
     </script>
 @endsection
