@@ -19,6 +19,7 @@ class Customer extends Model
        'class',
        'phone',
        'email',
+       'personCompany',
        'category',
        'zalo',
        'note',

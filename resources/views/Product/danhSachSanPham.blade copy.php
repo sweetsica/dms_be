@@ -8,21 +8,21 @@
     </style>
 @endsection
 @php
-    
+
     function getPaginationLink($link, $pageName)
     {
         if (!isset($link['url'])) {
             return '#';
         }
-    
+
         $pageNumber = explode('?page=', $link['url'])[1];
-    
+
         $queryString = request()->query();
-    
+
         $queryString[$pageName] = $pageNumber;
         return route('product.list', $queryString);
     }
-    
+
     // function isFiltering($filterNames)
     // {
     //     $filters = request()->query();
@@ -33,7 +33,7 @@
     //     }
     //     return false;
     // }
-    
+
 @endphp
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
@@ -353,8 +353,8 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Thêm sản phẩm</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="addForm" method="POST" action="{{ route('product.store') }}" enctype="multipart/form-data"
-                    onsubmit="openModal()">
+                <form id="addForm" method="POST" action="{{ route('product.store') }}"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -418,7 +418,7 @@
                                                     <img style="width:16px;height:16px"
                                                         src="{{ asset('assets/img/upload-file.svg') }}" />
                                                     Tải file lên
-                                                    <input accept=".png, .jpeg, .jpg" role="button" required
+                                                    <input accept=".png, .jpeg, .jpg" required role="button"
                                                         type="file" class="modal_upload-input modal_upload-file"
                                                         name="file" onchange="updateList(event)">
                                                 </button>
@@ -445,8 +445,6 @@
         </div>
     </div>
 
-
-
 @endsection
 @section('footer-script')
 
@@ -470,7 +468,6 @@
     <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_nhanSu.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
-
 
     <script>
         updateList = function(e) {
@@ -627,27 +624,20 @@
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/components/dataHrefTable.js') }}"></script>
-
     <script>
-        // $('#addForm').on('submit', function(e) {
-        //     $('#addDetailProduct').modal('show');
-        //     event.preventDefault();
-        // });
+        $(document).ready(function() {
+            // Handle form submission
+            $('#addForm').submit(function(event) {
+                // Prevent the default form submission
+                event.preventDefault();
 
+                // Show the loading button and hide the submit button
+                $('#submitBtn').hide();
+                $('#loadingBtn').show();
 
-        // $(document).ready(function() {
-        //     // Handle form submission
-        //     $('#addForm').submit(function(event) {
-        //         // Prevent the default form submission
-        //         event.preventDefault();
-
-        //         // Show the loading button and hide the submit button
-        //         $('#submitBtn').hide();
-        //         $('#loadingBtn').show();
-
-        //         // Submit the form
-        //         $(this).unbind('submit').submit();
-        //     });
-        // });
+                // Submit the form
+                $(this).unbind('submit').submit();
+            });
+        });
     </script>
 @endsection

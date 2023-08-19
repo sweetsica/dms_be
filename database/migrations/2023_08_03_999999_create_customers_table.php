@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->id();
             $table->string('code', 255)->nullable()->default(time());
             $table->string('name', 255)->nullable();
+            $table->string('personCompany', 255)->nullable();
             $table->string('type')->nullable()->default(0);
             $table->string('class')->nullable()->default(0);
             $table->string('phone', 255)->nullable();
@@ -47,7 +48,7 @@ return new class extends Migration {
 
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
-//            $table->timestamp('created_at')->useCurrent();
+            //            $table->timestamp('created_at')->useCurrent();
 //            $table->timestamp('updated_at')->useCurrent();
 
             $table->foreign('routeId')->references('id')->on('route_directions')->onDelete('cascade');

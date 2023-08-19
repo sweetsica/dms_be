@@ -21,6 +21,7 @@ use App\Http\Controllers\RouteDirectionController;
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\SpecificationsController;
 use App\Http\Controllers\TechnicalSpecificationsGroupController;
+use App\Http\Controllers\UnitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,10 +49,6 @@ Route::middleware(['guest'])->group(function () {
     Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
 });
 
-Route::get('/test-customer-1', [CustomerTestController::class, 'index1'])->name('index1');
-Route::get('/test-customer-2', [CustomerTestController::class, 'index2'])->name('index2');
-Route::get('/test-customer-3', [CustomerTestController::class, 'index3'])->name('index3');
-
 Route::middleware(['auth.role'])->group(function () {
 
     Route::get('/', function () {
@@ -61,6 +58,8 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('/log-out', [AuthenticateController::class, 'logout'])->name('logout');
 
     Route::post('/create-customer', [CustomerController::class, 'create'])->name('create-customer');
+
+    Route::post('/create-customer-simple', [CustomerController::class, 'createSimple'])->name('create-customer-simple');
 
     Route::get('/customer', [CustomerController::class, 'view'])->name('customers');
 
@@ -166,7 +165,6 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('cap_nhan_su/{id}', [PersonnelLevelController::class, 'destroy'])->name('PersonnelLevelx.destroy');
     Route::post('cap_nhan_su-delete', [PersonnelLevelController::class, 'delete'])->name('PersonnelLevel.delete');
 
-
     Route::get('nhan-su', [PersonnelController::class, 'index'])->name('Personnel.index');
     Route::get('nhan-su-vitri', [PersonnelController::class, 'indexvtri'])->name('Personnel.indexvtri');
     Route::get('nhan-su-dia-ban', [PersonnelController::class, 'indexDiaBan'])->name('Personnel.indexDiaBan');
@@ -203,9 +201,15 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('sua-thong-so-ky-thuat/{id}', [SpecificationsController::class, 'update'])->name('Specifications.update');
     Route::post('xoa-thong-so-ky-thuat/{id}', [SpecificationsController::class, 'destroy'])->name('Specifications.destroy');
     Route::post('thong-so-ky-thuat-delete', [SpecificationsController::class, 'delete'])->name('Specifications.delete');
-    
+
     Route::post('them-vi-tri-nhan-su/{id?}', [PersonnelController::class, 'assignPosition'])->name('assign.user.position');
     Route::delete('xoa-vi-tri-nhan-su/{user_id?}/{pos_id?}', [PersonnelController::class, 'removePosition'])->name('remove.user.position');
+
+    Route::get('don-vi-tinh', [UnitController::class, 'index'])->name('Unit.index');
+    Route::post('them-don-vi-tinh', [UnitController::class, 'store'])->name('Unit.store');
+    Route::post('sua-don-vi-tinh/{id}', [UnitController::class, 'update'])->name('Unit.update');
+    Route::post('xoa-don-vi-tinh/{id}', [UnitController::class, 'destroy'])->name('Unit.destroy');
+    Route::post('don-vi-tinh-delete', [UnitController::class, 'delete'])->name('Unit.delete');
 
 });
 

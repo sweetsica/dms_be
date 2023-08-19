@@ -8,21 +8,21 @@
     </style>
 @endsection
 @php
-
+    
     // function getPaginationLink($link, $pageName)
     // {
     //     if (!isset($link->url)) {
     //         return '#';
     //     }
-
+    
     //     $pageNumber = explode('?page=', $link->url)[1];
-
+    
     //     $queryString = request()->query();
-
+    
     //     $queryString[$pageName] = $pageNumber;
     //     return route('timekeeping.list', $queryString);
     // }
-
+    
     // function isFiltering($filterNames)
     // {
     //     $filters = request()->query();
@@ -33,12 +33,12 @@
     //     }
     //     return false;
     // }
-
+    
     $listData = [['id' => 1, 'code' => 'tuyen01', 'name' => 'Địa bàn 2', 'usermanager' => 'Nguyễn Văn A - TBHT00', 'email' => 'Cầu Giấy', 'nhom' => '2', 'kenh' => 'OTC'], ['id' => 2, 'code' => 'tuyen01', 'name' => 'Địa bàn 3', 'usermanager' => 'Nguyễn Văn B - MTDH01', 'email' => 'Thanh Xuân', 'nhom' => '3', 'kenh' => 'ETC']];
-
+    
 @endphp
 @section('content')
-@include('template.sidebar.sidebarArea.sidebarLeft')
+    @include('template.sidebar.sidebarArea.sidebarLeft')
 
     <div id="mainWrap" class="mainWrap">
         <div class="mainSection">
@@ -49,147 +49,154 @@
                         @include('template.components.sectionCard')
                     </div>
                     <div class="card mb-3">
-                        <div class="card-body">
+                        <div class="card-body position-relative">
                             <div class='row'>
                                 <div class="col-md-12">
-                                    <div class="action_wrapper d-flex flex-wrap justify-content-between align-items-center mb-3">
-                                            <div class="order-1 order-md-2  justify-content-between align-items-center flex-grow-1 mb-2 mb-md-0">
-                                                <form method="GET" action="#">
-                                                    <div class="form-group has-search">
-                                                        {{-- <span type="submit"
+                                    <div
+                                        class="action_wrapper d-flex flex-wrap justify-content-between align-items-center mb-3">
+                                        <div
+                                            class="order-1 order-md-2  justify-content-between align-items-center flex-grow-1 mb-2 mb-md-0">
+                                            <form method="GET" action="#">
+                                                <div class="form-group has-search">
+                                                    {{-- <span type="submit"
                                                             class="bi bi-search form-control-feedback fs-5"></span> --}}
-                                                        <input type="text" style="width: 150px; float: right;"
-                                                            class="form-control" value="{{ $search }}"
-                                                            placeholder="Tìm kiếm" name="search">
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Lọc">
-                                        <button class="btn btn-outline-danger" data-bs-toggle="modal"
-                                            data-bs-target="#filterOptions">
-                                            <i class="bi bi-funnel"></i>
-                                        </button>
-                                    </div>
-                                        @if ((session('user')['role_id'] == '1') || (session('user')['role_id'] == '2') )
-                                        <div  class="action_export order-md-4" data-bs-toggle="tooltip" data-bs-placement="top"
-                                            aria-label="Thêm địa bàn" data-bs-original-title="Thêm địa bàn">
-                                            <button class="btn btn-danger d-block testCreateUser" data-bs-toggle="modal"
-                                                data-bs-target="#add">Thêm địa bàn</button>
+                                                    <input type="text" style="width: 150px; float: right;"
+                                                        class="form-control" value="{{ $search }}"
+                                                        placeholder="Tìm kiếm" name="search">
+                                                </div>
+                                            </form>
                                         </div>
+                                        <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Lọc">
+                                            <button class="btn btn-outline-danger" data-bs-toggle="modal"
+                                                data-bs-target="#filterOptions">
+                                                <i class="bi bi-funnel"></i>
+                                            </button>
+                                        </div>
+                                        @if (session('user')['role_id'] == '1' || session('user')['role_id'] == '2')
+                                            <div class="action_export order-md-4" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" aria-label="Thêm địa bàn"
+                                                data-bs-original-title="Thêm địa bàn">
+                                                <button class="btn btn-danger d-block testCreateUser" data-bs-toggle="modal"
+                                                    data-bs-target="#add">Thêm địa bàn</button>
+                                            </div>
                                         @endif
 
                                     </div>
-                                    <form id="select-form" action="{{ route('locality.delete') }}"
-                                    method="POST">
-                                    @csrf
-                                    <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Xóa" >
-                                        <button class="btn btn-danger  " type="submit"
-                                            onclick="return confirm('Bạn có muốn xóa không?')" id="delete-selected-button"
-                                            style="display: none;"
-                                            >Xóa</button>
-                                    </div><br>
-                                    <div class="table-responsive">
-                                        <table id="dsDaoTao"
-                                            class="table table-responsive table-hover table-bordered filter"
-                                            style="width: 100%">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-nowrap text-center" style="width:1%"><input
-                                                        type="checkbox" id="select-all"></th>
-                                                    <th class="text-nowrap text-center" style="width:3%">STT</th>
-                                                    <th class="text-nowrap text-center" style="width:8%">Mã địa bàn</th>
-                                                    <th class="text-nowrap text-center" style="width:30%">Tên địa bàn</th>
-                                                    <th class="text-nowrap text-center" style="width:30%">Khu vực</th>
-                                                    <th class="text-nowrap text-center" style="width:30%">Mô tả</th>
-                                                    @if ((session('user')['role_id'] == '1') || (session('user')['role_id'] == '2') )
-                                                    <th class="text-nowrap text-center" style="width:4%">Hành động</th>
-                                                    @endif
-                                                </tr>
-                                            </thead>
-                                            <?php $a = 1; ?>
-                                            <tbody>
-                                                @foreach ($localityList as $item)
-                                                    <tr class="table-row" role="button">
-                                                        <td class="text-center"> <input type="checkbox" name="selected_items[]"
-                                                            value="{{ $item->id }}"></td>
-                                                        <td>
-                                                            <div class="overText text-center">
-                                                                {{ $a++ }}
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="overText" data-bs-toggle="tooltip"
-                                                                data-bs-placement="top" title="{{ $item->code }}">
-                                                                {{ $item->code }}
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="overText" data-bs-toggle="tooltip"
-                                                                data-bs-placement="top" title=" {{ $item->name }}">
-                                                                {{ $item->name }}
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="overText" data-bs-toggle="tooltip"
-                                                                data-bs-placement="top" title="{{ $item->area_name }}">
-                                                                {{ $item->area_name }}
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="overText" data-bs-toggle="tooltip"
-                                                                data-bs-placement="top" title="{{ $item->description }}">
-                                                                {{ $item->description }}
-                                                            </div>
-                                                        </td>
-                                                         @if ((session('user')['role_id'] == '1') || (session('user')['role_id'] == '2') )
-                                                        <td>
-                                                            <div class="table_actions d-flex justify-content-center">
-                                                                <div data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                    title="Sửa">
-                                                                    <div class="btn test_btn-edit-{{ $item['id'] }}"
-                                                                        href="#" data-bs-toggle="modal"
-                                                                        data-bs-target="#suaca{{ $item['id'] }}">
-                                                                        <img style="width:16px;height:16px"
-                                                                            src="{{ asset('assets/img/edit.svg') }}" />
-                                                                    </div>
-                                                                </div>
-                                                                <div data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                    title="Xóa">
-                                                                    <div class="btn test_btn-remove-{{ $item['id'] }}"
-                                                                        href="#" data-bs-toggle="modal"
-                                                                        data-bs-target="#xoaca{{ $item['id'] }}">
-                                                                        <img style="width:16px;height:16px"
-                                                                            src="{{ asset('assets/img/trash.svg') }}" />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
+                                    <form id="select-form" action="{{ route('locality.delete') }}" method="POST">
+                                        @csrf
+                                        <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Xóa"
+                                            style="position: absolute; top: 10px; left: 0;">
+                                            <button class="btn btn-danger  " type="submit"
+                                                onclick="return confirm('Bạn có muốn xóa không?')"
+                                                id="delete-selected-button" style="display: none;">Xóa</button>
+                                        </div><br>
+                                        <div class="table-responsive">
+                                            <table id="dsDaoTao"
+                                                class="table table-responsive table-hover table-bordered filter"
+                                                style="width: 100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-nowrap text-center" style="width:1%"><input
+                                                                type="checkbox" id="select-all"></th>
+                                                        <th class="text-nowrap text-center" style="width:3%">STT</th>
+                                                        <th class="text-nowrap text-center" style="width:8%">Mã địa bàn</th>
+                                                        <th class="text-nowrap text-center" style="width:30%">Tên địa bàn
+                                                        </th>
+                                                        <th class="text-nowrap text-center" style="width:30%">Khu vực</th>
+                                                        <th class="text-nowrap text-center" style="width:30%">Mô tả</th>
+                                                        @if (session('user')['role_id'] == '1' || session('user')['role_id'] == '2')
+                                                            <th class="text-nowrap text-center" style="width:4%">Hành động
+                                                            </th>
                                                         @endif
                                                     </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                        <nav aria-label="Page navigation example" class="float-end mt-3"
-                                            id="target-pagination">
-                                            <ul class="pagination">
-                                                {{ $localityList->appends([
-                                                        'search' => $search,
-                                                    ])->links() }}
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                </form>
+                                                </thead>
+                                                <?php $a = 1; ?>
+                                                <tbody>
+                                                    @foreach ($localityList as $item)
+                                                        <tr class="table-row" role="button">
+                                                            <td class="text-center"> <input type="checkbox"
+                                                                    name="selected_items[]" value="{{ $item->id }}">
+                                                            </td>
+                                                            <td>
+                                                                <div class="overText text-center">
+                                                                    {{ $a++ }}
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->code }}">
+                                                                    {{ $item->code }}
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title=" {{ $item->name }}">
+                                                                    {{ $item->name }}
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="{{ $item->area_name }}">
+                                                                    {{ $item->area_name }}
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="overText" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top"
+                                                                    title="{{ $item->description }}">
+                                                                    {{ $item->description }}
+                                                                </div>
+                                                            </td>
+                                                            @if (session('user')['role_id'] == '1' || session('user')['role_id'] == '2')
+                                                                <td>
+                                                                    <div
+                                                                        class="table_actions d-flex justify-content-center">
+                                                                        <div data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top" title="Sửa">
+                                                                            <div class="btn test_btn-edit-{{ $item['id'] }}"
+                                                                                href="#" data-bs-toggle="modal"
+                                                                                data-bs-target="#suaca{{ $item['id'] }}">
+                                                                                <img style="width:16px;height:16px"
+                                                                                    src="{{ asset('assets/img/edit.svg') }}" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top" title="Xóa">
+                                                                            <div class="btn test_btn-remove-{{ $item['id'] }}"
+                                                                                href="#" data-bs-toggle="modal"
+                                                                                data-bs-target="#xoaca{{ $item['id'] }}">
+                                                                                <img style="width:16px;height:16px"
+                                                                                    src="{{ asset('assets/img/trash.svg') }}" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            @endif
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                            <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                id="target-pagination">
+                                                <ul class="pagination">
+                                                    {{ $localityList->appends([
+                                                            'search' => $search,
+                                                        ])->links() }}
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                    </form>
                                 </div>
-                            </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            @include('template.footer.footer')
         </div>
+        @include('template.footer.footer')
+    </div>
     </div>
     @include('template.sidebar.sidebarMaster.sidebarRight')
 
@@ -297,7 +304,8 @@
                                     data-bs-placement="top" title="Mã địa bàn*" placeholder="Mã địa bàn*"
                                     class="form-control">
                             </div>
-                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Khu vực*">
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Khu vực*">
                                 {{-- <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Khu vực*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
                                     <option value="1">1</option>
                                 </select> --}}
@@ -327,34 +335,34 @@
         </div>
     </div>
 
-        {{-- Filter --}}
-        <div class="modal fade" id="filterOptions" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header text-center">
-                        <h5 class="modal-title w-100" id="exampleModalLabel">Lọc dữ liệu</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+    {{-- Filter --}}
+    <div class="modal fade" id="filterOptions" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Lọc dữ liệu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
 
-                    <form action="" method="GET">
-                        {{-- @foreach (request()->query() as $key => $value)
-                            @if (!in_array($key, [ 'don_vi_me']))
+                <form action="" method="GET">
+                    {{-- @foreach (request()->query() as $key => $value)
+                            @if (!in_array($key, ['don_vi_me']))
                                 <input type="hidden" name="{{ $key }}" value="{{ $value }}">
                             @endif
                         @endforeach --}}
-                        <div class="modal-body">
-                            <div class="row">
-                               <div class="col-12 mb-3">
-                                    <div data-bs-toggle="tooltip" data-bs-placement="top"
-                                        data-bs-original-title="Lọc theo khu vực">
-                                        <select id="select-status" class="selectpicker select_filter"
-                                            data-dropup-auto="false" title="Lọc theo khu vực" name='khu_vuc'>
-                                          @foreach ($area as $item )
-                                                <option value="{{ $item->name }}">{{ $item->name }}</option>
-                                          @endforeach
-                                        </select>
-                                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-original-title="Lọc theo khu vực">
+                                    <select id="select-status" class="selectpicker select_filter"
+                                        data-dropup-auto="false" title="Lọc theo khu vực" name='khu_vuc'>
+                                        @foreach ($area as $item)
+                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
+                            </div>
 
                         </div>
                         <div class="modal-footer justify-content-between">
@@ -362,10 +370,10 @@
                                 mới</button>
                             <button type="submit" class="btn btn-danger">Lọc</button>
                         </div>
-                    </form>
-                </div>
+                </form>
             </div>
         </div>
+    </div>
 
 
 

@@ -19,9 +19,8 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card mb-3">
-                                <div class="card-body">
+                                <div class="card-body position-relative">
                                     <div class='row'>
-
                                         <div class="col-md-12">
                                             <div
                                                 class="action_wrapper d-flex flex-wrap justify-content-between align-items-center mb-3">
@@ -60,7 +59,8 @@
                                                 method="POST">
                                                 @csrf
                                                 <div class="action_export mx-3 order-md-1" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" title="Xóa">
+                                                    data-bs-placement="top" title="Xóa"
+                                                    style="position: absolute; top: 10px; left: 0;">
                                                     <button class="btn btn-danger  " type="submit"
                                                         onclick="return confirm('Bạn có muốn xóa không?')"
                                                         id="delete-selected-button" style="display: none;">Xóa</button>
@@ -161,11 +161,11 @@
 
                                                                             <div
                                                                                 class="table_actions d-flex justify-content-center">
-                                                                                <div class="btn" data-bs-toggle="modal"
+                                                                                {{-- <div class="btn" data-bs-toggle="modal"
                                                                                     data-bs-target="#qrCode">
                                                                                     <i class="bi bi-share-fill"
                                                                                         style="color: #787878;"></i>
-                                                                                </div>
+                                                                                </div> --}}
                                                                                 <div data-bs-toggle="tooltip"
                                                                                     data-bs-placement="top"
                                                                                     title="Sửa ">
@@ -577,20 +577,20 @@
                             </div>
                             {{-- <div class="col-6 mb-3"> --}}
                             {{-- <input name="pack" type="text"
-                placeholder="Gói trang bị"
-                class="form-control"
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                title="Gói trang bị"
-                value="{{ $item->pack }}"> --}}
+                    placeholder="Gói trang bị"
+                    class="form-control"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Gói trang bị"
+                    value="{{ $item->pack }}"> --}}
                             {{-- <div data-bs-toggle="tooltip" data-bs-placement="top" title="Gói trang bị">
-                            <select disabled name="pack" class="selectpicker" data-dropup-auto="false">
-                                <option value="{{ $item->pack }}">
-                                    {{ $item->pack }}
-                                </option>
-                            </select>
-                        </div>
-                    </div> --}}
+                                <select disabled name="pack" class="selectpicker" data-dropup-auto="false">
+                                    <option value="{{ $item->pack }}">
+                                        {{ $item->pack }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div> --}}
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Hình thức làm việc">
                                     <select disabled name="working_form" class="selectpicker" data-dropup-auto="false"
@@ -711,7 +711,7 @@
                     @endforeach --}}
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-12 mb-3">
+                            {{-- <div class="col-12 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top"
                                     data-bs-original-title="Lọc theo trưởng đơn vị">
                                     <select id="select-status" class="selectpicker select_filter"
@@ -721,13 +721,13 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-12 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top"
                                     data-bs-original-title="Lọc theo đơn vị mẹ">
                                     <select id="select-status" class="selectpicker select_filter"
                                         data-dropup-auto="false" title="Lọc theo đơn vị mẹ" name='don_vi_me'>
-                                        @foreach ($departmentList as $item)
+                                        @foreach ($Department as $item)
                                             <option value="{{ $item->name }}">{{ $item->name }}</option>
                                         @endforeach
                                     </select>
