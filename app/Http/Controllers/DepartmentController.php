@@ -49,6 +49,13 @@ class DepartmentController extends Controller
         $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
         // dd($departmentListTree);
         $departmentlists = $this->getDepartment();
+        $positionlists = $this->getPosition();
+        $personnellists = $this->getPersonnel();
+        $roleList = Role::all();
+        $localityList = Locality::all();
+        $personnelLevelList = PersonnelLevel::all();
+
+        $listUsers = Personnel::all();
 
         $positionlists = $this->getPosition();
         $personnellists = $this->getPersonnel();
