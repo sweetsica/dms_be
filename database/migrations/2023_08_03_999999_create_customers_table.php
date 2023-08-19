@@ -57,6 +57,8 @@ return new class extends Migration {
 
             $table->string('filePath', 255)->nullable();
             $table->string('fileName', 255)->nullable();
+
+            $table->text('comment')->nullable();
         });
     }
 

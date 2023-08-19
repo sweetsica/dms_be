@@ -71,6 +71,8 @@ Route::middleware(['auth.role'])->group(function () {
 
     Route::get('/customer/{id}/download/{name}', [CustomerController::class, 'download'])->name('customer.download');
 
+    Route::post('/cmt-customer/{id}', [CustomerController::class, 'cmt'])->name('cmt.customer');
+
     Route::get('chi-tiet-khach-hang/{id}', [CustomerController::class, 'show'])->name('customer-detail.list');
 
     Route::get('/nhan_su', [PersonnelController::class, 'view'])->name('personel.view');

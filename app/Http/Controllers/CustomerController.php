@@ -523,4 +523,14 @@ class CustomerController extends Controller
         $filePath = storage_path('app/public/' . $filePaths[$fileIndex]);
         return response()->download($filePath, $name);
     }
+
+    public function cmt(Request $request, $id)
+    {
+        $comment = $request->get('comment');
+        $customer = Customer::find($id);
+        $customer->comment = $comment;
+        $customer->save();
+
+        return response()->with('success', 'Bình luận đã được gửi.');
+    }
 }

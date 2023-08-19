@@ -46,6 +46,7 @@ class Customer extends Model
        'coordinatesY',
        'filePath',
        'fileName',
+       'comment',
    ];
 
     public function route()
