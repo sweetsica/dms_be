@@ -364,6 +364,12 @@
                                         <div class="col-md-12 mb-3">
                                             <div class="card-title fs-4">4. Sản phẩm liên quan</div>
                                         </div>
+
+                                        <div class="col-md-4 mb-3">
+                                        <div class="col-12 mt-3">
+                                            <button type="button" class="btn btn-danger d-block" data-bs-toggle="modal"
+                                                data-bs-target="#add">+ Link sản phẩm liên quan</button>
+                                        </div>
                                         </div>
                                     </div>
                                     <div class="mb-4">
@@ -410,9 +416,142 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        {{-- <button class="btn btn-danger me-md-2 px-5" type="button">In</button> --}}
+                        {{-- <a class="btn btn-danger me-md-2 px-5" href="{{ route('product.export') }}">Tải file PDF</a> --}}
+                        <a class="btn btn-danger me-md-2 px-5" href="{{ route('product.export', $details->product_id) }}">Tải file PDF</a>
+                        <button class="btn btn-outline-danger me-md-2" type="button">Về danh sách</button>
+                        <button class="btn btn-danger  px-5" type="button" data-bs-toggle="modal"
+                            data-bs-target="#addDetailProduct">Thêm chi tiết</button>
+                    </div>
                 </div>
 
+                {{-- Modal thêm chi tiết sản phẩm --}}
+                <div class="modal fade" id="addDetailProduct" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header text-center">
+                                <h5 class="modal-title w-100" id="exampleModalLabel">Thêm chi tiết sản phẩm</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <form id="addForm" method="POST" action="{{ route('product.create', ['id' => $product->id]) }}" enctype="multipart/form-data">
+                                @csrf
+                                <div class="modal-body">
+                                    <div class="row mb-3">
+                                        {{-- Giá bán --}}
+                                        <div class="col-md-12 mb-3">
+                                            <div class="card-title fs-4">1. Giá bán</div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <input type="number" name="price" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" title="Nhập giá tiền" placeholder="Nhập giá tiền"
+                                                class="form-control">
+                                        </div>
 
+                                        {{-- Mô tả --}}
+                                        <div class="col-md-12 mb-3">
+                                            <div class="card-title fs-4">2. Mô tả</div>
+                                        </div>
+
+                                        <div class="col-md-12 mb-3">
+                                            <textarea type="text" name="description" data-bs-toggle="tooltip" data-bs-placement="top" title="Mô tả"
+                                                placeholder="Nhập mô tả" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="row g-2 mb-3" id="specifications">
+                                        {{-- Thông số kỹ thuật --}}
+                                        <div class="col-md-12 mb-3">
+                                            <div class="card-title fs-4">3. Thông số kỹ thuật</div>
+                                        </div>
+
+
+                                        <div class="col-md-4 mb-3">
+                                            <div class="d-flex align-items-center">
+
+                                                <input type="text" name="data[0][key3]" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" title="Thông số" placeholder="Thông số"
+                                                    class="form-control">
+                                                <i class="bi bi-plus fs-4 ms-2 add-spec"
+                                                    style="cursor: pointer; color: var(--primary-color)"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        {{-- Hình ảnh --}}
+                                        <div class="col-md-12 mb-3">
+                                            <div class="card-title fs-4">5. Hình ảnh</div>
+                                        </div>
+
+                                        <div class="col-12 col-md-12">
+                                            <div class="upload_wrapper-items">
+                                                <div class="alert alert-danger alertNotSupport" role="alert"
+                                                    style="display:none">
+                                                    File bạn tải lên hiện tại không hỗ trợ !
+                                                </div>
+                                                <div class="modal_upload-wrapper">
+                                                    <label class="modal_upload-label" for="file">
+                                                        Tải ảnh sản phẩm tại đây</label>
+                                                    <div class="mt-2 text-secondary fst-italic">Hỗ trợ định
+                                                        dạng
+                                                        JPG hoặc
+                                                        PNG kích
+                                                        thước tệp không quá 10MB
+                                                    </div>
+                                                    <div
+                                                        class="modal_upload-action mt-3 d-flex align-items-center justify-content-center">
+                                                        <div class="modal_upload-addFile me-3">
+                                                            <label for="fileInput" id="fileButton" class="btn position-relative border d-flex w-500">
+                                                                <img src="{{ asset('assets/img/upload-file.svg') }}" />
+                                                                <span class="ps-2">Đính kèm  ảnh sản phẩm</span>
+                                                            </label>
+                                                                <input accept="image/jpeg,image/png" id="fileInput" multiple role="button" type="file"
+                                                             class="modal_upload-input modal_upload-file" name="files[]" onchange="updateList(event)" />
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div id="preview" class="d-flex mt-3"></div>
+                                                        {{-- <ul id="attachments" class="file-list" style="padding: 0 0 4px 0; word-break: break-all;"></ul> --}}
+                                                </div>
+                                                <ul class="modal_upload-list"
+                                                    style="max-height: 134px; overflow-y: scroll; overflow-x: hidden;">
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-md-12">
+                                            <div class="input-group align-items-center">
+                                                {{-- <input type="file" class="form-control" id="attachment"
+                                                    name="attachments[]" style="display: none"> --}}
+
+                                                <i class="bi bi-link-45deg fs-3 fw-bold"
+                                                    style="color: var(--primary-color)"></i>
+                                                <label class="input-label fs-4 fw-bold ms-2" for="attachment"
+                                                    style="cursor: pointer;color: var(--primary-color)">Đính kèm
+                                                    file</label>
+                                                    <input accept=".pdf,.xlsx,.docx" id="attachment" multiple role="button" type="file"
+                                                    class="modal_upload-input modal_upload-file" name="attachments[]" onchange="updateList(event)" />
+                                            </div>
+                                            <ul id="attachments" class="file-list" style="padding: 0 0 4px 0; word-break: break-all;"></ul>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-danger me-3"
+                                        data-bs-dismiss="modal">Hủy</button>
+                                    <button type="submit" class="btn btn-danger">Lưu</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
             @include('template.footer.footer')
         </div>
@@ -619,7 +758,56 @@
             captionText.innerHTML = dots[slideIndex - 1].alt;
         }
     </script>
+        {{-- Modal thêm sản phẩm liên quan --}}
+        <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h5 class="modal-title w-100" id="exampleModalLabel">Link sản phẩm liên quan</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="POST" action="{{ route('product.related', ['id' => $product->id]) }}">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-sm-12 d-flex align-items-center pb-3 mt-2">
+                                    <div class="d-flex align-items-center">
+                                        <div class="card-title">Chọn sản phẩm liên quan</div>
+                                    </div>
 
+                                    <div class="col-sm-7" style="padding-left: 10px">
+                                        <div data-bs-toggle="tooltip" data-bs-placement="top" title="Sản phẩm">
+                                            <select class="selectpicker" data-dropup-auto="false" data-width="100%"
+                                                data-live-search="true" title="Chọn sản phẩm ..."
+                                                data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
+                                                data-size="3" name="related[]" data-live-search-placeholder="Tìm kiếm..."
+                                                multiple>
+
+                                                @forelse ($other_product as $op)
+                                                    <option value="{{ $op->id }}"
+                                                        @if (!empty($details->related) && in_array($op->id, json_decode($details->related, true))) selected @endif>{{ $op->name }}
+                                                        -
+                                                        {{ $op->code }}</option>
+                                                @empty
+                                                    <option value="" selected disabled>Chưa có sản phẩm nào để chọn
+                                                    </option>
+                                                @endforelse
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
+                            <button type="submit" class="btn btn-danger">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
 
 
@@ -656,4 +844,37 @@
 
 
 
+<script>
+    $(document).ready(function() {
+        $('#attachment').on('change', function(e) {
+            $('#attachments').empty();
+            var attachments = e.target.attachments;
+            for (var i = 0; i < attachments.length; i++) {
+                // console.log("ádas");
+                var attachment = attachments[i];
+
+                    var li = document.createElement('li');
+                    li.innerHTML = `
+                        <span class="fs-5">
+                            <i class="bi bi-link-45deg"></i> ${attachment.name}
+                        </span>
+                        <span class="modal_upload-remote" onclick="removeFileFromFileList(this)">
+                            <img style="width:18px;height:18px" src="{{ asset('assets/img/trash.svg') }}" />
+                        </span>
+                    `;
+                    $('#attachments').append(li);
+            }
+        });
+    });
+
+    function removeFileFromFileList(deleteButton) {
+        var liEl = deleteButton.parentNode;
+        var fileList = document.querySelectorAll('.file-list li');
+        var index = Array.prototype.indexOf.call(fileList, liEl);
+
+        if (index >= 0) {
+            liEl.remove();
+        }
+    }
+</script>
 @endsection

@@ -362,7 +362,6 @@ class ProductController extends Controller
      $pdf = PDF::loadView('pdf.chi_tiet_san_pham_pdf',[
         "product"=> $product,
         "details"=> $details,
-
         "combinedData"=>$combinedData,
         "productLQ"=>$productLQ,
         "other_product"=>$other_product

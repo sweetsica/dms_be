@@ -108,7 +108,6 @@ class PositionController extends Controller
         $pack  = $request->get('pack');
         $wage  = $request->get('wage');
         $description  = $request->get('description');
-        $manage  = $request->get('manage');
         $data = new Position();
         $data->name = $name;
         $data->parent=$parent;
@@ -118,7 +117,6 @@ class PositionController extends Controller
         $data->personnel_level=$personnel_level;
         $data->pack=$pack;
         $data->wage=$wage;
-        $data->manage=$manage;
         $data->description=$description;
         $data->save();
         return back();
@@ -134,7 +132,6 @@ class PositionController extends Controller
         $personnel_level  = $request->get('personnel_level');
         $pack  = $request->get('pack');
         $wage  = $request->get('wage');
-        $manage  = $request->get('manage');
         $description  = $request->get('description');
         $data = Position::find($id);
         $data->name = $name;
@@ -145,7 +142,6 @@ class PositionController extends Controller
         $data->personnel_level=$personnel_level;
         $data->pack=$pack;
         $data->wage=$wage;
-        $data->manage=$manage;
         $data->description=$description;
         $data->save();
         return redirect()->route('position.index');
