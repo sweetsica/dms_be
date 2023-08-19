@@ -56,41 +56,18 @@
                                                     </div>
                                                 @endif
                                             </div>
-                                            <form id="select-form" action="{{ route('Personnel.delete') }}"
-                                            method="POST">
-                                            @csrf
-                                        <div class="action_export mx-3 order-md-1" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Xóa">
-                                            <button class="btn btn-danger  " type="submit"
-                                                onclick="return confirm('Bạn có muốn xóa không?')"
-                                                id="delete-selected-button" style="display: none;">Xóa</button>
-                                        </div><br>
-                                            <div class="table-responsive">
-                                                <table id="dsDaoTao"
-                                                    class="table table-responsive table-hover table-bordered filter">
-                                                    <thead>
-                                                        <tr>
-                                                            <th class="text-nowrap text-center" style="width:2%">STT</th>
-                                                            <th class="text-nowrap">Mã nhân sự</th>
-                                                            <th class="text-nowrap">Tên nhân sự</th>
-                                                            <th class="text-nowrap">Đơn vị công tác (phòng ban)</th>
-                                                            <th class="text-nowrap">Vị trí/ chức danh</th>
-                                                            <th class="text-nowrap">Cấp nhân sự</th>
-                                                            <th class="text-nowrap">Vai trò</th>
-                                                            <th class="text-nowrap">Địa bàn</th>
-                                                            <th class="text-nowrap">Email</th>
-                                                            <th class="text-nowrap">Số điện thoại</th>
-                                                            <th class="text-nowrap">Hình thức</th>
-                                                            <th class="text-nowrap">Trạng thái</th>
-                                                            @if (session('user')['role_id'] == '1')
-                                                                <th class="text-nowrap text-center"><span>Hành động</span>
-                                                                </th>
-                                                            @endif
-                                                        </tr>
-                                                    </thead>
-                                                    <?php $a = 1; ?>
-                                                    @foreach ($personnelList as $item)
-                                                        <tbody>
+                                            <form id="select-form" action="{{ route('Personnel.delete') }}" method="POST">
+                                                @csrf
+                                                <div class="action_export mx-3 order-md-1" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" title="Xóa">
+                                                    <button class="btn btn-danger  " type="submit"
+                                                        onclick="return confirm('Bạn có muốn xóa không?')"
+                                                        id="delete-selected-button" style="display: none;">Xóa</button>
+                                                </div><br>
+                                                <div class="table-responsive">
+                                                    <table id="dsDaoTao"
+                                                        class="table table-responsive table-hover table-bordered filter">
+                                                        <thead>
                                                             <tr>
                                                                 <th class="text-nowrap text-center" style="width:2%">STT
                                                                 </th>
@@ -106,14 +83,15 @@
                                                                 <th class="text-nowrap">Hình thức</th>
                                                                 <th class="text-nowrap">Trạng thái</th>
                                                                 @if (session('user')['role_id'] == '1')
-                                                                    <th class="text-nowrap"><span>Hành động</span>
+                                                                    <th class="text-nowrap text-center"><span>Hành
+                                                                            động</span>
                                                                     </th>
                                                                 @endif
                                                             </tr>
                                                         </thead>
-                                                        <?php $a = 1; ?>
-                                                        @foreach ($personnelList as $item)
-                                                            <tbody>
+                                                        <tbody>
+                                                            <?php $a = 1; ?>
+                                                            @foreach ($personnelList as $item)
                                                                 <tr>
                                                                     <td class=" text-center">
                                                                         {{ $a++ }}
@@ -232,8 +210,8 @@
                                                                         </td>
                                                                     @endif
                                                                 </tr>
-                                                            </tbody>
-                                                        @endforeach
+                                                            @endforeach
+                                                        </tbody>
                                                     </table>
                                                     {{-- {{ $personnelList->appends([
                                                         'search' => $search,
@@ -833,12 +811,12 @@
                                 <div data-bs-toggle="tooltip" data-bs-placement="top"
                                     data-bs-original-title="Lọc theo trạng thái">
                                     <select id="select-status" class="selectpicker select_filter"
-                                    data-dropup-auto="false" title="Lọc theo trạng thái" name='trang_thai'>
-                                    {{-- @foreach ($personnel as $item) --}}
+                                        data-dropup-auto="false" title="Lọc theo trạng thái" name='trang_thai'>
+                                        {{-- @foreach ($personnel as $item) --}}
                                         <option value="Đang làm việc">Đang làm việc</option>
                                         <option value="Đã nghỉ việc">Đã nghỉ việc</option>
-                                    {{-- @endforeach --}}
-                                </select>
+                                        {{-- @endforeach --}}
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -862,10 +840,8 @@
 
     <!-- Chart Js -->
     <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chart.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-stacked100@1.0.0.js') }}">
-    </script>
-    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-datalabels@2.0.0.js') }}">
-    </script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-stacked100@1.0.0.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-datalabels@2.0.0.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_khachHangActive.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_khachHangMoi.js') }}"></script>

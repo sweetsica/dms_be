@@ -425,7 +425,9 @@
                     </div>
 
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button class="btn btn-danger me-md-2 px-5" type="button">In</button>
+                        {{-- <button class="btn btn-danger me-md-2 px-5" type="button">In</button> --}}
+                        {{-- <a class="btn btn-danger me-md-2 px-5" href="{{ route('product.export') }}">Tải file PDF</a> --}}
+                        <a class="btn btn-danger me-md-2 px-5" href="{{ route('product.export', $details->product_id) }}">Tải file PDF</a>
                         <button class="btn btn-outline-danger me-md-2" type="button">Về danh sách</button>
                         <button class="btn btn-danger  px-5" type="button" data-bs-toggle="modal"
                             data-bs-target="#addDetailProduct">Thêm chi tiết</button>
