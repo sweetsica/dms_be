@@ -577,20 +577,20 @@
                             </div>
                             {{-- <div class="col-6 mb-3"> --}}
                             {{-- <input name="pack" type="text"
-                    placeholder="Gói trang bị"
-                    class="form-control"
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="top"
-                    title="Gói trang bị"
-                    value="{{ $item->pack }}"> --}}
+                placeholder="Gói trang bị"
+                class="form-control"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="Gói trang bị"
+                value="{{ $item->pack }}"> --}}
                             {{-- <div data-bs-toggle="tooltip" data-bs-placement="top" title="Gói trang bị">
-                                <select disabled name="pack" class="selectpicker" data-dropup-auto="false">
-                                    <option value="{{ $item->pack }}">
-                                        {{ $item->pack }}
-                                    </option>
-                                </select>
-                            </div>
-                        </div> --}}
+                            <select disabled name="pack" class="selectpicker" data-dropup-auto="false">
+                                <option value="{{ $item->pack }}">
+                                    {{ $item->pack }}
+                                </option>
+                            </select>
+                        </div>
+                    </div> --}}
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Hình thức làm việc">
                                     <select disabled name="working_form" class="selectpicker" data-dropup-auto="false"
