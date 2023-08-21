@@ -48,7 +48,7 @@
                     <div class="ui styled accordion mb-5">
                         <div class="title active d-flex align-items-center justify-content-between"
                             style="background: #EBEBEB">
-                            <span class="fs-4 text-default fw-bold">Cơ cấu tổ chức</span>
+                            <span class="fs-4 text-default fw-bold">Cơ cấu địa bàn</span>
                             <i class="dropdown icon fs-5"></i>
                         </div>
                         <div class="content">

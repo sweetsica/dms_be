@@ -134,33 +134,35 @@
                                                                   action="{{ route('CustomerGroup.update', $item->id) }}"
                                                                   >
                                                                       @csrf
-                                                                      <div class="modal-body">
-                                                                          <div class="row">
-                                                                              <div class="col-6 mb-3">
-                                                                                  <input data-bs-toggle="tooltip"
-                                                                                      data-bs-placement="top" required
-                                                                                      title="Nhập tên nhóm khách hàng*" name="name"
-                                                                                      type="text" placeholder="Nhập tên nhóm khách hàng*"
-                                                                                      class="form-control"
-                                                                                      value="{{$item->name}}">
-                                                                              </div>
-                                                                              <div class="col-6 mb-3">
-                                                                                  <input data-bs-toggle="tooltip" required
-                                                                                      data-bs-placement="top"
-                                                                                      title="Nhập mã nhóm khách hàng*" name="code"
-                                                                                      type="text" placeholder="Nhập mã nhóm khách hàng*"
-                                                                                      class="form-control"
-                                                                                      value="{{$item->code}}">
-                                                                              </div>
-                                                                              <div class="col-6 mb-3">
-                                                                                  <div data-bs-toggle="tooltip" data-bs-placement="top" >
-                                                                                      <textarea name="description" type="text" placeholder="Mô tả"
-                                                                                          class="form-control " data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                                          title="Mô tả" style="width: 450px;height: 80px;">{{ $item->description }}</textarea>
-                                                                                  </div>
-                                                                              </div>
-                                                                          </div>
-                                                                      </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="row">
+                                                                                <div class="col-6 mb-3">
+                                                                                    <input data-bs-toggle="tooltip"
+                                                                                        data-bs-placement="top" required
+                                                                                        title="Nhập tên nhóm khách hàng*" name="name"
+                                                                                        type="text" placeholder="Nhập tên nhóm khách hàng*"
+                                                                                        class="form-control"
+                                                                                        value="{{$item->name}}">
+                                                                                </div>
+                                                                                <div class="col-6 mb-3">
+                                                                                    <input data-bs-toggle="tooltip" required
+                                                                                        data-bs-placement="top"
+                                                                                        title="Nhập mã nhóm khách hàng*" name="code"
+                                                                                        type="text" placeholder="Nhập mã nhóm khách hàng*"
+                                                                                        class="form-control"
+                                                                                        value="{{$item->code}}">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col">
+                                                                                    <div data-bs-toggle="tooltip" data-bs-placement="top" >
+                                                                                        <textarea name="description" type="text" placeholder="Mô tả"
+                                                                                            class="form-control " data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                                            title="Mô tả" style="height: 80px;">{{ $item->description }}</textarea>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                       <div class="modal-footer">
                                                                           <button type="button"
                                                                               class="btn btn-outline-danger"
@@ -244,17 +246,20 @@
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Nhập mã nhóm khách hàng*">
                             </div>
-                            <div class="col-6 mb-3">
+                        </div>
+                        <div class="row">
+                            <div class="col">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top">
                                     <textarea name="description" type="text" placeholder="Mô tả" class="form-control " data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Mô tả" style="width: 450px;height: 80px;"></textarea>
+                                        data-bs-placement="top" title="Mô tả" style="height: 80px;"></textarea>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-danger"
-                                    data-bs-dismiss="modal">Hủy</button>
-                                <button type="submit" class="btn btn-danger">Tạo</button>
-                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger"
+                                data-bs-dismiss="modal">Hủy</button>
+                            <button type="submit" class="btn btn-danger">Tạo</button>
+                        </div>  
                 </form>
             </div>
         </div>

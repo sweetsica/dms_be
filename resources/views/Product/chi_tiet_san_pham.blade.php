@@ -428,12 +428,11 @@
                         {{-- <button class="btn btn-danger me-md-2 px-5" type="button">In</button> --}}
                         {{-- <a class="btn btn-danger me-md-2 px-5" href="{{ route('product.export') }}">Tải file PDF</a> --}}
                         <a class="btn btn-danger me-md-2 px-5" href="{{ route('product.export', $details->product_id) }}">Tải file PDF</a>
-                        <button class="btn btn-outline-danger me-md-2" type="button">Về danh sách</button>
+                        <a class="btn btn-outline-danger me-md-2" href="/danh-sach-san-pham">Về danh sách</a>
                         <button class="btn btn-danger  px-5" type="button" data-bs-toggle="modal"
                             data-bs-target="#addDetailProduct">Thêm chi tiết</button>
                     </div>
                 </div>
-
                 {{-- Modal thêm chi tiết sản phẩm --}}
                 <div class="modal fade" id="addDetailProduct" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
