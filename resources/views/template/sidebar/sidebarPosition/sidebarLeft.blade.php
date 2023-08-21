@@ -36,13 +36,13 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <li>
+                                    {{-- <li>
                                         <a href="{{ route('Personnel.indexvtri') }} " style="padding-left:10px;">
                                             <div class="d-flex align-items-center item-accordion fs-4 p-3 rounded">
                                                 Cơ cấu chức danh
                                             </div>
                                         </a>
-                                    </li>
+                                    </li> --}}
                                     <li>
                                         <a href="{{ route('Personnel.indexDiaBan') }}" style="padding-left:10px;">
                                             <div class="d-flex align-items-center item-accordion fs-4 p-3 rounded">
@@ -77,6 +77,7 @@
         </span>
     </div>
 </div>
+
 
 <style>
     ul {

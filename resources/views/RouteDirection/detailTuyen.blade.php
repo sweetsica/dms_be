@@ -164,7 +164,14 @@
                         <div class="card-body card-warpper">
                             <div>
                                 <div class="container">
-                                    <h1 class="fw-bold text-default">{{ $route->name }} - {{ $route->code }}</h1>
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <h1 class="fw-bold text-default">{{ $route->name }} - {{ $route->code }}</h1>
+                                        <button class="btn btn-danger">
+                                            <a href="{{ route('routeDirection.view') }}" class="text-white">
+                                                Về danh sách
+                                            </a>
+                                        </button>
+                                    </div>
                                     <div class="row">
                                         <div class="col-lg-4">
                                             <div class="ui styled accordion mb-5">
@@ -279,7 +286,8 @@
                                                                     <td class="text-nowrap">
                                                                         <div class="text-nowrap d-block text-truncate"
                                                                             style="max-width:565px;"
-                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                            data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
                                                                             title="{{ $cus->person->name ?? '' }} - {{ $cus->person->code ?? '' }}">
                                                                             {{ $cus->person->name ?? '' }} -
                                                                             {{ $cus->person->code ?? '' }}
@@ -370,4 +378,4 @@
                 $('.ui.accordion').accordion();
             });
         </script>
-@endsection
+    @endsection

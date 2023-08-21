@@ -36,13 +36,13 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <li>
+                                    {{-- <li>
                                         <a href="{{ route('Personnel.indexvtri') }} " style="padding-left:10px;">
                                             <div class="d-flex align-items-center item-accordion fs-4 p-3 rounded">
                                                 Cơ cấu chức danh
                                             </div>
                                         </a>
-                                    </li>
+                                    </li> --}}
                                     <li>
                                         <a href="{{ route('Personnel.indexDiaBan') }}" style="padding-left:10px;">
                                             <div class="d-flex align-items-center item-accordion fs-4 p-3 rounded">
@@ -56,9 +56,9 @@
                     </div>
                     <br>
                     <div class="wapper-tree">
-                        <ul id="tree1">
+                        <ul id="tree1" style="overflow: scroll">
                             @foreach ($departmentListTree as $donVi)
-                                <li data-id="{{ $donVi->id }}">
+                                <li data-id="{{ $donVi->id }}" style="width: max-content">
                                     <a href="{{ route('department.index2', ['department_id' => $donVi->id]) }}"
                                         class="title-child">{{ $donVi->name }}</a>
                                     @if ($donVi->donViCon->count() > 0)
