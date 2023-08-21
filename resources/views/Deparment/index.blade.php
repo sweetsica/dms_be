@@ -703,31 +703,20 @@
                 </div>
 
                 <form action="" method="GET">
-                    {{-- @foreach (request()->query() as $key => $value)
-                        @if (!in_array($key, ['don_vi_me']))
-                            <input type="hidden" name="{{ $key }}" value="{{ $value }}">
-                        @endif
-                    @endforeach --}}
+
                     <div class="modal-body">
                         <div class="row">
-                            {{-- <div class="col-12 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top"
-                                    data-bs-original-title="Lọc theo trưởng đơn vị">
-                                    <select id="select-status" class="selectpicker select_filter"
-                                        data-dropup-auto="false" title="Lọc theo trưởng đơn vị" name='leader_name'>
-                                        @foreach ($UnitLeaderList as $item)
-                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div> --}}
+
                             <div class="col-12 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top"
                                     data-bs-original-title="Lọc theo đơn vị mẹ">
+
                                     <select id="select-status" class="selectpicker select_filter"
                                         data-dropup-auto="false" title="Lọc theo đơn vị mẹ" name='don_vi_me'>
                                         @foreach ($departmentList as $item)
-                                            <option value="{{ $item->parent }}">{{ $item->parent }}</option>
+                                        @if ($item->donvime)
+                                            <option value="{{ $item->parent}}">{{ $item->donvime->name}}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>

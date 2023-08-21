@@ -37,10 +37,10 @@ class DepartmentController extends Controller
             $query->where("department.name", "like", "%$search%");
         }
         if ($don_vi_me != NULL) {
-            $query->where("department.name", "like", "%$don_vi_me%");
+            $query->where("department.parent", "like", "%$don_vi_me%");
         }
-        if ($leader_name != NULL) {
-            $query->where("personnel.name", "like", "%$leader_name%");
+        if ($search != NULL) {
+            $query->orWhere("personnel.name", "like", "%$search%");
         }
         $departmentList = $query->paginate(15);
         // dd($departmentList);
@@ -101,15 +101,15 @@ class DepartmentController extends Controller
                 'department.ib_lead',
                 'personnel.name as leader_name'
             );
-        if ($search != NULL) {
-            $query->where("department.name", "like", "%$search%");
-        }
-        if ($don_vi_me != NULL) {
-            $query->where("department.name", "like", "%$don_vi_me%");
-        }
-        if ($search != NULL) {
-            $query->where("personnel.name", "like", "%$search%");
-        }
+        // if ($search != NULL) {
+        //     $query->where("department.code", "like", "%$search%");
+        // }
+        // if ($don_vi_me != NULL) {
+        //     $query->where("department.name", "like", "%$don_vi_me%");
+        // }
+        // if ($search != NULL) {
+        //     $query->where("personnel.name", "like", "%$search%");
+        // }
         $departmentList = $query->paginate(15);
         // dd($departmentList);
         $UnitLeaderList = Personnel::all();
@@ -122,7 +122,7 @@ class DepartmentController extends Controller
         $listPosToDept = [];
         if ($department_id) {
             $getDept = Department::with('areas')->find($department_id);
-            $listPosToDept = Position::with('levels')->where('department_id', $department_id)->get();
+            $listPosToDept = Position::with('levels')->where('department_id', $department_id)->where("position.code", "like", "%$search%")->get();
         }
         $personnelLevelList = PersonnelLevel::all();
         $positionlists = $this->getPosition();

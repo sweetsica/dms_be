@@ -214,33 +214,6 @@
 
                                             <div class="mb-2">
                                                 <div class="row ">
-                                                    {{-- <div class="col-lg-4 mb-3">
-                                                        <a href="#"
-                                                            class="text-color_pimary d-flex align-items-center">
-                                                            <img src="{{ asset('assets/img/icon-pdf.png') }}"
-                                                                class="img img-thumbnail"
-                                                                style="width:30%; border:none" />
-                                                            <span class="fw-bold fs-6">BaoGia.pdf</span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-lg-4 mb-3">
-                                                        <a href="#"
-                                                            class="text-color_pimary d-flex align-items-center">
-                                                            <img src="{{ asset('assets/img/icon-pdf.png') }}"
-                                                                class="img img-thumbnail"
-                                                                style="width:30%; border:none" />
-                                                            <span class="fw-bold fs-6">ThietKe.pdf</span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-lg-4 mb-3">
-                                                        <a href="#"
-                                                            class="text-color_pimary d-flex align-items-center">
-                                                            <img src="{{ asset('assets/img/icon-pdf.png') }}"
-                                                                class="img img-thumbnail"
-                                                                style="width:30%; border:none" />
-                                                            <span class="fw-bold fs-6">ChaoHang.pdf</span>
-                                                        </a>
-                                                    </div> --}}
                                                     @if (!empty(json_decode($details->attachments)))
                                                         @foreach (json_decode($details->attachments) as $key => $file)
                                                             <div class="col-lg-4 mb-3">
@@ -423,6 +396,38 @@
                             </div>
                         </div>
                     </div>
+                    @if (isset($relatedProducts))
+                    @foreach ($relatedProducts as $related)
+                        {{-- delete --}}
+                        <div class="modal fade" id="xoaSanPham{{ $related->id }}" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <form method="POST" action="{{ route('product.deleted', ['id' => $related->id]) }}">
+                                    @csrf
+                                    <input type="hidden" name="detail_id" value="{{ $details->id }}">
+                                    <div class="modal-content">
+                                        <div class="modal-header text-center">
+                                            <h5 class="modal-title w-100" id="exampleModalLabel">
+                                                XOÁ</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="fs-5">Bạn có thực sự muốn xoá sản phẩm liên quan
+                                                này không?</div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-danger"
+                                                data-bs-dismiss="modal">Hủy</button>
+                                            <button type="submit" class="btn btn-danger" id="deleteRowElement">Có, tôi muốn
+                                                xóa</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
 
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         {{-- <button class="btn btn-danger me-md-2 px-5" type="button">In</button> --}}
@@ -430,7 +435,7 @@
                         <a class="btn btn-danger me-md-2 px-5" href="{{ route('product.export', $details->product_id) }}">Tải file PDF</a>
                         <button class="btn btn-outline-danger me-md-2" type="button">Về danh sách</button>
                         <button class="btn btn-danger  px-5" type="button" data-bs-toggle="modal"
-                            data-bs-target="#addDetailProduct">Thêm chi tiết</button>
+                            data-bs-target="#addDetailProduct">Thêm - sửa chi tiết</button>
                     </div>
                 </div>
 
@@ -457,7 +462,7 @@
                                         <div class="col-md-4 mb-3">
                                             <input type="number" name="price" data-bs-toggle="tooltip"
                                                 data-bs-placement="top" title="Nhập giá tiền" placeholder="Nhập giá tiền"
-                                                class="form-control">
+                                                class="form-control" value="{{$details->price}}">
                                         </div>
 
                                         {{-- Mô tả --}}
@@ -467,7 +472,7 @@
 
                                         <div class="col-md-12 mb-3">
                                             <textarea type="text" name="description" data-bs-toggle="tooltip" data-bs-placement="top" title="Mô tả"
-                                                placeholder="Nhập mô tả" class="form-control"></textarea>
+                                                placeholder="Nhập mô tả" class="form-control">{{$details->description}}</textarea>
                                         </div>
                                     </div>
 
@@ -476,17 +481,23 @@
                                         <div class="col-md-12 mb-3">
                                             <div class="card-title fs-4">3. Thông số kỹ thuật</div>
                                         </div>
+                                        @foreach ($combinedData as $data)
                                         <div class="col-md-4 mb-3">
                                             <select name="data[0][key1]" class="selectpicker" data-dropup-auto="false"
-                                                data-width="100%" title="Chọn nhóm thông số" data-size="3">
+                                                data-width="100%"  data-size="3">
+
+                                                <option>{{$data->key1}}</option>
+
                                                 @foreach ($TechnicalSpecificationsGroupList as $item)
                                                     <option value="{{ $item->name }}">{{ $item->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
+
                                         <div class="col-md-4 mb-3">
                                             <select name="data[0][key2]" class="selectpicker" data-dropup-auto="false"
-                                                data-width="100%" title="Chọn thông số" data-size="3">
+                                                data-width="100%"  data-size="3">
+                                                <option>{{$data->key2}}</option>
                                                 @foreach ($SpecificationsList as $item)
                                                     <option value="{{ $item->name }}">{{ $item->name }}</option>
                                                 @endforeach
@@ -497,11 +508,12 @@
 
                                                 <input type="text" name="data[0][key3]" data-bs-toggle="tooltip"
                                                     data-bs-placement="top" title="Thông số" placeholder="Thông số"
-                                                    class="form-control">
+                                                    class="form-control" value="{{$data->key3}}">
                                                 <i class="bi bi-plus fs-4 ms-2 add-spec"
                                                     style="cursor: pointer; color: var(--primary-color)"></i>
                                             </div>
                                         </div>
+                                        @endforeach
                                     </div>
 
                                     <div class="row">
@@ -537,10 +549,17 @@
                                                                 role="button" type="file"
                                                                 class="modal_upload-input modal_upload-file"
                                                                 name="files[]" onchange="updateList(event)" />
-
                                                         </div>
-
                                                     </div>
+                                                    @if (!empty(json_decode($details->images)))
+                                                    <div class="d-flex mt-3">
+                                                                @foreach (json_decode($details->images) as $key => $img)
+                                                                        <img  class="d-flex mt-3"
+                                                                            src="{{ $img }}" style="width:25%; display: flex"
+                                                                            alt="Mountains and fjords"> &nbsp;&nbsp;&nbsp;
+                                                                @endforeach
+                                                            </div>
+                                                            @endif
                                                     <div id="preview" class="d-flex mt-3"></div>
                                                     {{-- <ul id="attachments" class="file-list" style="padding: 0 0 4px 0; word-break: break-all;"></ul> --}}
                                                 </div>
@@ -564,11 +583,22 @@
                                                     type="file" class="modal_upload-input modal_upload-file"
                                                     name="attachments[]" onchange="updateAttachments(event)" />
                                             </div>
+                                            @if (!empty(json_decode($details->attachments)))
+                                            @foreach (json_decode($details->attachments) as $key => $file)
+                                                <div class="col-lg-4 mb-3">
+                                                    <a href="#"
+                                                        class="text-color_pimary d-flex align-items-center">
+                                                        <img src="{{ asset('assets/img/icon-pdf.png') }}"
+                                                            class="img img-thumbnail"
+                                                            style="width:30%; border:none" />
+                                                        <span class="fw-bold fs-6">{{ $file }}</span>
+                                                    </a>
+                                                </div>
+                                            @endforeach
+                                        @endif
                                             <div id="previewAttachments" class="row"></div>
                                         </div>
-
                                     </div>
-
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-outline-danger me-3"

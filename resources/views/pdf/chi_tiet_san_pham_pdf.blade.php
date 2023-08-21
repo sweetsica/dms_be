@@ -337,14 +337,6 @@
                                         <div class="col-md-12 mb-3">
                                             <div class="card-title fs-4">4. Sản phẩm liên quan</div>
                                         </div>
-
-                                        <div class="col-md-4 mb-3">
-                                            <div class="col-12 mt-3">
-                                                <button type="button" class="btn btn-danger d-block"
-                                                    data-bs-toggle="modal" data-bs-target="#add">+ Link sản phẩm liên
-                                                    quan</button>
-                                            </div>
-                                        </div>
                                     </div>
                                     <div class="mb-4">
                                         {{-- <h2 class="text-color_pimary my-4">Sản phẩm liên quan</h2> --}}
