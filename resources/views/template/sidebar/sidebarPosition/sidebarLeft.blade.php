@@ -5,35 +5,9 @@
                 <div class="sidebarBody_wrapper ">
                     <div class="sidebarBody_heading-wrapper  ">
                         <div class="wrapper">
-                            <h1 style="color: red;">Cơ cấu đơn vị<img src="{{ asset('assets/img/Vector.png') }}"
-                                    onclick="showList()" id="show-list-button" style="float: right"></h1>
+                            <h1 style="color: red;">Cơ cấu đơn vị</h1>
                         </div>
-                        <div id="list-container" style="display: none;">
-                            <ul>
-                                <li style=" margin: 5px; padding: 0;">
-                                    <div class="d-flex align-items-center"
-                                        style=" background-color: #EBEBEB; height: 30px; display: flex; font-size: 15px; border-radius: 5px;">
-                                        <a href="{{ route('Personnel.index') }}"
-                                            style="color:black;padding-left:10px;">Cơ cấu tổ chức</a>
-                                    </div>
-                                </li>
-                                <li style=" margin: 5px; padding: 0;">
-                                    <div class="d-flex align-items-center"
-                                        style=" background-color: #EBEBEB; height: 30px; display: flex; font-size: 15px; border-radius: 5px;">
-                                        <a href="{{ route('Personnel.indexvtri') }} "
-                                            style="color:black;padding-left:10px;">Cơ cấu chức danh</a>
-                                    </div>
-                                </li>
-                                <li style=" margin: 5px; padding: 0;">
-                                    <div class="d-flex align-items-center"
-                                        style=" background-color: #EBEBEB; height: 30px; display: flex; font-size: 15px; border-radius: 5px;">
-                                        <a href="{{ route('Personnel.indexDiaBan') }}"
-                                            style="color:black;padding-left:10px;">Cơ
-                                            cấu địa bàn</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+
                     </div>
                     <title>Danh sách vị trí</title>
                     <hr>
@@ -46,9 +20,39 @@
                             </div>
                         </form>
                     </div><br>
-                    <div class="d-flex align-items-center"
-                        style=" background-color: #EBEBEB; height: 40px; display: flex; justify-content: center; font-size: 15px;">
-                        <b>Cơ cấu chức danh</b>
+                    <div class="ui styled accordion mb-5">
+                        <div class="title active d-flex align-items-center justify-content-between"
+                            style="background: #EBEBEB">
+                            <span class="fs-4 text-default fw-bold">Cơ cấu tổ chức</span>
+                            <i class="dropdown icon fs-5"></i>
+                        </div>
+                        <div class="content">
+                            <div id="list-container">
+                                <ul>
+                                    <li>
+                                        <a href="{{ route('Personnel.index') }}" style="padding-left:10px;">
+                                            <div class="d-flex align-items-center item-accordion fs-4 p-3 rounded">
+                                                Cơ cấu tổ chức
+                                            </div>
+                                        </a>
+                                    </li>
+                                    {{-- <li>
+                                        <a href="{{ route('Personnel.indexvtri') }} " style="padding-left:10px;">
+                                            <div class="d-flex align-items-center item-accordion fs-4 p-3 rounded">
+                                                Cơ cấu chức danh
+                                            </div>
+                                        </a>
+                                    </li> --}}
+                                    <li>
+                                        <a href="{{ route('Personnel.indexDiaBan') }}" style="padding-left:10px;">
+                                            <div class="d-flex align-items-center item-accordion fs-4 p-3 rounded">
+                                                Cơ cấu địa bàn
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     <br>
                     <div class="wapper-tree">
@@ -74,6 +78,7 @@
     </div>
 </div>
 
+
 <style>
     ul {
         padding: 0;
@@ -85,12 +90,29 @@
     }
 
     .title-child {
-        font-size: 14px;
+        font-size: 1.2rem;
+        color: black;
+        padding: 5px;
+    }
+
+    .title-child.active {
         color: #ca1f24;
+        font-weight: 700
     }
 
     .title-child:hover {
         color: #ca1f24;
+    }
+
+    .item-accordion {
+        background-color: #EBEBEB;
+        color: black;
+    }
+
+    .item-accordion:hover {
+        background-color: #ca1f24;
+        color: #fff;
+        font-weight: 700;
     }
 
     .tree,
@@ -145,6 +167,14 @@
         color: #ca1f24;
         margin-right: 5px
     }
+
+    .indicator a {
+        color: #ca1f24;
+    }
+
+    .tree li.open>ul {
+        display: block;
+    }
 </style>
 
 @section('script-chart')
@@ -153,24 +183,8 @@
     @endif
 
     <script>
-        // Lấy đối tượng hình ảnh và danh sách "li"
-        const showListButton = document.getElementById('show-list-button');
-        const listContainer = document.getElementById('list-container');
-        // Thêm sự kiện click cho hình ảnh để hiển thị danh sách "li"
-        showListButton.addEventListener('click', () => {
-            // Toggle (bật/tắt) hiển thị của danh sách "li"
-            if (listContainer.style.display === 'none') {
-                listContainer.style.display = 'block';
-            } else {
-                listContainer.style.display = 'none';
-            }
-        });
         $.fn.extend({
             treed: function(o) {
-
-                // var openedClass = 'bi-plus-square';
-                // var closedClass = 'bi-dash-square';
-
                 var openedClass = 'bi-dash-square';
                 var closedClass = 'bi-plus-square';
 
@@ -183,28 +197,26 @@
                     }
                 };
 
-                //initialize each of the top levels
                 var tree = $(this);
                 tree.addClass("tree");
 
                 tree.find('li').has("ul").each(function() {
-                    var branch = $(this); //li with children ul
-
-                    // $(this).children().children().toggle();
-
+                    var branch = $(this);
                     branch.prepend("<i class='indicator bi " + closedClass + "'></i>");
                     branch.addClass('branch');
                     branch.on('click', function(e) {
                         if (this == e.target) {
                             var icon = $(this).children('i');
+                            var a = $(this).children('a');
                             icon.toggleClass(openedClass + " " + closedClass);
+                            a.toggleClass('active')
                             $(this).children().children().toggle();
                         }
                     })
                     branch.children().children().toggle();
                 });
 
-                //fire event from the dynamically added icon
+
                 tree.find('.branch .indicator').each(function() {
                     $(this).on('click', function() {
                         $(this).closest('li').click();
@@ -214,9 +226,7 @@
         });
 
         $(document).ready(function() {
-            console.log("vao day dau tien");
             $("#tree1").children("li:first-child").click();
-            // $("#tree1").children("li:last-child").click();
         })
 
         $('#tree1').treed();
