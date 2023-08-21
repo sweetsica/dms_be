@@ -1,6 +1,6 @@
 @extends('template.master')
 {{-- Trang chủ GIao Ban --}}
-@section('title', 'Đề xuất theo mẫu')
+@section('title', 'Danh sách vai trò')
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 @endsection
@@ -40,15 +40,15 @@
                                                     </form>
                                                 </div>
 
-                                                <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
+                                                {{-- <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
                                                     data-bs-placement="top" title="Lọc">
                                                     <button class="btn btn-outline-danger" data-bs-toggle="modal"
                                                         data-bs-target="#filterOptions">
                                                         <i class="bi bi-funnel"></i>
                                                     </button>
-                                                </div>
+                                                </div> --}}
                                                 @if (session('user')['role_id'] == '1')
-                                                    <div class="action_export order-md-4">
+                                                    <div class="action_export order-md-4" style="margin-left: 12px">
                                                         <button class="btn btn-danger d-block testCreateUser"
                                                             data-bs-toggle="modal" data-bs-target="#taoDeXuat">Thêm vai
                                                             trò</button>
@@ -194,10 +194,12 @@
                                         title="Nhập mã vai trò*" name="code" type="text"
                                         placeholder="Nhập mã vai trò" class="form-control" value="{{ $item->code }}">
                                 </div>
-                                <div class="col-6 mb-3">
+                            </div>
+                        <div class="row">
+                                <div class="col">
                                     <div data-bs-toggle="tooltip" data-bs-placement="top">
                                         <textarea name="description" type="text" placeholder="Chức năng nhiệm vụ" class="form-control "
-                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Mô tả" style="width: 450px;height: 80px;">{{ $item->description }}</textarea>
+                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Mô tả" style="height: 80px;">{{ $item->description }}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -258,17 +260,20 @@
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Nhập mã vai trò*">
                             </div>
-                            <div class="col-6 mb-3">
+                        </div>
+                        <div class="row">
+                            <div class="col">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top">
                                     <textarea name="description" type="text" placeholder="Mô tả" class="form-control " data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Mô tả" style="width: 450px;height: 80px;"></textarea>
+                                        data-bs-placement="top" title="Mô tả" style="height: 80px;"></textarea>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-danger"
-                                    data-bs-dismiss="modal">Hủy</button>
-                                <button type="submit" class="btn btn-danger">Tạo</button>
-                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger"
+                                data-bs-dismiss="modal">Hủy</button>
+                            <button type="submit" class="btn btn-danger">Tạo</button>
+                        </div>
                 </form>
             </div>
         </div>

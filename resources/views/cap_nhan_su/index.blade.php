@@ -40,15 +40,15 @@
                                                     </form>
                                                 </div>
 
-                                                <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
+                                                {{-- <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
                                                     data-bs-placement="top" title="Lọc">
                                                     <button class="btn btn-outline-danger" data-bs-toggle="modal"
                                                         data-bs-target="#filterOptions">
                                                         <i class="bi bi-funnel"></i>
                                                     </button>
-                                                </div>
+                                                </div> --}}
                                                 @if (session('user')['role_id'] == '1')
-                                                    <div class="action_export order-md-4">
+                                                    <div class="action_export order-md-4" style="margin-left: 12px;">
                                                         <button class="btn btn-danger d-block testCreateUser"
                                                             data-bs-toggle="modal" data-bs-target="#taoDeXuat">Thêm cấp nhân
                                                             sự</button>

@@ -4,7 +4,6 @@
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 @endsection
-
 @section('content')
     @include('template.sidebar.sidebarPosition.sidebarLeft')
     <div id="mainWrap" class="mainWrap">
@@ -15,7 +14,15 @@
                         <h5 class="mainSection_heading-title">Danh sách nhân sự</h5>
                         @include('template.components.sectionCard')
                     </div>
+                    @if (session('success'))
+                        <div class="alert alert-success" role="alert"> {{session('success')}} 
+                        </div>
+                    @endif
 
+                    @if (session('error'))
+                        <div class="alert alert-danger" role="alert"> {{session('error')}} 
+                        </div>
+                    @endif
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card mb-3">

@@ -89,7 +89,6 @@
                                                                     name="selected_items[]" value="{{ $item->id }}">
                                                             </td>
                                                             <td>
-                                                            <td>
                                                                 <div class="overText text-center">
                                                                     {{ $a++ }}
                                                                 </div>

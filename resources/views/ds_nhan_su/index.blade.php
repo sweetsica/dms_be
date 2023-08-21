@@ -117,7 +117,7 @@
                                                                             title="{{ $item->name }}">
                                                                             {{ $item->name }}
                                                                         </div>
-                                                                    </td>
+                                                                    </td>                                                                   --}}
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
@@ -542,7 +542,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>        
     @endforeach
 
 
