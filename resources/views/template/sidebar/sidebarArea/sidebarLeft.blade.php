@@ -58,7 +58,7 @@
 
                         <ul id="tree1">
                             @foreach ($areaTree as $vung)
-                                <li><a href="{{ route('Personnel.show.diaban', $vung->id) }}"
+                                <li><a href="{{ route('Personnel.show.vung', $vung->id) }}"
                                         class="title-child">{{ $vung->name }}</a>
                                     {{-- <li><a href="{{ route('Personnel.show.vung',$vung->id) }}" class="title-child">{{ $vung->name }}</a> --}}
                                     @if ($vung->khuVucs->count() > 0)
