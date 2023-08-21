@@ -8,6 +8,7 @@ use App\Models\PersonnelLevel;
 use App\Models\Position;
 use App\Models\UnitLeader;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PositionController extends Controller
 {
@@ -144,13 +145,15 @@ class PositionController extends Controller
         $data->wage=$wage;
         $data->description=$description;
         $data->save();
-        return redirect()->route('position.index');
+        Session::flash('success', 'Sửa thành công');
+        return back();
     }
 
     public function destroy($id)
     {
         Position::destroy($id);
-        return redirect()->back()->with('mess', 'Đã xóa!');
+        Session::flash('success', 'Xóa thành công');
+        return back();
     }
 
     public function delete(Request $request)
@@ -158,7 +161,17 @@ class PositionController extends Controller
 
         $selectedItems = $request->input('selected_items', []);
         Position::whereIn('id', $selectedItems)->delete();
-        return redirect()->back()->with('mess', 'Đã xóa!');
+        Session::flash('success', 'Xoá thành công');
+        return back();
 
+    }
+    public function detach($id)
+    {
+        $position = Position::findOrFail($id);
+        $position->department_id = null;
+        $position->save();
+        
+        Session::flash('success', 'Xoá thành công khỏi phòng ban này');
+        return back();
     }
 }
