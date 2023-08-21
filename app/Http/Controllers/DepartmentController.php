@@ -66,7 +66,7 @@ class DepartmentController extends Controller
         $listUsers = Personnel::all();
 
         return view("Deparment.index", [
-            "Department"=>$Department,
+            "Department" => $Department,
             "departmentList" => $departmentList,
             'don_vi_me' => $don_vi_me,
             'leader_name' => $leader_name,

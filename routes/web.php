@@ -49,10 +49,6 @@ Route::middleware(['guest'])->group(function () {
     Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
 });
 
-Route::get('/test-customer-1', [CustomerTestController::class, 'index1'])->name('index1');
-Route::get('/test-customer-2', [CustomerTestController::class, 'index2'])->name('index2');
-Route::get('/test-customer-3', [CustomerTestController::class, 'index3'])->name('index3');
-
 Route::middleware(['auth.role'])->group(function () {
 
     Route::get('/', function () {
@@ -63,6 +59,8 @@ Route::middleware(['auth.role'])->group(function () {
 
     Route::post('/create-customer', [CustomerController::class, 'create'])->name('create-customer');
 
+    Route::post('/create-customer-simple', [CustomerController::class, 'createSimple'])->name('create-customer-simple');
+
     Route::get('/customer', [CustomerController::class, 'view'])->name('customers');
 
     Route::post('/update-customer/{id}', [CustomerController::class, 'update'])->name('update.customer');
@@ -72,6 +70,8 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('/customer_upload/{id}', [CustomerController::class, 'upload'])->name('customer.upload');
 
     Route::get('/customer/{id}/download/{name}', [CustomerController::class, 'download'])->name('customer.download');
+
+    Route::post('/cmt-customer/{id}', [CustomerController::class, 'cmt'])->name('cmt.customer');
 
     Route::get('chi-tiet-khach-hang/{id}', [CustomerController::class, 'show'])->name('customer-detail.list');
 
@@ -167,7 +167,6 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('cap_nhan_sux/{id}', [PersonnelLevelController::class, 'update'])->name('PersonnelLevel.update');
     Route::post('cap_nhan_su/{id}', [PersonnelLevelController::class, 'destroy'])->name('PersonnelLevelx.destroy');
     Route::post('cap_nhan_su-delete', [PersonnelLevelController::class, 'delete'])->name('PersonnelLevel.delete');
-
 
     Route::get('nhan-su', [PersonnelController::class, 'index'])->name('Personnel.index');
     Route::get('nhan-su-vitri', [PersonnelController::class, 'indexvtri'])->name('Personnel.indexvtri');

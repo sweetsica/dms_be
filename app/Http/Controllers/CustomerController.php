@@ -175,6 +175,80 @@ class CustomerController extends Controller
         }
     }
 
+    public function createSimple(Request $request)
+    {
+        $code = $request->get('code');
+        $name = $request->get('name');
+        $phone = $request->get('phone');
+        $email = $request->get('email');
+        $companyName = $request->get('companyName');
+        $personContact = $request->get('personContact');
+        $personCompany = $request->get('personCompany');
+        $career = $request->get('career');
+        $taxCode = $request->get('taxCode');
+        $companyPhoneNumber = $request->get('companyPhoneNumber');
+        $companyEmail = $request->get('companyEmail');
+        $accountNumber = $request->get('accountNumber');
+        $bankOpen = $request->get('bankOpen');
+        $city = $request->get('city');
+        $district = $request->get('district');
+        $guide = $request->get('guide');
+        $address = $request->get('address');
+        $personId = $request->get('personId');
+        $productId = $request->get('productId');
+        $group = $request->get('group');
+        $chanelId = $request->get('chanelId');
+        $routeId = $request->get('routeId');
+        $status = $request->get('status');
+        $uploadedFiles = $request->file('attachment');
+        $avatar = $request->file('avatar');
+        $data = new Customer();
+        $data->code = $code;
+        $data->name = $name;
+        $data->phone = $phone;
+        $data->email = $email;
+        $data->companyName = $companyName;
+        $data->personCompany = $personCompany;
+        $data->personContact = $personContact;
+        $data->career = $career;
+        $data->taxCode = $taxCode;
+        $data->companyPhoneNumber = $companyPhoneNumber;
+        $data->companyEmail = $companyEmail;
+        $data->accountNumber = $accountNumber;
+        $data->bankOpen = $bankOpen;
+        $data->city = $city;
+        $data->district = $district;
+        $data->guide = $guide;
+        $data->address = $address;
+        $data->personId = $personId;
+        $data->productId = json_encode($productId);
+        $data->group = $group;
+        $data->chanelId = $chanelId;
+        $data->routeId = $routeId;
+        $data->status = $status;
+        $existingFileName = json_decode($data->fileName, true) ?? [];
+        $existingFilePath = json_decode($data->filePath, true) ?? [];
+        if ($uploadedFiles) {
+            foreach ($uploadedFiles as $file) {
+                $path = $file->store('upload', 'public');
+                $existingFileName[] = $file->getClientOriginalName();
+                $existingFilePath[] = $path;
+            }
+        }
+        if ($avatar) {
+            foreach ($avatar as $a) {
+                $path = $a->move(public_path('assets/img/avatar', 'public'));
+                $existingFileName[] = $a->getClientOriginalName();
+                $existingFilePath[] = $path;
+            }
+        }
+        $data->fileName = json_encode($existingFileName);
+        $data->filePath = json_encode($existingFilePath);
+        $data->save();
+        $listData = Customer::all();
+        return redirect()->route('customers', compact('listData'));
+    }
+
     public function create(Request $request)
     {
 
@@ -448,5 +522,15 @@ class CustomerController extends Controller
         $fileIndex = array_search($name, $fileNames);
         $filePath = storage_path('app/public/' . $filePaths[$fileIndex]);
         return response()->download($filePath, $name);
+    }
+
+    public function cmt(Request $request, $id)
+    {
+        $comment = $request->get('comment');
+        $customer = Customer::find($id);
+        $customer->comment = $comment;
+        $customer->save();
+
+        return response()->with('success', 'Bình luận đã được gửi.');
     }
 }

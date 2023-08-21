@@ -19,9 +19,8 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card mb-3">
-                                <div class="card-body">
+                                <div class="card-body position-relative">
                                     <div class='row'>
-
                                         <div class="col-md-12">
                                             <div
                                                 class="action_wrapper d-flex flex-wrap justify-content-between align-items-center mb-3">
@@ -60,7 +59,8 @@
                                                 method="POST">
                                                 @csrf
                                                 <div class="action_export mx-3 order-md-1" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" title="Xóa">
+                                                    data-bs-placement="top" title="Xóa"
+                                                    style="position: absolute; top: 10px; left: 0;">
                                                     <button class="btn btn-danger  " type="submit"
                                                         onclick="return confirm('Bạn có muốn xóa không?')"
                                                         id="delete-selected-button" style="display: none;">Xóa</button>
@@ -170,11 +170,11 @@
 
                                                                             <div
                                                                                 class="table_actions d-flex justify-content-center">
-                                                                                <div class="btn" data-bs-toggle="modal"
+                                                                                {{-- <div class="btn" data-bs-toggle="modal"
                                                                                     data-bs-target="#qrCode">
                                                                                     <i class="bi bi-share-fill"
                                                                                         style="color: #787878;"></i>
-                                                                                </div>
+                                                                                </div> --}}
                                                                                 <div data-bs-toggle="tooltip"
                                                                                     data-bs-placement="top"
                                                                                     title="Sửa ">

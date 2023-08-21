@@ -8,21 +8,21 @@
     </style>
 @endsection
 @php
-
+    
     function getPaginationLink($link, $pageName)
     {
         if (!isset($link['url'])) {
             return '#';
         }
-
+    
         $pageNumber = explode('?page=', $link['url'])[1];
-
+    
         $queryString = request()->query();
-
+    
         $queryString[$pageName] = $pageNumber;
         return route('product.list', $queryString);
     }
-
+    
     // function isFiltering($filterNames)
     // {
     //     $filters = request()->query();
@@ -33,7 +33,7 @@
     //     }
     //     return false;
     // }
-
+    
 @endphp
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
@@ -629,10 +629,10 @@
     <script type="text/javascript" src="{{ asset('/assets/js/components/dataHrefTable.js') }}"></script>
 
     <script>
-        $('#addForm').on('submit', function(e) {
-            $('#addDetailProduct').modal('show');
-            event.preventDefault();
-        });
+        // $('#addForm').on('submit', function(e) {
+        //     $('#addDetailProduct').modal('show');
+        //     event.preventDefault();
+        // });
 
 
         $(document).ready(function() {
