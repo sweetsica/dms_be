@@ -87,8 +87,6 @@
                                                                 <th class="text-nowrap text-center" style="width:20%">Chức
                                                                     năng nhiệm vụ
                                                                 </th>
-                                                                <th class="text-nowrap text-center" style="width:20%">
-                                                                </th>
                                                                 @if (session('user')['role_id'] == '1')
                                                                     <th class="text-nowrap text-center" style="width:1%">
                                                                         <span>Hành
@@ -156,14 +154,6 @@
                                                                             title="{{ $item->description }}">
                                                                             {{ $item->description }}
                                                                         </div>
-                                                                    </td>
-                                                                    <td class="">
-                                                                        <div class="overText" data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top"
-                                                                            title="{{ $item->parent }}">
-                                                                            {{ $item->parent }}
-                                                                        </div>
-
                                                                     </td>
                                                                     @if (session('user')['role_id'] == '1')
                                                                         <td>
