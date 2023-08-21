@@ -161,6 +161,7 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('position/{id}', [PositionController::class, 'update'])->name('position.update');
     Route::post('positionx/{id}', [PositionController::class, 'destroy'])->name('positionx.destroy');
     Route::post('position-delete', [PositionController::class, 'delete'])->name('Position.delete');
+    Route::delete('position/{id}', [PositionController::class, 'detach'])->name('position.detach');
 
     Route::get('cap-nhan-su', [PersonnelLevelController::class, 'index'])->name('PersonnelLevel.index');
     Route::post('cap-nhan-su', [PersonnelLevelController::class, 'store'])->name('PersonnelLevel.store');
