@@ -357,7 +357,7 @@
                                                                                     title="Sửa ">
                                                                                     <div class="btn"
                                                                                         data-bs-toggle="modal"
-                                                                                        data-bs-target="#suaDeXuat{{ $item['id'] }}">
+                                                                                        data-bs-target="#suaDeXuat{{ $item->id }}">
                                                                                         <img style="width:16px;height:16px"
                                                                                             src="{{ asset('assets/img/edit.svg') }}" />
                                                                                     </div>
@@ -404,7 +404,7 @@
     </div>
     @include('template.sidebar.sidebarMaster.sidebarRight')
 
-    @foreach ($departmentList as $item)
+    @foreach ($positionlists as $item)
         {{-- Sửa đề xuất --}}
         <div class="modal fade" id="suaDeXuat{{ $item['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
@@ -502,111 +502,6 @@
                 </div>
             </div>
         </div>
-        <!-- Modal Thêm Tao De Xuat -->
-        <div class="modal fade" id="taoDeXuat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header text-center">
-                        <h5 class="modal-title w-100" id="exampleModalLabel">Thêm mới vị trí/chức danh</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form action="{{ route('position.store') }}" method="POST">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-6 mb-3">
-                                    <input name="name" required type="text"
-                                        placeholder="Nhập tên vị trí/chức danh*" class="form-control"
-                                        data-bs-toggle="tooltip" data-bs-placement="top"
-                                        title="Nhập tên vị trí/chức danh*" required>
-                                </div>
-                                <div class="col-6 mb-3">
-                                    <input name="code" required type="text" placeholder="Nhập mã vị trí/chức danh*"
-                                        class="form-control" data-bs-toggle="tooltip" title="Nhập mã vị trí/chức danh*"
-                                        required>
-                                </div>
-                                <div class="col-6 mb-3">
-                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn đơn vị công tác*">
-                                        <select name="department_id" required class="selectpicker"
-                                            data-dropup-auto="false">
-                                            <option value="">Chọn đơn vị công tác*</option>
-                                            @foreach ($departmentlists as $item)
-                                                @if ($item->id == request()->department_id)
-                                                    <option selected value="{{ $item->id }}">
-                                                        {{ $item->name }}
-                                                    </option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-6 mb-3">
-                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn cấp nhân sự*">
-                                        <select name="personnel_level" required class="selectpicker"
-                                            data-dropup-auto="false">
-                                            <option value="">Chọn cấp nhân sự*</option>
-                                            @foreach ($personnelLevelList as $item)
-                                                <option value="{{ $item->id }}">
-                                                    {{ $item->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-6 mb-3">
-                                    <div data-bs-toggle="tooltip" data-bs-placement="top"
-                                        title="Chọn vị trí cấp quản lý">
-                                        <select name="parent" required class="selectpicker" data-dropup-auto="false">
-                                            <option value="0">Chọn vị trí cấp quản lý</option>
-                                            @foreach ($positionlists as $item)
-                                                <option value="{{ $item->id }}">
-                                                    @php
-                                                        $str = '';
-                                                        for ($i = 0; $i < $item->level; $i++) {
-                                                            echo $str;
-                                                            $str = '  --';
-                                                        }
-                                                    @endphp
-                                                    {{ $item->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-6 mb-3">
-                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn gói trang bị">
-                                        <select name="pack" class="selectpicker" data-dropup-auto="false">
-                                            <option value="">Chọn gói trang bị</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-12 mb-3">
-                                    <div data-bs-toggle="tooltip" data-bs-placement="top">
-                                        <textarea name="description" type="text" placeholder="Mô tả công việc" class="form-control "
-                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Mô tả công việc" style="height: 80px;"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-6 mb-3">
-                                    <input name="staffing" type="text" placeholder="Định biên" class="form-control"
-                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Định biên">
-                                </div>
-                                <div class="col-6 mb-3">
-                                    <input name="wage" type="text" placeholder="Quỹ lương năm"
-                                        class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        title="Quỹ lương năm">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy
-                                    </button>
-                                    <button type="submit" class="btn btn-danger">Tạo</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
 
         {{-- Xóa đề xuất --}}
         <div class="modal fade" id="xoaDeXuat{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -632,8 +527,108 @@
         </div>
     @endforeach
 
-
     <!-- Modal Thêm Tao De Xuat -->
+    <div class="modal fade" id="taoDeXuat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Thêm mới vị trí/chức danh</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('position.store') }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-6 mb-3">
+                                <input name="name" required type="text" placeholder="Nhập tên vị trí/chức danh*"
+                                    class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Nhập tên vị trí/chức danh*" required>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <input name="code" required type="text" placeholder="Nhập mã vị trí/chức danh*"
+                                    class="form-control" data-bs-toggle="tooltip" title="Nhập mã vị trí/chức danh*"
+                                    required>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn đơn vị công tác*">
+                                    <select name="department_id" required class="selectpicker" data-dropup-auto="false">
+                                        <option value="">Chọn đơn vị công tác*</option>
+                                        @foreach ($departmentlists as $item)
+                                            @if ($item->id == request()->department_id)
+                                                <option selected value="{{ $item->id }}">
+                                                    {{ $item->name }}
+                                                </option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn cấp nhân sự*">
+                                    <select name="personnel_level" required class="selectpicker"
+                                        data-dropup-auto="false">
+                                        <option value="">Chọn cấp nhân sự*</option>
+                                        @foreach ($personnelLevelList as $item)
+                                            <option value="{{ $item->id }}">
+                                                {{ $item->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn vị trí cấp quản lý">
+                                    <select name="parent" required class="selectpicker" data-dropup-auto="false">
+                                        <option value="0">Chọn vị trí cấp quản lý</option>
+                                        @foreach ($positionlists as $item)
+                                            <option value="{{ $item->id }}">
+                                                @php
+                                                    $str = '';
+                                                    for ($i = 0; $i < $item->level; $i++) {
+                                                        echo $str;
+                                                        $str = '  --';
+                                                    }
+                                                @endphp
+                                                {{ $item->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn gói trang bị">
+                                    <select name="pack" class="selectpicker" data-dropup-auto="false">
+                                        <option value="">Chọn gói trang bị</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top">
+                                    <textarea name="description" type="text" placeholder="Mô tả công việc" class="form-control "
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Mô tả công việc" style="height: 80px;"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <input name="staffing" type="text" placeholder="Định biên" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Định biên">
+                            </div>
+                            <div class="col-6 mb-3">
+                                <input name="wage" type="text" placeholder="Quỹ lương năm" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Quỹ lương năm">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy
+                                </button>
+                                <button type="submit" class="btn btn-danger">Tạo</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {{-- <!-- Modal Thêm Tao De Xuat -->
     <div class="modal fade" id="taoDeXuat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -704,7 +699,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     {{-- Filter --}}
     {{-- <div class="modal fade" id="filterOptions" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
