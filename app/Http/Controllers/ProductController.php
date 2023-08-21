@@ -352,6 +352,7 @@ class ProductController extends Controller
 
     public function export($id)
     {
+        // set_time_limit(120);
         $product = Product::findOrFail($id);
         $details = ProductDetails::where('product_id', $id)->first();
         $jsonCombinedData = $details->data;
@@ -366,6 +367,8 @@ class ProductController extends Controller
         "productLQ"=>$productLQ,
         "other_product"=>$other_product
      ]);
+
      return $pdf->download('chi_tiet_san_pham_pdf.pdf');
+    //  set_time_limit(30);
     }
 }

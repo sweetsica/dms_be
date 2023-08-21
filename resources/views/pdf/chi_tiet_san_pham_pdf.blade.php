@@ -1,4 +1,4 @@
-{{-- @extends('template.master')
+@extends('template.master')
 @section('title', 'Chi Tiết sản phẩm')
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
@@ -12,116 +12,116 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"
         integrity="sha512-wR4oNhLBHf7smjy0K4oqzdWumd+r5/+6QO/vDda76MW5iug4PT7v86FoEkySIJft3XA0Ae6axhIvHrqwm793Nw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <style>
-            #preview {
-                width: 100px;
-                height: 10vh;
-                object-fit: contain;
+    <style>
+        #preview {
+            width: 100px;
+            height: 10vh;
+            object-fit: contain;
+        }
+
+        #fileInput {
+            margin-bottom: 10px;
+        }
+
+        #preview img {
+            max-height: 100%;
+            object-fit: contain;
+            margin: 2px;
+            display: block;
+        }
+
+        #attachments a {
+            display: block;
+            margin: 2px;
+        }
+
+        .file-list li {
+            margin: 2px;
+        }
+
+        .file-list span.modal_upload-remote {
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        #fileInput {
+            display: none;
+            /* Ẩn input thực tế */
+        }
+
+        #fileButton {
+            position: relative;
+            border: 1px solid #ced4da;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        #fileButton img {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+        }
+
+        #fileButton span {
+            flex-grow: 1;
+            margin-right: 8px;
+        }
+
+
+
+        .carousel-indicators button.thumbnail {
+            width: 200px;
+            height: 6vh;
+            object-fit: contain;
+        }
+
+        .carousel-indicators button.thumbnail img {
+            max-height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .carousel-indicators button.thumbnail:not(.active) {
+            opacity: 0.7;
+        }
+
+        .carousel-indicators {
+            position: static;
+        }
+
+
+        .carousel-indicators [data-bs-target] {
+            height: 40px;
+        }
+
+
+        .carousel-item {
+            height: 20vh;
+            background-size: 100%;
+            background-repeat: no-repeat
+        }
+
+        .carousel-item img {
+            max-height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+
+
+
+        @media screen and (min-width: 200px) {
+            .carousel {
+                max-width: 70%;
+                margin: 0 auto;
             }
-            #fileInput {
-                margin-bottom: 10px;
-            }
-
-            #preview img {
-                max-height: 100%;
-                object-fit: contain;
-                margin: 2px;
-                display: block;
-            }
-
-            #attachments a {
-                display: block;
-                margin: 2px;
-            }
-
-            .file-list li {
-                margin: 2px;
-            }
-
-            .file-list span.modal_upload-remote {
-                cursor: pointer;
-                margin-left: 10px;
-            }
-
-            #fileInput {
-                display: none; /* Ẩn input thực tế */
-            }
-
-            #fileButton {
-                position: relative;
-                border: 1px solid #ced4da;
-                width: 100%;
-                display: flex;
-                align-items: center;
-                padding: 5px 10px;
-                cursor: pointer;
-            }
-
-            #fileButton img {
-                width: 16px;
-                height: 16px;
-                margin-right: 8px;
-            }
-
-            #fileButton span {
-                flex-grow: 1;
-                margin-right: 8px;
-            }
-
-
-
-            .carousel-indicators button.thumbnail {
-                width: 200px;
-                height: 6vh;
-                object-fit: contain;
-            }
-
-            .carousel-indicators button.thumbnail img {
-                max-height: 100%;
-                width: auto;
-                object-fit: contain;
-            }
-
-            .carousel-indicators button.thumbnail:not(.active) {
-                opacity: 0.7;
-            }
-
-            .carousel-indicators {
-                position: static;
-            }
-
-
-            .carousel-indicators [data-bs-target] {
-                height: 40px;
-            }
-
-
-            .carousel-item {
-                height: 20vh;
-                background-size: 100%;
-                background-repeat: no-repeat
-            }
-
-            .carousel-item img {
-                max-height: 100%;
-                width: auto;
-                object-fit: contain;
-            }
-
-
-
-            @media screen and (min-width: 200px) {
-                .carousel {
-                    max-width: 70%;
-                    margin: 0 auto;
-                }
-            }
-
-
-        </style>
+        }
+    </style>
 @endsection
-@section('content') --}}
-
+@section('content')
+    {{-- @include('template.sidebar.sidebarMaster.sidebarLeft') --}}
     <div id="mainWrap" class="mainWrap">
         <div class="mainSection" style="height: 120rem">
             <div class="main">
@@ -137,9 +137,9 @@
                                             <span class="text-color_pimary text-uppercase">{{ $product->code }}</span>
                                         </div>
                                     </div>
-                                    {{-- <div class="img-logo">
+                                    <div class="img-logo">
                                         <img class="img-header " src="{{ asset('/assets/img/logo.jpg') }}" />
-                                    </div> --}}
+                                    </div>
                                 </div>
                             </div>
 
@@ -154,37 +154,36 @@
                                                             style="display: grid; grid-template-columns: auto">
                                                             <div class="border border-2 secondary mb-3 ">
                                                                 <img class="demo cursor h-100 w-100 "
-                                                                src="{{ $product->thumbnail }}"
-                                                                    style="width:100%" onclick="currentSlide(1)"
-                                                                    alt="The Woods">
+                                                                    src="{{ $product->thumbnail }}" style="width:100%"
+                                                                    onclick="currentSlide(1)" alt="The Woods">
                                                             </div>
 
-                                                            <?php $im=2; ?>
+                                                            <?php $im = 2; ?>
                                                             @if (!empty(json_decode($details->images)))
-                                                            @foreach (json_decode($details->images) as $key => $img)
-                                                            <div class="border border-2 secondary mb-3 ">
-                                                                <img class="demo cursor h-100 w-100 border border-1"
-                                                                        src="{{ $img }}"
-                                                                    style="width:100%" onclick="currentSlide({{$im++}})"
-                                                                    alt="Mountains and fjords">
-                                                            </div>
-                                                        @endforeach
-                                                        @endif
+                                                                @foreach (json_decode($details->images) as $key => $img)
+                                                                    <div class="border border-2 secondary mb-3 ">
+                                                                        <img class="demo cursor h-100 w-100 border border-1"
+                                                                            src="{{ $img }}" style="width:100%"
+                                                                            onclick="currentSlide({{ $im++ }})"
+                                                                            alt="Mountains and fjords">
+                                                                    </div>
+                                                                @endforeach
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-10">
                                                         <div>
                                                             <div class="mySlides">
-                                                                <img   src="{{ $product->thumbnail }}"
-                                                                    class="w-100" style="object-fit: contain;height: 100%">
+                                                                <img src="{{ $product->thumbnail }}" class="w-100"
+                                                                    style="object-fit: contain;height: 100%">
                                                             </div>
-                                                           @if (!empty(json_decode($details->images)))
-                                                           @foreach (json_decode($details->images) as $key => $img)
-                                                           <div class="mySlides">
-                                                               <img  src="{{ $img }}"
-                                                                   class="w-100" style="object-fit: contain;height: 100%">
-                                                           </div>
-                                                           @endforeach
+                                                            @if (!empty(json_decode($details->images)))
+                                                                @foreach (json_decode($details->images) as $key => $img)
+                                                                    <div class="mySlides">
+                                                                        <img src="{{ $img }}" class="w-100"
+                                                                            style="object-fit: contain;height: 100%">
+                                                                    </div>
+                                                                @endforeach
                                                             @endif
                                                         </div>
                                                     </div>
@@ -195,12 +194,13 @@
                                             <div class="d-flex justify-content-between mb-3">
                                                 <span>
                                                     <p class="m-0 fs-4 fw-bold">Giá bán</p>
-                                                    <p class="m-0 fs-5 fw-bold text-color_pimary">$ {{ $details->price }}</p>
+                                                    <p class="m-0 fs-5 fw-bold text-color_pimary">$ {{ $details->price }}
+                                                    </p>
                                                 </span>
                                                 <div class="col-4 d-flex align-items-center justify-content-end"
-                                                style="height: 70px;">
-                                                {!! QrCode::generate(route('product.show', $product->id)) !!}
-                                            </div>
+                                                    style="height: 70px;">
+                                                    {!! QrCode::generate(route('product.show', $product->id)) !!}
+                                                </div>
                                             </div>
 
                                             <div class="mb-2">
@@ -215,17 +215,17 @@
                                             <div class="mb-2">
                                                 <div class="row ">
                                                     @if (!empty(json_decode($details->attachments)))
-                                                    @foreach (json_decode($details->attachments) as $key => $file)
-                                                    {{-- <div class="col-lg-4 mb-3">
-                                                        <a href="#"
-                                                            class="text-color_pimary d-flex align-items-center">
-                                                            <img src="{{ asset('assets/img/icon-pdf.png') }}"
-                                                                class="img img-thumbnail"
-                                                                style="width:30%; border:none" />
-                                                            <span class="fw-bold fs-6">{{ $file }}</span>
-                                                        </a>
-                                                    </div> --}}
-                                                    @endforeach
+                                                        @foreach (json_decode($details->attachments) as $key => $file)
+                                                            <div class="col-lg-4 mb-3">
+                                                                <a href="#"
+                                                                    class="text-color_pimary d-flex align-items-center">
+                                                                    <img src="{{ asset('assets/img/icon-pdf.png') }}"
+                                                                        class="img img-thumbnail"
+                                                                        style="width:30%; border:none" />
+                                                                    <span class="fw-bold fs-6">{{ $file }}</span>
+                                                                </a>
+                                                            </div>
+                                                        @endforeach
                                                     @endif
                                                 </div>
                                             </div>
@@ -271,31 +271,31 @@
                                                             style="background: #D9D9D9">KÍCH THƯỚC</th>
                                                     </tr>
                                                     @if (!empty($details->data))
-                                                     @foreach ($combinedData as $data  )
-                                                     @if ($data->key1 =='Kích thước')
-                                                        <tr style="height: 40px;">
-                                                            <td class="ps-5">{{ $data->key2}}
-                                                            </td>
-                                                            <td class="text-center">{{ $data->key3}}</td>
-                                                        </tr>
-                                                        @endif
-                                                    @endforeach
+                                                        @foreach ($combinedData as $data)
+                                                            @if ($data->key1 == 'Kích thước')
+                                                                <tr style="height: 40px;">
+                                                                    <td class="ps-5">{{ $data->key2 }}
+                                                                    </td>
+                                                                    <td class="text-center">{{ $data->key3 }}</td>
+                                                                </tr>
+                                                            @endif
+                                                        @endforeach
                                                     @endif
                                                     <tr style="height: 40px;">
                                                         <th colspan="2" class="ps-5 text-color_pimary fw-bold"
                                                             style="background: #D9D9D9">KHỐI LƯƠNG</th>
                                                     </tr>
                                                     @if (!empty($details->data))
-                                                    @foreach ($combinedData as $data  )
-                                                    @if ($data->key1 =='Khối lượng')
-                                                       <tr style="height: 40px;">
-                                                           <td class="ps-5">{{ $data->key2}}
-                                                           </td>
-                                                           <td class="text-center">{{ $data->key3}}</td>
-                                                       </tr>
-                                                       @endif
-                                                   @endforeach
-                                                   @endif
+                                                        @foreach ($combinedData as $data)
+                                                            @if ($data->key1 == 'Khối lượng')
+                                                                <tr style="height: 40px;">
+                                                                    <td class="ps-5">{{ $data->key2 }}
+                                                                    </td>
+                                                                    <td class="text-center">{{ $data->key3 }}</td>
+                                                                </tr>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
                                                 </table>
                                             </div>
                                             <div class="col-lg-6">
@@ -316,16 +316,16 @@
                                                             style="background: #D9D9D9">HIỆU NĂNG</th>
                                                     </tr>
                                                     @if (!empty($details->data))
-                                                    @foreach ($combinedData as $data  )
-                                                    @if ($data->key1 =='Hiệu năng')
-                                                       <tr style="height: 40px;">
-                                                           <td class="ps-5">{{ $data->key2}}
-                                                           </td>
-                                                           <td class="text-center">{{ $data->key3}}</td>
-                                                       </tr>
-                                                       @endif
-                                                   @endforeach
-                                                   @endif
+                                                        @foreach ($combinedData as $data)
+                                                            @if ($data->key1 == 'Hiệu năng')
+                                                                <tr style="height: 40px;">
+                                                                    <td class="ps-5">{{ $data->key2 }}
+                                                                    </td>
+                                                                    <td class="text-center">{{ $data->key3 }}</td>
+                                                                </tr>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
                                                 </table>
                                             </div>
                                         </div>
@@ -339,49 +339,56 @@
                                         </div>
 
                                         <div class="col-md-4 mb-3">
-                                        <div class="col-12 mt-3">
-                                            <button type="button" class="btn btn-danger d-block" data-bs-toggle="modal"
-                                                data-bs-target="#add">+ Link sản phẩm liên quan</button>
-                                        </div>
+                                            <div class="col-12 mt-3">
+                                                <button type="button" class="btn btn-danger d-block"
+                                                    data-bs-toggle="modal" data-bs-target="#add">+ Link sản phẩm liên
+                                                    quan</button>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="mb-4">
                                         {{-- <h2 class="text-color_pimary my-4">Sản phẩm liên quan</h2> --}}
                                         <div class="row">
                                             @if (!empty($details->related))
-                                            @php
-                                                $relatedProductIds = json_decode($details->related);
-                                                $relatedProducts = \App\Models\Product::whereIn('id', $relatedProductIds)->get();
-                                            @endphp
-                                            @foreach ($relatedProducts as $related)
                                                 @php
-                                                    $detailsPro = \App\Models\ProductDetails::where('id', $related->id)->first();
+                                                    $relatedProductIds = json_decode($details->related);
+                                                    $relatedProducts = \App\Models\Product::whereIn('id', $relatedProductIds)->get();
                                                 @endphp
-                                                <div class="col-4 mt-3">
-                                                    <div class="row control_product">
-                                                        <div href="/chi-tiet-san-pham/{{ $related->id }}" class="control_product_link d-flex justify-content-between" id="control_link-1">
-                                                            <div class="col-3 control_product_img">
-                                                                <img src="{{ $related->thumbnail }}" alt="">
-                                                            </div>
-                                                            <div class="col-5 control-info ms-2">
+                                                @foreach ($relatedProducts as $related)
+                                                    @php
+                                                        $detailsPro = \App\Models\ProductDetails::where('id', $related->id)->first();
+                                                    @endphp
+                                                    <div class="col-4 mt-3">
+                                                        <div class="row control_product">
+                                                            <div href="/chi-tiet-san-pham/{{ $related->id }}"
+                                                                class="control_product_link d-flex justify-content-between"
+                                                                id="control_link-1">
+                                                                <div class="col-3 control_product_img">
+                                                                    <img src="{{ $related->thumbnail }}" alt="">
+                                                                </div>
+                                                                <div class="col-5 control-info ms-2">
 
-                                                                <div class="over_info1 card-title-black fs-5">
-                                                                    {{ $related->name }} - {{ $related->code }}
+                                                                    <div class="over_info1 card-title-black fs-5">
+                                                                        {{ $related->name }} - {{ $related->code }}
+                                                                    </div>
+                                                                    <div class="over_info1">
+                                                                        {{ number_format($detailsPro->price ?? 0, 2, ',', '.') }}
+                                                                    </div>
+                                                                    <a href="/chi-tiet-san-pham/{{ $related->id }}"
+                                                                        class="over_info1">Xem chi tiết</a>
                                                                 </div>
-                                                                <div class="over_info1">
-                                                                    {{ number_format($detailsPro->price ?? 0, 2, ',', '.') }}
+                                                                <div class="col-2 btn test_btn-remove-{{ $related->id }}"href="#"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#xoaSanPham{{ $related->id }}">
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal"
+                                                                        aria-label="Close"></button>
                                                                 </div>
-                                                                <a href="/chi-tiet-san-pham/{{ $related->id }}"
-                                                                    class="over_info1">Xem chi tiết</a>
-                                                            </div>
-                                                            <div class="col-2 btn test_btn-remove-{{ $related->id }}"href="#" data-bs-toggle="modal" data-bs-target="#xoaSanPham{{ $related->id }}" >
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            @endforeach
-                                        @endif
+                                                @endforeach
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -389,19 +396,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        {{-- <button class="btn btn-danger me-md-2 px-5" type="button">In</button> --}}
-                        {{-- <a class="btn btn-danger me-md-2 px-5" href="{{ route('product.export') }}">Tải file PDF</a> --}}
-                        <a class="btn btn-danger me-md-2 px-5" href="{{ route('product.export', $details->product_id) }}">Tải file PDF</a>
-                        <button class="btn btn-outline-danger me-md-2" type="button">Về danh sách</button>
-                        <button class="btn btn-danger  px-5" type="button" data-bs-toggle="modal"
-                            data-bs-target="#addDetailProduct">Thêm chi tiết</button>
-                    </div>
-                </div>
             </div>
-
+            @include('template.footer.footer')
         </div>
     </div>
+    {{-- @include('template.sidebar.sidebarMaster.sidebarRight') --}}
+
     <style>
         img {
             vertical-align: middle;
@@ -566,5 +566,46 @@
         .text-secondary:hover {
             color: var(--primary-color) !important;
         }
+
+        .file-name {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            padding: 0 10px;
+            font-weight: 700;
+        }
     </style>
-{{-- @endsection --}}
+@endsection
+@section('footer-script')
+
+    <!-- Plugins -->
+    <script src="{{ asset('assets/plugins/jquery-datetimepicker/custom-datetimepicker.js') }}"></script>
+
+    <script type="text/javascript" charset="utf-8"
+        src="https://cdn.datatables.net/fixedcolumns/4.2.2/js/dataTables.fixedColumns.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/jquery-repeater/repeater.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/jquery-repeater/custom-repeater.js') }}"></script>
+    <!-- Chart Js -->
+    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chart.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-stacked100@1.0.0.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-datalabels@2.0.0.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_khachHangActive.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_khachHangMoi.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_soDonHang.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_doanhSo.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_nhanSu.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
+
+
+    <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
+
+
+    <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/components/dataHrefTable.js') }}"></script>
+
+
+
+
+@endsection
