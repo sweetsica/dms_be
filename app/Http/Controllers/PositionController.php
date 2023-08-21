@@ -8,6 +8,7 @@ use App\Models\PersonnelLevel;
 use App\Models\Position;
 use App\Models\UnitLeader;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PositionController extends Controller
 {
@@ -108,7 +109,6 @@ class PositionController extends Controller
         $pack  = $request->get('pack');
         $wage  = $request->get('wage');
         $description  = $request->get('description');
-        $manage  = $request->get('manage');
         $data = new Position();
         $data->name = $name;
         $data->parent=$parent;
@@ -118,7 +118,6 @@ class PositionController extends Controller
         $data->personnel_level=$personnel_level;
         $data->pack=$pack;
         $data->wage=$wage;
-        $data->manage=$manage;
         $data->description=$description;
         $data->save();
         return back();
@@ -134,7 +133,6 @@ class PositionController extends Controller
         $personnel_level  = $request->get('personnel_level');
         $pack  = $request->get('pack');
         $wage  = $request->get('wage');
-        $manage  = $request->get('manage');
         $description  = $request->get('description');
         $data = Position::find($id);
         $data->name = $name;
@@ -145,16 +143,17 @@ class PositionController extends Controller
         $data->personnel_level=$personnel_level;
         $data->pack=$pack;
         $data->wage=$wage;
-        $data->manage=$manage;
         $data->description=$description;
         $data->save();
-        return redirect()->route('position.index');
+        Session::flash('success', 'Sửa thành công');
+        return back();
     }
 
     public function destroy($id)
     {
         Position::destroy($id);
-        return redirect()->back()->with('mess', 'Đã xóa!');
+        Session::flash('success', 'Xóa thành công');
+        return back();
     }
 
     public function delete(Request $request)
@@ -162,7 +161,17 @@ class PositionController extends Controller
 
         $selectedItems = $request->input('selected_items', []);
         Position::whereIn('id', $selectedItems)->delete();
-        return redirect()->back()->with('mess', 'Đã xóa!');
+        Session::flash('success', 'Xoá thành công');
+        return back();
 
+    }
+    public function detach($id)
+    {
+        $position = Position::findOrFail($id);
+        $position->department_id = null;
+        $position->save();
+        
+        Session::flash('success', 'Xoá thành công khỏi phòng ban này');
+        return back();
     }
 }

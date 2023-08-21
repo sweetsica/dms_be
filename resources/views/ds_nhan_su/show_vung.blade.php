@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-    @include('template.sidebar.sidebarArea.sidebarLeft')
+    {{-- @include('template.sidebar.sidebarArea.sidebarLeft') --}}
     <div id="mainWrap" class="mainWrap">
         <div class="mainSection">
             <div class="main">
@@ -89,29 +89,6 @@
                                                         </tr>
                                                     </thead>
                                                     <?php $a = 1; ?>
-                                                    @foreach ($personnelList as $item)
-                                                        <tbody>
-                                                            <tr>
-                                                                <th class="text-nowrap text-center" style="width:2%">STT
-                                                                </th>
-                                                                <th class="text-nowrap">Mã nhân sự</th>
-                                                                <th class="text-nowrap">Tên nhân sự</th>
-                                                                <th class="text-nowrap">Đơn vị công tác (phòng ban)</th>
-                                                                <th class="text-nowrap">Vị trí/ chức danh</th>
-                                                                <th class="text-nowrap">Cấp nhân sự</th>
-                                                                <th class="text-nowrap">Vai trò</th>
-                                                                <th class="text-nowrap">Địa bàn</th>
-                                                                <th class="text-nowrap">Email</th>
-                                                                <th class="text-nowrap">Số điện thoại</th>
-                                                                <th class="text-nowrap">Hình thức</th>
-                                                                <th class="text-nowrap">Trạng thái</th>
-                                                                @if (session('user')['role_id'] == '1')
-                                                                    <th class="text-nowrap"><span>Hành động</span>
-                                                                    </th>
-                                                                @endif
-                                                            </tr>
-                                                        </thead>
-                                                        <?php $a = 1; ?>
                                                         @foreach ($personnelList as $item)
                                                             <tbody>
                                                                 <tr>

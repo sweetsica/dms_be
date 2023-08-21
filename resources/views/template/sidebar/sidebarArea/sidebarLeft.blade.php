@@ -7,32 +7,7 @@
                         <div class="wrapper">
                             <h1 style="color: red;">Cơ cấu đơn vị </h1>
                         </div>
-                        <div id="list-container" style="display: none;">
-                            <ul>
-                                <li style=" margin: 5px; padding: 0;">
-                                    <div class="d-flex align-items-center"
-                                        style=" background-color: #EBEBEB; height: 30px; display: flex; font-size: 15px; border-radius: 5px;">
-                                        <a href="{{ route('Personnel.index') }}"
-                                            style="color:black;padding-left:10px;">Cơ cấu tổ chức</a>
-                                    </div>
-                                </li>
-                                <li style=" margin: 5px; padding: 0;">
-                                    <div class="d-flex align-items-center"
-                                        style=" background-color: #EBEBEB; height: 30px; display: flex; font-size: 15px; border-radius: 5px;">
-                                        <a href="{{ route('Personnel.indexvtri') }} "
-                                            style="color:black;padding-left:10px;">Cơ cấu chức danh</a>
-                                    </div>
-                                </li>
-                                <li style=" margin: 5px; padding: 0;">
-                                    <div class="d-flex align-items-center"
-                                        style=" background-color: #EBEBEB; height: 30px; display: flex; font-size: 15px; border-radius: 5px;">
-                                        <a href="{{ route('Personnel.indexDiaBan') }}"
-                                            style="color:black;padding-left:10px;">Cơ
-                                            cấu địa bàn</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+
                     </div>
                     <title>Danh sách đơn vị</title>
                     <hr>
@@ -48,7 +23,7 @@
                     <div class="ui styled accordion mb-5">
                         <div class="title active d-flex align-items-center justify-content-between"
                             style="background: #EBEBEB">
-                            <span class="fs-4 text-default fw-bold">Cơ cấu tổ chức</span>
+                            <span class="fs-4 text-default fw-bold">Cơ cấu địa bàn</span>
                             <i class="dropdown icon fs-5"></i>
                         </div>
                         <div class="content">
@@ -61,13 +36,13 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <li>
+                                    {{-- <li>
                                         <a href="{{ route('Personnel.indexvtri') }} " style="padding-left:10px;">
                                             <div class="d-flex align-items-center item-accordion fs-4 p-3 rounded">
                                                 Cơ cấu chức danh
                                             </div>
                                         </a>
-                                    </li>
+                                    </li> --}}
                                     <li>
                                         <a href="{{ route('Personnel.indexDiaBan') }}" style="padding-left:10px;">
                                             <div class="d-flex align-items-center item-accordion fs-4 p-3 rounded">
@@ -83,7 +58,7 @@
 
                         <ul id="tree1">
                             @foreach ($areaTree as $vung)
-                                <li><a href="{{ route('Personnel.show.diaban', $vung->id) }}"
+                                <li><a href="{{ route('Personnel.show.vung', $vung->id) }}"
                                         class="title-child">{{ $vung->name }}</a>
                                     {{-- <li><a href="{{ route('Personnel.show.vung',$vung->id) }}" class="title-child">{{ $vung->name }}</a> --}}
                                     @if ($vung->khuVucs->count() > 0)
