@@ -93,7 +93,7 @@ Route::middleware(['auth.role'])->group(function () {
 
     // Route::get('/get-customer/{id}', [CustomerController::class, 'findById'])->name('find-customer-byId');
 
-    Route::get('/order', [OrderController::class, 'index'])->name('index.order');
+    // Route::get('/order', [OrderController::class, 'index'])->name('index.order');
 
     // Trang chủ
     Route::get('/dashboard', [DashboardController::class, 'indexv2'])->name("dashboard");
