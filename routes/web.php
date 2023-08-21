@@ -73,6 +73,8 @@ Route::middleware(['auth.role'])->group(function () {
 
     Route::post('/cmt-customer/{id}', [CustomerController::class, 'cmt'])->name('cmt.customer');
 
+    Route::get('/delete-comment/{id}/{key}', [CustomerController::class, 'deleteComment'])->name('delete.comment');
+
     Route::get('chi-tiet-khach-hang/{id}', [CustomerController::class, 'show'])->name('customer-detail.list');
 
     Route::get('/nhan_su', [PersonnelController::class, 'view'])->name('personel.view');

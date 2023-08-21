@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class CustomerController extends Controller
 {
@@ -526,11 +527,34 @@ class CustomerController extends Controller
 
     public function cmt(Request $request, $id)
     {
-        $comment = $request->get('comment');
+        $content = $request->input('content');
+        $author = $request->input('author');
         $customer = Customer::find($id);
-        $customer->comment = $comment;
+        $formattedNow = Carbon::now()->format('d/m/Y H:i:s');
+        $comments = json_decode($customer->comment, true) ?? [];
+        $comments[] = [
+            'content' => $content,
+            'author' => $author,
+            'timeComment' => $formattedNow,
+        ];
+        $customer->comment = json_encode($comments);
         $customer->save();
-
-        return response()->with('success', 'Bình luận đã được gửi.');
+        return redirect()->back()->with('mess', 'Đã bình luận!');
     }
+
+    public function deleteComment($id, $key)
+    {
+        $customer = Customer::find($id);
+        $comments = json_decode($customer->comment, true) ?? [];
+
+        // Kiểm tra xem comment có tồn tại trong mảng hay không
+        if (array_key_exists($key, $comments)) {
+            unset($comments[$key]);
+            $customer->comment = json_encode(array_values($comments));
+            $customer->save();
+        }
+
+        return redirect()->back()->with('mess', 'Đã xóa comment!');
+    }
+
 }
