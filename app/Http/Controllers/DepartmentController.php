@@ -107,8 +107,8 @@ class DepartmentController extends Controller
         if ($don_vi_me != NULL) {
             $query->where("department.name", "like", "%$don_vi_me%");
         }
-        if ($leader_name != NULL) {
-            $query->where("personnel.name", "like", "%$leader_name%");
+        if ($search != NULL) {
+            $query->where("personnel.name", "like", "%$search%");
         }
         $departmentList = $query->paginate(15);
         // dd($departmentList);
