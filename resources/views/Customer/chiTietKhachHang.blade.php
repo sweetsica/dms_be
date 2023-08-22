@@ -11,7 +11,7 @@
     </style>
 @endsection
 @php
-
+    
 @endphp
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
@@ -42,7 +42,9 @@
                                         <div class="action_wrapper">
                                             <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                                 aria-label="Về danh sách" data-bs-original-title="Về danh sách">
-                                                <form class="btn btn-outline-danger d-block testCreateUser" action="{{ route('customer.upload', ['id' => $customer->id]) }}" method="post" enctype="multipart/form-data">
+                                                <form class="btn btn-outline-danger d-block testCreateUser"
+                                                    action="{{ route('customer.upload', ['id' => $customer->id]) }}"
+                                                    method="post" enctype="multipart/form-data">
                                                     @csrf
                                                     <input type="file" name="file[]" id="fileupload" multiple>
                                                     <input type="submit" value="Đăng file" name="submit">
@@ -345,8 +347,9 @@
                                                     <div class="row">
                                                         <div class="col-sm-12 card-title mt-3">6. File đính kèm</div>
                                                         <div class="col-4 mt-3">
-                                                            @foreach(json_decode($customer->fileName) ?? [] as $file)
-                                                                <a href="{{ route('customer.download', ['id' => $customer->id, 'name' => $file]) }}">{{ $file }}</a>
+                                                            @foreach (json_decode($customer->fileName) ?? [] as $file)
+                                                                <a
+                                                                    href="{{ route('customer.download', ['id' => $customer->id, 'name' => $file]) }}">{{ $file }}</a>
                                                                 <br>
                                                             @endforeach
                                                         </div>
@@ -920,9 +923,6 @@
     <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
 
 
-    <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}">
-    </script>
-    <script type = "text/javascript"
-        src = "{{ asset('/assets/js/components/dataHrefTable.js') }}" >
-    </script>
+    <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/components/dataHrefTable.js') }}"></script>
 @endsection

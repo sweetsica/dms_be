@@ -33,7 +33,11 @@
                                 <div class="d-flex align-items-center justify-content-between my-3">
                                     <h1 class="text-color_pimary fs-3">{{ $customer->companyName ?? $customer->name }}</h1>
                                     <div>
-                                        <button class="btn btn-outline-danger me-3"><a href="{{ route('customers') }}" style="color: red">Về danh sách</a></button>
+                                        <button class="btn btn-outline-danger btn-back"><a
+                                                href="{{ route('customers') }}">Về danh
+                                                sách</a></button>
+                                        <button class="btn btn-success" data-bs-toggle="modal"
+                                            data-bs-target="#suachitiet">Sửa thông tin</button>
                                         <button class="btn btn-danger">Tạo đơn hàng</button>
                                     </div>
                                 </div>
@@ -49,23 +53,23 @@
                                                             src="{{ asset('assets/img/avatardefault.jpg') }}" />
                                                     </div>
                                                     <!-- <div>
-                                                                                                                                                                                        <img class="img-slider" src="{{ asset('assets/img/oto-2.png') }}" />
-                                                                                                                                                                                    </div>
-                                                                                                                                                                                    <div>
-                                                                                                                                                                                        <img class="img-slider" src="{{ asset('assets/img/oto-3.png') }}" />
-                                                                                                                                                                                    </div>
-                                                                                                                                                                                    <div>
-                                                                                                                                                                                        <img class="img-slider" src="{{ asset('assets/img/oto-4.png') }}" />
-                                                                                                                                                                                    </div> -->
+                                                                                                                                                                                                                                                                                                                                                                                            <img class="img-slider" src="{{ asset('assets/img/oto-2.png') }}" />
+                                                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                                                        <div>
+                                                                                                                                                                                                                                                                                                                                                                                            <img class="img-slider" src="{{ asset('assets/img/oto-3.png') }}" />
+                                                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                                                        <div>
+                                                                                                                                                                                                                                                                                                                                                                                            <img class="img-slider" src="{{ asset('assets/img/oto-4.png') }}" />
+                                                                                                                                                                                                                                                                                                                                                                                        </div> -->
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-12">
                                                 <div class="slider slider-nav">
                                                     <!-- <div>
-                                                                                                                                                                                        <img src="{{ asset('assets/img/avatardefault.jpg') }}"
-                                                                                                                                                                                            class="img-slider_nav" />
-                                                                                                                                                                                    </div> -->
+                                                                                                                                                                                                                                                                                                                                                                                            <img src="{{ asset('assets/img/avatardefault.jpg') }}"
+                                                                                                                                                                                                                                                                                                                                                                                                class="img-slider_nav" />
+                                                                                                                                                                                                                                                                                                                                                                                        </div> -->
                                                 </div>
                                             </div>
 
@@ -102,14 +106,24 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-lg-5 mt-4">
+
+                                            <div class="col-lg-12 mt-4">
+                                                <div class="layout_120">
+                                                    <span class="fw-bold fs-4">Ghi chú:</span>
+                                                    <span class="fs-4">Khách lẻ là những người mua hàng hoặc sử dụng dịch
+                                                        vụ từ các cửa hàng, cửa hàng trực tuyến, hoặc các điểm bán
+                                                        lẻ.</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-5 mt-5">
                                                 <div class="layout_120">
                                                     <span class="fw-bold fs-4">Giai đoạn:</span>
                                                     <span class="fs-4 text-color_pimary">{{ $customer->status }}</span>
                                                 </div>
                                             </div>
 
-                                            <div class="col-lg-7 mt-4">
+                                            <div class="col-lg-7 mt-5">
                                                 <div class="row">
                                                     <div class="col-lg-6 ">
                                                         <span class="fw-bold fs-4 title-contact">Tỷ lệ:</span>
@@ -120,7 +134,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-lg-12 mt-4">
+                                            <div class="col-lg-12 mt-5">
                                                 <ul id="progress">
                                                     <li class="{{ $customer->status === 'Trinh sát' ? 'active' : '' }}">
                                                         Trinh sát</li>
@@ -143,7 +157,7 @@
                                             <div class="mt-4">
                                                 <div class="input-group align-items-center">
                                                     <!-- <input type="file" class="form-control" id="attachment"
-                                                                                                                                                                                        name="attachment" style="display: none"> -->
+                                                                                                                                                                                                                                                                                                                                                                                            name="attachment" style="display: none"> -->
                                                     <i class="bi bi-link-45deg text-color_pimary fs-3 fw-bold"></i>
                                                     <label class="input-label text-color_pimary fs-4 fw-bold ms-2"
                                                         for="attachment" style="cursor: pointer">File đính kèm</label>
@@ -178,7 +192,7 @@
                                             <div class="tabBody">
                                                 <div class="container">
                                                     {{-- Thông tin chung --}}
-                                                    <div class="my-3 wapper-contact mt-5">
+                                                    {{-- <div class="my-3 wapper-contact mt-5">
                                                         <h2 class="text-color_pimary fs-3">1. Thông tin chung</h2>
                                                         <div class="row mt-5">
                                                             <div class="col-lg-5">
@@ -207,27 +221,56 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    {{-- Tổ chức --}}
-                                                    <div class="mb-3 wapper-contact">
-                                                        <h2 class="text-color_pimary fs-3">2. Tổ chức</h2>
+                                                    </div> --}}
+                                                    {{-- Thông tin chung --}}
+                                                    <div class="my-3 wapper-contact mt-4">
+                                                        <h2 class="text-color_pimary fs-3">1. Thông tin chung</h2>
                                                         </h2>
                                                         <div class="row mt-3">
                                                             <div class="col-lg-5">
                                                                 <div class="layout_120">
-                                                                    <span class="fw-bold fs-4">Tên công ty:</span>
+                                                                    <span class="fw-bold fs-4">Mã số thuế:</span>
+                                                                    <span
+                                                                        class="fs-4">{{ $customer->taxCode ?? '' }}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold fs-4">Đại diện:</span>
+                                                                    <span
+                                                                        class="fs-4">{{ $customer->personCompany ?? '' }}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="row g-0">
+                                                                    <div class="col-lg-5">
+                                                                        <span class="fw-bold fs-4 title-contact">Chức
+                                                                            danh:</span>
+                                                                    </div>
+                                                                    <div class="col-lg-7 text-end">
+                                                                        <span
+                                                                            class="fs-4">{{ $customer->career ?? '' }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mt-3">
+                                                            <div class="col-lg-5 mt-4">
+                                                                <div class="layout_120">
+                                                                    <span class="fw-bold fs-4">Lĩnh vực KD:</span>
                                                                     <span class="fs-4">
                                                                         {{ $customer->companyName ?? '' }}</span>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-lg-3">
+                                                            <div class="col-lg-3 mt-4">
                                                                 <div class="layout_120">
                                                                     <span class="fw-bold fs-4">SĐT công ty:</span>
                                                                     <span
                                                                         class="fs-4">{{ $customer->companyPhoneNumber ?? '' }}</span>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-lg-4">
+                                                            <div class="col-lg-4 mt-4">
                                                                 <div class="row g-0">
                                                                     <div class="col-lg-5 ">
                                                                         <span class="fw-bold fs-4 title-contact">Email
@@ -237,35 +280,6 @@
                                                                     <div class="col-lg-7 text-end">
                                                                         <span
                                                                             class="fs-4">{{ $customer->companyEmail ?? '' }}</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row mt-3">
-                                                            <div class="col-lg-5 mt-4">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold fs-4">Mã số thuế:</span>
-                                                                    <span
-                                                                        class="fs-4">{{ $customer->taxCode ?? '' }}</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3 mt-4">
-                                                                <div class="layout_120">
-                                                                    <span class="fw-bold fs-4">Đại diện:</span>
-                                                                    <span
-                                                                        class="fs-4">{{ $customer->personCompany ?? '' }}</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4 mt-4">
-                                                                <div class="row g-0">
-                                                                    <div class="col-lg-5">
-                                                                        <span class="fw-bold fs-4 title-contact">Chức
-                                                                            danh:</span>
-                                                                    </div>
-                                                                    <div class="col-lg-7 text-end">
-                                                                        <span
-                                                                            class="fs-4">{{ $customer->career ?? '' }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -289,8 +303,49 @@
                                                         </div>
                                                     </div>
 
+                                                    <div class="row wapper-contact mt-4">
+                                                        <h2 class="text-color_pimary fs-3 pb-4">2. Liên hệ</h2>
+                                                        <div class="col-lg-12">
+                                                            <div class="table-responsive">
+                                                                <table id="contact"
+                                                                    class="table table-responsive table-hover table-bordered">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th class="text-nowrap text-center"
+                                                                                style="">STT</th>
+                                                                            <th class="text-nowrap text-center"
+                                                                                style="">Họ và tên</th>
+                                                                            <th class="text-nowrap text-center"
+                                                                                style="">Số điện thoại</th>
+                                                                            <th class="text-nowrap text-center"
+                                                                                style="">Email</th>
+                                                                            <th class="text-nowrap text-center"
+                                                                                style="">Chức danh</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <td class="text-nowrap text-center">
+                                                                            1
+                                                                        </td>
+                                                                        <td class="text-nowrap text-center">
+                                                                            Hiệp
+                                                                        </td>
+                                                                        <td class="text-nowrap text-center">
+                                                                            0989077077
+                                                                        </td>
+                                                                        <td class="text-nowrap text-center">
+                                                                            hiep@gmail.com
+                                                                        </td>
+                                                                        <td class="text-nowrap text-center">
+                                                                            Cửa hàng trưởng
+                                                                        </td>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-                                                    <div class="row">
+                                                    <div class="row wapper-contac mt-4">
                                                         <h2 class="text-color_pimary fs-3 pb-4">3. Địa chỉ</h2>
                                                         {{-- Địa chỉ --}}
                                                         <div class="col-lg-5">
@@ -434,20 +489,23 @@
                     <div class="d-flex">
                         <div class="card w-75 m-auto">
                             <div class="card-body">
-                                <form method="POST" autocomplete="off" action="{{ route('cmt.customer', ['id' => $customer->id]) }}" onsubmit="return showConfirmation()">
+                                <form method="POST" autocomplete="off"
+                                    action="{{ route('cmt.customer', ['id' => $customer->id]) }}"
+                                    onsubmit="return showConfirmation()">
                                     @csrf
                                     <div class="card_template-form mb-3">
-                                        <input type="hidden" value="{{session('user')['name']}}" name="author">
+                                        <input type="hidden" value="{{ session('user')['name'] }}" name="author">
                                         <div class="card-title fs-4">Trao đổi</div>
                                         <div class="flex-fill ms-3 d-flex align-items-center">
-                                            <input placeholder="Viết bình luận..." rows="1" id="comment" class="form-control" name="content"></input>
+                                            <input placeholder="Viết bình luận..." rows="1" id="comment"
+                                                class="form-control" name="content"></input>
                                         </div>
                                         <div>
                                             <button type="submit" class="btn btn-danger mx-3">Gửi</button>
                                         </div>
                                     </div>
                                 </form>
-                                @foreach(json_decode($customer->comment, true) ?? [] as $key => $comment)
+                                @foreach (json_decode($customer->comment, true) ?? [] as $key => $comment)
                                     <div class="row p-4" style="background: #c1c4c1; border-radius: 10px">
                                         <div class="col-lg-3">
                                             <span class="fs-5 fw-bold">{{ $comment['author'] }}</span>
@@ -457,7 +515,8 @@
                                         </div>
                                         <div class="col-lg-3">
                                             <span class="fs-5">{{ $comment['timeComment'] }}</span>
-                                            <a href="{{ route('delete.comment', ['id' => $customer->id, 'key' => $key]) }}" class="bi bi-trash fs-4 ms-4 icon-trash_comment"></a>
+                                            <a href="{{ route('delete.comment', ['id' => $customer->id, 'key' => $key]) }}"
+                                                class="bi bi-trash fs-4 ms-4 icon-trash_comment"></a>
                                         </div>
                                     </div>
                                     <br>
@@ -471,6 +530,265 @@
         </div>
     </div>
     @include('template.sidebar.sidebarMaster.sidebarRight')
+
+    <div class="modal fade editForm" id="suachitiet" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Sửa chi tiết khách hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="formThemCapPhatChitiet" method="POST" action="" enctype="multipart/form-data">
+                    @csrf
+                    <input name="name" style="display: none;" id="name">
+                    <input name="personContact" style="display: none;" id="personContact">
+                    <input name="phone" style="display: none;" id="phone">
+                    <input name="email" style="display: none;" id="email">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <div class="card-title">1. Tổ chức</div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="taxCode" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Mã số thuế" placeholder="Mã số thuế" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="personCompany" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="Người đại diện" placeholder="Người đại diện"
+                                    class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="career" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Chức danh" placeholder="Chức danh" class="form-control">
+                            </div>
+
+                            <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Lĩnh vực kinh doanh">
+                                <select class="selectpicker" id="customerType">
+                                    <option value="" selected>Lĩnh vực kinh doanh</option>
+                                    <option value="Kim khí">Kim khí</option>
+                                    <option value="Điện máy">Điện máy</option>
+                                    <option value="Xe điện">Xe điện</option>
+                                    <option value="Máy công cụ">Máy công cụ</option>
+                                    <option value="Vật liệu xây dựng">Vật liệu xây dựng</option>
+                                    <option value="Lĩnh vực khác">Lĩnh vực khác</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="companyPhoneNumber" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="Số điện thoại công ty"
+                                    placeholder="Số điện thoại công ty" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="companyEmail" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="Email công ty" placeholder="Email công ty"
+                                    class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" name="accountNumber" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="Số tài khoản" placeholder="Số tài khoản"
+                                    class="form-control">
+                            </div>
+                            <div class="col-md-8 mb-3">
+                                <input type="text" name="bankOpen" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Mở tại ngân hàng" placeholder="Mở tại ngân hàng" class="form-control">
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <div class="card-title">2. Liên hệ</div>
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <div class="table-responsive">
+                                    <table id="contact" class="table table-responsive table-hover table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-nowrap text-center" style="">STT</th>
+                                                <th class="text-nowrap text-center" style="">Họ và tên</th>
+                                                <th class="text-nowrap text-center" style="">Số điện thoại</th>
+                                                <th class="text-nowrap text-center" style="">Email</th>
+                                                <th class="text-nowrap text-center" style="">Chức danh</th>
+                                                <th class="text-nowrap text-center">
+                                                    <i class="bi bi-plus fs-3" id="addRowIcon"
+                                                        style="color: var(--primary-color); cursor: pointer;"></i>
+
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <div class="card-title">3. Địa chỉ</div>
+                            </div>
+                            <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Tỉnh/thành">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
+                                    data-live-search="true" title="Tỉnh/thành*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="city" id="city"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Quận/huyện">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
+                                    data-live-search="true" title="Quận/huyện*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="district" id="district"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Phường/xã">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
+                                    data-live-search="true" title="Phường/xã*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="guide" id="guide"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                </select>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <input type="text" id="addressInput" name="address" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ*" class="form-control">
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <div id="map"
+                                    style="height: 300px; display: block ;opacity: 0.5;background-image: url('{{ asset('/assets/img/img_map.jpg') }}'); "
+                                    class="border"></div>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <div class="card-title">4. Mô tả</div>
+                            </div>
+
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Nhân sự thu thập*">
+
+                                <select {{ session('user')['role_id'] != '1' ? 'disabled' : '' }} class="selectpicker"
+                                    data-dropup-auto="false" data-width="100%" required data-live-search="true"
+                                    title="Nhân sự thu thập*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="personId"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                    {{-- @foreach ($listPersons as $per)
+                                        <option value="{{ $per->id }}"
+                                            {{ $per->id == session('user')['id'] ? 'selected' : '' }}>
+                                            {{ $per->name }}
+                                        </option>
+                                    @endforeach --}}
+                                </select>
+                                <div class="error-text" id="personIdError" style="color: red;"></div>
+                            </div>
+
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Sản phẩm quan tâm">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
+                                    data-live-search="true" title="Sản phẩm quan tâm*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="productId[]" id="productId"
+                                    data-live-search-placeholder="Tìm kiếm..." multiple>
+                                </select>
+                            </div>
+
+
+                            <div class="col-md-12 mb-3">
+                                <div class="card-title">5. Phân loại</div>
+                            </div>
+
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Nhóm khách hàng">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
+                                    data-live-search="true" title="Nhóm khách hàng*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="groupId" id="groupId"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="Nhà thuốc">Nhà thuốc</option>
+                                    <option value="Phòng khám/Trung tâm tế">Phòng khám/Trung tâm tế</option>
+                                    <option value="Bệnh viện">Bệnh viện</option>
+                                    <option value="Nhà phân phối">Nhà phân phối</option>
+                                    <option value="Online">Online</option>
+                                    <option value="Khách sạn">Khách sạn</option>
+                                    <option value="Nhà thuốc S">Nhà thuốc S</option>
+                                    <option value="Siêu thị/Cửa hàng bán lẻ">Siêu thị/Cửa hàng bán lẻ</option>
+                                    <option value="Chuỗi nhà thuốc">Chuỗi nhà thuốc</option>
+                                    <option value="Đại siêu thị">Đại siêu thị</option>
+                                    <option value="Làm đẹp/Phòng tập thể dục/Thể thao">Làm đẹp/Phòng tập thể dục/Thể thao
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Tuyến">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
+                                    data-live-search="true" title="Tuyến*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="routeId" id="routeId"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Kênh khách hàng">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
+                                    data-live-search="true" title="Kênh khách hàng*" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="chanelId" id="chanelId"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Trạng thái*">
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
+                                    data-live-search="true" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="status"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="Trinh sát" selected>Trinh sát</option>
+                                    <option value="Cơ hội">Cơ hội</option>
+                                    <option value="Khách hàng">Khách hàng</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <div class="card-title">6. Hình ảnh</div>
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <div class="upload-files-container">
+                                    <div class="drag-file-area">
+                                        <span class="material-icons-outlined upload-icon fs-3 mt-4">Tải file ảnh tại
+                                            đây</span>
+                                        <h3 class="dynamic-message fs-5 text-secondary">Hỗ trợ định dạng JPG hoặc PNG kích
+                                            thước không quá
+                                            10MB</h3>
+                                        <label class="label">
+                                            <input type="file" class="default-file-input" style="display: none"
+                                                name="avatar[]" />
+                                            <span class="btn btn-outline-danger mb-4"><i
+                                                    class="bi bi-cloud-arrow-up"></i>Tải file lên</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <div class="input-group align-items-center">
+                                    <input type="file" class="form-control" id="attachment" name="attachment[]"
+                                        style="display: none" multiple>
+                                    <i class="bi bi-link-45deg text-color_pimary fs-3 fw-bold"></i>
+                                    <label class="input-label text-color_pimary fs-4 fw-bold ms-2" for="attachment"
+                                        style="cursor: pointer">Đính kèm file</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <ul id="fileListDisplay" class="list-unstyled"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-danger">Lưu</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <style>
         .title-contact {
@@ -592,6 +910,14 @@
         .icon-trash_comment:hover {
             color: var(--primary-color);
             cursor: pointer;
+        }
+
+        .btn-back a {
+            color: var(--primary-color)
+        }
+
+        .btn-back:hover a {
+            color: #fff
         }
     </style>
 

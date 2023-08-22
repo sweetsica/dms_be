@@ -112,7 +112,9 @@
                                                     <th class="text-nowrap text-center" style="width:8%">Sản phẩm quan tâm
                                                     </th>
                                                     <th class="text-nowrap text-center" style="width:6%">Trạng thái</th>
-                                                    <th class="text-nowrap text-center" style="width:4%">Hành động</th>
+                                                    <th class="text-nowrap text-center"
+                                                        style="width:4%;background: #fff; position: sticky; right: 0;">Hành
+                                                        động</th>
 
                                                 </tr>
                                             </thead>
@@ -233,7 +235,7 @@
                                                                 {{ $item['status'] }}
                                                             </div>
                                                         </td>
-                                                        <td>
+                                                        <td style="background: #fff; position: sticky; right: 0;">
                                                             <div class="table_actions d-flex justify-content-center">
                                                                 <div class="btn test_btn-edit-{{ $item['id'] }}"
                                                                     href="#" data-bs-toggle="modal"
@@ -316,9 +318,9 @@
             </div>
         </div>
         {{-- edit --}}
-        <div class="modal fade editForm" id="suaca{{ $item['id'] }}" tabindex="-1"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal fade " id="suaca{{ $item['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content">
                     <div class="modal-header text-center">
                         <h5 class="modal-title w-100" id="exampleModalLabel">Sửa khách hàng</h5>
@@ -329,232 +331,45 @@
                         @csrf
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-md-12 mb-3">
-                                    <div class="card-title">1. Thông tin chung</div>
+                                <div class="col-lg-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Loại khách hàng">
+                                    <select class="selectpicker" id="customerTypeEdit">
+                                        <option value="">Loại khách hàng</option>
+                                        <option value="Khách hàng lẻ" selected>Khách hàng lẻ</option>
+                                        <option value="Nhà phân phối">Nhà phân phối</option>
+                                        <option value="Đại lý">Đại lý</option>
+                                    </select>
                                 </div>
-                                <div class="col-md-4 mb-3">
-                                    <input type="text" value="{{ $item->name }}" name="name"
-                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên khách hàng"
+
+                                <div class="col-lg-6 mb-3">
+                                    <input type="text" name="personContact" data-bs-toggle="tooltip"
+                                        id="personContactInput" data-bs-placement="top" title="Mã khách hàng"
+                                        placeholder="Mã khách hàng*" class="form-control">
+                                </div>
+
+                                <div class="col-lg-6 mb-3">
+                                    <input type="text" name="name" data-bs-toggle="tooltip" required
+                                        id="nameInput" data-bs-placement="top" title="Tên khách hàng"
                                         placeholder="Tên khách hàng*" class="form-control">
                                 </div>
 
-                                <div class="col-md-4 mb-3">
-                                    <input type="text" value="{{ $item->phone }}" name="phone"
-                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Số điện thoại"
+                                <div class="col-lg-6 mb-3">
+                                    <input type="text" name="phone" data-bs-toggle="tooltip" required
+                                        id="phoneInput" data-bs-placement="top" title="Số điện thoại"
                                         placeholder="Số điện thoại*" class="form-control">
                                 </div>
-                                <div class="col-md-4 mb-3">
-                                    <input type="text" value="{{ $item->email }}" name="email"
-                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Email"
-                                        placeholder="Email*" class="form-control">
+                                <div class="col-lg-6 mb-3">
+                                    <input type="text" name="email" data-bs-toggle="tooltip" id="emailInput"
+                                        data-bs-placement="top" title="Email" placeholder="Email" class="form-control">
                                 </div>
-                                <div class="col-md-12 mb-3">
-                                    <div class="card-title">2. Tổ chức</div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <input type="text" value="{{ $item->companyName }}" name="companyName"
-                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Tên công ty"
-                                        placeholder="Tên công ty" class="form-control">
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <input type="text" value="{{ $item->personContact }}" name="personContact"
-                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Người đại diện"
-                                        placeholder="Người đại diện" class="form-control">
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <input type="text" value="{{ $item->career }}" name="career"
-                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Chức danh"
-                                        placeholder="Chức danh" class="form-control">
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <input type="text" value="{{ $item->taxCode }}" name="taxCode"
-                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Mã số thuế"
-                                        placeholder="Mã số thuế" class="form-control">
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <input type="text" value="{{ $item->companyPhoneNumber }}"
-                                        name="companyPhoneNumber" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        title="Số điện thoại công ty" placeholder="Số điện thoại công ty"
-                                        class="form-control">
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <input type="text" value="{{ $item->companyEmail }}" name="companyEmail"
-                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Email công ty"
-                                        placeholder="Email công ty" class="form-control">
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <input type="text" value="{{ $item->accountNumber }}" name="accountNumber"
-                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Số tài khoản"
-                                        placeholder="Số tài khoản" class="form-control">
-                                </div>
-                                <div class="col-md-8 mb-3">
-                                    <input type="text" value="{{ $item->bankOpen }}" name="bankOpen"
-                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Mở tại ngân hàng"
-                                        placeholder="Mở tại ngân hàng" class="form-control">
+                                <div class="col-lg-6 mb-3">
+                                    <input type="text" name="address" data-bs-toggle="tooltip" required
+                                        id="addressInputGeneral" data-bs-placement="top" title="Địa chỉ"
+                                        placeholder="Địa chỉ" class="form-control">
                                 </div>
 
-                                <div class="col-md-12 mb-3">
-                                    <div class="card-title">3. Địa chỉ</div>
-                                </div>
-                                <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Tỉnh/thành">
-                                    <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
-                                        data-live-search="true" title="{{ $item->city }}"
-                                        data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
-                                        data-size="3" name="city" id="city_edit"
-                                        data-live-search-placeholder="Tìm kiếm...">
-                                    </select>
-                                </div>
-                                <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Quận/huyện">
-                                    <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
-                                        data-live-search="true" title="{{ $item->district }}"
-                                        data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
-                                        data-size="3" name="district" id="district_edit"
-                                        data-live-search-placeholder="Tìm kiếm...">
-                                    </select>
-                                </div>
-                                <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Phường/xã">
-                                    <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
-                                        data-live-search="true" title="{{ $item->guide }}"
-                                        data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
-                                        data-size="3" name="guide" id="guide_edit"
-                                        data-live-search-placeholder="Tìm kiếm...">
-                                    </select>
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <input id="editAddress" type="text" value="{{ $item->address }}" name="address"
-                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Địa chỉ"
-                                        placeholder="Địa chỉ*" class="form-control">
-                                </div>
-                                <div id="mapEdit" style="height: 300px;"></div>
-                                <div class="col-md-12 mb-3">
-                                    <div class="card-title">4. Mô tả</div>
-                                </div>
-
-                                <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Nhân sự thu thập">
-                                    <select {{ session('user')['role_id'] != '1' ? 'disabled' : '' }} class="selectpicker"
-                                        data-dropup-auto="false" data-width="100%" required data-live-search="true"
-                                        title="Nhân sự thu thập*" data-select-all-text="Chọn tất cả"
-                                        data-deselect-all-text="Bỏ chọn" data-size="3" name="personId"
-                                        data-live-search-placeholder="Tìm kiếm...">
-                                        @foreach ($listPersons as $per)
-                                            <option value="{{ $per->id }}"
-                                                {{ $per->id == $item->personId ? 'selected' : '' }}>
-                                                {{ $per->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                @php
-                                    $selectedValues = json_decode($item->productId);
-                                @endphp
-                                <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Sản phẩm quan tâm">
-                                    <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
-                                        data-live-search="true" title="Sản phẩm quan tâm*"
-                                        data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
-                                        data-size="3" name="productId[]" data-live-search-placeholder="Tìm kiếm..."
-                                        multiple>
-                                        @foreach ($listProduct as $pro)
-                                            <option value="{{ $pro->id }}"
-                                                {{ isset($selectedValues) && is_array($selectedValues) && in_array($pro->id, $selectedValues) ? 'selected' : '' }}>
-                                                {{ $pro->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <div class="card-title">5. Phân loại</div>
-                                </div>
-                                <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Nhóm khách hàng">
-                                    <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
-                                        data-live-search="true" title="Nhóm khách hàng*"
-                                        data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
-                                        data-size="3" name="groupId" data-live-search-placeholder="Tìm kiếm...">
-                                        <option value="Phòng khám/Trung tâm tế"
-                                            {{ $item->group == 'Phòng khám/Trung tâm tế' ? 'selected' : '' }}>
-                                            Phòng
-                                            khám/Trung tâm tế</option>
-                                        <option value="Bệnh viện" {{ $item->group == 'Bệnh viện' ? 'selected' : '' }}>Bệnh
-                                            viện</option>
-                                        <option value="Nhà phân phối"
-                                            {{ $item->group == 'Nhà phân phối' ? 'selected' : '' }}>Nhà phân phối</option>
-                                        <option value="Online" {{ $item->group == 'Online' ? 'selected' : '' }}>Online
-                                        </option>
-                                        <option value="Khách sạn" {{ $item->group == 'Khách sạn' ? 'selected' : '' }}>
-                                            Khách sạn</option>
-                                        <option value="Nhà thuốc S" {{ $item->group == 'Nhà thuốc S' ? 'selected' : '' }}>
-                                            Nhà thuốc S</option>
-                                        <option value="Siêu thị/Cửa hàng bán lẻ"
-                                            {{ $item->group == 'Siêu thị/Cửa hàng bán lẻ' ? 'selected' : '' }}>
-                                            Siêu thị/Cửa
-                                            hàng bán lẻ</option>
-                                        <option value="Chuỗi nhà thuốc"
-                                            {{ $item->group == 'Chuỗi nhà thuốc' ? 'selected' : '' }}>Chuỗi nhà thuốc
-                                        </option>
-                                        <option value="Đại siêu thị"
-                                            {{ $item->group == 'Đại siêu thị' ? 'selected' : '' }}>Đại
-                                            siêu thị</option>
-                                        <option value="Làm đẹp/Phòng tập thể dục/Thể thao"
-                                            {{ $item->group ==
-                                            'Làm đẹp/Phòng tập
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    thể dục/Thể thao'
-                                                ? 'selected'
-                                                : '' }}>
-                                            Làm đẹp/Phòng tập thể dục/Thể
-                                            thao
-                                        </option>
-                                    </select>
-                                </div>
-
-                                <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Tuyến">
-                                    <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
-                                        data-live-search="true" title="Tuyến*" data-select-all-text="Chọn tất cả"
-                                        data-deselect-all-text="Bỏ chọn" data-size="3" name="routeId"
-                                        data-live-search-placeholder="Tìm kiếm...">
-                                        @foreach ($listRoute as $route)
-                                            <option value="{{ $route->id }}"
-                                                {{ $route->id == $item->routeId ? 'selected' : '' }}>
-                                                {{ $route->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Kênh khách hàng">
-                                    <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
-                                        data-live-search="true" title="Kênh khách hàng*"
-                                        data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
-                                        data-size="3" name="chanelId" data-live-search-placeholder="Tìm kiếm...">
-                                        @foreach ($listChannel as $ch)
-                                            <option value="{{ $item->id }}"
-                                                {{ $ch->id == $item->chanelId ? 'selected' : '' }}>
-                                                {{ $ch->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Trạng thái">
-                                    <select class="selectpicker" data-dropup-auto="false" data-width="100%" required
-                                        data-live-search="true" title="Trạng thái*" data-select-all-text="Chọn tất cả"
-                                        data-deselect-all-text="Bỏ chọn" data-size="3" name="status"
-                                        data-live-search-placeholder="Tìm kiếm...">
-                                        <option value="Trinh sát" {{ $item->status == 'Trinh sát' ? 'selected' : '' }}>
-                                            Trinh sát</option>
-                                        <option value="Tiềm năng" {{ $item->status == 'Tiềm năng' ? 'selected' : '' }}>
-                                            Tiềm năng</option>
-                                        <option value="Cơ hội" {{ $item->status == 'Cơ hội' ? 'selected' : '' }}>Cơ hội
-                                        </option>
-                                        <option value="Khách hàng" {{ $item->status == 'Khách hàng' ? 'selected' : '' }}>
-                                            Khách hàng</option>
-                                    </select>
+                                <div class="col-lg-12 mb-3">
+                                    <textarea class="form-control" placeholder="Ghi chú" id="floatingTextarea2" style="height: 100px"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -653,7 +468,7 @@
                         <div class="row">
                             <div class="col-lg-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Loại khách hàng">
-                                <select class="selectpicker" id="customerType">
+                                <select class="selectpicker" id="customerTypeAdd">
                                     <option value="">Loại khách hàng</option>
                                     <option value="Khách hàng lẻ" selected>Khách hàng lẻ</option>
                                     <option value="Nhà phân phối">Nhà phân phối</option>
@@ -745,7 +560,7 @@
 
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Lĩnh vực kinh doanh">
-                                <select class="selectpicker" id="customerType">
+                                <select class="selectpicker">
                                     <option value="" selected>Lĩnh vực kinh doanh</option>
                                     <option value="Kim khí">Kim khí</option>
                                     <option value="Điện máy">Điện máy</option>
@@ -1494,10 +1309,8 @@
     <script type="text/javascript" src="{{ asset('assets/plugins/jquery-repeater/custom-repeater.js') }}"></script>
     <!-- Chart Js -->
     <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chart.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-stacked100@1.0.0.js') }}">
-    </script>
-    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-datalabels@2.0.0.js') }}">
-    </script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-stacked100@1.0.0.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-datalabels@2.0.0.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_khachHangActive.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_khachHangMoi.js') }}"></script>
@@ -1846,7 +1659,7 @@
             themChiTietBtn.classList.add('btn-disable');
             themChiTietBtn.disabled = true;
         });
-        const customerTypeSelect = document.getElementById('customerType');
+        const customerTypeSelect = document.getElementById('customerTypeAdd');
         const themChiTietBtn = document.getElementById('btn_chi_tiet');
         customerTypeSelect.addEventListener('change', () => {
             const selectedValue = customerTypeSelect.value;
