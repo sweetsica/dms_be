@@ -111,8 +111,8 @@
                                                                         </div>
                                                                     </td>
                                                                     <td class="">
-                                                                        <a style="color: black; text-decoration: underline;">
-                                                                            {{-- href="{{ route('department.assignUser', ['' => $item->id]) }}"> --}}
+                                                                        <a style="color: black; text-decoration: underline;"
+                                                                            href="{{ route('department.assignUser', $item->id) }}">
                                                                             <div class="overText" data-bs-toggle="tooltip"
                                                                                 data-bs-placement="top"
                                                                                 title="{{ $item->name }}">
@@ -136,7 +136,6 @@
                                                                                 {{ $item->department_name }}
                                                                             </div>
                                                                         </a>
-
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
