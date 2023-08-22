@@ -533,6 +533,34 @@
                                             </div>
                                         </div>
                                         @endforeach
+                                        @else
+                                        <div class="col-md-4 mb-3">
+                                            <select name="data[0][key1]" class="selectpicker" data-dropup-auto="false"
+                                                data-width="100%"  data-size="3" title="Chọn nhóm thông số kỹ thuật">
+                                                @foreach ($TechnicalSpecificationsGroupList as $item)
+                                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-4 mb-3">
+                                            <select name="data[0][key2]" class="selectpicker" data-dropup-auto="false"
+                                                data-width="100%"  data-size="3" title="Chọn thông số kỹ thuật">
+                                                @foreach ($SpecificationsList as $item)
+                                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <div class="d-flex align-items-center">
+
+                                                <input type="text" name="data[0][key3]" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" title="Thông số" placeholder="Thông số"
+                                                    class="form-control" >
+                                                <i class="bi bi-plus fs-4 ms-2 add-spec"
+                                                    style="cursor: pointer; color: var(--primary-color)"></i>
+                                            </div>
+                                        </div>
                                         @endif
                                     </div>
 

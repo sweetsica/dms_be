@@ -171,13 +171,22 @@
                                             grid-template-columns: auto auto auto auto auto;
                                             gap: 10px;
                                             align-items: center;">
+
+
                                                 <form method="GET" action="">
                                                     <div class="form-group has-search">
                                                         <input type="text" class="form-control"
                                                             value="{{ $search }}" placeholder="Tìm kiếm"
                                                             name="search">
                                                     </div>
+                                                    <div class="form-group has-search" style="display: none">
+                                                        <input type="text" class="form-control"
+                                                            value="{{ $department_id }}" placeholder="Tìm kiếm"
+                                                            name="department_id">
+                                                    </div>
+                                                    <button style="display: none">ok</button>
                                                 </form>
+
 
                                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Lọc mã vị trí">
                                                     <select name="filter_personnel_level" required class="selectpicker"
