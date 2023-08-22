@@ -341,8 +341,6 @@ class CustomerController extends Controller
                 ]
             ]);
         }
-
-
         $code = $request->get('code');
         $name = $request->get('name');
         $phone = $request->get('phone');

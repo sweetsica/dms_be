@@ -1693,9 +1693,6 @@
                 const chanelIdError = document.getElementById("chanelIdError");
                 const routeIdError = document.getElementById("routeIdError");
 
-
-
-
                 if (data.success) {
                     addressError.innerHTML = "";
                     nameError.innerHTML = "";
