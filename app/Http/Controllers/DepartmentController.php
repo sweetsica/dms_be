@@ -139,6 +139,7 @@ class DepartmentController extends Controller
             'UnitLeaderList' => $UnitLeaderList,
             "departmentListTree" => $departmentListTree,
             'getDept' => $getDept,
+            'cap_nhan_su' => $cap_nhan_su,
             'department_id' => $department_id,
             'listPosToDept' => $listPosToDept
         ]);

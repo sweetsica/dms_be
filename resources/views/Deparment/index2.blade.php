@@ -185,11 +185,11 @@
                                                             value="{{ $department_id }}" placeholder="Tìm kiếm"
                                                             name="department_id">
                                                     </div>
-                                                    <button style="display: none">ok</button>
+
 
                                                     {{-- <div data-bs-toggle="tooltip" data-bs-placement="top"
                                                     title="Lọc cấp nhân sự">
-                                                    <select name="cap_nhan_su" required class="selectpicker"
+                                                    <select name="cap_nhan_su"  class="selectpicker"
                                                         data-dropup-auto="false">
                                                         <option value="">Lọc cấp nhân sự</option>
                                                         @foreach ($personnelLevelList as $item)
@@ -199,6 +199,7 @@
                                                             @endforeach
                                                     </select>
                                                 </div> --}}
+                                                 <button style="display: none">ok</button>
                                             {{-- </div> --}}
                                             </form>
 

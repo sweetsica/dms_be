@@ -23,7 +23,7 @@ class Position extends Model
         'department_id',
     ];
 
-    
+
     public function levels()
     {
         return $this->belongsTo(PersonnelLevel::class, 'personnel_level');
