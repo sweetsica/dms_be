@@ -502,7 +502,7 @@
                                         <option value="Làm đẹp/Phòng tập thể dục/Thể thao"
                                             {{ $item->group ==
                                             'Làm đẹp/Phòng tập
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                thể dục/Thể thao'
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    thể dục/Thể thao'
                                                 ? 'selected'
                                                 : '' }}>
                                             Làm đẹp/Phòng tập thể dục/Thể
@@ -701,7 +701,7 @@
                             <button type="button" class="btn btn-outline-danger me-3"
                                 data-bs-dismiss="modal">Hủy</button>
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#themchitiet" id="themchitiet">Thêm chi tiết</button>
+                                data-bs-target="#themchitiet" id="btn_chi_tiet">Thêm chi tiết</button>
                         </div>
                     </div>
                 </form>
@@ -730,9 +730,8 @@
                                 <div class="card-title">1. Tổ chức</div>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <input type="text" name="companyName" data-bs-toggle="tooltip"
-                                    data-bs-placement="top" title="Tên công ty" placeholder="Tên công ty"
-                                    class="form-control">
+                                <input type="text" name="taxCode" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Mã số thuế" placeholder="Mã số thuế" class="form-control">
                             </div>
                             <div class="col-md-4 mb-3">
                                 <input type="text" name="personCompany" data-bs-toggle="tooltip"
@@ -743,10 +742,20 @@
                                 <input type="text" name="career" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Chức danh" placeholder="Chức danh" class="form-control">
                             </div>
-                            <div class="col-md-4 mb-3">
-                                <input type="text" name="taxCode" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Mã số thuế" placeholder="Mã số thuế" class="form-control">
+
+                            <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Lĩnh vực kinh doanh">
+                                <select class="selectpicker" id="customerType">
+                                    <option value="" selected>Lĩnh vực kinh doanh</option>
+                                    <option value="Kim khí">Kim khí</option>
+                                    <option value="Điện máy">Điện máy</option>
+                                    <option value="Xe điện">Xe điện</option>
+                                    <option value="Máy công cụ">Máy công cụ</option>
+                                    <option value="Vật liệu xây dựng">Vật liệu xây dựng</option>
+                                    <option value="Lĩnh vực khác">Lĩnh vực khác</option>
+                                </select>
                             </div>
+
                             <div class="col-md-4 mb-3">
                                 <input type="text" name="companyPhoneNumber" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Số điện thoại công ty"
@@ -768,7 +777,34 @@
                             </div>
 
                             <div class="col-md-12 mb-3">
-                                <div class="card-title">2. Địa chỉ</div>
+                                <div class="card-title">2. Liên hệ</div>
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <div class="table-responsive">
+                                    <table id="contact" class="table table-responsive table-hover table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-nowrap text-center" style="">STT</th>
+                                                <th class="text-nowrap text-center" style="">Họ và tên</th>
+                                                <th class="text-nowrap text-center" style="">Số điện thoại</th>
+                                                <th class="text-nowrap text-center" style="">Email</th>
+                                                <th class="text-nowrap text-center" style="">Chức danh</th>
+                                                <th class="text-nowrap text-center">
+                                                    <i class="bi bi-plus fs-3" id="addRowIcon"
+                                                        style="color: var(--primary-color); cursor: pointer;"></i>
+
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <div class="card-title">3. Địa chỉ</div>
                             </div>
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Tỉnh/thành">
@@ -799,10 +835,12 @@
                                     data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ*" class="form-control">
                             </div>
                             <div class="col-md-12 mb-3">
-                                <div id="map" style="height: 300px; display: block" class="border"></div>
+                                <div id="map"
+                                    style="height: 300px; display: block ;opacity: 0.5;background-image: url('{{ asset('/assets/img/img_map.jpg') }}'); "
+                                    class="border"></div>
                             </div>
                             <div class="col-md-12 mb-3">
-                                <div class="card-title">3. Mô tả</div>
+                                <div class="card-title">4. Mô tả</div>
                             </div>
 
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
@@ -834,7 +872,7 @@
 
 
                             <div class="col-md-12 mb-3">
-                                <div class="card-title">4. Phân loại</div>
+                                <div class="card-title">5. Phân loại</div>
                             </div>
 
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
@@ -890,7 +928,7 @@
                             </div>
 
                             <div class="col-md-12 mb-3">
-                                <div class="card-title">5. Hình ảnh</div>
+                                <div class="card-title">6. Hình ảnh</div>
                             </div>
 
                             <div class="col-md-12 mb-3">
@@ -1150,6 +1188,11 @@
             margin: 10px;
             padding: 7.5px 50px;
             cursor: pointer;
+        }
+
+        .btn-disable {
+            background: #bab0b0 !important;
+            border: none !important;
         }
     </style>
 
@@ -1799,18 +1842,53 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const themChiTietBtn = document.getElementById('themchitiet');
+            const themChiTietBtn = document.getElementById('btn_chi_tiet');
+            themChiTietBtn.classList.add('btn-disable');
             themChiTietBtn.disabled = true;
         });
         const customerTypeSelect = document.getElementById('customerType');
-        const themChiTietBtn = document.getElementById('themchitiet');
+        const themChiTietBtn = document.getElementById('btn_chi_tiet');
         customerTypeSelect.addEventListener('change', () => {
             const selectedValue = customerTypeSelect.value;
             if (selectedValue === 'Khách hàng lẻ') {
+                console.log('themChiTietBtn', themChiTietBtn);
                 themChiTietBtn.disabled = true;
+                themChiTietBtn.classList.add('btn-disable');
             } else {
                 themChiTietBtn.disabled = false;
+                themChiTietBtn.classList.remove('btn-disable');
             }
+        });
+    </script>
+
+    <script>
+        const addRowIcon = document.getElementById('addRowIcon');
+        const tbody = document.querySelector('#contact tbody');
+        let rowCount = 1;
+        addRowIcon.addEventListener('click', function() {
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+            <td class="text-center">${rowCount}</td>
+            <td><input type="text" class="form-control" name="name[]"></td>
+            <td><input type="text" class="form-control" name="phone[]"></td>
+            <td><input type="text" class="form-control" name="email[]"></td>
+            <td><input type="text" class="form-control" name="position[]"></td>
+            <td class="text-center">
+                <i class="bi bi-trash deleteRow fs-3" 
+                style="color: var(--primary-color); cursor: pointer;" ></i>
+            </td>
+        `;
+
+            tbody.appendChild(newRow);
+            rowCount++;
+
+            // Xử lý sự kiện xóa hàng
+            const deleteButtons = document.querySelectorAll('.deleteRow');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.closest('tr').remove();
+                });
+            });
         });
     </script>
 @endsection

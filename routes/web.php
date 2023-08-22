@@ -185,6 +185,8 @@ Route::middleware(['auth.role'])->group(function () {
     Route::get('nhan_su_vung/{department_id}', [PersonnelController::class, 'showVung'])->name('Personnel.show.vung');
     Route::post('nhan_su-delete', [PersonnelController::class, 'delete'])->name('Personnel.delete');
 
+    Route::delete('go-nhan-su-khoi-vi-tri', [PersonnelController::class, 'detach'])->name('detach-user-from-position');
+
     Route::get('vai-tro', [RoleController::class, 'index'])->name('Role.index');
     Route::post('vai-tro', [RoleController::class, 'store'])->name('Role.store');
     Route::post('vai-trox/{id}', [RoleController::class, 'update'])->name('Rolex.update');

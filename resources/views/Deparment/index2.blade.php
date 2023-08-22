@@ -245,7 +245,7 @@
                                             <form id="select-form" action="{{ route('delete-selected-items') }}"
                                                 method="POST">
                                                 @csrf
-                                                <div class="action_export mx-3 order-md-1" data-bs-toggle="tooltip"
+                                                <div class="action_export order-md-1 mt-3" data-bs-toggle="tooltip"
                                                     data-bs-placement="top" title="Xóa">
                                                     <button class="btn btn-danger  " type="submit"
                                                         onclick="return confirm('Bạn có muốn xóa không?')"
@@ -853,7 +853,6 @@
             autoclose: true,
             switchOnClick: true,
             startView: "months",
-            +
             minViewMode: "months",
             locale: 'vi',
         });

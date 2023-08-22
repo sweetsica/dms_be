@@ -262,7 +262,7 @@
             <ul id="header_submenu">
 
                 <li class="header_submenu-items more position-relative">
-                    <a href="{{ route('department.index2') }}" class="header_submenu-link more_btn">
+                    <a href="{{ route('department.index2', ['department_id' => 1]) }}" class="header_submenu-link more_btn">
                         Cơ cấu đơn vị<i class="bi bi-chevron-right"></i>
                     </a>
                     <ul class="header_more">
