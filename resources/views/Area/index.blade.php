@@ -61,7 +61,7 @@
                                                             <th class="text-nowrap text-center" style="width:2%">STT</th>
                                                             <th class="text-nowrap" style="width:10%">Mã đơn vị</th>
                                                             <th class="text-nowrap" style="width:10%">Đơn vị </th>
-                                                            <th class="text-nowrap" style="width:10%">Đơn vị mẹ </th>
+                                                            <th class="text-nowrap" style="width:10%">Đơn vị cha </th>
                                                             <th class="text-nowrap" style="width:10%">Trưởng đơn vị </th>
                                                             <th class="text-nowrap" style="width:20%">Chức năng nhiệ vụ</th>
                                                             <th class="text-nowrap" style="width:3%"><span></span></th>
@@ -289,7 +289,7 @@
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Mẫu đề xuất">
                                     <select name="parent" required class="selectpicker" data-dropup-auto="false">
-                                        <option value="0">chọn đơn vị mẹ</option>
+                                        <option value="0">Chọn đơn vị cha</option>
                                         @foreach ($areaLists as $item)
                                             <option value="{{ $item->id }}">
                                                 @php

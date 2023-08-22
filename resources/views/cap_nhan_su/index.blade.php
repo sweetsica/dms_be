@@ -196,13 +196,13 @@
                                 <div class="col-6 mb-3">
                                     <input data-bs-toggle="tooltip" data-bs-placement="top" required
                                         title="Nhập tên cấp nhân sự*" name="name" type="text"
-                                        placeholder="Nhập tên cấp nhân sự" class="form-control"
+                                        placeholder="Nhập tên cấp nhân sự*" class="form-control"
                                         value="{{ $item->name }}">
                                 </div>
                                 <div class="col-6 mb-3">
                                     <input data-bs-toggle="tooltip" required data-bs-placement="top"
                                         title="Nhập mã cấp nhân sự*" name="code" type="text"
-                                        placeholder="Nhập mã cấp nhân sự" class="form-control"
+                                        placeholder="Nhập mã cấp nhân sự*" class="form-control"
                                         value="{{ $item->code }}">
                                 </div>
                                 <div class="col-12 mb-3">

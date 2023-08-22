@@ -20,6 +20,6 @@ class Locality extends Model
 
     public function tuyens()
     {
-        return $this->hasMany(Locality::class, 'area_id');
+        return $this->hasMany(RouteDirection::class, 'areaId');
     }
 }

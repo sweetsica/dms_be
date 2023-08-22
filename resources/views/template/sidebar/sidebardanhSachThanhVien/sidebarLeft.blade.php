@@ -111,7 +111,7 @@
                                 <div class="modal_body-title">Thuộc đơn vị <span class="text-danger">*</span></div>
                             </div>
                             <div class="col-sm-8">
-                                <select class="selectpicker" data-dropup-auto="false" title="Chọn đơn vị mẹ">
+                                <select class="selectpicker" data-dropup-auto="false" title="Chọn đơn vị cha">
                                     <option>CTCP Mastertran</option>
                                     <option>CTCP Thái Bình Hưng Thịnh</option>
                                 </select>
