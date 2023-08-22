@@ -235,12 +235,14 @@
                                                 </div>
                                             </div>
 
-                                            <form id="select-form" action="{{ route('delete-selected-items') }}"
+                                            <form id="select-form" action="{{ route('detach-user-from-position') }}"
                                                 method="POST">
                                                 @csrf
-                                                <div class="action_export mx-3 order-md-1" data-bs-toggle="tooltip"
+                                                @method("DELETE")
+                                                <input type="hidden" name="position_id" value="{{ $getPos->id }}">
+                                                <div class="action_export order-md-1 mt-3" data-bs-toggle="tooltip"
                                                     data-bs-placement="top" title="Xóa">
-                                                    <button class="btn btn-danger  " type="submit"
+                                                    <button class="btn btn-danger" type="submit"
                                                         onclick="return confirm('Bạn có muốn xóa không?')"
                                                         id="delete-selected-button" style="display: none;">Xóa</button>
                                                 </div><br>
@@ -1073,7 +1075,6 @@
             autoclose: true,
             switchOnClick: true,
             startView: "months",
-            +
             minViewMode: "months",
             locale: 'vi',
         });
