@@ -454,7 +454,7 @@
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <button class="btn btn-danger me-md-2 px-5" type="button" data-bs-toggle="modal"
                             data-bs-target="#product{{ $product->id }}">Xem trước</button>
-                        <button class="btn btn-outline-danger me-md-2" type="button">Về danh sách</button>
+                        <a class="btn btn-outline-danger me-md-2" href="/danh-sach-san-pham" type="button">Về danh sách</a>
                         <button class="btn btn-danger  px-5" type="button" data-bs-toggle="modal"
                             data-bs-target="#addDetailProduct">Thêm - sửa chi tiết</button>
                     </div>
