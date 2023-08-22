@@ -237,8 +237,8 @@
                                         value="{{ $item->name }}" required>
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <input data-bs-toggle="tooltip" data-bs-placement="top" title="Mã đơn vị"
-                                        name="code" type="text" placeholder="Mã đơn vị" class="form-control"
+                                    <input data-bs-toggle="tooltip" data-bs-placement="top" title="Mã đơn vị*"
+                                        name="code" type="text" placeholder="Mã đơn vị*" class="form-control"
                                         value="{{ $item->code }}" required>
                                 </div>
                                 <div class="col-6 mb-3">
