@@ -8,7 +8,7 @@
         </li>
 
         <li class="header_menu-item">
-            <a class="header_menu-link menu_btn-sub" href="#">
+            <a class="header_menu-link menu_btn-sub" href="/customer">
                 <i class="bi bi-database-add"></i>
                 <span>Khách hàng</span>
             </a>
