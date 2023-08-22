@@ -434,37 +434,34 @@
                     <div class="d-flex">
                         <div class="card w-75 m-auto">
                             <div class="card-body">
-                                <form method="POST" autocomplete="off">
+                                <form method="POST" autocomplete="off" action="{{ route('cmt.customer', ['id' => $customer->id]) }}" onsubmit="return showConfirmation()">
+                                    @csrf
                                     <div class="card_template-form mb-3">
-                                        <input type="hidden" name="target" value="proposals" autocomplete="off"
-                                            role="presentation">
-                                        <input type="hidden" name="target_id" value="683" autocomplete="off"
-                                            role="presentation">
-                                        <input type="hidden" name="_token" value="" autocomplete="off"
-                                            role="presentation">
+                                        <input type="hidden" value="{{session('user')['name']}}" name="author">
                                         <div class="card-title fs-4">Trao đổi</div>
                                         <div class="flex-fill ms-3 d-flex align-items-center">
-                                            <textarea placeholder="Viết bình luận..." rows="1" class="form-control" name="content"></textarea>
+                                            <input placeholder="Viết bình luận..." rows="1" id="comment" class="form-control" name="content"></input>
                                         </div>
                                         <div>
                                             <button type="submit" class="btn btn-danger mx-3">Gửi</button>
                                         </div>
                                     </div>
                                 </form>
-                                <div class="row p-4" style="background: #c1c4c1; border-radius: 10px">
-                                    <div class="col-lg-3">
-                                        <span class="fs-5 fw-bold">
-                                            Tester :
-                                        </span>
+                                @foreach(json_decode($customer->comment, true) ?? [] as $key => $comment)
+                                    <div class="row p-4" style="background: #c1c4c1; border-radius: 10px">
+                                        <div class="col-lg-3">
+                                            <span class="fs-5 fw-bold">{{ $comment['author'] }}</span>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <span class="fs-5">{{ $comment['content'] }}</span>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <span class="fs-5">{{ $comment['timeComment'] }}</span>
+                                            <a href="{{ route('delete.comment', ['id' => $customer->id, 'key' => $key]) }}" class="bi bi-trash fs-4 ms-4 icon-trash_comment"></a>
+                                        </div>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <span class="fs-5">aaaaaaaaaaaaaaaaaafbjksbkfj</span>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <span class="fs-5">23:37 || 18/08/23</span>
-                                        <i class="bi bi-trash fs-4 ms-4 icon-trash_comment"></i>
-                                    </div>
-                                </div>
+                                    <br>
+                                @endforeach
                             </div>
                         </div>
                     </div>

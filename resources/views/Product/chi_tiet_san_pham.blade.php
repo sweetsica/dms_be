@@ -225,7 +225,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="mb-2">
+                                            <div class="mb-3">
                                                 <p class="m-0 fs-4 fw-bold">Mô tả</p>
                                                 <div class="descrption-content">
                                                     <p class="fs-5 text-justify">
@@ -234,17 +234,32 @@
                                                 </div>
                                             </div>
 
+                                            <div class="mb-3">
+                                                <p class="m-0 fs-3 fw-bold mb-3">Phiên bản màu</p>
+                                                <div class="d-flex">
+                                                    <div class="rounded-circle border border-secondary mx-3 box-color_1">
+                                                    </div>
+                                                    <div class="rounded-circle border border-secondary mx-3 box-color_2">
+                                                    </div>
+                                                    <div class="rounded-circle border border-secondary mx-3 box-color_3">
+                                                    </div>
+                                                    <div class="rounded-circle border border-secondary mx-3 box-color_4">
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                             <div class="mb-2">
                                                 <div class="row ">
                                                     @if (!empty(json_decode($details->attachments)))
                                                         @foreach (json_decode($details->attachments) as $key => $file)
-                                                            <div class="col-lg-4 mb-3">
-                                                                <a href="#"
+                                                            <div class="col-lg-6 mb-3">
+                                                                <a href="{{ $file }}"
                                                                     class="text-color_pimary d-flex align-items-center">
                                                                     <img src="{{ asset('assets/img/icon-pdf.png') }}"
                                                                         class="img img-thumbnail"
-                                                                        style="width:30%; border:none" />
-                                                                    <span class="fw-bold fs-6">{{ $file }}</span>
+                                                                        style="width:20%; border:none" />
+                                                                    <span
+                                                                        class="fw-bold fs-6 text-truncate">{{ $file }}</span>
                                                                 </a>
                                                             </div>
                                                         @endforeach
@@ -252,19 +267,6 @@
                                                 </div>
                                             </div>
 
-                                            <div>
-                                                <p class="m-0 fs-3 fw-bold mb-3">Phiên bản màu</p>
-                                                <div class="d-flex">
-                                                    <div class="rounded-circle border border-secondary mx-3">
-                                                    </div>
-                                                    <div class="rounded-circle border border-secondary mx-3">
-                                                    </div>
-                                                    <div class="rounded-circle border border-secondary mx-3">
-                                                    </div>
-                                                    <div class="rounded-circle border border-secondary mx-3">
-                                                    </div>
-                                                </div>
-                                            </div>
 
                                         </div>
                                     </div>
@@ -451,7 +453,7 @@
 
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <button class="btn btn-danger me-md-2 px-5" type="button" data-bs-toggle="modal"
-                            data-bs-target="#printModal">In</button>
+                            data-bs-target="#product{{ $product->id }}">Xem trước</button>
                         <button class="btn btn-outline-danger me-md-2" type="button">Về danh sách</button>
                         <button class="btn btn-danger  px-5" type="button" data-bs-toggle="modal"
                             data-bs-target="#addDetailProduct">Thêm - sửa chi tiết</button>
@@ -628,285 +630,271 @@
                     </div>
                 </div>
 
-                {{-- Modal in --}}
-                <div id="printThis">
-                    <div class="modal fade" id="printModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-xl-centered" role="document" style="max-width: 24cm">
-                            <div class="modal-content" id="modal-content{{ $product->id }}">
-                                <div class="modal-body">
-                                    <div class="warrper-header mb-5">
-                                        <div
-                                            class="action_wrapper-search d-flex flex-wrap justify-content-between align-items-center mb-3">
-                                            <div class="title-hearder text-center">
-                                                <div class="fw-bold text-title_header">THÔNG SỐ SẢN PHẨM</div>
-                                                <div class="fw-bold text-title_header text-uppercase">
+                {{-- Modal Print --}}
+                <div class="modal fade" id="product{{ $product->id }}" tabindex="-1"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl-centered" role="document" style="max-width: 24cm">
+                        <div class="modal-content" id="modal-content{{ $product->id }}">
+                            <div class="modal-body">
+                                <div class="card_template-body-top" style="margin-bottom: 2rem">
+                                    <div class='row my-2'>
+                                        <div class="col-4">
+                                            <a class="mb-2 w-70">
+                                                <img class="header_logo" src="{{ asset('/assets/img/logo.jpg') }}" />
+                                            </a>
+                                        </div>
+                                        <div class="col-4">
+                                            <div
+                                                style="
+                                            font-size: 2rem;
+                                            text-align: center">
+                                                <div class="fw-bold ">THÔNG SỐ SẢN PHẨM</div>
+                                                <div class="fw-bold  text-uppercase">
                                                     {{ $product->name }} -
-                                                    <span
-                                                        class="text-color_pimary text-uppercase">{{ $product->code }}</span>
+                                                    <span class="text-uppercase"
+                                                        style="color: var(--primary-color)">{{ $product->code }}</span>
                                                 </div>
-                                            </div>
-                                            <div class="img-logo">
-                                                <img class="img-header " src="{{ asset('/assets/img/logo.jpg') }}" />
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div>
-                                        <div class="container mb-4">
-                                            <div class="row g-2">
-                                                <div class="col-lg-7 text-center" id="slider-show">
-                                                    <div class="container">
-                                                        <div class="row g-4">
-                                                            abc
-                                                            {{-- <div class="col-lg-2">
-                                                                <div class="slider slider-nav ">
-                                                                    <div class="mb-3">
-                                                                        <img src="{{ $product->thumbnail }}"
-                                                                            class="img-slider_nav" alt="Slider Nav" />
-                                                                    </div>
-
-                                                                    @if (!empty(json_decode($details->images)))
-                                                                        @foreach (json_decode($details->images) as $key => $img)
-                                                                            <div class="mb-3">
-                                                                                <img src="{{ $img }}"
-                                                                                    class="img-slider_nav"
-                                                                                    alt="Slider Nav" />
-                                                                            </div>
-                                                                        @endforeach
-                                                                    @endif
-
-
-                                                                </div>
+                                <div class="card_template-body-middle1" style="height: 230px">
+                                    <div class="row">
+                                        <div class="col-7 text-center">
+                                            <div class="container">
+                                                <div class="row g-4">
+                                                    <div class="col-2">
+                                                        <div>
+                                                            <div class="mb-3">
+                                                                <img src="{{ $product->thumbnail }}"
+                                                                    class="img-slider_nav" alt="Slider Nav"
+                                                                    style=" width: 100%;
+                                                                    height: auto;" />
                                                             </div>
-                                                            <div class="col-lg-10">
-                                                                <div class="slider slider-single "
-                                                                    style="
-                                                                height: 254px;
-                                                                overflow: hidden">
-                                                                    <div>
-                                                                        <img class="img-slider"
-                                                                            src="{{ $product->thumbnail }}"
-                                                                            alt="Slider Show" />
-                                                                    </div>
 
-                                                                    @if (!empty(json_decode($details->images)))
-                                                                        @foreach (json_decode($details->images) as $key => $img)
-                                                                            <div>
-                                                                                <img class="img-slider"
-                                                                                    src="{{ $img }}"
-                                                                                    alt="Slider Show"
-                                                                                    style="width: 405px;
-                                                                                height: 252px;" />
-                                                                            </div>
-                                                                        @endforeach
+                                                            @if (!empty(json_decode($details->images)))
+                                                                @php
+                                                                    $limit = 4;
+                                                                    $count = 0;
+                                                                @endphp
+                                                                @foreach (json_decode($details->images) as $key => $img)
+                                                                    @if ($count < $limit)
+                                                                        <div class="mb-3">
+                                                                            <img src="{{ $img }}"
+                                                                                class="img-slider_nav" alt="Slider Nav"
+                                                                                style=" width: 100%;
+                                                                            height: auto;" />
+                                                                        </div>
                                                                     @endif
-                                                                </div>
-                                                            </div> --}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-5">
-                                                    <div class="d-flex justify-content-between mb-3">
-                                                        <span>
-                                                            <p class="m-0 fs-4 fw-bold">Giá bán</p>
-                                                            <p class="m-0 fs-5 fw-bold text-color_pimary">$
-                                                                {{ $details->price }}
-                                                            </p>
-                                                        </span>
-                                                        <div class="col-4 d-flex align-items-center justify-content-end"
-                                                            style="height: 70px;">
-                                                            {!! QrCode::generate(route('product.show', $product->id)) !!}
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="mb-2">
-                                                        <p class="m-0 fs-4 fw-bold">Mô tả</p>
-                                                        <div class="descrption-content">
-                                                            <p class="fs-5 text-justify">
-                                                                {{ $details->description }}
-                                                            </p>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="mb-2">
-                                                        <div class="row ">
-                                                            @if (!empty(json_decode($details->attachments)))
-                                                                @foreach (json_decode($details->attachments) as $key => $file)
-                                                                    <div class="col-lg-4 mb-3">
-                                                                        <a href="#"
-                                                                            class="text-color_pimary d-flex align-items-center">
-                                                                            <img src="{{ asset('assets/img/icon-pdf.png') }}"
-                                                                                class="img img-thumbnail"
-                                                                                style="width:30%; border:none" />
-                                                                            <span
-                                                                                class="fw-bold fs-6">{{ $file }}</span>
-                                                                        </a>
-                                                                    </div>
+                                                                    @php $count++; @endphp
                                                                 @endforeach
                                                             @endif
                                                         </div>
-                                                    </div>
 
-                                                    <div>
-                                                        <p class="m-0 fs-3 fw-bold mb-3">Phiên bản màu</p>
-                                                        <div class="d-flex">
-                                                            <div class="rounded-circle border border-secondary mx-3 box-color_1"
-                                                                style="width: 18px; height: 18px;background: #61D1D8">
-                                                            </div>
-                                                            <div class="rounded-circle border border-secondary mx-3 box-color_2"
-                                                                style="width: 18px; height: 18px;background: #ffff"></div>
-                                                            <div class="rounded-circle border border-secondary mx-3 box-color_3"
-                                                                style="width: 18px; height: 18px;background: #D02F2F">
-                                                            </div>
-                                                            <div class="rounded-circle border border-secondary mx-3 box-color_4"
-                                                                style="width: 18px; height: 18px;background: #61D620">
+                                                    </div>
+                                                    <div class="col-10">
+                                                        <div
+                                                            style="
+                                                                height: 300px;
+                                                                overflow: hidden;
+                                                                object-fit: cover;
+                                                                width: 100%;">
+                                                            <div>
+                                                                <img class="img-slider w-100 h-100"
+                                                                    src="{{ $product->thumbnail }}" alt="Slider Show" />
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="container">
-                                            {{-- Thông số kỹ thuật --}}
-                                            <div class="mb-4">
-                                                <h2 class="text-color_pimary my-4">Thông số kỹ thuật</h2>
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <table class="table table-bordered border border-1 text-center"
-                                                            id="table_add">
-                                                            <tr style="height: 40px;">
-                                                                <th class="text-content text-center"
-                                                                    style="background: #DBFDFF91">
-                                                                    Tên thông số
-                                                                </th>
-                                                                <th class="text-content text-center"
-                                                                    style="background: #DBFDFF91">
-                                                                    Thông số
-                                                                </th>
-                                                            </tr>
-
-                                                            <tr style="height: 40px;">
-                                                                <th colspan="2" class="ps-5 text-color_pimary fw-bold"
-                                                                    style="background: #D9D9D9">KÍCH THƯỚC</th>
-                                                            </tr>
-                                                            @if (!empty($details->data))
-                                                                @foreach ($combinedData as $data)
-                                                                    @if ($data->key1 == 'Kích thước')
-                                                                        <tr style="height: 40px;">
-                                                                            <td class="ps-5">{{ $data->key2 }}
-                                                                            </td>
-                                                                            <td class="text-center">{{ $data->key3 }}
-                                                                            </td>
-                                                                        </tr>
-                                                                    @endif
-                                                                @endforeach
-                                                            @endif
-                                                            <tr style="height: 40px;">
-                                                                <th colspan="2" class="ps-5 text-color_pimary fw-bold"
-                                                                    style="background: #D9D9D9">KHỐI LƯƠNG</th>
-                                                            </tr>
-                                                            @if (!empty($details->data))
-                                                                @foreach ($combinedData as $data)
-                                                                    @if ($data->key1 == 'Khối lượng')
-                                                                        <tr style="height: 40px;">
-                                                                            <td class="ps-5">{{ $data->key2 }}
-                                                                            </td>
-                                                                            <td class="text-center">{{ $data->key3 }}
-                                                                            </td>
-                                                                        </tr>
-                                                                    @endif
-                                                                @endforeach
-                                                            @endif
-                                                        </table>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <table class="table table-bordered border border-1 text-center"
-                                                            id="table_add">
-                                                            <tr style="height: 40px;">
-                                                                <th class="text-content text-center"
-                                                                    style="background: #DBFDFF91">
-                                                                    Tên thông số
-                                                                </th>
-                                                                <th class="text-content text-center"
-                                                                    style="background: #DBFDFF91">
-                                                                    Thông số
-                                                                </th>
-                                                            </tr>
-                                                            <tr style="height: 40px;">
-                                                                <th colspan="2" class="ps-5 text-color_pimary fw-bold"
-                                                                    style="background: #D9D9D9">HIỆU NĂNG</th>
-                                                            </tr>
-                                                            @if (!empty($details->data))
-                                                                @foreach ($combinedData as $data)
-                                                                    @if ($data->key1 == 'Hiệu năng')
-                                                                        <tr style="height: 40px;">
-                                                                            <td class="ps-5">{{ $data->key2 }}
-                                                                            </td>
-                                                                            <td class="text-center">{{ $data->key3 }}
-                                                                            </td>
-                                                                        </tr>
-                                                                    @endif
-                                                                @endforeach
-                                                            @endif
-                                                        </table>
-                                                    </div>
+                                        <div class="col-5">
+                                            <div
+                                                style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                                                <span>
+                                                    <p class="m-0 fs-4 fw-bold">Giá bán</p>
+                                                    <p class="m-0 fs-4 fw-bold" style="color: var(--primary-color)">
+                                                        $
+                                                        {{ $details->price }}
+                                                    </p>
+                                                </span>
+                                                <div class="col-4" style="height: 50px;">
+                                                    {!! QrCode::size(50)->generate(route('product.show', $product->id)) !!}
                                                 </div>
                                             </div>
 
-                                            {{-- Sản phẩm liên quan --}}
-                                            <div class="col-md-12 mb-3">
-                                                <div class="card-title fs-4">4. Sản phẩm liên quan</div>
+                                            <div class="mb-2">
+                                                <p class="m-0 fs-4 fw-bold">Mô tả</p>
+                                                <div class="descrption-content">
+                                                    <p class="fs-5 text-justify">
+                                                        {{ $details->description }}
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <div class="mb-4">
-                                                {{-- <h2 class="text-color_pimary my-4">Sản phẩm liên quan</h2> --}}
-                                                <div class="row">
-                                                    @if (!empty($details->related))
-                                                        @php
-                                                            $relatedProductIds = json_decode($details->related);
-                                                            $relatedProducts = \App\Models\Product::whereIn('id', $relatedProductIds)->get();
-                                                        @endphp
-                                                        @foreach ($relatedProducts as $related)
-                                                            @php
-                                                                $detailsPro = \App\Models\ProductDetails::where('id', $related->id)->first();
-                                                            @endphp
-                                                            <div class="col-4 mt-3">
-                                                                <div class="row control_product">
-                                                                    <div href="/chi-tiet-san-pham/{{ $related->id }}"
-                                                                        class="control_product_link d-flex justify-content-between"
-                                                                        id="control_link-1">
-                                                                        <div class="col-3 control_product_img">
-                                                                            <img src="{{ $related->thumbnail }}"
-                                                                                alt="">
-                                                                        </div>
-                                                                        <div class="col-5 control-info ms-2">
+                                            <div class="mb-2">
+                                                <p class="m-0 fs-3 fw-bold mb-3">Phiên bản màu</p>
+                                                <div class="d-flex">
+                                                    <div class="rounded-circle border border-secondary mx-3"
+                                                        style="width: 18px; height: 18px; overflow: hidden;">
+                                                        <img style="width: 100%; height: 150%;"
+                                                            src="{{ asset('assets/img/blue.jpg') }}" />
+                                                    </div>
+                                                    <div class="rounded-circle border border-secondary mx-3"
+                                                        style="width: 18px; height: 18px; overflow: hidden;">
+                                                    </div>
+                                                    <div class="rounded-circle border border-secondary mx-3"
+                                                        style="width: 18px; height: 18px; overflow: hidden;">
+                                                        <img style="width: 100%; height: 150%;"
+                                                            src="{{ asset('assets/img/red.jpg') }}" />
+                                                    </div>
+                                                    <div class="rounded-circle border border-secondary mx-3"
+                                                        style="width: 18px; height: 18px; overflow: hidden;">
+                                                        <img style="width: 100%; height: 150%;"
+                                                            src="{{ asset('assets/img/green.png') }}" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card_template-body-middle1">
+                                    {{-- Thông số kỹ thuật --}}
+                                    <div class="mb-4">
+                                        <h2 class="my-4" style="color: var(--primary-color)">Thông số kỹ thuật</h2>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <table class="table table-bordered border border-1 text-center"
+                                                    id="table_add">
+                                                    <tr style="height: 40px;">
+                                                        <th class="text-content text-center"
+                                                            style="background: #DBFDFF91">
+                                                            Tên thông số
+                                                        </th>
+                                                        <th class="text-content text-center"
+                                                            style="background: #DBFDFF91">
+                                                            Thông số
+                                                        </th>
+                                                    </tr>
 
-                                                                            <div class="over_info1 card-title-black fs-5">
-                                                                                {{ $related->name }} -
-                                                                                {{ $related->code }}
-                                                                            </div>
-                                                                            <div class="over_info1">
-                                                                                {{ number_format($detailsPro->price ?? 0, 2, ',', '.') }}
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                    <tr style="height: 40px;">
+                                                        <th colspan="2" class="ps-5 text-color_pimary fw-bold"
+                                                            style="background: #D9D9D9">KÍCH THƯỚC</th>
+                                                    </tr>
+                                                    @if (!empty($details->data))
+                                                        @foreach ($combinedData as $data)
+                                                            @if ($data->key1 == 'Kích thước')
+                                                                <tr style="height: 40px;">
+                                                                    <td class="ps-5">{{ $data->key2 }}
+                                                                    </td>
+                                                                    <td class="text-center">{{ $data->key3 }}
+                                                                    </td>
+                                                                </tr>
+                                                            @endif
                                                         @endforeach
                                                     @endif
-                                                </div>
+                                                    <tr style="height: 40px;">
+                                                        <th colspan="2" class="ps-5 text-color_pimary fw-bold"
+                                                            style="background: #D9D9D9">KHỐI LƯƠNG</th>
+                                                    </tr>
+                                                    @if (!empty($details->data))
+                                                        @foreach ($combinedData as $data)
+                                                            @if ($data->key1 == 'Khối lượng')
+                                                                <tr style="height: 40px;">
+                                                                    <td class="ps-5">{{ $data->key2 }}
+                                                                    </td>
+                                                                    <td class="text-center">{{ $data->key3 }}
+                                                                    </td>
+                                                                </tr>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </table>
+                                            </div>
+                                            <div class="col-6">
+                                                <table class="table table-bordered border border-1 text-center"
+                                                    id="table_add">
+                                                    <tr style="height: 40px;">
+                                                        <th class="text-content text-center"
+                                                            style="background: #DBFDFF91">
+                                                            Tên thông số
+                                                        </th>
+                                                        <th class="text-content text-center"
+                                                            style="background: #DBFDFF91">
+                                                            Thông số
+                                                        </th>
+                                                    </tr>
+                                                    <tr style="height: 40px;">
+                                                        <th colspan="2" class="ps-5 text-color_pimary fw-bold"
+                                                            style="background: #D9D9D9">HIỆU NĂNG</th>
+                                                    </tr>
+                                                    @if (!empty($details->data))
+                                                        @foreach ($combinedData as $data)
+                                                            @if ($data->key1 == 'Hiệu năng')
+                                                                <tr style="height: 40px;">
+                                                                    <td class="ps-5">{{ $data->key2 }}
+                                                                    </td>
+                                                                    <td class="text-center">{{ $data->key3 }}
+                                                                    </td>
+                                                                </tr>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </table>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="card_template-body-middle1">
+                                    {{-- Sản phẩm liên quan --}}
+                                    <div class="col-12 mb-3">
+                                        <h2 style="color: var(--primary-color)">Sản phẩm liên quan</h2>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="row g-4">
+                                            @if (!empty($details->related))
+                                                @php
+                                                    $relatedProductIds = json_decode($details->related);
+                                                    $relatedProducts = \App\Models\Product::whereIn('id', $relatedProductIds)->get();
+                                                @endphp
+                                                @foreach ($relatedProducts as $related)
+                                                    @php
+                                                        $detailsPro = \App\Models\ProductDetails::where('id', $related->id)->first();
+                                                    @endphp
+                                                    <div class="col-4 mt-3">
+                                                        <div class="row g-0">
+                                                            <div href="/chi-tiet-san-pham/{{ $related->id }}"
+                                                                class=" d-flex justify-content-between align-items-center border p-3"
+                                                                id="control_link-1">
+                                                                <div class="col-6 control_product_img">
+                                                                    <img src="{{ $related->thumbnail }}" alt="">
+                                                                </div>
+                                                                <div class="col-6 control-info ms-2">
+                                                                    <div class="over_info1 card-title-black fs-5">
+                                                                        {{ $related->name }} -
+                                                                        {{ $related->code }}
+                                                                    </div>
+                                                                    <div class="over_info1">
+                                                                        {{ number_format($detailsPro->price ?? 0, 2, ',', '.') }}
+                                                                    </div>
+                                                                </div>
 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            @endif
+                                        </div>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-outline-danger"
-                                            data-bs-dismiss="modal">Hủy</button>
-                                        <button type="button" class="btn btn-danger " id="btnPrint"
-                                            data-content="modal-content{{ $product->id }}">In</button>
-                                    </div>
+                                </div>
+
+
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-danger"
+                                        data-bs-dismiss="modal">Hủy</button>
+                                    <button type="button" class="btn btn-danger btnPrint"
+                                        data-content="modal-content{{ $product->id }}">In</button>
                                 </div>
                             </div>
                         </div>
@@ -1019,7 +1007,8 @@
 
             .img-slider {
                 width: 100%;
-                height: 100%;
+                height: 290px;
+                object-fit: cover;
             }
 
             .img-slider_nav {
@@ -1112,6 +1101,9 @@
 
         <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}"></script>
         <script type="text/javascript" src="{{ asset('/assets/js/components/dataHrefTable.js') }}"></script>
+
+        <script src="{{ asset('/assets/plugins/print.min.js') }}"></script>
+        <script src="{{ asset('/assets/js/components/capturePDF.js') }}"></script>
 
         {{-- Slick --}}
         <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
@@ -1258,27 +1250,6 @@
                 if (index >= 0) {
                     liEl.remove();
                 }
-            }
-
-            // Print
-            document.getElementById("btnPrint").onclick = function() {
-                printElement(document.getElementById("printThis"));
-            }
-
-            function printElement(elem) {
-                var domClone = elem.cloneNode(true);
-
-                var $printSection = document.getElementById("printSection");
-
-                if (!$printSection) {
-                    var $printSection = document.createElement("div");
-                    $printSection.id = "printSection";
-                    document.body.appendChild($printSection);
-                }
-
-                $printSection.innerHTML = "";
-                $printSection.appendChild(domClone);
-                window.print();
             }
         </script>
 
