@@ -187,12 +187,12 @@
                                 <div class="col-6 mb-3">
                                     <input data-bs-toggle="tooltip" required data-bs-placement="top"
                                         title="Nhập tên vai trò*" name="name" type="text"
-                                        placeholder="Nhập tên vai trò" class="form-control" value="{{ $item->name }}">
+                                        placeholder="Nhập tên vai trò*" class="form-control" value="{{ $item->name }}">
                                 </div>
                                 <div class="col-6 mb-3">
                                     <input data-bs-toggle="tooltip" required data-bs-placement="top"
                                         title="Nhập mã vai trò*" name="code" type="text"
-                                        placeholder="Nhập mã vai trò" class="form-control" value="{{ $item->code }}">
+                                        placeholder="Nhập mã vai trò*" class="form-control" value="{{ $item->code }}">
                                 </div>
                                 <div class="col-6 mb-3">
                                     <div data-bs-toggle="tooltip" data-bs-placement="top">
