@@ -499,13 +499,12 @@
                                         <div class="col-md-12 mb-3">
                                             <div class="card-title fs-4">3. Thông số kỹ thuật</div>
                                         </div>
+                                        @if (!empty($details->data))
                                         @foreach ($combinedData as $data)
                                         <div class="col-md-4 mb-3">
                                             <select name="data[0][key1]" class="selectpicker" data-dropup-auto="false"
                                                 data-width="100%"  data-size="3">
-
                                                 <option>{{$data->key1}}</option>
-
                                                 @foreach ($TechnicalSpecificationsGroupList as $item)
                                                     <option value="{{ $item->name }}">{{ $item->name }}</option>
                                                 @endforeach
@@ -532,6 +531,7 @@
                                             </div>
                                         </div>
                                         @endforeach
+                                        @endif
                                     </div>
 
                                     <div class="row">
