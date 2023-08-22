@@ -353,8 +353,8 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Thêm sản phẩm</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="addForm" method="POST" action="{{ route('product.store') }}" enctype="multipart/form-data"
-                    onsubmit="openModal()">
+                <form id="addForm" method="POST" action="{{ route('product.store') }}"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -418,7 +418,7 @@
                                                     <img style="width:16px;height:16px"
                                                         src="{{ asset('assets/img/upload-file.svg') }}" />
                                                     Tải file lên
-                                                    <input accept=".png, .jpeg, .jpg" role="button" required
+                                                    <input accept=".png, .jpeg, .jpg" required role="button"
                                                         type="file" class="modal_upload-input modal_upload-file"
                                                         name="file" onchange="updateList(event)">
                                                 </button>
@@ -635,19 +635,19 @@
         // });
 
 
-        // $(document).ready(function() {
-        //     // Handle form submission
-        //     $('#addForm').submit(function(event) {
-        //         // Prevent the default form submission
-        //         event.preventDefault();
+        $(document).ready(function() {
+            // Handle form submission
+            $('#addForm').submit(function(event) {
+                // Prevent the default form submission
+                event.preventDefault();
 
-        //         // Show the loading button and hide the submit button
-        //         $('#submitBtn').hide();
-        //         $('#loadingBtn').show();
+                // Show the loading button and hide the submit button
+                $('#submitBtn').hide();
+                $('#loadingBtn').show();
 
-        //         // Submit the form
-        //         $(this).unbind('submit').submit();
-        //     });
-        // });
+                // Submit the form
+                $(this).unbind('submit').submit();
+            });
+        });
     </script>
 @endsection

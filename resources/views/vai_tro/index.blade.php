@@ -1,6 +1,6 @@
 @extends('template.master')
 {{-- Trang chủ GIao Ban --}}
-@section('title', 'Đề xuất theo mẫu')
+@section('title', 'Danh sách vai trò')
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 @endsection
@@ -40,15 +40,15 @@
                                                     </form>
                                                 </div>
 
-                                                <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
+                                                {{-- <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
                                                     data-bs-placement="top" title="Lọc">
                                                     <button class="btn btn-outline-danger" data-bs-toggle="modal"
                                                         data-bs-target="#filterOptions">
                                                         <i class="bi bi-funnel"></i>
                                                     </button>
-                                                </div>
+                                                </div> --}}
                                                 @if (session('user')['role_id'] == '1')
-                                                    <div class="action_export order-md-4">
+                                                    <div class="action_export order-md-4" style="margin-left: 12px">
                                                         <button class="btn btn-danger d-block testCreateUser"
                                                             data-bs-toggle="modal" data-bs-target="#taoDeXuat">Thêm vai
                                                             trò</button>
@@ -187,17 +187,19 @@
                                 <div class="col-6 mb-3">
                                     <input data-bs-toggle="tooltip" required data-bs-placement="top"
                                         title="Nhập tên vai trò*" name="name" type="text"
-                                        placeholder="Nhập tên vai trò" class="form-control" value="{{ $item->name }}">
+                                        placeholder="Nhập tên vai trò*" class="form-control" value="{{ $item->name }}">
                                 </div>
                                 <div class="col-6 mb-3">
                                     <input data-bs-toggle="tooltip" required data-bs-placement="top"
                                         title="Nhập mã vai trò*" name="code" type="text"
-                                        placeholder="Nhập mã vai trò" class="form-control" value="{{ $item->code }}">
+                                        placeholder="Nhập mã vai trò*" class="form-control" value="{{ $item->code }}">
                                 </div>
-                                <div class="col-6 mb-3">
+                            </div>
+                        <div class="row">
+                                <div class="col">
                                     <div data-bs-toggle="tooltip" data-bs-placement="top">
                                         <textarea name="description" type="text" placeholder="Chức năng nhiệm vụ" class="form-control "
-                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Mô tả" style="width: 450px;height: 80px;">{{ $item->description }}</textarea>
+                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Mô tả" style="height: 80px;">{{ $item->description }}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -244,7 +246,7 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Thêm mới</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('Role.store') }}" method="POST">
+                <form id="addForm" action="{{ route('Role.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -258,17 +260,23 @@
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Nhập mã vai trò*">
                             </div>
-                            <div class="col-6 mb-3">
+                        </div>
+                        <div class="row">
+                            <div class="col">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top">
                                     <textarea name="description" type="text" placeholder="Mô tả" class="form-control " data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Mô tả" style="width: 450px;height: 80px;"></textarea>
+                                        data-bs-placement="top" title="Mô tả" style="height: 80px;"></textarea>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-danger"
-                                    data-bs-dismiss="modal">Hủy</button>
-                                <button type="submit" class="btn btn-danger">Tạo</button>
-                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
+                            <button id="loadingBtn" style="display: none;" class="btn btn-danger" type="button" disabled>
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Loading...
+                            </button>
+                            <button id="submitBtn" type="submit" class="btn btn-danger">Tạo</button>
+                        </div>
                 </form>
             </div>
         </div>
@@ -320,6 +328,29 @@
             // Đặt giá trị của tất cả các ô checkbox trong bảng theo giá trị của ô chọn/bỏ chọn tất cả
             checkboxes.forEach((checkbox) => {
                 checkbox.checked = this.checked;
+            });
+        });
+    </script>
+
+    <script>
+        // $('#addForm').on('submit', function(e) {
+        //     $('#addDetailProduct').modal('show');
+        //     event.preventDefault();
+        // });
+
+
+        $(document).ready(function() {
+            // Handle form submission
+            $('#addForm').submit(function(event) {
+                // Prevent the default form submission
+                event.preventDefault();
+
+                // Show the loading button and hide the submit button
+                $('#submitBtn').hide();
+                $('#loadingBtn').show();
+
+                // Submit the form
+                $(this).unbind('submit').submit();
             });
         });
     </script>

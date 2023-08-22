@@ -89,7 +89,6 @@
                                                                     name="selected_items[]" value="{{ $item->id }}">
                                                             </td>
                                                             <td>
-                                                            <td>
                                                                 <div class="overText text-center">
                                                                     {{ $a++ }}
                                                                 </div>
@@ -230,7 +229,7 @@
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Vùng*">
                                     {{-- <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Vùng*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="area" data-live-search-placeholder="Tìm kiếm..."> --}}
-                                    <select name="area" required class="selectpicker" data-dropup-auto="false">
+                                    <select name="area" required class="selectpicker" data-dropup-auto="false" data-live-search="true">
                                         <option value="{{ $item->area }}">{{ $item->department_name }}</option>
                                         @foreach ($department as $depmt)
                                             <option value="{{ $depmt->id }}">
@@ -265,7 +264,7 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Thêm khu vực</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="formThemCapPhat" method="POST" action="{{ route('area.store') }}">
+                <form id="addForm" method="POST" action="{{ route('area.store') }}">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -280,7 +279,7 @@
                                     class="form-control">
                             </div>
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Vùng*">
-                                <select name="area" required class="selectpicker" data-dropup-auto="false">
+                                <select name="area" required class="selectpicker" data-dropup-auto="false" data-live-search="true">
                                     <option value="">Chọn vùng*</option>
                                     @foreach ($department as $item)
                                         <option value="{{ $item->id }}">
@@ -297,7 +296,11 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
-                        <button type="submit" class="btn btn-danger">Lưu</button>
+                        <button id="loadingBtn" style="display: none;" class="btn btn-danger" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button>
+                        <button id="submitBtn" type="submit" class="btn btn-danger">Lưu</button>
                     </div>
                 </form>
             </div>
@@ -534,6 +537,29 @@
             // Đặt giá trị của tất cả các ô checkbox trong bảng theo giá trị của ô chọn/bỏ chọn tất cả
             checkboxes.forEach((checkbox) => {
                 checkbox.checked = this.checked;
+            });
+        });
+    </script>
+
+    <script>
+        // $('#addForm').on('submit', function(e) {
+        //     $('#addDetailProduct').modal('show');
+        //     event.preventDefault();
+        // });
+
+
+        $(document).ready(function() {
+            // Handle form submission
+            $('#addForm').submit(function(event) {
+                // Prevent the default form submission
+                event.preventDefault();
+
+                // Show the loading button and hide the submit button
+                $('#submitBtn').hide();
+                $('#loadingBtn').show();
+
+                // Submit the form
+                $(this).unbind('submit').submit();
             });
         });
     </script>

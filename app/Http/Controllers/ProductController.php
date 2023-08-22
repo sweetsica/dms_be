@@ -6,12 +6,17 @@ use App\Models\Product;
 use App\Models\ProductDetails;
 use App\Models\Specifications;
 use App\Models\TechnicalSpecificationsGroup;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Barryvdh\DomPDF\PDF as DomPDFPDF;
+// use Barryvdh\DomPDF\PDF;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+// use Barryvdh\DomPDF\PDF;
+use PDF;
 
 class ProductController extends Controller
 {
@@ -345,5 +350,24 @@ class ProductController extends Controller
 
         Session::flash('success', "Xoá sản phẩm liên quan thành công");
         return back();
+    }
+
+    public function export($id)
+    {
+        // set_time_limit(120);
+        $product = Product::findOrFail($id);
+        $details = ProductDetails::where('product_id', $id)->first();
+        $jsonCombinedData = $details->data;
+        $combinedData = json_decode($jsonCombinedData);
+
+     $pdf = FacadePdf::loadView('pdf.chi_tiet_san_pham_pdf',[
+        "product"=> $product,
+        "details"=> $details,
+        "combinedData"=>$combinedData,
+     ]);
+
+    //  return $pdf->store('chi_tiet_san_pham_pdf.pdf');
+     return $pdf->stream();
+    //  set_time_limit(30);
     }
 }

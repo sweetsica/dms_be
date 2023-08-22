@@ -227,9 +227,9 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
                                     <img class="header_user-img" src="{{ asset('assets/img/avatar.jpeg') }}" />
                                 </div>
                                 <span class="fw-bold">{{ session('user')['name'] ?? '' }}</span>
-                                <span>({{ session('user')['role'] ?? '' }})</span>
+                                <span>({{ session('user')['role_id'] ?? '' }})</span>
                                 <div class="">
-                                    {{ session('user')['position'] ?? '' }}
+                                    {{ session('user')['position_id'] ?? '' }}
                                 </div>
                             </li>
                             <li class="header_user-item">

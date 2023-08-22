@@ -111,11 +111,14 @@
                                                                         </div>
                                                                     </td>
                                                                     <td class="">
-                                                                        <div class="overText" data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top"
-                                                                            title="{{ $item->name }}">
-                                                                            {{ $item->name }}
-                                                                        </div>
+                                                                        <a style="color: black; text-decoration: underline;">
+                                                                            {{-- href="{{ route('department.assignUser', ['' => $item->id]) }}"> --}}
+                                                                            <div class="overText" data-bs-toggle="tooltip"
+                                                                                data-bs-placement="top"
+                                                                                title="{{ $item->name }}">
+                                                                                {{ $item->name }}
+                                                                            </div>
+                                                                        </a>
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
@@ -125,11 +128,14 @@
                                                                         </div>
                                                                     </td>
                                                                     <td>
-                                                                        <div class="overText" data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top"
-                                                                            title="{{ $item->department_name }}">
-                                                                            {{ $item->department_name }}
-                                                                        </div>
+                                                                        <a style="color: black; text-decoration: underline;"
+                                                                            href="{{ route('department.index2', ['department_id' => $item->department_id]) }}">
+                                                                            <div class="overText" data-bs-toggle="tooltip"
+                                                                                data-bs-placement="top"
+                                                                                title="{{ $item->department_name }}">
+                                                                                {{ $item->department_name }}
+                                                                            </div>
+                                                                        </a>
 
                                                                     </td>
                                                                     <td class="">
@@ -246,7 +252,7 @@
                                 <div class="col-6 mb-3">
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn đơn vị công tác*">
                                         <select name="department_id" required class="selectpicker"
-                                            data-dropup-auto="false">
+                                            data-dropup-auto="false" data-live-search="true">
                                             <?php if ($item->department_id == null){ ?>
                                             <option>Chọn đơn vị công
                                                 tác*
@@ -274,7 +280,7 @@
                                 </div>
                                 <div class="col-6 mb-3">
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn cấp nhân sự*">
-                                        <select name="personnel_level" required class="selectpicker"
+                                        <select name="personnel_level" required class="selectpicker" data-live-search="true"
                                             data-dropup-auto="false">
                                             <?php if ($item->personnel_level == null){ ?>
                                             <option>Chọn cấp nhân sự*
@@ -295,7 +301,7 @@
                                 <div class="col-6 mb-3">
 
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn cấp quản lý">
-                                        <select name="parent" class="selectpicker" data-dropup-auto="false">
+                                        <select name="parent" class="selectpicker" data-dropup-auto="false" data-live-search="true">
                                             <?php if ($item->parent == null){ ?>
                                             <option value="0">Chọn cấp quản lý
                                             </option>
@@ -394,7 +400,7 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Thêm mới vị trí/chức danh</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('position.store') }}" method="POST">
+                <form id="addForm" action="{{ route('position.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -410,7 +416,7 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn đơn vị công tác*">
-                                    <select name="department_id" required class="selectpicker" data-dropup-auto="false">
+                                    <select name="department_id" required class="selectpicker" data-dropup-auto="false" data-live-search="true">
                                         <option value="">Chọn đơn vị công tác*</option>
                                         @foreach ($departmentlists as $item)
                                             <option value="{{ $item->id }}">
@@ -429,7 +435,7 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn cấp nhân sự*">
-                                    <select name="personnel_level" required class="selectpicker"
+                                    <select name="personnel_level" required class="selectpicker" data-live-search="true"
                                         data-dropup-auto="false">
                                         <option value="">Chọn cấp nhân sự*</option>
                                         @foreach ($personnelLevelList as $item)
@@ -442,7 +448,7 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn vị trí cấp quản lý">
-                                    <select name="parent" required class="selectpicker" data-dropup-auto="false">
+                                    <select name="parent" required class="selectpicker" data-dropup-auto="false" data-live-search="true">
                                         <option value="0">Chọn vị trí cấp quản lý</option>
                                         @foreach ($positionlists as $item)
                                             <option value="{{ $item->id }}">
@@ -482,9 +488,12 @@
                             </div>
 
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy
+                                <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
+                                <button id="loadingBtn" style="display: none;" class="btn btn-danger" type="button" disabled>
+                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    Loading...
                                 </button>
-                                <button type="submit" class="btn btn-danger">Tạo</button>
+                                <button id="submitBtn" type="submit" class="btn btn-danger">Tạo</button>
                             </div>
                         </div>
                     </div>
@@ -609,6 +618,29 @@
             const atLeastOneChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
             deleteButton.style.display = atLeastOneChecked ? 'block' : 'none';
         }
+    </script>
+    
+    <script>
+        // $('#addForm').on('submit', function(e) {
+        //     $('#addDetailProduct').modal('show');
+        //     event.preventDefault();
+        // });
+
+
+        $(document).ready(function() {
+            // Handle form submission
+            $('#addForm').submit(function(event) {
+                // Prevent the default form submission
+                event.preventDefault();
+
+                // Show the loading button and hide the submit button
+                $('#submitBtn').hide();
+                $('#loadingBtn').show();
+
+                // Submit the form
+                $(this).unbind('submit').submit();
+            });
+        });
     </script>
 
 @endsection

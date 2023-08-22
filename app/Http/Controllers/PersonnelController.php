@@ -775,6 +775,10 @@ class PersonnelController extends Controller
         $annual_salary = $request->get('annual_salary');
         $pack = $request->get('pack');
         $manage = $request->get('manage');
+        $checkmail = Personnel::where('email', $email)->orWhere('phone', $phone)->first();
+        if ($checkmail){
+            return redirect()->back()->with('error', 'Email hoặc số điện thoại đã tồn tại. Xin vui lòng nhập lại!');
+        }
         $data = new Personnel();
         $data->name = $name;
         $data->department_id = $department_id;

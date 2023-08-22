@@ -71,6 +71,10 @@ Route::middleware(['auth.role'])->group(function () {
 
     Route::get('/customer/{id}/download/{name}', [CustomerController::class, 'download'])->name('customer.download');
 
+    Route::post('/cmt-customer/{id}', [CustomerController::class, 'cmt'])->name('cmt.customer');
+
+    Route::get('/delete-comment/{id}/{key}', [CustomerController::class, 'deleteComment'])->name('delete.comment');
+
     Route::get('chi-tiet-khach-hang/{id}', [CustomerController::class, 'show'])->name('customer-detail.list');
 
     Route::get('/nhan_su', [PersonnelController::class, 'view'])->name('personel.view');
@@ -91,7 +95,7 @@ Route::middleware(['auth.role'])->group(function () {
 
     // Route::get('/get-customer/{id}', [CustomerController::class, 'findById'])->name('find-customer-byId');
 
-    Route::get('/order', [OrderController::class, 'index'])->name('index.order');
+    // Route::get('/order', [OrderController::class, 'index'])->name('index.order');
 
     // Trang chủ
     Route::get('/dashboard', [DashboardController::class, 'indexv2'])->name("dashboard");
@@ -115,6 +119,7 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('them-moi-chi-tiet/{id}', [ProductController::class, 'create'])->name('product.create');
     Route::post('them-san-pham-lien-quan/{id}', [ProductController::class, 'related'])->name('product.related');
     Route::post('xoa-chi-tiet/{id}', [ProductController::class, 'delete'])->name('product.deleted');
+    Route::get('export-pdf/{id}',[ProductController::class, 'export'])->name('product.export');
 
     Route::get('danh-sach-phien-ban', [VersionController::class, 'index'])->name('version.list');
     Route::post('them-moi-phien-ban', [VersionController::class, 'store'])->name('version.store');
@@ -158,6 +163,7 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('position/{id}', [PositionController::class, 'update'])->name('position.update');
     Route::post('positionx/{id}', [PositionController::class, 'destroy'])->name('positionx.destroy');
     Route::post('position-delete', [PositionController::class, 'delete'])->name('Position.delete');
+    Route::delete('position/{id}', [PositionController::class, 'detach'])->name('position.detach');
 
     Route::get('cap-nhan-su', [PersonnelLevelController::class, 'index'])->name('PersonnelLevel.index');
     Route::post('cap-nhan-su', [PersonnelLevelController::class, 'store'])->name('PersonnelLevel.store');
