@@ -843,7 +843,10 @@
                                     data-live-search="true" title="Nhóm khách hàng*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="groupId" id="groupId"
                                     data-live-search-placeholder="Tìm kiếm...">
-                                    <option value="Nhà thuốc">Nhà thuốc</option>
+                                    @foreach ($listgroup as $item )
+                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                    @endforeach
+                                    {{-- <option value="Nhà thuốc">Nhà thuốc</option>
                                     <option value="Phòng khám/Trung tâm tế">Phòng khám/Trung tâm tế</option>
                                     <option value="Bệnh viện">Bệnh viện</option>
                                     <option value="Nhà phân phối">Nhà phân phối</option>
@@ -854,7 +857,7 @@
                                     <option value="Chuỗi nhà thuốc">Chuỗi nhà thuốc</option>
                                     <option value="Đại siêu thị">Đại siêu thị</option>
                                     <option value="Làm đẹp/Phòng tập thể dục/Thể thao">Làm đẹp/Phòng tập thể dục/Thể thao
-                                    </option>
+                                    </option> --}}
                                 </select>
                             </div>
 

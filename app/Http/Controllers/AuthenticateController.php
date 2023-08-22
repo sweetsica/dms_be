@@ -24,10 +24,11 @@ class AuthenticateController extends Controller
     {
         try {
             $intendedUrl = $request->session()->get('url.intended');
-            $email = $request->input('email');
+            $email_phone = $request->input('email_phone');
+            // $phone = $request->input('phone');
             $password = $request->input('password');
 
-            $account = Personnel::where('email', $email)->where('password', $password)->firstOrFail();
+            $account = Personnel::where('email', $email_phone)->orWhere('phone', $email_phone)->where('password', $password)->firstOrFail();
             if ($account) {
                 if ($account->status == "Đang làm việc") {
                     $account->load('department');

@@ -174,6 +174,7 @@
 
 
                                                 <form method="GET" action="">
+                                                    {{-- <div style="display: flex"> --}}
                                                     <div class="form-group has-search">
                                                         <input type="text" class="form-control"
                                                             value="{{ $search }}" placeholder="Tìm kiếm"
@@ -185,20 +186,21 @@
                                                             name="department_id">
                                                     </div>
                                                     <button style="display: none">ok</button>
-                                                </form>
 
-
-                                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Lọc mã vị trí">
-                                                    <select name="filter_personnel_level" required class="selectpicker"
+                                                    {{-- <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    title="Lọc cấp nhân sự">
+                                                    <select name="cap_nhan_su" required class="selectpicker"
                                                         data-dropup-auto="false">
-                                                        <option value="">Lọc mã vị trí</option>
-                                                        {{-- @foreach ($personnelLevelList as $item)
+                                                        <option value="">Lọc cấp nhân sự</option>
+                                                        @foreach ($personnelLevelList as $item)
                                                                 <option value="{{ $item->id }}">
                                                                     {{ $item->name }}
                                                                 </option>
-                                                            @endforeach --}}
+                                                            @endforeach
                                                     </select>
-                                                </div>
+                                                </div> --}}
+                                            {{-- </div> --}}
+                                            </form>
 
                                                 <div data-bs-toggle="tooltip" data-bs-placement="top"
                                                     title="Lọc cấp nhân sự">

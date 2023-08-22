@@ -89,6 +89,7 @@ class DepartmentController extends Controller
         $search = $request->get('search');
         $don_vi_me = $request->get('don_vi_me');
         $leader_name = $request->get('leader_name');
+        $cap_nhan_su = $request->get('cap_nhan_su');
         $query = Department::query();
         // $departmentList = Department::
         $query->leftJoin('personnel', 'personnel.id', '=', 'department.ib_lead')

@@ -33,7 +33,7 @@
                                 <div class="d-flex align-items-center justify-content-between my-3">
                                     <h1 class="text-color_pimary fs-3">{{ $customer->companyName ?? $customer->name }}</h1>
                                     <div>
-                                        <button class="btn btn-outline-danger me-3">Về danh sách</button>
+                                        <button class="btn btn-outline-danger me-3"><a href="{{ route('customers') }}" style="color: red">Về danh sách</a></button>
                                         <button class="btn btn-danger">Tạo đơn hàng</button>
                                     </div>
                                 </div>
