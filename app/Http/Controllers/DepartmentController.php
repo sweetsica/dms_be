@@ -89,6 +89,7 @@ class DepartmentController extends Controller
         $search = $request->get('search');
         $don_vi_me = $request->get('don_vi_me');
         $leader_name = $request->get('leader_name');
+        $cap_nhan_su = $request->get('cap_nhan_su');
         $query = Department::query();
         // $departmentList = Department::
         $query->leftJoin('personnel', 'personnel.id', '=', 'department.ib_lead')
@@ -121,8 +122,9 @@ class DepartmentController extends Controller
         $getDept = [];
         $listPosToDept = [];
         if ($department_id) {
+
             $getDept = Department::with('areas')->find($department_id);
-            $listPosToDept = Position::with('levels')->where('department_id', $department_id)->where("position.code", "like", "%$search%")->get();
+            $listPosToDept = Position::with('levels')->where('department_id', $department_id )->where("position.code", "like", "%$search%")->get();
         }
         $personnelLevelList = PersonnelLevel::all();
         $positionlists = $this->getPosition();
@@ -137,6 +139,7 @@ class DepartmentController extends Controller
             'UnitLeaderList' => $UnitLeaderList,
             "departmentListTree" => $departmentListTree,
             'getDept' => $getDept,
+            'department_id' => $department_id,
             'listPosToDept' => $listPosToDept
         ]);
     }

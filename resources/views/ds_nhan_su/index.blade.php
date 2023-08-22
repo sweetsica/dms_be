@@ -120,7 +120,7 @@
                                                                             title="{{ $item->name ?? '' }}">
                                                                             {{ $item->name ?? '' }}
                                                                         </div>
-                                                                    </td>                                                                
+                                                                    </td>
                                                                     <td>
                                                                         <a style="color: black; text-decoration: underline;"
                                                                             href="{{ route('department.index2', ['department_id' => $item->department_id]) }}">
@@ -823,7 +823,7 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
     @endforeach
 
 
