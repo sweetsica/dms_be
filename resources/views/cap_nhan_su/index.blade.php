@@ -254,7 +254,7 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Thêm mới</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('PersonnelLevel.store') }}" method="POST">
+                <form id="addForm" action="{{ route('PersonnelLevel.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -275,9 +275,12 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-danger"
-                                    data-bs-dismiss="modal">Hủy</button>
-                                <button type="submit" class="btn btn-danger" id="submitButton">Tạo</button>
+                                <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
+                                <button id="loadingBtn" style="display: none;" class="btn btn-danger" type="button" disabled>
+                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    Loading...
+                                </button>
+                                <button id="submitBtn" type="submit" class="btn btn-danger">Lưu</button>
                             </div>
                         </div>
                     </div>
@@ -341,6 +344,29 @@
             startView: "months",
             minViewMode: "months",
             locale: 'vi',
+        });
+    </script>
+
+    <script>
+        // $('#addForm').on('submit', function(e) {
+        //     $('#addDetailProduct').modal('show');
+        //     event.preventDefault();
+        // });
+
+
+        $(document).ready(function() {
+            // Handle form submission
+            $('#addForm').submit(function(event) {
+                // Prevent the default form submission
+                event.preventDefault();
+
+                // Show the loading button and hide the submit button
+                $('#submitBtn').hide();
+                $('#loadingBtn').show();
+
+                // Submit the form
+                $(this).unbind('submit').submit();
+            });
         });
     </script>
 

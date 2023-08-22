@@ -245,7 +245,7 @@
                                 <div class="col-6 mb-3">
 
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn đơn vị mẹ">
-                                        <select name="parent" required class="selectpicker" data-dropup-auto="false">
+                                        <select name="parent" required class="selectpicker" data-dropup-auto="false" data-live-search="true">
                                             <?php if( $item->parent == 0){ ?>
                                             <option value="0">Chọn
                                                 đơn
@@ -279,7 +279,7 @@
                                 </div>
                                 <div class="col-6 mb-3">
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn trưởng bộ phận">
-                                        <select name="ib_lead" class="selectpicker" data-dropup-auto="false">
+                                        <select name="ib_lead" class="selectpicker" data-dropup-auto="false" data-live-search="true">
                                             <?php if( $item->ib_lead == 0){ ?>
                                             <option value="0">Chọn
                                                 trưởng bộ phận
@@ -425,7 +425,7 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Đơn vị công tác">
-                                    <select disabled name="department_id" class="selectpicker" data-dropup-auto="false">
+                                    <select disabled name="department_id" class="selectpicker" data-dropup-auto="false" data-live-search="true">
                                         <?php if( $item->department_id == null){ ?>
                                         <option value="">Chọn đơn
                                             vị công tác</option>
@@ -452,7 +452,7 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Cấp nhân sự">
-                                    <select disabled name="personnel_lv_id" class="selectpicker"
+                                    <select disabled name="personnel_lv_id" class="selectpicker" data-live-search="true"
                                         data-dropup-auto="false">
                                         <?php if( $item->personnel_lv_id == null){ ?>
                                         <option value="">Cấp nhân
@@ -473,7 +473,7 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Vị trí chức danh">
-                                    <select disabled name="position_id" class="selectpicker" data-dropup-auto="false"
+                                    <select disabled name="position_id" class="selectpicker" data-dropup-auto="false" data-live-search="true"
                                         multiple>
                                         <?php if( $item->position_id == null){ ?>
                                         <option value="">Vị trí
@@ -525,7 +525,7 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Địa bàn">
-                                    <select disabled name="area_id" class="selectpicker" data-dropup-auto="false">
+                                    <select disabled name="area_id" class="selectpicker" data-dropup-auto="false" data-live-search="true">
                                         <?php if( $item->area_id == null){ ?>
                                         <option value="">Địa bàn
                                         </option>
@@ -544,7 +544,7 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Quản lý trực tiếp">
-                                    <select disabled name="manage" class="selectpicker" data-dropup-auto="false">
+                                    <select disabled name="manage" class="selectpicker" data-dropup-auto="false" data-live-search="true"> 
                                         <?php if( $item->manage == null){ ?>
                                         <option value="">Quản lý
                                             trực tiếp</option>
@@ -629,7 +629,7 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Thêm Đơn Vị</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('department.store') }}" method="POST">
+                <form id="addForm" action="{{ route('department.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -647,7 +647,7 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn đơn vị mẹ">
-                                    <select name="parent" required class="selectpicker" data-dropup-auto="false">
+                                    <select name="parent" required class="selectpicker" data-dropup-auto="false" data-live-search="true">
                                         <option value="0">Chọn đơn vị mẹ</option>
                                         @foreach ($departmentlists as $item)
                                             <option value="{{ $item->id }}">
@@ -666,7 +666,7 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn trưởng bộ phận">
-                                    <select name="ib_lead" required class="selectpicker" data-dropup-auto="false">
+                                    <select name="ib_lead" required class="selectpicker" data-dropup-auto="false" data-live-search="true">
                                         <option value="0">Chọn trưởng bộ phận</option>
                                         @foreach ($UnitLeaderList as $item)
                                             <option value="{{ $item->id }}">
@@ -682,10 +682,13 @@
                                         data-bs-toggle="tooltip" data-bs-placement="top" title="Chức năng nhiệm vụ" style="height: 80px;"></textarea>
                                 </div>
                             </div>
-                            <div class="modal-footer" style="padding: 10px -2px !important;">
-                                <button type="button" class="btn btn-outline-danger"
-                                    data-bs-dismiss="modal">Hủy</button>
-                                <button type="submit" class="btn btn-danger">Tạo</button>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
+                                <button id="loadingBtn" style="display: none;" class="btn btn-danger" type="button" disabled>
+                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    Loading...
+                                </button>
+                                <button id="submitBtn" type="submit" class="btn btn-danger">Tạo</button>
                             </div>
                         </div>
                     </div>
@@ -816,6 +819,29 @@
             const atLeastOneChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
             deleteButton.style.display = atLeastOneChecked ? 'block' : 'none';
         }
+    </script>
+
+    <script>
+        // $('#addForm').on('submit', function(e) {
+        //     $('#addDetailProduct').modal('show');
+        //     event.preventDefault();
+        // });
+
+
+        $(document).ready(function() {
+            // Handle form submission
+            $('#addForm').submit(function(event) {
+                // Prevent the default form submission
+                event.preventDefault();
+
+                // Show the loading button and hide the submit button
+                $('#submitBtn').hide();
+                $('#loadingBtn').show();
+
+                // Submit the form
+                $(this).unbind('submit').submit();
+            });
+        });
     </script>
 
 @endsection
