@@ -15,16 +15,15 @@
                         <form method="GET" action="">
                             <div class="form-group has-search">
                                 <span type="submit" class="bi bi-search form-control-feedback fs-5"></span>
-                                <input type="text" style="width: 250px;" class="form-control" value=""
-                                    placeholder="Tìm kiếm" name="search">
+                                <input type="text" style="width: 250px;" class="form-control" value="{{ request()->get('q') }}" name="q"
+                                    placeholder="Tìm kiếm">
                             </div>
                         </form>
-                    </div>
-                    <br>
+                    </div><br>
                     <div class="ui styled accordion mb-5">
                         <div class="title active d-flex align-items-center justify-content-between"
                             style="background: #EBEBEB">
-                            <span class="fs-4 text-default fw-bold">Cơ cấu tổ chức</span>
+                            <span class="fs-4 text-default fw-bold">Cơ cấu địa bàn</span>
                             <i class="dropdown icon fs-5"></i>
                         </div>
                         <div class="content">
@@ -55,22 +54,44 @@
                             </div>
                         </div>
                     </div>
-                    <br>
-                    {{-- Cây sơ đồ --}}
-                    {{-- <div class="wapper-tree">
+                    <div style="font-size: 14px">
+
                         <ul id="tree1">
-                            @foreach ($departmentListTree as $donVi)
-                                <li>
-                                    <a href="#" class="title-child">{{ $donVi->name }}</a>
-                                    @if ($donVi->donViCon->count() > 0)
-                                        @include('template.sidebar.sidebarDepartment.child', [
-                                            'donViCon' => $donVi->donViCon,
-                                        ])
+                            @foreach ($areaTree as $vung)
+                                <li><a href="{{ route('Personnel.show.vung', $vung->id) }}"
+                                        class="title-child">{{ $vung->name }}</a>
+                                    {{-- <li><a href="{{ route('Personnel.show.vung',$vung->id) }}" class="title-child">{{ $vung->name }}</a> --}}
+                                    @if ($vung->khuVucs->count() > 0)
+                                        <ul>
+                                            @foreach ($vung->khuVucs as $khuVuc)
+                                                <li>
+                                                    <a href="{{ route('Personnel.show.diaban', $khuVuc->id) }}"
+                                                        class="title-child">{{ $khuVuc->name }}</a>
+                                                    @if ($khuVuc->diaBans->count() > 0)
+                                                        <ul>
+                                                            @foreach ($khuVuc->diaBans as $diaBan)
+                                                                <li>
+                                                                    <a href="{{ route('Personnel.show.diaban', $diaBan->id) }}"
+                                                                        class="title-child">{{ $diaBan->name }}</a>
+                                                                    @if ($diaBan->tuyens->count() > 0)
+                                                                        <ul>
+                                                                            @foreach ($diaBan->tuyens as $tuyen)
+                                                                                <li>{{ $tuyen->name }}</li>
+                                                                            @endforeach
+                                                                        </ul>                                                                    
+                                                                    @endif
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    @endif
+                                                </li>
+                                            @endforeach
+                                        </ul>
                                     @endif
                                 </li>
                             @endforeach
                         </ul>
-                    </div> --}}
+                    </div>
                 </div>
             </div>
         </div>
