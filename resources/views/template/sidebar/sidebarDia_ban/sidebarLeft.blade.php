@@ -30,7 +30,12 @@
                             <div id="list-container">
                                 <ul>
                                     <li>
-                                        <a href="{{ route('Personnel.index') }}" style="padding-left:10px;">
+                                        {{-- <a href="{{ route('Personnel.index') }}" style="padding-left:10px;">
+                                            <div class="d-flex align-items-center item-accordion fs-4 p-3 rounded">
+                                                Cơ cấu tổ chức
+                                            </div>
+                                        </a> --}}
+                                        <a style="padding-left:10px;" onclick="ToChucFunction()">
                                             <div class="d-flex align-items-center item-accordion fs-4 p-3 rounded">
                                                 Cơ cấu tổ chức
                                             </div>
@@ -44,7 +49,12 @@
                                         </a>
                                     </li> --}}
                                     <li>
-                                        <a href="{{ route('Personnel.indexDiaBan') }}" style="padding-left:10px;">
+                                        {{-- <a href="{{ route('Personnel.indexDiaBan') }}" style="padding-left:10px;">
+                                            <div class="d-flex align-items-center item-accordion fs-4 p-3 rounded">
+                                                Cơ cấu địa bàn
+                                            </div>
+                                        </a> --}}
+                                        <a style="padding-left:10px;" onclick="DiaBanFunction()">
                                             <div class="d-flex align-items-center item-accordion fs-4 p-3 rounded">
                                                 Cơ cấu địa bàn
                                             </div>
@@ -54,8 +64,23 @@
                             </div>
                         </div>
                     </div>
-                    <div style="font-size: 14px">
-
+                    <div class="d-lg-none" id="CoCauToChuc">
+                        {{-- <ul id="tree" style="overflow: scroll"> --}}
+                            <ul id="tree">
+                            @foreach ($departmentListTree as $donVi)
+                                <li data-id="{{ $donVi->id }}" style="width: max-content">
+                                    <a href="{{ route('department.index2', ['department_id' => $donVi->id]) }}"
+                                        class="title-child">{{ $donVi->name }}</a>
+                                    @if ($donVi->donViCon->count() > 0)
+                                        @include('template.sidebar.sidebarDepartment.child', [
+                                            'donViCon' => $donVi->donViCon,
+                                        ])
+                                    @endif
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div style="font-size: 14px" id="CoCauDiaBan">
                         <ul id="tree1">
                             @foreach ($areaTree as $vung)
                                 <li><a href="{{ route('Personnel.show.vung', $vung->id) }}"
@@ -202,6 +227,24 @@
     @if (!env('FE_LAYOUT'))
         <script type="text/javascript" src="{{ asset('/assets/js/chart/ChartSidebarleft/dash.js') }}"></script>
     @endif
+
+    <script>
+        function ToChucFunction() {
+        var element = document.getElementById("CoCauDiaBan");
+        element.classList.add("d-lg-none");
+        var element = document.getElementById("CoCauToChuc");
+        element.classList.remove("d-lg-none");
+        }
+    </script>
+
+    <script>
+        function DiaBanFunction() {
+        var element = document.getElementById("CoCauDiaBan");
+        element.classList.remove("d-lg-none");
+        var element = document.getElementById("CoCauToChuc");
+        element.classList.add("d-lg-none");
+        }
+    </script>
 
     <script>
         $.fn.extend({

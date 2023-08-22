@@ -42,6 +42,7 @@ class RouteDirectionController extends Controller
 
         try {
             $search = $request->get('search');
+            $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
             $areaTree =  Department::with('khuVucs.diaBans.tuyens')->where('code', 'like', 'VUNG%')->get();
             $vung = $request->get('vung');
             $q = $request->query('q');
@@ -84,7 +85,8 @@ class RouteDirectionController extends Controller
                     "listNS",
                     "pagination",
                     "areaTree",
-                    "search"
+                    "search",
+                    "departmentListTree"
                 )
             );
         } catch (\Exception $e) {
