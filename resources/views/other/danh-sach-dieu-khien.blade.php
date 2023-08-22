@@ -108,7 +108,7 @@
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3 mb-5 mt-5">
                                     <div class=" control_wrapper"  >
-                                        <a href="{{ route('department.store') }}" class="control_link" id="control_link-7">
+                                        <a href="/department-profile" class="control_link" id="control_link-7">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/workflow.png') }}" alt="">
                                             </div>
@@ -125,7 +125,7 @@
                                                 <img src="{{ asset('/assets/img/control/brain.png') }}" alt="">
                                             </div>
                                             <div class="control_title fs-5">
-                                                Cơ cấu chức danh
+                                                Vị trí chức danh
                                             </div>
                                         </a>
                                     </div>
