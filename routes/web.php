@@ -73,6 +73,8 @@ Route::middleware(['auth.role'])->group(function () {
 
     Route::post('/cmt-customer/{id}', [CustomerController::class, 'cmt'])->name('cmt.customer');
 
+    Route::get('/delete-comment/{id}/{key}', [CustomerController::class, 'deleteComment'])->name('delete.comment');
+
     Route::get('chi-tiet-khach-hang/{id}', [CustomerController::class, 'show'])->name('customer-detail.list');
 
     Route::get('/nhan_su', [PersonnelController::class, 'view'])->name('personel.view');
@@ -93,7 +95,7 @@ Route::middleware(['auth.role'])->group(function () {
 
     // Route::get('/get-customer/{id}', [CustomerController::class, 'findById'])->name('find-customer-byId');
 
-    Route::get('/order', [OrderController::class, 'index'])->name('index.order');
+    // Route::get('/order', [OrderController::class, 'index'])->name('index.order');
 
     // Trang chủ
     Route::get('/dashboard', [DashboardController::class, 'indexv2'])->name("dashboard");
@@ -161,6 +163,7 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('position/{id}', [PositionController::class, 'update'])->name('position.update');
     Route::post('positionx/{id}', [PositionController::class, 'destroy'])->name('positionx.destroy');
     Route::post('position-delete', [PositionController::class, 'delete'])->name('Position.delete');
+    Route::delete('position/{id}', [PositionController::class, 'detach'])->name('position.detach');
 
     Route::get('cap-nhan-su', [PersonnelLevelController::class, 'index'])->name('PersonnelLevel.index');
     Route::post('cap-nhan-su', [PersonnelLevelController::class, 'store'])->name('PersonnelLevel.store');
