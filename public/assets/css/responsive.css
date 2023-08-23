@@ -25,6 +25,10 @@
         font-size: var(--fz-18);
     }
 
+    .mainSection_heading-subtitle {
+        font-size: var(--fz-16);
+    }
+
     .style_table-4 th {
         font-size: var(--fz-12);
     }
@@ -102,6 +106,10 @@
 
     .mainSection_heading-title {
         font-size: var(--fz-18);
+    }
+
+    .mainSection_heading-subtitle {
+        font-size: var(--fz-16);
     }
 
     .style_table-4 th {
@@ -226,6 +234,9 @@
 
     .mainSection_heading-title {
         font-size: var(--fz-20);
+    }
+    .mainSection_heading-subtitle {
+        font-size: var(--fz-18);
     }
     .style_table-4 th {
         font-size: var(--fz-14);
