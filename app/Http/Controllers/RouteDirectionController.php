@@ -11,6 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
+use App\Models\PersonnelLevel;
+use App\Models\Department;
+
 
 class RouteDirectionController extends Controller
 {
@@ -38,6 +41,10 @@ class RouteDirectionController extends Controller
     {
 
         try {
+            $search = $request->get('search');
+            $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
+            $areaTree =  Department::with('khuVucs.diaBans.tuyens')->where('code', 'like', 'VUNG%')->get();
+            $vung = $request->get('vung');
             $q = $request->query('q');
             $diaban = $request->query('diaban');
             $nhansupt = $request->query('nhansupt');
@@ -76,7 +83,10 @@ class RouteDirectionController extends Controller
                     "listRoute",
                     "listLocality",
                     "listNS",
-                    "pagination"
+                    "pagination",
+                    "areaTree",
+                    "search",
+                    "departmentListTree"
                 )
             );
         } catch (\Exception $e) {

@@ -36,14 +36,14 @@ class Department extends Model
     }
 
     public function khuVucs()
-{
+    {
     return $this->hasMany(Area::class, 'area');
-}
+    }
 
 public function personnel()
-{
+    {
     return $this->hasMany(Personnel::class, 'department_id');
-}
+    }
 
 
 

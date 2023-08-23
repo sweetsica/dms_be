@@ -696,9 +696,9 @@
                                 </div>
                             </div>
                             <div class="col-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn đơn vị mẹ">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn đơn vị cha">
                                     <select name="parent" required class="selectpicker" data-dropup-auto="false">
-                                        <option value="0">Chọn đơn vị mẹ</option>
+                                        <option value="0">Chọn đơn vị cha</option>
                                         @foreach ($departmentlists as $item)
                                             <option value="{{ $item->id }}">
                                                 @php
@@ -772,9 +772,9 @@
                 </div>
             </div>
             <div class="col-12 mb-3">
-                <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Lọc theo đơn vị mẹ">
+                <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Lọc theo Đơn vị cha">
                     <select id="select-status" class="selectpicker select_filter" data-dropup-auto="false"
-                        title="Lọc theo đơn vị mẹ" name='don_vi_me'>
+                        title="Lọc theo Đơn vị cha" name='don_vi_me'>
                         @foreach ($departmentList as $item)
                             <option value="{{ $item->name }}">{{ $item->name }}</option>
                         @endforeach
