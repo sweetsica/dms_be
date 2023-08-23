@@ -578,7 +578,7 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Lọc dữ liệu</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="customerForm" method="POST" action="{{ route('create-customer') }}">
+                <form method="POST" action="{{ route('create-customer') }}">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -671,6 +671,7 @@
                                 <input type="text" name="name" data-bs-toggle="tooltip" required id="nameInput"
                                     data-bs-placement="top" title="Tên khách hàng" placeholder="Tên khách hàng*"
                                     class="form-control">
+
                             </div>
 
                             <div class="col-lg-6 mb-3">
@@ -684,7 +685,7 @@
                             </div>
                             <div class="col-lg-6 mb-3">
                                 <input type="text" name="address" data-bs-toggle="tooltip" required
-                                    id="addressInputGeneral" data-bs-placement="top" title="Địa chỉ"
+                                    id="addressInputGeneral" data-bs-placement="top" title="Địa chỉ*"
                                     placeholder="Địa chỉ" class="form-control">
                             </div>
 
@@ -717,8 +718,7 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Thêm chi tiết khách hàng</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="formThemCapPhatChitiet" method="POST" action="{{ route('create-customer') }}"
-                    enctype="multipart/form-data">
+                <form id="customerForm">
                     @csrf
                     <input name="name" style="display: none;" id="name">
                     <input name="personContact" style="display: none;" id="personContact">
@@ -813,6 +813,7 @@
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="city" id="city"
                                     data-live-search-placeholder="Tìm kiếm...">
                                 </select>
+                                <div class="error-text" id="cityError" style="color: red;"></div>
                             </div>
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Quận/huyện">
@@ -821,6 +822,7 @@
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="district" id="district"
                                     data-live-search-placeholder="Tìm kiếm...">
                                 </select>
+                                <div class="error-text" id="districtError" style="color: red;"></div>
                             </div>
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Phường/xã">
@@ -829,10 +831,12 @@
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="guide" id="guide"
                                     data-live-search-placeholder="Tìm kiếm...">
                                 </select>
+                                <div class="error-text" id="guideError" style="color: red;"></div>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <input type="text" id="addressInput" name="address" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ*" class="form-control">
+                                    <div class="error-text" id="addressError" style="color: red;"></div>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <div id="map"
@@ -868,6 +872,7 @@
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="productId[]" id="productId"
                                     data-live-search-placeholder="Tìm kiếm..." multiple>
                                 </select>
+                                <div class="error-text" id="productIdError" style="color: red;"></div>
                             </div>
 
 
@@ -897,6 +902,7 @@
                                     <option value="Làm đẹp/Phòng tập thể dục/Thể thao">Làm đẹp/Phòng tập thể dục/Thể thao
                                     </option> --}}
                                 </select>
+                                <div class="error-text" id="groupError" style="color: red;"></div>
                             </div>
 
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Tuyến">
@@ -905,6 +911,7 @@
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="routeId" id="routeId"
                                     data-live-search-placeholder="Tìm kiếm...">
                                 </select>
+                                <div class="error-text" id="routeIdError" style="color: red;"></div>
                             </div>
 
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
@@ -914,6 +921,7 @@
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="chanelId" id="chanelId"
                                     data-live-search-placeholder="Tìm kiếm...">
                                 </select>
+                                <div class="error-text" id="chanelIdError" style="color: red;"></div>
                             </div>
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Trạng thái*">
@@ -965,7 +973,7 @@
                     </div>
                     <div class="modal-footer ">
                         <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
-                        <button type="submit" class="btn btn-danger">Lưu</button>
+                        <button type="button" class="btn btn-danger" id="submitButton" >Lưu</button>
                     </div>
                 </form>
             </div>
@@ -1776,7 +1784,6 @@
     <script>
         document.getElementById("submitButton").addEventListener("click", function() {
             const formData = new FormData(document.getElementById("customerForm"));
-
             fetch("{{ route('create-customer') }}", {
                     method: "POST",
                     body: formData
@@ -1784,8 +1791,8 @@
                 .then(response => response.json())
                 .then(data => {
                     // const codeError = document.getElementById("codeError");
-                    const nameError = document.getElementById("nameError");
-                    const phoneError = document.getElementById("phoneError");
+                    // const nameError = document.getElementById("nameError");
+                    // const phoneError = document.getElementById("phoneError");
                     const cityError = document.getElementById("cityError");
                     const addressError = document.getElementById("addressError");
                     const districtError = document.getElementById("districtError");
@@ -1796,13 +1803,11 @@
                     const chanelIdError = document.getElementById("chanelIdError");
                     const routeIdError = document.getElementById("routeIdError");
 
-
-
-
                     if (data.success) {
+                        // coderessError.innerHTML = "";
                         addressError.innerHTML = "";
-                        nameError.innerHTML = "";
-                        phoneError.innerHTML = "";
+                        // nameError.innerHTML = "";
+                        // phoneError.innerHTML = "";
                         cityError.innerHTML = "";
                         districtError.innerHTML = "";
                         guideError.innerHTML = "";
@@ -1816,9 +1821,10 @@
                         window.location.href = "{{ route('customers') }}"; // Điều hướng trang khách hàng
                     } else {
 
+                        // coderessError.innerHTML = data.errors.code;
                         addressError.innerHTML = data.errors.address;
-                        nameError.innerHTML = data.errors.name;
-                        phoneError.innerHTML = data.errors.phone;
+                        // nameError.innerHTML = data.errors.name;
+                        // phoneError.innerHTML = data.errors.phone;
                         cityError.innerHTML = data.errors.city;
                         districtError.innerHTML = data.errors.district;
                         guideError.innerHTML = data.errors.guide;
@@ -1865,16 +1871,17 @@
         const addRowIcon = document.getElementById('addRowIcon');
         const tbody = document.querySelector('#contact tbody');
         let rowCount = 1;
+        let cou = 0;
         addRowIcon.addEventListener('click', function() {
             const newRow = document.createElement('tr');
             newRow.innerHTML = `
             <td class="text-center">${rowCount}</td>
-            <td><input type="text" class="form-control" name="name[]"></td>
-            <td><input type="text" class="form-control" name="phone[]"></td>
-            <td><input type="text" class="form-control" name="email[]"></td>
-            <td><input type="text" class="form-control" name="position[]"></td>
+            <td><input type="text" class="form-control" name="contact[][key1]"></td>
+            <td><input type="text" class="form-control" name="phone[][key2]"></td>
+            <td><input type="text" class="form-control" name="email[][key3]"></td>
+            <td><input type="text" class="form-control" name="position[][key4]"></td>
             <td class="text-center">
-                <i class="bi bi-trash deleteRow fs-3" 
+                <i class="bi bi-trash deleteRow fs-3"
                 style="color: var(--primary-color); cursor: pointer;" ></i>
             </td>
         `;

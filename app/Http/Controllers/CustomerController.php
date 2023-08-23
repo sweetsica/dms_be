@@ -258,8 +258,8 @@ class CustomerController extends Controller
         if ($status === 'Trinh sát') {
             $validator = Validator::make($request->all(), [
 
-                'name' => 'required|string|max:255',
-                'phone' => 'required|string|max:20',
+                // 'name' => 'required|string|max:255',
+                // 'phone' => 'required|string|max:20',
                 'city' => 'required',
                 'district' => 'required',
                 'guide' => 'required',
@@ -267,8 +267,8 @@ class CustomerController extends Controller
                 'personId' => 'required',
 
             ], [
-                'name.required' => 'Trường này không được để trống.',
-                'phone.required' => 'Trường này không được để trống.',
+                // 'name.required' => 'Trường này không được để trống.',
+                // 'phone.required' => 'Trường này không được để trống.',
                 'city.required' => 'trường này không được để trống.',
                 'district.required' => 'Trường này không được để trống.',
                 'guide.required' => 'Trường này không được để trống.',
@@ -277,8 +277,8 @@ class CustomerController extends Controller
             ]);
         } elseif ($status === 'Cơ hội') {
             $validator = Validator::make($request->all(), [
-                'name' => 'required|string|max:255',
-                'phone' => 'required|string|max:20',
+                // 'name' => 'required|string|max:255',
+                // 'phone' => 'required|string|max:20',
                 'city' => 'required',
                 'district' => 'required',
                 'guide' => 'required',
@@ -286,8 +286,8 @@ class CustomerController extends Controller
                 'personId' => 'required',
                 'productId' => 'required',
             ], [
-                'name.required' => 'Trường này không được để trống.',
-                'phone.required' => 'Trường này không được để trống.',
+                // 'name.required' => 'Trường này không được để trống.',
+                // 'phone.required' => 'Trường này không được để trống.',
                 'city.required' => 'Trường này không được để trống.',
                 'district.required' => 'Trường này không được để trống.',
                 'guide.required' => 'Trường này không được để trống.',
@@ -297,8 +297,8 @@ class CustomerController extends Controller
             ]);
         } else {
             $validator = Validator::make($request->all(), [
-                'name' => 'required|string|max:255',
-                'phone' => 'required|string|max:20',
+                // 'name' => 'required|string|max:255',
+                // 'phone' => 'required|string|max:20',
                 'city' => 'required',
                 'district' => 'required',
                 'guide' => 'required',
@@ -309,8 +309,8 @@ class CustomerController extends Controller
                 'chanelId' => 'required',
                 'routeId' => 'required',
             ], [
-                'name.required' => 'Trường này không được để trống.',
-                'phone.required' => 'Trường này không được để trống.',
+                // 'name.required' => 'Trường này không được để trống.',
+                // 'phone.required' => 'Trường này không được để trống.',
                 'city.required' => 'Trường này không được để trống.',
                 'district.required' => 'Trường này không được để trống.',
                 'guide.required' => 'Trường này không được để trống.',
@@ -409,6 +409,15 @@ class CustomerController extends Controller
         }
         $data->fileName = json_encode($existingFileName);
         $data->filePath = json_encode($existingFilePath);
+        
+        $combinedContact = [];
+        foreach ($request->contact as $array) {
+            if (is_array($array)) {
+                $combinedContact[] = $array;
+            }
+        }
+        $jsonCombinedData = json_encode($combinedContact);
+        $data->contact = $jsonCombinedData;
         $data->save();
         $listData = Customer::all();
         // return response()->json(['success' => true]);
