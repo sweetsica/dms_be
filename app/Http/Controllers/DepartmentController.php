@@ -10,6 +10,7 @@ use App\Models\Position;
 use App\Models\Role;
 use App\Models\UnitLeader;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class DepartmentController extends Controller
 {
@@ -122,9 +123,11 @@ class DepartmentController extends Controller
         $getDept = [];
         $listPosToDept = [];
         if ($department_id) {
-
             $getDept = Department::with('areas')->find($department_id);
-            $listPosToDept = Position::with('levels')->where('department_id', $department_id )->where("position.code", "like", "%$search%")->get();
+            if (!$getDept) {
+                return View::make('404');
+            }
+            $listPosToDept = Position::with('levels')->where('department_id', $department_id)->where("position.code", "like", "%$search%")->get();
         }
         $personnelLevelList = PersonnelLevel::all();
         $positionlists = $this->getPosition();
