@@ -284,7 +284,7 @@ class DepartmentController extends Controller
         $data->ib_lead = $ib_lead;
         $data->description = $description;
         $data->save();
-        return redirect()->route('department.index');
+        return redirect()->back();
     }
 
     public function destroy($id)

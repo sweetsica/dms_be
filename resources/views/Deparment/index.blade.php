@@ -12,7 +12,7 @@
             <div class="main">
                 <div class="container-fluid">
                     <div class="mainSection_heading">
-                        <h5 class="mainSection_heading-title">Danh sách tổ chức</h5>
+                        <h5 class="mainSection_heading-title">Hồ sơ đơn vị</h5>
                         @include('template.components.sectionCard')
                     </div>
 
