@@ -777,7 +777,7 @@ class PersonnelController extends Controller
         $pack = $request->get('pack');
         $manage = $request->get('manage');
         $checkmail = Personnel::where('email', $email)->orWhere('phone', $phone)->first();
-        if ($checkmail){
+        if ($checkmail) {
             return redirect()->back()->with('error', 'Email hoặc số điện thoại đã tồn tại. Xin vui lòng nhập lại!');
         }
         $data = new Personnel();
@@ -860,6 +860,31 @@ class PersonnelController extends Controller
         $selectedItems = $request->input('selected_items', []);
         Personnel::whereIn('id', $selectedItems)->delete();
         return redirect()->back()->with('mess', 'Đã xóa!');
+    }
+
+    public function detach(Request $request)
+    {
+        $selectedUsers = $request->input('selected_items', []);
+        $position_id = $request->position_id;
+        foreach ($selectedUsers as $userId) {
+            $user = Personnel::findOrFail($userId);
+            if ($user) {
+                $positionIds = json_decode($user->position_id, true);
+                $positionIds = array_diff($positionIds, [$position_id]);
+                $positionIds = array_values($positionIds); // Re-index the array
+
+                // Set position_id to null if there's only one value left
+                if (count(json_decode($user->position_id, true)) == 1) {
+                    $user->position_id  = null;
+                } else {
+                    $user->position_id = json_encode($positionIds);
+                }
+
+                $user->save();
+            }
+        }
+        Session::flash('success', 'Đã gỡ user khỏi vị trí này!');
+        return back();
     }
 
     public function view()

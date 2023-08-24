@@ -10,6 +10,7 @@ use App\Models\Position;
 use App\Models\Role;
 use App\Models\UnitLeader;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class DepartmentController extends Controller
 {
@@ -89,6 +90,7 @@ class DepartmentController extends Controller
         $search = $request->get('search');
         $don_vi_me = $request->get('don_vi_me');
         $leader_name = $request->get('leader_name');
+        $cap_nhan_su = $request->get('cap_nhan_su');
         $query = Department::query();
         // $departmentList = Department::
         $query->leftJoin('personnel', 'personnel.id', '=', 'department.ib_lead')
@@ -122,6 +124,9 @@ class DepartmentController extends Controller
         $listPosToDept = [];
         if ($department_id) {
             $getDept = Department::with('areas')->find($department_id);
+            if (!$getDept) {
+                return View::make('404');
+            }
             $listPosToDept = Position::with('levels')->where('department_id', $department_id)->where("position.code", "like", "%$search%")->get();
         }
         $personnelLevelList = PersonnelLevel::all();
@@ -137,6 +142,8 @@ class DepartmentController extends Controller
             'UnitLeaderList' => $UnitLeaderList,
             "departmentListTree" => $departmentListTree,
             'getDept' => $getDept,
+            'cap_nhan_su' => $cap_nhan_su,
+            'department_id' => $department_id,
             'listPosToDept' => $listPosToDept
         ]);
     }

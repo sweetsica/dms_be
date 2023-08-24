@@ -108,7 +108,7 @@
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3 mb-5 mt-5">
                                     <div class=" control_wrapper"  >
-                                        <a href="/department-profile" class="control_link" id="control_link-7">
+                                        <a href="/department-profile?department_id=1" class="control_link" id="control_link-7">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/workflow.png') }}" alt="">
                                             </div>

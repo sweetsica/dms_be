@@ -48,7 +48,9 @@ class Customer extends Model
        'fileName',
        'comment',
        'author',
+       'image',
        'timeComment',
+       'customer_type',
    ];
 
     public function route()

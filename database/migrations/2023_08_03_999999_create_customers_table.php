@@ -39,6 +39,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('personId')->nullable();
             $table->text('productId')->nullable();
 
+
             $table->string('city', 255)->nullable();
             $table->string('district', 255)->nullable();
             $table->string('guide', 255)->nullable();

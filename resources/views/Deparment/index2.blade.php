@@ -271,25 +271,37 @@ foreach ($listPosToDept as $item){
                                             grid-template-columns: auto auto auto auto auto;
                                             gap: 10px;
                                             align-items: center;">
+
+
                                                 <form method="GET" action="">
+                                                    {{-- <div style="display: flex"> --}}
                                                     <div class="form-group has-search">
                                                         <input type="text" class="form-control"
                                                             value="{{ $search }}" placeholder="Tìm kiếm"
                                                             name="search">
                                                     </div>
-                                                </form>
+                                                    <div class="form-group has-search" style="display: none">
+                                                        <input type="text" class="form-control"
+                                                            value="{{ $department_id }}" placeholder="Tìm kiếm"
+                                                            name="department_id">
+                                                    </div>
 
-                                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Lọc mã vị trí">
-                                                    <select name="filter_personnel_level" required class="selectpicker"
+
+                                                    {{-- <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    title="Lọc cấp nhân sự">
+                                                    <select name="cap_nhan_su"  class="selectpicker"
                                                         data-dropup-auto="false">
-                                                        <option value="">Lọc mã vị trí</option>
-                                                        {{-- @foreach ($personnelLevelList as $item)
+                                                        <option value="">Lọc cấp nhân sự</option>
+                                                        @foreach ($personnelLevelList as $item)
                                                                 <option value="{{ $item->id }}">
                                                                     {{ $item->name }}
                                                                 </option>
-                                                            @endforeach --}}
+                                                            @endforeach
                                                     </select>
-                                                </div>
+                                                </div> --}}
+                                                 <button style="display: none">ok</button>
+                                            {{-- </div> --}}
+                                            </form>
 
                                                 <div data-bs-toggle="tooltip" data-bs-placement="top"
                                                     title="Lọc cấp nhân sự">
@@ -333,7 +345,7 @@ foreach ($listPosToDept as $item){
                                             <form id="select-form" action="{{ route('delete-selected-items') }}"
                                                 method="POST">
                                                 @csrf
-                                                <div class="action_export mx-3 order-md-1" data-bs-toggle="tooltip"
+                                                <div class="action_export order-md-1 mt-3" data-bs-toggle="tooltip"
                                                     data-bs-placement="top" title="Xóa">
                                                     <button class="btn btn-danger  " type="submit"
                                                         onclick="return confirm('Bạn có muốn xóa không?')"
@@ -1046,7 +1058,6 @@ foreach ($listPosToDept as $item){
             autoclose: true,
             switchOnClick: true,
             startView: "months",
-            +
             minViewMode: "months",
             locale: 'vi',
         });

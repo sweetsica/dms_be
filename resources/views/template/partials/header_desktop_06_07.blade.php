@@ -8,7 +8,7 @@
         </li>
 
         <li class="header_menu-item">
-            <a class="header_menu-link menu_btn-sub" href="/customer">
+            <a class="header_menu-link menu_btn-sub" href="{{ route('customers') }}">
                 <i class="bi bi-database-add"></i>
                 <span>Khách hàng</span>
             </a>
@@ -85,9 +85,8 @@
                 <span>Kinh doanh</span>
             </a>
             <ul id="header_submenu">
-
                 <li class="header_submenu-items more position-relative">
-                    <a href="#" class="header_submenu-link more_btn">
+                    <a href="{{ route('Supplier.index') }}" class="header_submenu-link more_btn">
                         Nhà cung cấp</a>
 
                 </li>
@@ -108,20 +107,26 @@
                 </li>
                 <li class="header_submenu-items more position-relative">
                     <a href="#" class="header_submenu-link more_btn">
-                        Chính sách kinh doanh</a>
+                        Chính sách KD<i class="bi bi-chevron-right"></i></a>
+                    <ul class="header_more">
+                        <li class="header_more-item">
+                            <a href="{{ route('Promotion.index') }}" class="header_submenu-link">Chương trình khuyến
+                                mại</a>
+                        </li>
+                    </ul>
 
                 </li>
             </ul>
         </li>
 
         <li class="header_menu-item">
-            <a class="header_menu-link menu_btn-sub" href="#">
+            <a class="header_menu-link menu_btn-sub" href="{{ route('WareHouse.index') }}">
                 <i class="bi bi-archive"></i>
                 <span>Kho vận</span>
             </a>
             <ul id="header_submenu">
                 <li class="header_submenu-items more position-relative">
-                    <a href="#" class="header_submenu-link more_btn">
+                    <a href="{{ route('WareHouse.index') }}" class="header_submenu-link more_btn">
                         Kho</a>
 
                 </li>
@@ -262,7 +267,8 @@
             <ul id="header_submenu">
 
                 <li class="header_submenu-items more position-relative">
-                    <a href="{{ route('department.index2') }}" class="header_submenu-link more_btn">
+                    <a href="{{ route('department.index2', ['department_id' => 1]) }}"
+                        class="header_submenu-link more_btn">
                         Cơ cấu đơn vị<i class="bi bi-chevron-right"></i>
                     </a>
                     <ul class="header_more">
