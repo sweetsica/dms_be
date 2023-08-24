@@ -515,7 +515,7 @@ foreach ($listPosToDept as $item){
     </div>
     @include('template.sidebar.sidebarMaster.sidebarRight')
 
-        {{-- Sửa đề xuất --}}
+        {{-- Sửa đơn vị --}}
         <div class="modal fade" id="suaPhongBan{{ $getDept['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -575,13 +575,13 @@ foreach ($listPosToDept as $item){
                                 </div>
                                 <div class="col-6 mb-3">
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn trạng thái">
-                                        <select name="ib_lead" class="selectpicker" data-dropup-auto="false">
+                                        <select name="status" class="selectpicker" data-dropup-auto="false">
                                             @if ($getDept->status == 1)
-                                            <option value="1" name = "status" selected>Hoạt động</option>
-                                            <option value="0" name = "status">Không hoạt động</option>
+                                            <option value="1" selected>Hoạt động</option>
+                                            <option value="0">Không hoạt động</option>
                                             @else
-                                            <option value="1" name = "status">Hoạt động</option>
-                                            <option value="0" name = "status" selected>Không hoạt động</option>
+                                            <option value="1">Hoạt động</option>
+                                            <option value="0" selected>Không hoạt động</option>
                                             @endif
                                         </select>
                                     </div>
@@ -845,11 +845,11 @@ foreach ($listPosToDept as $item){
                                 </div>
                             </div>
                             <div class="col-6 mb-3">
-                                <input name="staffing" type="text" placeholder="Định biên" class="form-control"
+                                <input name="staffing" type="number" placeholder="Định biên" class="form-control"
                                     data-bs-toggle="tooltip" data-bs-placement="top" title="Định biên">
                             </div>
                             <div class="col-6 mb-3">
-                                <input name="wage" type="text" placeholder="Quỹ lương năm" class="form-control"
+                                <input name="wage" type="number" placeholder="Quỹ lương năm" class="form-control"
                                     data-bs-toggle="tooltip" data-bs-placement="top" title="Quỹ lương năm">
                             </div>
                             <div class="modal-footer">
