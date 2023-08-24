@@ -3,7 +3,28 @@
 @section('title', 'Thông tin vị trí')
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
+    <style>
+        .mainSection_heading1 {
+        position: relative;
+        /* display: flex; */
+        align-items: center;
+        margin: 0 0 10px 0;
+        justify-content: center;
+        height: auto;
+        }
+        .mainSection_card1 {
+    margin-left: 10px;   
+    font-size: var(--fz-12);
+}
+    </style>
 @endsection
+
+@php
+$total_wage = 0;
+foreach ($listPosToDept as $item){
+    $total_wage += $item->wage;
+}
+@endphp
 
 @section('content')
     @include('template.sidebar.sidebarDepartment.sidebarLeft')
@@ -11,10 +32,40 @@
         <div class="mainSection">
             <div class="main">
                 <div class="container-fluid">
-                    <div class="mainSection_heading">
-                        <h5 class="mainSection_heading-title">Thông tin vị trí - {{ $getPos->name ?? '' }}</h5>
-                        @include('template.components.sectionCard')
-                    </div>
+                    <div class="mainSection_heading1">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="mainSection_card1">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="text-nowrap">Đơn vị: </div>
+                                        </div>
+                                        <div class="col-md-9"><strong class="text-nowrap">{{ Session::get('department_name') }}</strong>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="text-nowrap">Họ và tên: </div>
+                                        </div>
+                                        <div class="col-md-9"><strong class="text-nowrap">{{ session('user')['name'] ?? "" }} - {{ session('user')['code'] ?? "" }}</strong></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <h5 class="mainSection_heading-title">Thông tin vị trí</h5> 
+                                </div>
+                                <div class="row">
+                                    <h5 class="mainSection_heading-title card-title">{{ $getPos->name ?? '' }}</h5>  
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div style="margin-top:3%;">
+                                    <div id="mainSection_width" class="mainSection_thismonth d-flex align-items-center overflow-hidden d-none d-sm-block">
+                                        <input id="thismonth" class="form-control" type="text" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                      
+                    </div>  
 
                     <div class="row">
                         <div class="col-lg-12">
@@ -27,8 +78,7 @@
                                                 @if (session('user')['role_id'] == '1')
                                                     <div class="action_export order-md-4">
                                                         <button class="btn btn-danger d-block testCreateUser"
-                                                            data-bs-toggle="modal" data-bs-target="#assignUser">Gán nhân
-                                                            sự</button>
+                                                            data-bs-toggle="modal" data-bs-target="#suaViTri{{ $getPos->id }}">Sửa vị trí/chức danh</button>
                                                     </div>
                                                 @endif
 
@@ -70,11 +120,11 @@
                                                             <div class="col-lg-12">
                                                                 <div class="row">
                                                                     <div class="col-lg-4">
-                                                                        <span class="fs-5 fw-bold">Địa bàn:</span>
+                                                                        <span class="fs-5 fw-bold">Đơn vị công tác:</span>
                                                                     </div>
                                                                     <div class="col-lg-8">
                                                                         <span class="fs-5">
-                                                                            {{ $getPos->areas->name ?? '' }}
+                                                                            {{ $getDept->name ?? '' }}
                                                                         </span>
                                                                     </div>
                                                                 </div>
@@ -106,7 +156,19 @@
                                                                         <span class="fs-5 fw-bold">Trạng thái:</span>
                                                                     </div>
                                                                     <div class="col-lg-6">
-                                                                        <span class="fs-5">Hoạt động</span>
+                                                                        @switch($getDept->status)
+                                                                        @case(0)
+                                                                            <span class="fs-5">Không hoạt động</span>
+                                                                        @break
+
+                                                                        @case(1)
+                                                                            <span class="fs-5">Hoạt động</span>
+                                                                        @break                                                                        
+
+                                                                        @default
+                                                                            <span></span>
+                                                                        @break
+                                                                    @endswitch
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -143,7 +205,7 @@
                                                                             tế:</span>
                                                                     </div>
                                                                     <div class="col-lg-8">
-                                                                        <span class="fs-5">10 người</span>
+                                                                        <span class="fs-5">{{ $getDept->demarcation }} người</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -154,8 +216,20 @@
                                                                     <div class="col-lg-4">
                                                                         <span class="fs-5 fw-bold">Quỹ lương năm:</span>
                                                                     </div>
-                                                                    <div class="col-lg-8">
-                                                                        <span class="fs-5">100.000.000 VNĐ</span>
+                                                                    <div class="col-lg-8" >
+                                                                        <span class="fs-5">{{ number_format($total_wage, 0, '.', '.')  }} VNĐ</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row my-2">
+                                                            <div class="col-lg-12">
+                                                                <div class="row">
+                                                                    <div class="col-lg-4">
+                                                                        <span class="fs-5 fw-bold">Quỹ lương tháng:</span>
+                                                                    </div>
+                                                                    <div class="col-lg-8" >
+                                                                        <span class="fs-5">{{ number_format($total_wage/12, 0, '.', '.')  }} VNĐ</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -165,7 +239,21 @@
                                             </div>
 
                                             <div class="fs-4 fw-bold my-4" style="color: var(--primary-color)">
-                                                Danh sách nhân sự đảm nhiệm
+                                                <div class="row">
+                                                    <div class="col-sm-6">Danh sách nhân sự đảm nhiệm</div>
+                                                    <div class="col-sm-6">
+                                                        <div class="action_wrapper align-items-center mb-3 justify-content-end">
+                                                            @if (session('user')['role_id'] == '1')
+                                                                <div class="action_export order-md-4">
+                                                                    <button class="btn btn-danger d-block testCreateUser"
+                                                                        data-bs-toggle="modal" data-bs-target="#assignUser">Gán nhân
+                                                                        sự</button>
+                                                                </div>
+                                                            @endif
+            
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             <div
@@ -257,32 +345,32 @@
                                                                 </th>
                                                                 <th class="text-nowrap text-center" style="width:2%">STT
                                                                 </th>
-                                                                <th class="text-nowrap text-center" style="width:10%">Mã
+                                                                <th class="text-nowrap text-center" style="width:6%">Mã
                                                                     nhân sự</th>
                                                                 <th class="text-nowrap text-center" style="width:10%">Tên
                                                                     nhân sự </th>
                                                                 <th class="text-nowrap text-center" style="width:10%">Đơn
                                                                     vị
                                                                     công tác </th>
-                                                                <th class="text-nowrap text-center" style="width:10%">Cấp
+                                                                <th class="text-nowrap text-center" style="width:8%">Cấp
                                                                     nhân sự
                                                                 </th>
-                                                                <th class="text-nowrap text-center" style="width:20%">Vai
+                                                                <th class="text-nowrap text-center" style="width:10%">Vai
                                                                     trò
                                                                 </th>
-                                                                <th class="text-nowrap text-center" style="width:20%">Địa
+                                                                <th class="text-nowrap text-center" style="width:8%">Địa
                                                                     bàn
                                                                 </th>
-                                                                <th class="text-nowrap text-center" style="width:20%">
+                                                                <th class="text-nowrap text-center" style="width:8%">
                                                                     Email
                                                                 </th>
-                                                                <th class="text-nowrap text-center" style="width:20%">Số
+                                                                <th class="text-nowrap text-center" style="width:8%">Số
                                                                     điện thoại
                                                                 </th>
-                                                                <th class="text-nowrap text-center" style="width:20%">Hình
+                                                                <th class="text-nowrap text-center" style="width:5%">Hình
                                                                     thức
                                                                 </th>
-                                                                <th class="text-nowrap text-center" style="width:20%">
+                                                                <th class="text-nowrap text-center" style="width:5%">
                                                                     Trạng
                                                                     thái
                                                                 </th>
@@ -304,7 +392,7 @@
                                                                         {{ $loop->iteration }}
                                                                     </td>
                                                                     <td class="">
-                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                        <div class="overText text-center" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
                                                                             title="{{ $item->code ?? '' }}">
                                                                             {{ $item->code ?? '' }}
@@ -336,7 +424,7 @@
 
                                                                     </td>
                                                                     <td class="">
-                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                        <div class="overText text-center" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
                                                                             title="{{ $item->role->name ?? '' }}">
                                                                             {{ $item->role->name ?? '' }}
@@ -344,7 +432,7 @@
 
                                                                     </td>
                                                                     <td class="">
-                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                        <div class="overText text-center" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
                                                                             title="{{ $item->area->name ?? '' }}">
                                                                             {{ $item->area->name ?? '' }}
@@ -1004,6 +1092,146 @@
             </div>
         </div>
     @endforeach
+    {{-- Sửa vị trí/ chức danh --}}
+    <div class="modal fade" id="suaViTri{{ $getPos->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h5 class="modal-title w-100" id="exampleModalLabel">Sửa vị trí/chức danh</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="POST" action="{{ route('position.update', $getPos->id) }}">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-6 mb-3">
+                                    <input data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Nhập tên vị trí/chức danh*" name="name" type="text"
+                                        class="form-control" value="{{ $getPos->name }}" required>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <input data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Nhập mã vị trí/chức danh*" name="code" type="text"
+                                        class="form-control" value="{{ $getPos->code }}" required>
+                                </div>
+
+                                <div class="col-6 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn đơn vị công tác*">
+                                        <select name="department_id" required class="selectpicker"
+                                            data-dropup-auto="false" data-live-search="true">
+                                            <?php if ($getPos->department_id == null){ ?>
+                                            <option>Chọn đơn vị công
+                                                tác*
+                                            </option>
+                                            <?php
+                                      } else { ?>
+                                            <?php } ?>
+                                            <option value="{{ $getPos->department_id }}">
+                                                {{ $getPos->department_name }}
+                                            </option>
+                                            @foreach ($departmentlists as $ac)
+                                                <option value="{{ $ac->id }}">
+                                                    @php
+                                                        $str = '';
+                                                        for ($i = 0; $i < $ac->level; $i++) {
+                                                            echo $str;
+                                                            $str = '  --';
+                                                        }
+                                                    @endphp
+                                                    {{ $ac->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn cấp nhân sự*">
+                                        <select name="personnel_level" required class="selectpicker" data-live-search="true"
+                                            data-dropup-auto="false">
+                                            <?php if ($getPos->personnel_level == null){ ?>
+                                            <option>Chọn cấp nhân sự*
+                                            </option>
+                                            <?php } else { ?>
+                                            <?php } ?>
+                                            <option value="{{ $getPos->personnel_level }}">
+                                                {{ $getPos->personnel_level_name }}
+                                            </option>
+                                            @foreach ($personnelLevelList as $av)
+                                                <option value="{{ $av->id }}">
+                                                    {{ $av->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn cấp quản lý">
+                                        <select name="parent" class="selectpicker" data-dropup-auto="false" data-live-search="true">
+                                            <?php if ($getPos->parent == null){ ?>
+                                            <option value="0">Chọn cấp quản lý
+                                            </option>
+                                            <?php } else { ?>
+                                            <?php } ?>
+                                            <option value="{{ $getPos->parent }}">
+                                                @if ($getPos->donvime)
+                                                    {{ $getPos->donvime->name }}
+                                                @endif
+                                            </option>
+                                            @foreach ($positionlists as $ac)
+                                                <option value="{{ $ac->id }}">
+                                                    @php
+                                                        $str = '';
+                                                        for ($i = 0; $i < $ac->level; $i++) {
+                                                            echo $str;
+                                                            $str = '  --';
+                                                        }
+                                                    @endphp
+                                                    {{ $ac->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn gói trang bị">
+                                        <select name="pack" class="selectpicker" data-dropup-auto="false">
+                                            <option value="">Chọn gói
+                                                trang bị
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top">
+                                        <textarea name="description" type="text" placeholder="Mô tả công việc" class="form-control "
+                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Mô tả công việc" style="height: 80px;">{{ $getPos->description }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <input name="staffing" type="text" placeholder="Định biên" class="form-control"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Định biên"
+                                        value="{{ $getPos->staffing }}">
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <input name="wage" type="text" placeholder="Quỹ lương năm"
+                                        class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Quỹ lương năm" value="{{ $getPos->wage }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy
+                            </button>
+                            <button type="submit" class="btn btn-danger">Lưu
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
     {{-- Gán nhân sự --}}
     <div class="modal fade" id="assignUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
