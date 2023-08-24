@@ -1381,6 +1381,7 @@ th {
     align-items: center;
     margin: 0 0 10px 0;
     justify-content: center;
+    height: auto;
 }
 
 .mainSection_heading-title {
@@ -1388,6 +1389,14 @@ th {
     text-transform: uppercase;
     font-weight: 700;
     font-size: var(--fz-20);
+    margin: 0;
+}
+
+.mainSection_heading-subtitle {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: var(--fz-18);
     margin: 0;
 }
 

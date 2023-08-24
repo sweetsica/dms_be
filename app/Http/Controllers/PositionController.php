@@ -30,6 +30,7 @@ class PositionController extends Controller
             'position.parent',
 
             'position.wage',
+            'position.created_at',
             'position.pack',
             'position.department_id',
             'position.personnel_level',

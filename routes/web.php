@@ -219,6 +219,9 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('xoa-don-vi-tinh/{id}', [UnitController::class, 'destroy'])->name('Unit.destroy');
     Route::post('don-vi-tinh-delete', [UnitController::class, 'delete'])->name('Unit.delete');
 
+    Route::get('dashboard_TongGiamDoc', function () {
+        return view('Dashboard.dashboard_Admin');});
+
 });
 
 Route::get('/export/customer', [ExcelController::class, 'setExportCustomter']);
