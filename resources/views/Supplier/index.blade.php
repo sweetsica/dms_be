@@ -65,7 +65,7 @@
                                                 @endif
 
                                             </div>
-                                            <form id="select-form" action="{{ route('delete-selected-items') }}"
+                                            <form id="select-form" action="{{ route('Supplier.delete') }}"
                                                 method="POST">
                                                 @csrf
                                                 <div class="action_export mx-3 order-md-1" data-bs-toggle="tooltip"
@@ -121,20 +121,22 @@
                                                                 @endif
                                                             </tr>
                                                         </thead>
-                                                        {{-- @foreach ($departmentList as $item)
+                                                        <?php $t = 1; ?>
+                                                        {{-- @foreach ($supplierList as $item)
                                                             <tbody>
                                                                 <tr>
                                                                     <td class="text-center"> <input type="checkbox"
                                                                             name="selected_items[]"
-                                                                            value="{{ $item->id }}"></td>
+                                                                            value="{{ $item->id }}">
+                                                                    </td>
                                                                     <td class=" text-center">
                                                                         {{ $t++ }}
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
-                                                                            title="{{ $item->code }}">
-                                                                            {{ $item->code }}
+                                                                            title="{{ $item->name }}">
+                                                                            {{ $item->name }}
                                                                         </div>
                                                                     </td>
                                                                     <td class="">
@@ -142,8 +144,8 @@
                                                                             href="{{ route('department.index2', ['department_id' => $item->id]) }}">
                                                                             <div class="overText" data-bs-toggle="tooltip"
                                                                                 data-bs-placement="top"
-                                                                                title="{{ $item->name }}">
-                                                                                {{ $item->name }}
+                                                                                title="{{ $item->code }}">
+                                                                                {{ $item->code }}
                                                                             </div>
                                                                         </a>
                                                                     </td>
@@ -211,97 +213,108 @@
                                                                 </tr>
                                                             </tbody>
                                                         @endforeach --}}
+                                                    @foreach ($supplierList as $item)
                                                         <tbody>
                                                             <tr>
                                                                 <td>
-                                                                    <input type="checkbox" name="selected_items[]">
+                                                                    <input type="checkbox" name="selected_items[]" value="{{ $item->id }}">
                                                                 </td>
                                                                 <td>
                                                                     <div class="overText text-center"
                                                                         data-bs-toggle="tooltip" data-bs-placement="top"
                                                                         title="">
-                                                                        1
+                                                                        {{ $t++ }}
                                                                     </div>
                                                                 </td>
                                                                 <td>
                                                                     <div class="overText text-center"
                                                                         data-bs-toggle="tooltip" data-bs-placement="top"
                                                                         title="">
-                                                                        <span class="badge bg-success">
-                                                                            Đang hợp tác
-                                                                        </span>
+                                                                        @switch($item->status)
+                                                                        @case(0)
+                                                                            <span class="badge bg-danger">
+                                                                                Ngưng hợp tác
+                                                                            </span>
+                                                                        @break
+
+                                                                        @case(1)
+                                                                            <span class="badge bg-success">
+                                                                                Đang hợp tác
+                                                                            </span>
+                                                                        @break                                                                        
+
+                                                                        @default
+                                                                            <span></span>
+                                                                        @break
+                                                                    @endswitch                                                                        
                                                                     </div>
                                                                 </td>
                                                                 <td>
                                                                     <div class="overText text-center"
                                                                         data-bs-toggle="tooltip" data-bs-placement="top"
                                                                         title="">
-                                                                        VINFAST
+                                                                        {{ $item->code }}
                                                                     </div>
                                                                 </td>
-                                                                <td>
+                                                                <td class="text-center">
                                                                     <button type="button" data-bs-toggle="modal"
-                                                                        data-bs-target="#chiTietNhaCungCap"
+                                                                        data-bs-target="#chiTietNhaCungCap{{ $item->id }}"
                                                                         style="background: transparent">
-                                                                        <div class="text-wrap text-center btn-show_detail"
+                                                                        <div class="text-wrap btn-show_detail"
                                                                             data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
-                                                                            title="Công ty TNHH Kinh doanh Thương Mại và Dịch vụ
-                                                                        FOX">
-                                                                            Công ty TNHH Kinh doanh Thương Mại và Dịch vụ
-                                                                            VINFAST
+                                                                            title="{{ $item->name }}">
+                                                                            {{ $item->name }}
                                                                         </div>
                                                                     </button>
                                                                 </td>
                                                                 <td>
                                                                     <div class="overText text-center"
                                                                         data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                        title="">
-                                                                        Linh
+                                                                        title=" {{ $item->contact_name }}">
+                                                                        {{ $item->contact_name }}
                                                                     </div>
                                                                 </td>
                                                                 <td>
                                                                     <div class="overText text-center"
                                                                         data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                        title="">
-                                                                        012345678
+                                                                        title="{{ $item->contact_phone }}">
+                                                                        {{ $item->contact_phone }}
                                                                     </div>
                                                                 </td>
                                                                 <td>
                                                                     <div class="overText text-center"
                                                                         data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                        title="">
-                                                                        vinfast@gmail.com
+                                                                        title="{{ $item->contact_name }}">
+                                                                        {{ $item->contact_email }}
                                                                     </div>
                                                                 </td>
                                                                 <td>
                                                                     <div class="overText text-center"
                                                                         data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                        title="">
-                                                                        111111111
+                                                                        title="{{ $item->tax_code }}">
+                                                                        {{ $item->tax_code }}
                                                                     </div>
                                                                 </td>
                                                                 <td>
                                                                     <div class="text-wrap text-center"
                                                                         data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                        title="">
-                                                                        Lorem ipsum dolor sit amet consectetur
-                                                                        adipisicing
-                                                                        elit.
+                                                                        title="{{ $item->address }}">
+                                                                        {{ $item->address }}
                                                                     </div>
                                                                 </td>
                                                                 <td>
                                                                     <div class="overText text-center"
                                                                         data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                        title="">
-                                                                        10000000000
+                                                                        title="{{ $item->debt_limit }}">
+                                                                        {{ $item->debt_limit }}
                                                                     </div>
                                                                 </td>
                                                                 <td>
                                                                     <div class="overText text-center"
                                                                         data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                        title="">
-                                                                        90
+                                                                        title="{{ $item->days_owed }}">
+                                                                        {{ $item->days_owed }}
                                                                     </div>
                                                                 </td>
                                                                 @if (session('user')['role_id'] == '1')
@@ -312,7 +325,7 @@
                                                                             <div data-bs-toggle="tooltip"
                                                                                 data-bs-placement="top" title="Sửa ">
                                                                                 <div class="btn" data-bs-toggle="modal"
-                                                                                    data-bs-target="#suaNhaCungCap">
+                                                                                    data-bs-target="#suaNhaCungCap{{ $item->id }}">
                                                                                     <img style="width:16px;height:16px"
                                                                                         src="{{ asset('assets/img/edit.svg') }}" />
                                                                                 </div>
@@ -320,7 +333,7 @@
                                                                             <div data-bs-toggle="tooltip"
                                                                                 data-bs-placement="top" title="Xóa">
                                                                                 <div class="btn" data-bs-toggle="modal"
-                                                                                    data-bs-target="#xoaNhaCungCap">
+                                                                                    data-bs-target="#xoaNhaCungCap{{ $item->id }}">
                                                                                     <img style="width:16px;height:16px"
                                                                                         src="{{ asset('assets/img/trash.svg') }}" />
                                                                                 </div>
@@ -328,125 +341,9 @@
                                                                         </div>
                                                                     </td>
                                                                 @endif
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <input type="checkbox" name="selected_items[]">
-                                                                </td>
-                                                                <td>
-                                                                    <div class="overText text-center"
-                                                                        data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                        title="">
-                                                                        2
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="overText text-center"
-                                                                        data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                        title="">
-                                                                        <span class="badge bg-danger">
-                                                                            Ngưng hợp tác
-                                                                        </span>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="overText text-center"
-                                                                        data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                        title="">
-                                                                        FOX
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <button type="button" data-bs-toggle="modal"
-                                                                        data-bs-target="#chiTietNhaCungCap"
-                                                                        style="background: transparent">
-                                                                        <div class="text-wrap text-center btn-show_detail"
-                                                                            data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top"
-                                                                            title="Công ty TNHH Kinh doanh Thương Mại và Dịch vụ
-                                                                            FOX">
-                                                                            Công ty TNHH Kinh doanh Thương Mại và Dịch vụ
-                                                                            FOX
-                                                                        </div>
-                                                                    </button>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="overText text-center"
-                                                                        data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                        title="">
-                                                                        Nam
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="overText text-center"
-                                                                        data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                        title="">
-                                                                        012345678
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="overText text-center"
-                                                                        data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                        title="">
-                                                                        fox@gmail.com
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="overText text-center"
-                                                                        data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                        title="">
-                                                                        22222
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="text-wrap text-center"
-                                                                        data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                        title="">
-                                                                        Lorem ipsum dolor sit amet consectetur
-                                                                        adipisicing
-                                                                        elit.
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="overText text-center"
-                                                                        data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                        title="">
-                                                                        10000000000
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="overText text-center"
-                                                                        data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                        title="">
-                                                                        90
-                                                                    </div>
-                                                                </td>
-                                                                @if (session('user')['role_id'] == '1')
-                                                                    <td
-                                                                        style="background: #fff; position: sticky; right: 0;">
-                                                                        <div
-                                                                            class="table_actions d-flex justify-content-center">
-                                                                            <div data-bs-toggle="tooltip"
-                                                                                data-bs-placement="top" title="Sửa">
-                                                                                <div class="btn" data-bs-toggle="modal"
-                                                                                    data-bs-target="#suaNhaCungCap">
-                                                                                    <img style="width:16px;height:16px"
-                                                                                        src="{{ asset('assets/img/edit.svg') }}" />
-                                                                                </div>
-                                                                            </div>
-                                                                            <div data-bs-toggle="tooltip"
-                                                                                data-bs-placement="top" title="Xóa">
-                                                                                <div class="btn" data-bs-toggle="modal"
-                                                                                    data-bs-target="#xoaNhaCungCap">
-                                                                                    <img style="width:16px;height:16px"
-                                                                                        src="{{ asset('assets/img/trash.svg') }}" />
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                @endif
-                                                            </tr>
+                                                            </tr>                                                            
                                                         </tbody>
+                                                    @endforeach
                                                     </table>
                                                     {{-- <nav aria-label="Page navigation example" class="float-end mt-3"
                                                         id="target-pagination">
@@ -598,14 +495,15 @@
     @endforeach --}}
 
     {{-- Sửa nhà cung cấp --}}
-    <div class="modal fade" id="suaNhaCungCap" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+@foreach ($supplierList as $item)
+    <div class="modal fade" id="suaNhaCungCap{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <h5 class="modal-title w-100" id="exampleModalLabel">Sửa nhà cung cấp</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="">
+                <form method="POST" action="{{ route('Supplier.update', $item->id) }}">
                     @csrf
                     <div class="modal-body">
                         <div class="row g-3 mb-3">
@@ -615,48 +513,48 @@
                             <div class="col-lg-4">
                                 <input name="name" required type="text" placeholder="Tên nhà cung cấp*"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                    title="Tên nhà cung cấp*" value="Nhà cung cấp số 1">
+                                    title="Tên nhà cung cấp*" value="{{ $item->name }}">
 
                             </div>
                             <div class="col-lg-4">
                                 <input name="code" required type="text" placeholder="Mã nhà cung cấp*"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                    title="Mã nhà cung cấp*" value="NCC01">
+                                    title="Mã nhà cung cấp*" value="{{ $item->code }}">
                             </div>
                             <div class="col-lg-4">
-                                <input name="name" required type="text" placeholder="Lĩnh vực kinh doanh"
+                                <input name="business_areas" type="text" placeholder="Lĩnh vực kinh doanh"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                    title="Lĩnh vực kinh doanh" value="Xe điện">
+                                    title="Lĩnh vực kinh doanh" value="{{ $item->business_areas }}">
                             </div>
                             <div class="col-lg-4">
-                                <input name="name" required type="text" placeholder="Mã số thuế"
+                                <input name="tax_code" type="text" placeholder="Mã số thuế"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                    title="Mã số thuế">
+                                    title="Mã số thuế" value="{{ $item->tax_code }}">
                             </div>
                             <div class="col-lg-4">
-                                <input name="name" required type="text" placeholder="Người đại diện"
+                                <input name="representative" type="text" placeholder="Người đại diện"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                    title="Người đại diện" value="Nguyễn Văn A">
+                                    title="Người đại diện" value="{{ $item->representative }}">
                             </div>
                             <div class="col-lg-4">
-                                <input name="name" required type="text" placeholder="Chức danh"
+                                <input name="job_title" type="text" placeholder="Chức danh"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                    title="Chức danh" value="Giám đốc">
+                                    title="Chức danh" value="{{ $item->job_title }}">
                             </div>
                             <div class="col-lg-4">
-                                <input name="name" required type="text" placeholder="Số tài khoản"
+                                <input name="bank_number" type="text" placeholder="Số tài khoản"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                    title="Số tài khoản" value="111111111111">
+                                    title="Số tài khoản" value="{{ $item->bank_number }}">
                             </div>
                             <div class="col-lg-8">
-                                <input name="name" required type="text" placeholder="Mở ngân hàng tại"
+                                <input name="bank_name" type="text" placeholder="Mở ngân hàng tại"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                    title="Mở ngân hàng tại" value="BIDV">
+                                    title="Mở ngân hàng tại" value="{{ $item->bank_name }}">
                             </div>
                             <div class="col-lg-12">
-                                <input name="name" required type="text" placeholder="Địa chỉ" class="form-control"
+                                <input name="address" type="text" placeholder="Địa chỉ" class="form-control"
                                     data-bs-toggle="tooltip" data-bs-placement="bottom" title="Địa chỉ"
-                                    value="Thành phố Hà Nội">
+                                    value="{{ $item->address }}">
                             </div>
                         </div>
 
@@ -665,19 +563,19 @@
                                 <h3 class="modal-title">Người liên hệ</h3>
                             </div>
                             <div class="col-lg-4">
-                                <input name="name" required type="text" placeholder="Tên người liên hệ"
+                                <input name="contact_name" type="text" placeholder="Tên người liên hệ"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                    title="Tên người liên hệ" value="Nguyễn Văn C">
+                                    title="Tên người liên hệ" value="{{ $item->contact_name }}">
                             </div>
                             <div class="col-lg-4">
-                                <input name="code" required type="text" placeholder="SĐT người liên hệ"
+                                <input name="contact_phone" type="number" placeholder="SĐT người liên hệ"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                    title="SĐT người liên hệ" value="0123456">
+                                    title="SĐT người liên hệ" value="{{ $item->contact_phone }}">
                             </div>
                             <div class="col-lg-4">
-                                <input name="name" required type="text" placeholder="Email người liên hệ"
+                                <input name="contact_email" type="text" placeholder="Email người liên hệ"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                    title="Email người liên hệ" value="a@gmail.com">
+                                    title="Email người liên hệ" value="{{ $item->contact_email }}">
                             </div>
                         </div>
 
@@ -686,14 +584,14 @@
                                 <h3 class="modal-title">Công nợ</h3>
                             </div>
                             <div class="col-lg-4">
-                                <input name="name" required type="text" placeholder="Hạn mức công nợ"
+                                <input name="debt_limit" type="number" placeholder="Hạn mức công nợ"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                    title="Hạn mức công nợ" value="10000000">
+                                    title="Hạn mức công nợ" value="{{ $item->debt_limit }}">
                             </div>
                             <div class="col-lg-4">
-                                <input name="code" required type="text" placeholder="Số ngày được nợ"
+                                <input name="days_owed" type="number" placeholder="Số ngày được nợ"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                    title="Số ngày được nợ" value="90">
+                                    title="Số ngày được nợ" value="{{ $item->days_owed }}">
                             </div>
                         </div>
 
@@ -703,13 +601,22 @@
                             </div>
                             <div class="col-lg-4">
                                 <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Trạng thái">
-                                    <select name="" class="selectpicker">
-                                        <option value="">Chọn trạng thái
+                                    <select name="status" class="selectpicker">
+                                        @if ($item->status == 1)
+                                        <option disabled>Chọn trạng thái
                                         </option>
-                                        <option value="Đang hợp tác" selected>Đang hợp tác
+                                        <option value="1" selected>Đang hợp tác
                                         </option>
-                                        <option value="Ngừng hợp tác">Ngừng hợp tác
+                                        <option value="0">Ngừng hợp tác
                                         </option>
+                                        @else
+                                        <option disabled>Chọn trạng thái
+                                        </option>
+                                        <option value="1">Đang hợp tác
+                                        </option>
+                                        <option value="0" selected>Ngừng hợp tác
+                                        </option>
+                                        @endif
                                     </select>
                                 </div>
                             </div>
@@ -726,7 +633,7 @@
     </div>
 
     {{-- Chi tiết nhà cung cấp --}}
-    <div class="modal fade" id="chiTietNhaCungCap" tabindex="-1" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="chiTietNhaCungCap{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
@@ -743,47 +650,48 @@
                         <div class="col-lg-4">
                             <input name="name" required type="text" placeholder="Tên nhà cung cấp*"
                                 class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                title="Tên nhà cung cấp*" value="Nhà cung cấp số 1" disabled>
+                                title="Tên nhà cung cấp*" value="{{ $item->name }}" disabled>
 
                         </div>
                         <div class="col-lg-4">
                             <input name="code" required type="text" placeholder="Mã nhà cung cấp*"
                                 class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                title="Mã nhà cung cấp*" value="NCC01" disabled>
+                                title="Mã nhà cung cấp*" value="{{ $item->code }}" disabled>
                         </div>
                         <div class="col-lg-4">
                             <input name="name" required type="text" placeholder="Lĩnh vực kinh doanh"
                                 class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                title="Lĩnh vực kinh doanh" value="Xe điện" disabled>
+                                title="Lĩnh vực kinh doanh" value="{{ $item->business_areas }}" disabled>
                         </div>
                         <div class="col-lg-4">
                             <input name="name" required type="text" placeholder="Mã số thuế" class="form-control"
-                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Mã số thuế" disabled>
+                                data-bs-toggle="tooltip" data-bs-placement="bottom" 
+                                title="Mã số thuế"  value="{{ $item->tax_code }}" disabled>
                         </div>
                         <div class="col-lg-4">
                             <input name="name" required type="text" placeholder="Người đại diện"
                                 class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                title="Người đại diện" value="Nguyễn Văn A" disabled>
+                                title="Người đại diện" value="{{ $item->representative }}" disabled>
                         </div>
                         <div class="col-lg-4">
                             <input name="name" required type="text" placeholder="Chức danh" class="form-control"
-                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Chức danh" value="Giám đốc"
-                                disabled>
+                                data-bs-toggle="tooltip" data-bs-placement="bottom" 
+                                title="Chức danh" value="{{ $item->job_title }}" disabled>
                         </div>
                         <div class="col-lg-4">
                             <input name="name" required type="text" placeholder="Số tài khoản"
                                 class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                title="Số tài khoản" value="111111111111" disabled>
+                                title="Số tài khoản" value="{{ $item->bank_number }}" disabled>
                         </div>
                         <div class="col-lg-8">
                             <input name="name" required type="text" placeholder="Mở ngân hàng tại"
                                 class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                title="Mở ngân hàng tại" value="BIDV" disabled>
+                                title="Mở ngân hàng tại" value="{{ $item->bank_name }}" disabled>
                         </div>
                         <div class="col-lg-12">
                             <input name="name" required type="text" placeholder="Địa chỉ" class="form-control"
                                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Địa chỉ"
-                                value="Thành phố Hà Nội" disabled>
+                                value="{{ $item->address }}" disabled>
                         </div>
                     </div>
 
@@ -794,17 +702,17 @@
                         <div class="col-lg-4">
                             <input name="name" required type="text" placeholder="Tên người liên hệ"
                                 class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                title="Tên người liên hệ" value="Nguyễn Văn C" disabled>
+                                title="Tên người liên hệ" value="{{ $item->contact_name }}" disabled>
                         </div>
                         <div class="col-lg-4">
                             <input name="code" required type="text" placeholder="SĐT người liên hệ"
                                 class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                title="SĐT người liên hệ" value="0123456" disabled>
+                                title="SĐT người liên hệ" value="{{ $item->contact_phone }}" disabled>
                         </div>
                         <div class="col-lg-4">
                             <input name="name" required type="text" placeholder="Email người liên hệ"
                                 class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                title="Email người liên hệ" value="a@gmail.com" disabled>
+                                title="Email người liên hệ" value="{{ $item->contact_email }}" disabled>
                         </div>
                     </div>
 
@@ -815,12 +723,12 @@
                         <div class="col-lg-4">
                             <input name="name" required type="text" placeholder="Hạn mức công nợ"
                                 class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                title="Hạn mức công nợ" value="10000000" disabled>
+                                title="Hạn mức công nợ" value="{{ $item->debt_limit }}" disabled>
                         </div>
                         <div class="col-lg-4">
                             <input name="code" required type="text" placeholder="Số ngày được nợ"
                                 class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                title="Số ngày được nợ" value="90" disabled>
+                                title="Số ngày được nợ" value="{{ $item->days_owed }}" disabled>
                         </div>
                     </div>
 
@@ -831,12 +739,17 @@
                         <div class="col-lg-4">
                             <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Trạng thái">
                                 <select name="" class="selectpicker" disabled>
-                                    <option value="">Chọn trạng thái
+                                    @if ($item->status == 1)                                    
+                                    <option value="1" selected>Đang hợp tác
                                     </option>
-                                    <option value="Đang hợp tác" selected>Đang hợp tác
+                                    <option value="0">Ngừng hợp tác
                                     </option>
-                                    <option value="Ngừng hợp tác">Ngừng hợp tác
+                                    @else                                    
+                                    <option value="1">Đang hợp tác
                                     </option>
+                                    <option value="0" selected>Ngừng hợp tác
+                                    </option>
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -851,7 +764,7 @@
     </div>
 
     {{-- Xóa nhà cung cấp --}}
-    <div class="modal fade" id="xoaNhaCungCap" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="xoaNhaCungCap{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -863,7 +776,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
-                    <form action="" method="POST">
+                    <form action="{{ route('Supplier.destroy', $item->id) }}" method="POST">
                         @csrf
                         <button type="submit" class="btn btn-danger">Xóa</button>
                     </form>
@@ -871,7 +784,7 @@
             </div>
         </div>
     </div>
-
+@endforeach
     <!-- Modal Thêm mới nhà cung cấp -->
     <div class="modal fade" id="addSupplier" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -880,7 +793,7 @@
                     <h1 class="modal-title w-100" id="exampleModalLabel">Thêm nhà cung cấp</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="addForm" action="" method="POST">
+                <form id="addForm" action="{{ route('Supplier.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="row g-3 mb-3">
@@ -898,37 +811,37 @@
                                     title="Mã nhà cung cấp*">
                             </div>
                             <div class="col-lg-4">
-                                <input name="name" required type="text" placeholder="Lĩnh vực kinh doanh"
+                                <input name="business_areas" type="text" placeholder="Lĩnh vực kinh doanh"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="Lĩnh vực kinh doanh">
                             </div>
                             <div class="col-lg-4">
-                                <input name="name" required type="text" placeholder="Mã số thuế"
+                                <input name="tax_code" type="text" placeholder="Mã số thuế"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="Mã số thuế">
                             </div>
                             <div class="col-lg-4">
-                                <input name="name" required type="text" placeholder="Người đại diện"
+                                <input name="representative" type="text" placeholder="Người đại diện"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="Người đại diện">
                             </div>
                             <div class="col-lg-4">
-                                <input name="name" required type="text" placeholder="Chức danh"
+                                <input name="job_title" type="text" placeholder="Chức danh"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="Chức danh">
                             </div>
                             <div class="col-lg-4">
-                                <input name="name" required type="text" placeholder="Số tài khoản"
+                                <input name="bank_number" type="text" placeholder="Số tài khoản"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="Số tài khoản">
                             </div>
                             <div class="col-lg-8">
-                                <input name="name" required type="text" placeholder="Mở ngân hàng tại"
+                                <input name="bank_name" type="text" placeholder="Mở ngân hàng tại"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="Mở ngân hàng tại">
                             </div>
                             <div class="col-lg-12">
-                                <input name="name" required type="text" placeholder="Địa chỉ" class="form-control"
+                                <input name="address" type="text" placeholder="Địa chỉ" class="form-control"
                                     data-bs-toggle="tooltip" data-bs-placement="bottom" title="Địa chỉ">
                             </div>
                         </div>
@@ -938,17 +851,17 @@
                                 <h3 class="modal-title">Người liên hệ</h3>
                             </div>
                             <div class="col-lg-4">
-                                <input name="name" required type="text" placeholder="Tên người liên hệ"
+                                <input name="contact_name" type="text" placeholder="Tên người liên hệ"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="Tên người liên hệ">
                             </div>
                             <div class="col-lg-4">
-                                <input name="code" required type="text" placeholder="SĐT người liên hệ"
+                                <input name="contact_phone" type="number" placeholder="SĐT người liên hệ"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="SĐT người liên hệ">
                             </div>
                             <div class="col-lg-4">
-                                <input name="name" required type="text" placeholder="Email người liên hệ"
+                                <input name="contact_email" type="text" placeholder="Email người liên hệ"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="Email người liên hệ">
                             </div>
@@ -959,12 +872,12 @@
                                 <h3 class="modal-title">Công nợ</h3>
                             </div>
                             <div class="col-lg-4">
-                                <input name="name" required type="text" placeholder="Hạn mức công nợ"
+                                <input name="debt_limit" type="number" placeholder="Hạn mức công nợ"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="Hạn mức công nợ">
                             </div>
                             <div class="col-lg-4">
-                                <input name="code" required type="text" placeholder="Số ngày được nợ"
+                                <input name="days_owed" type="number" placeholder="Số ngày được nợ"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="Số ngày được nợ">
                             </div>
@@ -976,12 +889,12 @@
                             </div>
                             <div class="col-lg-4">
                                 <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Trạng thái">
-                                    <select name="" class="selectpicker">
-                                        <option value="">Chọn trạng thái
+                                    <select name="status" class="selectpicker">
+                                        <option disabled>Chọn trạng thái
                                         </option>
-                                        <option value="Đang hợp tác">Đang hợp tác
+                                        <option value="1">Đang hợp tác
                                         </option>
-                                        <option value="Ngừng hợp tác">Ngừng hợp tác
+                                        <option value="0">Ngừng hợp tác
                                         </option>
                                     </select>
                                 </div>

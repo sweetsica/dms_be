@@ -25,6 +25,7 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\WareHouseController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PromotionController;
+use App\Models\WareHouse;
 
 /*
 |--------------------------------------------------------------------------
@@ -226,9 +227,17 @@ Route::middleware(['auth.role'])->group(function () {
 
     // Kho
     Route::get('danh-sach-kho', [WareHouseController::class, 'index'])->name('WareHouse.index');
+    Route::post('them-kho', [WareHouseController::class, 'store'])->name('WareHouse.store');
+    Route::post('sua-kho/{id}', [WareHouseController::class, 'update'])->name('WareHouse.update');
+    Route::post('xoa-kho/{id}', [WareHouseController::class, 'destroy'])->name('WareHouse.destroy');
+    Route::post('kho-delete', [WareHouseController::class, 'delete'])->name('WareHouse.delete');
 
     // Nhà cung cấp
     Route::get('danh-sach-nha-cung-cap', [SupplierController::class, 'index'])->name('Supplier.index');
+    Route::post('them-nha-cung-cap', [SupplierController::class, 'store'])->name('Supplier.store');
+    Route::post('sua-nha-cung-cap/{id}', [SupplierController::class, 'update'])->name('Supplier.update');
+    Route::post('xoa-nha-cung-cap/{id}', [SupplierController::class, 'destroy'])->name('Supplier.destroy');
+    Route::post('nha-cung-cap-delete', [SupplierController::class, 'delete'])->name('Supplier.delete');
 
     // Chương trình khuyến mại
     Route::get('danh-sach-khuyen-mai', [PromotionController::class, 'index'])->name('Promotion.index');
