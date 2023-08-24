@@ -184,6 +184,8 @@ Route::middleware(['auth.role'])->group(function () {
     Route::get('nhan_su_dia_ban/{area_id}', [PersonnelController::class, 'showDiaBan'])->name('Personnel.show.diaban');
     Route::get('nhan_su_vung/{department_id}', [PersonnelController::class, 'showVung'])->name('Personnel.show.vung');
     Route::post('nhan_su-delete', [PersonnelController::class, 'delete'])->name('Personnel.delete');
+    Route::get('/thong-tin-ca-nhan', [PersonnelController::class, 'me'])->name('Personnel.me');
+
 
     Route::get('vai-tro', [RoleController::class, 'index'])->name('Role.index');
     Route::post('vai-tro', [RoleController::class, 'store'])->name('Role.store');

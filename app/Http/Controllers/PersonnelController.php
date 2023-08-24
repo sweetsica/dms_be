@@ -11,6 +11,7 @@ use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class PersonnelController extends Controller
 {
@@ -844,7 +845,7 @@ class PersonnelController extends Controller
         $data->gender = $gender;
         $data->manage = $manage;
         $data->save();
-        return redirect()->route('Personnel.index');
+        return redirect()->back();
     }
 
     public function destroy($id)
@@ -907,5 +908,70 @@ class PersonnelController extends Controller
 
         Session::flash('success', "Gỡ nhân sự thành công");
         return back();
+    }
+
+    public function me(Request $request)
+    {
+            $id = session('user')["id"];
+
+            // dd($user);
+            // return $user;
+            $departmentlists = $this->getDepartment();
+            $positionlists = $this->getPosition();
+            $personnelLevelList = PersonnelLevel::all();
+            $roleList = Role::all();
+            $localityList = Locality::all();
+            $personnellists = $this->getPersonnel();
+            $personnelLevelList = PersonnelLevel::all();
+            $user = DB::table('personnel')
+                ->where('personnel.id', $id)
+                ->leftJoin('department', 'department.id', '=', 'personnel.department_id')
+                ->leftJoin('position', 'position.id', '=', 'personnel.position_id')
+                ->leftJoin('personnel_level', 'personnel_level.id', '=', 'personnel.personnel_lv_id')
+                ->leftJoin('role', 'role.id', '=', 'personnel.role_id')
+                ->leftJoin('locality', 'locality.id', '=', 'personnel.area_id')
+                ->select(
+                    'personnel.id',
+                    'personnel.name',
+                    'personnel.address',
+                    'personnel.gender',
+                    'personnel.birthday',
+                    'personnel.password',
+                    'personnel.code',
+                    'personnel.email',
+                    'personnel.annual_salary',
+                    'personnel.pack',
+                    'personnel.manage',
+                    'personnel.phone',
+                    'personnel.working_form',
+                    'personnel.status',
+                    'personnel.department_id',
+                    'personnel.personnel_lv_id',
+                    'personnel.position_id',
+                    'department.name as department_name',
+                    'position.name as position_name',
+                    'personnel_level.name as personnel_level_name',
+                    'personnel.role_id',
+                    'role.name as role_name',
+                    'locality.name as locality_name',
+                    'personnel.area_id'
+                    // 'personnel.id',
+                )
+                ->get();
+
+// dd($user);
+            // $listPositionLevel = $this->dwtService->listPositionLevel();
+            // $listUsers = $this->dwtService->listUsers();
+            // $listEquimentPack = $this->dwtService->listEquimentPack();
+
+            return view('information.profile')
+                ->with('departmentlists', $departmentlists)
+                ->with('positionlists', $positionlists)
+                ->with('roleList', $roleList)
+                ->with('personnellists', $personnellists)
+                ->with('localityList', $localityList)
+                ->with('user', $user)
+                ->with('personnelLevelList', $personnelLevelList);
+        
     }
 }
