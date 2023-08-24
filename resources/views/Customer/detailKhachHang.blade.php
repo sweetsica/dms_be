@@ -542,7 +542,7 @@
                 <div class="modal-header text-center">
                     <h5 class="modal-title w-100" id="exampleModalLabel">Sửa chi tiết khách hàng</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+                </div>Chức danh
                 <form id="formThemCapPhatChitiet" method="POST" action="{{ route('update.customer',$customer->id) }}" enctype="multipart/form-data">
                     @csrf
                     <input name="name" style="display: none;" id="name">
@@ -561,17 +561,18 @@
                             <div class="col-md-4 mb-3">
                                 <input type="text" name="personCompany" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Người đại diện" placeholder="Người đại diện"
-                                    class="form-control">
+                                    class="form-control" value="{{ $customer->personCompany ?? '' }}">
                             </div>
                             <div class="col-md-4 mb-3">
                                 <input type="text" name="career" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Chức danh" placeholder="Chức danh" class="form-control">
+                                    title="Chức danh" placeholder="Chức danh" class="form-control" value="{{ $customer->career ?? '' }}">
                             </div>
 
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Lĩnh vực kinh doanh">
-                                <select class="selectpicker" id="customerType">
-                                    <option value="" selected>Lĩnh vực kinh doanh</option>
+                                <select class="selectpicker" id="customerType" name="business_areas">
+                                    <option value="{{ $customer->business_areas ?? '' }}"> {{ $customer->business_areas ?? '' }}</option>
+                                    <option value="" >Lĩnh vực kinh doanh</option>
                                     <option value="Kim khí">Kim khí</option>
                                     <option value="Điện máy">Điện máy</option>
                                     <option value="Xe điện">Xe điện</option>
