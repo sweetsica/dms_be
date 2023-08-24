@@ -22,6 +22,9 @@ use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\SpecificationsController;
 use App\Http\Controllers\TechnicalSpecificationsGroupController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\WareHouseController;
+use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\PromotionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -219,6 +222,15 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('xoa-don-vi-tinh/{id}', [UnitController::class, 'destroy'])->name('Unit.destroy');
     Route::post('don-vi-tinh-delete', [UnitController::class, 'delete'])->name('Unit.delete');
 
+    // Kho
+    Route::get('danh-sach-kho', [WareHouseController::class, 'index'])->name('WareHouse.index');
+
+    // Nhà cung cấp
+    Route::get('danh-sach-nha-cung-cap', [SupplierController::class, 'index'])->name('Supplier.index');
+
+    // Chương trình khuyến mại
+    Route::get('danh-sach-khuyen-mai', [PromotionController::class, 'index'])->name('Promotion.index');
+    
 });
 
 Route::get('/export/customer', [ExcelController::class, 'setExportCustomter']);
