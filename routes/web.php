@@ -230,7 +230,9 @@ Route::middleware(['auth.role'])->group(function () {
 
     // Chương trình khuyến mại
     Route::get('danh-sach-khuyen-mai', [PromotionController::class, 'index'])->name('Promotion.index');
-    
+    Route::post('them-khuyen-mai', [PromotionController::class, 'store'])->name('Promotion.store');
+    Route::post('sua-khuyen-mai/{id}', [PromotionController::class, 'update'])->name('Promotion.update');
+
     Route::get('dashboard_TongGiamDoc', function () {
         return view('Dashboard.dashboard_Admin');});
 
