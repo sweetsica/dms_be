@@ -75,19 +75,20 @@
                                                                         type="checkbox" id="select-all"></th>
                                                                 <th class="text-nowrap text-center" style="width:2%">STT
                                                                 </th>
-                                                                <th class="text-nowrap" style="width:10%">Mã vị trí</th>
-                                                                <th class="text-nowrap" style="width:10%">Tên vị trí/chức
+                                                                <th class="text-nowrap text-center" style="width:6%">Mã vị trí</th>
+                                                                <th class="text-nowrap text-center" style="width:10%">Tên vị trí/chức
                                                                     danh
                                                                 </th>
-                                                                <th class="text-nowrap" style="width:10%">Cấp nhân sự</th>
-                                                                <th class="text-nowrap" style="width:10%">Đơn vị công tác
+                                                                <th class="text-nowrap text-center" style="width:10%">Cấp nhân sự</th>
+                                                                <th class="text-nowrap text-center" style="width:10%">Đơn vị công tác
                                                                 </th>
-                                                                <th class="text-nowrap" style="width:20%">Mô tả</th>
-                                                                <th class="text-nowrap" style="width:10%">Định biên</th>
-                                                                <th class="text-nowrap" style="width:10%">Quỹ lương năm</th>
-                                                                <th class="text-nowrap" style="width:8%">Gói trang bị</th>
+                                                                <th class="text-nowrap text-center" style="width:20%">Mô tả</th>
+                                                                <th class="text-nowrap text-center" style="width:6%">Định biên</th>
+                                                                <th class="text-nowrap text-center" style="width:10%">Quỹ lương năm</th>
+                                                                <th class="text-nowrap text-center" style="width:8%">Ngày tạo</th>
+                                                                <th class="text-nowrap text-center" style="width:8%">Gói trang bị</th>
                                                                 @if (session('user')['role_id'] == '1')
-                                                                    <th class="text-nowrap" style="width:3%"><span>Thao
+                                                                    <th class="text-nowrap text-center" style="width:3%"><span>Thao
                                                                             tác</span>
                                                                     </th>
                                                                 @endif
@@ -146,7 +147,7 @@
 
                                                                     </td>
                                                                     <td class="">
-                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                        <div class="overText text-center" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
                                                                             title=" {{ $item->staffing }}">
                                                                             {{ $item->staffing }}
@@ -154,15 +155,23 @@
 
                                                                     </td>
                                                                     <td class="">
-                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                        <div class="overText text-center" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
-                                                                            title="  {{ $item->wage }}">
-                                                                            {{ $item->wage }}
+                                                                            title="  {{ number_format($item->wage, 0, '.', '.') }}">
+                                                                            {{ number_format($item->wage, 0, '.', '.') }}
                                                                         </div>
 
                                                                     </td>
-                                                                    <td class="">
+                                                                    <td class="" style="text-align: center;">
                                                                         <div class="overText" data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="{{ date('d/m/Y', strtotime($item->created_at ))}}">
+                                                                            {{ date('d/m/Y', strtotime($item->created_at ))}}
+                                                                        </div>
+
+                                                                    </td> 
+                                                                    <td class="">
+                                                                        <div class="overText text-center" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
                                                                             title=" {{ $item->pack }}">
                                                                             {{ $item->pack }}

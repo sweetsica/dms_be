@@ -231,6 +231,9 @@ Route::middleware(['auth.role'])->group(function () {
     // Chương trình khuyến mại
     Route::get('danh-sach-khuyen-mai', [PromotionController::class, 'index'])->name('Promotion.index');
     
+    Route::get('dashboard_TongGiamDoc', function () {
+        return view('Dashboard.dashboard_Admin');});
+
 });
 
 Route::get('/export/customer', [ExcelController::class, 'setExportCustomter']);
