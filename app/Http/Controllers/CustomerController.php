@@ -46,12 +46,16 @@ class CustomerController extends Controller
     {
         $customer = Customer::with('channel', 'route', 'person')->findOrFail($id);
         // dd($customer);
+        $listPersons = Personnel::all();
         $jsonCombinedData = $customer->contact;
         $combinedData = json_decode($jsonCombinedData);
+        $listgroup = CustomerGroup::all();
         // dd( $combinedData);
         return view('Customer.detailKhachHang')->with(
             compact(
                 "customer",
+                "listPersons",
+                "listgroup",
                 "combinedData"
             )
         );
@@ -492,12 +496,12 @@ class CustomerController extends Controller
     public function update(Request $request, $id)
     {
         $code = $request->get('code');
-        $description = $request->get('description');
+        // $description = $request->get('description');
         $business_areas = $request->get('business_areas');
         $customer_type = $request->get('customer_type');
-        $name = $request->get('name');
-        $phone = $request->get('phone');
-        $email = $request->get('email');
+        // $name = $request->get('name');
+        // $phone = $request->get('phone');
+        // $email = $request->get('email');
         $companyName = $request->get('companyName');
         $personContact = $request->get('personContact');
         $personCompany = $request->get('personCompany');
@@ -522,12 +526,12 @@ class CustomerController extends Controller
         $avatar = $request->file('avatar');
         $data = Customer::find($id);
         $data->code = $code;
-        $data->description = $description;
+        // $data->description = $description;
         $data->business_areas = $business_areas;
         $data->customer_type = $customer_type;
-        $data->name = $name;
-        $data->phone = $phone;
-        $data->email = $email;
+        // $data->name = $name;
+        // $data->phone = $phone;
+        // $data->email = $email;
         $data->companyName = $companyName;
         $data->personCompany = $personCompany;
         $data->personContact = $personContact;
@@ -561,14 +565,15 @@ class CustomerController extends Controller
         }
         $data->fileName = json_encode($existingFileName);
         $data->filePath = json_encode($existingFilePath);
-        $combinedContact = [];
-        foreach ($request->contact as $array) {
-            if (is_array($array)) {
-                $combinedContact[] = $array;
-            }
-        }
-        $jsonCombinedData = json_encode($combinedContact);
-        $data->contact = $jsonCombinedData;
+
+        // $combinedContact = [];
+        // foreach ($request->contact as $array) {
+        //     if (is_array($array)) {
+        //         $combinedContact[] = $array;
+        //     }
+        // }
+        // $jsonCombinedData = json_encode($combinedContact);
+        // $data->contact = $jsonCombinedData;
 
         if ($request->hasFile('image')) {
             $images = $request->file('image');

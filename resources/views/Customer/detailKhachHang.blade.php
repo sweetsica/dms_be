@@ -545,10 +545,10 @@
                 </div>Chức danh
                 <form id="formThemCapPhatChitiet" method="POST" action="{{ route('update.customer',$customer->id) }}" enctype="multipart/form-data">
                     @csrf
-                    <input name="name" style="display: none;" id="name">
+                    {{-- <input name="name" style="display: none;" id="name">
                     <input name="personContact" style="display: none;" id="personContact">
                     <input name="phone" style="display: none;" id="phone">
-                    <input name="email" style="display: none;" id="email">
+                    <input name="email" style="display: none;" id="email"> --}}
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-12 mb-3">
@@ -567,10 +567,9 @@
                                 <input type="text" name="career" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Chức danh" placeholder="Chức danh" class="form-control" value="{{ $customer->career ?? '' }}">
                             </div>
-
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Lĩnh vực kinh doanh">
-                                <select class="selectpicker" id="customerType" name="business_areas">
+                                <select class="selectpicker" name="business_areas">
                                     <option value="{{ $customer->business_areas ?? '' }}"> {{ $customer->business_areas ?? '' }}</option>
                                     <option value="" >Lĩnh vực kinh doanh</option>
                                     <option value="Kim khí">Kim khí</option>
@@ -585,21 +584,21 @@
                             <div class="col-md-4 mb-3">
                                 <input type="text" name="companyPhoneNumber" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Số điện thoại công ty"
-                                    placeholder="Số điện thoại công ty" class="form-control">
+                                    placeholder="Số điện thoại công ty" class="form-control" value="{{ $customer->companyPhoneNumber ?? '' }}">
                             </div>
                             <div class="col-md-4 mb-3">
                                 <input type="text" name="companyEmail" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Email công ty" placeholder="Email công ty"
-                                    class="form-control">
+                                    class="form-control" value="{{ $customer->companyEmail ?? '' }}">
                             </div>
                             <div class="col-md-4 mb-3">
                                 <input type="text" name="accountNumber" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Số tài khoản" placeholder="Số tài khoản"
-                                    class="form-control">
+                                    class="form-control" value="{{ $customer->accountNumber ?? '' }}">
                             </div>
                             <div class="col-md-8 mb-3">
                                 <input type="text" name="bankOpen" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Mở tại ngân hàng" placeholder="Mở tại ngân hàng" class="form-control">
+                                    title="Mở tại ngân hàng" placeholder="Mở tại ngân hàng" class="form-control" value="{{ $customer->bankOpen ?? '' }}">
                             </div>
 
                             <div class="col-md-12 mb-3">
@@ -624,6 +623,23 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @if (!empty($customer->contact))
+                                                        @foreach ($combinedData as $data)
+                                                        <tr>
+                                                        <td class="text-nowrap text-center"
+                                                            style="">{{ $a++}}</td>
+                                                        <td class="text-nowrap text-center"
+                                                             style="">{{ $data->key1}}</td>
+                                                        <td class="text-nowrap text-center"
+                                                            style="">{{ $data->key2}}</td>
+                                                        <td class="text-nowrap text-center"
+                                                            style="">{{ $data->key3}}</td>
+                                                        <td class="text-nowrap text-center"
+                                                            style="">{{ $data->key4}}</td>
+                                                            <td></td>
+                                                        @endforeach
+                                                    </tr>
+                                                @endif
                                         </tbody>
                                     </table>
                                 </div>
@@ -635,30 +651,33 @@
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Tỉnh/thành">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                    data-live-search="true" title="Tỉnh/thành*" data-select-all-text="Chọn tất cả"
+                                    data-live-search="true"  data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="city" id="city"
                                     data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="{{ $customer->city ?? '' }}">{{ $customer->city ?? '' }}</option>
                                 </select>
                             </div>
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Quận/huyện">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                    data-live-search="true" title="Quận/huyện*" data-select-all-text="Chọn tất cả"
+                                    data-live-search="true"  data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="district" id="district"
                                     data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="{{ $customer->district ?? '' }}">{{ $customer->district ?? '' }}</option>
                                 </select>
                             </div>
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Phường/xã">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                    data-live-search="true" title="Phường/xã*" data-select-all-text="Chọn tất cả"
+                                    data-live-search="true" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="guide" id="guide"
                                     data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="{{ $customer->guide ?? '' }}">{{ $customer->guide ?? '' }}</option>
                                 </select>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <input type="text" id="addressInput" name="address" data-bs-toggle="tooltip"
-                                    data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ*" class="form-control">
+                                    data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ*" class="form-control" value="{{ $customer->address ?? '' }}">
                             </div>
                             <div class="col-md-12 mb-3">
                                 <div id="map"
@@ -677,23 +696,31 @@
                                     title="Nhân sự thu thập*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="personId"
                                     data-live-search-placeholder="Tìm kiếm...">
-                                    {{-- @foreach ($listPersons as $per)
+                                    @foreach ($listPersons as $per)
                                         <option value="{{ $per->id }}"
                                             {{ $per->id == session('user')['id'] ? 'selected' : '' }}>
                                             {{ $per->name }}
                                         </option>
-                                    @endforeach --}}
+                                    @endforeach
                                 </select>
                                 <div class="error-text" id="personIdError" style="color: red;"></div>
                             </div>
 
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Sản phẩm quan tâm">
-                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
+                                {{-- <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Sản phẩm quan tâm*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="productId[]" id="productId"
                                     data-live-search-placeholder="Tìm kiếm..." multiple>
-                                </select>
+                                    <option value="{{ $productList }}">{{ $productList }}</option>
+                                </select> --}}
+                                <select class="selectpicker"
+                                data-dropup-auto="false" data-width="100%"  data-live-search="true"
+                                data-select-all-text="Chọn tất cả"
+                                data-deselect-all-text="Bỏ chọn" data-size="3"  name="productId[]" id="productId"
+                                data-live-search-placeholder="Tìm kiếm...">
+                                <option value="{{ $productList }}">{{ $productList }}</option>
+                            </select>
                             </div>
 
 
@@ -707,18 +734,10 @@
                                     data-live-search="true" title="Nhóm khách hàng*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="groupId" id="groupId"
                                     data-live-search-placeholder="Tìm kiếm...">
-                                    <option value="Nhà thuốc">Nhà thuốc</option>
-                                    <option value="Phòng khám/Trung tâm tế">Phòng khám/Trung tâm tế</option>
-                                    <option value="Bệnh viện">Bệnh viện</option>
-                                    <option value="Nhà phân phối">Nhà phân phối</option>
-                                    <option value="Online">Online</option>
-                                    <option value="Khách sạn">Khách sạn</option>
-                                    <option value="Nhà thuốc S">Nhà thuốc S</option>
-                                    <option value="Siêu thị/Cửa hàng bán lẻ">Siêu thị/Cửa hàng bán lẻ</option>
-                                    <option value="Chuỗi nhà thuốc">Chuỗi nhà thuốc</option>
-                                    <option value="Đại siêu thị">Đại siêu thị</option>
-                                    <option value="Làm đẹp/Phòng tập thể dục/Thể thao">Làm đẹp/Phòng tập thể dục/Thể thao
-                                    </option>
+                                    <option value="{{ $customer->group ?? '' }}"> {{ $customer->group ?? '' }} </option>
+                                    @foreach ($listgroup as $item )
+                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
@@ -754,21 +773,42 @@
                                 <div class="card-title">6. Hình ảnh</div>
                             </div>
 
-                            <div class="col-md-12 mb-3">
-                                <div class="upload-files-container">
-                                    <div class="drag-file-area">
-                                        <span class="material-icons-outlined upload-icon fs-3 mt-4">Tải file ảnh tại
-                                            đây</span>
-                                        <h3 class="dynamic-message fs-5 text-secondary">Hỗ trợ định dạng JPG hoặc PNG kích
-                                            thước không quá
-                                            10MB</h3>
-                                        <label class="label">
-                                            <input type="file" class="default-file-input" style="display: none"
-                                                name="avatar[]" />
-                                            <span class="btn btn-outline-danger mb-4"><i
-                                                    class="bi bi-cloud-arrow-up"></i>Tải file lên</span>
-                                        </label>
+                            <div class="col-12 col-md-12">
+                                <div class="upload_wrapper-items">
+                                    <div class="alert alert-danger alertNotSupport" role="alert"
+                                        style="display:none">
+                                        File bạn tải lên hiện tại không hỗ trợ !
                                     </div>
+                                    <div class="modal_upload-wrapper">
+                                        <label class="modal_upload-label" for="file">
+                                            Tải ảnh sản phẩm tại đây</label>
+                                        <div class="mt-2 text-secondary fst-italic">Hỗ trợ định
+                                            dạng
+                                            JPG hoặc
+                                            PNG kích
+                                            thước tệp không quá 10MB
+                                        </div>
+                                        <div
+                                            class="modal_upload-action mt-3 d-flex align-items-center justify-content-center">
+                                            <div class="modal_upload-addFile me-3">
+                                                <label for="fileInput" id="fileButton"
+                                                    class="btn position-relative border d-flex w-500">
+                                                    <img src="{{ asset('assets/img/upload-file.svg') }}" />
+                                                    <span class="ps-2">Đính kèm ảnh sản phẩm</span>
+                                                </label>
+                                                <input accept="image/jpeg,image/png"
+                                                    role="button" type="file"
+                                                    class="modal_upload-input modal_upload-file"
+                                                    name="image" onchange="updateList(event)" />
+                                            </div>
+                                        </div>
+
+                                        <div id="preview" class="d-flex mt-3"></div>
+                                        {{-- <ul id="attachments" class="file-list" style="padding: 0 0 4px 0; word-break: break-all;"></ul> --}}
+                                    </div>
+                                    <ul class="modal_upload-list"
+                                        style="max-height: 134px; overflow-y: scroll; overflow-x: hidden;">
+                                    </ul>
                                 </div>
                             </div>
 
@@ -1037,4 +1077,290 @@
             }
         });
     </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script>
+    //load data tỉnh thành từ https://provinces.open-api.vn/api/
+    const host = "https://provinces.open-api.vn/api/";
+    var callAPI = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data, "city");
+            });
+    }
+    callAPI('https://provinces.open-api.vn/api/?depth=1');
+    var callApiDistrict = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data.districts, "district");
+                // $('#district').selectpicker('destroy');
+            });
+    }
+    var callApiWard = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data.wards, "guide");
+                // $('#guide').selectpicker('destroy');
+            });
+    }
+
+    var renderData = (array, select) => {
+        $('#' + select).selectpicker('destroy');
+        let row = '<option disable value="">Chọn</option>';
+        array.forEach(element => {
+            row += `<option data-id="${element.code}" value="${element.name}">${element.name}</option>`
+        });
+        document.querySelector("#" + select).innerHTML = row;
+        $('#' + select).selectpicker();
+    }
+
+    $("#city").change(() => {
+        callApiDistrict(host + "p/" + $("#city").find(':selected').data('id') + "?depth=2");
+    });
+    $("#district").change(() => {
+        callApiWard(host + "d/" + $("#district").find(':selected').data('id') + "?depth=2");
+    });
+    $("#guide").change(() => {})
+
+
+    //sua dia chi cho edit
+    var callAPI_edit = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData_edit(response.data, "city_edit");
+            });
+    }
+    callAPI_edit('https://provinces.open-api.vn/api/?depth=1');
+    var callApiDistrict_edit = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData_edit(response.data.districts, "district_edit");
+            });
+    }
+    var callApiWard_edit = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData_edit(response.data.wards, "guide_edit");
+            });
+    }
+
+    var renderData_edit = (array, select) => {
+        $('#' + select).selectpicker('destroy');
+        let row = '<option disable value="">Chọn</option>';
+        array.forEach(element => {
+            row += `<option data-id="${element.code}" value="${element.name}">${element.name}</option>`
+        });
+        document.querySelector("#" + select).innerHTML = row;
+        $('#' + select).selectpicker();
+    }
+
+    $("#city_edit").change(() => {
+        callApiDistrict_edit(host + "p/" + $("#city_edit").find(':selected').data('id') + "?depth=2");
+    });
+    $("#district_edit").change(() => {
+        callApiWard_edit(host + "d/" + $("#district_edit").find(':selected').data('id') + "?depth=2");
+    });
+    $("#guide_edit").change(() => {})
+
+
+
+    //load data nhan su api
+    function loadPersonnelData() {
+        const apiUrl = '/nhan_su';
+        const selectElement = document.getElementById('personId');
+        fetch(apiUrl)
+            .then((response) => response.json())
+            .then((data) => {
+                selectElement.innerHTML = '';
+                data.forEach((person) => {
+                    const option = document.createElement('option');
+                    option.value = person.id;
+                    option.textContent = person.name;
+                    selectElement.appendChild(option);
+                });
+
+                $('#personId').selectpicker('refresh');
+            })
+            .catch((error) => console.error('Lỗi khi gọi API:', error));
+    }
+    window.addEventListener('load', loadPersonnelData);
+
+    //load data san pham api
+    function loadProductData() {
+        const apiUrl = '/danh_sach_san_pham_cho_select';
+        const selectElement = document.getElementById('productId');
+        fetch(apiUrl)
+            .then((response) => response.json())
+            .then((data) => {
+                selectElement.innerHTML = '';
+                data.forEach((product) => {
+                    const option = document.createElement('option');
+                    option.value = product.id;
+                    option.textContent = product.name;
+                    selectElement.appendChild(option);
+                });
+
+                $('#productId').selectpicker('refresh');
+            })
+            .catch((error) => console.error('Lỗi khi gọi API:', error));
+    }
+    window.addEventListener('load', loadProductData);
+
+    //load data kenh api
+    function loadChanelData() {
+        const apiUrl = '/department_getAll';
+        const selectElement = document.getElementById('chanelId');
+        fetch(apiUrl)
+            .then((response) => response.json())
+            .then((data) => {
+                selectElement.innerHTML = '';
+                data.forEach((chanel) => {
+                    const option = document.createElement('option');
+                    option.value = chanel.id;
+                    option.textContent = chanel.name;
+                    selectElement.appendChild(option);
+                });
+
+                $('#chanelId').selectpicker('refresh');
+            })
+            .catch((error) => console.error('Lỗi khi gọi API:', error));
+    }
+    window.addEventListener('load', loadChanelData);
+
+    //load data tuyen api
+    function loadRouteData() {
+        const apiUrl = '/route_direction_getAll';
+        const selectElement = document.getElementById('routeId');
+        fetch(apiUrl)
+            .then((response) => response.json())
+            .then((data) => {
+                selectElement.innerHTML = '';
+                data.forEach((route) => {
+                    const option = document.createElement('option');
+                    option.value = route.id;
+                    option.textContent = route.name;
+                    selectElement.appendChild(option);
+                });
+
+                $('#routeId').selectpicker('refresh');
+            })
+            .catch((error) => console.error('Lỗi khi gọi API:', error));
+    }
+    window.addEventListener('load', loadRouteData);
+
+    var isAdvancedUpload = function() {
+        var div = document.createElement('div');
+        return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window &&
+            'FileReader' in window;
+    }();
+
+    let draggableFileArea = document.querySelector(".drag-file-area");
+    let browseFileText = document.querySelector(".browse-files");
+    let uploadIcon = document.querySelector(".upload-icon");
+    let dragDropText = document.querySelector(".dynamic-message");
+    let fileInput = document.querySelector(".default-file-input");
+    let cannotUploadMessage = document.querySelector(".cannot-upload-message");
+    let cancelAlertButton = document.querySelector(".cancel-alert-button");
+    let uploadedFile = document.querySelector(".file-block");
+    let fileName = document.querySelector(".file-name");
+    let fileSize = document.querySelector(".file-size");
+    let progressBar = document.querySelector(".progress-bar");
+    let removeFileButton = document.querySelector(".remove-file-icon");
+    let uploadButton = document.querySelector(".upload-button");
+    let fileFlag = 0;
+
+    fileInput.addEventListener("click", () => {
+        fileInput.value = '';
+        console.log(fileInput.value);
+    });
+
+    fileInput.addEventListener("change", e => {
+        console.log(" > " + fileInput.value)
+        uploadIcon.innerHTML = 'Tải file lên';
+        dragDropText.innerHTML = 'File Dropped Successfully!';
+        document.querySelector(".label").innerHTML =
+            `<input type="file" class="default-file-input" style=""/>`;
+        uploadButton.innerHTML = `Upload`;
+        fileName.innerHTML = fileInput.files[0].name;
+        fileSize.innerHTML = (fileInput.files[0].size / 1024).toFixed(1) + " KB";
+        uploadedFile.style.cssText = "display: flex;";
+        progressBar.style.width = 0;
+        fileFlag = 0;
+    });
+
+    uploadButton.addEventListener("click", () => {
+        let isFileUploaded = fileInput.value;
+        if (isFileUploaded != '') {
+            if (fileFlag == 0) {
+                fileFlag = 1;
+                var width = 0;
+                var id = setInterval(frame, 50);
+
+                function frame() {
+                    if (width >= 390) {
+                        clearInterval(id);
+                        uploadButton.innerHTML =
+                            `<span class="material-icons-outlined upload-button-icon"> check_circle </span> Uploaded`;
+                    } else {
+                        width += 5;
+                        progressBar.style.width = width + "px";
+                    }
+                }
+            }
+        } else {
+            cannotUploadMessage.style.cssText = "display: flex; animation: fadeIn linear 1.5s;";
+        }
+    });
+
+    cancelAlertButton.addEventListener("click", () => {
+        cannotUploadMessage.style.cssText = "display: none;";
+    });
+
+    if (isAdvancedUpload) {
+        ["drag", "dragstart", "dragend", "dragover", "dragenter", "dragleave", "drop"].forEach(evt =>
+            draggableFileArea.addEventListener(evt, e => {
+                e.preventDefault();
+                e.stopPropagation();
+            })
+        );
+
+        ["dragover", "dragenter"].forEach(evt => {
+            draggableFileArea.addEventListener(evt, e => {
+                e.preventDefault();
+                e.stopPropagation();
+                uploadIcon.innerHTML = 'file_download';
+                dragDropText.innerHTML = 'Drop your file here!';
+            });
+        });
+
+        draggableFileArea.addEventListener("drop", e => {
+            uploadIcon.innerHTML = 'check_circle';
+            dragDropText.innerHTML = 'File Dropped Successfully!';
+            // document.querySelector(".label").innerHTML =
+            //     `drag & drop or <span class="browse-files"> <input type="file" class="default-file-input" style=""/> <span class="browse-files-text" style="top: -23px; left: -20px;"> browse file</span> </span>`;
+            uploadButton.innerHTML = `Upload`;
+
+            let files = e.dataTransfer.files;
+            fileInput.files = files;
+            console.log(files[0].name + " " + files[0].size);
+            console.log(document.querySelector(".default-file-input").value);
+            fileName.innerHTML = files[0].name;
+            fileSize.innerHTML = (files[0].size / 1024).toFixed(1) + " KB";
+            uploadedFile.style.cssText = "display: flex;";
+            progressBar.style.width = 0;
+            fileFlag = 0;
+        });
+    }
+
+    removeFileButton.addEventListener("click", () => {
+        uploadedFile.style.cssText = "display: none;";
+        fileInput.value = '';
+        uploadIcon.innerHTML = 'file_upload';
+        dragDropText.innerHTML = 'Drag & drop any file here';
+        document.querySelector(".label").innerHTML =
+            `or <span class="browse-files"> <input type="file" class="default-file-input"/> <span class="browse-files-text">browse file</span> <span>from device</span> </span>`;
+        uploadButton.innerHTML = `Upload`;
+    });
+</script>
 @endsection
