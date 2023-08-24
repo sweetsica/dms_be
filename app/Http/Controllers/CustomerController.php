@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
 
 class CustomerController extends Controller
 {
@@ -44,11 +45,35 @@ class CustomerController extends Controller
     public function show($id)
     {
         $customer = Customer::with('channel', 'route', 'person')->findOrFail($id);
+        // dd($customer);
+        $jsonCombinedData = $customer->contact;
+        $combinedData = json_decode($jsonCombinedData);
+        // dd( $combinedData);
         return view('Customer.detailKhachHang')->with(
             compact(
-                "customer"
+                "customer",
+                "combinedData"
             )
         );
+    }
+
+    public function uploadFileToRemoteHost($file)
+    {
+        $fileStream = fopen($file, 'r');
+        $url = "https://report.sweetsica.com/api/report/upload";
+        //send form data
+        $response = Http::attach(
+            'files',
+            file_get_contents($file),
+            $file->getClientOriginalName()
+        )->post($url);
+
+        //throw exception if response is not successful
+        $response->throw()->json();
+        //get data from response
+        $data = $response->json();
+        $dataObj = $this->_toObject($data);
+        return $dataObj->downloadLink;
     }
 
     public function store(Request $request)
@@ -179,6 +204,8 @@ class CustomerController extends Controller
     public function createSimple(Request $request)
     {
         $code = $request->get('code');
+        $description = $request->get('description');
+        $customer_type = $request->get('customer_type');
         $name = $request->get('name');
         $phone = $request->get('phone');
         $email = $request->get('email');
@@ -205,6 +232,8 @@ class CustomerController extends Controller
         $avatar = $request->file('avatar');
         $data = new Customer();
         $data->code = $code;
+        $data->description = $description;
+        $data->customer_type = $customer_type;
         $data->name = $name;
         $data->phone = $phone;
         $data->email = $email;
@@ -245,6 +274,21 @@ class CustomerController extends Controller
         }
         $data->fileName = json_encode($existingFileName);
         $data->filePath = json_encode($existingFilePath);
+
+        // if ($request->hasFile('files')) {
+        //     $files = $request->file('files');
+        //     $uploadedImages = [];
+        //     foreach ($files as $file) {
+        //         $extension = $file->getClientOriginalExtension();
+        //         if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif'])) {
+        //             $uploadedImages[] = $this->uploadFileToRemoteHost($file);
+        //         }
+        //     }
+        //     if (!empty($uploadedImages)) {
+        //         $data->image = json_encode($uploadedImages);
+        //     }
+        // }
+
         $data->save();
         $listData = Customer::all();
         return redirect()->route('customers', compact('listData'));
@@ -327,8 +371,7 @@ class CustomerController extends Controller
             return response()->json([
                 'success' => false,
                 'errors' => [
-                    'name' => $validator->errors()->first('name'),
-                    'phone' => $validator->errors()->first('phone'),
+
                     'city' => $validator->errors()->first('city'),
                     'district' => $validator->errors()->first('district'),
                     'guide' => $validator->errors()->first('guide'),
@@ -343,6 +386,9 @@ class CustomerController extends Controller
             ]);
         }
         $code = $request->get('code');
+        $description = $request->get('description');
+        $business_areas = $request->get('business_areas');
+        $customer_type = $request->get('customer_type');
         $name = $request->get('name');
         $phone = $request->get('phone');
         $email = $request->get('email');
@@ -366,9 +412,13 @@ class CustomerController extends Controller
         $routeId = $request->get('routeId');
         $status = $request->get('status');
         $uploadedFiles = $request->file('attachment');
+        $image = $request->file('image');
         $avatar = $request->file('avatar');
         $data = new Customer();
         $data->code = $code;
+        $data->description = $description;
+        $data->business_areas = $business_areas;
+        $data->customer_type = $customer_type;
         $data->name = $name;
         $data->phone = $phone;
         $data->email = $email;
@@ -393,6 +443,8 @@ class CustomerController extends Controller
         $data->status = $status;
         $existingFileName = json_decode($data->fileName, true) ?? [];
         $existingFilePath = json_decode($data->filePath, true) ?? [];
+        $images = json_encode($data->image, true) ?? [];
+
         if ($uploadedFiles) {
             foreach ($uploadedFiles as $file) {
                 $path = $file->store('upload', 'public');
@@ -400,16 +452,18 @@ class CustomerController extends Controller
                 $existingFilePath[] = $path;
             }
         }
-        if ($avatar) {
-            foreach ($avatar as $a) {
-                $path = $a->move(public_path('assets/img/avatar', 'public'));
-                $existingFileName[] = $a->getClientOriginalName();
-                $existingFilePath[] = $path;
-            }
-        }
+        // if ($avatar) {
+        //     foreach ($avatar as $a) {
+        //         $path =  $a->store('upload', 'public');
+        //         $existingFileName[] = $a->getClientOriginalName();
+        //         $images[] = $path;
+        //     }
+        // }
         $data->fileName = json_encode($existingFileName);
         $data->filePath = json_encode($existingFilePath);
-        
+
+        // $data->image = json_encode($images);
+
         $combinedContact = [];
         foreach ($request->contact as $array) {
             if (is_array($array)) {
@@ -418,10 +472,18 @@ class CustomerController extends Controller
         }
         $jsonCombinedData = json_encode($combinedContact);
         $data->contact = $jsonCombinedData;
+
+        if ($request->hasFile('image')) {
+            $images = $request->file('image');
+            $imageName = time() . '.' . $images->getClientOriginalExtension();
+            $image->move(public_path('uploads'), $imageName);
+            $data->image =  'uploads/' . $imageName;
+        }
+
         $data->save();
         $listData = Customer::all();
-        // return response()->json(['success' => true]);
-        return redirect()->route('customers', compact('listData'));
+        return response()->json(['success' => true]);
+        // return redirect()->route('customers', compact('listData'));
         // return view('customer.danhSachKhachHang', compact('listData'));
 
 
@@ -430,6 +492,7 @@ class CustomerController extends Controller
     public function update(Request $request, $id)
     {
         $name = $request->get('name');
+        $customer_type = $request->get('customer_type');
         $phone = $request->get('phone');
         $email = $request->get('email');
         $companyName = $request->get('companyName');
@@ -452,6 +515,7 @@ class CustomerController extends Controller
         $status = $request->get('status');
         $data = Customer::find($id);
         $data->name = $name;
+        $data->customer_type = $customer_type;
         $data->phone = $phone;
         $data->email = $email;
         $data->companyName = $companyName;

@@ -471,7 +471,8 @@
                             </div>
                             <form id="addForm" method="POST"
                                 action="{{ route('product.create', ['id' => $product->id]) }}"
-                                enctype="multipart/form-data">
+                                enctype="multipart/form-data"
+                                >
                                 @csrf
                                 <div class="modal-body">
                                     <div class="row mb-3">

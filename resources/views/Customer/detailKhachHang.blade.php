@@ -49,8 +49,10 @@
                                             <div class="col-lg-12">
                                                 <div class="slider slider-single">
                                                     <div>
-                                                        <img class="img-slider"
-                                                            src="{{ asset('assets/img/avatardefault.jpg') }}" />
+                                                        {{-- <img class="img-slider"
+                                                            src="{{ asset('assets/img/avatardefault.jpg') }}" /> --}}
+                                                            <img class="img-slider"
+                                                            src="{{ asset($customer->image) }}" />
                                                     </div>
                                                     <!-- <div>
                                                                                                                                                                                                                                                                                                                                                                                             <img class="img-slider" src="{{ asset('assets/img/oto-2.png') }}" />
@@ -84,7 +86,7 @@
                                                             hệ</h2>
                                                         <div class="layout_120">
                                                             <span class="fw-bold fs-4">Người liên hệ:</span>
-                                                            <span class="fs-4">{{ $customer->personContact }}</span>
+                                                            <span class="fs-4">{{ $customer->name }}</span>
                                                         </div>
                                                     </span>
                                                     <img src="{{ asset('assets/img/QR.webp') }}"
@@ -110,9 +112,7 @@
                                             <div class="col-lg-12 mt-4">
                                                 <div class="layout_120">
                                                     <span class="fw-bold fs-4">Ghi chú:</span>
-                                                    <span class="fs-4">Khách lẻ là những người mua hàng hoặc sử dụng dịch
-                                                        vụ từ các cửa hàng, cửa hàng trực tuyến, hoặc các điểm bán
-                                                        lẻ.</span>
+                                                    <span class="fs-4">{{ $customer->description }}</span>
                                                 </div>
                                             </div>
 
@@ -260,7 +260,7 @@
                                                                 <div class="layout_120">
                                                                     <span class="fw-bold fs-4">Lĩnh vực KD:</span>
                                                                     <span class="fs-4">
-                                                                        {{ $customer->companyName ?? '' }}</span>
+                                                                        {{ $customer->business_areas ?? '' }}</span>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3 mt-4">
@@ -323,22 +323,26 @@
                                                                                 style="">Chức danh</th>
                                                                         </tr>
                                                                     </thead>
+                                                                    <@php
+                                                                        $a=1;
+                                                                    @endphp
                                                                     <tbody>
-                                                                        <td class="text-nowrap text-center">
-                                                                            1
-                                                                        </td>
-                                                                        <td class="text-nowrap text-center">
-                                                                            Hiệp
-                                                                        </td>
-                                                                        <td class="text-nowrap text-center">
-                                                                            0989077077
-                                                                        </td>
-                                                                        <td class="text-nowrap text-center">
-                                                                            hiep@gmail.com
-                                                                        </td>
-                                                                        <td class="text-nowrap text-center">
-                                                                            Cửa hàng trưởng
-                                                                        </td>
+                                                                        @if (!empty($customer->contact))
+                                                                            @foreach ($combinedData as $data)
+                                                                            <tr>
+                                                                            <td class="text-nowrap text-center"
+                                                                            style="">{{ $a++}}</td>
+                                                                            <td class="text-nowrap text-center"
+                                                                            style="">{{ $data->key1}}</td>
+                                                                            <td class="text-nowrap text-center"
+                                                                            style="">{{ $data->key2}}</td>
+                                                                            <td class="text-nowrap text-center"
+                                                                            style="">{{ $data->key3}}</td>
+                                                                            <td class="text-nowrap text-center"
+                                                                            style="">{{ $data->key4}}</td>
+                                                                            @endforeach
+                                                                            </tr>
+                                                                        @endif
                                                                     </tbody>
                                                                 </table>
                                                             </div>
