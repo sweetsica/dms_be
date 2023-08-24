@@ -39,11 +39,6 @@ return new class extends Migration {
             $table->unsignedBigInteger('personId')->nullable();
             $table->text('productId')->nullable();
 
-            $table->text('contact')->nullable();
-            $table->text('image')->nullable();
-            $table->string('business_areas', 255)->nullable();
-            $table->string('description', 255)->nullable();
-            $table->string('customer_type', 255)->nullable();
 
             $table->string('city', 255)->nullable();
             $table->string('district', 255)->nullable();

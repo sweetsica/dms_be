@@ -543,7 +543,7 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Sửa chi tiết khách hàng</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="formThemCapPhatChitiet" method="POST" action="" enctype="multipart/form-data">
+                <form id="formThemCapPhatChitiet" method="POST" action="{{ route('update.customer',$customer->id) }}" enctype="multipart/form-data">
                     @csrf
                     <input name="name" style="display: none;" id="name">
                     <input name="personContact" style="display: none;" id="personContact">
@@ -556,7 +556,7 @@
                             </div>
                             <div class="col-md-4 mb-3">
                                 <input type="text" name="taxCode" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Mã số thuế" placeholder="Mã số thuế" class="form-control">
+                                    title="Mã số thuế" placeholder="Mã số thuế" class="form-control" value="{{ $customer->taxCode ?? '' }}">
                             </div>
                             <div class="col-md-4 mb-3">
                                 <input type="text" name="personCompany" data-bs-toggle="tooltip"

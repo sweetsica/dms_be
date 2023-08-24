@@ -491,12 +491,16 @@ class CustomerController extends Controller
 
     public function update(Request $request, $id)
     {
-        $name = $request->get('name');
+        $code = $request->get('code');
+        $description = $request->get('description');
+        $business_areas = $request->get('business_areas');
         $customer_type = $request->get('customer_type');
+        $name = $request->get('name');
         $phone = $request->get('phone');
         $email = $request->get('email');
         $companyName = $request->get('companyName');
         $personContact = $request->get('personContact');
+        $personCompany = $request->get('personCompany');
         $career = $request->get('career');
         $taxCode = $request->get('taxCode');
         $companyPhoneNumber = $request->get('companyPhoneNumber');
@@ -509,16 +513,23 @@ class CustomerController extends Controller
         $address = $request->get('address');
         $personId = $request->get('personId');
         $productId = $request->get('productId');
-        $groupId = $request->get('groupId');
+        $group = $request->get('group');
         $chanelId = $request->get('chanelId');
         $routeId = $request->get('routeId');
         $status = $request->get('status');
+        $uploadedFiles = $request->file('attachment');
+        $image = $request->file('image');
+        $avatar = $request->file('avatar');
         $data = Customer::find($id);
-        $data->name = $name;
+        $data->code = $code;
+        $data->description = $description;
+        $data->business_areas = $business_areas;
         $data->customer_type = $customer_type;
+        $data->name = $name;
         $data->phone = $phone;
         $data->email = $email;
         $data->companyName = $companyName;
+        $data->personCompany = $personCompany;
         $data->personContact = $personContact;
         $data->career = $career;
         $data->taxCode = $taxCode;
@@ -532,11 +543,39 @@ class CustomerController extends Controller
         $data->address = $address;
         $data->personId = $personId;
         $data->productId = json_encode($productId);
-        $data->group = $groupId;
+        $data->group = $group;
         $data->chanelId = $chanelId;
         $data->routeId = $routeId;
         $data->status = $status;
         $data->save();
+        $existingFileName = json_decode($data->fileName, true) ?? [];
+        $existingFilePath = json_decode($data->filePath, true) ?? [];
+        $images = json_encode($data->image, true) ?? [];
+
+        if ($uploadedFiles) {
+            foreach ($uploadedFiles as $file) {
+                $path = $file->store('upload', 'public');
+                $existingFileName[] = $file->getClientOriginalName();
+                $existingFilePath[] = $path;
+            }
+        }
+        $data->fileName = json_encode($existingFileName);
+        $data->filePath = json_encode($existingFilePath);
+        $combinedContact = [];
+        foreach ($request->contact as $array) {
+            if (is_array($array)) {
+                $combinedContact[] = $array;
+            }
+        }
+        $jsonCombinedData = json_encode($combinedContact);
+        $data->contact = $jsonCombinedData;
+
+        if ($request->hasFile('image')) {
+            $images = $request->file('image');
+            $imageName = time() . '.' . $images->getClientOriginalExtension();
+            $image->move(public_path('uploads'), $imageName);
+            $data->image =  'uploads/' . $imageName;
+        }
         $listData = Customer::all();
         return redirect()->route('customers', compact('listData'));
     }
