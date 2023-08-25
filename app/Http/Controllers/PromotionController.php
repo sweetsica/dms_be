@@ -14,28 +14,62 @@ class PromotionController extends Controller
     public function index() {
 
     $promotions = Promotion::all(); // Lấy danh sách Promotion
-    // dd($promotions);
-    // $jsonCombinedData = $promotions->promotion_details;
-    // $combinedData = json_decode($jsonCombinedData);
+    $promotionDetailsArray = [];
+    if( $promotions){
+    foreach ($promotions as $promotion) {
+        $promotionDetailsArray = $promotion->promotion_details;
 
+    }
+}else{
+    $promotionDetailsArray=[];
+}
+if($promotionDetailsArray){
+    $combinedData = json_decode($promotionDetailsArray);
+}else{
+    $combinedData = [];
+}
+
+    // dd($combinedData);
+    $customerGroupNames = [];
+    foreach ($promotions as $promotion) {
+        $customerGrIds = json_decode($promotion->customer_group_id);
+        // dd($promotion->customer_group_id);
+        if ($customerGrIds) {
+            $customersGr = CustomerGroup::whereIn('id', $customerGrIds)->get();
+        }else{
+            $customersGr = [];
+        }
+        if ( !is_array($customersGr) or count($customersGr) > 0) {
+            $customerGroupNames[$promotion->id] = $customersGr->pluck('name')->toArray();
+        } else {
+            $customerGroupNames[$promotion->id] = []; // hoặc xử lý khác tùy vào trường hợp của bạn
+        }
+
+    }
 
     $customerNames = [];
-
     foreach ($promotions as $promotion) {
-        $customerIds = json_decode($promotion->customer_group_id);
-        // dd($promotion->customer_group_id);
-
+        $customerIds = json_decode($promotion->customer_id);
+        // dd($promotion->customer_id);
         if ($customerIds) {
-            $customers = CustomerGroup::whereIn('id', $customerIds)->get();
+            $customers = Customer::whereIn('id', $customerIds)->get();
+        }else{
+            $customers = [];
         }
-        $customerNames[$promotion->id] = $customers->pluck('name')->toArray();
-        // dd($customers->pluck('name')->toArray());
+        if ( !is_array($customers) or count($customers) > 0) {
+            $customerNames[$promotion->id] = $customers->pluck('name')->toArray();
+        } else {
+            $customerNames[$promotion->id] = []; // hoặc xử lý khác tùy vào trường hợp của bạn
+        }
+        // dd($customerNames);
+
     }
+
         $listgroup = CustomerGroup::all();
         $customersList = Customer::all();
         $products = Product::all();
 
-        return view('Promotion.index', compact('promotions', 'customerNames','listgroup','customersList','products'));
+        return view('Promotion.index', compact('promotions', 'customerGroupNames','listgroup','customersList','products','combinedData','customerNames'));
     }
 
     public function store(Request $request) {
@@ -72,6 +106,9 @@ class PromotionController extends Controller
         if ($request->customer_group_id) {
             $data->customer_group_id = json_encode($request->customer_group_id);
         }
+        if ($request->customer_id) {
+            $data->customer_id = json_encode($request->customer_id);
+        }
         $data->save();
         return redirect()->route('Promotion.index');
     }
@@ -93,7 +130,7 @@ class PromotionController extends Controller
         $multiples = $request->get('multiples');
         $status = $request->get('status');
         $customer_type = $request->get('customer_type');
-        $customer_id = $request->get('customer_id');
+        // $customer_id = $request->get('customer_id');
         $data = Promotion::find($id);
         $data->name = $name;
         $data->code = $code;
@@ -103,14 +140,32 @@ class PromotionController extends Controller
         $data->multiples = $multiples;
         $data->status = $status;
         $data->customer_type = $customer_type;
-        $data->customer_id = $customer_id;
+        // $data->customer_id = $customer_id;
         $data->promotion_details  = $jsonCombinedData;
         if ($request->customer_group_id) {
             $data->customer_group_id = json_encode($request->customer_group_id);
         }
+        if ($request->customer_id) {
+            $data->customer_id = json_encode($request->customer_id);
+        }
         $data->save();
         // Session::flash('success', 'Sửa thành công');
         return back();
+    }
+
+    public function destroy($id)
+    {
+        Promotion::destroy($id);
+        // $selectedItems = $request->input('selected_items', []);
+        return redirect()->back()->with('mess', 'Đã xóa!');;
+    }
+
+    public function delete(Request $request)
+    {
+        // Department::destroy($id);
+        $selectedItems = $request->input('selected_items', []);
+        Promotion::whereIn('id', $selectedItems)->delete();
+        return redirect()->back()->with('mess', 'Đã xóa!');
     }
 
 }
