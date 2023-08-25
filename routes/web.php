@@ -26,7 +26,7 @@ use App\Http\Controllers\WareHouseController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\PromotionController;
-
+use App\Http\Controllers\BuySupplierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -249,7 +249,14 @@ Route::middleware(['auth.role'])->group(function () {
 
     // Chương trình khuyến mại
     Route::get('danh-sach-khuyen-mai', [PromotionController::class, 'index'])->name('Promotion.index');
-    
+
+    // Phiếu nhập mua nhà cung cấp
+    Route::get('danh-sach-phieu-nhap-mua-nha-cung-cap', [BuySupplierController::class, 'index'])->name('BuySupplier.index');
+    Route::post('them-khuyen-mai', [PromotionController::class, 'store'])->name('Promotion.store');
+    Route::post('sua-khuyen-mai/{id}', [PromotionController::class, 'update'])->name('Promotion.update');
+    Route::post('destroy-khuyen-mai/{id}', [PromotionController::class, 'destroy'])->name('Promotion.destroy');
+    Route::post('khuyen-mai-delete', [PromotionController::class, 'delete'])->name('delete-Promotion');
+
     Route::get('dashboard_TongGiamDoc', function () {
         return view('Dashboard.dashboard_Admin');});
 

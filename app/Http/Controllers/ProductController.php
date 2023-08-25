@@ -243,6 +243,7 @@ class ProductController extends Controller
         $details = ProductDetails::where('product_id', $id)->first();
         $jsonCombinedData = $details->data;
         $combinedData = json_decode($jsonCombinedData);
+        // dd($combinedData);
         $productLQ = Product::all();
         $other_product = Product::where('id', '!=', $id)->get();
         $SpecificationsList = Specifications::all();
