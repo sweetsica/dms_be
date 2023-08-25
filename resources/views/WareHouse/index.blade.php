@@ -65,7 +65,7 @@
                                                 @endif
 
                                             </div>
-                                            <form id="select-form" action="{{ route('delete-selected-items') }}"
+                                            <form id="select-form" action="{{ route('WareHouse.delete') }}"
                                                 method="POST">
                                                 @csrf
                                                 <div class="action_export mx-3 order-md-1" data-bs-toggle="tooltip"
@@ -209,6 +209,7 @@
                                                         @endforeach --}}
                                                     <?php $k = 1 ?>
                                                     @foreach ($wareHouseList as $item)
+                                                        <?php $accountant_name = $item->accountant ?>
                                                         <tbody>
                                                             <tr>
                                                                 <td class="text-center"> <input type="checkbox"
@@ -263,10 +264,14 @@
                                                                     {{ $item->address }}
                                                                 </td>
                                                                 <td class="text-center">
-                                                                    {{ $item->manage }}
+                                                                    {{ $item->manage_name }}
                                                                 </td>
                                                                 <td class="text-center">
-                                                                    {{ $item->accountant }}
+                                                                    @foreach($listUsers as $user)
+                                                                        @if ($accountant_name == $user->id)
+                                                                        {{ $user->name ?? '' }}
+                                                                        @endif
+                                                                    @endforeach
                                                                 </td>
                                                                 <td class="text-center">
                                                                     @switch($item->status)
@@ -447,76 +452,107 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Sửa kho</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="addForm" action="" method="POST">
+                <form id="addForm" action="{{ route('WareHouse.update', $item->id) }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-lg-6 mb-3">
-                                <input name="code" required type="text" placeholder="Mã kho" class="form-control"
-                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Mã kho" value="HN1">
+                                <input name="code" required type="text" placeholder="Mã kho*" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Mã kho*" value="{{ $item->code }}">
                             </div>
                             <div class="col-lg-6 mb-3">
-                                <input name="name" required type="text" placeholder="Tên kho" class="form-control"
-                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tên kho"
-                                    value="Kho Cầu Giấy - Hà Nội">
+                                <input name="name" required type="text" placeholder="Tên kho*" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tên kho*"
+                                    value="{{ $item->name }}">
                             </div>
                             <div class="col-lg-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Phân loại">
-                                    <select name="" class="selectpicker">
-                                        <option value="">Chọn phân loại
-                                        </option>
-                                        <option value="Kho công ty" selected>Kho công ty
-                                        </option>
-                                        <option value="Kho nhà phân phối">Kho nhà phân phối
-                                        </option>
-                                        <option value="Kho bán lẻ">Kho bán lẻ
-                                        </option>
+                                <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Phân loại*">
+                                    <select name="classify" class="selectpicker" required>
+                                        <option disabled>Phân loại*</option>
+                                        @if ($item->classify == 1)
+                                            <option value="0">Kho công ty
+                                            </option>
+                                            <option value="1" selected>Kho nhà phân phối
+                                            </option>
+                                            <option value="2">Kho bán lẻ
+                                            </option>
+                                        @elseif ($item->classify == 2)
+                                            <option value="0">Kho công ty
+                                            </option>
+                                            <option value="1">Kho nhà phân phối
+                                            </option>
+                                            <option value="2" selected>Kho bán lẻ
+                                            </option>
+                                        @else 
+                                            <option value="0" selected>Kho công ty
+                                            </option>
+                                            <option value="1">Kho nhà phân phối
+                                            </option>
+                                            <option value="2">Kho bán lẻ
+                                            </option>
+                                        @endif
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-6 mb-3">
-                                <input name="code" required type="text" placeholder="Mô tả" class="form-control"
-                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Mô tả"
-                                    value="Kho văn phòng">
+                                <input name="description" type="text" placeholder="Mô tả*" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Mô tả*"
+                                    value="{{ $item->description }}">
                             </div>
                             <div class="col-lg-6 mb-3">
-                                <input name="code" required type="text" placeholder="Địa chỉ" class="form-control"
-                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Địa chỉ"
-                                    value="219 Trung Kính, Cầu Giấy, Hà Nội">
+                                <input name="address" required type="text" placeholder="Địa chỉ*" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Địa chỉ*"
+                                    value="{{ $item->address }}">
                             </div>
                             <div class="col-lg-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Người quản lý">
-                                    <select name="" class="selectpicker">
-                                        <option value="">Chọn người quản lý
-                                        </option>
-                                        <option value="Nguyễn Văn A" selected>Nguyễn Văn A
-                                        </option>
-                                        <option value="Nguyễn Thị B">Nguyễn Thị B
-                                        </option>
+                                <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Người quản lý*">
+                                    <select name="manage" class="selectpicker" data-dropup-auto="false" data-live-search="true" required>
+                                        <?php if( $item->manage == 0){ ?>
+                                            <option value="0">Chọn người quản lý*
+                                            </option>
+                                            <?php }else{ ?>
+                                            <option value="{{ $item->manage }}">
+                                                {{ $item->manage_name }}
+                                            </option>
+                                            <?php } ?>
+                                            <option value="0">Chọn
+                                                người quản lý*</option>
+                                            @foreach ($listUsers as $av)
+                                                <option value="{{ $av->id }}">
+                                                    {{ $av->name }}
+                                                </option>
+                                            @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Kế toán phụ trách">
-                                    <select name="" class="selectpicker">
-                                        <option value="">Chọn kế toán phụ trách
-                                        </option>
-                                        <option value="Trần Văn C" selected>Trần Văn C
-                                        </option>
-                                        <option value="Cao Bá D">Cao Bá D
-                                        </option>
+                                <div data-bs-toggle="tooltip" data-dropup-auto="false" data-bs-placement="bottom" title="Kế toán phụ trách*">
+                                    <select name="accountant" class="selectpicker" data-dropup-auto="false" data-live-search="true" required>
+                                        @foreach ($listUsers as $u)
+                                                    @if ($item->accountant == $u->id)
+                                                        <option value="{{ $u->id }}" selected>{{ $u->name }}</option>
+                                                    @else
+                                                        <option value="{{ $u->id }}">{{ $u->name }}</option>
+                                                    @endif
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Trạng thái">
-                                    <select name="" class="selectpicker">
-                                        <option value="">Chọn trạng thái
-                                        </option>
-                                        <option value="Đang hoạt động" selected>Đang hoạt động
-                                        </option>
-                                        <option value="Ngưng hoạt động">Ngưng hoạt động
-                                        </option>
+                                <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Trạng thái*">
+                                    <select name="status" class="selectpicker" required>
+                                        @if ($item->status == 1)                                            
+                                            <option value="1" selected>Đang hoạt động
+                                            </option>
+                                            <option value="0">Ngưng hoạt động
+                                            </option>
+                                        @elseif (($item->status == 0) )
+                                            <option value="1">Đang hoạt động
+                                            </option>
+                                            <option value="0" selected>Ngưng hoạt động
+                                            </option>
+                                        @endif
+                                        
                                     </select>
                                 </div>
                             </div>
@@ -544,72 +580,101 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-lg-6 mb-3">
-                                <input name="code" required type="text" placeholder="Mã kho" class="form-control"
-                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Mã kho" value="HN1"
+                                <input name="code"type="text" placeholder="Mã kho" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Mã kho" value="{{ $item->code }}"
                                     disabled>
                             </div>
                             <div class="col-lg-6 mb-3">
-                                <input name="name" required type="text" placeholder="Tên kho" class="form-control"
+                                <input name="name" type="text" placeholder="Tên kho" class="form-control"
                                     data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tên kho"
-                                    value="Kho Cầu Giấy - Hà Nội" disabled>
+                                    value="{{ $item->name }}" disabled>
                             </div>
                             <div class="col-lg-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Phân loại">
-                                    <select name="" class="selectpicker" disabled>
-                                        <option value="">Chọn phân loại
-                                        </option>
-                                        <option value="Kho công ty" selected>Kho công ty
-                                        </option>
-                                        <option value="Kho nhà phân phối">Kho nhà phân phối
-                                        </option>
-                                        <option value="Kho bán lẻ">Kho bán lẻ
-                                        </option>
+                                    <select name="" class="selectpicker" disabled required>
+                                        @if ($item->classify == 1)
+                                            <option value="0">Kho công ty
+                                            </option>
+                                            <option value="1" selected>Kho nhà phân phối
+                                            </option>
+                                            <option value="2">Kho bán lẻ
+                                            </option>
+                                        @elseif ($item->classify == 2)
+                                            <option value="0">Kho công ty
+                                            </option>
+                                            <option value="1">Kho nhà phân phối
+                                            </option>
+                                            <option value="2" selected>Kho bán lẻ
+                                            </option>
+                                        @else 
+                                            <option value="0" selected>Kho công ty
+                                            </option>
+                                            <option value="1">Kho nhà phân phối
+                                            </option>
+                                            <option value="2">Kho bán lẻ
+                                            </option>
+                                        @endif
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-6 mb-3">
                                 <input name="code" required type="text" placeholder="Mô tả" class="form-control"
                                     data-bs-toggle="tooltip" data-bs-placement="bottom" title="Mô tả"
-                                    value="Kho văn phòng" disabled>
+                                    value="{{ $item->description }}" disabled>
                             </div>
                             <div class="col-lg-6 mb-3">
                                 <input name="code" required type="text" placeholder="Địa chỉ" class="form-control"
                                     data-bs-toggle="tooltip" data-bs-placement="bottom" title="Địa chỉ"
-                                    value="219 Trung Kính, Cầu Giấy, Hà Nội" disabled>
+                                    value="{{ $item->address }}" disabled>
                             </div>
                             <div class="col-lg-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Người quản lý">
+                                <div data-bs-toggle="tooltip" data-dropup-auto="false" data-bs-placement="bottom" title="Người quản lý">
                                     <select name="" class="selectpicker" disabled>
-                                        <option value="">Chọn người quản lý
-                                        </option>
-                                        <option value="Nguyễn Văn A" selected>Nguyễn Văn A
-                                        </option>
-                                        <option value="Nguyễn Thị B">Nguyễn Thị B
-                                        </option>
+                                        <?php if( $item->manage == 0){ ?>
+                                            <option value="0">Chọn người quản lý
+                                            </option>
+                                            <?php }else{ ?>
+                                            <option value="{{ $item->manage }}">
+                                                {{ $item->manage_name }}
+                                            </option>
+                                            <?php } ?>
+                                            <option value="0">Chọn
+                                                người quản lý</option>
+                                            @foreach ($listUsers as $av)
+                                                <option value="{{ $av->id }}">
+                                                    {{ $av->name }}
+                                                </option>
+                                            @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Kế toán phụ trách">
+                                <div data-bs-toggle="tooltip" data-dropup-auto="false" data-bs-placement="bottom" title="Kế toán phụ trách">
                                     <select name="" class="selectpicker" disabled>
-                                        <option value="">Chọn kế toán phụ trách
-                                        </option>
-                                        <option value="Trần Văn C" selected>Trần Văn C
-                                        </option>
-                                        <option value="Cao Bá D">Cao Bá D
-                                        </option>
+                                        @foreach ($listUsers as $u)
+                                            @if ($item->accountant == $u->id)
+                                                <option value="{{ $u->id }}" selected>{{ $u->name }}</option>
+                                            @else
+                                                <option value="{{ $u->id }}">{{ $u->name }}</option>
+                                            @endif
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Trạng thái">
                                     <select name="" class="selectpicker" disabled>
-                                        <option value="">Chọn trạng thái
-                                        </option>
-                                        <option value="Đang hoạt động" selected>Đang hoạt động
-                                        </option>
-                                        <option value="Ngưng hoạt động">Ngưng hoạt động
-                                        </option>
+                                        @if ($item->status == 1)                                            
+                                            <option value="1" selected>Đang hoạt động
+                                            </option>
+                                            <option value="0">Ngưng hoạt động
+                                            </option>
+                                        @elseif (($item->status == 0) )
+                                            <option value="1">Đang hoạt động
+                                            </option>
+                                            <option value="0" selected>Ngưng hoạt động
+                                            </option>
+                                        @endif
                                     </select>
                                 </div>
                             </div>
@@ -636,7 +701,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
-                    <form action="" method="POST">
+                    <form action="{{ route('WareHouse.destroy', $item->id) }}" method="POST">
                         @csrf
                         <button type="submit" class="btn btn-danger">Xóa</button>
                     </form>
@@ -667,9 +732,7 @@
                             </div>
                             <div class="col-lg-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Phân loại*" required>
-                                    <select name="classify" class="selectpicker">
-                                        <option disabled>Chọn phân loại*
-                                        </option>
+                                    <select name="classify" class="selectpicker" title="Phân loại*" required>
                                         <option value="0">Kho công ty
                                         </option>
                                         <option value="1">Kho nhà phân phối
@@ -680,7 +743,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-6 mb-3">
-                                <input name="description" required type="text" placeholder="Mô tả" class="form-control"
+                                <input name="description" type="text" placeholder="Mô tả" class="form-control"
                                     data-bs-toggle="tooltip" data-bs-placement="bottom" title="Mô tả">
                             </div>
                             <div class="col-lg-6 mb-3">
@@ -689,9 +752,8 @@
                             </div>
                             <div class="col-lg-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Người quản lý*">
-                                    <select name="manage" class="selectpicker" data-dropup-auto="false" data-live-search="true" required>
-                                        <option value="0">Chọn người quản lý*
-                                        </option>
+                                    <select name="manage" class="selectpicker" data-dropup-auto="false" 
+                                        data-live-search="true" title="Chọn người quản lý*" required>
                                         @foreach($listUsers as $user)
                                         <option value="{{ $user->id }}">{{ $user->name }}</option>
                                         @endforeach
@@ -700,9 +762,8 @@
                             </div>
                             <div class="col-lg-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Kế toán phụ trách*">
-                                    <select name="accountant" class="selectpicker" data-dropup-auto="false" data-live-search="true" required>
-                                        <option value="0">Chọn kế toán phụ trách*
-                                        </option>
+                                    <select name="accountant" class="selectpicker" data-dropup-auto="false" 
+                                        data-live-search="true" title="Chọn kế toán phụ trách*" required>                                        
                                         @foreach($listUsers as $user)
                                         <option value="{{ $user->id }}">{{ $user->name }}</option>
                                         @endforeach
@@ -711,9 +772,7 @@
                             </div>
                             <div class="col-lg-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Trạng thái" required>
-                                    <select name="status" class="selectpicker">
-                                        <option disabled>Chọn trạng thái*
-                                        </option>
+                                    <select name="status" title="Chọn trạng thái*" class="selectpicker" required>                                        
                                         <option value="1">Đang hoạt động
                                         </option>
                                         <option value="0">Ngưng hoạt động
