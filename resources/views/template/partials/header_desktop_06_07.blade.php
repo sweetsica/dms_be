@@ -135,7 +135,8 @@
                         Nhập kho<i class="bi bi-chevron-right"></i></a>
                     <ul class="header_more">
                         <li class="header_more-item">
-                            <a href="#" class="header_submenu-link">Nhập mua nhà cung cấp</a>
+                            <a href="{{ route('BuySupplier.index') }}" class="header_submenu-link">Nhập mua nhà cung
+                                cấp</a>
                         </li>
                         <li class="header_more-item">
                             <a href="#" class="header_submenu-link">Nhập kho điều chỉnh</a>

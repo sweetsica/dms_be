@@ -463,7 +463,7 @@
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">Sửa kho</h5>
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Sửa chương trình khuyến mại</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="addForm" action="" method="POST">
@@ -696,7 +696,7 @@
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">Chi tiết kho</h5>
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Chi tiết chương trình khuyến mại</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
