@@ -41,7 +41,7 @@ foreach ($promotions as $promotion) {
 $promotionDetailsArray=[];
 }
 
- dd($promotionDetailsArray);
+//  dd($promotionDetailsArray);
 
     $customerGroupNames = [];
     foreach ($promotions as $promotion) {
