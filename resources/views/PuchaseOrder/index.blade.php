@@ -29,9 +29,19 @@
         {
             color: var(--primary-color)
         }
-        .text_body
+        .text_body1
+        {   
+            text-align: right;
+            border: 1px solid red;
+        }
+        .text_body2
+        {   
+            text-align: right;
+            border: 1px solid red;
+        }
+        .text_title2
         {
-
+            margin-left: 20px;
         }
     </style>
 @endsection
@@ -695,27 +705,32 @@
                                 <div class="card-title-black">Tổng tiền thuế:</div>
                                 <div class="card-title-black">Tổng thanh toán:</div>
                             </div>                        
-                            <div class="col-lg-2 text_body1">
-                                <div class="card-title-black">20.000.000</div>
-                                <div class="card-title-black">20.000.000</div>
-                                <div class="card-title-black">20.000.000</div>
-                                <div class="card-title-black">20.000.000</div>
-                                <div class="card-title-black">20.000.000</div>
+                            <div class="col-lg-2">
+                                <div class="card-title-black text_body1">
+                                    <span class="text-right">20.000.000</span></div>
+                                <div class="card-title-black text_body1">
+                                    <span class="text-right">20.000.000</span></div>
+                                <div class="card-title-black text_body1">
+                                    <span class="text-right">20.000.000</span></div>
+                                <div class="card-title-black text_body1">
+                                    <span class="text-right">20.000.000</span></div>
+                                <div class="card-title-black text_body1">
+                                    <span class="text-right">20.000.000</span></div>
                             </div>
                         <div class="col-lg-4"></div>
-                        <div class="col-lg-2 text_title text_title2">
-                            <div class="card-title-black">Thanh toán trước:</div>
-                            <div class="card-title-black">Số tiền còn lại:</div>
-                            <div class="card-title-black">Hạn mức công nợ:</div>
-                            <div class="card-title-black">Dư nợ hiện tại:</div>
-                            <div class="card-title-black">Hạn thanh toán:</div>
+                        <div class="col-lg-2 text_title">
+                            <div class="card-title-black text_title2">Thanh toán trước:</div>
+                            <div class="card-title-black text_title2">Số tiền còn lại:</div>
+                            <div class="card-title-black text_title2">Hạn mức công nợ:</div>
+                            <div class="card-title-black text_title2">Dư nợ hiện tại:</div>
+                            <div class="card-title-black text_title2">Hạn thanh toán:</div>
                         </div>
-                        <div class="col-lg-2" style="text-align: right;">
-                            <div class="card-title-black">10.000.000</div>
-                            <div class="card-title-black">10.000.000</div>
-                            <div class="card-title-black">10.000.000</div>
-                            <div class="card-title-black">10.000.000</div>
-                            <div class="card-title-black">10.000.000</div>                            
+                        <div class="col-lg-2">
+                            <div class="card-title-black text_body2">10.000.000</div>
+                            <div class="card-title-black text_body2">10.000.000</div>
+                            <div class="card-title-black text_body2">10.000.000</div>
+                            <div class="card-title-black text_body2">10.000.000</div>
+                            <div class="card-title-black text_body2">10.000.000</div>                            
                         </div>                                             
                     </div>
 
