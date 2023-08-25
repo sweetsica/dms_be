@@ -14,32 +14,32 @@ class PromotionController extends Controller
     public function index() {
 
     $promotions = Promotion::all(); // Lấy danh sách Promotion
-//     $promotionDetailsArray = [];
-//     if( $promotions){
-//     foreach ($promotions as $promotion) {
-//         $promotionDetailsArray = $promotion->promotion_details;
+    $promotionDetailsArray = [];
+    if( $promotions){
+    foreach ($promotions as $promotion) {
+        $promotionDetailsArray = $promotion->promotion_details;
 
-//     }
-// }else{
-//     $promotionDetailsArray=[];
-// }
-
-// if($promotionDetailsArray){
-//     $combinedData = json_decode($promotionDetailsArray);
-// }else{
-//     $combinedData = [];
-// }
-
-$promotionDetailsArray = [];
-if( $promotions){
-foreach ($promotions as $promotion) {
-    // $promotionDetailsArray = $promotion->promotion_details;
-    $promotionDetailsArray = json_decode($promotion->promotion_details, true);
-
-}
+    }
 }else{
-$promotionDetailsArray=[];
+    $promotionDetailsArray=[];
 }
+
+if($promotionDetailsArray){
+    $combinedData = json_decode($promotionDetailsArray);
+}else{
+    $combinedData = [];
+}
+
+// $promotionDetailsArray = [];
+// if( $promotions){
+// foreach ($promotions as $promotion) {
+//     // $promotionDetailsArray = $promotion->promotion_details;
+//     $promotionDetailsArray = json_decode($promotion->promotion_details, true);
+
+// }
+// }else{
+// $promotionDetailsArray=[];
+// }
 
 //  dd($promotionDetailsArray);
 
@@ -82,8 +82,8 @@ $promotionDetailsArray=[];
         $customersList = Customer::all();
         $products = Product::all();
 
-        // return view('Promotion.index', compact('promotions', 'customerGroupNames','listgroup','customersList','products','combinedData','customerNames'));
-        return view('Promotion.index', compact('promotions', 'customerGroupNames','listgroup','customersList','products','customerNames','promotionDetailsArray'));
+        return view('Promotion.index', compact('promotions', 'customerGroupNames','listgroup','customersList','products','combinedData','customerNames'));
+        // return view('Promotion.index', compact('promotions', 'customerGroupNames','listgroup','customersList','products','customerNames','promotionDetailsArray'));
     }
 
     public function store(Request $request) {
