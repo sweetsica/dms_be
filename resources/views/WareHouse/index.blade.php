@@ -207,95 +207,85 @@
                                                                 </tr>
                                                             </tbody>
                                                         @endforeach --}}
+                                                    <?php $k = 1 ?>
+                                                    @foreach ($wareHouseList as $item)
                                                         <tbody>
                                                             <tr>
                                                                 <td class="text-center"> <input type="checkbox"
-                                                                        name="selected_items[]" value="">
+                                                                        name="selected_items[]" value="{{ $item->id }}">
                                                                 </td>
-                                                                <td class="text-center">1
+                                                                <td class="text-center">
+                                                                    {{ $k++ }}
                                                                 </td>
-                                                                <td class="text-center">HN1
+                                                                <td class="text-center">
+                                                                    {{ $item->code }}
                                                                 </td>
                                                                 <td class="text-center">
                                                                     <button type="button" data-bs-toggle="modal"
-                                                                        data-bs-target="#chiTietKho"
+                                                                        data-bs-target="#chiTietKho{{ $item->id }}"
                                                                         style="background: transparent">
                                                                         <div class="text-wrap text-center btn-show_detail"
                                                                             data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                            title="Kho Cầu Giấy - Hà Nội">
-                                                                            Kho Cầu Giấy - Hà Nội
+                                                                            title="{{ $item->name }}">
+                                                                            {{ $item->name }}
                                                                         </div>
                                                                     </button>
                                                                 </td>
-                                                                <td class="text-center">Công ty
-                                                                </td>
-                                                                <td class="text-center">Kho văn phòng
-                                                                </td>
-                                                                <td class="text-center">219 Trung Kính, Cầu Giấy, Hà Nội
-                                                                </td>
-                                                                <td class="text-center">Nguyễn Trãi-MTDH00
-                                                                </td>
-                                                                <td class="text-center">Nguyễn Tuân-MTDH01
-                                                                </td>
                                                                 <td class="text-center">
-                                                                    <span class="badge bg-success">Đang hoạt động</span>
-                                                                </td>
-                                                                <td class="text-center"
-                                                                    style="background: #fff; position: sticky; right: 0;">
-                                                                    <div
-                                                                        class="table_actions d-flex justify-content-center">
-                                                                        <div data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top" title="Sửa ">
-                                                                            <div class="btn" data-bs-toggle="modal"
-                                                                                data-bs-target="#suaKho">
-                                                                                <img style="width:16px;height:16px"
-                                                                                    src="{{ asset('assets/img/edit.svg') }}" />
-                                                                            </div>
-                                                                        </div>
-                                                                        <div data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top" title="Xóa">
-                                                                            <div class="btn" data-bs-toggle="modal"
-                                                                                data-bs-target="#xoaKho">
-                                                                                <img style="width:16px;height:16px"
-                                                                                    src="{{ asset('assets/img/trash.svg') }}" />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
+                                                                    @switch($item->classify)
+                                                                        @case(0)
+                                                                            <span>
+                                                                                Kho công ty
+                                                                            </span>
+                                                                        @break
 
-                                                            <tr>
-                                                                <td class="text-center"> <input type="checkbox"
-                                                                        name="selected_items[]" value="">
-                                                                </td>
-                                                                <td class="text-center">2
-                                                                </td>
-                                                                <td class="text-center">HN2
-                                                                </td>
-                                                                <td class="text-center">
-                                                                    <button type="button" data-bs-toggle="modal"
-                                                                        data-bs-target="#chiTietKho"
-                                                                        style="background: transparent">
-                                                                        <div class="text-wrap text-center btn-show_detail"
-                                                                            data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top"
-                                                                            title="Kho nhà máy Thái Bình">
-                                                                            Kho nhà máy Thái Bình
-                                                                        </div>
-                                                                    </button>
-                                                                </td>
-                                                                <td class="text-center">Nhà phân phối
-                                                                </td>
-                                                                <td class="text-center">Kho sản phẩm thuốc
-                                                                </td>
-                                                                <td class="text-center">Quỳnh Phụ, Thái Bình
-                                                                </td>
-                                                                <td class="text-center">Nguyễn Trãi-MTDH00
-                                                                </td>
-                                                                <td class="text-center">Nguyễn Tuân-MTDH01
+                                                                        @case(1)
+                                                                            <span>
+                                                                                Kho nhà phân phối
+                                                                            </span>
+                                                                        @break  
+
+                                                                        @case(2)
+                                                                            <span>
+                                                                                Kho bán lẻ
+                                                                            </span>
+                                                                        @break                                                                       
+
+                                                                        @default
+                                                                            <span></span>
+                                                                        @break
+                                                                    @endswitch   
                                                                 </td>
                                                                 <td class="text-center">
-                                                                    <span class="badge bg-danger">Ngưng hoạt động</span>
+                                                                    {{ $item->description }}
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    {{ $item->address }}
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    {{ $item->manage }}
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    {{ $item->accountant }}
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    @switch($item->status)
+                                                                        @case(0)
+                                                                            <span class="badge bg-danger">
+                                                                                Ngưng hoạt động
+                                                                            </span>
+                                                                        @break
+
+                                                                        @case(1)
+                                                                            <span class="badge bg-success">
+                                                                                Đang hoạt động
+                                                                            </span>
+                                                                        @break                                                                        
+
+                                                                        @default
+                                                                            <span></span>
+                                                                        @break
+                                                                    @endswitch   
                                                                 </td>
                                                                 <td class="text-center"
                                                                     style="background: #fff; position: sticky; right: 0;">
@@ -304,7 +294,7 @@
                                                                         <div data-bs-toggle="tooltip"
                                                                             data-bs-placement="top" title="Sửa ">
                                                                             <div class="btn" data-bs-toggle="modal"
-                                                                                data-bs-target="#suaKho">
+                                                                                data-bs-target="#suaKho{{ $item->id }}">
                                                                                 <img style="width:16px;height:16px"
                                                                                     src="{{ asset('assets/img/edit.svg') }}" />
                                                                             </div>
@@ -312,15 +302,16 @@
                                                                         <div data-bs-toggle="tooltip"
                                                                             data-bs-placement="top" title="Xóa">
                                                                             <div class="btn" data-bs-toggle="modal"
-                                                                                data-bs-target="#xoaKho">
+                                                                                data-bs-target="#xoaKho{{ $item->id }}">
                                                                                 <img style="width:16px;height:16px"
                                                                                     src="{{ asset('assets/img/trash.svg') }}" />
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </td>
-                                                            </tr>
+                                                            </tr>                                                            
                                                         </tbody>
+                                                    @endforeach
                                                     </table>
                                                     {{-- <nav aria-label="Page navigation example" class="float-end mt-3"
                                                         id="target-pagination">
@@ -448,7 +439,8 @@
 
 
     {{-- Modal sửa kho --}}
-    <div class="modal fade" id="suaKho" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+@foreach ($wareHouseList as $item)
+    <div class="modal fade" id="suaKho{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
@@ -540,7 +532,7 @@
     </div>
 
     {{-- Modal chi tiết kho --}}
-    <div class="modal fade" id="chiTietKho" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="chiTietKho{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
@@ -632,7 +624,7 @@
     </div>
 
     {{-- Modal Xóa kho --}}
-    <div class="modal fade" id="xoaKho" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="xoaKho{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -652,7 +644,7 @@
             </div>
         </div>
     </div>
-
+@endforeach
     <!-- Modal thêm kho -->
     <div class="modal fade" id="addKho" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -661,72 +653,70 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Thêm Kho</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="addForm" action="" method="POST">
+                <form id="addForm" action="{{ route('WareHouse.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-lg-6 mb-3">
-                                <input name="code" required type="text" placeholder="Mã kho" class="form-control"
-                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Mã kho">
+                                <input name="code" required type="text" placeholder="Mã kho*" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Mã kho*" required>
                             </div>
                             <div class="col-lg-6 mb-3">
-                                <input name="name" required type="text" placeholder="Tên kho" class="form-control"
-                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tên kho">
+                                <input name="name" required type="text" placeholder="Tên kho*" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tên kho*" required>
                             </div>
                             <div class="col-lg-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Phân loại">
-                                    <select name="" class="selectpicker">
-                                        <option value="">Chọn phân loại
+                                <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Phân loại*" required>
+                                    <select name="classify" class="selectpicker">
+                                        <option disabled>Chọn phân loại*
                                         </option>
-                                        <option value="Kho công ty">Kho công ty
+                                        <option value="0">Kho công ty
                                         </option>
-                                        <option value="Kho nhà phân phối">Kho nhà phân phối
+                                        <option value="1">Kho nhà phân phối
                                         </option>
-                                        <option value="Kho bán lẻ">Kho bán lẻ
+                                        <option value="2">Kho bán lẻ
                                         </option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-6 mb-3">
-                                <input name="code" required type="text" placeholder="Mô tả" class="form-control"
+                                <input name="description" required type="text" placeholder="Mô tả" class="form-control"
                                     data-bs-toggle="tooltip" data-bs-placement="bottom" title="Mô tả">
                             </div>
                             <div class="col-lg-6 mb-3">
-                                <input name="code" required type="text" placeholder="Địa chỉ" class="form-control"
-                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Địa chỉ">
+                                <input name="address" required type="text" placeholder="Địa chỉ*" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Địa chỉ*" required>
                             </div>
                             <div class="col-lg-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Người quản lý">
-                                    <select name="" class="selectpicker">
-                                        <option value="">Chọn người quản lý
+                                <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Người quản lý*">
+                                    <select name="manage" class="selectpicker" data-dropup-auto="false" data-live-search="true" required>
+                                        <option value="0">Chọn người quản lý*
                                         </option>
-                                        <option value="Nguyễn Văn A">Nguyễn Văn A
-                                        </option>
-                                        <option value="Nguyễn Thị B">Nguyễn Thị B
-                                        </option>
+                                        @foreach($listUsers as $user)
+                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Kế toán phụ trách">
-                                    <select name="" class="selectpicker">
-                                        <option value="">Chọn kế toán phụ trách
+                                <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Kế toán phụ trách*">
+                                    <select name="accountant" class="selectpicker" data-dropup-auto="false" data-live-search="true" required>
+                                        <option value="0">Chọn kế toán phụ trách*
                                         </option>
-                                        <option value="Trần Văn C">Trần Văn C
-                                        </option>
-                                        <option value="Cao Bá D">Cao Bá D
-                                        </option>
+                                        @foreach($listUsers as $user)
+                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Trạng thái">
-                                    <select name="" class="selectpicker">
-                                        <option value="">Chọn trạng thái
+                                <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Trạng thái" required>
+                                    <select name="status" class="selectpicker">
+                                        <option disabled>Chọn trạng thái*
                                         </option>
-                                        <option value="Đang hoạt động">Đang hoạt động
+                                        <option value="1">Đang hoạt động
                                         </option>
-                                        <option value="Ngưng hoạt động">Ngưng hoạt động
+                                        <option value="0">Ngưng hoạt động
                                         </option>
                                     </select>
                                 </div>

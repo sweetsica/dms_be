@@ -198,6 +198,13 @@ class DepartmentController extends Controller
 
         $getPos = Position::with('department.areas')->find($id);
         $listUsers = Personnel::query();
+        $department_id = $getPos['department_id'];
+        $getDept = [];
+        $listPosToDept = [];
+        if ($department_id) {
+            $getDept = Department::with('areas')->find($department_id);
+            $listPosToDept = Position::with('levels')->where('department_id', $department_id)->where("position.code", "like", "%$search%")->get();
+        }
         if ($search) {
             $listUsers = $listUsers->where(function ($query) use ($search) {
                 $query->where('name', 'like', '%' . $search . '%')
@@ -227,7 +234,9 @@ class DepartmentController extends Controller
             "departmentListTree" => $departmentListTree,
             'listUsers' => $listUsers,
             'getPos' => $getPos,
-            'selectableUser' => $selectableUser
+            'selectableUser' => $selectableUser,
+            'getDept' => $getDept,
+            'listPosToDept' => $listPosToDept
         ]);
     }
 
@@ -284,12 +293,23 @@ class DepartmentController extends Controller
         $parent = $request->get('parent');
         $code = $request->get('code');
         $description = $request->get('description');
+        if ($request['status'] || $request['demarcation']){
+            $status = $request->get('status');
+            $demarcation = $request->get('demarcation');
+        }
+        else {
+            $data = Department::find($id);
+            $status = $data->status;
+            $demarcation = $data->demarcation;
+        }
         $data = Department::find($id);
         $data->name = $name;
         $data->code = $code;
         $data->parent = $parent;
         $data->ib_lead = $ib_lead;
         $data->description = $description;
+        $data->status = $status;
+        $data->demarcation = $demarcation;
         $data->save();
         return redirect()->back();
     }

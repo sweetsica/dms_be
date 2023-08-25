@@ -333,8 +333,9 @@
                             <div class="row">
                                 <div class="col-lg-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Loại khách hàng">
-                                    <select class="selectpicker" id="customerTypeEdit">
-                                        <option value="">Loại khách hàng</option>
+                                    <select class="selectpicker" id="">
+                                        <option value="{{ $item->customer_type }}"> {{ $item->customer_type }} </option>
+                                        <option value="Loại khách hàng">Loại khách hàng</option>
                                         <option value="Khách hàng lẻ" selected>Khách hàng lẻ</option>
                                         <option value="Nhà phân phối">Nhà phân phối</option>
                                         <option value="Đại lý">Đại lý</option>
@@ -343,33 +344,33 @@
 
                                 <div class="col-lg-6 mb-3">
                                     <input type="text" name="personContact" data-bs-toggle="tooltip"
-                                        id="personContactInput" data-bs-placement="top" title="Mã khách hàng"
-                                        placeholder="Mã khách hàng*" class="form-control">
+                                        id="" data-bs-placement="top" title="Mã khách hàng"
+                                        placeholder="Mã khách hàng*" class="form-control" >
                                 </div>
 
                                 <div class="col-lg-6 mb-3">
                                     <input type="text" name="name" data-bs-toggle="tooltip" required
-                                        id="nameInput" data-bs-placement="top" title="Tên khách hàng"
-                                        placeholder="Tên khách hàng*" class="form-control">
+                                        id="" data-bs-placement="top" title="Tên khách hàng"
+                                        class="form-control" value="{{ $item->name }}">
                                 </div>
 
                                 <div class="col-lg-6 mb-3">
                                     <input type="text" name="phone" data-bs-toggle="tooltip" required
-                                        id="phoneInput" data-bs-placement="top" title="Số điện thoại"
-                                        placeholder="Số điện thoại*" class="form-control">
+                                        id="" data-bs-placement="top" title="Số điện thoại"
+                                       class="form-control" value="{{ $item->phone }}">
                                 </div>
                                 <div class="col-lg-6 mb-3">
-                                    <input type="text" name="email" data-bs-toggle="tooltip" id="emailInput"
-                                        data-bs-placement="top" title="Email" placeholder="Email" class="form-control">
+                                    <input type="text" name="email" data-bs-toggle="tooltip" id=""
+                                        data-bs-placement="top"  placeholder="Email" title="Email" value="{{ $item->email }}" class="form-control">
                                 </div>
                                 <div class="col-lg-6 mb-3">
                                     <input type="text" name="address" data-bs-toggle="tooltip" required
-                                        id="addressInputGeneral" data-bs-placement="top" title="Địa chỉ"
-                                        placeholder="Địa chỉ" class="form-control">
+                                        id="" data-bs-placement="top" title="Địa chỉ"
+                                        placeholder="Địa chỉ" class="form-control" value="{{ $item->address }}" >
                                 </div>
 
                                 <div class="col-lg-12 mb-3">
-                                    <textarea class="form-control" placeholder="Ghi chú" id="floatingTextarea2" style="height: 100px"></textarea>
+                                    <textarea class="form-control" placeholder="Ghi chú" id="" style="height: 100px" name="description">{{ $item->description }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -393,7 +394,7 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Lọc dữ liệu</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="customerForm" method="POST" action="{{ route('create-customer') }}">
+                <form method="POST" action="{{ route('create-customer') }}">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -468,8 +469,8 @@
                         <div class="row">
                             <div class="col-lg-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Loại khách hàng">
-                                <select class="selectpicker" id="customerTypeAdd">
-                                    <option value="">Loại khách hàng</option>
+                                <select class="selectpicker" id="customerTypeAdd" name="customer_type">
+                                    <option value="Loại khách hàng">Loại khách hàng</option>
                                     <option value="Khách hàng lẻ" selected>Khách hàng lẻ</option>
                                     <option value="Nhà phân phối">Nhà phân phối</option>
                                     <option value="Đại lý">Đại lý</option>
@@ -486,6 +487,7 @@
                                 <input type="text" name="name" data-bs-toggle="tooltip" required id="nameInput"
                                     data-bs-placement="top" title="Tên khách hàng" placeholder="Tên khách hàng*"
                                     class="form-control">
+
                             </div>
 
                             <div class="col-lg-6 mb-3">
@@ -499,12 +501,12 @@
                             </div>
                             <div class="col-lg-6 mb-3">
                                 <input type="text" name="address" data-bs-toggle="tooltip" required
-                                    id="addressInputGeneral" data-bs-placement="top" title="Địa chỉ"
+                                    id="addressInputGeneral" data-bs-placement="top" title="Địa chỉ*"
                                     placeholder="Địa chỉ" class="form-control">
                             </div>
 
                             <div class="col-lg-12 mb-3">
-                                <textarea class="form-control" placeholder="Ghi chú" id="floatingTextarea2" style="height: 100px"></textarea>
+                                <textarea class="form-control" placeholder="Ghi chú" id="descriptionInput" style="height: 100px"></textarea>
                             </div>
                         </div>
                     </div>
@@ -532,10 +534,14 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Thêm chi tiết khách hàng</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="formThemCapPhatChitiet" method="POST" action="{{ route('create-customer') }}"
-                    enctype="multipart/form-data">
+                <form id="customerForm"
+                {{-- method="POST" action="{{ route('create-customer') }}" --}}
+                enctype="multipart/form-data"
+                >
                     @csrf
                     <input name="name" style="display: none;" id="name">
+                    <input name="customer_type" style="display: none;" id="customer_type">
+                    <input name="description" style="display: none;" id="description">
                     <input name="personContact" style="display: none;" id="personContact">
                     <input name="phone" style="display: none;" id="phone">
                     <input name="email" style="display: none;" id="email">
@@ -560,7 +566,7 @@
 
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Lĩnh vực kinh doanh">
-                                <select class="selectpicker">
+                                <select class="selectpicker" name="business_areas">
                                     <option value="" selected>Lĩnh vực kinh doanh</option>
                                     <option value="Kim khí">Kim khí</option>
                                     <option value="Điện máy">Điện máy</option>
@@ -628,6 +634,7 @@
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="city" id="city"
                                     data-live-search-placeholder="Tìm kiếm...">
                                 </select>
+                                <div class="error-text" id="cityError" style="color: red;"></div>
                             </div>
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Quận/huyện">
@@ -636,6 +643,7 @@
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="district" id="district"
                                     data-live-search-placeholder="Tìm kiếm...">
                                 </select>
+                                <div class="error-text" id="districtError" style="color: red;"></div>
                             </div>
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Phường/xã">
@@ -644,10 +652,12 @@
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="guide" id="guide"
                                     data-live-search-placeholder="Tìm kiếm...">
                                 </select>
+                                <div class="error-text" id="guideError" style="color: red;"></div>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <input type="text" id="addressInput" name="address" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ*" class="form-control">
+                                    <div class="error-text" id="addressError" style="color: red;"></div>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <div id="map"
@@ -683,6 +693,7 @@
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="productId[]" id="productId"
                                     data-live-search-placeholder="Tìm kiếm..." multiple>
                                 </select>
+                                <div class="error-text" id="productIdError" style="color: red;"></div>
                             </div>
 
 
@@ -712,14 +723,16 @@
                                     <option value="Làm đẹp/Phòng tập thể dục/Thể thao">Làm đẹp/Phòng tập thể dục/Thể thao
                                     </option> --}}
                                 </select>
+                                <div class="error-text" id="groupError" style="color: red;"></div>
                             </div>
 
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Tuyến">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                    data-live-search="true" title="Tuyến*" data-select-all-text="Chọn tất cả"
+                                    data-live-search="true" title="Tuyến*" data-select-all-text="Chọn tất cả"name
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="routeId" id="routeId"
                                     data-live-search-placeholder="Tìm kiếm...">
                                 </select>
+                                <div class="error-text" id="routeIdError" style="color: red;"></div>
                             </div>
 
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
@@ -729,6 +742,7 @@
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="chanelId" id="chanelId"
                                     data-live-search-placeholder="Tìm kiếm...">
                                 </select>
+                                <div class="error-text" id="chanelIdError" style="color: red;"></div>
                             </div>
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Trạng thái*">
@@ -746,21 +760,42 @@
                                 <div class="card-title">6. Hình ảnh</div>
                             </div>
 
-                            <div class="col-md-12 mb-3">
-                                <div class="upload-files-container">
-                                    <div class="drag-file-area">
-                                        <span class="material-icons-outlined upload-icon fs-3 mt-4">Tải file ảnh tại
-                                            đây</span>
-                                        <h3 class="dynamic-message fs-5 text-secondary">Hỗ trợ định dạng JPG hoặc PNG kích
-                                            thước không quá
-                                            10MB</h3>
-                                        <label class="label">
-                                            <input type="file" class="default-file-input" style="display: none"
-                                                name="avatar[]" />
-                                            <span class="btn btn-outline-danger mb-4"><i
-                                                    class="bi bi-cloud-arrow-up"></i>Tải file lên</span>
-                                        </label>
+                            <div class="col-12 col-md-12">
+                                <div class="upload_wrapper-items">
+                                    <div class="alert alert-danger alertNotSupport" role="alert"
+                                        style="display:none">
+                                        File bạn tải lên hiện tại không hỗ trợ !
                                     </div>
+                                    <div class="modal_upload-wrapper">
+                                        <label class="modal_upload-label" for="file">
+                                            Tải ảnh sản phẩm tại đây</label>
+                                        <div class="mt-2 text-secondary fst-italic">Hỗ trợ định
+                                            dạng
+                                            JPG hoặc
+                                            PNG kích
+                                            thước tệp không quá 10MB
+                                        </div>
+                                        <div
+                                            class="modal_upload-action mt-3 d-flex align-items-center justify-content-center">
+                                            <div class="modal_upload-addFile me-3">
+                                                <label for="fileInput" id="fileButton"
+                                                    class="btn position-relative border d-flex w-500">
+                                                    <img src="{{ asset('assets/img/upload-file.svg') }}" />
+                                                    <span class="ps-2">Đính kèm ảnh sản phẩm</span>
+                                                </label>
+                                                <input accept="image/jpeg,image/png"
+                                                    role="button" type="file"
+                                                    class="modal_upload-input modal_upload-file"
+                                                    name="image" onchange="updateList(event)" />
+                                            </div>
+                                        </div>
+
+                                        <div id="preview" class="d-flex mt-3"></div>
+                                        {{-- <ul id="attachments" class="file-list" style="padding: 0 0 4px 0; word-break: break-all;"></ul> --}}
+                                    </div>
+                                    <ul class="modal_upload-list"
+                                        style="max-height: 134px; overflow-y: scroll; overflow-x: hidden;">
+                                    </ul>
                                 </div>
                             </div>
 
@@ -780,7 +815,7 @@
                     </div>
                     <div class="modal-footer ">
                         <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
-                        <button type="submit" class="btn btn-danger">Lưu</button>
+                        <button type="button" class="btn btn-danger" id="submitButton" >Lưu</button>
                     </div>
                 </form>
             </div>
@@ -791,17 +826,25 @@
         document.addEventListener("DOMContentLoaded", function() {
             const addButton = document.querySelector("[data-bs-target^='#themchitiet']");
             const nameInput = document.querySelector("#nameInput");
+            const customerTypeInput = document.querySelector("#customerTypeAdd");
+            const descriptionInput = document.querySelector("#descriptionInput");
+            const customerTypeAdd = document.querySelector("#customerTypeAdd");
             const emailInput = document.querySelector("#emailInput");
             const phoneInput = document.querySelector("#phoneInput");
             const personContactInput = document.querySelector("#personContactInput")
             const addressInputGeneral = document.querySelector("#addressInputGeneral");
             const nameI = document.querySelector("#name");
+            const customerTypeAddI = document.querySelector("#customer_type");
+            const descriptionI = document.querySelector("#description");
             const emailI = document.querySelector("#email");
             const phoneI = document.querySelector("#phone");
             const personI = document.querySelector("#personContact");
             const addressInput = document.querySelector("#addressInput");
             addButton.addEventListener("click", function() {
                 nameI.value = nameInput.value;
+                customerTypeAddI.value = customerTypeInput.value;
+                descriptionI.value = descriptionInput.value;
+                customerTypeAddI.value = customerTypeAdd.value;
                 emailI.value = emailInput.value;
                 phoneI.value = phoneInput.value;
                 personI.value = personContactInput.value;
@@ -1589,7 +1632,6 @@
     <script>
         document.getElementById("submitButton").addEventListener("click", function() {
             const formData = new FormData(document.getElementById("customerForm"));
-
             fetch("{{ route('create-customer') }}", {
                     method: "POST",
                     body: formData
@@ -1597,8 +1639,8 @@
                 .then(response => response.json())
                 .then(data => {
                     // const codeError = document.getElementById("codeError");
-                    const nameError = document.getElementById("nameError");
-                    const phoneError = document.getElementById("phoneError");
+                    // const nameError = document.getElementById("nameError");
+                    // const phoneError = document.getElementById("phoneError");
                     const cityError = document.getElementById("cityError");
                     const addressError = document.getElementById("addressError");
                     const districtError = document.getElementById("districtError");
@@ -1609,13 +1651,11 @@
                     const chanelIdError = document.getElementById("chanelIdError");
                     const routeIdError = document.getElementById("routeIdError");
 
-
-
-
                     if (data.success) {
+                        // coderessError.innerHTML = "";
                         addressError.innerHTML = "";
-                        nameError.innerHTML = "";
-                        phoneError.innerHTML = "";
+                        // nameError.innerHTML = "";
+                        // phoneError.innerHTML = "";
                         cityError.innerHTML = "";
                         districtError.innerHTML = "";
                         guideError.innerHTML = "";
@@ -1629,9 +1669,10 @@
                         window.location.href = "{{ route('customers') }}"; // Điều hướng trang khách hàng
                     } else {
 
+                        // coderessError.innerHTML = data.errors.code;
                         addressError.innerHTML = data.errors.address;
-                        nameError.innerHTML = data.errors.name;
-                        phoneError.innerHTML = data.errors.phone;
+                        // nameError.innerHTML = data.errors.name;
+                        // phoneError.innerHTML = data.errors.phone;
                         cityError.innerHTML = data.errors.city;
                         districtError.innerHTML = data.errors.district;
                         guideError.innerHTML = data.errors.guide;
@@ -1648,7 +1689,7 @@
         });
 
         function closeModal() {
-            const modal = document.getElementById("add");
+            const modal = document.getElementById("themchitiet");
             modal.style.display = "none";
         }
     </script>
@@ -1678,22 +1719,24 @@
         const addRowIcon = document.getElementById('addRowIcon');
         const tbody = document.querySelector('#contact tbody');
         let rowCount = 1;
+        let specCount = 0;
         addRowIcon.addEventListener('click', function() {
             const newRow = document.createElement('tr');
             newRow.innerHTML = `
             <td class="text-center">${rowCount}</td>
-            <td><input type="text" class="form-control" name="name[]"></td>
-            <td><input type="text" class="form-control" name="phone[]"></td>
-            <td><input type="text" class="form-control" name="email[]"></td>
-            <td><input type="text" class="form-control" name="position[]"></td>
+            <td><input type="text" class="form-control" name="contact[${specCount}][key1]"></td>
+            <td><input type="text" class="form-control" name="contact[${specCount}][key2]"></td>
+            <td><input type="text" class="form-control" name="contact[${specCount}][key3]"></td>
+            <td><input type="text" class="form-control" name="contact[${specCount}][key4]"></td>
             <td class="text-center">
-                <i class="bi bi-trash deleteRow fs-3" 
+                <i class="bi bi-trash deleteRow fs-3"
                 style="color: var(--primary-color); cursor: pointer;" ></i>
             </td>
         `;
 
             tbody.appendChild(newRow);
             rowCount++;
+            specCount++;
 
             // Xử lý sự kiện xóa hàng
             const deleteButtons = document.querySelectorAll('.deleteRow');

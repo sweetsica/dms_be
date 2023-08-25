@@ -119,6 +119,8 @@ class PositionController extends Controller
         $data->personnel_level=$personnel_level;
         $data->pack=$pack;
         $data->wage=$wage;
+        $data->created_at = now();
+        $data->updated_at = now();
         $data->description=$description;
         $data->save();
         return back();
@@ -145,6 +147,7 @@ class PositionController extends Controller
         $data->pack=$pack;
         $data->wage=$wage;
         $data->description=$description;
+        $data->updated_at = now();
         $data->save();
         Session::flash('success', 'Sửa thành công');
         return back();

@@ -26,6 +26,7 @@ use App\Http\Controllers\WareHouseController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\BuySupplierController;
+use App\Models\WareHouse;
 
 /*
 |--------------------------------------------------------------------------
@@ -188,6 +189,8 @@ Route::middleware(['auth.role'])->group(function () {
     Route::get('nhan_su_dia_ban/{area_id}', [PersonnelController::class, 'showDiaBan'])->name('Personnel.show.diaban');
     Route::get('nhan_su_vung/{department_id}', [PersonnelController::class, 'showVung'])->name('Personnel.show.vung');
     Route::post('nhan_su-delete', [PersonnelController::class, 'delete'])->name('Personnel.delete');
+    Route::get('/thong-tin-ca-nhan', [PersonnelController::class, 'me'])->name('Personnel.me');
+
 
     Route::delete('go-nhan-su-khoi-vi-tri', [PersonnelController::class, 'detach'])->name('detach-user-from-position');
 
@@ -225,15 +228,27 @@ Route::middleware(['auth.role'])->group(function () {
 
     // Kho
     Route::get('danh-sach-kho', [WareHouseController::class, 'index'])->name('WareHouse.index');
+    Route::post('them-kho', [WareHouseController::class, 'store'])->name('WareHouse.store');
+    Route::post('sua-kho/{id}', [WareHouseController::class, 'update'])->name('WareHouse.update');
+    Route::post('xoa-kho/{id}', [WareHouseController::class, 'destroy'])->name('WareHouse.destroy');
+    Route::post('kho-delete', [WareHouseController::class, 'delete'])->name('WareHouse.delete');
 
     // Nhà cung cấp
     Route::get('danh-sach-nha-cung-cap', [SupplierController::class, 'index'])->name('Supplier.index');
+    Route::post('them-nha-cung-cap', [SupplierController::class, 'store'])->name('Supplier.store');
+    Route::post('sua-nha-cung-cap/{id}', [SupplierController::class, 'update'])->name('Supplier.update');
+    Route::post('xoa-nha-cung-cap/{id}', [SupplierController::class, 'destroy'])->name('Supplier.destroy');
+    Route::post('nha-cung-cap-delete', [SupplierController::class, 'delete'])->name('Supplier.delete');
 
     // Chương trình khuyến mại
     Route::get('danh-sach-khuyen-mai', [PromotionController::class, 'index'])->name('Promotion.index');
 
     // Phiếu nhập mua nhà cung cấp
     Route::get('danh-sach-phieu-nhap-mua-nha-cung-cap', [BuySupplierController::class, 'index'])->name('BuySupplier.index');
+    Route::post('them-khuyen-mai', [PromotionController::class, 'store'])->name('Promotion.store');
+    Route::post('sua-khuyen-mai/{id}', [PromotionController::class, 'update'])->name('Promotion.update');
+    Route::post('destroy-khuyen-mai/{id}', [PromotionController::class, 'destroy'])->name('Promotion.destroy');
+    Route::post('khuyen-mai-delete', [PromotionController::class, 'delete'])->name('delete-Promotion');
 
     Route::get('dashboard_TongGiamDoc', function () {
         return view('Dashboard.dashboard_Admin');});

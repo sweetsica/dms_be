@@ -487,7 +487,7 @@
                                 </div>
                             </div>
                             <div class="col-6 mb-3">
-                                <input name="staffing" type="text" placeholder="Định biên" class="form-control"
+                                <input name="staffing" type="number" placeholder="Định biên" class="form-control"
                                     data-bs-toggle="tooltip" data-bs-placement="top" title="Định biên">
                             </div>
                             <div class="col-6 mb-3">

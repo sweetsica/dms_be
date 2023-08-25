@@ -471,7 +471,8 @@
                             </div>
                             <form id="addForm" method="POST"
                                 action="{{ route('product.create', ['id' => $product->id]) }}"
-                                enctype="multipart/form-data">
+                                enctype="multipart/form-data"
+                                >
                                 @csrf
                                 <div class="modal-body">
                                     <div class="row mb-3">
@@ -524,7 +525,6 @@
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <div class="d-flex align-items-center">
-
                                                 <input type="text" name="data[0][key3]" data-bs-toggle="tooltip"
                                                     data-bs-placement="top" title="Thông số" placeholder="Thông số"
                                                     class="form-control" value="{{$data->key3}}">
