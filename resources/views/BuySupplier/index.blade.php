@@ -456,7 +456,7 @@
                             </div>
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="table-responsive mb-3" style="min-height: auto">
+                                    <div class="table-responsive mb-3" style="min-height: 150px">
                                         <table id="contact" class="table table-responsive table-hover table-bordered"
                                             style="width: 150%">
                                             <thead>
@@ -1263,7 +1263,6 @@
             let rowData = []
 
             function generateUniqueIDs(specCount) {
-                console.log('specCount', specCount);
                 const uniqueIDs = {
                     selectCodeProduct: `selectCodeProduct_${specCount}`,
                     nameProduct: `nameProduct_${specCount}`,
@@ -1638,7 +1637,6 @@
                                 .querySelector('.selectpicker').id.split('_')[1]
                             );
                             parentRow.remove();
-
                             rowData = rowData.filter(data => data
                                 .selectCodeProduct !==
                                 `selectCodeProduct_${removedSpecCount}`);
@@ -1704,11 +1702,12 @@
     {{-- Xử lý modal sửa --}}
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-
-            let specCount = 0;
-            let rowData = []
-
             const rows = document.querySelectorAll("#specifications_edit tr");
+            let specCount = rows.length;
+
+            const specifications = document.getElementById('specifications_edit');
+
+            const rowData = Array.from(rows);
 
             function updateSelectedValues(selectId, spanId) {
                 const selectedOptions = Array.from(document.querySelectorAll(`#${selectId} option:checked`));
@@ -1717,73 +1716,129 @@
                 spanElement.value = selectedValues.join(", ");
             }
 
-            selectCodeProduct_0.addEventListener("change", function() {
-                const selectedOptions = Array.from(selectCodeProduct_0.selectedOptions);
-                const selectedValues = selectedOptions.map(option => option.value);
-                nameProductSpan_0.value = selectedValues.join(", ");
+            rows.forEach((row, index) => {
+                updateSelectedValues(`selectCodeProductEdit_${index}`, `nameProductEdit_${index}`);
+                const selectCodeProduct_0 = document.querySelector(`#selectCodeProductEdit_${index}`);
+                const nameProductSpan_0 = document.querySelector(`#nameProductEdit_${index}`);
+
+                selectCodeProduct_0.addEventListener("change", function() {
+                    const selectedOptions = Array.from(selectCodeProduct_0.selectedOptions);
+                    const selectedValues = selectedOptions.map(option => option.value);
+                    nameProductSpan_0.value = selectedValues.join(", ");
+                });
+
+                // Xử lý tính thuế ô mặc định
+                const soLuongInput = document.querySelector(`#soLuongEdit_${index}`);
+                const donGiaInput = document.querySelector(`#donGiaEdit_${index}`);
+                const tongGiaInput = document.querySelector(`#tongGiaEdit_${index}`);
+                const tiLeCKInput = document.querySelector(`#tiLeCKEdit_${index}`);
+                const CKInput = document.querySelector(`#CKEdit_${index}`);
+                const tienTruocThueInput = document.querySelector(
+                    `#tienTruocThueEdit_${index}`);
+                const thueSuatInput = document.querySelector(`#thueSuatEdit_${index}`);
+                const tienThueInput = document.querySelector(`#tienThueEdit_${index}`);
+                const tienSauThueInput = document.querySelector(`#tienSauThueEdit_0`);
+                const inputs = specifications.querySelectorAll('input');
+
+                soLuongInput.addEventListener("input", calculateTotal);
+                donGiaInput.addEventListener("input", calculateTotal);
+                tiLeCKInput.addEventListener("input", calculateCK);
+                tongGiaInput.addEventListener("input", calculateCK);
+                CKInput.addEventListener("input", calculateTienTruocThue);
+                tienTruocThueInput.addEventListener("input", calculateTienTruocThue);
+                tienTruocThueInput.addEventListener("input", calculateTienThue);
+                thueSuatInput.addEventListener("input", calculateTienThue);
+                tienThueInput.addEventListener("input", calculateTienSauThue);
+                inputs.forEach(input => input.addEventListener('input', calculateSumEdit));
+
+                function calculateTotal() {
+                    const soLuong = parseFloat(soLuongInput.value);
+                    const donGia = parseFloat(donGiaInput.value);
+                    const tongGia = soLuong * donGia;
+                    if (!isNaN(tongGia)) {
+                        tongGiaInput.value = tongGia;
+                    } else {
+                        tongGiaInput.value = "";
+                    }
+
+                    calculateCK();
+                    calculateTienTruocThue();
+                    calculateTienThue();
+                    calculateTienSauThue();
+                }
+
+                function calculateCK() {
+                    const tongGia = parseFloat(tongGiaInput.value);
+                    const tiLeCK = parseFloat(tiLeCKInput.value);
+                    const chiKhau = (tongGia * (tiLeCK / 100)) || 0;
+
+                    if (!isNaN(chiKhau)) {
+                        CKInput.value = chiKhau;
+                    } else {
+                        CKInput.value = "";
+                    }
+                    calculateTienTruocThue();
+                    calculateTienThue();
+                    calculateTienSauThue();
+                }
+
+                function calculateTienTruocThue() {
+                    const tongGia = parseFloat(tongGiaInput.value);
+                    const chiKhau = parseFloat(CKInput.value);
+                    const tienTruocThue = tongGia - chiKhau;
+                    if (!isNaN(tienTruocThue)) {
+                        tienTruocThueInput.value = tienTruocThue;
+                    } else {
+                        tienTruocThueInput.value = "";
+                    }
+                    calculateTienThue();
+                    calculateTienSauThue();
+                }
+
+                function calculateTienThue() {
+                    const tienTruocThue = parseFloat(tienTruocThueInput.value);
+                    const thueSuat = parseFloat(thueSuatInput.value);
+                    const tienThue = (tienTruocThue * (thueSuat / 100)) || "";
+                    tienThueInput.value = tienThue;
+
+                    calculateTienSauThue();
+                }
+
+                function calculateTienSauThue() {
+                    const tienThue = parseFloat(tienThueInput.value);
+                    const tienSauThue = tienThue + parseFloat(tienTruocThueInput.value);
+                    tienSauThueInput.value = tienSauThue;
+                }
+                calculateSumEdit()
             });
 
 
-            rows.forEach((row, index) => {
+            function calculateSumEdit() {
 
-                updateSelectedValues(`selectCodeProductEdit_${index}`, `nameProductEdit_${index}`);
-
-                // Xử lý tính thuế ô mặc định
-                const soLuongInput = document.querySelector(`#soLuongEdit_0`);
-                const donGiaInput = document.querySelector(`#donGiaEdit_0`);
-                const tongGiaInput = document.querySelector(`#tongGiaEdit_0`);
-                const tiLeCKInput = document.querySelector(`#tiLeCKEdit_0`);
-                const CKInput = document.querySelector(`#CKEdit_0`);
-                const tienTruocThueInput = document.querySelector(
-                    `#tienTruocThueEdit_0`);
-                const thueSuatInput = document.querySelector(`#thueSuatEdit_0`);
-                const tienThueInput = document.querySelector(`#tienThueEdit_0`);
-                const tienSauThueInput = document.querySelector(`#tienSauThueEdit_0`);
-                const selectCodeProduct_0 = document.querySelector("#selectCodeProductEdit_0");
-                const nameProductSpan_0 = document.querySelector("#nameProductEdit_0");
-            })
-
-            const inputs = specifications.querySelectorAll('input');
-
-            soLuongInput.addEventListener("input", calculateTotal);
-            donGiaInput.addEventListener("input", calculateTotal);
-            tiLeCKInput.addEventListener("input", calculateCK);
-            tongGiaInput.addEventListener("input", calculateCK);
-            CKInput.addEventListener("input", calculateTienTruocThue);
-            tienTruocThueInput.addEventListener("input", calculateTienTruocThue);
-            tienTruocThueInput.addEventListener("input", calculateTienThue);
-            thueSuatInput.addEventListener("input", calculateTienThue);
-            tienThueInput.addEventListener("input", calculateTienSauThue);
-            inputs.forEach(input => input.addEventListener('input', calculateSum));
-
-
-            function calculateSum() {
                 let sumTienHang = 0;
                 let sumTienChietKhau = 0;
                 let sumTienTruocThue = 0;
                 let sumTienThue = 0;
                 let sumThanhToan = 0;
 
-                if (rows.length > 0) {
-                    rows.forEach((row, index) => {
-                        const tongGia = parseFloat(row.querySelector(`#tongGiaEdit_${index}`).value) || 0;
-                        const chiKhau = parseFloat(row.querySelector(`#CKEdit_${index}`).value) || 0;
-                        const tienTruocThue = parseFloat(row.querySelector(`#tienTruocThueEdit_${index}`)
-                            .value) || 0;
-                        const tienThue = parseFloat(row.querySelector(`#tienThueEdit_${index}`).value) || 0;
-                        const tienSauThue = parseFloat(row.querySelector(`#tienSauThueEdit_${index}`)
-                                .value) ||
-                            0;
+                rowData.forEach((row, index) => {
 
-                        sumTienHang += tongGia;
-                        sumTienChietKhau += chiKhau;
-                        sumTienTruocThue += tienTruocThue;
-                        sumTienThue += tienThue;
-                        sumThanhToan += tienSauThue;
-                    });
-                } else {
+                    const tongGia = parseFloat(row.querySelector(`#tongGiaEdit_${index}`).value) || 0;
+                    const chiKhau = parseFloat(row.querySelector(`#CKEdit_${index}`).value) || 0;
+                    const tienTruocThue = parseFloat(row.querySelector(`#tienTruocThueEdit_${index}`)
+                        .value) || 0;
+                    const tienThue = parseFloat(row.querySelector(`#tienThueEdit_${index}`).value) || 0;
+                    const tienSauThue = parseFloat(row.querySelector(`#tienSauThueEdit_${index}`)
+                            .value) ||
+                        0;
 
-                }
+
+                    sumTienHang += tongGia;
+                    sumTienChietKhau += chiKhau;
+                    sumTienTruocThue += tienTruocThue;
+                    sumTienThue += tienThue;
+                    sumThanhToan += tienSauThue;
+                });
 
                 document.getElementById("sumTienHangEdit").textContent = sumTienHang;
                 document.getElementById("sumTienChietKhauEdit").textContent = sumTienChietKhau;
@@ -1791,9 +1846,6 @@
                 document.getElementById("sumTienThueEdit").textContent = sumTienThue;
                 document.getElementById("sumThanhToanEdit").textContent = sumThanhToan;
             }
-
-            // Initial calculation
-            calculateSum();
 
             function generateUniqueIDs(specCount) {
                 const uniqueIDs = {
@@ -1912,111 +1964,15 @@
                     tienSauThue: uniqueIDs.tienSauThue,
                     tongGia: uniqueIDs.tongGia
                 };
-                rowData.push(newRowData);
-
                 return newSpecDiv;
             }
 
-
-
-            function calculateTotal() {
-                const soLuong = parseFloat(soLuongInput.value);
-                const donGia = parseFloat(donGiaInput.value);
-                const tongGia = soLuong * donGia;
-                if (!isNaN(tongGia)) {
-                    tongGiaInput.value = tongGia;
-                } else {
-                    tongGiaInput.value = "";
-                }
-
-                calculateCK();
-                calculateTienTruocThue();
-                calculateTienThue();
-                calculateTienSauThue();
-            }
-
-            function calculateCK() {
-                const tongGia = parseFloat(tongGiaInput.value);
-                const tiLeCK = parseFloat(tiLeCKInput.value);
-                const chiKhau = (tongGia * (tiLeCK / 100)) || 0;
-
-                if (!isNaN(chiKhau)) {
-                    CKInput.value = chiKhau;
-                } else {
-                    CKInput.value = "";
-                }
-                calculateTienTruocThue();
-                calculateTienThue();
-                calculateTienSauThue();
-            }
-
-            function calculateTienTruocThue() {
-                const tongGia = parseFloat(tongGiaInput.value);
-                const chiKhau = parseFloat(CKInput.value);
-                const tienTruocThue = tongGia - chiKhau;
-                if (!isNaN(tienTruocThue)) {
-                    tienTruocThueInput.value = tienTruocThue;
-                } else {
-                    tienTruocThueInput.value = "";
-                }
-                calculateTienThue();
-                calculateTienSauThue();
-            }
-
-            function calculateTienThue() {
-                const tienTruocThue = parseFloat(tienTruocThueInput.value);
-                const thueSuat = parseFloat(thueSuatInput.value);
-                const tienThue = (tienTruocThue * (thueSuat / 100)) || "";
-                tienThueInput.value = tienThue;
-
-                calculateTienSauThue();
-            }
-
-            function calculateTienSauThue() {
-                const tienThue = parseFloat(tienThueInput.value);
-                const tienSauThue = tienThue + parseFloat(tienTruocThueInput.value);
-                tienSauThueInput.value = tienSauThue;
-            }
-
-            // function calculateSum() {
-            //     let sumTienHang = 0;
-            //     let sumTienChietKhau = 0;
-            //     let sumTienTruocThue = 0;
-            //     let sumTienThue = 0;
-            //     let sumTienSauThue = 0;
-
-            //     rowData.forEach(data => {
-
-            //         const tongGia = parseFloat(document.querySelector(`#${data.tongGia}`).value) || 0;
-            //         const chiKhau = parseFloat(document.querySelector(`#${data.CK}`).value) || 0;
-            //         const tienTruocThue = parseFloat(document.querySelector(`#${data.tienTruocThue}`)
-            //             .value) || 0;
-            //         const tienThue = parseFloat(document.querySelector(`#${data.tienThue}`).value) || 0;
-            //         const tienSauThue = parseFloat(document.querySelector(`#${data.tienSauThue}`).value) ||
-            //             0;
-
-            //         sumTienHang += tongGia;
-            //         sumTienChietKhau += chiKhau;
-            //         sumTienTruocThue += tienTruocThue;
-            //         sumTienThue += tienThue;
-            //         sumTienSauThue += tienSauThue;
-            //     });
-
-            //     document.getElementById("sumTienHang").textContent = sumTienHang;
-            //     document.getElementById("sumTienChietKhau").textContent = sumTienChietKhau;
-            //     document.getElementById("sumTienTruocThue").textContent = sumTienTruocThue;
-            //     document.getElementById("sumTienThue").textContent = sumTienThue;
-            //     document.getElementById("sumThanhToan").textContent = sumTienSauThue;
-            // }
-
             const addSpecIcons = document.querySelectorAll(".add-spec_edit");
-
             addSpecIcons.forEach(icon => {
                 icon.addEventListener("click", function() {
                     const newSpecDiv = createSpecificationRow();
-
+                    rowData.push(newSpecDiv);
                     document.getElementById("specifications_edit").appendChild(newSpecDiv);
-
                     $('.selectpicker').selectpicker();
 
                     const selectCodeProduct = newSpecDiv.querySelector(
@@ -2025,7 +1981,6 @@
                     const nameProductSpan = newSpecDiv.querySelector(
                         `#nameProductEdit_${specCount}`
                     );
-
 
                     selectCodeProduct.addEventListener("change", function() {
                         const selectedOptions = Array.from(selectCodeProduct
@@ -2120,42 +2075,6 @@
                         tienSauThueInput.value = tienSauThue;
                     }
 
-                    function calculateSum() {
-                        let sumTienHang = 0;
-                        let sumTienChietKhau = 0;
-                        let sumTienTruocThue = 0;
-                        let sumTienThue = 0;
-                        let sumTienSauThue = 0;
-
-                        rowData.forEach(data => {
-
-                            const tongGia = parseFloat(document.querySelector(
-                                `#${data.tongGia}`).value) || 0;
-                            const chiKhau = parseFloat(document.querySelector(`#${data.CK}`)
-                                .value) || 0;
-                            const tienTruocThue = parseFloat(document.querySelector(
-                                    `#${data.tienTruocThue}`)
-                                .value) || 0;
-                            const tienThue = parseFloat(document.querySelector(
-                                `#${data.tienThue}`).value) || 0;
-                            const tienSauThue = parseFloat(document.querySelector(
-                                    `#${data.tienSauThue}`).value) ||
-                                0;
-
-                            sumTienHang += tongGia;
-                            sumTienChietKhau += chiKhau;
-                            sumTienTruocThue += tienTruocThue;
-                            sumTienThue += tienThue;
-                            sumTienSauThue += tienSauThue;
-                        });
-
-                        document.getElementById("sumTienHang").textContent = sumTienHang;
-                        document.getElementById("sumTienChietKhau").textContent = sumTienChietKhau;
-                        document.getElementById("sumTienTruocThue").textContent = sumTienTruocThue;
-                        document.getElementById("sumTienThue").textContent = sumTienThue;
-                        document.getElementById("sumThanhToan").textContent = sumTienSauThue;
-                    }
-
                     const removeSpecIcons = document.querySelectorAll(".remove-spec_edit");
 
                     removeSpecIcons.forEach(removeIcon => {
@@ -2166,31 +2085,38 @@
                             );
                             parentRow.remove();
 
-                            rowData = rowData.filter(data => data
-                                .selectCodeProduct !==
-                                `selectCodeProductEdit_${removedSpecCount}`);
 
-                            calculateSum();
+                            rowData = rowData.filter(data => {
+                                const idData = data.querySelector(
+                                        `td input[id^="nameProductEdit_"]`)
+                                    .id;
+
+                                return idData !==
+                                    `nameProductEdit_${removedSpecCount}`;
+                            });
+
+                            // rowData = rowData.filter(data => data
+                            //     .querySelector(
+                            //         `td input[id^="nameProductEdit_"]`)
+                            //     .id !==
+                            //     `nameProductEdit_${removedSpecCount}`);
+
+                            calculateSumEdit();
                             specCount--;
                         });
                     });
 
                     specCount++;
 
-                    const specifications = document.getElementById('specifications_edit');
-
                     const inputs = specifications.querySelectorAll('input');
 
-                    inputs.forEach(input => input.addEventListener('input', calculateSum));
+                    inputs.forEach(input => input.addEventListener('input', calculateSumEdit));
 
-                    calculateSum();
+                    calculateSumEdit();
                 });
 
             });
 
-
-            // Tính tổng
-            calculateSum();
         });
     </script>
 
