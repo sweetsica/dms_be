@@ -688,14 +688,14 @@
                     <div class="row g-3 mb-3" style="border-bottom:1px solid black; margin-top:20px;"></div>
 
                     <div class="row g-3 mb-3">                        
-                            <div class="col-lg-2">
-                                <div class="card-title-black text_title">Tổng tiền hàng:</div>
-                                <div class="card-title-black text_title">Tổng tiền chiết khấu:</div>
-                                <div class="card-title-black text_title">Tổng tiền trước thuế:</div>
-                                <div class="card-title-black text_title">Tổng tiền thuế:</div>
-                                <div class="card-title-black text_title">Tổng thanh toán:</div>
+                            <div class="col-lg-2 text_title">
+                                <div class="card-title-black">Tổng tiền hàng:</div>
+                                <div class="card-title-black">Tổng tiền chiết khấu:</div>
+                                <div class="card-title-black">Tổng tiền trước thuế:</div>
+                                <div class="card-title-black">Tổng tiền thuế:</div>
+                                <div class="card-title-black">Tổng thanh toán:</div>
                             </div>                        
-                            <div class="col-lg-2" style="text-align: right;">
+                            <div class="col-lg-2 text_body1">
                                 <div class="card-title-black">20.000.000</div>
                                 <div class="card-title-black">20.000.000</div>
                                 <div class="card-title-black">20.000.000</div>
@@ -703,7 +703,7 @@
                                 <div class="card-title-black">20.000.000</div>
                             </div>
                         <div class="col-lg-4"></div>
-                        <div class="col-lg-2">
+                        <div class="col-lg-2 text_title text_title2">
                             <div class="card-title-black">Thanh toán trước:</div>
                             <div class="card-title-black">Số tiền còn lại:</div>
                             <div class="card-title-black">Hạn mức công nợ:</div>
@@ -720,7 +720,7 @@
                     </div>
 
                     <div class="row g-3 mb-3">
-                        <div class="col-lg-4">
+                        <div class="col-lg-4 text_title">
                             <div class="card-title-black">Số tiền bằng chữ:</div>
                         </div> 
                         <div class="col-lg-8">
