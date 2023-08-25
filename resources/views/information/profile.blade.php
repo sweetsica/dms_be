@@ -35,10 +35,10 @@
                         <h5 class="mainSection_heading-title">Hồ sơ người dùng</h5>
                         @include('template.components.sectionCard')
                     </div>
-@foreach ($user as $item)
-@php
-$manager = $item->manage 
-@endphp
+                @foreach ($user as $item)
+                @php
+                $manager = $item->manage 
+                @endphp
                     <div class="information_wrapper bg-white">
                         <div class="row">
                             <div class="col-12 col-md-5 mb-3">
@@ -368,10 +368,12 @@ $manager = $item->manage
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Quản lý trực tiếp">
                                         <select name="manage" class="selectpicker" data-dropup-auto="false" data-live-search="true">
                                             <?php if( $item->manage == null){ ?>
-                                            <option value="">Quản lý
+                                            <option value="0">Quản lý
                                                 trực tiếp</option>
                                             <?php }else{ ?>
-                                            <?php } ?>                                            
+                                            <?php } ?>  
+                                            <option value="0">Quản lý
+                                                trực tiếp</option>                                          
                                             @foreach ($personnellists as $perllists)
                                                 @if ($perllists->id == $manager)
                                                     <option value="{{ $perllists->id }}" selected>{{ $perllists->name }}</option>
