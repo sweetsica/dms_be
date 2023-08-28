@@ -35,14 +35,14 @@
         </li>
 
         <li class="header_menu-item">
-            <a class="header_menu-link menu_btn-sub" href="#">
+            <a class="header_menu-link menu_btn-sub" href="/danh-sach-don-dat-hang">
                 <i class="bi bi-boxes"></i>
                 <span>Đơn hàng</span>
             </a>
             <ul id="header_submenu">
 
                 <li class="header_submenu-items more position-relative">
-                    <a href="#" class="header_submenu-link more_btn">
+                    <a href="/danh-sach-don-dat-hang" class="header_submenu-link more_btn">
                         Đơn đặt hàng</a>
 
                 </li>
@@ -316,7 +316,7 @@
                 </li>
 
                 <li class="header_submenu-items more position-relative">
-                    <a href="#" class="header_submenu-link more_btn">
+                    <a href="/customer" class="header_submenu-link more_btn">
                         Khách hàng<i class="bi bi-chevron-right"></i>
                     </a>
                     <ul class="header_more">
@@ -331,7 +331,7 @@
                     </ul>
                 </li>
                 <li class="header_submenu-items more position-relative">
-                    <a href="#" class="header_submenu-link more_btn">
+                    <a href="/danh-sach-san-pham" class="header_submenu-link more_btn">
                         Hồ sơ sản phẩm<i class="bi bi-chevron-right"></i>
                     </a>
                     <ul class="header_more">
