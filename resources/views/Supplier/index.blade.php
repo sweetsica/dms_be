@@ -381,19 +381,20 @@
                                                                 ])->links() }}
                                                         </ul>
                                                     </nav> --}}
-                                                    <nav aria-label="Page navigation example" class="float-end mt-3" id="target-pagination">
-                                                        <ul class="pagination">
-                                                            @foreach ($pagination['links'] as $link)
-                                                                <li class="page-item {{ $link['active'] ? 'active' : '' }}">
-                                                                    <a class="page-link" href="{{ getPaginationLink($link, 'page') }}"
-                                                                        aria-label="Previous">
-                                                                        <span aria-hidden="true">{!! $link['label'] !!}</span>
-                                                                    </a>
-                                                                </li>
-                                                            @endforeach
-                                                        </ul>
-                                                    </nav>
+                                                    
                                                 </div>
+                                                <nav aria-label="Page navigation example" class="float-end mt-3" id="target-pagination">
+                                                    <ul class="pagination">
+                                                        @foreach ($pagination['links'] as $link)
+                                                            <li class="page-item {{ $link['active'] ? 'active' : '' }}">
+                                                                <a class="page-link" href="{{ getPaginationLink($link, 'page') }}"
+                                                                    aria-label="Previous">
+                                                                    <span aria-hidden="true">{!! $link['label'] !!}</span>
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </nav>
                                             </form>
                                         </div>
                                     </div>
