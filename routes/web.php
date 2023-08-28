@@ -194,7 +194,7 @@ Route::middleware(['auth.role'])->group(function () {
 
     Route::delete('go-nhan-su-khoi-vi-tri', [PersonnelController::class, 'detach'])->name('detach-user-from-position');
 
-    Route::get('vai-tro', [RoleController::class, 'index'])->name('Role.index');
+    Route::get('vai-tro', [RoleController::class, 'index'])->name('Role.index')->middleware('permission');
     Route::post('vai-tro', [RoleController::class, 'store'])->name('Role.store');
     Route::post('vai-trox/{id}', [RoleController::class, 'update'])->name('Rolex.update');
     Route::post('vai-tro/{id}', [RoleController::class, 'destroy'])->name('Role.destroy');
@@ -245,6 +245,7 @@ Route::middleware(['auth.role'])->group(function () {
 
     // Phiếu nhập mua nhà cung cấp
     Route::get('danh-sach-phieu-nhap-mua-nha-cung-cap', [BuySupplierController::class, 'index'])->name('BuySupplier.index');
+
     Route::post('them-khuyen-mai', [PromotionController::class, 'store'])->name('Promotion.store');
     Route::post('sua-khuyen-mai/{id}', [PromotionController::class, 'update'])->name('Promotion.update');
     Route::post('destroy-khuyen-mai/{id}', [PromotionController::class, 'destroy'])->name('Promotion.destroy');

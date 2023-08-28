@@ -241,12 +241,12 @@
                                                                             <span class="badge bg-success">
                                                                                 Đang hợp tác
                                                                             </span>
-                                                                        @break                                                                        
+                                                                        @break
 
                                                                         @default
                                                                             <span></span>
                                                                         @break
-                                                                    @endswitch                                                                        
+                                                                    @endswitch
                                                                     </div>
                                                                 </td>
                                                                 <td>
@@ -341,18 +341,18 @@
                                                                         </div>
                                                                     </td>
                                                                 @endif
-                                                            </tr>                                                            
+                                                            </tr>
                                                         </tbody>
                                                     @endforeach
                                                     </table>
-                                                    {{-- <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                    <nav aria-label="Page navigation example" class="float-end mt-3"
                                                         id="target-pagination">
                                                         <ul class="pagination">
-                                                            {{ $departmentList->appends([
+                                                            {{ $supplierList->appends([
                                                                     'search' => $search,
                                                                 ])->links() }}
                                                         </ul>
-                                                    </nav> --}}
+                                                    </nav>
                                                 </div>
                                             </form>
                                         </div>
@@ -665,7 +665,7 @@
                         </div>
                         <div class="col-lg-4">
                             <input name="name" required type="text" placeholder="Mã số thuế" class="form-control"
-                                data-bs-toggle="tooltip" data-bs-placement="bottom" 
+                                data-bs-toggle="tooltip" data-bs-placement="bottom"
                                 title="Mã số thuế"  value="{{ $item->tax_code }}" disabled>
                         </div>
                         <div class="col-lg-4">
@@ -675,7 +675,7 @@
                         </div>
                         <div class="col-lg-4">
                             <input name="name" required type="text" placeholder="Chức danh" class="form-control"
-                                data-bs-toggle="tooltip" data-bs-placement="bottom" 
+                                data-bs-toggle="tooltip" data-bs-placement="bottom"
                                 title="Chức danh" value="{{ $item->job_title }}" disabled>
                         </div>
                         <div class="col-lg-4">
@@ -739,12 +739,12 @@
                         <div class="col-lg-4">
                             <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Trạng thái">
                                 <select name="" class="selectpicker" disabled>
-                                    @if ($item->status == 1)                                    
+                                    @if ($item->status == 1)
                                     <option value="1" selected>Đang hợp tác
                                     </option>
                                     <option value="0">Ngừng hợp tác
                                     </option>
-                                    @else                                    
+                                    @else
                                     <option value="1">Đang hợp tác
                                     </option>
                                     <option value="0" selected>Ngừng hợp tác

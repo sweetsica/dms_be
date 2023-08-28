@@ -6,6 +6,7 @@ use App\Models\Area;
 use App\Models\Department;
 use App\Models\UnitLeader;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AreaController extends Controller
 {
@@ -31,7 +32,7 @@ class AreaController extends Controller
         if($vung != NULL) {
             $query->where("department.name", "like", "%$vung%");
         }
-        $areaList =$query->paginate(10);
+        $areaList =$query->orderBy('area.id', 'desc')->paginate(10);
         $department = Department::where('code', 'like', 'VUNG%')->get();
         $areaTree =  Department::with('khuVucs.diaBans.tuyens')->where('code', 'like', 'VUNG%')->get();
         // dd()
@@ -78,7 +79,9 @@ class AreaController extends Controller
     public function destroy($id)
     {
         Area::destroy($id);
-        return redirect()->back()->with('mess', 'Đã xóa!');;
+        Session::flash('success', 'Xoá thành công');
+        return redirect()->route('area.index');
+        // return redirect()->back()->with('mess', 'Đã xóa!');
     }
 
     public function delete(Request $request)

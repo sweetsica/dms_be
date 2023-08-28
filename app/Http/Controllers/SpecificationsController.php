@@ -23,7 +23,7 @@ class SpecificationsController extends Controller
         )
         ->where("specifications.code", "like", "%$search%")
         ->orWhere("specifications.name", "like", "%$search%")
-        ->paginate(10);
+        ->orderBy('specifications.id', 'desc')->paginate(10);
         $TechnicalSpecificationsGroupList = TechnicalSpecificationsGroup::all();
         return view('thong_so_ky_thuat.index', [
             'search' => $search,

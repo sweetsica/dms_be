@@ -39,7 +39,7 @@ class SupplierController extends Controller
         }
         if($search != NULL) {
             $query->orWhere("suppliers.code", "like", "%$search%");
-        }        
+        }
 
         $supplierList =$query->paginate(15);
         // dd($supplierList);
@@ -48,8 +48,8 @@ class SupplierController extends Controller
         return view("Supplier.index",[
             'supplierList'=>$supplierList,
             'search' => $search,
-        ]);      
-       
+        ]);
+
     }
 
     public function store(Request $request)

@@ -705,30 +705,18 @@
                                 title="Nhóm khách hàng">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Nhóm khách hàng*" data-select-all-text="Chọn tất cả"
-                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="groupId" id="groupId"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="group" id="groupId"
                                     data-live-search-placeholder="Tìm kiếm...">
                                     @foreach ($listgroup as $item )
                                         <option value="{{$item->id}}">{{$item->name}}</option>
                                     @endforeach
-                                    {{-- <option value="Nhà thuốc">Nhà thuốc</option>
-                                    <option value="Phòng khám/Trung tâm tế">Phòng khám/Trung tâm tế</option>
-                                    <option value="Bệnh viện">Bệnh viện</option>
-                                    <option value="Nhà phân phối">Nhà phân phối</option>
-                                    <option value="Online">Online</option>
-                                    <option value="Khách sạn">Khách sạn</option>
-                                    <option value="Nhà thuốc S">Nhà thuốc S</option>
-                                    <option value="Siêu thị/Cửa hàng bán lẻ">Siêu thị/Cửa hàng bán lẻ</option>
-                                    <option value="Chuỗi nhà thuốc">Chuỗi nhà thuốc</option>
-                                    <option value="Đại siêu thị">Đại siêu thị</option>
-                                    <option value="Làm đẹp/Phòng tập thể dục/Thể thao">Làm đẹp/Phòng tập thể dục/Thể thao
-                                    </option> --}}
                                 </select>
                                 <div class="error-text" id="groupError" style="color: red;"></div>
                             </div>
 
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Tuyến">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                    data-live-search="true" title="Tuyến*" data-select-all-text="Chọn tất cả"name
+                                    data-live-search="true" title="Tuyến*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="routeId" id="routeId"
                                     data-live-search-placeholder="Tìm kiếm...">
                                 </select>

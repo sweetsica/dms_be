@@ -53,7 +53,7 @@ class ProductController extends Controller
     {
         try {
             $q = $request->query('q');
-            $limit = 10;
+            $limit = 1;
             $listProduct = Product::query();
             if ($q) {
                 $pattern = '/^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)\s+.*/';
@@ -137,10 +137,17 @@ class ProductController extends Controller
             }
         }
 
+        if ($request->description == null) {
+            $details->description = '';
+        }
+
         if ($request->description) {
             $details->description = $request->description;
         }
 
+        if ($request->price == null) {
+            $details->price = 0;
+        }
         if ($request->price) {
             $details->price = $request->price;
         }

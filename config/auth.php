@@ -38,7 +38,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'personnel',
         ],
     ],
 
@@ -59,11 +59,20 @@ return [
     |
     */
 
-    'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Personnel::class,
-        ],
+    // 'providers' => [
+    //     'users' => [
+    //         'driver' => 'eloquent',
+    //         'model' => App\Models\Personnel::class,
+    //     ],
+        'providers' => [
+            'personnel' => [
+                'driver' => 'database',
+                'table' => 'personnel',
+                'model' => App\Models\Personnel::class,
+                'email' => 'email', // Tên cột email trong bảng personnel
+                'password' => 'password',
+                'role_id' => 'role_id',
+            ],
 
         // 'users' => [
         //     'driver' => 'database',
