@@ -33,9 +33,11 @@
                                 <div class="d-flex align-items-center justify-content-between my-3">
                                     <h1 class="text-color_pimary fs-3">{{ $customer->companyName ?? $customer->name }}</h1>
                                     <div>
-                                        <button class="btn btn-outline-danger btn-back"><a
-                                                href="{{ route('customers') }}">Về danh
-                                                sách</a></button>
+
+                                        <a href="{{ route('customers') }}">
+                                            <button class="btn btn-outline-danger btn-back">Về danh sách
+                                            </button>
+                                        </a>
                                         <button class="btn btn-success" data-bs-toggle="modal"
                                             data-bs-target="#suachitiet">Sửa thông tin</button>
                                         <button class="btn btn-danger">Tạo đơn hàng</button>
@@ -51,27 +53,26 @@
                                                     <div>
                                                         {{-- <img class="img-slider"
                                                             src="{{ asset('assets/img/avatardefault.jpg') }}" /> --}}
-                                                            <img class="img-slider"
-                                                            src="{{ asset($customer->image) }}" />
+                                                        <img class="img-slider" src="{{ asset($customer->image) }}" />
                                                     </div>
                                                     <!-- <div>
-                                                                                                                                                                                                                                                                                                                                                                                            <img class="img-slider" src="{{ asset('assets/img/oto-2.png') }}" />
-                                                                                                                                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                                                                                                                                        <div>
-                                                                                                                                                                                                                                                                                                                                                                                            <img class="img-slider" src="{{ asset('assets/img/oto-3.png') }}" />
-                                                                                                                                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                                                                                                                                        <div>
-                                                                                                                                                                                                                                                                                                                                                                                            <img class="img-slider" src="{{ asset('assets/img/oto-4.png') }}" />
-                                                                                                                                                                                                                                                                                                                                                                                        </div> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                            <img class="img-slider" src="{{ asset('assets/img/oto-2.png') }}" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                        <div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                            <img class="img-slider" src="{{ asset('assets/img/oto-3.png') }}" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                        <div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                            <img class="img-slider" src="{{ asset('assets/img/oto-4.png') }}" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                        </div> -->
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-12">
                                                 <div class="slider slider-nav">
                                                     <!-- <div>
-                                                                                                                                                                                                                                                                                                                                                                                            <img src="{{ asset('assets/img/avatardefault.jpg') }}"
-                                                                                                                                                                                                                                                                                                                                                                                                class="img-slider_nav" />
-                                                                                                                                                                                                                                                                                                                                                                                        </div> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                            <img src="{{ asset('assets/img/avatardefault.jpg') }}"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                class="img-slider_nav" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                        </div> -->
                                                 </div>
                                             </div>
 
@@ -157,7 +158,7 @@
                                             <div class="mt-4">
                                                 <div class="input-group align-items-center">
                                                     <!-- <input type="file" class="form-control" id="attachment"
-                                                                                                                                                                                                                                                                                                                                                                                            name="attachment" style="display: none"> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                            name="attachment" style="display: none"> -->
                                                     <i class="bi bi-link-45deg text-color_pimary fs-3 fw-bold"></i>
                                                     <label class="input-label text-color_pimary fs-4 fw-bold ms-2"
                                                         for="attachment" style="cursor: pointer">File đính kèm</label>
@@ -323,23 +324,28 @@
                                                                                 style="">Chức danh</th>
                                                                         </tr>
                                                                     </thead>
-                                                                    <@php
-                                                                        $a=1;
+                                                                    @php
+                                                                        $a = 1;
                                                                     @endphp
                                                                     <tbody>
                                                                         @if (!empty($customer->contact))
                                                                             @foreach ($combinedData as $data)
-                                                                            <tr>
-                                                                            <td class="text-nowrap text-center"
-                                                                            style="">{{ $a++}}</td>
-                                                                            <td class="text-nowrap text-center"
-                                                                            style="">{{ $data->key1}}</td>
-                                                                            <td class="text-nowrap text-center"
-                                                                            style="">{{ $data->key2}}</td>
-                                                                            <td class="text-nowrap text-center"
-                                                                            style="">{{ $data->key3}}</td>
-                                                                            <td class="text-nowrap text-center"
-                                                                            style="">{{ $data->key4}}</td>
+                                                                                <tr>
+                                                                                    <td class="text-nowrap text-center"
+                                                                                        style="">{{ $a++ }}
+                                                                                    </td>
+                                                                                    <td class="text-nowrap text-center"
+                                                                                        style="">{{ $data->key1 }}
+                                                                                    </td>
+                                                                                    <td class="text-nowrap text-center"
+                                                                                        style="">{{ $data->key2 }}
+                                                                                    </td>
+                                                                                    <td class="text-nowrap text-center"
+                                                                                        style="">{{ $data->key3 }}
+                                                                                    </td>
+                                                                                    <td class="text-nowrap text-center"
+                                                                                        style="">{{ $data->key4 }}
+                                                                                    </td>
                                                                             @endforeach
                                                                             </tr>
                                                                         @endif
@@ -542,8 +548,9 @@
                 <div class="modal-header text-center">
                     <h5 class="modal-title w-100" id="exampleModalLabel">Sửa chi tiết khách hàng</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>Chức danh
-                <form id="formThemCapPhatChitiet" method="POST" action="{{ route('update.customer',$customer->id) }}" enctype="multipart/form-data">
+                </div>
+                <form id="formThemCapPhatChitiet" method="POST" action="{{ route('update.customer', $customer->id) }}"
+                    enctype="multipart/form-data">
                     @csrf
                     {{-- <input name="name" style="display: none;" id="name">
                     <input name="personContact" style="display: none;" id="personContact">
@@ -555,8 +562,9 @@
                                 <div class="card-title">1. Tổ chức</div>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <input type="text" name="taxCode" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Mã số thuế" placeholder="Mã số thuế" class="form-control" value="{{ $customer->taxCode ?? '' }}">
+                                <input type="text" name="taxCode" placeholder="Mã số thuế" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Mã số thuế"
+                                    value="{{ $customer->taxCode ?? '' }}">
                             </div>
                             <div class="col-md-4 mb-3">
                                 <input type="text" name="personCompany" data-bs-toggle="tooltip"
@@ -565,13 +573,15 @@
                             </div>
                             <div class="col-md-4 mb-3">
                                 <input type="text" name="career" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Chức danh" placeholder="Chức danh" class="form-control" value="{{ $customer->career ?? '' }}">
+                                    title="Chức danh" placeholder="Chức danh" class="form-control"
+                                    value="{{ $customer->career ?? '' }}">
                             </div>
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Lĩnh vực kinh doanh">
                                 <select class="selectpicker" name="business_areas">
-                                    <option value="{{ $customer->business_areas ?? '' }}"> {{ $customer->business_areas ?? '' }}</option>
-                                    <option value="" >Lĩnh vực kinh doanh</option>
+                                    <option value="{{ $customer->business_areas ?? '' }}">
+                                        {{ $customer->business_areas ?? '' }}</option>
+                                    <option value="">Lĩnh vực kinh doanh</option>
                                     <option value="Kim khí">Kim khí</option>
                                     <option value="Điện máy">Điện máy</option>
                                     <option value="Xe điện">Xe điện</option>
@@ -584,7 +594,8 @@
                             <div class="col-md-4 mb-3">
                                 <input type="text" name="companyPhoneNumber" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Số điện thoại công ty"
-                                    placeholder="Số điện thoại công ty" class="form-control" value="{{ $customer->companyPhoneNumber ?? '' }}">
+                                    placeholder="Số điện thoại công ty" class="form-control"
+                                    value="{{ $customer->companyPhoneNumber ?? '' }}">
                             </div>
                             <div class="col-md-4 mb-3">
                                 <input type="text" name="companyEmail" data-bs-toggle="tooltip"
@@ -598,7 +609,8 @@
                             </div>
                             <div class="col-md-8 mb-3">
                                 <input type="text" name="bankOpen" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Mở tại ngân hàng" placeholder="Mở tại ngân hàng" class="form-control" value="{{ $customer->bankOpen ?? '' }}">
+                                    title="Mở tại ngân hàng" placeholder="Mở tại ngân hàng" class="form-control"
+                                    value="{{ $customer->bankOpen ?? '' }}">
                             </div>
 
                             <div class="col-md-12 mb-3">
@@ -624,22 +636,22 @@
                                         </thead>
                                         <tbody>
                                             @if (!empty($customer->contact))
-                                                        @foreach ($combinedData as $data)
-                                                        <tr>
-                                                        <td class="text-nowrap text-center"
-                                                            style="">{{ $a++}}</td>
-                                                        <td class="text-nowrap text-center"
-                                                             style="">{{ $data->key1}}</td>
-                                                        <td class="text-nowrap text-center"
-                                                            style="">{{ $data->key2}}</td>
-                                                        <td class="text-nowrap text-center"
-                                                            style="">{{ $data->key3}}</td>
-                                                        <td class="text-nowrap text-center"
-                                                            style="">{{ $data->key4}}</td>
-                                                            <td></td>
-                                                        @endforeach
-                                                    </tr>
-                                                @endif
+                                                @foreach ($combinedData as $data)
+                                                    <tr>
+                                                        <td class="text-nowrap text-center" style="">
+                                                            {{ $a++ }}</td>
+                                                        <td class="text-nowrap text-center" style="">
+                                                            {{ $data->key1 }}</td>
+                                                        <td class="text-nowrap text-center" style="">
+                                                            {{ $data->key2 }}</td>
+                                                        <td class="text-nowrap text-center" style="">
+                                                            {{ $data->key3 }}</td>
+                                                        <td class="text-nowrap text-center" style="">
+                                                            {{ $data->key4 }}</td>
+                                                        <td></td>
+                                                @endforeach
+                                                </tr>
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>
@@ -651,7 +663,7 @@
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Tỉnh/thành">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                    data-live-search="true"  data-select-all-text="Chọn tất cả"
+                                    data-live-search="true" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="city" id="city"
                                     data-live-search-placeholder="Tìm kiếm...">
                                     <option value="{{ $customer->city ?? '' }}">{{ $customer->city ?? '' }}</option>
@@ -660,10 +672,11 @@
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Quận/huyện">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                    data-live-search="true"  data-select-all-text="Chọn tất cả"
+                                    data-live-search="true" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="district" id="district"
                                     data-live-search-placeholder="Tìm kiếm...">
-                                    <option value="{{ $customer->district ?? '' }}">{{ $customer->district ?? '' }}</option>
+                                    <option value="{{ $customer->district ?? '' }}">{{ $customer->district ?? '' }}
+                                    </option>
                                 </select>
                             </div>
                             <div class="col-md-4 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
@@ -677,7 +690,8 @@
                             </div>
                             <div class="col-md-12 mb-3">
                                 <input type="text" id="addressInput" name="address" data-bs-toggle="tooltip"
-                                    data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ*" class="form-control" value="{{ $customer->address ?? '' }}">
+                                    data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ*" class="form-control"
+                                    value="{{ $customer->address ?? '' }}">
                             </div>
                             <div class="col-md-12 mb-3">
                                 <div id="map"
@@ -714,13 +728,12 @@
                                     data-live-search-placeholder="Tìm kiếm..." multiple>
                                     <option value="{{ $productList }}">{{ $productList }}</option>
                                 </select> --}}
-                                <select class="selectpicker"
-                                data-dropup-auto="false" data-width="100%"  data-live-search="true"
-                                data-select-all-text="Chọn tất cả"
-                                data-deselect-all-text="Bỏ chọn" data-size="3"  name="productId[]" id="productId"
-                                data-live-search-placeholder="Tìm kiếm...">
-                                <option value="{{ $productList }}">{{ $productList }}</option>
-                            </select>
+                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
+                                    data-live-search="true" data-select-all-text="Chọn tất cả"
+                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="productId[]" id="productId"
+                                    data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="{{ $productList }}">{{ $productList }}</option>
+                                </select>
                             </div>
 
 
@@ -735,8 +748,8 @@
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="groupId" id="groupId"
                                     data-live-search-placeholder="Tìm kiếm...">
                                     <option value="{{ $customer->group ?? '' }}"> {{ $customer->group ?? '' }} </option>
-                                    @foreach ($listgroup as $item )
-                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                    @foreach ($listgroup as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -775,8 +788,7 @@
 
                             <div class="col-12 col-md-12">
                                 <div class="upload_wrapper-items">
-                                    <div class="alert alert-danger alertNotSupport" role="alert"
-                                        style="display:none">
+                                    <div class="alert alert-danger alertNotSupport" role="alert" style="display:none">
                                         File bạn tải lên hiện tại không hỗ trợ !
                                     </div>
                                     <div class="modal_upload-wrapper">
@@ -796,10 +808,9 @@
                                                     <img src="{{ asset('assets/img/upload-file.svg') }}" />
                                                     <span class="ps-2">Đính kèm ảnh sản phẩm</span>
                                                 </label>
-                                                <input accept="image/jpeg,image/png"
-                                                    role="button" type="file"
-                                                    class="modal_upload-input modal_upload-file"
-                                                    name="image" onchange="updateList(event)" />
+                                                <input accept="image/jpeg,image/png" role="button" type="file"
+                                                    class="modal_upload-input modal_upload-file" name="image"
+                                                    onchange="updateList(event)" />
                                             </div>
                                         </div>
 
@@ -1078,289 +1089,289 @@
         });
     </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-<script>
-    //load data tỉnh thành từ https://provinces.open-api.vn/api/
-    const host = "https://provinces.open-api.vn/api/";
-    var callAPI = (api) => {
-        return axios.get(api)
-            .then((response) => {
-                renderData(response.data, "city");
-            });
-    }
-    callAPI('https://provinces.open-api.vn/api/?depth=1');
-    var callApiDistrict = (api) => {
-        return axios.get(api)
-            .then((response) => {
-                renderData(response.data.districts, "district");
-                // $('#district').selectpicker('destroy');
-            });
-    }
-    var callApiWard = (api) => {
-        return axios.get(api)
-            .then((response) => {
-                renderData(response.data.wards, "guide");
-                // $('#guide').selectpicker('destroy');
-            });
-    }
-
-    var renderData = (array, select) => {
-        $('#' + select).selectpicker('destroy');
-        let row = '<option disable value="">Chọn</option>';
-        array.forEach(element => {
-            row += `<option data-id="${element.code}" value="${element.name}">${element.name}</option>`
-        });
-        document.querySelector("#" + select).innerHTML = row;
-        $('#' + select).selectpicker();
-    }
-
-    $("#city").change(() => {
-        callApiDistrict(host + "p/" + $("#city").find(':selected').data('id') + "?depth=2");
-    });
-    $("#district").change(() => {
-        callApiWard(host + "d/" + $("#district").find(':selected').data('id') + "?depth=2");
-    });
-    $("#guide").change(() => {})
-
-
-    //sua dia chi cho edit
-    var callAPI_edit = (api) => {
-        return axios.get(api)
-            .then((response) => {
-                renderData_edit(response.data, "city_edit");
-            });
-    }
-    callAPI_edit('https://provinces.open-api.vn/api/?depth=1');
-    var callApiDistrict_edit = (api) => {
-        return axios.get(api)
-            .then((response) => {
-                renderData_edit(response.data.districts, "district_edit");
-            });
-    }
-    var callApiWard_edit = (api) => {
-        return axios.get(api)
-            .then((response) => {
-                renderData_edit(response.data.wards, "guide_edit");
-            });
-    }
-
-    var renderData_edit = (array, select) => {
-        $('#' + select).selectpicker('destroy');
-        let row = '<option disable value="">Chọn</option>';
-        array.forEach(element => {
-            row += `<option data-id="${element.code}" value="${element.name}">${element.name}</option>`
-        });
-        document.querySelector("#" + select).innerHTML = row;
-        $('#' + select).selectpicker();
-    }
-
-    $("#city_edit").change(() => {
-        callApiDistrict_edit(host + "p/" + $("#city_edit").find(':selected').data('id') + "?depth=2");
-    });
-    $("#district_edit").change(() => {
-        callApiWard_edit(host + "d/" + $("#district_edit").find(':selected').data('id') + "?depth=2");
-    });
-    $("#guide_edit").change(() => {})
-
-
-
-    //load data nhan su api
-    function loadPersonnelData() {
-        const apiUrl = '/nhan_su';
-        const selectElement = document.getElementById('personId');
-        fetch(apiUrl)
-            .then((response) => response.json())
-            .then((data) => {
-                selectElement.innerHTML = '';
-                data.forEach((person) => {
-                    const option = document.createElement('option');
-                    option.value = person.id;
-                    option.textContent = person.name;
-                    selectElement.appendChild(option);
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script>
+        //load data tỉnh thành từ https://provinces.open-api.vn/api/
+        const host = "https://provinces.open-api.vn/api/";
+        var callAPI = (api) => {
+            return axios.get(api)
+                .then((response) => {
+                    renderData(response.data, "city");
                 });
-
-                $('#personId').selectpicker('refresh');
-            })
-            .catch((error) => console.error('Lỗi khi gọi API:', error));
-    }
-    window.addEventListener('load', loadPersonnelData);
-
-    //load data san pham api
-    function loadProductData() {
-        const apiUrl = '/danh_sach_san_pham_cho_select';
-        const selectElement = document.getElementById('productId');
-        fetch(apiUrl)
-            .then((response) => response.json())
-            .then((data) => {
-                selectElement.innerHTML = '';
-                data.forEach((product) => {
-                    const option = document.createElement('option');
-                    option.value = product.id;
-                    option.textContent = product.name;
-                    selectElement.appendChild(option);
-                });
-
-                $('#productId').selectpicker('refresh');
-            })
-            .catch((error) => console.error('Lỗi khi gọi API:', error));
-    }
-    window.addEventListener('load', loadProductData);
-
-    //load data kenh api
-    function loadChanelData() {
-        const apiUrl = '/department_getAll';
-        const selectElement = document.getElementById('chanelId');
-        fetch(apiUrl)
-            .then((response) => response.json())
-            .then((data) => {
-                selectElement.innerHTML = '';
-                data.forEach((chanel) => {
-                    const option = document.createElement('option');
-                    option.value = chanel.id;
-                    option.textContent = chanel.name;
-                    selectElement.appendChild(option);
-                });
-
-                $('#chanelId').selectpicker('refresh');
-            })
-            .catch((error) => console.error('Lỗi khi gọi API:', error));
-    }
-    window.addEventListener('load', loadChanelData);
-
-    //load data tuyen api
-    function loadRouteData() {
-        const apiUrl = '/route_direction_getAll';
-        const selectElement = document.getElementById('routeId');
-        fetch(apiUrl)
-            .then((response) => response.json())
-            .then((data) => {
-                selectElement.innerHTML = '';
-                data.forEach((route) => {
-                    const option = document.createElement('option');
-                    option.value = route.id;
-                    option.textContent = route.name;
-                    selectElement.appendChild(option);
-                });
-
-                $('#routeId').selectpicker('refresh');
-            })
-            .catch((error) => console.error('Lỗi khi gọi API:', error));
-    }
-    window.addEventListener('load', loadRouteData);
-
-    var isAdvancedUpload = function() {
-        var div = document.createElement('div');
-        return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window &&
-            'FileReader' in window;
-    }();
-
-    let draggableFileArea = document.querySelector(".drag-file-area");
-    let browseFileText = document.querySelector(".browse-files");
-    let uploadIcon = document.querySelector(".upload-icon");
-    let dragDropText = document.querySelector(".dynamic-message");
-    let fileInput = document.querySelector(".default-file-input");
-    let cannotUploadMessage = document.querySelector(".cannot-upload-message");
-    let cancelAlertButton = document.querySelector(".cancel-alert-button");
-    let uploadedFile = document.querySelector(".file-block");
-    let fileName = document.querySelector(".file-name");
-    let fileSize = document.querySelector(".file-size");
-    let progressBar = document.querySelector(".progress-bar");
-    let removeFileButton = document.querySelector(".remove-file-icon");
-    let uploadButton = document.querySelector(".upload-button");
-    let fileFlag = 0;
-
-    fileInput.addEventListener("click", () => {
-        fileInput.value = '';
-        console.log(fileInput.value);
-    });
-
-    fileInput.addEventListener("change", e => {
-        console.log(" > " + fileInput.value)
-        uploadIcon.innerHTML = 'Tải file lên';
-        dragDropText.innerHTML = 'File Dropped Successfully!';
-        document.querySelector(".label").innerHTML =
-            `<input type="file" class="default-file-input" style=""/>`;
-        uploadButton.innerHTML = `Upload`;
-        fileName.innerHTML = fileInput.files[0].name;
-        fileSize.innerHTML = (fileInput.files[0].size / 1024).toFixed(1) + " KB";
-        uploadedFile.style.cssText = "display: flex;";
-        progressBar.style.width = 0;
-        fileFlag = 0;
-    });
-
-    uploadButton.addEventListener("click", () => {
-        let isFileUploaded = fileInput.value;
-        if (isFileUploaded != '') {
-            if (fileFlag == 0) {
-                fileFlag = 1;
-                var width = 0;
-                var id = setInterval(frame, 50);
-
-                function frame() {
-                    if (width >= 390) {
-                        clearInterval(id);
-                        uploadButton.innerHTML =
-                            `<span class="material-icons-outlined upload-button-icon"> check_circle </span> Uploaded`;
-                    } else {
-                        width += 5;
-                        progressBar.style.width = width + "px";
-                    }
-                }
-            }
-        } else {
-            cannotUploadMessage.style.cssText = "display: flex; animation: fadeIn linear 1.5s;";
         }
-    });
+        callAPI('https://provinces.open-api.vn/api/?depth=1');
+        var callApiDistrict = (api) => {
+            return axios.get(api)
+                .then((response) => {
+                    renderData(response.data.districts, "district");
+                    // $('#district').selectpicker('destroy');
+                });
+        }
+        var callApiWard = (api) => {
+            return axios.get(api)
+                .then((response) => {
+                    renderData(response.data.wards, "guide");
+                    // $('#guide').selectpicker('destroy');
+                });
+        }
 
-    cancelAlertButton.addEventListener("click", () => {
-        cannotUploadMessage.style.cssText = "display: none;";
-    });
-
-    if (isAdvancedUpload) {
-        ["drag", "dragstart", "dragend", "dragover", "dragenter", "dragleave", "drop"].forEach(evt =>
-            draggableFileArea.addEventListener(evt, e => {
-                e.preventDefault();
-                e.stopPropagation();
-            })
-        );
-
-        ["dragover", "dragenter"].forEach(evt => {
-            draggableFileArea.addEventListener(evt, e => {
-                e.preventDefault();
-                e.stopPropagation();
-                uploadIcon.innerHTML = 'file_download';
-                dragDropText.innerHTML = 'Drop your file here!';
+        var renderData = (array, select) => {
+            $('#' + select).selectpicker('destroy');
+            let row = '<option disable value="">Chọn</option>';
+            array.forEach(element => {
+                row += `<option data-id="${element.code}" value="${element.name}">${element.name}</option>`
             });
+            document.querySelector("#" + select).innerHTML = row;
+            $('#' + select).selectpicker();
+        }
+
+        $("#city").change(() => {
+            callApiDistrict(host + "p/" + $("#city").find(':selected').data('id') + "?depth=2");
+        });
+        $("#district").change(() => {
+            callApiWard(host + "d/" + $("#district").find(':selected').data('id') + "?depth=2");
+        });
+        $("#guide").change(() => {})
+
+
+        //sua dia chi cho edit
+        var callAPI_edit = (api) => {
+            return axios.get(api)
+                .then((response) => {
+                    renderData_edit(response.data, "city_edit");
+                });
+        }
+        callAPI_edit('https://provinces.open-api.vn/api/?depth=1');
+        var callApiDistrict_edit = (api) => {
+            return axios.get(api)
+                .then((response) => {
+                    renderData_edit(response.data.districts, "district_edit");
+                });
+        }
+        var callApiWard_edit = (api) => {
+            return axios.get(api)
+                .then((response) => {
+                    renderData_edit(response.data.wards, "guide_edit");
+                });
+        }
+
+        var renderData_edit = (array, select) => {
+            $('#' + select).selectpicker('destroy');
+            let row = '<option disable value="">Chọn</option>';
+            array.forEach(element => {
+                row += `<option data-id="${element.code}" value="${element.name}">${element.name}</option>`
+            });
+            document.querySelector("#" + select).innerHTML = row;
+            $('#' + select).selectpicker();
+        }
+
+        $("#city_edit").change(() => {
+            callApiDistrict_edit(host + "p/" + $("#city_edit").find(':selected').data('id') + "?depth=2");
+        });
+        $("#district_edit").change(() => {
+            callApiWard_edit(host + "d/" + $("#district_edit").find(':selected').data('id') + "?depth=2");
+        });
+        $("#guide_edit").change(() => {})
+
+
+
+        //load data nhan su api
+        function loadPersonnelData() {
+            const apiUrl = '/nhan_su';
+            const selectElement = document.getElementById('personId');
+            fetch(apiUrl)
+                .then((response) => response.json())
+                .then((data) => {
+                    selectElement.innerHTML = '';
+                    data.forEach((person) => {
+                        const option = document.createElement('option');
+                        option.value = person.id;
+                        option.textContent = person.name;
+                        selectElement.appendChild(option);
+                    });
+
+                    $('#personId').selectpicker('refresh');
+                })
+                .catch((error) => console.error('Lỗi khi gọi API:', error));
+        }
+        window.addEventListener('load', loadPersonnelData);
+
+        //load data san pham api
+        function loadProductData() {
+            const apiUrl = '/danh_sach_san_pham_cho_select';
+            const selectElement = document.getElementById('productId');
+            fetch(apiUrl)
+                .then((response) => response.json())
+                .then((data) => {
+                    selectElement.innerHTML = '';
+                    data.forEach((product) => {
+                        const option = document.createElement('option');
+                        option.value = product.id;
+                        option.textContent = product.name;
+                        selectElement.appendChild(option);
+                    });
+
+                    $('#productId').selectpicker('refresh');
+                })
+                .catch((error) => console.error('Lỗi khi gọi API:', error));
+        }
+        window.addEventListener('load', loadProductData);
+
+        //load data kenh api
+        function loadChanelData() {
+            const apiUrl = '/department_getAll';
+            const selectElement = document.getElementById('chanelId');
+            fetch(apiUrl)
+                .then((response) => response.json())
+                .then((data) => {
+                    selectElement.innerHTML = '';
+                    data.forEach((chanel) => {
+                        const option = document.createElement('option');
+                        option.value = chanel.id;
+                        option.textContent = chanel.name;
+                        selectElement.appendChild(option);
+                    });
+
+                    $('#chanelId').selectpicker('refresh');
+                })
+                .catch((error) => console.error('Lỗi khi gọi API:', error));
+        }
+        window.addEventListener('load', loadChanelData);
+
+        //load data tuyen api
+        function loadRouteData() {
+            const apiUrl = '/route_direction_getAll';
+            const selectElement = document.getElementById('routeId');
+            fetch(apiUrl)
+                .then((response) => response.json())
+                .then((data) => {
+                    selectElement.innerHTML = '';
+                    data.forEach((route) => {
+                        const option = document.createElement('option');
+                        option.value = route.id;
+                        option.textContent = route.name;
+                        selectElement.appendChild(option);
+                    });
+
+                    $('#routeId').selectpicker('refresh');
+                })
+                .catch((error) => console.error('Lỗi khi gọi API:', error));
+        }
+        window.addEventListener('load', loadRouteData);
+
+        var isAdvancedUpload = function() {
+            var div = document.createElement('div');
+            return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window &&
+                'FileReader' in window;
+        }();
+
+        let draggableFileArea = document.querySelector(".drag-file-area");
+        let browseFileText = document.querySelector(".browse-files");
+        let uploadIcon = document.querySelector(".upload-icon");
+        let dragDropText = document.querySelector(".dynamic-message");
+        let fileInput = document.querySelector(".default-file-input");
+        let cannotUploadMessage = document.querySelector(".cannot-upload-message");
+        let cancelAlertButton = document.querySelector(".cancel-alert-button");
+        let uploadedFile = document.querySelector(".file-block");
+        let fileName = document.querySelector(".file-name");
+        let fileSize = document.querySelector(".file-size");
+        let progressBar = document.querySelector(".progress-bar");
+        let removeFileButton = document.querySelector(".remove-file-icon");
+        let uploadButton = document.querySelector(".upload-button");
+        let fileFlag = 0;
+
+        fileInput.addEventListener("click", () => {
+            fileInput.value = '';
+            console.log(fileInput.value);
         });
 
-        draggableFileArea.addEventListener("drop", e => {
-            uploadIcon.innerHTML = 'check_circle';
+        fileInput.addEventListener("change", e => {
+            console.log(" > " + fileInput.value)
+            uploadIcon.innerHTML = 'Tải file lên';
             dragDropText.innerHTML = 'File Dropped Successfully!';
-            // document.querySelector(".label").innerHTML =
-            //     `drag & drop or <span class="browse-files"> <input type="file" class="default-file-input" style=""/> <span class="browse-files-text" style="top: -23px; left: -20px;"> browse file</span> </span>`;
+            document.querySelector(".label").innerHTML =
+                `<input type="file" class="default-file-input" style=""/>`;
             uploadButton.innerHTML = `Upload`;
-
-            let files = e.dataTransfer.files;
-            fileInput.files = files;
-            console.log(files[0].name + " " + files[0].size);
-            console.log(document.querySelector(".default-file-input").value);
-            fileName.innerHTML = files[0].name;
-            fileSize.innerHTML = (files[0].size / 1024).toFixed(1) + " KB";
+            fileName.innerHTML = fileInput.files[0].name;
+            fileSize.innerHTML = (fileInput.files[0].size / 1024).toFixed(1) + " KB";
             uploadedFile.style.cssText = "display: flex;";
             progressBar.style.width = 0;
             fileFlag = 0;
         });
-    }
 
-    removeFileButton.addEventListener("click", () => {
-        uploadedFile.style.cssText = "display: none;";
-        fileInput.value = '';
-        uploadIcon.innerHTML = 'file_upload';
-        dragDropText.innerHTML = 'Drag & drop any file here';
-        document.querySelector(".label").innerHTML =
-            `or <span class="browse-files"> <input type="file" class="default-file-input"/> <span class="browse-files-text">browse file</span> <span>from device</span> </span>`;
-        uploadButton.innerHTML = `Upload`;
-    });
-</script>
+        uploadButton.addEventListener("click", () => {
+            let isFileUploaded = fileInput.value;
+            if (isFileUploaded != '') {
+                if (fileFlag == 0) {
+                    fileFlag = 1;
+                    var width = 0;
+                    var id = setInterval(frame, 50);
+
+                    function frame() {
+                        if (width >= 390) {
+                            clearInterval(id);
+                            uploadButton.innerHTML =
+                                `<span class="material-icons-outlined upload-button-icon"> check_circle </span> Uploaded`;
+                        } else {
+                            width += 5;
+                            progressBar.style.width = width + "px";
+                        }
+                    }
+                }
+            } else {
+                cannotUploadMessage.style.cssText = "display: flex; animation: fadeIn linear 1.5s;";
+            }
+        });
+
+        cancelAlertButton.addEventListener("click", () => {
+            cannotUploadMessage.style.cssText = "display: none;";
+        });
+
+        if (isAdvancedUpload) {
+            ["drag", "dragstart", "dragend", "dragover", "dragenter", "dragleave", "drop"].forEach(evt =>
+                draggableFileArea.addEventListener(evt, e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                })
+            );
+
+            ["dragover", "dragenter"].forEach(evt => {
+                draggableFileArea.addEventListener(evt, e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    uploadIcon.innerHTML = 'file_download';
+                    dragDropText.innerHTML = 'Drop your file here!';
+                });
+            });
+
+            draggableFileArea.addEventListener("drop", e => {
+                uploadIcon.innerHTML = 'check_circle';
+                dragDropText.innerHTML = 'File Dropped Successfully!';
+                // document.querySelector(".label").innerHTML =
+                //     `drag & drop or <span class="browse-files"> <input type="file" class="default-file-input" style=""/> <span class="browse-files-text" style="top: -23px; left: -20px;"> browse file</span> </span>`;
+                uploadButton.innerHTML = `Upload`;
+
+                let files = e.dataTransfer.files;
+                fileInput.files = files;
+                console.log(files[0].name + " " + files[0].size);
+                console.log(document.querySelector(".default-file-input").value);
+                fileName.innerHTML = files[0].name;
+                fileSize.innerHTML = (files[0].size / 1024).toFixed(1) + " KB";
+                uploadedFile.style.cssText = "display: flex;";
+                progressBar.style.width = 0;
+                fileFlag = 0;
+            });
+        }
+
+        removeFileButton.addEventListener("click", () => {
+            uploadedFile.style.cssText = "display: none;";
+            fileInput.value = '';
+            uploadIcon.innerHTML = 'file_upload';
+            dragDropText.innerHTML = 'Drag & drop any file here';
+            document.querySelector(".label").innerHTML =
+                `or <span class="browse-files"> <input type="file" class="default-file-input"/> <span class="browse-files-text">browse file</span> <span>from device</span> </span>`;
+            uploadButton.innerHTML = `Upload`;
+        });
+    </script>
 @endsection

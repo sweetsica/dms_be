@@ -102,23 +102,23 @@
                                                                     <td class=" text-center">
                                                                         {{ $i++ }}
                                                                     </td>
-                                                                    <td class="">
-                                                                        <div class="overText" data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top"
+                                                                    <td>
+                                                                        <div class="overText text-center"
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
                                                                             title="{{ $item->code }}">
                                                                             {{ $item->code }}
                                                                         </div>
                                                                     </td>
-                                                                    <td class="">
-                                                                        <div class="overText" data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top"
+                                                                    <td>
+                                                                        <div class="overText text-center"
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
                                                                             title="{{ $item->name }}">
                                                                             {{ $item->name }}
                                                                         </div>
                                                                     </td>
-                                                                    <td class="">
-                                                                        <div class="overText" data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top"
+                                                                    <td>
+                                                                        <div class="overText text-center"
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
                                                                             title="{{ $item->description }}">
                                                                             {{ $item->description }}
                                                                         </div>
@@ -275,9 +275,12 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
-                                <button id="loadingBtn" style="display: none;" class="btn btn-danger" type="button" disabled>
-                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                <button type="button" class="btn btn-outline-danger me-3"
+                                    data-bs-dismiss="modal">Hủy</button>
+                                <button id="loadingBtn" style="display: none;" class="btn btn-danger" type="button"
+                                    disabled>
+                                    <span class="spinner-border spinner-border-sm" role="status"
+                                        aria-hidden="true"></span>
                                     Loading...
                                 </button>
                                 <button id="submitBtn" type="submit" class="btn btn-danger">Lưu</button>

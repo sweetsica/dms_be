@@ -75,20 +75,30 @@
                                                                         type="checkbox" id="select-all"></th>
                                                                 <th class="text-nowrap text-center" style="width:2%">STT
                                                                 </th>
-                                                                <th class="text-nowrap text-center" style="width:6%">Mã vị trí</th>
-                                                                <th class="text-nowrap text-center" style="width:10%">Tên vị trí/chức
+                                                                <th class="text-nowrap text-center" style="width:6%">Mã vị
+                                                                    trí</th>
+                                                                <th class="text-nowrap text-center" style="width:10%">Tên vị
+                                                                    trí/chức
                                                                     danh
                                                                 </th>
-                                                                <th class="text-nowrap text-center" style="width:10%">Cấp nhân sự</th>
-                                                                <th class="text-nowrap text-center" style="width:10%">Đơn vị công tác
+                                                                <th class="text-nowrap text-center" style="width:10%">Cấp
+                                                                    nhân sự</th>
+                                                                <th class="text-nowrap text-center" style="width:10%">Đơn vị
+                                                                    công tác
                                                                 </th>
-                                                                <th class="text-nowrap text-center" style="width:20%">Mô tả</th>
-                                                                <th class="text-nowrap text-center" style="width:6%">Định biên</th>
-                                                                <th class="text-nowrap text-center" style="width:10%">Quỹ lương năm</th>
-                                                                <th class="text-nowrap text-center" style="width:8%">Ngày tạo</th>
-                                                                <th class="text-nowrap text-center" style="width:8%">Gói trang bị</th>
+                                                                <th class="text-nowrap text-center" style="width:20%">Mô tả
+                                                                </th>
+                                                                <th class="text-nowrap text-center" style="width:6%">Định
+                                                                    biên</th>
+                                                                <th class="text-nowrap text-center" style="width:10%">Quỹ
+                                                                    lương năm</th>
+                                                                <th class="text-nowrap text-center" style="width:8%">Ngày
+                                                                    tạo</th>
+                                                                <th class="text-nowrap text-center" style="width:8%">Gói
+                                                                    trang bị</th>
                                                                 @if (session('user')['role_id'] == '1')
-                                                                    <th class="text-nowrap text-center" style="width:3%"><span>Thao
+                                                                    <th class="text-nowrap text-center" style="width:3%">
+                                                                        <span>Thao
                                                                             tác</span>
                                                                     </th>
                                                                 @endif
@@ -147,7 +157,8 @@
 
                                                                     </td>
                                                                     <td class="">
-                                                                        <div class="overText text-center" data-bs-toggle="tooltip"
+                                                                        <div class="overText text-center"
+                                                                            data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
                                                                             title=" {{ $item->staffing }}">
                                                                             {{ $item->staffing }}
@@ -155,7 +166,8 @@
 
                                                                     </td>
                                                                     <td class="">
-                                                                        <div class="overText text-center" data-bs-toggle="tooltip"
+                                                                        <div class="overText text-center"
+                                                                            data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
                                                                             title="  {{ number_format($item->wage, 0, '.', '.') }}">
                                                                             {{ number_format($item->wage, 0, '.', '.') }}
@@ -165,13 +177,14 @@
                                                                     <td class="" style="text-align: center;">
                                                                         <div class="overText" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
-                                                                            title="{{ date('d/m/Y', strtotime($item->created_at ))}}">
-                                                                            {{ date('d/m/Y', strtotime($item->created_at ))}}
+                                                                            title="{{ date('d/m/Y', strtotime($item->created_at)) }}">
+                                                                            {{ date('d/m/Y', strtotime($item->created_at)) }}
                                                                         </div>
 
-                                                                    </td> 
+                                                                    </td>
                                                                     <td class="">
-                                                                        <div class="overText text-center" data-bs-toggle="tooltip"
+                                                                        <div class="overText text-center"
+                                                                            data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
                                                                             title=" {{ $item->pack }}">
                                                                             {{ $item->pack }}
@@ -288,8 +301,8 @@
                                 </div>
                                 <div class="col-6 mb-3">
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn cấp nhân sự*">
-                                        <select name="personnel_level" required class="selectpicker" data-live-search="true"
-                                            data-dropup-auto="false">
+                                        <select name="personnel_level" required class="selectpicker"
+                                            data-live-search="true" data-dropup-auto="false">
                                             <?php if ($item->personnel_level == null){ ?>
                                             <option>Chọn cấp nhân sự*
                                             </option>
@@ -309,7 +322,8 @@
                                 <div class="col-6 mb-3">
 
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn cấp quản lý">
-                                        <select name="parent" class="selectpicker" data-dropup-auto="false" data-live-search="true">
+                                        <select name="parent" class="selectpicker" data-dropup-auto="false"
+                                            data-live-search="true">
                                             <?php if ($item->parent == null){ ?>
                                             <option value="0">Chọn cấp quản lý
                                             </option>
@@ -424,7 +438,8 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn đơn vị công tác*">
-                                    <select name="department_id" required class="selectpicker" data-dropup-auto="false" data-live-search="true">
+                                    <select name="department_id" required class="selectpicker" data-dropup-auto="false"
+                                        data-live-search="true">
                                         <option value="">Chọn đơn vị công tác*</option>
                                         @foreach ($departmentlists as $item)
                                             <option value="{{ $item->id }}">
@@ -455,9 +470,10 @@
                                 </div>
                             </div>
                             <div class="col-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn vị trí cấp quản lý">
-                                    <select name="parent" required class="selectpicker" data-dropup-auto="false" data-live-search="true">
-                                        <option value="0">Chọn vị trí cấp quản lý</option>
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn cấp quản lý">
+                                    <select name="parent" required class="selectpicker" data-dropup-auto="false"
+                                        data-live-search="true">
+                                        <option value="0">Chọn cấp quản lý</option>
                                         @foreach ($positionlists as $item)
                                             <option value="{{ $item->id }}">
                                                 @php
@@ -496,9 +512,12 @@
                             </div>
 
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
-                                <button id="loadingBtn" style="display: none;" class="btn btn-danger" type="button" disabled>
-                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                <button type="button" class="btn btn-outline-danger me-3"
+                                    data-bs-dismiss="modal">Hủy</button>
+                                <button id="loadingBtn" style="display: none;" class="btn btn-danger" type="button"
+                                    disabled>
+                                    <span class="spinner-border spinner-border-sm" role="status"
+                                        aria-hidden="true"></span>
                                     Loading...
                                 </button>
                                 <button id="submitBtn" type="submit" class="btn btn-danger">Tạo</button>
@@ -627,7 +646,7 @@
             deleteButton.style.display = atLeastOneChecked ? 'block' : 'none';
         }
     </script>
-    
+
     <script>
         // $('#addForm').on('submit', function(e) {
         //     $('#addDetailProduct').modal('show');

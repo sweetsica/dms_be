@@ -1,6 +1,6 @@
 @extends('template.master')
 {{-- Trang chủ GIao Ban --}}
-@section('title', 'Danh sách nhóm khách hàng')
+@section('title', 'Danh sách thông số kỹ thuật')
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 @endsection
@@ -55,8 +55,7 @@
                                                 </div>
                                             </div>
                                             <form id="select-form" action="{{ route('Specifications.delete') }}"
-                                                
-                                            method="POST">
+                                                method="POST">
                                                 @csrf
                                                 <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
                                                     data-bs-placement="top" title="Xóa">
@@ -92,32 +91,32 @@
                                                                     <td class=" text-center">
                                                                         {{ $i++ }}
                                                                     </td>
-                                                                    <td class="">
-                                                                        <div class="overText" data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top"
+                                                                    <td>
+                                                                        <div class="overText text-center"
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
                                                                             title="{{ $item->code }}">
                                                                             {{ $item->code }}
                                                                         </div>
                                                                     </td>
-                                                                    <td class="">
-                                                                        <div class="overText" data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top"
+                                                                    <td>
+                                                                        <div class="overText text-center"
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
                                                                             title=" {{ $item->name }}">
                                                                             {{ $item->name }}
                                                                         </div>
 
                                                                     </td>
-                                                                    <td class="">
-                                                                        <div class="overText" data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top"
+                                                                    <td>
+                                                                        <div class="overText text-center"
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
                                                                             title=" {{ $item->group_name }}">
                                                                             {{ $item->group_name }}
                                                                         </div>
 
                                                                     </td>
-                                                                    <td class="">
-                                                                        <div class="overText" data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top"
+                                                                    <td>
+                                                                        <div class="overText text-center"
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
                                                                             title="{{ $item->description }}">
                                                                             {{ $item->description }}
                                                                         </div>

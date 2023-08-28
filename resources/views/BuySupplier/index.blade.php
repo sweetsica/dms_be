@@ -1787,7 +1787,7 @@
 
             const specifications = document.getElementById('specifications_edit');
 
-            const rowData = Array.from(rows);
+            var rowData = Array.from(rows);
 
             function updateSelectedValues(selectId, spanId) {
                 const selectedOptions = Array.from(document.querySelectorAll(`#${selectId} option:checked`));
@@ -1894,24 +1894,30 @@
 
 
             function calculateSumEdit() {
-
                 let sumTienHang = 0;
                 let sumTienChietKhau = 0;
                 let sumTienTruocThue = 0;
                 let sumTienThue = 0;
                 let sumThanhToan = 0;
-
                 rowData.forEach((row, index) => {
 
-                    const tongGia = parseFloat(row.querySelector(`#tongGiaEdit_${index}`).value) || 0;
-                    const chiKhau = parseFloat(row.querySelector(`#CKEdit_${index}`).value) || 0;
-                    const tienTruocThue = parseFloat(row.querySelector(`#tienTruocThueEdit_${index}`)
-                        .value) || 0;
-                    const tienThue = parseFloat(row.querySelector(`#tienThueEdit_${index}`).value) || 0;
-                    const tienSauThue = parseFloat(row.querySelector(`#tienSauThueEdit_${index}`)
-                            .value) ||
-                        0;
 
+                    const tongGiaElement = row.querySelector(`#tongGiaEdit_${index}`);
+                    const chiKhauElement = row.querySelector(`#CKEdit_${index}`);
+                    const tienTruocThueElement = row.querySelector(`#tienTruocThueEdit_${index}`);
+                    const tienThueElement = row.querySelector(`#tienThueEdit_${index}`);
+                    const tienSauThueElement = row.querySelector(`#tienSauThueEdit_${index}`);
+
+                    if (tongGiaElement == null || chiKhauElement == null || tienTruocThueElement == null ||
+                        tienThueElement == null || tienSauThueElement == null) {
+                        index++;
+                        return;
+                    }
+                    const tongGia = parseFloat(tongGiaElement.value) || 0;
+                    const chiKhau = parseFloat(chiKhauElement.value) || 0;
+                    const tienTruocThue = parseFloat(tienTruocThueElement.value) || 0;
+                    const tienThue = parseFloat(tienThueElement.value) || 0;
+                    const tienSauThue = parseFloat(tienSauThueElement.value) || 0;
 
                     sumTienHang += tongGia;
                     sumTienChietKhau += chiKhau;
@@ -2166,30 +2172,11 @@
                             );
                             parentRow.remove();
 
-                            const removeElement = `row_${removedSpecCount}`;
 
-                            rowData.filter(row => {
-                                const element = row.id;
-                                return element !== removeElement;
-                            });
+                            rowData.filter(row => row.id !==
+                                `row_${removedSpecCount}`);
 
-                            // console.log('rowData', rowData);
-                            // console.log('removedSpecCount', removedSpecCount);
-
-                            // rowData = rowData.filter(data => {
-                            //     const idData = data.querySelector(
-                            //             `td input[id^="nameProductEdit_"]`)
-                            //         .id;
-
-                            //     return idData !==
-                            //         `nameProductEdit_${removedSpecCount}`;
-                            // });
-
-                            // rowData = rowData.filter(data => data
-                            //     .querySelector(
-                            //         `td input[id^="nameProductEdit_"]`)
-                            //     .id !==
-                            //     `nameProductEdit_${removedSpecCount}`);
+                            // rowData = updateNodeList;
 
                             calculateSumEdit();
                             specCount--;

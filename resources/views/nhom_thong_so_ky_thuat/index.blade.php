@@ -93,24 +93,24 @@
                                                                     <td class=" text-center">
                                                                         {{ $i++ }}
                                                                     </td>
-                                                                    <td class="">
-                                                                        <div class="overText" data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top"
+                                                                    <td>
+                                                                        <div class="overText text-center"
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
                                                                             title="{{ $item->code }}">
                                                                             {{ $item->code }}
                                                                         </div>
                                                                     </td>
-                                                                    <td class="">
-                                                                        <div class="overText" data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top"
+                                                                    <td>
+                                                                        <div class="overText text-center"
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
                                                                             title=" {{ $item->name }}">
                                                                             {{ $item->name }}
                                                                         </div>
 
                                                                     </td>
-                                                                    <td class="">
-                                                                        <div class="overText" data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top"
+                                                                    <td>
+                                                                        <div class="overText text-center"
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
                                                                             title="{{ $item->description }}">
                                                                             {{ $item->description }}
                                                                         </div>

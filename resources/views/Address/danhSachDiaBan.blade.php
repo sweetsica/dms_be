@@ -43,7 +43,7 @@
     <div id="mainWrap" class="mainWrap">
         <div class="mainSection">
             <div class="main">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="mainSection_heading">
                         <h5 class="mainSection_heading-title">Danh sách địa bàn</h5>
                         @include('template.components.sectionCard')
@@ -125,25 +125,25 @@
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <div class="overText" data-bs-toggle="tooltip"
+                                                                <div class="overText text-center" data-bs-toggle="tooltip"
                                                                     data-bs-placement="top" title="{{ $item->code }}">
                                                                     {{ $item->code }}
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <div class="overText" data-bs-toggle="tooltip"
+                                                                <div class="overText text-center" data-bs-toggle="tooltip"
                                                                     data-bs-placement="top" title=" {{ $item->name }}">
                                                                     {{ $item->name }}
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <div class="overText" data-bs-toggle="tooltip"
+                                                                <div class="overText text-center" data-bs-toggle="tooltip"
                                                                     data-bs-placement="top" title="{{ $item->area_name }}">
                                                                     {{ $item->area_name }}
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <div class="overText" data-bs-toggle="tooltip"
+                                                                <div class="overText text-center" data-bs-toggle="tooltip"
                                                                     data-bs-placement="top"
                                                                     title="{{ $item->description }}">
                                                                     {{ $item->description }}
@@ -253,7 +253,8 @@
                                     {{-- <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Khu vực*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
                                     <option value="1" selected>1</option>
                                 </select> --}}
-                                    <select name="area_id" required class="selectpicker" data-dropup-auto="false" data-live-search="true">
+                                    <select name="area_id" required class="selectpicker" data-dropup-auto="false"
+                                        data-live-search="true">
                                         <option value="{{ $item->area_id }}">{{ $item->area_name }}</option>
                                         @foreach ($area as $ar)
                                             <option value="{{ $ar->id }}">
@@ -309,7 +310,8 @@
                                 {{-- <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Khu vực*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
                                     <option value="1">1</option>
                                 </select> --}}
-                                <select name="area_id" required class="selectpicker" data-dropup-auto="false" data-live-search="true">
+                                <select name="area_id" required class="selectpicker" data-dropup-auto="false"
+                                    data-live-search="true">
                                     <option value="">Chọn khu vực*</option>
                                     @foreach ($area as $item)
                                         <option value="{{ $item->id }}">

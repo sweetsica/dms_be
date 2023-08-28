@@ -128,88 +128,88 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText" data-bs-toggle="tooltip"
+                                                            <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="{{ $item['code'] }}">
                                                                 {{ $item['code'] }}
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText" data-bs-toggle="tooltip"
+                                                            <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="{{ $item['name'] }}">
                                                                 {{ $item['name'] }}
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText" data-bs-toggle="tooltip"
+                                                            <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title=" {{ $item['phone'] }}">
                                                                 {{ $item['phone'] }}
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText center" data-bs-toggle="tooltip"
+                                                            <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="  {{ $item['email'] }}">
                                                                 {{ $item['email'] }}
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText center" data-bs-toggle="tooltip"
+                                                            <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top"
                                                                 title="  {{ $item['companyName'] }}">
                                                                 {{ $item['companyName'] }}
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText center" data-bs-toggle="tooltip"
+                                                            <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="  {{ $item['taxCode'] }}">
                                                                 {{ $item['taxCode'] }}
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText center" data-bs-toggle="tooltip"
+                                                            <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="  {{ $item['city'] }}">
                                                                 {{ $item['city'] }}
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText center" data-bs-toggle="tooltip"
+                                                            <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="{{ $item['district'] }}">
                                                                 {{ $item['district'] }}
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText center" data-bs-toggle="tooltip"
+                                                            <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="{{ $item['guide'] }}">
                                                                 {{ $item['guide'] }}
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText center" data-bs-toggle="tooltip"
+                                                            <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="{{ $item['address'] }}">
                                                                 {{ $item['address'] }}
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText center" data-bs-toggle="tooltip"
+                                                            <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="{{ $item['group'] }}">
                                                                 {{ $item['group'] }}
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText center" data-bs-toggle="tooltip"
+                                                            <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top"
                                                                 title=" {{ $item->channel->name ?? '' }}">
                                                                 {{ $item->channel->name ?? '' }}
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText center" data-bs-toggle="tooltip"
+                                                            <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top"
                                                                 title="{{ $item->route->name ?? '' }}">
                                                                 {{ $item->route->name ?? '' }}
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText center" data-bs-toggle="tooltip"
+                                                            <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top"
                                                                 title="{{ $item->person->name ?? '' }}">
                                                                 {{ $item->person->name ?? '' }}
@@ -224,13 +224,13 @@
                                                                 }
                                                                 $productList = implode(', ', $productNames);
                                                             @endphp
-                                                            <div class="overText center" data-bs-toggle="tooltip"
+                                                            <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="{{ $productList }}">
                                                                 {{ $productList }}
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText center" data-bs-toggle="tooltip"
+                                                            <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="{{ $item['status'] }}">
                                                                 {{ $item['status'] }}
                                                             </div>
@@ -335,7 +335,6 @@
                                     title="Loại khách hàng">
                                     <select class="selectpicker" id="">
                                         <option value="{{ $item->customer_type }}"> {{ $item->customer_type }} </option>
-                                        <option value="Loại khách hàng">Loại khách hàng</option>
                                         <option value="Khách hàng lẻ" selected>Khách hàng lẻ</option>
                                         <option value="Nhà phân phối">Nhà phân phối</option>
                                         <option value="Đại lý">Đại lý</option>
@@ -343,9 +342,9 @@
                                 </div>
 
                                 <div class="col-lg-6 mb-3">
-                                    <input type="text" name="personContact" data-bs-toggle="tooltip"
-                                        id="" data-bs-placement="top" title="Mã khách hàng"
-                                        placeholder="Mã khách hàng*" class="form-control" >
+                                    <input type="text" name="personContact" data-bs-toggle="tooltip" id=""
+                                        data-bs-placement="top" title="Mã khách hàng" placeholder="Mã khách hàng*"
+                                        class="form-control">
                                 </div>
 
                                 <div class="col-lg-6 mb-3">
@@ -357,16 +356,17 @@
                                 <div class="col-lg-6 mb-3">
                                     <input type="text" name="phone" data-bs-toggle="tooltip" required
                                         id="" data-bs-placement="top" title="Số điện thoại"
-                                       class="form-control" value="{{ $item->phone }}">
+                                        class="form-control" value="{{ $item->phone }}">
                                 </div>
                                 <div class="col-lg-6 mb-3">
                                     <input type="text" name="email" data-bs-toggle="tooltip" id=""
-                                        data-bs-placement="top"  placeholder="Email" title="Email" value="{{ $item->email }}" class="form-control">
+                                        data-bs-placement="top" placeholder="Email" title="Email"
+                                        value="{{ $item->email }}" class="form-control">
                                 </div>
                                 <div class="col-lg-6 mb-3">
                                     <input type="text" name="address" data-bs-toggle="tooltip" required
-                                        id="" data-bs-placement="top" title="Địa chỉ"
-                                        placeholder="Địa chỉ" class="form-control" value="{{ $item->address }}" >
+                                        id="" data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ"
+                                        class="form-control" value="{{ $item->address }}">
                                 </div>
 
                                 <div class="col-lg-12 mb-3">
@@ -470,7 +470,6 @@
                             <div class="col-lg-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Loại khách hàng">
                                 <select class="selectpicker" id="customerTypeAdd" name="customer_type">
-                                    <option value="Loại khách hàng">Loại khách hàng</option>
                                     <option value="Khách hàng lẻ" selected>Khách hàng lẻ</option>
                                     <option value="Nhà phân phối">Nhà phân phối</option>
                                     <option value="Đại lý">Đại lý</option>
@@ -480,29 +479,28 @@
                             <div class="col-lg-6 mb-3">
                                 <input type="text" name="personContact" data-bs-toggle="tooltip"
                                     id="personContactInput" data-bs-placement="top" title="Mã khách hàng"
-                                    placeholder="Mã khách hàng*" class="form-control">
+                                    placeholder="Mã khách hàng" class="form-control mb-1">
                             </div>
 
                             <div class="col-lg-6 mb-3">
-                                <input type="text" name="name" data-bs-toggle="tooltip" required id="nameInput"
+                                <input type="text" name="name" data-bs-toggle="tooltip" id="nameInput"
                                     data-bs-placement="top" title="Tên khách hàng" placeholder="Tên khách hàng*"
-                                    class="form-control">
+                                    class="form-control mb-1">
 
                             </div>
 
                             <div class="col-lg-6 mb-3">
                                 <input type="text" name="phone" data-bs-toggle="tooltip" required id="phoneInput"
                                     data-bs-placement="top" title="Số điện thoại" placeholder="Số điện thoại*"
-                                    class="form-control">
+                                    class="form-control mb-1">
                             </div>
                             <div class="col-lg-6 mb-3">
                                 <input type="text" name="email" data-bs-toggle="tooltip" id="emailInput"
                                     data-bs-placement="top" title="Email" placeholder="Email" class="form-control">
                             </div>
                             <div class="col-lg-6 mb-3">
-                                <input type="text" name="address" data-bs-toggle="tooltip" required
-                                    id="addressInputGeneral" data-bs-placement="top" title="Địa chỉ*"
-                                    placeholder="Địa chỉ" class="form-control">
+                                <input type="text" name="address" data-bs-toggle="tooltip" id="addressInputGeneral"
+                                    data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ*" class="form-control">
                             </div>
 
                             <div class="col-lg-12 mb-3">
@@ -534,10 +532,7 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Thêm chi tiết khách hàng</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="customerForm"
-                {{-- method="POST" action="{{ route('create-customer') }}" --}}
-                enctype="multipart/form-data"
-                >
+                <form id="customerForm" {{-- method="POST" action="{{ route('create-customer') }}" --}} enctype="multipart/form-data">
                     @csrf
                     <input name="name" style="display: none;" id="name">
                     <input name="customer_type" style="display: none;" id="customer_type">
@@ -614,7 +609,6 @@
                                                 <th class="text-nowrap text-center">
                                                     <i class="bi bi-plus fs-3" id="addRowIcon"
                                                         style="color: var(--primary-color); cursor: pointer;"></i>
-
                                                 </th>
                                             </tr>
                                         </thead>
@@ -657,7 +651,7 @@
                             <div class="col-md-12 mb-3">
                                 <input type="text" id="addressInput" name="address" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ*" class="form-control">
-                                    <div class="error-text" id="addressError" style="color: red;"></div>
+                                <div class="error-text" id="addressError" style="color: red;"></div>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <div id="map"
@@ -707,8 +701,8 @@
                                     data-live-search="true" title="Nhóm khách hàng*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="groupId" id="groupId"
                                     data-live-search-placeholder="Tìm kiếm...">
-                                    @foreach ($listgroup as $item )
-                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                    @foreach ($listgroup as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach
                                     {{-- <option value="Nhà thuốc">Nhà thuốc</option>
                                     <option value="Phòng khám/Trung tâm tế">Phòng khám/Trung tâm tế</option>
@@ -762,8 +756,7 @@
 
                             <div class="col-12 col-md-12">
                                 <div class="upload_wrapper-items">
-                                    <div class="alert alert-danger alertNotSupport" role="alert"
-                                        style="display:none">
+                                    <div class="alert alert-danger alertNotSupport" role="alert" style="display:none">
                                         File bạn tải lên hiện tại không hỗ trợ !
                                     </div>
                                     <div class="modal_upload-wrapper">
@@ -783,10 +776,9 @@
                                                     <img src="{{ asset('assets/img/upload-file.svg') }}" />
                                                     <span class="ps-2">Đính kèm ảnh sản phẩm</span>
                                                 </label>
-                                                <input accept="image/jpeg,image/png"
-                                                    role="button" type="file"
-                                                    class="modal_upload-input modal_upload-file"
-                                                    name="image" onchange="updateList(event)" />
+                                                <input accept="image/jpeg,image/png" role="button" type="file"
+                                                    class="modal_upload-input modal_upload-file" name="image"
+                                                    onchange="updateList(event)" />
                                             </div>
                                         </div>
 
@@ -815,7 +807,7 @@
                     </div>
                     <div class="modal-footer ">
                         <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
-                        <button type="button" class="btn btn-danger" id="submitButton" >Lưu</button>
+                        <button type="button" class="btn btn-danger" id="submitButton">Lưu</button>
                     </div>
                 </form>
             </div>
@@ -1700,51 +1692,130 @@
             themChiTietBtn.classList.add('btn-disable');
             themChiTietBtn.disabled = true;
         });
+
         const customerTypeSelect = document.getElementById('customerTypeAdd');
         const themChiTietBtn = document.getElementById('btn_chi_tiet');
+        const addressInputGeneral = document.getElementById('addressInputGeneral');
+        const nameInput = document.getElementById('nameInput');
+        const phoneInput = document.getElementById('phoneInput');
+
         customerTypeSelect.addEventListener('change', () => {
             const selectedValue = customerTypeSelect.value;
+
             if (selectedValue === 'Khách hàng lẻ') {
-                console.log('themChiTietBtn', themChiTietBtn);
                 themChiTietBtn.disabled = true;
                 themChiTietBtn.classList.add('btn-disable');
-            } else {
-                themChiTietBtn.disabled = false;
-                themChiTietBtn.classList.remove('btn-disable');
+
+
+                // Xóa thông báo lỗi
+                hideErrorMessage(addressInputGeneral);
+                hideErrorMessage(nameInput);
+                hideErrorMessage(phoneInput);
+            }
+
+            if (selectedValue !== 'Khách hàng lẻ') {
+                checkAndToggleButton();
             }
         });
+
+        addressInputGeneral.addEventListener('input', checkAndToggleButton);
+        nameInput.addEventListener('input', checkAndToggleButton);
+        phoneInput.addEventListener('input', checkAndToggleButton);
+
+        function checkAndToggleButton() {
+            const selectedValue = customerTypeSelect.value;
+            const addressValue = addressInputGeneral.value.trim();
+            const nameValue = nameInput.value.trim();
+            const phoneValue = phoneInput.value.trim();
+
+            if (selectedValue !== 'Khách hàng lẻ') {
+                if (!addressValue) {
+                    showErrorMessage(addressInputGeneral, 'Địa chỉ không được để trống');
+                } else {
+                    hideErrorMessage(addressInputGeneral);
+                }
+
+                if (!nameValue) {
+                    showErrorMessage(nameInput, 'Tên khách hàng không được để trống');
+                } else {
+                    hideErrorMessage(nameInput);
+                }
+
+                if (!phoneValue) {
+                    showErrorMessage(phoneInput, 'Số điện thoại không được để trống');
+                } else {
+                    hideErrorMessage(phoneInput);
+                }
+
+                if (addressValue && nameValue && phoneValue) {
+                    themChiTietBtn.disabled = false;
+                    themChiTietBtn.classList.remove('btn-disable');
+                } else {
+                    themChiTietBtn.disabled = true;
+                    themChiTietBtn.classList.add('btn-disable');
+                }
+            }
+        }
+
+        function showErrorMessage(inputElement, message) {
+            let errorSpan = inputElement.nextElementSibling;
+            if (!errorSpan || !errorSpan.classList.contains('error-message')) {
+                errorSpan = document.createElement('span');
+                errorSpan.className = 'error-message text-danger';
+                inputElement.parentNode.insertBefore(errorSpan, inputElement.nextSibling);
+            }
+            errorSpan.textContent = message;
+        }
+
+        function hideErrorMessage(inputElement) {
+            const errorSpan = inputElement.nextElementSibling;
+            if (errorSpan && errorSpan.classList.contains('error-message')) {
+                errorSpan.remove();
+            }
+        }
     </script>
 
     <script>
-        const addRowIcon = document.getElementById('addRowIcon');
-        const tbody = document.querySelector('#contact tbody');
-        let rowCount = 1;
-        let specCount = 0;
-        addRowIcon.addEventListener('click', function() {
-            const newRow = document.createElement('tr');
-            newRow.innerHTML = `
-            <td class="text-center">${rowCount}</td>
-            <td><input type="text" class="form-control" name="contact[${specCount}][key1]"></td>
-            <td><input type="text" class="form-control" name="contact[${specCount}][key2]"></td>
-            <td><input type="text" class="form-control" name="contact[${specCount}][key3]"></td>
-            <td><input type="text" class="form-control" name="contact[${specCount}][key4]"></td>
-            <td class="text-center">
-                <i class="bi bi-trash deleteRow fs-3"
-                style="color: var(--primary-color); cursor: pointer;" ></i>
-            </td>
-        `;
+        document.addEventListener('DOMContentLoaded', function() {
+            const tbody = document.querySelector('#contact tbody');
 
-            tbody.appendChild(newRow);
-            rowCount++;
-            specCount++;
+            let rowCount = 1;
+            let specCount = 0;
 
-            // Xử lý sự kiện xóa hàng
-            const deleteButtons = document.querySelectorAll('.deleteRow');
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    this.closest('tr').remove();
+            const addRow = () => {
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                <td class="text-center">${rowCount}</td>
+                <td><input type="text" class="form-control" name="contact[${specCount}][key1]"></td>
+                <td><input type="text" class="form-control" name="contact[${specCount}][key2]"></td>
+                <td><input type="text" class="form-control" name="contact[${specCount}][key3]"></td>
+                <td><input type="text" class="form-control" name="contact[${specCount}][key4]"></td>
+                <td class="text-center">
+                    <i class="bi bi-trash deleteRow fs-3"
+                    style="color: var(--primary-color); cursor: pointer;" ></i>
+                </td>
+            `;
+
+                tbody.appendChild(newRow);
+                rowCount++;
+                specCount++;
+
+                // Xử lý sự kiện xóa hàng
+                const deleteButtons = document.querySelectorAll('.deleteRow');
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        this.closest('tr').remove();
+                    });
                 });
-            });
+            };
+
+            // Gọi hàm addRow để thêm hàng ngay sau khi tải trang xong
+            addRow();
+
+            const addRowIcon = document.getElementById('addRowIcon');
+            addRowIcon.addEventListener('click', function() {
+                addRow();
+            })
         });
     </script>
 @endsection

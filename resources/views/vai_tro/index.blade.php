@@ -24,9 +24,7 @@
                                         <div class="col-md-12">
                                             <div
                                                 class="action_wrapper d-flex flex-wrap justify-content-between align-items-center mb-3">
-                                                <div class="order-2 order-md-1" style="font-size: 15px;">
-                                                    <b>Danh sách vai trò</b>
-                                                </div>
+
                                                 <div
                                                     class="order-1 order-md-2  justify-content-between align-items-center flex-grow-1 mb-2 mb-md-0">
                                                     <form method="GET" action="">
@@ -90,29 +88,28 @@
                                                         @foreach ($roleList as $item)
                                                             <tbody>
                                                                 <tr>
-                                                                    <td class=" text-center"> <input type="checkbox"
-                                                                            name="selected_items[]"
+                                                                    <td> <input type="checkbox" name="selected_items[]"
                                                                             value="{{ $item->id }}"></td>
-                                                                    <td class=" text-center">
+                                                                    <td class="text-center">
                                                                         {{ $i++ }}
                                                                     </td>
-                                                                    <td class="">
-                                                                        <div class="overText" data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top"
+                                                                    <td>
+                                                                        <div class="overText text-center"
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
                                                                             title="{{ $item->code }}">
                                                                             {{ $item->code }}
                                                                         </div>
                                                                     </td>
-                                                                    <td class="">
-                                                                        <div class="overText" data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top"
+                                                                    <td>
+                                                                        <div class="overText text-center"
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
                                                                             title="{{ $item->name }}">
                                                                             {{ $item->name }}
                                                                         </div>
                                                                     </td>
-                                                                    <td class="">
-                                                                        <div class="overText" data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top"
+                                                                    <td>
+                                                                        <div class="overText text-center"
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
                                                                             title="{{ $item->description }}">
                                                                             {{ $item->description }}
                                                                         </div>
@@ -187,7 +184,8 @@
                                 <div class="col-6 mb-3">
                                     <input data-bs-toggle="tooltip" required data-bs-placement="top"
                                         title="Nhập tên vai trò*" name="name" type="text"
-                                        placeholder="Nhập tên vai trò*" class="form-control" value="{{ $item->name }}">
+                                        placeholder="Nhập tên vai trò*" class="form-control"
+                                        value="{{ $item->name }}">
                                 </div>
                                 <div class="col-6 mb-3">
                                     <input data-bs-toggle="tooltip" required data-bs-placement="top"
@@ -195,7 +193,7 @@
                                         placeholder="Nhập mã vai trò*" class="form-control" value="{{ $item->code }}">
                                 </div>
                             </div>
-                        <div class="row">
+                            <div class="row">
                                 <div class="col">
                                     <div data-bs-toggle="tooltip" data-bs-placement="top">
                                         <textarea name="description" type="text" placeholder="Chức năng nhiệm vụ" class="form-control "
@@ -270,8 +268,10 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
-                            <button id="loadingBtn" style="display: none;" class="btn btn-danger" type="button" disabled>
+                            <button type="button" class="btn btn-outline-danger me-3"
+                                data-bs-dismiss="modal">Hủy</button>
+                            <button id="loadingBtn" style="display: none;" class="btn btn-danger" type="button"
+                                disabled>
                                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                 Loading...
                             </button>

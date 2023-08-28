@@ -123,78 +123,77 @@
                                                         </thead>
                                                         <tbody>
                                                             @foreach ($promotions as $item)
-                                                            <tr>
+                                                                <tr>
 
-                                                            <td class="text-center"> <input type="checkbox"
-                                                                name="selected_items[]" value="">
-                                                            </td>
-                                                            <td class="text-center">1
-                                                            </td>
-                                                            <td class="text-center">
-                                                                @if($item->status=="Hoạt động")
-                                                                <span class="badge bg-success">Hoạt
-                                                                động</span>
-                                                                @else
-                                                                <span class="badge bg-danger">Khóa</span>
-                                                                @endif
-                                                            </td>
-                                                            <td class="text-center">
-                                                                <button type="button" data-bs-toggle="modal"
-                                                                    data-bs-target="#chiTietCTKM{{$item->id}}"
-                                                                    style="background: transparent">
-                                                                    <div class="text-wrap text-center btn-show_detail"
-                                                                        data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                        title="GIAM300K">
-                                                                       {{$item->code}}
-                                                                    </div>
-                                                                </button>
+                                                                    <td class="text-center"> <input type="checkbox"
+                                                                            name="selected_items[]" value="">
+                                                                    </td>
+                                                                    <td class="text-center">1
+                                                                    </td>
+                                                                    <td class="text-center">
+                                                                        @if ($item->status == 'Hoạt động')
+                                                                            <span class="badge bg-success">Hoạt
+                                                                                động</span>
+                                                                        @else
+                                                                            <span class="badge bg-danger">Khóa</span>
+                                                                        @endif
+                                                                    </td>
+                                                                    <td class="text-center">
+                                                                        <button type="button" data-bs-toggle="modal"
+                                                                            data-bs-target="#chiTietCTKM{{ $item->id }}"
+                                                                            style="background: transparent">
+                                                                            <div class="text-wrap text-center btn-show_detail"
+                                                                                data-bs-toggle="tooltip"
+                                                                                data-bs-placement="top" title="GIAM300K">
+                                                                                {{ $item->code }}
+                                                                            </div>
+                                                                        </button>
+                                                </div>
+                                                </td>
+                                                <td class="text-center">{{ $item->name }}
+                                                </td>
+                                                <td class="text-center">{{ $item->promotion_form }}
+                                                </td>
+                                                <td class="text-center">{{ $item->applicable_date }}
+                                                </td>
+                                                <td class="text-center">{{ $item->end_date }}
+                                                </td>
+                                                <td class="text-center">{{ $item->multiples }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ $item->customer_type }}
+                                                </td>
+                                                <td class="text-center">
+                                                    @foreach ($customerGroupNames[$item->id] as $customerGroupName)
+                                                        {{ $customerGroupName }}<br>
+                                                    @endforeach
+                                                </td>
+                                                <td class="text-center"
+                                                    style="background: #fff; position: sticky; right: 0;">
+                                                    <div class="table_actions d-flex justify-content-center">
+                                                        <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                            title="Sửa ">
+                                                            <div class="btn" data-bs-toggle="modal"
+                                                                data-bs-target="#suaCTKM{{ $item->id }}">
+                                                                <img style="width:16px;height:16px"
+                                                                    src="{{ asset('assets/img/edit.svg') }}" />
                                                             </div>
-                                                            </td>
-                                                            <td class="text-center">{{$item->name}}
-                                                            </td>
-                                                            <td class="text-center">{{$item->promotion_form}}
-                                                            </td>
-                                                            <td class="text-center">{{$item->applicable_date}}
-                                                            </td>
-                                                            <td class="text-center">{{$item->end_date}}
-                                                            </td>
-                                                            <td class="text-center">{{$item->multiples}}
-                                                            </td>
-                                                            <td class="text-center">
-                                                                {{$item->customer_type}}
-                                                            </td>
-                                                            <td class="text-center">
-                                                                 @foreach($customerGroupNames[$item->id] as $customerGroupName)
-                                                                    {{ $customerGroupName }}<br>
-                                                                @endforeach
-                                                            </td>
-                                                            <td class="text-center"
-                                                            style="background: #fff; position: sticky; right: 0;">
-                                                            <div
-                                                                class="table_actions d-flex justify-content-center">
-                                                                <div data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top" title="Sửa ">
-                                                                    <div class="btn" data-bs-toggle="modal"
-                                                                        data-bs-target="#suaCTKM{{ $item->id }}">
-                                                                        <img style="width:16px;height:16px"
-                                                                            src="{{ asset('assets/img/edit.svg') }}" />
-                                                                    </div>
-                                                                </div>
-                                                                <div data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top" title="Xóa">
-                                                                    <div class="btn" data-bs-toggle="modal"
-                                                                        data-bs-target="#xoaCTKM{{$item->id}}">
-                                                                        <img style="width:16px;height:16px"
-                                                                            src="{{ asset('assets/img/trash.svg') }}" />
-                                                                    </div>
-                                                                </div>
+                                                        </div>
+                                                        <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                            title="Xóa">
+                                                            <div class="btn" data-bs-toggle="modal"
+                                                                data-bs-target="#xoaCTKM{{ $item->id }}">
+                                                                <img style="width:16px;height:16px"
+                                                                    src="{{ asset('assets/img/trash.svg') }}" />
                                                             </div>
-                                                            </td>
-                                                            </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                    {{-- <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                </tr>
+                                                @endforeach
+                                                </tbody>
+                                                </table>
+                                                {{-- <nav aria-label="Page navigation example" class="float-end mt-3"
                                                         id="target-pagination">
                                                         <ul class="pagination">
                                                             {{ $departmentList->appends([
@@ -202,9 +201,8 @@
                                                                 ])->links() }}
                                                         </ul>
                                                     </nav> --}}
-                                                </div>
-                                            </form>
                                         </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -214,23 +212,310 @@
             </div>
         </div>
     </div>
+    </div>
     @include('template.footer.footer')
     </div>
     </div>
     @include('template.sidebar.sidebarMaster.sidebarRight')
 
 
- @foreach ($promotions as $item)
-    {{-- Modal sửa kho --}}
-    <div class="modal fade" id="suaCTKM{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">Sửa kho</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    @foreach ($promotions as $item)
+        {{-- Modal sửa kho --}}
+        <div class="modal fade" id="suaCTKM{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h5 class="modal-title w-100" id="exampleModalLabel">Sửa kho</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form id="addForm" action="{{ route('Promotion.update', ['id' => $item->id]) }}" method="POST">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-lg-12 mb-3">
+                                    <h5 class="modal-title">1. Thông tin CTKM</h5>
+                                </div>
+                                <div class="col-lg-4 mb-3">
+                                    <input name="code" required type="text" placeholder="Mã CTKM*"
+                                        class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                        title="Mã CTKM*" value="{{ $item->code }}">
+                                </div>
+                                <div class="col-lg-4 mb-3">
+                                    <input name="name" required type="text" placeholder="Tên CTKM*"
+                                        class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                        title="Tên CTKM*" value="Khuyến mại" value="{{ $item->name }}">
+                                </div>
+                                <div class="col-lg-4 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                        title="Hình thức khuyến mại">
+                                        <select name="promotion_form" class="selectpicker">
+                                            <option value="{{ $item->promotion_form }}">{{ $item->promotion_form }}
+                                            </option>
+                                            <option value="">Chọn hình thức khuyến mại
+                                            </option>
+                                            <option value="Tặng sản phẩm" selected>Tặng sản phẩm
+                                            </option>
+                                            <option value="Tặng tiền">Tặng tiền
+                                            </option>
+                                            <option value="Chiết khấu phần trăm(%)">Chiết khấu phần trăm(%)
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 mb-3">
+                                    <input name="applicable_date" type="text" placeholder="Ngày áp dụng"
+                                        class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                        title="Ngày áp dụng" value="{{ $item->applicable_date }}">
+                                </div>
+                                <div class="col-lg-4 mb-3">
+                                    <input name="end_date" type="text" placeholder="Ngày kết thúc"
+                                        class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                        title="Ngày kết thúc" value="{{ $item->end_date }}">
+                                </div>
+                                <div class="col-lg-4 mb-3">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Bội số">
+                                                <select name="multiples" class="selectpicker">
+                                                    <option value="{{ $item->multiples }}">{{ $item->multiples }}
+                                                    </option>
+                                                    <option value="">Chọn bội số
+                                                    </option>
+                                                    <option value="Áp dụng" selected>Áp dụng
+                                                    </option>
+                                                    <option value="Không áp dụng">Không áp dụng
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Trạng thái">
+                                                <select name="status" class="selectpicker">
+                                                    <option value="{{ $item->status }}">{{ $item->status }}</option>
+                                                    <option value="">Chọn trạng thái
+                                                    </option>
+                                                    <option value="Hoạt động" selected>Hoạt động
+                                                    </option>
+                                                    <option value="Khóa">Khóa
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                        title="Nhóm khách hàng áp dụng">
+                                        <select class="selectpicker" data-dropup-auto="false" data-width="100%"
+                                            data-live-search="true" title="Nhóm khách hàng áp dụng"
+                                            data-select-all-text="Nhóm khách hàng áp dụng"
+                                            data-deselect-all-text="Bỏ chọn" data-size="3" name="customer_group_id[]"
+                                            data-live-search-placeholder="Tìm kiếm..." multiple>
+                                            @foreach ($customerGroupNames[$item->id] as $customerGroupName)
+                                                <option selected value="{{ $item->customer_group_id }}">
+                                                    {{ $customerGroupName }}</option>
+                                            @endforeach
+                                            {{-- <option value="{{ $item->customer_group_id }}"> {{ $item->customer_group_id }}</option> --}}
+                                            @foreach ($listgroup as $a)
+                                                <option value="{{ $a->id }}"> {{ $a->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                        title="Loại khách hàng áp dụng">
+                                        <select class="selectpicker" data-dropup-auto="false" data-width="100%"
+                                            data-live-search="true" title="Loại khách hàng áp dụng"
+                                            data-select-all-text="Loại khách hàng áp dụng"
+                                            data-deselect-all-text="Bỏ chọn" name="customer_type"
+                                            data-live-search-placeholder="Tìm kiếm..." multiple>
+                                            <option value="{{ $item->customer_type }}">{{ $item->customer_type }}
+                                            </option>
+                                            <option value="Chọn tất cả" selected>Chọn tất cả
+                                            </option>
+                                            <option value="Khách lẻ">Khách lẻ
+                                            </option>
+                                            <option value="Đại lý">Đại lý
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 mb-3">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Khách hàng áp dụng">
+                                        <select class="selectpicker" data-dropup-auto="false" data-width="100%"
+                                            data-live-search="true" title="Khách hàng áp dụng"
+                                            data-select-all-text="Khách hàng áp dụng" data-deselect-all-text="Bỏ chọn"
+                                            data-size="3" name="customer_id[]"
+                                            data-live-search-placeholder="Tìm kiếm..." multiple>
+                                            @foreach ($customerNames[$item->id] as $customerName)
+                                                <option selected value="{{ $item->customer_id }}"> {{ $customerName }}
+                                                </option>
+                                            @endforeach
+                                            @foreach ($customersList as $customer)
+                                                <option value="{{ $customer->id }}"> {{ $customer->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12 mb-3">
+                                    <h5 class="modal-title">2. Chi tiết CTKM</h5>
+                                </div>
+
+                                <div class="table-responsive" style="min-height: 200px">
+                                    <table id="contact" class="table table-responsive table-hover table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-nowrap text-center">Mã sản phẩm</th>
+                                                <th class="text-nowrap text-center" style="width: 10%;">Tên SP AD
+                                                </th>
+                                                <th class="text-nowrap text-center" style="width: 8%;">Đạt số lượng</th>
+                                                <th class="text-nowrap text-center" style="width: 8%;">Đạt số tiền</th>
+                                                <th class="text-nowrap text-center" style="width: 8%;">Số lượng SP tặng
+                                                </th>
+                                                <th class="text-nowrap text-center">Mã SP tặng</th>
+                                                <th class="text-nowrap text-center" style="width: 10%;">Tên SP
+                                                    tặng</th>
+                                                <th class="text-nowrap text-center" style="width: 8%;">Chiết khấu %</th>
+                                                <th class="text-nowrap text-center" style="width: 8%;">Tặng tiền</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="specifications_edit">
+                                            @if (!empty($item->promotion_details))
+                                                @php
+                                                    $h = 0;
+                                                    $l = 0;
+                                                    $k = 0;
+                                                    $m = 0;
+                                                    $n = 0;
+                                                @endphp
+                                                @foreach ($combinedData as $data)
+                                                    <tr>
+                                                        {{-- @php
+                                                echo $data['key2'];
+                                            @endphp --}}
+                                                        <td class="text-center">
+                                                            <div data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                                title="Mã sản phẩm">
+                                                                <select class="selectpicker" data-dropup-auto="false"
+                                                                    data-width="100%" data-live-search="true"
+                                                                    title="Chọn mã sản phẩm"
+                                                                    data-select-all-text="Mã sản phẩm"
+                                                                    data-deselect-all-text="Bỏ chọn" data-size="3"
+                                                                    name="promotion_details[{{ $n++ }}][key1]"
+                                                                    data-live-search-placeholder="Tìm kiếm..."
+                                                                    id="selectCodeProductEdit_{{ $h++ }}">
+                                                                    {{-- @if (isset($data->key1))
+                                                            <option  selected >
+                                                                @foreach ($data->key1 as $value)
+                                                                {{ $value}}
+                                                                @endforeach
+                                                            </option>
+
+                                                        @endif --}}
+                                                                    <option selected value="{{ $data->key1 }}">
+                                                                        {{ $data->key1 }}</option>
+                                                                    @foreach ($products as $product)
+                                                                        <option value="{{ $product->name }}">
+                                                                            {{ $product->code }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center">
+
+                                                            <span id="nameProductEdit_{{ $l++ }}"
+                                                                name="promotion_details[{{ $n++ }}][key2]"
+                                                                class="nameProduct">{{ $data->key2 }}</span>
+
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="form-control"
+                                                                name="promotion_details[{{ $n++ }}][key3]"
+                                                                value="{{ $data->key3 }}">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="form-control"
+                                                                name="promotion_details[{{ $n++ }}][key4]"
+                                                                value="{{ $data->key4 }}">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="form-control"
+                                                                name="promotion_details[{{ $n++ }}][key5]"
+                                                                value="{{ $data->key5 }}">
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <div data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                                title="Mã sản phẩm tặng">
+                                                                <select class="selectpicker" data-dropup-auto="false"
+                                                                    data-width="100%" data-live-search="true"
+                                                                    title="Chọn sản phẩm ..."
+                                                                    data-select-all-text="Mã sản phẩm tặng"
+                                                                    data-deselect-all-text="Bỏ chọn" data-size="3"
+                                                                    name="promotion_details[{{ $n++ }}][key6]"
+                                                                    data-live-search-placeholder="Tìm kiếm..."
+                                                                    id="codeProductBonusEdit_{{ $k++ }}">
+                                                                    <option selected value="{{ $data->key6 }}">
+                                                                        {{ $data->key6 }}</option>
+                                                                    @foreach ($products as $product)
+                                                                        <option value="{{ $product->name }}">
+                                                                            {{ $product->code }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <span id="productBonusEdit_{{ $m++ }}"
+                                                                name="promotion_details[{{ $n++ }}][key7]">{{ $data->key7 }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="form-control"
+                                                                name="promotion_details[{{ $n++ }}][key8]"
+                                                                value="{{ $data->key8 }}">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="form-control"
+                                                                name="promotion_details[{{ $n++ }}][key9]"
+                                                                value="{{ $data->key9 }}">
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <i class="bi bi-plus fs-3 add-spec_edit"
+                                                                style="color: var(--primary-color);cursor: pointer;"></i>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger me-3"
+                                data-bs-dismiss="modal">Hủy</button>
+                            <button id="submitBtn" type="submit" class="btn btn-danger">Lưu</button>
+                        </div>
+                    </form>
                 </div>
-                <form id="addForm" action="{{ route('Promotion.update', ['id'=>$item->id]) }}" method="POST">
-                    @csrf
+            </div>
+        </div>
+
+
+        {{-- Modal chi tiết CTKM --}}
+        <div class="modal fade" id="chiTietCTKM{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h5 class="modal-title w-100" id="exampleModalLabel">Chi tiết chương trình khuyến mại</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-lg-12 mb-3">
@@ -239,65 +524,39 @@
                             <div class="col-lg-4 mb-3">
                                 <input name="code" required type="text" placeholder="Mã CTKM*"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                    title="Mã CTKM*" value="{{$item->code}}">
+                                    title="Mã CTKM*" value="{{ $item->code }}" disabled>
                             </div>
                             <div class="col-lg-4 mb-3">
                                 <input name="name" required type="text" placeholder="Tên CTKM*"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                    title="Tên CTKM*" value="Khuyến mại" value="{{$item->name}}">
+                                    title="Tên CTKM*" value="{{ $item->name }}" disabled>
                             </div>
                             <div class="col-lg-4 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hình thức khuyến mại">
-                                    <select name="promotion_form" class="selectpicker">
-                                        <option value="{{$item->promotion_form}}">{{$item->promotion_form}}</option>
-                                        <option value="">Chọn hình thức khuyến mại
-                                        </option>
-                                        <option value="Tặng sản phẩm" selected>Tặng sản phẩm
-                                        </option>
-                                        <option value="Tặng tiền">Tặng tiền
-                                        </option>
-                                        <option value="Chiết khấu phần trăm(%)">Chiết khấu phần trăm(%)
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 mb-3">
-                                <input name="applicable_date"  type="text" placeholder="Ngày áp dụng"
+                                <input name="name" required type="text" placeholder="Hình thức khuyến mại"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                    title="Ngày áp dụng" value="{{$item->applicable_date}}">
+                                    title="Hình thức khuyến mại" value="{{ $item->promotion_form }}" disabled>
                             </div>
                             <div class="col-lg-4 mb-3">
-                                <input name="end_date"  type="text" placeholder="Ngày kết thúc"
+                                <input name="applicable_date" type="text" placeholder="Ngày áp dụng"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                    title="Ngày kết thúc"  value="{{$item->end_date}}">
+                                    title="Ngày áp dụng" value="{{ $item->applicable_date }}" disabled>
+                            </div>
+                            <div class="col-lg-4 mb-3">
+                                <input name="end_date" type="text" placeholder="Ngày kết thúc" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ngày kết thúc"
+                                    value="{{ $item->end_date }}" disabled>
                             </div>
                             <div class="col-lg-4 mb-3">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Bội số">
-                                            <select name="multiples" class="selectpicker">
-                                                <option value="{{$item->multiples}}">{{$item->multiples}}</option>
-                                                <option value="">Chọn bội số
-                                                </option>
-                                                <option value="Áp dụng" selected>Áp dụng
-                                                </option>
-                                                <option value="Không áp dụng">Không áp dụng
-                                                </option>
-                                            </select>
-                                        </div>
+                                        <input name="multiples" required type="text" placeholder="Bội số"
+                                            class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                            title="Bội số" value="{{ $item->multiples }}" disabled>
                                     </div>
                                     <div class="col-lg-6">
-                                        <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Trạng thái">
-                                            <select name="status" class="selectpicker">
-                                                <option value="{{$item->status}}">{{$item->status}}</option>
-                                                <option value="">Chọn trạng thái
-                                                </option>
-                                                <option value="Hoạt động" selected>Hoạt động
-                                                </option>
-                                                <option value="Khóa">Khóa
-                                                </option>
-                                            </select>
-                                        </div>
+                                        <input name="status" required type="text" placeholder="Trạng thái"
+                                            class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                            title="Trạng thái" value="{{ $item->status }}" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -306,14 +565,15 @@
                                     <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                         data-live-search="true" title="Nhóm khách hàng áp dụng"
                                         data-select-all-text="Nhóm khách hàng áp dụng" data-deselect-all-text="Bỏ chọn"
-                                        data-size="3" name="customer_group_id[]" data-live-search-placeholder="Tìm kiếm..."
-                                        multiple>
-                                        @foreach($customerGroupNames[$item->id] as $customerGroupName)
-                                        <option selected value="{{ $item->customer_group_id}}"> {{ $customerGroupName }}</option>
+                                        data-size="3" name="customer_group_id[]"
+                                        data-live-search-placeholder="Tìm kiếm..." multiple disabled>
+                                        @foreach ($customerGroupNames[$item->id] as $customerGroupName)
+                                            <option selected value="{{ $customerGroupName }}"> {{ $customerGroupName }}
+                                            </option>
                                         @endforeach
-                                        {{-- <option value="{{ $item->customer_group_id }}"> {{ $item->customer_group_id }}</option> --}}
-                                        @foreach ($listgroup as $a )
-                                        <option value="{{ $a->id }}"> {{ $a->name }}</option>
+
+                                        @foreach ($listgroup as $a)
+                                            <option value="{{ $a->id }}"> {{ $a->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -323,9 +583,9 @@
                                     <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                         data-live-search="true" title="Loại khách hàng áp dụng"
                                         data-select-all-text="Loại khách hàng áp dụng" data-deselect-all-text="Bỏ chọn"
-                                        name="customer_type" data-live-search-placeholder="Tìm kiếm..."
-                                        multiple>
-                                        <option value="{{$item->customer_type}}">{{$item->customer_type}}</option>
+                                        data-size="3" name="customer_type" data-live-search-placeholder="Tìm kiếm..."
+                                        multiple disabled>
+                                        <option value="{{ $item->customer_type }}">{{ $item->customer_type }}</option>
                                         <option value="Chọn tất cả" selected>Chọn tất cả
                                         </option>
                                         <option value="Khách lẻ">Khách lẻ
@@ -340,14 +600,14 @@
                                     <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                         data-live-search="true" title="Khách hàng áp dụng"
                                         data-select-all-text="Khách hàng áp dụng" data-deselect-all-text="Bỏ chọn"
-                                        data-size="3" name="customer_id[]" data-live-search-placeholder="Tìm kiếm..."
-                                        multiple>
-                                        @foreach($customerNames[$item->id] as $customerName)
-                                        <option selected value="{{ $item->customer_id}}"> {{ $customerName }}</option>
+                                        data-size="3" name="customer_id" data-live-search-placeholder="Tìm kiếm..."
+                                        multiple disabled>
+                                        @foreach ($customerNames[$item->id] as $customerName)
+                                            <option selected value="{{ $customerName }}"> {{ $customerName }}</option>
                                         @endforeach
-                                     @foreach ($customersList as $customer)
-                                     <option value="{{ $customer->id }}"> {{ $customer->name }}</option>
-                                     @endforeach
+                                        @foreach ($customersList as $customer)
+                                            <option value="{{ $customer->id }}"> {{ $customer->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -357,7 +617,6 @@
                             <div class="col-lg-12 mb-3">
                                 <h5 class="modal-title">2. Chi tiết CTKM</h5>
                             </div>
-
                             <div class="table-responsive" style="min-height: 200px">
                                 <table id="contact" class="table table-responsive table-hover table-bordered">
                                     <thead>
@@ -374,98 +633,89 @@
                                                 tặng</th>
                                             <th class="text-nowrap text-center" style="width: 8%;">Chiết khấu %</th>
                                             <th class="text-nowrap text-center" style="width: 8%;">Tặng tiền</th>
-                                            <th></th>
                                         </tr>
                                     </thead>
-                                    <tbody id="specifications_edit">
+                                    <tbody id="detailCTKM">
                                         @if (!empty($item->promotion_details))
                                             @php
-                                                $h =0;
-                                                $l =0;
-                                                $k =0;
-                                                $m =0;
-                                                $n=0;
+                                                $p = 0;
                                             @endphp
-                                        @foreach ($combinedData as $data)
-                                        <tr>
-                                            {{-- @php
-                                                echo $data['key2'];
-                                            @endphp --}}
-                                            <td class="text-center">
-                                                <div data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Mã sản phẩm">
-                                                    <select class="selectpicker" data-dropup-auto="false"
-                                                        data-width="100%" data-live-search="true"
-                                                        title="Chọn mã sản phẩm" data-select-all-text="Mã sản phẩm"
-                                                        data-deselect-all-text="Bỏ chọn" data-size="3"
-                                                        name="promotion_details[{{$n++}}][key1]" data-live-search-placeholder="Tìm kiếm..."
-                                                        id="selectCodeProductEdit_{{$h++}}">
-                                                        {{-- @if (isset($data->key1))
-                                                            <option  selected >
-                                                                @foreach ($data->key1 as $value)
-                                                                {{ $value}}
-                                                                @endforeach
-                                                            </option>
+                                            @foreach ($combinedData as $data)
+                                                <tr>
+                                                    <td class="text-center">
+                                                        <div data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                            title="Mã sản phẩm">
+                                                            <select class="selectpicker" data-dropup-auto="false"
+                                                                data-width="100%" data-live-search="true"
+                                                                title="Chọn mã sản phẩm"
+                                                                data-select-all-text="Mã sản phẩm"
+                                                                data-deselect-all-text="Bỏ chọn" data-size="3"
+                                                                name="data[0][key1][]"
+                                                                data-live-search-placeholder="Tìm kiếm..."
+                                                                id="selectCodeProductDetail_{{ $p++ }}" multiple
+                                                                disabled>
+                                                                {{-- @if (isset($data->key1))
+                                                    <option  selected >
+                                                        @foreach ($data->key1 as $value)
+                                                        {{ $value}}
+                                                        @endforeach
+                                                    </option>
+                                                @endif --}}
+                                                                <option value="{{ $data->key1 }}" selected>
+                                                                    {{ $data->key1 }}
+                                                            </select>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <span id="nameProductDetail_{{ $p++ }}"
+                                                            class="nameProduct">{{ $data->key2 }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" name="data[0][key2]"
+                                                            value="{{ $data->key3 }}" disabled>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" name="data[0][key3]"
+                                                            value="{{ $data->key4 }}" disabled>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" name="data[0][key3]"
+                                                            value="{{ $data->key5 }}" disabled>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <div data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                            title="Mã sản phẩm tặng">
+                                                            <select class="selectpicker" data-dropup-auto="false"
+                                                                data-width="100%" data-live-search="true"
+                                                                title="Chọn sản phẩm ..."
+                                                                data-select-all-text="Mã sản phẩm tặng"
+                                                                data-deselect-all-text="Bỏ chọn" data-size="3"
+                                                                name="data[0][key4][]"
+                                                                data-live-search-placeholder="Tìm kiếm..."
+                                                                id="codeProductBonusDetail_{{ $p++ }}" multiple
+                                                                disabled>
+                                                                <option value="{{ $data->key6 }}" selected>
+                                                                    {{ $data->key6 }}
+                                                                </option>
 
-                                                        @endif --}}
-                                                            <option selected value="{{$data->key1}}">{{$data->key1}}</option>
-                                                        @foreach ($products as $product )
-                                                        <option value="{{ $product->name}}">{{ $product->code}}</option>
-                                                    @endforeach
-                                                    </select>
-                                                </div>
-                                            </td>
-                                            <td class="text-center">
+                                                            </select>
+                                                        </div>
 
-                                                <span id="nameProductEdit_{{$l++}}" name="promotion_details[{{$n++}}][key2]" class="nameProduct">{{$data->key2}}</span>
-
-                                            </td>
-                                            <td>
-                                                <input type="text" class="form-control" name="promotion_details[{{$n++}}][key3]"
-                                                    value="{{$data->key3}}">
-                                            </td>
-                                            <td>
-                                                <input type="text" class="form-control" name="promotion_details[{{$n++}}][key4]"
-                                                    value="{{$data->key4}}">
-                                            </td>
-                                            <td>
-                                                <input type="text" class="form-control" name="promotion_details[{{$n++}}][key5]"
-                                                    value="{{$data->key5}}">
-                                            </td>
-                                            <td class="text-center">
-                                                <div data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Mã sản phẩm tặng">
-                                                    <select class="selectpicker" data-dropup-auto="false"
-                                                        data-width="100%" data-live-search="true"
-                                                        title="Chọn sản phẩm ..." data-select-all-text="Mã sản phẩm tặng"
-                                                        data-deselect-all-text="Bỏ chọn" data-size="3"
-                                                        name="promotion_details[{{$n++}}][key6]" data-live-search-placeholder="Tìm kiếm..."
-                                                        id="codeProductBonusEdit_{{$k++}}" >
-                                                        <option selected value="{{$data->key6}}">{{$data->key6}}</option>
-                                                        @foreach ($products as $product )
-                                                        <option value="{{ $product->name}}">{{ $product->code}}</option>
-                                                    @endforeach
-                                                    </select>
-                                                </div>
-
-                                            </td>
-                                            <td class="text-center">
-                                                <span id="productBonusEdit_{{$m++}}" name="promotion_details[{{$n++}}][key7]">{{$data->key7}}</span>
-                                            </td>
-                                            <td>
-                                                <input type="text" class="form-control" name="promotion_details[{{$n++}}][key8]"
-                                                    value="{{$data->key8}}">
-                                            </td>
-                                            <td>
-                                                <input type="text" class="form-control" name="promotion_details[{{$n++}}][key9]"
-                                                    value="{{$data->key9}}">
-                                            </td>
-                                            <td class="text-center">
-                                                <i class="bi bi-plus fs-3 add-spec_edit"
-                                                    style="color: var(--primary-color);cursor: pointer;"></i>
-                                            </td>
-                                        </tr>
-                                        @endforeach
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <span
+                                                            id="productBonusDetail_{{ $p++ }}">{{ $data->key7 }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" name="data[0][key5]"
+                                                            value="{{ $data->key8 }}" disabled>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" name="data[0][key6]"
+                                                            value="{{ $data->key9 }}" disabled>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         @endif
                                     </tbody>
                                 </table>
@@ -473,271 +723,34 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
-                        <button id="submitBtn" type="submit" class="btn btn-danger">Lưu</button>
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
                     </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
-    {{-- Modal chi tiết kho --}}
-    <div class="modal fade" id="chiTietCTKM{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">Chi tiết kho</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-12 mb-3">
-                            <h5 class="modal-title">1. Thông tin CTKM</h5>
-                        </div>
-                        <div class="col-lg-4 mb-3">
-                            <input name="code" required type="text" placeholder="Mã CTKM*"
-                                class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                title="Mã CTKM*" value="{{$item->code}}">
-                        </div>
-                        <div class="col-lg-4 mb-3">
-                            <input name="name" required type="text" placeholder="Tên CTKM*"
-                                class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                title="Tên CTKM*" value="Khuyến mại" value="{{$item->name}}">
-                        </div>
-                        <div class="col-lg-4 mb-3">
-                            <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hình thức khuyến mại">
-                                <select name="promotion_form" class="selectpicker">
-                                    <option value="{{$item->promotion_form}}">{{$item->promotion_form}}</option>
-                                    <option value="">Chọn hình thức khuyến mại
-                                    </option>
-                                    <option value="Tặng sản phẩm" selected>Tặng sản phẩm
-                                    </option>
-                                    <option value="Tặng tiền">Tặng tiền
-                                    </option>
-                                    <option value="Chiết khấu phần trăm(%)">Chiết khấu phần trăm(%)
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 mb-3">
-                            <input name="applicable_date"  type="text" placeholder="Ngày áp dụng"
-                                class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                title="Ngày áp dụng" value="{{$item->applicable_date}}">
-                        </div>
-                        <div class="col-lg-4 mb-3">
-                            <input name="end_date"  type="text" placeholder="Ngày kết thúc"
-                                class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                title="Ngày kết thúc"  value="{{$item->end_date}}">
-                        </div>
-                        <div class="col-lg-4 mb-3">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Bội số">
-                                        <select name="multiples" class="selectpicker">
-                                            <option value="{{$item->multiples}}">{{$item->multiples}}</option>
-                                            <option value="">Chọn bội số
-                                            </option>
-                                            <option value="Áp dụng" selected>Áp dụng
-                                            </option>
-                                            <option value="Không áp dụng">Không áp dụng
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Trạng thái">
-                                        <select name="status" class="selectpicker">
-                                            <option value="{{$item->status}}">{{$item->status}}</option>
-                                            <option value="">Chọn trạng thái
-                                            </option>
-                                            <option value="Hoạt động" selected>Hoạt động
-                                            </option>
-                                            <option value="Khóa">Khóa
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 mb-3">
-                            <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nhóm khách hàng áp dụng">
-                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                    data-live-search="true" title="Nhóm khách hàng áp dụng"
-                                    data-select-all-text="Nhóm khách hàng áp dụng" data-deselect-all-text="Bỏ chọn"
-                                    data-size="3" name="customer_group_id[]" data-live-search-placeholder="Tìm kiếm..."
-                                    multiple>
-                                    @foreach($customerGroupNames[$item->id] as $customerGroupName)
-                                    <option selected value="{{ $customerGroupName}}"> {{ $customerGroupName }}</option>
-                                    @endforeach
-
-                                    @foreach ($listgroup as $a )
-                                    <option value="{{ $a->id }}"> {{ $a->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 mb-3">
-                            <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Loại khách hàng áp dụng">
-                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                    data-live-search="true" title="Loại khách hàng áp dụng"
-                                    data-select-all-text="Loại khách hàng áp dụng" data-deselect-all-text="Bỏ chọn"
-                                    data-size="3" name="customer_type" data-live-search-placeholder="Tìm kiếm..."
-                                    multiple>
-                                    <option value="{{$item->customer_type}}">{{$item->customer_type}}</option>
-                                    <option value="Chọn tất cả" selected>Chọn tất cả
-                                    </option>
-                                    <option value="Khách lẻ">Khách lẻ
-                                    </option>
-                                    <option value="Đại lý">Đại lý
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 mb-3">
-                            <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Khách hàng áp dụng">
-                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                    data-live-search="true" title="Khách hàng áp dụng"
-                                    data-select-all-text="Khách hàng áp dụng" data-deselect-all-text="Bỏ chọn"
-                                    data-size="3" name="customer_id" data-live-search-placeholder="Tìm kiếm..."
-                                    multiple>
-                                    @foreach($customerNames[$item->id] as $customerName)
-                                    <option selected value="{{ $customerName}}"> {{ $customerName }}</option>
-                                    @endforeach
-                                 @foreach ($customersList as $customer)
-                                 <option value="{{ $customer->id }}"> {{ $customer->name }}</option>
-                                 @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-12 mb-3">
-                            <h5 class="modal-title">2. Chi tiết CTKM</h5>
-                        </div>
-                        <div class="table-responsive" style="min-height: 200px">
-                            <table id="contact" class="table table-responsive table-hover table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th class="text-nowrap text-center">Mã sản phẩm</th>
-                                        <th class="text-nowrap text-center" style="width: 10%;">Tên SP AD
-                                        </th>
-                                        <th class="text-nowrap text-center" style="width: 8%;">Đạt số lượng</th>
-                                        <th class="text-nowrap text-center" style="width: 8%;">Đạt số tiền</th>
-                                        <th class="text-nowrap text-center" style="width: 8%;">Số lượng SP tặng
-                                        </th>
-                                        <th class="text-nowrap text-center">Mã SP tặng</th>
-                                        <th class="text-nowrap text-center" style="width: 10%;">Tên SP
-                                            tặng</th>
-                                        <th class="text-nowrap text-center" style="width: 8%;">Chiết khấu %</th>
-                                        <th class="text-nowrap text-center" style="width: 8%;">Tặng tiền</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="detailCTKM">
-                                    @if (!empty($item->promotion_details))
-                                    @php
-                                        $p=0;
-                                    @endphp
-                                    @foreach ($combinedData as $data)
-                                    <tr>
-                                        <td class="text-center">
-                                            <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Mã sản phẩm">
-                                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                                    data-live-search="true" title="Chọn mã sản phẩm"
-                                                    data-select-all-text="Mã sản phẩm" data-deselect-all-text="Bỏ chọn"
-                                                    data-size="3" name="data[0][key1][]"
-                                                    data-live-search-placeholder="Tìm kiếm..."
-                                                    id="selectCodeProductDetail_{{$p++}}" multiple disabled>
-                                                    {{-- @if (isset($data->key1))
-                                                    <option  selected >
-                                                        @foreach ($data->key1 as $value)
-                                                        {{ $value}}
-                                                        @endforeach
-                                                    </option>
-                                                @endif --}}
-                                                <option value="{{$data->key1}}" selected>{{$data->key1}}
-                                                </select>
-                                            </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <span id="nameProductDetail_{{$p++}}" class="nameProduct">{{$data->key2}}</span>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" name="data[0][key2]"
-                                                value="{{$data->key3}}" disabled >
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" name="data[0][key3]"
-                                                value="{{$data->key4}}" disabled>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" name="data[0][key3]"
-                                                value="{{$data->key5}}" disabled>
-                                        </td>
-                                        <td class="text-center">
-                                            <div data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                title="Mã sản phẩm tặng">
-                                                <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                                    data-live-search="true" title="Chọn sản phẩm ..."
-                                                    data-select-all-text="Mã sản phẩm tặng"
-                                                    data-deselect-all-text="Bỏ chọn" data-size="3"
-                                                    name="data[0][key4][]" data-live-search-placeholder="Tìm kiếm..."
-                                                    id="codeProductBonusDetail_{{$p++}}" multiple disabled>
-                                                    <option value="{{$data->key6}}" selected>{{$data->key6}}
-                                                    </option>
-
-                                                </select>
-                                            </div>
-
-                                        </td>
-                                        <td class="text-center">
-                                            <span id="productBonusDetail_{{$p++}}">{{$data->key7}}</span>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" name="data[0][key5]"
-                                                value="{{$data->key8}}" disabled>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" name="data[0][key6]"
-                                                value="{{$data->key9}}" disabled>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                    @endif
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
                 </div>
             </div>
         </div>
-    </div>
 
-    {{-- Modal Xóa kho --}}
-    <div class="modal fade" id="xoaCTKM{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-danger" id="exampleModalLabel">Xóa chương trình khuyến mại</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Bạn có thực sự muốn xoá chương trình khuyến mại này không?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
-                    <form action="{{ route('Promotion.destroy', ['id'=>$item->id]) }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-danger">Xóa</button>
-                    </form>
+        {{-- Modal Xóa kho --}}
+        <div class="modal fade" id="xoaCTKM{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-danger" id="exampleModalLabel">Xóa chương trình khuyến mại</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Bạn có thực sự muốn xoá chương trình khuyến mại này không?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
+                        <form action="{{ route('Promotion.destroy', ['id' => $item->id]) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Xóa</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     @endforeach
 
     <!-- Modal thêm kho -->
@@ -780,14 +793,13 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 mb-3">
-                                <input name="applicable_date"  type="text" placeholder="Ngày áp dụng"
+                                <input name="applicable_date" type="text" placeholder="Ngày áp dụng"
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="Ngày áp dụng">
                             </div>
                             <div class="col-lg-4 mb-3">
-                                <input name="end_date"  type="text" placeholder="Ngày kết thúc"
-                                    class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                    title="Ngày kết thúc">
+                                <input name="end_date" type="text" placeholder="Ngày kết thúc" class="form-control"
+                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ngày kết thúc">
                             </div>
                             <div class="col-lg-4 mb-3">
                                 <div class="row">
@@ -822,11 +834,11 @@
                                     <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                         data-live-search="true" title="Nhóm khách hàng áp dụng"
                                         data-select-all-text="Nhóm khách hàng áp dụng" data-deselect-all-text="Bỏ chọn"
-                                        data-size="3" name="customer_group_id[]" data-live-search-placeholder="Tìm kiếm..."
-                                        multiple >
-                                       @foreach ($listgroup as $item )
+                                        data-size="3" name="customer_group_id[]"
+                                        data-live-search-placeholder="Tìm kiếm..." multiple>
+                                        @foreach ($listgroup as $item)
                                             <option value="{{ $item->id }}"> {{ $item->name }}</option>
-                                       @endforeach
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -853,7 +865,7 @@
                                         data-select-all-text="Khách hàng áp dụng" data-deselect-all-text="Bỏ chọn"
                                         data-size="3" name="customer_id[]" data-live-search-placeholder="Tìm kiếm..."
                                         multiple>
-                                        @foreach ($customersList as $item )
+                                        @foreach ($customersList as $item)
                                             <option value="{{ $item->id }}"> {{ $item->name }}</option>
                                         @endforeach
                                     </select>
@@ -893,27 +905,34 @@
                                                         data-width="100%" data-live-search="true"
                                                         title="Chọn mã sản phẩm" data-select-all-text="Mã sản phẩm"
                                                         data-deselect-all-text="Bỏ chọn" data-size="3"
-                                                        name="promotion_details[0][key1]" data-live-search-placeholder="Tìm kiếm..."
-                                                        id="selectCodeProduct_0" >
-                                                        @foreach ($products as $item )
-                                                            <option value="{{ $item->name}}">{{ $item->code}}</option>
+                                                        name="promotion_details[0][key1]"
+                                                        data-live-search-placeholder="Tìm kiếm..."
+                                                        id="selectCodeProduct_0">
+                                                        @foreach ($products as $item)
+                                                            <option value="{{ $item->name }}">{{ $item->code }}
+                                                            </option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                             </td>
                                             <td class="text-center">
-                                                <input id="nameProduct_0" class="nameProduct form-control"  name="promotion_details[0][key2]"  readonly>
+                                                <input id="nameProduct_0" class="nameProduct form-control"
+                                                    name="promotion_details[0][key2]" readonly>
 
 
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control" data-bs-toggle="tooltip" ata-bs-placement="top" placeholder="Thông số" name="promotion_details[0][key3]">
+                                                <input type="text" class="form-control" data-bs-toggle="tooltip"
+                                                    ata-bs-placement="top" placeholder="Thông số"
+                                                    name="promotion_details[0][key3]">
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control" name="promotion_details[0][key4]">
+                                                <input type="text" class="form-control"
+                                                    name="promotion_details[0][key4]">
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control" name="promotion_details[0][key5]">
+                                                <input type="text" class="form-control"
+                                                    name="promotion_details[0][key5]">
                                             </td>
                                             <td class="text-center">
                                                 <div data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -922,23 +941,28 @@
                                                         data-width="100%" data-live-search="true"
                                                         title="Chọn sản phẩm ..." data-select-all-text="Mã sản phẩm tặng"
                                                         data-deselect-all-text="Bỏ chọn" data-size="3"
-                                                        name="promotion_details[0][key6]" data-live-search-placeholder="Tìm kiếm..."
-                                                        id="codeProductBonus_0" >
-                                                        @foreach ($products as $item )
-                                                        <option value="{{ $item->name}}">{{ $item->code}}</option>
+                                                        name="promotion_details[0][key6]"
+                                                        data-live-search-placeholder="Tìm kiếm..."
+                                                        id="codeProductBonus_0">
+                                                        @foreach ($products as $item)
+                                                            <option value="{{ $item->name }}">{{ $item->code }}
+                                                            </option>
                                                         @endforeach
                                                     </select>
                                                 </div>
 
                                             </td>
                                             <td class="text-center">
-                                                <input id="productBonus_0" name="promotion_details[0][key7]" class="form-control" readonly>
+                                                <input id="productBonus_0" name="promotion_details[0][key7]"
+                                                    class="form-control" readonly>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control" name="promotion_details[0][key8]">
+                                                <input type="text" class="form-control"
+                                                    name="promotion_details[0][key8]">
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control" name="promotion_details[0][key9]">
+                                                <input type="text" class="form-control"
+                                                    name="promotion_details[0][key9]">
                                             </td>
                                             <td class="text-center">
                                                 <i class="bi bi-plus fs-3 add-spec"
@@ -959,7 +983,7 @@
         </div>
     </div>
 
-   
+
 
 @endsection
 @section('footer-script')
@@ -969,8 +993,10 @@
 
     <!-- Chart Js -->
     <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chart.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-stacked100@1.0.0.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-datalabels@2.0.0.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-stacked100@1.0.0.js') }}">
+    </script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-datalabels@2.0.0.js') }}">
+    </script>
 
     <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_khachHangActive.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_khachHangMoi.js') }}"></script>
@@ -1038,8 +1064,8 @@
                                                         data-deselect-all-text="Bỏ chọn" data-size="3"
                                                         name="promotion_details[${specCount}][key1]" data-live-search-placeholder="Tìm kiếm..."
                                                         id="selectCodeProduct_${specCount}" >
-                                                        @foreach ($products as $item )
-                                                            <option value="{{ $item->name}}">{{ $item->code}}</option>
+                                                        @foreach ($products as $item)
+                                                            <option value="{{ $item->name }}">{{ $item->code }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -1065,8 +1091,8 @@
                                                         data-deselect-all-text="Bỏ chọn" data-size="3"
                                                         name="promotion_details[${specCount}][key6]" data-live-search-placeholder="Tìm kiếm..."
                                                         id="codeProductBonus_${specCount}" >
-                                                        @foreach ($products as $item )
-                                                            <option value="{{ $item->name}}">{{ $item->code}}</option>
+                                                        @foreach ($products as $item)
+                                                            <option value="{{ $item->name }}">{{ $item->code }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -1122,7 +1148,8 @@
 
                     removeSpecIcons.forEach(removeIcon => {
                         removeIcon.addEventListener("click", function() {
-                            newSpecDiv.remove();
+                            const rowToRemove = removeIcon.closest("tr");
+                            rowToRemove.remove();
                         });
                     });
 
@@ -1163,26 +1190,26 @@
 
             const rows = document.querySelectorAll("#specifications_edit tr");
 
-            rows.forEach((row,index) => {
+            rows.forEach((row, index) => {
                 updateSelectedValues(`selectCodeProductEdit_${index}`, `nameProductEdit_${index}`);
                 updateSelectedValues(`codeProductBonusEdit_${index}`, `productBonusEdit_${index}`);
 
                 const selectCodeProduct_0 = document.querySelector(`#selectCodeProductEdit_${index}`);
                 const nameProductSpan_0 = document.querySelector(`#nameProductEdit_${index}`);
 
-                 selectCodeProduct_0.addEventListener("change", function() {
-                const selectedOptions = Array.from(selectCodeProduct_0.selectedOptions);
-                const selectedValues = selectedOptions.map(option => option.value);
-                nameProductSpan_0.textContent = selectedValues.join(", ");
+                selectCodeProduct_0.addEventListener("change", function() {
+                    const selectedOptions = Array.from(selectCodeProduct_0.selectedOptions);
+                    const selectedValues = selectedOptions.map(option => option.value);
+                    nameProductSpan_0.textContent = selectedValues.join(", ");
                 });
 
                 const codeProductBonus_0 = document.querySelector(`#codeProductBonusEdit_${index}`);
                 const productBonusSpan_0 = document.querySelector(`#productBonusEdit_${index}`);
 
                 codeProductBonus_0.addEventListener("change", function() {
-                const selectedOptions = Array.from(codeProductBonus_0.selectedOptions);
-                const selectedValues = selectedOptions.map(option => option.value);
-                productBonusSpan_0.textContent = selectedValues.join(", ");
+                    const selectedOptions = Array.from(codeProductBonus_0.selectedOptions);
+                    const selectedValues = selectedOptions.map(option => option.value);
+                    productBonusSpan_0.textContent = selectedValues.join(", ");
                 });
             })
             // Update selected values for the initial row
@@ -1292,7 +1319,8 @@
 
                     removeSpecIcons.forEach(removeIcon => {
                         removeIcon.addEventListener("click", function() {
-                            newSpecDiv.remove();
+                            const rowToRemove = removeIcon.closest("tr");
+                            rowToRemove.remove();
                         });
                     });
 

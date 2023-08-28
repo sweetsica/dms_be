@@ -66,7 +66,6 @@
                                                         id="delete-selected-button" style="display: none;">Xóa</button>
                                                 </div><br>
                                                 <div class="table-responsive">
-
                                                     <table id="dsDaoTao"
                                                         class="table table-responsive table-hover table-bordered filter">
                                                         <thead>
@@ -244,7 +243,8 @@
                                 <div class="col-6 mb-3">
 
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn đơn vị cha">
-                                        <select name="parent" required class="selectpicker" data-dropup-auto="false" data-live-search="true">
+                                        <select name="parent" required class="selectpicker" data-dropup-auto="false"
+                                            data-live-search="true">
                                             <?php if( $item->parent == 0){ ?>
                                             <option value="0">Chọn
                                                 đơn
@@ -278,7 +278,8 @@
                                 </div>
                                 <div class="col-6 mb-3">
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn trưởng bộ phận">
-                                        <select name="ib_lead" class="selectpicker" data-dropup-auto="false" data-live-search="true">
+                                        <select name="ib_lead" class="selectpicker" data-dropup-auto="false"
+                                            data-live-search="true">
                                             <?php if( $item->ib_lead == 0){ ?>
                                             <option value="0">Chọn
                                                 trưởng bộ phận
@@ -424,7 +425,8 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Đơn vị công tác">
-                                    <select disabled name="department_id" class="selectpicker" data-dropup-auto="false" data-live-search="true">
+                                    <select disabled name="department_id" class="selectpicker" data-dropup-auto="false"
+                                        data-live-search="true">
                                         <?php if( $item->department_id == null){ ?>
                                         <option value="">Chọn đơn
                                             vị công tác</option>
@@ -472,8 +474,8 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Vị trí chức danh">
-                                    <select disabled name="position_id" class="selectpicker" data-dropup-auto="false" data-live-search="true"
-                                        multiple>
+                                    <select disabled name="position_id" class="selectpicker" data-dropup-auto="false"
+                                        data-live-search="true" multiple>
                                         <?php if( $item->position_id == null){ ?>
                                         <option value="">Vị trí
                                             chức danh</option>
@@ -524,7 +526,8 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Địa bàn">
-                                    <select disabled name="area_id" class="selectpicker" data-dropup-auto="false" data-live-search="true">
+                                    <select disabled name="area_id" class="selectpicker" data-dropup-auto="false"
+                                        data-live-search="true">
                                         <?php if( $item->area_id == null){ ?>
                                         <option value="">Địa bàn
                                         </option>
@@ -543,7 +546,8 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Quản lý trực tiếp">
-                                    <select disabled name="manage" class="selectpicker" data-dropup-auto="false" data-live-search="true"> 
+                                    <select disabled name="manage" class="selectpicker" data-dropup-auto="false"
+                                        data-live-search="true">
                                         <?php if( $item->manage == null){ ?>
                                         <option value="">Quản lý
                                             trực tiếp</option>
@@ -646,7 +650,8 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn đơn vị cha">
-                                    <select name="parent" required class="selectpicker" data-dropup-auto="false" data-live-search="true">
+                                    <select name="parent" required class="selectpicker" data-dropup-auto="false"
+                                        data-live-search="true">
                                         <option value="0">Chọn đơn vị cha</option>
                                         @foreach ($departmentlists as $item)
                                             <option value="{{ $item->id }}">
@@ -665,7 +670,8 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn trưởng bộ phận">
-                                    <select name="ib_lead" required class="selectpicker" data-dropup-auto="false" data-live-search="true">
+                                    <select name="ib_lead" required class="selectpicker" data-dropup-auto="false"
+                                        data-live-search="true">
                                         <option value="0">Chọn trưởng bộ phận</option>
                                         @foreach ($UnitLeaderList as $item)
                                             <option value="{{ $item->id }}">
@@ -682,9 +688,12 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
-                                <button id="loadingBtn" style="display: none;" class="btn btn-danger" type="button" disabled>
-                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                <button type="button" class="btn btn-outline-danger me-3"
+                                    data-bs-dismiss="modal">Hủy</button>
+                                <button id="loadingBtn" style="display: none;" class="btn btn-danger" type="button"
+                                    disabled>
+                                    <span class="spinner-border spinner-border-sm" role="status"
+                                        aria-hidden="true"></span>
                                     Loading...
                                 </button>
                                 <button id="submitBtn" type="submit" class="btn btn-danger">Tạo</button>
@@ -717,8 +726,8 @@
                                     <select id="select-status" class="selectpicker select_filter"
                                         data-dropup-auto="false" title="Lọc theo Đơn vị cha" name='don_vi_me'>
                                         @foreach ($departmentList as $item)
-                                        @if ($item->donvime)
-                                            <option value="{{ $item->parent}}">{{ $item->donvime->name}}</option>
+                                            @if ($item->donvime)
+                                                <option value="{{ $item->parent }}">{{ $item->donvime->name }}</option>
                                             @endif
                                         @endforeach
                                     </select>
