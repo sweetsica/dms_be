@@ -13,7 +13,11 @@ class CustomerGroupController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search');
-
+        $pattern = '/^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)\s+.*/';
+        if (preg_match($pattern, $search)) {
+            Session::flash('error', 'Lỗi đầu vào khi search');
+            return back();
+        }
         $CustomerGroupList = CustomerGroup::where("customer_group.code", "like", "%$search%")->paginate(5);
         
         $positionListTree = Position::where('parent', 0)->with('donViCon')->get();

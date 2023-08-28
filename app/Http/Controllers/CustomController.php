@@ -39,10 +39,15 @@ class CustomController extends Controller
             $limit = 10;
             $listCustom = Custom::query();
             if ($q) {
+                $pattern = '/^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)\s+.*/';
+            if (preg_match($pattern, $q)) {
+                Session::flash('error', 'Lỗi đầu vào khi search');
+                return back();
+                }
                 $listCustom = $listCustom->where('code', 'like', '%' . $q . '%')
                     ->orWhere('name', 'like', '%' . $q . '%');
             }
-
+            
             $listCustom = $listCustom->orderByDesc('id')->paginate($limit);
 
             $listVersion = Version::all();

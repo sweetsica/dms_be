@@ -12,6 +12,11 @@ class UnitController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search');
+        $pattern = '/^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)\s+.*/';
+        if (preg_match($pattern, $search)) {
+            Session::flash('error', 'Lỗi đầu vào khi search');
+            return back();
+        }
         $UnitList = Unit::where("unit.code", "like", "%$search%")->orWhere("unit.name", "like", "%$search%")->paginate(10);
         return view('don_vi_tinh.index', [
             'search' => $search,

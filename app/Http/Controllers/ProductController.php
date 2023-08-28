@@ -56,15 +56,11 @@ class ProductController extends Controller
             $limit = 10;
             $listProduct = Product::query();
             if ($q) {
-                if (strlen($q) >= 50) {
-                    $q = substr($q, 0, 47);
-                    $q = $q.'...';
-                }
-                // $pattern = '/^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)\s+.*/';
-                // if (preg_match($pattern, $q)) {
-                //     Session::flash('error', 'Lỗi đầu vào khi search');
-                //     return back();
-                // }
+                $pattern = '/^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)\s+.*/';
+                if (preg_match($pattern, $q)) {
+                    Session::flash('error', 'Lỗi đầu vào khi search');
+                    return back();
+                }               
                 $listProduct = $listProduct->where('code', 'like', '%' . $q . '%')
                     ->orWhere('name', 'like', '%' . $q . '%');
             }

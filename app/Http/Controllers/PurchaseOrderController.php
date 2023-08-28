@@ -38,6 +38,11 @@ class PurchaseOrderController extends Controller
             'suppliers.days_owed',
             'suppliers.status',
         );
+        $pattern = '/^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)\s+.*/';
+        if (preg_match($pattern, $search)) {
+            Session::flash('error', 'Lỗi đầu vào khi search');
+            return back();
+        }
         if($search != NULL) {
             $query->where("suppliers.name", "like", "%$search%");
         }

@@ -6,6 +6,7 @@ use App\Models\Area;
 use App\Models\Department;
 use App\Models\UnitLeader;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AreaController extends Controller
 {
@@ -22,10 +23,11 @@ class AreaController extends Controller
             'area.area',
             'department.name as department_name'
         );
-        if (strlen($search) >= 50) {
-            $search = substr($search, 0, 47);
-            $search = $search.'...';
-        }
+        $pattern = '/^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)\s+.*/';
+        if (preg_match($pattern, $search)) {
+            Session::flash('error', 'Lỗi đầu vào khi search');
+            return back();
+        }        
         if($search != NULL) {
             $query->where("area.name", "like", "%$search%");
         }

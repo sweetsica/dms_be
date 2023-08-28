@@ -34,6 +34,11 @@ class WareHouseController extends Controller
                 'ware_houses.status',
                 'personnel.name as manage_name',   
             );
+        $pattern = '/^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)\s+.*/';
+            if (preg_match($pattern, $search)) {
+                Session::flash('error', 'Lỗi đầu vào khi search');
+                return back();
+            }
         if($search != NULL) {
             $query->where("ware_houses.name", "like", "%$search%");
         }

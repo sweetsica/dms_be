@@ -23,6 +23,11 @@ class LocalityController extends Controller
             'locality.area_id',
             'area.name as area_name'
         );
+        $pattern = '/^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)\s+.*/';
+        if (preg_match($pattern, $search)) {
+            Session::flash('error', 'Lỗi đầu vào khi search');
+            return back();
+        }
         if (strlen($search) >= 50) {
             $search = substr($search, 0, 47);
             $search = $search.'...';

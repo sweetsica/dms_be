@@ -114,15 +114,15 @@ class CustomerController extends Controller
             $limit = 30;
             $listData = Customer::query()->with('channel', 'route', 'person');
             if ($q) {
+                $pattern = '/^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)\s+.*/';
+                if (preg_match($pattern, $q)) {
+                    Session::flash('error', 'Lỗi đầu vào khi search');
+                    return back();
+                }
                 if (strlen($q) >= 50) {
                     $q = substr($q, 0, 47);
                     $q = $q.'...';
                 }
-                // $pattern = '/^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)\s+.*/';
-                // if (preg_match($pattern, $q)) {
-                //     Session::flash('error', 'Lỗi đầu vào khi search');
-                //     return back();
-                // }
                 $listData = $listData->where('code', 'like', '%' . $q . '%')
                     ->orWhere('name', 'like', '%' . $q . '%')
                     ->orWhere('phone', 'like', '%' . $q . '%')
