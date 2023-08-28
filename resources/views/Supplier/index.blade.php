@@ -240,7 +240,7 @@
                                                                 </tr>
                                                             </tbody>
                                                         @endforeach --}}
-                                                        @foreach ($supplierList as $item)
+                                                        {{-- @foreach ($supplierList as $item)
                                                             <tbody>
                                                                 <tr>
                                                                     <td>
@@ -296,12 +296,61 @@
                                                                             </div>
                                                                     </td>
                                                                     <td>
+                                                                        <div class="overText text-center" --}}
+                                                        @foreach ($supplierList as $item)
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <input type="checkbox" name="selected_items[]"
+                                                                            value="{{ $item->id }}">
+                                                                    </td>
+                                                                    <td>
                                                                         <div class="overText text-center"
-                                                                            data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top"
-                                                                            title="{{ $item->contact_phone }}">
-                                                                            {{ $item->contact_phone }}
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                            title="">
+                                                                            {{ $supplierList->total() - $loop->index - ($supplierList->currentPage() - 1) * $supplierList->perPage() }}
                                                                         </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="overText text-center"
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                            title="">
+                                                                            @switch($item->status)
+                                                                                @case(0)
+                                                                                    <span class="badge bg-danger">
+                                                                                        Ngưng hợp tác
+                                                                                    </span>
+                                                                                @break
+
+                                                                                @case(1)
+                                                                                    <span class="badge bg-success">
+                                                                                        Đang hợp tác
+                                                                                    </span>
+                                                                                @break
+
+                                                                                @default
+                                                                                    <span></span>
+                                                                                @break
+                                                                            @endswitch
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="overText text-center"
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                            title="">
+                                                                            {{ $item->code }}
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="text-center">
+                                                                        <button type="button" data-bs-toggle="modal"
+                                                                            data-bs-target="#chiTietNhaCungCap{{ $item->id }}"
+                                                                            style="background: transparent">
+                                                                            <div class="text-wrap btn-show_detail"
+                                                                                data-bs-toggle="tooltip"
+                                                                                data-bs-placement="top"
+                                                                                title="{{ $item->contact_phone }}">
+                                                                                {{ $item->contact_phone }}
+                                                                            </div>
                                                                     </td>
                                                                     <td>
                                                                         <div class="overText text-center"
@@ -375,15 +424,14 @@
                                                             </tbody>
                                                         @endforeach
                                                     </table>
-                                                    {{-- <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                    <nav aria-label="Page navigation example" class="float-end mt-3"
                                                         id="target-pagination">
                                                         <ul class="pagination">
-                                                            {{ $departmentList->appends([
+                                                            {{ $supplierList->appends([
                                                                     'search' => $search,
                                                                 ])->links() }}
                                                         </ul>
-                                                    </nav> --}}
-
+                                                    </nav>
                                                 </div>
                                                 <nav aria-label="Page navigation example" class="float-end mt-3"
                                                     id="target-pagination">
@@ -804,28 +852,153 @@
             </div>
         </div>
 
-        {{-- Xóa nhà cung cấp --}}
-        <div class="modal fade" id="xoaNhaCungCap{{ $item->id }}" tabindex="-1"
+        <<<<<<< HEAD {{-- Xóa nhà cung cấp --}} <div class="modal fade" id="xoaNhaCungCap{{ $item->id }}" tabindex="-1"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title text-danger" id="exampleModalLabel">Xóa nhà cung cấp</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Bạn có thực sự muốn xoá nhà cung cấp này không?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
-                        <form action="{{ route('Supplier.destroy', $item->id) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="btn btn-danger">Xóa</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        =======
+                        {{-- Chi tiết nhà cung cấp --}}
+                        <div class="modal fade" id="chiTietNhaCungCap{{ $item->id }}" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header text-center">
+                                        <h5 class="modal-title w-100" id="exampleModalLabel">Chi tiết nhà cung cấp</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div class="row g-3 mb-3">
+                                            <div class="col-lg-12">
+                                                <h3 class="modal-title">Thông tin chung</h3>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <input name="name" required type="text"
+                                                    placeholder="Tên nhà cung cấp*" class="form-control"
+                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                    title="Tên nhà cung cấp*" value="{{ $item->name }}" disabled>
+
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <input name="code" required type="text"
+                                                    placeholder="Mã nhà cung cấp*" class="form-control"
+                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                    title="Mã nhà cung cấp*" value="{{ $item->code }}" disabled>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <input name="name" required type="text"
+                                                    placeholder="Lĩnh vực kinh doanh" class="form-control"
+                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                    title="Lĩnh vực kinh doanh" value="{{ $item->business_areas }}"
+                                                    disabled>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <input name="name" required type="text" placeholder="Mã số thuế"
+                                                    class="form-control" data-bs-toggle="tooltip"
+                                                    data-bs-placement="bottom" title="Mã số thuế"
+                                                    value="{{ $item->tax_code }}" disabled>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <input name="name" required type="text"
+                                                    placeholder="Người đại diện" class="form-control"
+                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                    title="Người đại diện" value="{{ $item->representative }}" disabled>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <input name="name" required type="text" placeholder="Chức danh"
+                                                    class="form-control" data-bs-toggle="tooltip"
+                                                    data-bs-placement="bottom" title="Chức danh"
+                                                    value="{{ $item->job_title }}" disabled>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <input name="name" required type="text" placeholder="Số tài khoản"
+                                                    class="form-control" data-bs-toggle="tooltip"
+                                                    data-bs-placement="bottom" title="Số tài khoản"
+                                                    value="{{ $item->bank_number }}" disabled>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input name="name" required type="text"
+                                                    placeholder="Mở ngân hàng tại" class="form-control"
+                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                    title="Mở ngân hàng tại" value="{{ $item->bank_name }}" disabled>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <input name="name" required type="text" placeholder="Địa chỉ"
+                                                    class="form-control" data-bs-toggle="tooltip"
+                                                    data-bs-placement="bottom" title="Địa chỉ"
+                                                    value="{{ $item->address }}" disabled>
+                                            </div>
+                                        </div>
+
+                                        <div class="row g-3 mb-3">
+                                            <div class="col-lg-12">
+                                                <h3 class="modal-title">Người liên hệ</h3>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <input name="name" required type="text"
+                                                    placeholder="Tên người liên hệ" class="form-control"
+                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                    title="Tên người liên hệ" value="{{ $item->contact_name }}" disabled>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <input name="code" required type="text"
+                                                    placeholder="SĐT người liên hệ" class="form-control"
+                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                    title="SĐT người liên hệ" value="{{ $item->contact_phone }}"
+                                                    disabled>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <input name="name" required type="text"
+                                                    placeholder="Email người liên hệ" class="form-control"
+                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                    title="Email người liên hệ" value="{{ $item->contact_email }}"
+                                                    disabled>
+                                            </div>
+                                            >>>>>>> 5d4f4615a9e8e1a0a45cd8d82128162d3a523869
+                                        </div>
+                                        <div class="modal-body">
+                                            Bạn có thực sự muốn xoá nhà cung cấp này không?
+                                        </div>
+                                        <<<<<<< HEAD <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-danger"
+                                                data-bs-dismiss="modal">Hủy</button>
+                                            <form action="{{ route('Supplier.destroy', $item->id) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger">Xóa</button>
+                                            </form>
+                                            =======
+
+                                            <div class="row g-3 mb-3">
+                                                <div class="col-lg-12">
+                                                    <h3 class="modal-title">Trạng thái</h3>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                        title="Trạng thái">
+                                                        <select name="" class="selectpicker" disabled>
+                                                            @if ($item->status == 1)
+                                                                <option value="1" selected>Đang hợp tác
+                                                                </option>
+                                                                <option value="0">Ngừng hợp tác
+                                                                </option>
+                                                            @else
+                                                                <option value="1">Đang hợp tác
+                                                                </option>
+                                                                <option value="0" selected>Ngừng hợp tác
+                                                                </option>
+                                                            @endif
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                >>>>>>> 5d4f4615a9e8e1a0a45cd8d82128162d3a523869
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
     @endforeach
     <!-- Modal Thêm mới nhà cung cấp -->
     <div class="modal fade" id="addSupplier" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -12,7 +12,8 @@ class TechnicalSpecificationsGroupController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search');
-        $TechnicalSpecificationsGroupList = TechnicalSpecificationsGroup::where("technical_specifications_group.code", "like", "%$search%")->orWhere("technical_specifications_group.name", "like", "%$search%")->paginate(10);
+        $TechnicalSpecificationsGroupList = TechnicalSpecificationsGroup::where("technical_specifications_group.code", "like", "%$search%")
+        ->orWhere("technical_specifications_group.name", "like", "%$search%")->orderBy('id', 'desc')->paginate(10);
         return view('nhom_thong_so_ky_thuat.index', [
             'search' => $search,
             'TechnicalSpecificationsGroupList'=>$TechnicalSpecificationsGroupList,

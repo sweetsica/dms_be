@@ -25,16 +25,23 @@ class AuthenticateController extends Controller
         try {
             $intendedUrl = $request->session()->get('url.intended');
             $email_phone = $request->input('email_phone');
-            // $phone = $request->input('phone');
+            // $phone = $request->input('email_phone');
             $password = $request->input('password');
 
-            $account = Personnel::where('email', $email_phone)->orWhere('phone', $email_phone)->where('password', $password)->firstOrFail();
-            if ($account) {
+
+            // $account = Personnel::where('email', $email_phone)->where('phone', $email_phone)->first();
+            $account = Personnel::where(function ($query) use ($email_phone) {
+                $query->where('email', $email_phone)
+                      ->orWhere('phone', $email_phone);
+            })->first();
+            if ($account && $account->password===$password) {
+                // if ($account_login_phone ) {
                 if ($account->status == "Đang làm việc") {
                     $account->load('department');
                     $departmentName = $account->department ? $account->department->name : "Unknown";
                     $request->session()->put('department_name', $departmentName);
                     $request->session()->put('user', $account);
+                    // $request->session()->put('user', $account);
                     $request->session()->put('statsus', $account->role_id);
 
                     if ($intendedUrl) {
@@ -45,7 +52,8 @@ class AuthenticateController extends Controller
                     return redirect()->back()
                         ->withInput()->with('loginError', 'Tài khoản của bạn không hoạt động');
                 }
-            } else {
+            }
+            else {
                 return redirect()->back()
                     ->withInput()->with('loginError', 'Sai tài khoản hoặc mật khẩu');
             }

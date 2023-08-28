@@ -19,6 +19,7 @@ class DepartmentController extends Controller
 
     public function index(Request $request)
     {
+
         $search = $request->get('search');
         $don_vi_me = $request->get('don_vi_me');
         $leader_name = $request->get('leader_name');
@@ -50,7 +51,7 @@ class DepartmentController extends Controller
         if ($search != NULL) {
             $query->orWhere("personnel.name", "like", "%$search%");
         }
-        $departmentList = $query->paginate(15);
+        $departmentList = $query->orderBy('department.id', 'desc')->paginate(15);
         // dd($departmentList);
         $UnitLeaderList = Personnel::all();
         $Department = Department::all();
@@ -88,6 +89,7 @@ class DepartmentController extends Controller
             'roleList' => $roleList,
             'localityList' => $localityList,
             'personnellists' => $personnellists,
+
         ]);
     }
 
@@ -327,8 +329,24 @@ class DepartmentController extends Controller
     {
         Department::destroy($id);
         // $selectedItems = $request->input('selected_items', []);
-        Session::flash('success', 'Đã xoá!');
-        return redirect()->back();
+        // Session::flash('success', 'Đã xoá!');
+        // return redirect()->back();
+        // Department::destroy($id);
+        // $record = Department::find($id);
+        // if (!$record) {
+        //     // Nếu không tìm thấy bản ghi, chuyển người dùng trở lại trang trước đó
+        //     return back()->with('error', 'Bản ghi không tồn tại.');
+        // }
+        // $record->delete();
+        // return back()->with('success', 'Bản ghi đã được xóa thành công.');
+
+        // return redirect()->route('department.index');
+
+        $route = Department::findOrFail($id);
+        $route->delete();
+
+        Session::flash('success', "Xoá tuyến thành công");
+        return redirect()->route('department.index');
     }
 
     public function delete(Request $request)

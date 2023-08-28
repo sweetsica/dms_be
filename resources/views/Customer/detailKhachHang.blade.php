@@ -56,23 +56,23 @@
                                                         <img class="img-slider" src="{{ asset($customer->image) }}" />
                                                     </div>
                                                     <!-- <div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                            <img class="img-slider" src="{{ asset('assets/img/oto-2.png') }}" />
-                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                        <div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                            <img class="img-slider" src="{{ asset('assets/img/oto-3.png') }}" />
-                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                        <div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                            <img class="img-slider" src="{{ asset('assets/img/oto-4.png') }}" />
-                                                                                                                                                                                                                                                                                                                                                                                                                                        </div> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                <img class="img-slider" src="{{ asset('assets/img/oto-2.png') }}" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                            <div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                <img class="img-slider" src="{{ asset('assets/img/oto-3.png') }}" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                            <div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                <img class="img-slider" src="{{ asset('assets/img/oto-4.png') }}" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                            </div> -->
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-12">
                                                 <div class="slider slider-nav">
                                                     <!-- <div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                            <img src="{{ asset('assets/img/avatardefault.jpg') }}"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                class="img-slider_nav" />
-                                                                                                                                                                                                                                                                                                                                                                                                                                        </div> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                <img src="{{ asset('assets/img/avatardefault.jpg') }}"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    class="img-slider_nav" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                            </div> -->
                                                 </div>
                                             </div>
 
@@ -158,10 +158,12 @@
                                             <div class="mt-4">
                                                 <div class="input-group align-items-center">
                                                     <!-- <input type="file" class="form-control" id="attachment"
-                                                                                                                                                                                                                                                                                                                                                                                                                                            name="attachment" style="display: none"> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                name="attachment" style="display: none"> -->
                                                     <i class="bi bi-link-45deg text-color_pimary fs-3 fw-bold"></i>
-                                                    <label class="input-label text-color_pimary fs-4 fw-bold ms-2"
-                                                        for="attachment" style="cursor: pointer">File đính kèm</label>
+                                                    {{-- <label class="input-label text-color_pimary fs-4 fw-bold ms-2"
+                                                        for="attachment" style="cursor: pointer">File đính kèm</label> --}}
+                                                    <p class="input-label text-color_pimary fs-4 fw-bold ms-2">File đính
+                                                        kèm</p>
                                                 </div>
                                                 <div class="col-4 mt-3">
                                                     @foreach (json_decode($customer->fileName) ?? [] as $file)
@@ -303,7 +305,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                     <div class="row wapper-contact mt-4">
                                                         <h2 class="text-color_pimary fs-3 pb-4">2. Liên hệ</h2>
                                                         <div class="col-lg-12">
@@ -354,7 +355,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                     <div class="row wapper-contac mt-4">
                                                         <h2 class="text-color_pimary fs-3 pb-4">3. Địa chỉ</h2>
                                                         {{-- Địa chỉ --}}
@@ -508,7 +508,7 @@
                                         <div class="card-title fs-4">Trao đổi</div>
                                         <div class="flex-fill ms-3 d-flex align-items-center">
                                             <input placeholder="Viết bình luận..." rows="1" id="comment"
-                                                class="form-control" name="content"></input>
+                                                class="form-control" name="content">
                                         </div>
                                         <div>
                                             <button type="submit" class="btn btn-danger mx-3">Gửi</button>

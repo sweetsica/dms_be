@@ -43,7 +43,7 @@ class LocalityController extends Controller
         if($khu_vuc != NULL) {
             $query->where("area.name", "like", "%$khu_vuc%");
         }
-        $localityList=$query->paginate(10);
+        $localityList=$query->orderBy('locality.id', 'desc')->paginate(10);
         $area = Area::all();
         $areaTree =  Department::with('khuVucs.diaBans.tuyens')->where('code', 'like', 'VUNG%')->get();
         return view("Address.danhSachDiaBan",[
@@ -90,8 +90,11 @@ class LocalityController extends Controller
     public function destroy($id)
     {
         Locality::destroy($id);
-        Session::flash('success', 'Đã xoá!');
-        return redirect()->back();
+        // Session::flash('success', 'Đã xoá!');
+        // return redirect()->back();
+        // return redirect()->back()->with('mess', 'Đã xóa!');
+        Session::flash('success', 'Xoá thành công');
+        return redirect()->route('locality.index');
     }
 
     public function delete(Request $request)

@@ -96,7 +96,7 @@ class PersonnelController extends Controller
             $query->where("personnel.status", "like", "%$trang_thai%");
         }
         // ->where("personnel.code", "like", "%$search%")
-        $personnelList = $query->paginate(15);
+        $personnelList = $query->orderBy('personnel.id','desc')->paginate(15);
         $departmentlists = $this->getDepartment();
         $positionlists = $this->getPosition();
         $personnellists = $this->getPersonnel();
@@ -862,8 +862,11 @@ class PersonnelController extends Controller
     public function destroy($id)
     {
         Personnel::destroy($id);
-        Session::flash('success', 'Đã xoá!');
-        return redirect()->back();
+        // Session::flash('success', 'Đã xoá!');
+        // return redirect()->back();
+        Session::flash('success', 'Xoá thành công');
+        return redirect()->route('Personnel.index');
+        return redirect()->back()->with('mess', 'Đã xóa !');;
     }
 
     public function delete(Request $request)
@@ -1010,6 +1013,6 @@ class PersonnelController extends Controller
                 ->with('localityList', $localityList)
                 ->with('user', $user)
                 ->with('personnelLevelList', $personnelLevelList);
-        
+
     }
 }
