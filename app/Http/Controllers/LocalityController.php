@@ -6,6 +6,8 @@ use App\Models\Area;
 use App\Models\Department;
 use App\Models\Locality;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+
 
 class LocalityController extends Controller
 {
@@ -65,6 +67,7 @@ class LocalityController extends Controller
         $data->area_id=$area_id;
         $data->description=$description;
         $data->save();
+        Session::flash('success', 'Thêm mới thành công');
         return redirect()->route('locality.index');
     }
 
@@ -80,13 +83,15 @@ class LocalityController extends Controller
         $data->area_id=$area_id;
         $data->description=$description;
         $data->save();
+        Session::flash('success', 'Sửa thành công');
         return redirect()->route('locality.index');
     }
 
     public function destroy($id)
     {
         Locality::destroy($id);
-        return redirect()->back()->with('mess', 'Đã xóa!');;
+        Session::flash('success', 'Đã xoá!');
+        return redirect()->back();
     }
 
     public function delete(Request $request)
@@ -94,8 +99,8 @@ class LocalityController extends Controller
         // Department::destroy($id);
         $selectedItems = $request->input('selected_items', []);
         Locality::whereIn('id', $selectedItems)->delete();
-        return redirect()->back()->with('mess', 'Đã xóa!');
-        ;
+        Session::flash('success', 'Đã xoá!');
+        return redirect()->back();
     }
 
 }

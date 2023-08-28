@@ -35,10 +35,10 @@ class SupplierController extends Controller
             'suppliers.status',
         );
         $pattern = '/^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)\s+.*/';
-                if (preg_match($pattern, $search)) {
-                    Session::flash('error', 'Lỗi đầu vào khi search');
-                    return back();
-                }
+        if (preg_match($pattern, $search)) {
+            Session::flash('error', 'Lỗi đầu vào khi search');
+            return back();
+        }
         if($search != NULL) {
             $query->where("suppliers.name", "like", "%$search%");
         }
@@ -91,6 +91,7 @@ class SupplierController extends Controller
         $data->days_owed = $days_owed;
         $data->status = $status;
         $data->save();
+        Session::flash('success', 'Thêm mới thành công');
         return back();
     }
 
@@ -135,7 +136,7 @@ class SupplierController extends Controller
     public function destroy($id)
     {
         Supplier::destroy($id);
-        Session::flash('success', 'Xóa thành công');
+        Session::flash('success', 'Đã xoá!');
         return back();
     }
 
@@ -144,7 +145,7 @@ class SupplierController extends Controller
 
         $selectedItems = $request->input('selected_items', []);
         Supplier::whereIn('id', $selectedItems)->delete();
-        Session::flash('success', 'Xoá thành công');
+        Session::flash('success', 'Đã xoá!');
         return back();
 
     }

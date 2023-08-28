@@ -118,11 +118,7 @@ class CustomerController extends Controller
                 if (preg_match($pattern, $q)) {
                     Session::flash('error', 'Lỗi đầu vào khi search');
                     return back();
-                }
-                if (strlen($q) >= 50) {
-                    $q = substr($q, 0, 47);
-                    $q = $q.'...';
-                }
+                }                
                 $listData = $listData->where('code', 'like', '%' . $q . '%')
                     ->orWhere('name', 'like', '%' . $q . '%')
                     ->orWhere('phone', 'like', '%' . $q . '%')
@@ -298,6 +294,7 @@ class CustomerController extends Controller
         // }
 
         $data->save();
+        Session::flash('success', 'Thêm mới thành công');
         $listData = Customer::all();
         return redirect()->route('customers', compact('listData'));
     }
@@ -489,6 +486,7 @@ class CustomerController extends Controller
         }
 
         $data->save();
+        Session::flash('success', 'Thêm mới thành công');
         $listData = Customer::all();
         return response()->json(['success' => true]);
         // return redirect()->route('customers', compact('listData'));
@@ -556,6 +554,7 @@ class CustomerController extends Controller
         $data->routeId = $routeId;
         $data->status = $status;
         $data->save();
+        Session::flash('success', 'Sửa thành công');
         $existingFileName = json_decode($data->fileName, true) ?? [];
         $existingFilePath = json_decode($data->filePath, true) ?? [];
         $images = json_encode($data->image, true) ?? [];
@@ -608,7 +607,8 @@ class CustomerController extends Controller
     public function delete($id)
     {
         Customer::destroy($id);
-        return redirect()->back()->with('mess', 'Đã xóa!');
+        Session::flash('success', 'Đã xoá!');
+        return redirect()->back();
     }
 
     public function upload(Request $request, $id)
@@ -658,7 +658,8 @@ class CustomerController extends Controller
         ];
         $customer->comment = json_encode($comments);
         $customer->save();
-        return redirect()->back()->with('mess', 'Đã bình luận!');
+        Session::flash('success', 'Đã bình luận');
+        return redirect()->back();
     }
 
     public function deleteComment($id, $key)
@@ -672,8 +673,8 @@ class CustomerController extends Controller
             $customer->comment = json_encode(array_values($comments));
             $customer->save();
         }
-
-        return redirect()->back()->with('mess', 'Đã xóa comment!');
+        Session::flash('success', 'Đã xoá comment!');
+        return redirect()->back();
     }
 
 }

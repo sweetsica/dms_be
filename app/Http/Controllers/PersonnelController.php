@@ -810,6 +810,7 @@ class PersonnelController extends Controller
         $data->gender = $gender;
         $data->manage = $manage;
         $data->save();
+        Session::flash('success', 'Thêm mới thành công');
         return redirect()->route('Personnel.index');
     }
 
@@ -854,13 +855,15 @@ class PersonnelController extends Controller
         $data->gender = $gender;
         $data->manage = $manage;
         $data->save();
+        Session::flash('success', 'Sửa thành công');
         return redirect()->back();
     }
 
     public function destroy($id)
     {
         Personnel::destroy($id);
-        return redirect()->back()->with('mess', 'Đã xóa !');;
+        Session::flash('success', 'Đã xoá!');
+        return redirect()->back();
     }
 
     public function delete(Request $request)
@@ -868,7 +871,8 @@ class PersonnelController extends Controller
 
         $selectedItems = $request->input('selected_items', []);
         Personnel::whereIn('id', $selectedItems)->delete();
-        return redirect()->back()->with('mess', 'Đã xóa!');
+        Session::flash('success', 'Đã xoá!');
+        return redirect()->back();
     }
 
     public function detach(Request $request)

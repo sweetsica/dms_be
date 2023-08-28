@@ -6,6 +6,8 @@ use App\Models\CustomerGroup;
 use App\Models\Position;
 use Illuminate\Http\Request;
 use LDAP\Result;
+use Illuminate\Support\Facades\Session;
+
 
 class CustomerGroupController extends Controller
 {
@@ -37,6 +39,7 @@ class CustomerGroupController extends Controller
         $data->code = $code;
         $data->description = $description;
         $data->save();
+        Session::flash('success', 'Thêm mới thành công');
         return redirect()->route('CustomerGroup.index');
     }
 
@@ -50,13 +53,15 @@ class CustomerGroupController extends Controller
         $data->code = $code;
         $data->description = $description;
         $data->save();
+        Session::flash('success', 'Sửa thành công');
         return redirect()->route('CustomerGroup.index');
     }
 
     public function destroy($id)
     {
         CustomerGroup::destroy($id);
-        return redirect()->back()->with('mess', 'Đã xóa!');
+        Session::flash('success', 'Đã xoá!');
+        return redirect()->back();
     }
 
 }

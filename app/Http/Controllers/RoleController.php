@@ -6,6 +6,8 @@ use App\Models\Position;
 use App\Models\Role;
 use App\Models\Department;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+
 
 class RoleController extends Controller
 {
@@ -40,6 +42,7 @@ class RoleController extends Controller
         $data->code=$code;
         $data->description=$description;
         $data->save();
+        Session::flash('success', 'Thêm mới thành công');
         return redirect()->route('Role.index');
     }
 
@@ -53,13 +56,15 @@ class RoleController extends Controller
         $data->code = $code;
         $data->description=$description;
         $data->save();
+        Session::flash('success', 'Sửa thành công');
         return redirect()->route('Role.index');
     }
 
     public function destroy($id)
     {
         Role::destroy($id);
-        return redirect()->back()->with('mess', 'Đã xóa !');;
+        Session::flash('success', 'Đã xoá!');
+        return redirect()->back();
     }
 
     public function delete(Request $request)
@@ -67,7 +72,8 @@ class RoleController extends Controller
 
         $selectedItems = $request->input('selected_items', []);
         Role::whereIn('id', $selectedItems)->delete();
-        return redirect()->back()->with('mess', 'Đã xóa!');
+        Session::flash('success', 'Đã xoá!');
+        return redirect()->back();
 
     }
 }

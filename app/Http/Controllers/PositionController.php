@@ -128,6 +128,7 @@ class PositionController extends Controller
         $data->updated_at = now();
         $data->description=$description;
         $data->save();
+        Session::flash('success', 'Thêm mới thành công');
         return back();
     }
 
@@ -161,7 +162,7 @@ class PositionController extends Controller
     public function destroy($id)
     {
         Position::destroy($id);
-        Session::flash('success', 'Xóa thành công');
+        Session::flash('success', 'Đã xoá!');
         return back();
     }
 
@@ -170,7 +171,7 @@ class PositionController extends Controller
 
         $selectedItems = $request->input('selected_items', []);
         Position::whereIn('id', $selectedItems)->delete();
-        Session::flash('success', 'Xoá thành công');
+        Session::flash('success', 'Đã xoá!');
         return back();
 
     }
@@ -180,7 +181,7 @@ class PositionController extends Controller
         $position->department_id = null;
         $position->save();
         
-        Session::flash('success', 'Xoá thành công khỏi phòng ban này');
+        Session::flash('success', 'Đã xoá khỏi phòng ban này');
         return back();
     }
 }

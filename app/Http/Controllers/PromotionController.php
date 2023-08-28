@@ -6,8 +6,9 @@ use App\Models\Customer;
 use App\Models\CustomerGroup;
 use App\Models\Product;
 use App\Models\Promotion;
-use Illuminate\Contracts\Session\Session;
+// use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PromotionController extends Controller
 {
@@ -124,6 +125,7 @@ if($promotionDetailsArray){
             $data->customer_id = json_encode($request->customer_id);
         }
         $data->save();
+        Session::flash('success', 'Thêm mới thành công');
         return redirect()->route('Promotion.index');
     }
 
@@ -163,7 +165,7 @@ if($promotionDetailsArray){
             $data->customer_id = json_encode($request->customer_id);
         }
         $data->save();
-        // Session::flash('success', 'Sửa thành công');
+        Session::flash('success', 'Sửa thành công');
         return back();
     }
 
@@ -171,7 +173,8 @@ if($promotionDetailsArray){
     {
         Promotion::destroy($id);
         // $selectedItems = $request->input('selected_items', []);
-        return redirect()->back()->with('mess', 'Đã xóa!');;
+        Session::flash('success', 'Đã xoá!');
+        return redirect()->back();
     }
 
     public function delete(Request $request)
@@ -179,7 +182,8 @@ if($promotionDetailsArray){
         // Department::destroy($id);
         $selectedItems = $request->input('selected_items', []);
         Promotion::whereIn('id', $selectedItems)->delete();
-        return redirect()->back()->with('mess', 'Đã xóa!');
+        Session::flash('success', 'Đã xoá!');
+        return redirect()->back();
     }
 
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Specifications;
 use App\Models\TechnicalSpecificationsGroup;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class SpecificationsController extends Controller
 {
@@ -43,6 +44,7 @@ class SpecificationsController extends Controller
         $data->description = $description;
         $data->group_id = $group_id;
         $data->save();
+        Session::flash('success', 'Thêm mới thành công');
         return redirect()->route('Specifications.index');
     }
 
@@ -59,13 +61,15 @@ class SpecificationsController extends Controller
         $data->description = $description;
 
         $data->save();
+        Session::flash('success', 'Sửa thành công');
         return redirect()->route('Specifications.index');
     }
 
     public function destroy($id)
     {
         Specifications::destroy($id);
-        return redirect()->back()->with('mess', 'Đã xóa!');
+        Session::flash('success', 'Đã xoá!');
+        return redirect()->back();
     }
 
     public function delete(Request $request)
@@ -73,7 +77,8 @@ class SpecificationsController extends Controller
 
         $selectedItems = $request->input('selected_items', []);
         Specifications::whereIn('id', $selectedItems)->delete();
-        return redirect()->back()->with('mess', 'Đã xóa!');
+        Session::flash('success', 'Đã xoá!');
+        return redirect()->back();
 
     }
 }
