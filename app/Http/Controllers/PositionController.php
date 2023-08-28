@@ -39,6 +39,10 @@ class PositionController extends Controller
 
             'position.staffing'
         );
+        if (strlen($search) >= 50) {
+            $search = substr($search, 0, 47);
+            $search = $search.'...';
+        }
         if($search != NULL) {
             $query->where("position.name", "like", "%$search%");
         }

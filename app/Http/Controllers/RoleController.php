@@ -12,6 +12,10 @@ class RoleController extends Controller
 
     public function index(Request $request){
         $search = $request->get('search');
+        if (strlen($search) >= 50) {
+            $search = substr($search, 0, 47);
+            $search = $search.'...';
+        }
         $roleList = Role::where("role.code", "like", "%$search%")->paginate(5);
         $departmentListTree = Department::where('parent',0)->with('donViCon')->get();
         return view("vai_tro.index",[

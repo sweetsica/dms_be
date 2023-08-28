@@ -59,7 +59,11 @@ class PersonnelController extends Controller
                 'personnel.area_id'
                 // 'personnel.id',
             );
-        if ($search != NULL) {
+        if (strlen($search) >= 50) {
+            $search = substr($search, 0, 47);
+            $search = $search.'...';
+        }
+        if ($search != NULL) {           
             $query->where("personnel.code", "like", "%$search%");
         }
         if ($search != NULL) {

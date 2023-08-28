@@ -34,6 +34,10 @@ class DepartmentController extends Controller
                 'department.ib_lead',
                 'personnel.name as leader_name'
             );
+        if (strlen($search) >= 50) {
+            $search = substr($search, 0, 47);
+            $search = $search.'...';
+        }
         if ($search != NULL) {
             $query->where("department.name", "like", "%$search%");
         }

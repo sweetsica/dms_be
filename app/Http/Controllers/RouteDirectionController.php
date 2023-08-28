@@ -51,6 +51,10 @@ class RouteDirectionController extends Controller
             $limit = 10;
             $listRoute = RouteDirection::query()->with('personnel', 'areas');
             if ($q) {
+                if (strlen($q) >= 50) {
+                    $q = substr($q, 0, 47);
+                    $q = $q.'...';
+                }
                 $listRoute = $listRoute->where('code', 'like', '%' . $q . '%')
                     ->orWhere('name', 'like', '%' . $q . '%')
                     ->orWhereHas('personnel', function ($routeQuery) use ($q) {

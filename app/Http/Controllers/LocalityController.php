@@ -23,6 +23,10 @@ class LocalityController extends Controller
             'locality.area_id',
             'area.name as area_name'
         );
+        if (strlen($search) >= 50) {
+            $search = substr($search, 0, 47);
+            $search = $search.'...';
+        }
         if($search != NULL) {
             $query->where("locality.name", "like", "%$search%");
         }

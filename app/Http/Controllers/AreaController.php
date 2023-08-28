@@ -22,6 +22,10 @@ class AreaController extends Controller
             'area.area',
             'department.name as department_name'
         );
+        if (strlen($search) >= 50) {
+            $search = substr($search, 0, 47);
+            $search = $search.'...';
+        }
         if($search != NULL) {
             $query->where("area.name", "like", "%$search%");
         }
