@@ -4,6 +4,34 @@
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 @endsection
+@php
+
+    function getPaginationLink($link, $pageName)
+    {
+        if (!isset($link['url'])) {
+            return '#';
+        }
+
+        $pageNumber = explode('?page=', $link['url'])[1];
+
+        $queryString = request()->query();
+
+        $queryString[$pageName] = $pageNumber;
+        return route('Supplier.index', $queryString);
+    }
+
+    // function isFiltering($filterNames)
+    // {
+    //     $filters = request()->query();
+    //     foreach ($filterNames as $filterName) {
+    //         if (isset($filters[$filterName]) && $filters[$filterName] != '') {
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
+
+@endphp
 <style>
     .text_default {
         color: var(--primary-color)
@@ -223,7 +251,7 @@
                                                                     <div class="overText text-center"
                                                                         data-bs-toggle="tooltip" data-bs-placement="top"
                                                                         title="">
-                                                                        {{ $t++ }}
+                                                                        {{ $supplierList->total() - $loop->index - ($supplierList->currentPage() - 1) * $supplierList->perPage() }}
                                                                     </div>
                                                                 </td>
                                                                 <td>
@@ -353,6 +381,18 @@
                                                                 ])->links() }}
                                                         </ul>
                                                     </nav> --}}
+                                                    <nav aria-label="Page navigation example" class="float-end mt-3" id="target-pagination">
+                                                        <ul class="pagination">
+                                                            @foreach ($pagination['links'] as $link)
+                                                                <li class="page-item {{ $link['active'] ? 'active' : '' }}">
+                                                                    <a class="page-link" href="{{ getPaginationLink($link, 'page') }}"
+                                                                        aria-label="Previous">
+                                                                        <span aria-hidden="true">{!! $link['label'] !!}</span>
+                                                                    </a>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </nav>
                                                 </div>
                                             </form>
                                         </div>
@@ -903,6 +943,10 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
+                        <button id="loadingBtn" style="display: none;" class="btn btn-danger" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button>
                         <button id="submitBtn" type="submit" class="btn btn-danger">Lưu</button>
                     </div>
                 </form>
@@ -1009,6 +1053,29 @@
             const atLeastOneChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
             deleteButton.style.display = atLeastOneChecked ? 'block' : 'none';
         }
+    </script>
+
+    <script>
+        // $('#addForm').on('submit', function(e) {
+        //     $('#addDetailProduct').modal('show');
+        //     event.preventDefault();
+        // });
+
+
+        $(document).ready(function() {
+            // Handle form submission
+            $('#addForm').submit(function(event) {
+                // Prevent the default form submission
+                event.preventDefault();
+
+                // Show the loading button and hide the submit button
+                $('#submitBtn').hide();
+                $('#loadingBtn').show();
+
+                // Submit the form
+                $(this).unbind('submit').submit();
+            });
+        });
     </script>
 
 @endsection
