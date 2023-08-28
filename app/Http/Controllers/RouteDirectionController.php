@@ -51,6 +51,11 @@ class RouteDirectionController extends Controller
             $limit = 10;
             $listRoute = RouteDirection::query()->with('personnel', 'areas');
             if ($q) {
+                $pattern = '/^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)\s+.*/';
+                if (preg_match($pattern, $q)) {
+                    Session::flash('error', 'Lỗi đầu vào khi search');
+                    return back();
+                }                
                 $listRoute = $listRoute->where('code', 'like', '%' . $q . '%')
                     ->orWhere('name', 'like', '%' . $q . '%')
                     ->orWhereHas('personnel', function ($routeQuery) use ($q) {

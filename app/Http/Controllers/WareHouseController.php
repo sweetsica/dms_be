@@ -6,7 +6,6 @@ use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Models\WareHouse;
 use App\Models\Personnel;
-
 use Illuminate\Support\Facades\Session;
 
 class WareHouseController extends Controller
@@ -34,6 +33,11 @@ class WareHouseController extends Controller
                 'ware_houses.status',
                 'personnel.name as manage_name',   
             );
+        $pattern = '/^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)\s+.*/';
+            if (preg_match($pattern, $search)) {
+                Session::flash('error', 'Lỗi đầu vào khi search');
+                return back();
+            }
         if($search != NULL) {
             $query->where("ware_houses.name", "like", "%$search%");
         }
@@ -71,6 +75,7 @@ class WareHouseController extends Controller
         $data->accountant = $accountant;        
         $data->status = $status;
         $data->save();
+        Session::flash('success', 'Thêm mới thành công');
         return back();
     }
 
@@ -101,7 +106,7 @@ class WareHouseController extends Controller
     public function destroy($id)
     {
         WareHouse::destroy($id);
-        Session::flash('success', 'Xóa thành công');
+        Session::flash('success', 'Đã xoá!');
         return back();
     }
 
@@ -110,7 +115,7 @@ class WareHouseController extends Controller
 
         $selectedItems = $request->input('selected_items', []);
         WareHouse::whereIn('id', $selectedItems)->delete();
-        Session::flash('success', 'Xoá thành công');
+        Session::flash('success', 'Đã xoá!');
         return back();
 
     }

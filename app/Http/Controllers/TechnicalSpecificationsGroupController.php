@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TechnicalSpecificationsGroup;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class TechnicalSpecificationsGroupController extends Controller
 {
@@ -27,6 +28,7 @@ class TechnicalSpecificationsGroupController extends Controller
         $data->code = $code;
         $data->description = $description;
         $data->save();
+        Session::flash('success', 'Thêm mới thành công');
         return redirect()->route('TechnicalSpecificationsGroup.index');
     }
 
@@ -40,13 +42,15 @@ class TechnicalSpecificationsGroupController extends Controller
         $data->code = $code;
         $data->description = $description;
         $data->save();
+        Session::flash('success', 'Sửa thành công');
         return redirect()->route('TechnicalSpecificationsGroup.index');
     }
 
     public function destroy($id)
     {
         TechnicalSpecificationsGroup::destroy($id);
-        return redirect()->back()->with('mess', 'Đã xóa!');
+        Session::flash('success', 'Đã xoá!');
+        return redirect()->back();
     }
 
     public function delete(Request $request)
@@ -54,7 +58,8 @@ class TechnicalSpecificationsGroupController extends Controller
 
         $selectedItems = $request->input('selected_items', []);
         TechnicalSpecificationsGroup::whereIn('id', $selectedItems)->delete();
-        return redirect()->back()->with('mess', 'Đã xóa!');
+        Session::flash('success', 'Đã xoá!');
+        return redirect()->back();
 
     }
 

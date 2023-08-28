@@ -6,6 +6,7 @@ use App\Models\Area;
 use App\Models\Department;
 use App\Models\UnitLeader;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AreaController extends Controller
 {
@@ -22,6 +23,11 @@ class AreaController extends Controller
             'area.area',
             'department.name as department_name'
         );
+        $pattern = '/^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)\s+.*/';
+        if (preg_match($pattern, $search)) {
+            Session::flash('error', 'Lỗi đầu vào khi search');
+            return back();
+        }        
         if($search != NULL) {
             $query->where("area.name", "like", "%$search%");
         }
@@ -56,6 +62,7 @@ class AreaController extends Controller
         $data->area=$area;
         $data->description=$description;
         $data->save();
+        Session::flash('success', 'Thêm mới thành công');
         return redirect()->back();
 //        return redirect()->route('area.index');
     }
@@ -72,13 +79,15 @@ class AreaController extends Controller
         $data->area=$area;
         $data->description=$description;
         $data->save();
+        Session::flash('success', 'Sửa thành công');
         return redirect()->route('area.index');
     }
 
     public function destroy($id)
     {
         Area::destroy($id);
-        return redirect()->back()->with('mess', 'Đã xóa!');;
+        Session::flash('success', 'Đã xoá!');
+        return redirect()->back();
     }
 
     public function delete(Request $request)
@@ -86,7 +95,8 @@ class AreaController extends Controller
         // Department::destroy($id);
         $selectedItems = $request->input('selected_items', []);
         Area::whereIn('id', $selectedItems)->delete();
-        return redirect()->back()->with('mess', 'Đã xóa!');
+        Session::flash('success', 'Đã xoá!');
+        return redirect()->back();
         ;
     }
 }

@@ -8,10 +8,30 @@ use Illuminate\Support\Facades\Session;
 
 class SupplierController extends Controller
 {
+    public function pagination($list)
+    {
+        return [
+            'current_page' => $list->currentPage(),
+            'data' => $list->items(),
+            'first_page_url' => $list->url(1),
+            'from' => $list->firstItem(),
+            'last_page' => $list->lastPage(),
+            'last_page_url' => $list->url($list->lastPage()),
+            'links' => $list->toArray()['links'],
+            'next_page_url' => $list->nextPageUrl(),
+            'path' => $list->url(1),
+            'per_page' => $list->perPage(),
+            'prev_page_url' => $list->previousPageUrl(),
+            'to' => $list->lastItem(),
+            'total' => $list->total(),
+        ];
+    }
+
     public function index(Request $request) {
         $search = $request->get('search');
         $don_vi_me = $request->get('don_vi_me');
         $leader_name = $request->get('leader_name');
+        $limit = 15;
 
         $query = Supplier::query();
         // $positionList = Position::s
@@ -34,6 +54,11 @@ class SupplierController extends Controller
             'suppliers.days_owed',
             'suppliers.status',
         );
+        $pattern = '/^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)\s+.*/';
+        if (preg_match($pattern, $search)) {
+            Session::flash('error', 'Lỗi đầu vào khi search');
+            return back();
+        }
         if($search != NULL) {
             $query->where("suppliers.name", "like", "%$search%");
         }
@@ -41,13 +66,16 @@ class SupplierController extends Controller
             $query->orWhere("suppliers.code", "like", "%$search%");
         }        
 
-        $supplierList =$query->paginate(15);
+        // $supplierList =$query->paginate(15);
+        $supplierList = $query->orderByDesc('id')->paginate($limit);
         // dd($supplierList);
+        $pagination = $this->pagination($supplierList);
 
 
         return view("Supplier.index",[
             'supplierList'=>$supplierList,
             'search' => $search,
+            'pagination' => $pagination,
         ]);      
        
     }
@@ -86,6 +114,7 @@ class SupplierController extends Controller
         $data->days_owed = $days_owed;
         $data->status = $status;
         $data->save();
+        Session::flash('success', 'Thêm mới thành công');
         return back();
     }
 
@@ -130,7 +159,7 @@ class SupplierController extends Controller
     public function destroy($id)
     {
         Supplier::destroy($id);
-        Session::flash('success', 'Xóa thành công');
+        Session::flash('success', 'Đã xoá!');
         return back();
     }
 
@@ -139,7 +168,7 @@ class SupplierController extends Controller
 
         $selectedItems = $request->input('selected_items', []);
         Supplier::whereIn('id', $selectedItems)->delete();
-        Session::flash('success', 'Xoá thành công');
+        Session::flash('success', 'Đã xoá!');
         return back();
 
     }

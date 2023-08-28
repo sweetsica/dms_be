@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Department;
 use App\Models\DepartmentLv1;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class DepartmentLv1Controller extends Controller
 {
@@ -36,6 +37,7 @@ class DepartmentLv1Controller extends Controller
         $data->description=$description;
         $data->department_id=$department_id;
         $data->save();
+        Session::flash('success', 'Thêm mới thành công');
         return redirect()->route('department_lv1.index');
     }
 }

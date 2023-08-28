@@ -241,11 +241,19 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('nha-cung-cap-delete', [SupplierController::class, 'delete'])->name('Supplier.delete');
 
     // Đơn đặt hàng
+<<<<<<< HEAD
     Route::get('danh-sach-don-dat-hang', [PurchaseOrderController::class, 'index'])->name('[PurchaseOrder.index');
     Route::post('them-don-dat-hang', [PurchaseOrderController::class, 'store'])->name('[PurchaseOrder.store');
     Route::post('sua-don-dat-hang/{id}', [PurchaseOrderController::class, 'update'])->name('[PurchaseOrder.update');
     Route::post('xoa-don-dat-hang/{id}', [PurchaseOrderController::class, 'destroy'])->name('[PurchaseOrder.destroy');
     Route::post('don-dat-hang-delete', [PurchaseOrderController::class, 'delete'])->name('[PurchaseOrder.delete');
+=======
+    Route::get('danh-sach-don-dat-hang', [PurchaseOrderController::class, 'index'])->name('PuchaseOrder.index');
+    Route::post('them-don-dat-hang', [PurchaseOrderController::class, 'store'])->name('PuchaseOrder.store');
+    Route::post('sua-don-dat-hang/{id}', [PurchaseOrderController::class, 'update'])->name('PuchaseOrder.update');
+    Route::post('xoa-don-dat-hang/{id}', [PurchaseOrderController::class, 'destroy'])->name('PuchaseOrder.destroy');
+    Route::post('don-dat-hang-delete', [PurchaseOrderController::class, 'delete'])->name('PuchaseOrder.delete');
+>>>>>>> 1ba27b71ceefb80f566ef8efdccc43595587959a
 
     // Chương trình khuyến mại
     Route::get('danh-sach-khuyen-mai', [PromotionController::class, 'index'])->name('Promotion.index');

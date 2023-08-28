@@ -66,7 +66,7 @@
                     </div>
                     <div class="d-lg-none" id="CoCauToChuc">
                         {{-- <ul id="tree" style="overflow: scroll"> --}}
-                            <ul id="tree">
+                            <ul id="tree2">
                             @foreach ($departmentListTree as $donVi)
                                 <li data-id="{{ $donVi->id }}" style="width: max-content">
                                     <a href="{{ route('department.index2', ['department_id' => $donVi->id]) }}"
@@ -293,6 +293,11 @@
             $("#tree1").children("li:first-child").click();
         })
 
+        $(document).ready(function() {
+            $("#tree2").children("li:first-child").click();
+        })
+
         $('#tree1').treed();
+        $('#tree2').treed();
     </script>
 @endsection

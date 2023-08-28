@@ -7,6 +7,8 @@ use App\Models\Version;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
+
+
 class VersionController extends Controller
 {
     /**
@@ -38,6 +40,11 @@ class VersionController extends Controller
             $limit = 10;
             $listVersion = Version::query();
             if ($q) {
+                $pattern = '/^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)\s+.*/';
+                if (preg_match($pattern, $q)) {
+                    Session::flash('error', 'Lỗi đầu vào khi search');
+                    return back();
+                }
                 $listVersion = $listVersion->where('code', 'like', '%' . $q . '%')
                     ->orWhere('name', 'like', '%' . $q . '%');
             }

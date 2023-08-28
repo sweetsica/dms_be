@@ -28,7 +28,7 @@
                         <div class="card-body" style="background-color: var(--white-color-blur); padding: 20px 10px">
                             <div class="row">
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3">
-                                    <div class=" control_wrapper"  >
+                                    <div class=" control_wrapper" onclick="goRedirect(1)">
                                         <a href=" {{ route('customers') }}" class="control_link" id="control_link-1">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/agreement.png') }}" alt="">
@@ -40,7 +40,7 @@
                                     </div>
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3">
-                                    <div class=" control_wrapper"  >
+                                    <div class=" control_wrapper" onclick="goRedirect(2)" >
                                         <a href="{{ route('Personnel.store') }}" class="control_link" id="control_link-2">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/2.png') }}"
@@ -53,7 +53,7 @@
                                     </div>
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3">
-                                    <div class=" control_wrapper"  >
+                                    <div class=" control_wrapper" onclick="goRedirect(3)" >
                                         <a href="{{ route('product.list') }}" class="control_link" id="control_link-3">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/features.png') }}" alt="">
@@ -65,7 +65,7 @@
                                     </div>
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3">
-                                    <div class=" control_wrapper"  >
+                                    <div class=" control_wrapper" onclick="goRedirect(4)" >
                                         <a href="{{ route('version.list') }}" class="control_link" id="control_link-4">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/order-delivery.png') }}" alt="">
@@ -83,7 +83,7 @@
                         <div class="card-body" style="background-color: var(--white-color-blur); padding: 20px 10px">
                             <div class="row">
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3 mb-5 mt-5">
-                                    <div class=" control_wrapper"  >
+                                    <div class=" control_wrapper" onclick="goRedirect(5)" >
                                         <a href="#" class="control_link" id="control_link-5">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/cargo.png') }}" alt="">
@@ -95,7 +95,7 @@
                                     </div>
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3 mb-5 mt-5">
-                                    <div class=" control_wrapper"  >
+                                    <div class=" control_wrapper" onclick="goRedirect(6)" >
                                         <a href="danh-sach-tuyen" class="control_link" id="control_link-6">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/users.png') }}" alt="">
@@ -107,7 +107,7 @@
                                     </div>
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3 mb-5 mt-5">
-                                    <div class=" control_wrapper"  >
+                                    <div class=" control_wrapper" onclick="goRedirect(7)">
                                         <a href="/department-profile?department_id=1" class="control_link" id="control_link-7">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/workflow.png') }}" alt="">
@@ -119,7 +119,7 @@
                                     </div>
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3 mb-5 mt-5">
-                                    <div class=" control_wrapper"  >
+                                    <div class=" control_wrapper" onclick="goRedirect(8)">
                                         <a href="{{ route('position.store') }}" class="control_link" id="control_link-8">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/brain.png') }}" alt="">
@@ -254,5 +254,13 @@
 
         });
     </script>
+
+<script>
+    function goRedirect(id){
+        var links = document.getElementById("control_link-"+id).href;
+        window.location.href = links;
+    }
+</script>
+
 
 @endsection

@@ -60,7 +60,7 @@ class ProductController extends Controller
                 if (preg_match($pattern, $q)) {
                     Session::flash('error', 'Lỗi đầu vào khi search');
                     return back();
-                }
+                }               
                 $listProduct = $listProduct->where('code', 'like', '%' . $q . '%')
                     ->orWhere('name', 'like', '%' . $q . '%');
             }

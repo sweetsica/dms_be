@@ -11,6 +11,8 @@ use App\Models\Role;
 use App\Models\UnitLeader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Session;
+
 
 class DepartmentController extends Controller
 {
@@ -34,6 +36,11 @@ class DepartmentController extends Controller
                 'department.ib_lead',
                 'personnel.name as leader_name'
             );
+        $pattern = '/^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)\s+.*/';
+        if (preg_match($pattern, $search)) {
+            Session::flash('error', 'Lỗi đầu vào khi search');
+            return back();
+        }        
         if ($search != NULL) {
             $query->where("department.name", "like", "%$search%");
         }
@@ -283,6 +290,7 @@ class DepartmentController extends Controller
         $data->ib_lead = $ib_lead;
         $data->description = $description;
         $data->save();
+        Session::flash('success', 'Thêm mới thành công');
         return redirect()->route('department.index');
     }
 
@@ -311,6 +319,7 @@ class DepartmentController extends Controller
         $data->status = $status;
         $data->demarcation = $demarcation;
         $data->save();
+        Session::flash('success', 'Sửa thành công');
         return redirect()->back();
     }
 
@@ -318,7 +327,8 @@ class DepartmentController extends Controller
     {
         Department::destroy($id);
         // $selectedItems = $request->input('selected_items', []);
-        return redirect()->back()->with('mess', 'Đã xóa!');;
+        Session::flash('success', 'Đã xoá!');
+        return redirect()->back();
     }
 
     public function delete(Request $request)
@@ -326,7 +336,8 @@ class DepartmentController extends Controller
         // Department::destroy($id);
         $selectedItems = $request->input('selected_items', []);
         Department::whereIn('id', $selectedItems)->delete();
-        return redirect()->back()->with('mess', 'Đã xóa!');
+        Session::flash('success', 'Đã xoá!');
+        return redirect()->back();
     }
 
     public function getAll()
