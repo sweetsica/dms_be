@@ -29,7 +29,6 @@
                         <h5 class="mainSection_heading-title">Chi tiết kho</h5>
                         @include('template.components.sectionCard')
                     </div>
-
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card mb-3">
@@ -141,16 +140,105 @@
                                         </div>
 
                                         <div class="ms-3">
-                                            <button class="btn btn-danger btn-lg">
-                                                <i class="bi bi-printer"></i>
+                                            <button class="btn btn-danger btn-lg" style="padding: 7px 15px;">
+                                                <i class="bi bi-printer "></i>
                                             </button>
                                         </div>
 
                                         <div class="ms-3">
-                                            <button class="btn btn-danger btn-lg">
-                                                <i class="bi bi-download"></i>
+                                            <button class="btn btn-danger btn-lg" style="padding: 7px 15px;">
+                                                <i class="bi bi-download "></i>
                                             </button>
                                         </div>
+                                    </div>
+
+                                    <div class="table-responsive mt-3">
+                                        <table id="dsDaoTao"
+                                            class="table table-responsive table-hover table-bordered filter">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-nowrap text-center" style="width: 3%">STT
+                                                    </th>
+                                                    <th class="text-nowrap text-center" style="width: 5%">Mã
+                                                    </th>
+                                                    <th class="text-nowrap text-center" style="width: 10%">Tên
+                                                        sản phẩm
+                                                    </th>
+                                                    <th class="text-nowrap text-center" style="width: 10%">Mô tả sản phẩm
+                                                    </th>
+                                                    <th class="text-nowrap text-center" style="width: 5%">Số lượng
+                                                    </th>
+                                                    <th class="text-nowrap text-center" style="width: 5%">ĐVT chẵn
+                                                    </th>
+                                                    <th class="text-nowrap text-center" style="width: 5%">ĐVT lẻ
+                                                    </th>
+                                                    <th class="text-nowrap text-center" style="width: 8%">Phân loại
+                                                    </th>
+                                                    <th class="text-nowrap text-center" style="width: 8%">Ngày nhập kho
+                                                    </th>
+                                                    <th class="text-nowrap text-center" style="width: 10%">Ghi chú
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-nowrap text-center">1</td>
+                                                    <td class="text-nowrap text-center">12345</td>
+                                                    <td class="text-nowrap text-center">Vitamin tổng hợp</td>
+                                                    <td class="text-nowrap text-center">aaaaaaaaaaaaaaa</td>
+                                                    <td class="text-nowrap text-center">10</td>
+                                                    <td class="text-nowrap text-center">Hộp</td>
+                                                    <td class="text-nowrap text-center">Hộp</td>
+                                                    <td class="text-nowrap text-center">Sản phẩm</td>
+                                                    <td class="text-nowrap text-center">Ngày nhập kho</td>
+                                                    <td class="text-nowrap text-center"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-nowrap text-center">2</td>
+                                                    <td class="text-nowrap text-center">12345</td>
+                                                    <td class="text-nowrap text-center">Vitamin tổng hợp</td>
+                                                    <td class="text-nowrap text-center">aaaaaaaaaaaaaaa</td>
+                                                    <td class="text-nowrap text-center">10</td>
+                                                    <td class="text-nowrap text-center">Hộp</td>
+                                                    <td class="text-nowrap text-center">Hộp</td>
+                                                    <td class="text-nowrap text-center">Sản phẩm</td>
+                                                    <td class="text-nowrap text-center">Ngày nhập kho</td>
+                                                    <td class="text-nowrap text-center"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-nowrap text-center">3</td>
+                                                    <td class="text-nowrap text-center">12345</td>
+                                                    <td class="text-nowrap text-center">Vitamin tổng hợp</td>
+                                                    <td class="text-nowrap text-center">aaaaaaaaaaaaaaa</td>
+                                                    <td class="text-nowrap text-center">10</td>
+                                                    <td class="text-nowrap text-center">Hộp</td>
+                                                    <td class="text-nowrap text-center">Hộp</td>
+                                                    <td class="text-nowrap text-center">Sản phẩm</td>
+                                                    <td class="text-nowrap text-center">Ngày nhập kho</td>
+                                                    <td class="text-nowrap text-center"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-nowrap text-center">4</td>
+                                                    <td class="text-nowrap text-center">12345</td>
+                                                    <td class="text-nowrap text-center">Vitamin tổng hợp</td>
+                                                    <td class="text-nowrap text-center">aaaaaaaaaaaaaaa</td>
+                                                    <td class="text-nowrap text-center">10</td>
+                                                    <td class="text-nowrap text-center">Hộp</td>
+                                                    <td class="text-nowrap text-center">Hộp</td>
+                                                    <td class="text-nowrap text-center">Sản phẩm</td>
+                                                    <td class="text-nowrap text-center">Ngày nhập kho</td>
+                                                    <td class="text-nowrap text-center"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        {{-- <nav aria-label="Page navigation example" class="float-end mt-3"
+                                            id="target-pagination">
+                                            <ul class="pagination">
+                                                {{ $departmentList->appends([
+                                                        'search' => $search,
+                                                    ])->links() }}
+                                            </ul>
+                                        </nav> --}}
                                     </div>
                                 </div>
                             </div>
