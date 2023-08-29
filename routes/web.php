@@ -228,6 +228,7 @@ Route::middleware(['auth.role'])->group(function () {
 
     // Kho
     Route::get('danh-sach-kho', [WareHouseController::class, 'index'])->name('WareHouse.index');
+    Route::get('chi-tiet-kho/{id}', [WareHouseController::class, 'show'])->name('WareHouse.show');
     Route::post('them-kho', [WareHouseController::class, 'store'])->name('WareHouse.store');
     Route::post('sua-kho/{id}', [WareHouseController::class, 'update'])->name('WareHouse.update');
     Route::post('xoa-kho/{id}', [WareHouseController::class, 'destroy'])->name('WareHouse.destroy');

@@ -771,7 +771,6 @@
                                         </div>
 
                                         <div id="preview" class="d-flex mt-3"></div>
-                                        {{-- <ul id="attachments" class="file-list" style="padding: 0 0 4px 0; word-break: break-all;"></ul> --}}
                                     </div>
                                     <ul class="modal_upload-list"
                                         style="max-height: 134px; overflow-y: scroll; overflow-x: hidden;">
