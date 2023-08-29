@@ -202,7 +202,7 @@
                                 <span class="cards-title-black">DOANH SỐ</span>
                             </div>
                             <div class="row testkh2" style="height: 45%">
-                                <div class="col-sm-12">
+                                <div class="col-sm-12 text-center">
                                     <div class="card_borderp1">
                                         <span class="card-title-black text-center">Tình hình doanh số</span>
                                         <div class="mainSection_chartp1 mt-3">
@@ -212,23 +212,48 @@
                                 </div>                                
                             </div>
                             <div class="row testkh2" style="height: 45%">
-                                <div class="col-sm-6 testkh3">
-                                    theo kênh
+                                <div class="col-sm-6 text-center">
+                                    <div class="card_borderp1">
+                                        <span class="card-title-black text-center">Tình hình doanh số theo kênh</span>
+                                        <div class="mainSection_chartp1 mt-3">
+                                            <canvas id="admin_DoanhSoTheoKenh"></canvas>
+                                        </div>
+                                    </div>
                                 </div>  
-                                <div class="col-sm-6 testkh3">
-                                    luỹ kế tháng
+                                <div class="col-sm-6 text-center">
+                                    <div class="card_borderp1">
+                                        <span class="card-title-black text-center">Doanh số luỹ kế tháng</span>
+                                        <div class="mainSection_chartp1 mt-3">
+                                            <canvas id="admin_DoanhSoLuyKeThang"></canvas>
+                                        </div>
+                                    </div>
                                 </div>  
                             </div>
                         </div>
                         <div id="part3" class="col-sm-2 testkh1">
-                            <div class="row testkh2" style="height: 33%">
-                                Kênh 
+                            <div class="row testkh2" style="height: 33%; padding:2%">
+                                <div class="card_borderp1">
+                                    <span class="card-title-black text-center">Doanh số theo kênh</span>
+                                    <div class="mainSection_chart mt-3">
+                                        <canvas id="admin_D_DoanhSoTheoKenh"></canvas>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="row testkh2" style="height: 33%">
-                                Vùng 
+                            <div class="row testkh2" style="height: 33%; padding:2%">
+                                <div class="card_borderp1">
+                                    <span class="card-title-black text-center">Doanh số theo vùng </span>
+                                    <div class="mainSection_chart mt-3">
+                                        <canvas id="admin_D_DoanhSoTheoVung"></canvas>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="row testkh2" style="height: 33%">
-                                Địa bàn
+                            <div class="row testkh2" style="height: 33%; padding:2%">
+                                <div class="card_borderp1">
+                                    <span class="card-title-black text-center">Doanh số theo địa bàn</span>
+                                    <div class="mainSection_chart mt-3">
+                                        <canvas id="admin_D_DoanhSoTheoDiaBan"></canvas>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -535,6 +560,11 @@
     <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_KDTheoVung.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_KDTheoDiaBan.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_TinhHinhDoanhSo.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_DoanhSoTheoKenh.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_DoanhSoLuyKeThang.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_D_DoanhSoTheoKenh.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_D_DoanhSoTheoVung.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_D_DoanhSoTheoDiaBan.js') }}"></script>
     
  
    

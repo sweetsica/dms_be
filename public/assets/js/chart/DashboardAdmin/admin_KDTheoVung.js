@@ -23,7 +23,7 @@ new Chart(admin_KDTheoVung, {
       {
         label: 'Hiện có',
         data: [6, 5, 4, 5, 6, 3],
-        backgroundColor: 'rgb(219, 20, 20)',
+        backgroundColor: 'rgb(196, 37, 23)',
       },
       {
         label: 'Tổng định biên',
@@ -61,7 +61,7 @@ new Chart(admin_KDTheoVung, {
       x: {
         stacked: true,
         font: {
-          size: 6,
+          size: 8,
         }
       },
       y: {

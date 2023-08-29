@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-    @include('template.sidebar.sidebarPosition.sidebarLeft')
+    @include('template.sidebar.sidebarDepartment.sidebarLeft')
     <div id="mainWrap" class="mainWrap">
         <div class="mainSection">
             <div class="main">

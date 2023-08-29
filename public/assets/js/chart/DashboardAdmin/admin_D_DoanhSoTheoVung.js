@@ -1,20 +1,19 @@
-const admin_NhanSuOnOff = document.getElementById("admin_NhanSuOnOff");
+const admin_D_DoanhSoTheoVung = document.getElementById("admin_D_DoanhSoTheoVung");
 
-new Chart(admin_NhanSuOnOff, {
-    type: "pie",
+new Chart(admin_D_DoanhSoTheoVung, {
+    type: "doughnut",
     data: {
-        labels: ["Online", "Offline"],
+        labels: ["Vùng A", "Vùng B", "Vùng C"],
         datasets: [
             {
-                label: "Nhân sự",
-                data: [22,78],
+                label: "Chỉ số",
+                data: [12, 19, 3, 5],
                 borderWidth: 1,
-                backgroundColor: ["rgba(196, 37, 23)","rgba(248, 101, 101)"],
-                borderColor: ["rgba(196, 37, 23, 0.5)","rgba(248, 101, 101, 0.5)"],
             },
         ],
     },
     options: {
+        barPercentage:0.5,    
         responsive: true,
         maintainAspectRatio: false,
         scales: {
@@ -34,9 +33,16 @@ new Chart(admin_NhanSuOnOff, {
         },
         plugins: {
             legend: {
-                display: false,
+                labels:{
+                    font: {
+                      size:8
+                    },
+                    boxWidth:8,
+                  },
+                position:'right',
+
             },
-            tooltip: { enabled: true },            
+            tooltip: { enabled: true },
         },
     },
 });

@@ -1,4 +1,4 @@
-const admin_TinhHinhDoanhSo = document.getElementById('admin_TinhHinhDoanhSo');
+const admin_DoanhSoTheoKenh = document.getElementById('admin_DoanhSoTheoKenh');
 
 function dynamicColors() {
   var r = Math.floor(Math.random() * 255);
@@ -8,33 +8,26 @@ function dynamicColors() {
 }
 
 
-new Chart(admin_TinhHinhDoanhSo, {
+new Chart(admin_DoanhSoTheoKenh, {
   type: 'bar',
   data: {
     labels: [ 
-      "1",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6", 
-      "7", 
-      "8", 
-      "9", 
-      "10", 
-      "11", 
-      "12", 
-
+      "OTC",
+      "ETC",
+      "MT",
+      "Đại lý",
+      "Bán lẻ",
+      "TMDT",      
   ],
     datasets: [
       {
         label: 'Doanh số',
-        data: [450, 350, 250, 500, 300, 400, 250, 150, 180, 200, 450, 500],
+        data: [45, 35, 25, 50, 30, 40],
         backgroundColor: 'rgb(196, 37, 23)',
       },
       {
         label: 'Chỉ tiêu',
-        data: [550, 450, 150, 350, 225, 200, 170, 250, 300, 165, 375, 400],
+        data: [55, 45, 15, 35, 22, 20],
         backgroundColor: 'rgb(248, 101, 101)',
       },      
     ]

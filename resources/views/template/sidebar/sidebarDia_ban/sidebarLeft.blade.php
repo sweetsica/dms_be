@@ -64,12 +64,16 @@
                             </div>
                         </div>
                     </div>
+                    @php
+                            $x=1;
+                            $y=1;
+                        @endphp
                     <div class="d-lg-none" id="CoCauToChuc">
                         {{-- <ul id="tree" style="overflow: scroll"> --}}
-                            <ul id="tree2">
+                            <ul id="tree2" style="overflow: scroll">
                             @foreach ($departmentListTree as $donVi)
                                 <li data-id="{{ $donVi->id }}" style="width: max-content">
-                                    <a href="{{ route('department.index2', ['department_id' => $donVi->id]) }}"
+                                    {{$x++}}<a href="{{ route('department.index2', ['department_id' => $donVi->id]) }}"
                                         class="title-child">{{ $donVi->name }}</a>
                                     @if ($donVi->donViCon->count() > 0)
                                         @include('template.sidebar.sidebarDepartment.child', [

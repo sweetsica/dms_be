@@ -60,6 +60,7 @@ class PositionController extends Controller
         // dd($positionList);
         $UnitLeaderList = UnitLeader::all();
         $positionListTree = Position::where('parent',0)->with('donViCon')->get();
+        $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
         $positionlists = $this->getPosition();
         $departmentlists = $this->getDepartment();
         $personnelLevelList = PersonnelLevel::all();
@@ -74,7 +75,7 @@ class PositionController extends Controller
             'UnitLeaderList' => $UnitLeaderList,
             'dv_cong_tac' => $dv_cong_tac,
             'cap_nhan_su' => $cap_nhan_su,
-
+            "departmentListTree" => $departmentListTree,
             "positionListTree"=>$positionListTree
         ]);
     }
