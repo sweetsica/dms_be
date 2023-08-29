@@ -264,7 +264,7 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('destroy-khuyen-mai/{id}', [PromotionController::class, 'destroy'])->name('Promotion.destroy');
     Route::post('khuyen-mai-delete', [PromotionController::class, 'delete'])->name('delete-Promotion');
 
-    Route::get('dashboard_TongGiamDoc', function () {
+    Route::get('dashboard_admin', function () {
         return view('Dashboard.dashboard_Admin');});
 
 });

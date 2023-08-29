@@ -867,6 +867,9 @@ class PersonnelController extends Controller
         Session::flash('success', 'Xoá thành công');
         return redirect()->route('Personnel.index');
         return redirect()->back()->with('mess', 'Đã xóa !');;
+        
+        // Session::flash('success', 'Xoá thành công');
+        // return redirect()->route('Personnel.index');
     }
 
     public function delete(Request $request)

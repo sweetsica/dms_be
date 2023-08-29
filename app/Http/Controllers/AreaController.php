@@ -90,7 +90,9 @@ class AreaController extends Controller
         // return redirect()->back();
         Session::flash('success', 'Xoá thành công');
         return redirect()->route('area.index');
-        // return redirect()->back()->with('mess', 'Đã xóa!');
+        return redirect()->back()->with('mess', 'Đã xóa!');
+        // Session::flash('success', 'Đã xoá!');
+        // return redirect()->back();
     }
 
     public function delete(Request $request)
