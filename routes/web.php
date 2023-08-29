@@ -194,7 +194,7 @@ Route::middleware(['auth.role'])->group(function () {
 
     Route::delete('go-nhan-su-khoi-vi-tri', [PersonnelController::class, 'detach'])->name('detach-user-from-position');
 
-    Route::get('vai-tro', [RoleController::class, 'index'])->name('Role.index');
+    Route::get('vai-tro', [RoleController::class, 'index'])->name('Role.index')->middleware('permission');
     Route::post('vai-tro', [RoleController::class, 'store'])->name('Role.store');
     Route::post('vai-trox/{id}', [RoleController::class, 'update'])->name('Rolex.update');
     Route::post('vai-tro/{id}', [RoleController::class, 'destroy'])->name('Role.destroy');
@@ -228,6 +228,7 @@ Route::middleware(['auth.role'])->group(function () {
 
     // Kho
     Route::get('danh-sach-kho', [WareHouseController::class, 'index'])->name('WareHouse.index');
+    Route::get('chi-tiet-kho/{id}', [WareHouseController::class, 'show'])->name('WareHouse.show');
     Route::post('them-kho', [WareHouseController::class, 'store'])->name('WareHouse.store');
     Route::post('sua-kho/{id}', [WareHouseController::class, 'update'])->name('WareHouse.update');
     Route::post('xoa-kho/{id}', [WareHouseController::class, 'destroy'])->name('WareHouse.destroy');
@@ -241,6 +242,11 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('nha-cung-cap-delete', [SupplierController::class, 'delete'])->name('Supplier.delete');
 
     // Đơn đặt hàng
+    Route::get('danh-sach-don-dat-hang', [PurchaseOrderController::class, 'index'])->name('[PurchaseOrder.index');
+    Route::post('them-don-dat-hang', [PurchaseOrderController::class, 'store'])->name('[PurchaseOrder.store');
+    Route::post('sua-don-dat-hang/{id}', [PurchaseOrderController::class, 'update'])->name('[PurchaseOrder.update');
+    Route::post('xoa-don-dat-hang/{id}', [PurchaseOrderController::class, 'destroy'])->name('[PurchaseOrder.destroy');
+    Route::post('don-dat-hang-delete', [PurchaseOrderController::class, 'delete'])->name('[PurchaseOrder.delete');
     Route::get('danh-sach-don-dat-hang', [PurchaseOrderController::class, 'index'])->name('PuchaseOrder.index');
     Route::post('them-don-dat-hang', [PurchaseOrderController::class, 'store'])->name('PuchaseOrder.store');
     Route::post('sua-don-dat-hang/{id}', [PurchaseOrderController::class, 'update'])->name('PuchaseOrder.update');
@@ -252,6 +258,7 @@ Route::middleware(['auth.role'])->group(function () {
 
     // Phiếu nhập mua nhà cung cấp
     Route::get('danh-sach-phieu-nhap-mua-nha-cung-cap', [BuySupplierController::class, 'index'])->name('BuySupplier.index');
+
     Route::post('them-khuyen-mai', [PromotionController::class, 'store'])->name('Promotion.store');
     Route::post('sua-khuyen-mai/{id}', [PromotionController::class, 'update'])->name('Promotion.update');
     Route::post('destroy-khuyen-mai/{id}', [PromotionController::class, 'destroy'])->name('Promotion.destroy');

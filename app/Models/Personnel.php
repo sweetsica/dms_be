@@ -57,7 +57,7 @@ class Personnel extends Model implements Authenticatable
     {
         return $this->belongsTo(PersonnelLevel::class, 'position_level_id');
     }
-    
+
     public function role()
     {
         return $this->belongsTo(Role::class, 'role_id');
@@ -83,6 +83,12 @@ class Personnel extends Model implements Authenticatable
             }
         }
     }
+
+    public function hasPermission($permission)
+{
+    // Kiểm tra xem người dùng có quyền $permission không
+    return $this->permissions->contains('name', $permission);
+}
 
 
 

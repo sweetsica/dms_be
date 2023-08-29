@@ -79,6 +79,10 @@ class WareHouseController extends Controller
         return back();
     }
 
+    public function show($id) {
+        return view('WareHouse.chiTietKho');
+    }
+
     public function update(Request $request,$id)
     {
         $name = $request->get('code');

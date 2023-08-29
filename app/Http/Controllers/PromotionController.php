@@ -12,38 +12,51 @@ use Illuminate\Support\Facades\Session;
 
 class PromotionController extends Controller
 {
-    public function index() {
+
+public function index() {
 
     $promotions = Promotion::all(); // Lấy danh sách Promotion
-    $promotionDetailsArray = [];
-    if( $promotions){
-    foreach ($promotions as $promotion) {
-        $promotionDetailsArray = $promotion->promotion_details;
+//     $promotionDetailsArray = [];
+//     if( $promotions){
+//     foreach ($promotions as $promotion) {
+//         $promotionDetailsArray = $promotion->promotion_details;
 
-    }
-}else{
-    $promotionDetailsArray=[];
-}
-
-if($promotionDetailsArray){
-    $combinedData = json_decode($promotionDetailsArray);
-}else{
-    $combinedData = [];
-}
-
-// $promotionDetailsArray = [];
-// if( $promotions){
-// foreach ($promotions as $promotion) {
-//     // $promotionDetailsArray = $promotion->promotion_details;
-//     $promotionDetailsArray = json_decode($promotion->promotion_details, true);
-
-// }
+//     }
 // }else{
+//     $promotionDetailsArray=[];
+// }
+
+// if($promotionDetailsArray){
+//     $combinedData = json_decode($promotionDetailsArray);
+// }else{
+//     $combinedData = [];
+// }
+$promotionDetailsArray = [];
+if( $promotions){
+foreach ($promotions as $promotion) {
+    // $promotionDetailsArray = $promotion->promotion_details;
+    $promotionDetails = json_decode($promotion->promotion_details, true);
+    // $promotionDetailsArray[] = json_decode($promotion->promotion_details, true);
+    if ($promotionDetails) {
+        $promotionDetailsArray[$promotion->id] = $promotionDetails;
+    } else {
+        $promotionDetailsArray[$promotion->id] = [];
+    }
+}
+}
+// else{
 // $promotionDetailsArray=[];
 // }
+// dd()
+
+if ($promotionDetails) {
+    $promotionDetailsArray[$promotion->id] = $promotionDetails;
+} else {
+    $promotionDetailsArray[$promotion->id] = [];
+}
+
 
 //  dd($promotionDetailsArray);
-
     $customerGroupNames = [];
     foreach ($promotions as $promotion) {
         $customerGrIds = json_decode($promotion->customer_group_id);
@@ -83,8 +96,8 @@ if($promotionDetailsArray){
         $customersList = Customer::all();
         $products = Product::all();
 
-        return view('Promotion.index', compact('promotions', 'customerGroupNames','listgroup','customersList','products','combinedData','customerNames'));
-        // return view('Promotion.index', compact('promotions', 'customerGroupNames','listgroup','customersList','products','customerNames','promotionDetailsArray'));
+        // return view('Promotion.index', compact('promotions', 'customerGroupNames','listgroup','customersList','products','combinedData','customerNames'));
+        return view('Promotion.index', compact('promotions', 'customerGroupNames','listgroup','customersList','products','customerNames','promotionDetailsArray'));
     }
 
     public function store(Request $request) {

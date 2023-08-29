@@ -215,7 +215,17 @@
                                                                 </td>
                                                                 <td class="text-center">1
                                                                 </td>
-                                                                <td class="text-center"> ADGFRE90
+                                                                <td class="text-center">
+                                                                    <button type="button" data-bs-toggle="modal"
+                                                                        data-bs-target="#chiTietNK"
+                                                                        style="background: transparent">
+                                                                        <div class="text-wrap text-center btn-show_detail"
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                            title="ADGFRE90">
+                                                                            ADGFRE90
+                                                                        </div>
+                                                                    </button>
+
                                                                 </td>
                                                                 <td class="text-center">
                                                                     21/08/2023
@@ -242,7 +252,7 @@
                                                                         <div data-bs-toggle="tooltip"
                                                                             data-bs-placement="top" title="Sửa ">
                                                                             <div class="btn" data-bs-toggle="modal"
-                                                                                data-bs-target="#suaCTKM">
+                                                                                data-bs-target="#suaNK">
                                                                                 <img style="width:16px;height:16px"
                                                                                     src="{{ asset('assets/img/edit.svg') }}" />
                                                                             </div>
@@ -250,7 +260,7 @@
                                                                         <div data-bs-toggle="tooltip"
                                                                             data-bs-placement="top" title="Xóa">
                                                                             <div class="btn" data-bs-toggle="modal"
-                                                                                data-bs-target="#xoaCTKM">
+                                                                                data-bs-target="#xoaNK">
                                                                                 <img style="width:16px;height:16px"
                                                                                     src="{{ asset('assets/img/trash.svg') }}" />
                                                                             </div>
@@ -386,8 +396,8 @@
     @endforeach --}}
 
 
-    {{-- Modal sửa chương trình khuyến mại --}}
-    <div class="modal fade" id="suaCTKM" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- Modal sửa nhập kho --}}
+    <div class="modal fade" id="suaNK" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
                 <div class="modal-header text-center">
@@ -489,7 +499,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="specifications_edit">
-                                                <tr>
+                                                <tr id="row_0">
                                                     <td class="text-center">
                                                         <div data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                             title="Mã sản phẩm">
@@ -568,7 +578,7 @@
                                                             style="color: var(--primary-color);cursor: pointer;"></i>
                                                     </td>
                                                 </tr>
-                                                <tr>
+                                                <tr id="row_1">
                                                     <td class="text-center">
                                                         <div data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                             title="Mã sản phẩm">
@@ -717,12 +727,12 @@
         </div>
     </div>
 
-    {{-- Modal chi tiết phiếu chương trình khuyến mại --}}
-    {{-- <div class="modal fade" id="chiTietCTKM" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- Modal chi tiết nhập kho --}}
+    <div class="modal fade" id="chiTietNK" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel">Chi tiết kho</h5>
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Chi tiết phiếu nhập mua nhà cung cấp</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -730,19 +740,19 @@
                         <div class="col-lg-4 mb-3">
                             <input name="" required type="text" placeholder="Mã nhập kho*"
                                 class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                title="Mã nhập kho*" value="KHO01">
+                                title="Mã nhập kho*" value="KHO01" disabled>
                         </div>
                         <div class="col-lg-4 mb-3">
                             <input name="" required type="date" placeholder="Ngày nhập kho*"
                                 class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Ngày nhập kho*" value="2023-08-24">
+                                title="Ngày nhập kho*" value="2023-08-24" disabled>
                         </div>
                         <div class="col-lg-4 mb-3">
                             <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nhà cung cấp">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Nhà cung cấp" data-select-all-text="Nhà cung cấp"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name=""
-                                    data-live-search-placeholder="Tìm kiếm...">
+                                    data-live-search-placeholder="Tìm kiếm..." disabled>
                                     <option value="VINFAST" selected>VINFAST
                                     </option>
                                     <option value="DUCATI">DUCATI
@@ -754,7 +764,7 @@
                             <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                 data-live-search="true" title="Loại kho" data-select-all-text="Loại kho"
                                 data-deselect-all-text="Bỏ chọn" data-size="3" name=""
-                                data-live-search-placeholder="Tìm kiếm...">
+                                data-live-search-placeholder="Tìm kiếm..." disabled>
                                 <option value="Kho 1">Kho 1
                                 </option>
                                 <option value="Kho 2" selected>Kho 2
@@ -765,7 +775,7 @@
                             <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                 data-live-search="true" title="Kho nhập" data-select-all-text="Kho nhập"
                                 data-deselect-all-text="Bỏ chọn" data-size="3" name=""
-                                data-live-search-placeholder="Tìm kiếm...">
+                                data-live-search-placeholder="Tìm kiếm..." disabled>
                                 <option value="Thái Bình">Thái Bình
                                 </option>
                                 <option value="Cầu Giấy" selected>Cầu Giấy
@@ -775,7 +785,7 @@
                         <div class="col-lg-4 mb-3">
                             <input name="" required type="text" placeholder="Diễn giải" class="form-control"
                                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Diễn giải"
-                                value="Mua 500 xe ô tô điện">
+                                value="Mua 500 xe ô tô điện" disabled>
                         </div>
                     </div>
 
@@ -813,12 +823,10 @@
                                                 <th class="text-nowrap text-center" style="width: 8%;">Tiền sau thuế
                                                 </th>
                                                 <th class="text-nowrap text-center" style="width: 10%;">Ghi chú</th>
-                                                <th> <i class="bi bi-plus fs-3 add-spec"
-                                                        style="color: var(--primary-color);cursor: pointer;"></i></th>
                                             </tr>
                                         </thead>
-                                        <tbody id="specifications_edit">
-                                            <tr>
+                                        <tbody id="specifications_detail">
+                                            <tr id="row_0">
                                                 <td class="text-center">
                                                     <div data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                         title="Mã sản phẩm">
@@ -828,7 +836,7 @@
                                                             data-deselect-all-text="Bỏ chọn" data-size="3"
                                                             name="data[0][key1]"
                                                             data-live-search-placeholder="Tìm kiếm..."
-                                                            id="selectCodeProductEdit_0">
+                                                            id="selectCodeProductDetail_0" disabled>
                                                             <option value="Xe điện GODLF" selected>GODLF
                                                             </option>
                                                             <option value="Xe máy XSR155">XSR155
@@ -837,63 +845,135 @@
                                                     </div>
                                                 </td>
                                                 <td class="text-center">
-                                                    <input id="nameProductEdit_0" class="nameProduct form-control"
+                                                    <input id="nameProductDetail_0" class="nameProduct form-control"
                                                         disabled>
                                                 </td>
                                                 <td>
                                                     <input type="date" class="form-control" name="data[0][key2]"
-                                                        value="2023-09-30">
+                                                        value="2023-09-30" disabled>
                                                 </td>
                                                 <td>
                                                     <input type="number" class="form-control" name="data[0][key3]"
-                                                        value="30">
+                                                        value="30" disabled>
                                                 </td>
                                                 <td>
                                                     <input type="text" class="form-control" name="data[0][key4]"
-                                                        value="Chiếc">
+                                                        value="Chiếc" disabled>
                                                 </td>
                                                 <td>
                                                     <input type="number" class="form-control" name="data[0][key5]"
-                                                        id="soLuongEdit_0" value="50">
+                                                        id="soLuongDetail_0" value="50" disabled>
                                                 </td>
                                                 <td>
                                                     <input type="number" class="form-control" name="data[0][key6]"
-                                                        id="donGiaEdit_0" value="2000000">
+                                                        id="donGiaDetail_0" value="2000000" disabled>
                                                 </td>
                                                 <td>
                                                     <input type="number" class="form-control" name="data[0][key7]"
-                                                        id="tongGiaEdit_0" disabled value="1000000000">
+                                                        id="tongGiaDetail_0" disabled value="1000000000">
                                                 </td>
                                                 <td>
                                                     <input type="number" class="form-control" name="data[0][key8]"
-                                                        id="tiLeCKEdit_0" value="2">
+                                                        id="tiLeCKDetail_0" value="2" disabled>
                                                 </td>
                                                 <td>
                                                     <input type="number" class="form-control" name="data[0][key9]"
-                                                        id="CKEdit_0" disabled value="20000000">
+                                                        id="CKDetail_0" disabled value="20000000">
                                                 </td>
                                                 <td>
                                                     <input type="number" class="form-control" name="data[0][key10]"
-                                                        id="tienTruocThueEdit_0" disabled value="98000000">
+                                                        id="tienTruocThueDetail_0" disabled value="98000000">
                                                 </td>
                                                 <td>
                                                     <input type="number" class="form-control" name="data[0][key11]"
-                                                        id="thueSuatEdit_0" value="10">
+                                                        id="thueSuatDetail_0" value="10" disabled>
                                                 </td>
                                                 <td>
                                                     <input type="number" class="form-control" name="data[0][key12]"
-                                                        id="tienThueEdi_0" disabled value="9800000">
+                                                        id="tienThueDetail_0" disabled value="9800000">
                                                 </td>
                                                 <td>
                                                     <input type="number" class="form-control" name="data[0][key13]"
-                                                        id="tienSauThueEdit_0" disabled value="107800000">
+                                                        id="tienSauThueDetail_0" disabled value="107800000">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" name="data[0][key14]">
+                                                    <input type="text" class="form-control" name="data[0][key14]"
+                                                        disabled>
+                                                </td>
+                                            </tr>
+                                            <tr id="row_1">
+                                                <td class="text-center">
+                                                    <div data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                        title="Mã sản phẩm">
+                                                        <select class="selectpicker" data-dropup-auto="false"
+                                                            data-width="100%" data-live-search="true"
+                                                            title="Chọn mã sản phẩm" data-select-all-text="Mã sản phẩm"
+                                                            data-deselect-all-text="Bỏ chọn" data-size="3"
+                                                            name="data[0][key1]"
+                                                            data-live-search-placeholder="Tìm kiếm..."
+                                                            id="selectCodeProductDetail_1" disabled>
+                                                            <option value="Xe điện GODLF" selected>GODLF
+                                                            </option>
+                                                            <option value="Xe máy XSR155">XSR155
+                                                            </option>
+                                                        </select>
+                                                    </div>
                                                 </td>
                                                 <td class="text-center">
-                                                    <i class="bi bi-plus fs-3 add-spec_edit"
-                                                        style="color: var(--primary-color);cursor: pointer;"></i>
+                                                    <input id="nameProductDetail_1" class="nameProduct form-control"
+                                                        disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="date" class="form-control" name="data[0][key2]"
+                                                        value="2023-09-30" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="form-control" name="data[0][key3]"
+                                                        value="30" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" name="data[0][key4]"
+                                                        value="Chiếc" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="form-control" name="data[0][key5]"
+                                                        id="soLuongDetail_1" value="50" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="form-control" name="data[0][key6]"
+                                                        id="donGiaDetail_1" value="2000000" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="form-control" name="data[0][key7]"
+                                                        id="tongGiaDetail_1" disabled value="1000000000">
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="form-control" name="data[0][key8]"
+                                                        id="tiLeCKDetail_1" value="2" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="form-control" name="data[0][key9]"
+                                                        id="CKDetail_1" disabled value="20000000">
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="form-control" name="data[0][key10]"
+                                                        id="tienTruocThueDetail_1" disabled value="98000000">
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="form-control" name="data[0][key11]"
+                                                        id="thueSuatDetail_1" value="10" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="form-control" name="data[0][key12]"
+                                                        id="tienThueDetail_1" disabled value="9800000">
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="form-control" name="data[0][key13]"
+                                                        id="tienSauThueDetail_1" disabled value="107800000">
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" name="data[0][key14]"
+                                                        disabled>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -905,7 +985,7 @@
                                         <div class="text-center">
                                             <span class="modal-title">Tổng tiền hàng</span>
                                             <div class="border p-3 mt-3">
-                                                <span class="fw-bold fs-5" id="sumTienHang"></span>
+                                                <span class="fw-bold fs-5" id="sumTienHangDetail"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -913,7 +993,7 @@
                                         <div class="text-center">
                                             <span class="modal-title">Tổng tiền chiết khấu</span>
                                             <div class="border p-3 mt-3">
-                                                <span class="fw-bold fs-5" id="sumTienChietKhau"></span>
+                                                <span class="fw-bold fs-5" id="sumTienChietKhauDetail"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -921,7 +1001,7 @@
                                         <div class="text-center">
                                             <span class="modal-title">Tổng tiền trước thuế</span>
                                             <div class="border p-3 mt-3">
-                                                <span class="fw-bold fs-5" id="sumTienTruocThue"></span>
+                                                <span class="fw-bold fs-5" id="sumTienTruocThueDetail"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -929,7 +1009,7 @@
                                         <div class="text-center">
                                             <span class="modal-title">Tổng tiền thuế</span>
                                             <div class="border p-3 mt-3">
-                                                <span class="fw-bold fs-5" id="sumTienThue"></span>
+                                                <span class="fw-bold fs-5" id="sumTienThueDetail"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -937,7 +1017,7 @@
                                         <div class="text-center">
                                             <span class="modal-title">Tổng thanh toán</span>
                                             <div class="border p-3 mt-3">
-                                                <span class="fw-bold fs-5" id="sumThanhToan"></span>
+                                                <span class="fw-bold fs-5" id="sumThanhToanDetail"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -961,18 +1041,18 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 
-    {{-- Modal Xóa phiếu chương trình khuyến mại --}}
-    <div class="modal fade" id="xoaCTKM" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- Modal Xóa nhập kho --}}
+    <div class="modal fade" id="xoaNK" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title text-danger" id="exampleModalLabel">Xóa chương trình khuyến mại</h5>
+                    <h5 class="modal-title text-danger" id="exampleModalLabel">Xóa phiếu nhập mua nhà cung cấp</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Bạn có thực sự muốn xoá chương trình khuyến mại này không?
+                    Bạn có thực sự muốn xoá phiếu nhập mua nhà cung cấp này không?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
@@ -985,7 +1065,7 @@
         </div>
     </div>
 
-    <!-- Modal thêm phiếu chương trình khuyến mại -->
+    <!-- Modal thêm nhập kho -->
     <div class="modal fade" id="addPNMNCC" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
@@ -1255,7 +1335,7 @@
         }
     </script>
 
-    {{-- Xử lý modal thêm  --}}
+    {{-- Xử lý modal thêm nhập kho  --}}
     <script>
         document.addEventListener("DOMContentLoaded", function() {
 
@@ -1699,7 +1779,7 @@
         });
     </script>
 
-    {{-- Xử lý modal sửa --}}
+    {{-- Xử lý modal sửa nhập kho --}}
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const rows = document.querySelectorAll("#specifications_edit tr");
@@ -1707,7 +1787,7 @@
 
             const specifications = document.getElementById('specifications_edit');
 
-            const rowData = Array.from(rows);
+            var rowData = Array.from(rows);
 
             function updateSelectedValues(selectId, spanId) {
                 const selectedOptions = Array.from(document.querySelectorAll(`#${selectId} option:checked`));
@@ -1814,24 +1894,30 @@
 
 
             function calculateSumEdit() {
-
                 let sumTienHang = 0;
                 let sumTienChietKhau = 0;
                 let sumTienTruocThue = 0;
                 let sumTienThue = 0;
                 let sumThanhToan = 0;
-
                 rowData.forEach((row, index) => {
 
-                    const tongGia = parseFloat(row.querySelector(`#tongGiaEdit_${index}`).value) || 0;
-                    const chiKhau = parseFloat(row.querySelector(`#CKEdit_${index}`).value) || 0;
-                    const tienTruocThue = parseFloat(row.querySelector(`#tienTruocThueEdit_${index}`)
-                        .value) || 0;
-                    const tienThue = parseFloat(row.querySelector(`#tienThueEdit_${index}`).value) || 0;
-                    const tienSauThue = parseFloat(row.querySelector(`#tienSauThueEdit_${index}`)
-                            .value) ||
-                        0;
 
+                    const tongGiaElement = row.querySelector(`#tongGiaEdit_${index}`);
+                    const chiKhauElement = row.querySelector(`#CKEdit_${index}`);
+                    const tienTruocThueElement = row.querySelector(`#tienTruocThueEdit_${index}`);
+                    const tienThueElement = row.querySelector(`#tienThueEdit_${index}`);
+                    const tienSauThueElement = row.querySelector(`#tienSauThueEdit_${index}`);
+
+                    if (tongGiaElement == null || chiKhauElement == null || tienTruocThueElement == null ||
+                        tienThueElement == null || tienSauThueElement == null) {
+                        index++;
+                        return;
+                    }
+                    const tongGia = parseFloat(tongGiaElement.value) || 0;
+                    const chiKhau = parseFloat(chiKhauElement.value) || 0;
+                    const tienTruocThue = parseFloat(tienTruocThueElement.value) || 0;
+                    const tienThue = parseFloat(tienThueElement.value) || 0;
+                    const tienSauThue = parseFloat(tienSauThueElement.value) || 0;
 
                     sumTienHang += tongGia;
                     sumTienChietKhau += chiKhau;
@@ -1866,6 +1952,7 @@
 
             function createSpecificationRow() {
                 const newSpecDiv = document.createElement("tr");
+                newSpecDiv.setAttribute("id", `row_${specCount}`);
                 const uniqueIDs = generateUniqueIDs(specCount);
                 newSpecDiv.innerHTML = ` <td class="text-center">
                                                 <div data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -2086,20 +2173,10 @@
                             parentRow.remove();
 
 
-                            rowData = rowData.filter(data => {
-                                const idData = data.querySelector(
-                                        `td input[id^="nameProductEdit_"]`)
-                                    .id;
+                            rowData.filter(row => row.id !==
+                                `row_${removedSpecCount}`);
 
-                                return idData !==
-                                    `nameProductEdit_${removedSpecCount}`;
-                            });
-
-                            // rowData = rowData.filter(data => data
-                            //     .querySelector(
-                            //         `td input[id^="nameProductEdit_"]`)
-                            //     .id !==
-                            //     `nameProductEdit_${removedSpecCount}`);
+                            // rowData = updateNodeList;
 
                             calculateSumEdit();
                             specCount--;
@@ -2120,10 +2197,11 @@
         });
     </script>
 
-    {{-- Xử lý chi tiết CTKM --}}
+    {{-- Xử lý chi tiết nhập kho --}}
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Function to update selected values in span
+            const rows = document.querySelectorAll("#specifications_detail tr");
+
             function updateSelectedValues(selectId, spanId) {
                 const selectedOptions = Array.from(document.querySelectorAll(`#${selectId} option:checked`));
                 const selectedValues = selectedOptions.map(option => option.value);
@@ -2131,21 +2209,43 @@
                 spanElement.value = selectedValues.join(", ");
             }
 
-            // Function to handle dynamic rows
-            function handleDynamicRows() {
-                const rows = document.querySelectorAll("#detailCTKM tr");
+            rows.forEach((row, index) => {
+                updateSelectedValues(`selectCodeProductDetail_${index}`, `nameProductDetail_${index}`);
+                calculateSumDetail()
+            });
+
+            function calculateSumDetail() {
+
+                let sumTienHang = 0;
+                let sumTienChietKhau = 0;
+                let sumTienTruocThue = 0;
+                let sumTienThue = 0;
+                let sumThanhToan = 0;
+
                 rows.forEach((row, index) => {
-                    const selectCodeProduct = row.querySelector(`#selectCodeProductDetail_${index}`);
-                    const productBonusSpan = row.querySelector(`#productBonusDetail_${index}`);
 
-
-                    updateSelectedValues(`selectCodeProductDetail_${index}`,
-                        `nameProductDetail_${index}`);
+                    const tongGia = parseFloat(row.querySelector(`#tongGiaDetail_${index}`).value) || 0;
+                    const chiKhau = parseFloat(row.querySelector(`#CKDetail_${index}`).value) || 0;
+                    const tienTruocThue = parseFloat(row.querySelector(`#tienTruocThueDetail_${index}`)
+                        .value) || 0;
+                    const tienThue = parseFloat(row.querySelector(`#tienThueDetail_${index}`).value) || 0;
+                    const tienSauThue = parseFloat(row.querySelector(`#tienSauThueDetail_${index}`)
+                            .value) ||
+                        0;
+                    sumTienHang += tongGia;
+                    sumTienChietKhau += chiKhau;
+                    sumTienTruocThue += tienTruocThue;
+                    sumTienThue += tienThue;
+                    sumThanhToan += tienSauThue;
                 });
+
+                document.getElementById("sumTienHangDetail").textContent = sumTienHang;
+                document.getElementById("sumTienChietKhauDetail").textContent = sumTienChietKhau;
+                document.getElementById("sumTienTruocThueDetail").textContent = sumTienTruocThue;
+                document.getElementById("sumTienThueDetail").textContent = sumTienThue;
+                document.getElementById("sumThanhToanDetail").textContent = sumThanhToan;
             }
 
-            // Update selected values for all rows
-            handleDynamicRows();
         });
     </script>
 @endsection

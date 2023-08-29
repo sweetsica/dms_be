@@ -37,7 +37,7 @@ class AreaController extends Controller
         if($vung != NULL) {
             $query->where("department.name", "like", "%$vung%");
         }
-        $areaList =$query->paginate(10);
+        $areaList =$query->orderBy('area.id', 'desc')->paginate(10);
         $department = Department::where('code', 'like', 'VUNG%')->get();
         $areaTree =  Department::with('khuVucs.diaBans.tuyens')->where('code', 'like', 'VUNG%')->get();
         // dd()
@@ -86,8 +86,13 @@ class AreaController extends Controller
     public function destroy($id)
     {
         Area::destroy($id);
-        Session::flash('success', 'Đã xoá!');
-        return redirect()->back();
+        // Session::flash('success', 'Đã xoá!');
+        // return redirect()->back();
+        Session::flash('success', 'Xoá thành công');
+        return redirect()->route('area.index');
+        return redirect()->back()->with('mess', 'Đã xóa!');
+        // Session::flash('success', 'Đã xoá!');
+        // return redirect()->back();
     }
 
     public function delete(Request $request)

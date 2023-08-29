@@ -12,7 +12,7 @@
     <div id="mainWrap" class="mainWrap">
         <div class="mainSection">
             <div class="main">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="mainSection_heading">
                         <h5 class="mainSection_heading-title">Danh sách khu vực</h5>
                         @include('template.components.sectionCard')
@@ -63,8 +63,7 @@
                                         </div><br>
                                         <div class="table-responsive">
                                             <table id="dsDaoTao"
-                                                class="table table-responsive table-hover table-bordered filter"
-                                                style="width: 100%">
+                                                class="table table-responsive table-hover table-bordered filter">
                                                 <thead>
                                                     <tr>
                                                         <th class="text-nowrap text-center" style="width:1%"><input
@@ -94,26 +93,26 @@
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <div class="overText" data-bs-toggle="tooltip"
+                                                                <div class="overText text-center" data-bs-toggle="tooltip"
                                                                     data-bs-placement="top" title="{{ $item->code }}">
                                                                     {{ $item->code }}
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <div class="overText" data-bs-toggle="tooltip"
+                                                                <div class="overText text-center" data-bs-toggle="tooltip"
                                                                     data-bs-placement="top" title="{{ $item->name }}">
                                                                     {{ $item->name }}
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <div class="overText" data-bs-toggle="tooltip"
+                                                                <div class="overText text-center" data-bs-toggle="tooltip"
                                                                     data-bs-placement="top"
                                                                     title="{{ $item->department_name }}">
                                                                     {{ $item->department_name }}
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <div class="overText" data-bs-toggle="tooltip"
+                                                                <div class="overText text-center" data-bs-toggle="tooltip"
                                                                     data-bs-placement="top"
                                                                     title="{{ $item->description }}">
                                                                     {{ $item->description }}
@@ -229,7 +228,8 @@
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Vùng*">
                                     {{-- <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Vùng*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="area" data-live-search-placeholder="Tìm kiếm..."> --}}
-                                    <select name="area" required class="selectpicker" data-dropup-auto="false" data-live-search="true">
+                                    <select name="area" required class="selectpicker" data-dropup-auto="false"
+                                        data-live-search="true">
                                         <option value="{{ $item->area }}">{{ $item->department_name }}</option>
                                         @foreach ($department as $depmt)
                                             <option value="{{ $depmt->id }}">
@@ -279,7 +279,8 @@
                                     class="form-control">
                             </div>
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Vùng*">
-                                <select name="area" required class="selectpicker" data-dropup-auto="false" data-live-search="true">
+                                <select name="area" required class="selectpicker" data-dropup-auto="false"
+                                    data-live-search="true">
                                     <option value="">Chọn vùng*</option>
                                     @foreach ($department as $item)
                                         <option value="{{ $item->id }}">

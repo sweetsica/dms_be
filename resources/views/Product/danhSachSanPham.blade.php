@@ -40,7 +40,7 @@
     <div id="mainWrap" class="mainWrap">
         <div class="mainSection">
             <div class="main">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="mainSection_heading">
                         <h5 class="mainSection_heading-title">Danh sách sản phẩm</h5>
                         @include('template.components.sectionCard')
@@ -115,13 +115,13 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText" data-bs-toggle="tooltip"
+                                                            <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="{{ $item->code }}">
                                                                 {{ $item->code }}
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText" data-bs-toggle="tooltip"
+                                                            <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="{{ $item->name }}">
                                                                 {{ $item->name }}
                                                             </div>
@@ -134,14 +134,14 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText" data-bs-toggle="tooltip"
+                                                            <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="{{ $item->type }}">
                                                                 {{ $item->type }}
 
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText center" data-bs-toggle="tooltip"
+                                                            <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top"
                                                                 title="{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y') }}">
                                                                 {{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y') }}
@@ -254,7 +254,7 @@
                                     <select name="type" required class="selectpicker" data-dropup-auto="false"
                                         data-width="100%" data-size="3" data-live-search="true"
                                         data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
-                                        data-live-search-placeholder="Tìm kiếm...">
+                                        data-live-search-placeholder="Tìm kiếm..." placeholder="Phân loại*">
                                         <option value="Sản phẩm" {{ $item->type == 'Sản phẩm' ? 'selected' : '' }}>Sản
                                             phẩm</option>
                                         <option value="Phiên bản" {{ $item->type == 'Phiên bản' ? 'selected' : '' }}>Phiên
@@ -270,7 +270,7 @@
                                     <select name="branch" required class="selectpicker" data-dropup-auto="false"
                                         data-width="100%" data-size="3" data-live-search="true"
                                         data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
-                                        data-live-search-placeholder="Tìm kiếm...">
+                                        data-live-search-placeholder="Tìm kiếm..." placeholder="Ngành hàng*">
                                         <option value="Sản phẩm dẫn"
                                             {{ $item->branch == 'Sản phẩm dẫn' ? 'selected' : '' }}>Sản phẩm dẫn</option>
                                         <option value="Sản phẩm tư vấn"
@@ -373,9 +373,9 @@
                                 title="Phân loại*">
                                 <select required name="type" class="selectpicker" data-dropup-auto="false"
                                     data-width="100%" data-size="3" data-live-search="true"
-                                    data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
-                                    data-live-search-placeholder="Tìm kiếm...">
-                                    <option value="" disabled selected>Chọn phân loại</option>
+                                    data-select-all-text="Chọn phân loại" data-deselect-all-text="Bỏ chọn"
+                                    data-live-search-placeholder="Tìm kiếm..." placeholder="Phân loại*">
+                                    {{-- <option value="" disabled selected></option> --}}
                                     <option value="Sản phẩm">Sản phẩm</option>
                                     <option value="Phiên bản">Phiên bản</option>
                                     <option value="Tuỳ chọn">Tuỳ chọn</option>
@@ -387,8 +387,8 @@
                                 <select required name="branch" class="selectpicker" data-dropup-auto="false"
                                     data-width="100%" data-size="3" data-live-search="true"
                                     data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
-                                    data-live-search-placeholder="Tìm kiếm...">
-                                    <option value="" disabled selected>Chọn ngành hàng</option>
+                                    data-live-search-placeholder="Tìm kiếm..." placeholder="Ngành hàng*">
+                                    {{-- <option value="" disabled selected>Chọn ngành hàng</option> --}}
                                     <option value="Sản phẩm dẫn">Sản phẩm dẫn</option>
                                     <option value="Sản phẩm tư vấn">Sản phẩm tư vấn</option>
                                     <option value="Sản phẩm mới">Sản phẩm mới</option>

@@ -13,7 +13,7 @@
         height: auto;
         }
         .mainSection_card1 {
-    margin-left: 10px;   
+    margin-left: 10px;
     font-size: var(--fz-12);
 }
     </style>
@@ -51,10 +51,10 @@ foreach ($listPosToDept as $item){
                             </div>
                             <div class="col-md-6">
                                 <div class="row">
-                                    <h5 class="mainSection_heading-title">Hồ sơ phòng ban</h5> 
+                                    <h5 class="mainSection_heading-title">Hồ sơ phòng ban</h5>
                                 </div>
                                 <div class="row">
-                                    <h5 class="mainSection_heading-title card-title">{{ $getDept->name ?? '' }}</h5>  
+                                    <h5 class="mainSection_heading-title card-title">{{ $getDept->name ?? '' }}</h5>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -64,9 +64,9 @@ foreach ($listPosToDept as $item){
                                     </div>
                                 </div>
                             </div>
-                        </div>                      
-                    </div>  
-                            
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card mb-3">
@@ -174,7 +174,7 @@ foreach ($listPosToDept as $item){
 
                                                                         @case(1)
                                                                             <span class="fs-5">Hoạt động</span>
-                                                                        @break                                                                        
+                                                                        @break
 
                                                                         @default
                                                                             <span></span>
@@ -265,7 +265,7 @@ foreach ($listPosToDept as $item){
                                                     </div>
                                                 </div>
                                             </div>
-    
+
                                             <div
                                                 style="display: grid;
                                             grid-template-columns: auto auto auto auto auto;
@@ -308,11 +308,11 @@ foreach ($listPosToDept as $item){
                                                     <select name="filter_personnel_level" required class="selectpicker"
                                                         data-dropup-auto="false">
                                                         <option value="">Lọc cấp nhân sự</option>
-                                                        {{-- @foreach ($personnelLevelList as $item)
+                                                        @foreach ($personnelLevelList as $item)
                                                                 <option value="{{ $item->id }}">
                                                                     {{ $item->name }}
                                                                 </option>
-                                                            @endforeach --}}
+                                                            @endforeach
                                                     </select>
                                                 </div>
 
@@ -321,11 +321,11 @@ foreach ($listPosToDept as $item){
                                                     <select name="filter_personnel_level" required class="selectpicker"
                                                         data-dropup-auto="false">
                                                         <option value="">Lọc tên vị trí</option>
-                                                        {{-- @foreach ($personnelLevelList as $item)
+                                                        @foreach ($personnelLevelList as $item)
                                                                 <option value="{{ $item->id }}">
                                                                     {{ $item->name }}
                                                                 </option>
-                                                            @endforeach --}}
+                                                            @endforeach
                                                     </select>
                                                 </div>
 
@@ -334,11 +334,11 @@ foreach ($listPosToDept as $item){
                                                     <select name="filter_personnel_level" required class="selectpicker"
                                                         data-dropup-auto="false">
                                                         <option value="">Lọc người đảm nhiệm</option>
-                                                        {{-- @foreach ($personnelLevelList as $item)
+                                                        @foreach ($personnelLevelList as $item)
                                                                 <option value="{{ $item->id }}">
                                                                     {{ $item->name }}
                                                                 </option>
-                                                            @endforeach --}}
+                                                            @endforeach
                                                     </select>
                                                 </div>
                                             </div>
@@ -378,7 +378,7 @@ foreach ($listPosToDept as $item){
                                                                 </th>
                                                                 <th class="text-nowrap text-center" style="width:8%">
                                                                     Ngày tạo
-                                                                </th>                                                                
+                                                                </th>
                                                                 <th class="text-nowrap text-center" style="width:8%">
                                                                     Người đảm nhiệm
                                                                 </th>
@@ -452,7 +452,7 @@ foreach ($listPosToDept as $item){
                                                                             {{ date('d/m/Y', strtotime($item->created_at ))}}
                                                                         </div>
 
-                                                                    </td>                                                                    
+                                                                    </td>
                                                                     @php
                                                                         $getUser = \App\Models\Personnel::where('position_id', $item->id)->get();
                                                                         $userNames = $getUser->pluck('name')->implode(', ');

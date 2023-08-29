@@ -8,21 +8,21 @@
     </style>
 @endsection
 @php
-
+    
     function getPaginationLink($link, $pageName)
     {
         if (!isset($link['url'])) {
             return '#';
         }
-
+    
         $pageNumber = explode('?page=', $link['url'])[1];
-
+    
         $queryString = request()->query();
-
+    
         $queryString[$pageName] = $pageNumber;
         return route('routeDirection.view', $queryString);
     }
-
+    
     // function isFiltering($filterNames)
     // {
     //     $filters = request()->query();
@@ -33,14 +33,14 @@
     //     }
     //     return false;
     // }
-
+    
 @endphp
 @section('content')
     @include('template.sidebar.sidebarDia_ban.sidebarLeft')
     <div id="mainWrap" class="mainWrap">
         <div class="mainSection">
             <div class="main">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="mainSection_heading">
                         <h5 class="mainSection_heading-title">Danh sách tuyến</h5>
                         @include('template.components.sectionCard')
@@ -70,7 +70,7 @@
                                             </div>
 
                                             <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Lọc">
+                                                data-bs-placement="top" title="Lọc">
                                                 <button class="btn btn-outline-danger" data-bs-toggle="modal"
                                                     data-bs-target="#filterOptions">
                                                     <i class="bi bi-funnel"></i>
@@ -84,12 +84,12 @@
                                                 href={{ route('print.dwtUser', ['date' => request()->userDate ?? date('m-Y')]) }}
                                                 class="btn-export"><i class="bi bi-download"></i></a>
                                         </div> --}}
-                                        @if ((session('user')['role_id'] == '1') || (session('user')['role_id'] == '2') )
-                                        <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                            aria-label="Thêm tuyến" data-bs-original-title="Thêm tuyến">
-                                            <button class="btn btn-danger d-block testCreateUser" data-bs-toggle="modal"
-                                                data-bs-target="#add">Thêm tuyến</button>
-                                        </div>
+                                        @if (session('user')['role_id'] == '1' || session('user')['role_id'] == '2')
+                                            <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                aria-label="Thêm tuyến" data-bs-original-title="Thêm tuyến">
+                                                <button class="btn btn-danger d-block testCreateUser" data-bs-toggle="modal"
+                                                    data-bs-target="#add">Thêm tuyến</button>
+                                            </div>
                                         @endif
                                     </div>
                                     <div class="table-responsive">
@@ -105,8 +105,8 @@
                                                     <th class="text-nowrap text-center" style="width:12%">Nhân sự phụ trách
                                                     </th>
                                                     <th class="text-nowrap text-center" style="width:10%">Số khách hàng</th>
-                                                    @if ((session('user')['role_id'] == '1') || (session('user')['role_id'] == '2') )
-                                                    <th class="text-nowrap text-center" style="width:4%">Hành động</th>
+                                                    @if (session('user')['role_id'] == '1' || session('user')['role_id'] == '2')
+                                                        <th class="text-nowrap text-center" style="width:4%">Hành động</th>
                                                     @endif
                                                 </tr>
                                             </thead>
@@ -119,7 +119,8 @@
                                                             ->pluck('count', 'routeId');
                                                     @endphp
                                                     <tr class="table-row" data-bs-toggle="modal"
-                                                    data-href="/route_direction_getInfo/{{ $item['id'] }}" role="button">
+                                                        data-href="/route_direction_getInfo/{{ $item['id'] }}"
+                                                        role="button">
 
                                                         <td>
                                                             <div class="overText text-center">
@@ -127,26 +128,26 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText" data-bs-toggle="tooltip"
+                                                            <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="{{ $item->code ?? '' }}">
                                                                 {{ $item->code ?? '' }}
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText" data-bs-toggle="tooltip"
+                                                            <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="{{ $item->name ?? '' }}">
                                                                 {{ $item->name ?? '' }}
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText" data-bs-toggle="tooltip"
+                                                            <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top"
                                                                 title="{{ $item->areas->name ?? '' }}">
                                                                 {{ $item->areas->name ?? '' }}
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText" data-bs-toggle="tooltip"
+                                                            <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top"
                                                                 title="{{ $item->personnel->name ?? '' }} - {{ $item->personnel->code ?? '' }}">
                                                                 {{ $item->personnel->name ?? '' }} -
@@ -160,32 +161,44 @@
                                                                 {{ $routeCounts[$item->id] ?? 0 }}
                                                             </div>
                                                         </td>
-                                                        @if ((session('user')['role_id'] == '1') || (session('user')['role_id'] == '2') )
-                                                        <td>
-                                                            <div class="table_actions d-flex justify-content-center">
-                                                                <div class="btn test_btn-edit-{{ $item['id'] }}"
-                                                                    href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#suaTuyen{{ $item->id }}">
-                                                                    <img style="width:16px;height:16px"
-                                                                        src="{{ asset('assets/img/edit.svg') }}" />
-                                                                </div>
-                                                                <div class="btn test_btn-remove-{{ $item['id'] }}"
-                                                                    href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#xoaTuyen{{ $item->id }}">
-                                                                    <img style="width:16px;height:16px"
-                                                                        src="{{ asset('assets/img/trash.svg') }}" />
-                                                                </div>
-                                                            </div>
+                                                        @if (session('user')['role_id'] == '1' || session('user')['role_id'] == '2')
+                                                            <td>
+                                                                <div class="table_actions d-flex justify-content-center">
+                                                                    <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                        title="Sửa ">
+                                                                        <div class="btn test_btn-edit-{{ $item['id'] }}"
+                                                                            href="#" data-bs-toggle="modal"
+                                                                            data-bs-target="#suaTuyen{{ $item->id }}"
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                            title="Sửa">
+                                                                            <img style="width:16px;height:16px"
+                                                                                src="{{ asset('assets/img/edit.svg') }}" />
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                        title="Xóa">
+                                                                        <div class="btn test_btn-remove-{{ $item['id'] }}"
+                                                                            href="#" data-bs-toggle="modal"
+                                                                            data-bs-target="#xoaTuyen{{ $item->id }}">
+                                                                            <img style="width:16px;height:16px"
+                                                                                src="{{ asset('assets/img/trash.svg') }}" />
+                                                                        </div>
+                                                                    </div>
 
 
-                                                        </td>
+                                                                </div>
+
+
+                                                            </td>
                                                         @endif
                                                     </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
                                     </div>
-                                    <nav aria-label="Page navigation example" class="float-end mt-3" id="target-pagination">
+                                    <nav aria-label="Page navigation example" class="float-end mt-3"
+                                        id="target-pagination">
                                         <ul class="pagination">
                                             @foreach ($pagination['links'] as $link)
                                                 <li class="page-item {{ $link['active'] ? 'active' : '' }}">
@@ -215,19 +228,18 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header text-center">
-                        <h5 class="modal-title w-100" id="exampleModalLabel">XOÁ</h5>
+                        <h5 class="modal-title w-100" id="exampleModalLabel">Xóa Tuyến</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="fs-5">Bạn có thực sự muốn xoá không?</div>
+                        <div class="fs-5">Bạn có thực sự muốn xoá tuyến không?</div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
                         <form action="{{ route('routeDirection.destroy', ['id' => $item->id]) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger" id="deleteRowElement">Có, tôi muốn
-                                xóa</button>
+                            <button type="submit" class="btn btn-danger" id="deleteRowElement">Xóa</button>
                         </form>
                     </div>
                 </div>
@@ -250,16 +262,16 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <input value="{{ $item->name }}" type="text" name="name"
-                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên tuyến"
+                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên tuyến*"
                                         placeholder="Tên tuyến*" class="form-control">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <input value="{{ $item->code }}" type="text" name="code"
-                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã tuyến"
+                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã tuyến*"
                                         placeholder="Mã tuyến*" class="form-control">
                                 </div>
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Nhân sự phụ trách">
+                                    title="Nhân sự phụ trách*">
                                     <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
                                         data-live-search="true" title="Nhân sự phụ trách*"
                                         data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
@@ -273,7 +285,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Thời gian đi tuyến">
+                                    title="Thời gian đi tuyến*">
                                     <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
                                         data-live-search="true" title="Thời gian đi tuyến*"
                                         data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
@@ -295,7 +307,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Địa bàn">
+                                    title="Địa bàn*">
                                     <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
                                         data-live-search="true" title="Địa bàn*" data-select-all-text="Chọn tất cả"
                                         data-deselect-all-text="Bỏ chọn" data-size="3" name="areaId"
@@ -496,16 +508,16 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <input type="text" name="name" data-bs-toggle="tooltip" required
-                                    data-bs-placement="top" title="Tên tuyến" placeholder="Tên tuyến*"
+                                    data-bs-placement="top" title="Tên tuyến*" placeholder="Tên tuyến*"
                                     class="form-control">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <input type="text" name="code" data-bs-toggle="tooltip" required
-                                    data-bs-placement="top" title="Mã tuyến" placeholder="Mã tuyến*"
+                                    data-bs-placement="top" title="Mã tuyến*" placeholder="Mã tuyến*"
                                     class="form-control">
                             </div>
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Nhân sự phụ trách">
+                                title="Nhân sự phụ trách*">
                                 <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Nhân sự phụ trách*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="personId"
@@ -517,7 +529,7 @@
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Thời gian đi tuyến">
+                                title="Thời gian đi tuyến*">
                                 <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Thời gian đi tuyến*"
                                     data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3"
@@ -531,7 +543,8 @@
                                     <option value="Chủ nhật">Chủ nhật</option>
                                 </select>
                             </div>
-                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Địa bàn">
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Địa bàn*">
                                 <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Địa bàn*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="areaId"
