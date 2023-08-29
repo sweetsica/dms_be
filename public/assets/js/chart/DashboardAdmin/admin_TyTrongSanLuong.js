@@ -1,13 +1,13 @@
-const admin_D_DoanhSoTheoKenh = document.getElementById("admin_D_DoanhSoTheoKenh");
+const admin_TyTrongSanLuong = document.getElementById("admin_TyTrongSanLuong");
 
-new Chart(admin_D_DoanhSoTheoKenh, {
-    type: "doughnut",
+new Chart(admin_TyTrongSanLuong, {
+    type: "pie",
     data: {
-        labels: ["Kênh A", "Kênh B", "Kênh C", "Kênh D"],
+        labels: ["SKU1", "SKU2", "SKU3", "SKU4"],
         datasets: [
             {
-                label: "Doanh số",
-                data: [164, 279, 147, 255],
+                label: "Tỷ Trọng",
+                data: [254, 400, 175, 277],
                 borderWidth: 1,
                 backgroundColor: ["rgba(196, 37, 23)","rgba(191, 164, 8)","rgba(248, 101, 101)","rgba(179, 223, 246)"],
                 borderColor: ["rgba(196, 37, 23, 0.5)","rgba(191, 164, 8, 0.5)","rgba(248, 101, 101, 0.5)","rgba(179, 223, 246, 0.5)"],
@@ -15,7 +15,6 @@ new Chart(admin_D_DoanhSoTheoKenh, {
         ],
     },
     options: {
-        barPercentage:0.5,    
         responsive: true,
         maintainAspectRatio: false,
         scales: {
@@ -35,16 +34,9 @@ new Chart(admin_D_DoanhSoTheoKenh, {
         },
         plugins: {
             legend: {
-                labels:{
-                    font: {
-                      size:8
-                    },
-                    boxWidth:8,
-                  },
-                position:'right',
-
+                display: false,
             },
-            tooltip: { enabled: true },
+            tooltip: { enabled: true },            
         },
     },
 });

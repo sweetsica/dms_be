@@ -6,9 +6,11 @@ new Chart(admin_D_DoanhSoTheoVung, {
         labels: ["Vùng A", "Vùng B", "Vùng C"],
         datasets: [
             {
-                label: "Chỉ số",
-                data: [12, 19, 3, 5],
+                label: "Doanh số",
+                data: [161, 223, 114],
                 borderWidth: 1,
+                backgroundColor: ["rgba(196, 37, 23)","rgba(191, 164, 8)","rgba(179, 223, 246)"],
+                borderColor: ["rgba(196, 37, 23, 0.5)","rgba(191, 164, 8, 0.5)","rgba(179, 223, 246, 0.5)"],
             },
         ],
     },

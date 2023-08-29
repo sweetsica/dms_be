@@ -38,10 +38,11 @@
         .cards
         {
             background-color: rgb(246, 246, 246);
+            border-radius: 2px;
         }
         .card_on
         {
-            margin-top: 20%;
+            margin: 20% 5px 5px 5px;
         }
         .card_part6
         {
@@ -50,6 +51,7 @@
         .card_borderp1
         {
             border:2px solid rgb(246, 246, 246);
+            border-radius: 5px;
         }
         .testkh{
             /* border: 1px solid blueviolet; */
@@ -108,6 +110,7 @@
             width: 100%;
             height: 150px;
         }
+        .
     </style>
 @endsection
     <div id="mainWrap" class="mainWrap mb-0 ms-0 me-0" style="margin-top: 59px;">
@@ -125,61 +128,69 @@
                                 <span class="cards-title-black">NHÂN SỰ</span>
                             </div>
                             <div class="row testkh2" style="height: 30%">
-                                <div class="col-sm-3 testkh3">
-                                    tuyển mới
-                                </div>
-                                <div class="col-sm-3 cards">
-                                    <div class="row" style="height: 20%">
-                                        <span class="card-title-black text-center">Nhân sự chấm công</span>
+                                <div class="col-sm-3" style="padding: 1%">
+                                    <div class="col card_borderp1">                                    
+                                        <span class="card-title-black text-center">Nhân sự tuyển mới</span>
                                     </div>
-                                    <div class="row" style="height: 80%">
-                                        <div class="col-sm-6">
-                                            <div class="card text-center card_on">
-                                                <span class="card-title cardname" data-bs-toggle="tooltip" 
-                                                    data-bs-placement="top" title="Số nhân sự vi phạm chấm công">
-                                                    Nhân sự vi phạm
-                                                </span>
-                                                <strong class="card-body cardvalue">10</strong>
-                                            </div>  
+                                </div>
+                                <div class="col-sm-3" style="padding: 1%">
+                                    <div class="cards" style="height: 100%">
+                                        <div class="row" style="height: 20%">
+                                            <span class="card-title-black text-center">Nhân sự chấm công</span>
                                         </div>
-                                        <div class="col-sm-6">
-                                            <div class="card text-center card_on">
-                                                <span class="card-title cardname" data-bs-toggle="tooltip" 
-                                                    data-bs-placement="top" title="Số lượt vi phạm chấm công">
-                                                    Lượt vi phạm
-                                                </span>
-                                                <strong class="card-body cardvalue">50</strong>
+                                        <div class="row" style="height: 80%">
+                                            <div class="col-sm-6">
+                                                <div class="card text-center card_on">
+                                                    <span class="card-title cardname" data-bs-toggle="tooltip" 
+                                                        data-bs-placement="top" title="Số nhân sự vi phạm chấm công">
+                                                        Nhân sự vi phạm
+                                                    </span>
+                                                    <strong class="card-body cardvalue">10</strong>
+                                                </div>  
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="card text-center card_on">
+                                                    <span class="card-title cardname" data-bs-toggle="tooltip" 
+                                                        data-bs-placement="top" title="Số lượt vi phạm chấm công">
+                                                        Lượt vi phạm
+                                                    </span>
+                                                    <strong class="card-body cardvalue">50</strong>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-3 text-center">
-                                    <span class="card-title-black text-center">Nhân sự Online/Offline</span>
-                                    <div class="mainSection_chart mt-3">
-                                        <canvas id="admin_NhanSuOnOff"></canvas>
+                                <div class="col-sm-3 text-center" style="padding: 1%">
+                                    <div class="card_borderp1">
+                                        <span class="card-title-black text-center">Nhân sự Online/Offline</span>
+                                        <div class="mainSection_chart mt-3">
+                                            <canvas id="admin_NhanSuOnOff"></canvas>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-3 cards">
-                                    <div class="row" style="height: 20%">
-                                        <span class="card-title-black text-center">Lượt công tác</span>
-                                    </div>
-                                    <div class="row" style="height: 80%">
-                                        <div class="col-sm-3"></div>
-                                        <div class="col-sm-6">
-                                            <div class="card text-center card_on">
-                                                <span class="card-title cardname" data-bs-toggle="tooltip" 
-                                                    data-bs-placement="top" title="Số nhân sự vi phạm chấm công">
-                                                    Nhân sự vi phạm
-                                                </span>
-                                                <strong class="card-body cardvalue">10</strong>
-                                            </div>  
+                                <div class="col-sm-3" style="padding: 1%">
+                                    <div class="cards" style="height: 100%">
+                                        <div class="row" style="height: 20%">
+                                            <span class="card-title-black text-center">Lượt công tác</span>
                                         </div>
-                                        <div class="col-sm-3"></div>                                        
+                                        <div class="row" style="height: 80%">
+                                            <div class="col-sm-3"></div>
+                                            <div class="col-sm-6">
+                                                <div class="card text-center card_on">
+                                                    <span class="card-title cardname" data-bs-toggle="tooltip" 
+                                                        data-bs-placement="top" title="Số lượt công tác đã thực hiện">
+                                                        Lượt công tác
+                                                    </span>
+                                                    <strong class="card-body cardvalue">10</strong>
+                                                </div>  
+                                            </div>
+                                            <div class="col-sm-3"></div>                                        
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row testkh2" style="height: 45%" >
-                                <div class="col-sm-6 text-center" style="padding: 2%">
+                                <div class="col-sm-6 text-center" style="padding: 1%">
                                     <div class="card_borderp1">
                                         <span class="card-title-black text-center">Số nhân sự kinh doanh theo vùng</span>
                                         <div class="mainSection_chartp1 mt-3">
@@ -187,7 +198,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 text-center" style="padding: 2%">
+                                <div class="col-sm-6 text-center" style="padding: 1%">
                                     <div class="card_borderp1">
                                         <span class="card-title-black text-center">Số nhân sự kinh doanh địa bàn</span>
                                         <div class="mainSection_chartp1 mt-3">
@@ -263,15 +274,25 @@
                                 <span class="cards-title-black">SKU</span>
                             </div>
                             <div class="row testkh2" style="height: 45%">
-                                <div class="col-sm-6 testkh3">
-                                    doanh số
+                                <div class="col-sm-6">
+                                    <div class="card_borderp1">
+                                        <span class="card-title-black text-center">Tỷ trọng doanh số SKU</span>
+                                        <div class="mainSection_chartp1 mt-3">
+                                            <canvas id="admin_DoanhSoSKU"></canvas>
+                                        </div>
+                                    </div>
                                 </div>  
-                                <div class="col-sm-6 testkh3">
-                                    sản lượng
+                                <div class="col-sm-6">
+                                    <div class="card_borderp1">
+                                        <span class="card-title-black text-center">Tỷ trọng sản lượng</span>
+                                        <div class="mainSection_chartp1 mt-3">
+                                            <canvas id="admin_TyTrongSanLuong"></canvas>
+                                        </div>
+                                    </div>
                                 </div>                                
                             </div>
-                            <div class="row testkh2" style="height: 45%">
-                                <div class="col-sm-5 testkh3">
+                            <div class="row" style="height: 45%">
+                                <div class="col-sm-5">
                                     <span class="cards-title-black">CẢNH BÁO HÀNG HOÁ</span>
                                     <table class="table table-bordered">
                                         <thead>
@@ -315,7 +336,7 @@
                                         </tbody>
                                     </table>
                                 </div>  
-                                <div class="col-sm-7 testkh3">
+                                <div class="col-sm-7">
                                     <span class="cards-title-black">ĐỘ PHÙ SKU</span>
                                     <table class="table table-bordered">
                                         <thead>
@@ -373,16 +394,19 @@
                             </div>
                         </div>
                         <div id="part5" class="col-sm-2 testkh1">
-                            <div class="row testkh2" style="height: 10%">
+                            <div class="row" style="height: 10%">
                                 <span class="cards-title-black">KHÁCH HÀNG</span>
                             </div>
-                            <div class="row testkh2" style="height: 40%">
+                            <div class="row" style="height: 40%">
                                 bản đồ
                             </div>
-                            <div class="row testkh2" style="height: 20%">
-                                công nợ
+                            <div class="row" style="height: 20%">
+                                <div class="card card_borderp1">
+                                    <span class="card-title-black">Số công nợ</span>
+                                    <span class="card-subtitle text-center">75%</span>
+                                </div>
                             </div>
-                            <div class="row testkh2" style="height: 30%">
+                            <div class="row" style="height: 30%">
                                 đặt hàng
                             </div>
                         </div>
@@ -390,98 +414,104 @@
                             <div class="row testkh2" style="height: 10%">
                                 <span class="cards-title-black">SỐ ĐƠN VÀ ĐỊA BÀN</span>
                             </div>
-                            <div class="row cards text-center" style="height: 25%;">
-                                <div class="col-sm-12" style="height: 20%">
-                                    <span class="card-title-black">Số đơn</span>
+                            <div class="" style="padding: 2%">
+                                <div class="row cards text-center " style="height: 25%;">
+                                    <div class="col-sm-12" style="height: 10%">
+                                        <span class="card-title-black">Số đơn</span>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="card text-center card_on">
+                                            <span class="card-title cardname" data-bs-toggle="tooltip" 
+                                                data-bs-placement="top" title="Số đơn hàng đặt">
+                                                Đơn hàng đặt
+                                            </span>
+                                            <strong class="card-body cardvalue">999+</strong>
+                                        </div> 
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="card text-center card_on">
+                                            <span class="card-title cardname" data-bs-toggle="tooltip" 
+                                                data-bs-placement="top" title="Số đơn từ chối">
+                                                Đơn từ chối
+                                            </span>
+                                            <strong class="card-body cardvalue">10</strong>
+                                        </div> 
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="card text-center card_on">
+                                            <span class="card-title cardname" data-bs-toggle="tooltip" 
+                                                data-bs-placement="top" title="Số đơn bán hàng">
+                                                Đơn bán hàng
+                                            </span>
+                                            <strong class="card-body cardvalue">500</strong>
+                                        </div> 
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="card text-center card_on">
+                                            <span class="card-title cardname" data-bs-toggle="tooltip" 
+                                                data-bs-placement="top" title="Số đơn đổi trả">
+                                                Đơn đổi trả
+                                            </span>
+                                            <strong class="card-body cardvalue">05</strong>
+                                        </div> 
+                                    </div>
                                 </div>
-                                <div class="col-sm-3" style="height: 80%">
-                                    <div class="card text-center card_on">
-                                        <span class="card-title cardname" data-bs-toggle="tooltip" 
-                                            data-bs-placement="top" title="Số đơn hàng đặt">
-                                            Đơn hàng đặt
-                                        </span>
-                                        <strong class="card-body cardvalue">999+</strong>
-                                    </div> 
-                                </div>
-                                <div class="col-sm-3" style="height: 80%">
-                                    <div class="card text-center card_on">
-                                        <span class="card-title cardname" data-bs-toggle="tooltip" 
-                                            data-bs-placement="top" title="Số đơn từ chối">
-                                            Đơn từ chối
-                                        </span>
-                                        <strong class="card-body cardvalue">10</strong>
-                                    </div> 
-                                </div>
-                                <div class="col-sm-3" style="height: 80%">
-                                    <div class="card text-center card_on">
-                                        <span class="card-title cardname" data-bs-toggle="tooltip" 
-                                            data-bs-placement="top" title="Số đơn bán hàng">
-                                            Đơn bán hàng
-                                        </span>
-                                        <strong class="card-body cardvalue">500</strong>
-                                    </div> 
-                                </div>
-                                <div class="col-sm-3" style="height: 80%">
-                                    <div class="card text-center card_on">
-                                        <span class="card-title cardname" data-bs-toggle="tooltip" 
-                                            data-bs-placement="top" title="Số đơn đổi trả">
-                                            Đơn đổi trả
-                                        </span>
-                                        <strong class="card-body cardvalue">05</strong>
-                                    </div> 
-                                </div>
-                            </div>
+                            </div> 
                             <div class="row testkh2" style="height: 25%">
-                                <div class="col-sm-8 text-center cards">
-                                    <div class="row" style="height: 20%">
-                                        <span class="card-title-black">Số địa bàn</span>
-                                    </div>
-                                    <div class="row" style="height: 80%">
-                                        <div class="col-sm-4">
-                                            <div class="card text-center card_on">
-                                                <span class="card-title cardname" data-bs-toggle="tooltip" 
-                                                    data-bs-placement="top" title="Không hoàn thành chỉ tiêu doanh số">
-                                                    Không hoàn thành
-                                                </span>
-                                                <strong class="card-body cardvalue">10</strong>
-                                            </div>  
+                                <div class="col-sm-8">
+                                    <div class="text-center cards">
+                                        <div class="row" style="height: 20%;">
+                                            <span class="card-title-black">Số địa bàn</span>
                                         </div>
-                                        <div class="col-sm-4">
-                                            <div class="card text-center card_on">
-                                                <span class="card-title cardname" data-bs-toggle="tooltip" 
-                                                    data-bs-placement="top" title="Không hoàn thành chỉ tiêu độ phù">
-                                                    Lượt vi phạm
-                                                </span>
-                                                <strong class="card-body cardvalue">50</strong>
+                                        <div class="row" style="height: 80%">
+                                            <div class="col-sm-4">
+                                                <div class="card text-center card_on">
+                                                    <span class="card-title cardname" data-bs-toggle="tooltip" 
+                                                        data-bs-placement="top" title="Không hoàn thành chỉ tiêu doanh số">
+                                                        Không hoàn thành
+                                                    </span>
+                                                    <strong class="card-body cardvalue">10</strong>
+                                                </div>  
                                             </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="card text-center card_on">
-                                                <span class="card-title cardname" data-bs-toggle="tooltip" 
-                                                    data-bs-placement="top" title="Không phát sinh giao dịch trong 3 ngày">
-                                                    Lượt vi phạm
-                                                </span>
-                                                <strong class="card-body cardvalue">50</strong>
+                                            <div class="col-sm-4">
+                                                <div class="card text-center card_on">
+                                                    <span class="card-title cardname" data-bs-toggle="tooltip" 
+                                                        data-bs-placement="top" title="Không hoàn thành chỉ tiêu độ phù">
+                                                        Không hoàn thành
+                                                    </span>
+                                                    <strong class="card-body cardvalue">50</strong>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="card text-center card_on">
+                                                    <span class="card-title cardname" data-bs-toggle="tooltip" 
+                                                        data-bs-placement="top" title="Không phát sinh giao dịch trong 3 ngày">
+                                                        Không hoàn thành
+                                                    </span>
+                                                    <strong class="card-body cardvalue">50</strong>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-4 cards">
-                                    <div class="row" style="height: 20%">
-                                        <span class="card-title-black text-center">Sự cố vi phạm</span>
-                                    </div>
-                                    <div class="row" style="height: 80%">
-                                        <div class="col-sm-2"></div>
-                                        <div class="col-sm-8">
-                                            <div class="card text-center card_on">
-                                                <span class="card-title cardname" data-bs-toggle="tooltip" 
-                                                    data-bs-placement="top" title="Số sự cố vi phạm ở địa bàn">
-                                                    Sự cố vi phạm
-                                                </span>
-                                                <strong class="card-body cardvalue">02</strong>
-                                            </div>  
+                                <div class="col-sm-4 ">
+                                    <div class="cards">
+                                        <div class="row" style="height: 20%">
+                                            <span class="card-title-black text-center">Sự cố vi phạm</span>
                                         </div>
-                                        <div class="col-sm-2"></div>                                        
+                                        <div class="row" style="height: 80%">
+                                            <div class="col-sm-2"></div>
+                                            <div class="col-sm-8">
+                                                <div class="card text-center card_on">
+                                                    <span class="card-title cardname" data-bs-toggle="tooltip" 
+                                                        data-bs-placement="top" title="Số sự cố vi phạm ở địa bàn">
+                                                        Sự cố vi phạm
+                                                    </span>
+                                                    <strong class="card-body cardvalue">02</strong>
+                                                </div>  
+                                            </div>
+                                            <div class="col-sm-2"></div>                                        
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -494,6 +524,7 @@
                                         <div class="card">
                                             <span class="card-title-black">Số ca đào tạo tháng này</span>
                                             <span class="card-subtitle">75%</span>
+                                            <span></span>
                                         </div>
                                     </div>
                                     <div class="row card_part6" style="height: 50%">
@@ -565,6 +596,8 @@
     <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_D_DoanhSoTheoKenh.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_D_DoanhSoTheoVung.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_D_DoanhSoTheoDiaBan.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_DoanhSoSKU.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_TyTrongSanLuong.js') }}"></script>
     
  
    

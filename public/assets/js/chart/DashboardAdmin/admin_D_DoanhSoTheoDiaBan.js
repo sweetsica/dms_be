@@ -6,9 +6,11 @@ new Chart(admin_D_DoanhSoTheoDiaBan, {
         labels: ["Địa bàn A", "Địa bàn B", "Địa bàn C", "Địa bàn D"],
         datasets: [
             {
-                label: "Chỉ số",
-                data: [12, 19, 3, 5],
+                label: "Doanh số",
+                data: [300, 450, 600, 350],
                 borderWidth: 1,
+                backgroundColor: ["rgba(196, 37, 23)","rgba(191, 164, 8)","rgba(248, 101, 101)","rgba(179, 223, 246)"],
+                borderColor: ["rgba(196, 37, 23, 0.5)","rgba(191, 164, 8, 0.5)","rgba(248, 101, 101, 0.5)","rgba(179, 223, 246, 0.5)"],
             },
         ],
     },
