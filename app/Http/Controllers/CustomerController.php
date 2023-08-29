@@ -565,16 +565,7 @@ class CustomerController extends Controller
         }
         $data->fileName = json_encode($existingFileName);
         $data->filePath = json_encode($existingFilePath);
-
-        // $combinedContact = [];
-        // foreach ($request->contact as $array) {
-        //     if (is_array($array)) {
-        //         $combinedContact[] = $array;
-        //     }
-        // }
-        // $jsonCombinedData = json_encode($combinedContact);
-        // $data->contact = $jsonCombinedData;
-
+        
         if ($request->hasFile('image')) {
             $images = $request->file('image');
             $imageName = time() . '.' . $images->getClientOriginalExtension();

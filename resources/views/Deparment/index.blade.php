@@ -4,7 +4,34 @@
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 @endsection
+@php
 
+    function getPaginationLink($link, $pageName)
+    {
+        if (!isset($link['url'])) {
+            return '#';
+        }
+
+        $pageNumber = explode('?page=', $link['url'])[1];
+
+        $queryString = request()->query();
+
+        $queryString[$pageName] = $pageNumber;
+        return route('department.index', $queryString);
+    }
+
+    // function isFiltering($filterNames)
+    // {
+    //     $filters = request()->query();
+    //     foreach ($filterNames as $filterName) {
+    //         if (isset($filters[$filterName]) && $filters[$filterName] != '') {
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
+
+@endphp
 @section('content')
     @include('template.sidebar.sidebarDepartment.sidebarLeft')
     <div id="mainWrap" class="mainWrap">
@@ -103,7 +130,7 @@
                                                                             name="selected_items[]"
                                                                             value="{{ $item->id }}"></td>
                                                                     <td class=" text-center">
-                                                                        {{ $t++ }}
+                                                                        {{ $departmentList->total() - $loop->index - ($departmentList->currentPage() - 1) * $departmentList->perPage() }}
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
@@ -192,7 +219,7 @@
                                                             </tbody>
                                                         @endforeach
                                                     </table>
-                                                    <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                    {{-- <nav aria-label="Page navigation example" class="float-end mt-3"
                                                         id="target-pagination">
                                                         <ul class="pagination">
                                                             {{ $departmentList->appends([
@@ -200,6 +227,18 @@
                                                                     'don_vi_me'=>$don_vi_me,
 
                                                                 ])->links() }}
+                                                        </ul>
+                                                    </nav> --}}
+                                                    <nav aria-label="Page navigation example" class="float-end mt-3" id="target-pagination">
+                                                        <ul class="pagination">
+                                                            @foreach ($pagination['links'] as $link)
+                                                                <li class="page-item {{ $link['active'] ? 'active' : '' }}">
+                                                                    <a class="page-link" href="{{ getPaginationLink($link, 'page') }}"
+                                                                        aria-label="Previous">
+                                                                        <span aria-hidden="true">{!! $link['label'] !!}</span>
+                                                                    </a>
+                                                                </li>
+                                                            @endforeach
                                                         </ul>
                                                     </nav>
                                                 </div>
