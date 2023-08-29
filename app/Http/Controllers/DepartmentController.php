@@ -9,6 +9,7 @@ use App\Models\PersonnelLevel;
 use App\Models\Position;
 use App\Models\Role;
 use App\Models\UnitLeader;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Session;
@@ -43,12 +44,14 @@ class DepartmentController extends Controller
         $don_vi_me = $request->get('don_vi_me');
         $leader_name = $request->get('leader_name');
         $limit = 15;
+
         // dd($abc);
         $query = Department::query();
         // $departmentList = Department::
         $query->leftJoin('personnel', 'personnel.id', '=', 'department.ib_lead')
             ->select(
                 'department.id',
+                'department.order',
                 'department.name',
                 'department.description',
                 'department.code',
@@ -60,7 +63,7 @@ class DepartmentController extends Controller
         if (preg_match($pattern, $search)) {
             Session::flash('error', 'Lỗi đầu vào khi search');
             return back();
-        }        
+        }
         if ($search != NULL) {
             $query->where("department.name", "like", "%$search%");
         }
@@ -74,7 +77,10 @@ class DepartmentController extends Controller
         // dd($departmentList);
         $UnitLeaderList = Personnel::all();
         $Department = Department::all();
-        $departmentListTree = Department::where('parent', 0)->with('donViCon')->orderBy('department.id', 'asc')->get();
+        $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
+        $departmentListTree = $departmentListTree->sortBy('order');
+        // dd($departmentListTree->pluck('order'));
+
         // dd($departmentListTree);
         $departmentlists = $this->getDepartment();
         $positionlists = $this->getPosition();
@@ -109,6 +115,7 @@ class DepartmentController extends Controller
             'roleList' => $roleList,
             'localityList' => $localityList,
             'personnellists' => $personnellists,
+
             'pagination' => $pagination,
 
 
@@ -197,6 +204,7 @@ class DepartmentController extends Controller
         $query->leftJoin('personnel', 'personnel.id', '=', 'department.ib_lead')
             ->select(
                 'department.id',
+                'department.order',
                 'department.name',
                 'department.description',
                 'department.code',
@@ -303,12 +311,14 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         $name = $request->get('name');
+        $order = $request->get('order');
         $code = $request->get('code');
         $ib_lead = $request->get('ib_lead');
         $parent = $request->get('parent');
         $description = $request->get('description');
         $data = new Department();
         $data->name = $name;
+        $data->order = $order;
         $data->parent = $parent;
         $data->code = $code;
         $data->ib_lead = $ib_lead;
@@ -320,6 +330,8 @@ class DepartmentController extends Controller
 
     public function update(Request $request, $id)
     {
+        $unitToMoveId = $request->get('unit_to_move_id');
+        $targetUnitId = $request->get('target_unit_id');
         $name = $request->get('name');
         $ib_lead = $request->get('ib_lead');
         $parent = $request->get('parent');
@@ -342,7 +354,24 @@ class DepartmentController extends Controller
         $data->description = $description;
         $data->status = $status;
         $data->demarcation = $demarcation;
-        $data->save();
+        $unit1 = Department::where('order', $unitToMoveId)->first();
+        $unit2 = Department::where('order', $targetUnitId)->first();
+
+        // Kiểm tra nếu cả hai đơn vị tồn tại
+        if ($unit1 && $unit2) {
+            // Hoán đổi dữ liệu
+            $tempName = $unit1->order;
+            $unit1->order = $unit2->order;
+            $unit2->order = $tempName;
+
+            // Lưu thay đổi vào cơ sở dữ liệu
+            $unit1->save();
+            $unit2->save();
+            $data->save();
+
+            // return redirect()->back()->with('success', 'Đã hoán đổi tên đơn vị thành công.');
+        }
+
         Session::flash('success', 'Sửa thành công');
         return redirect()->back();
     }
@@ -364,11 +393,12 @@ class DepartmentController extends Controller
 
         // return redirect()->route('department.index');
 
-        $route = Department::findOrFail($id);
-        $route->delete();
+        // $route = Department::findOrFail($id);
+        // $route->delete();
 
         Session::flash('success', "Xoá tuyến thành công");
-        return redirect()->route('department.index');
+        // return redirect()->route('department.index');
+        return redirect()->back();
     }
 
     public function delete(Request $request)
@@ -385,4 +415,34 @@ class DepartmentController extends Controller
         $departmentList = Department::where('name', 'like', 'KENH%')->get();
         return $departmentList;
     }
+
+    public function editStt(Request $request)
+    {
+        $unitToMoveId = $request->input('unit_to_move_id');
+        $targetUnitId = $request->input('target_unit_id');
+        try {
+            // Lấy dữ liệu từ hai đơn vị
+            $unit1 = Department::where('order', $unitToMoveId)->first();
+            $unit2 = Department::where('order', $targetUnitId)->first();
+
+            // Kiểm tra nếu cả hai đơn vị tồn tại
+            if ($unit1 && $unit2) {
+                // Hoán đổi dữ liệu
+                $tempName = $unit1->order;
+                $unit1->order = $unit2->order;
+                $unit2->order = $tempName;
+
+                // Lưu thay đổi vào cơ sở dữ liệu
+                $unit1->save();
+                $unit2->save();
+
+                // return redirect()->back()->with('success', 'Đã hoán đổi tên đơn vị thành công.');
+            } else {
+                return redirect()->back()->with('error', 'Không tìm thấy đơn vị.');
+            }
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Đã xảy ra lỗi khi hoán đổi tên đơn vị: ' . $e->getMessage());
+        }
+    }
+
 }

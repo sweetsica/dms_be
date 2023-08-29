@@ -241,6 +241,7 @@
                                                     </nav>
                                                 </div>
                                             </form>
+
                                         </div>
                                     </div>
                                 </div>
@@ -339,6 +340,21 @@
                                         </select>
                                     </div>
                                 </div>
+
+                                <div class="col-6 mb-3">
+                                    <input name="unit_to_move_id" required type="text"
+                                        class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        value="{{ $item->order }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Chọn STT để thay đổi vị trí:</label>
+                                    <select class="form-control" id="" name="target_unit_id">
+                                        <option value="{{ $item->order }}">{{ $item->order }}</option>
+                                        @foreach($departmentList as $otherUnit)
+                                            <option value="{{ $otherUnit->order }}">{{ $otherUnit->order}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                             <div class="col-12 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top">
@@ -356,7 +372,6 @@
                 </div>
             </div>
         </div>
-
 
         {{-- Xóa đề xuất --}}
         <div class="modal fade" id="xoaDeXuat{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -380,6 +395,8 @@
                 </div>
             </div>
         </div>
+
+
     @endforeach
 
     @foreach ($listUsers as $item)
@@ -721,6 +738,13 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-6 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Stt cấp độ*">
+                                    <input name="order" required type="text" placeholder="Stt cấp độ*"
+                                        class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Stt cấp độ*">
+                                </div>
+                            </div>
                             <div class="col-12 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top">
                                     <textarea name="description" type="text" placeholder="Chức năng nhiệm vụ" class="form-control "
@@ -744,6 +768,8 @@
             </div>
         </div>
     </div>
+
+
 
     {{-- Filter --}}
     <div class="modal fade" id="filterOptions" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -783,6 +809,12 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
 
 @endsection
 @section('footer-script')
