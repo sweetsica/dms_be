@@ -53,7 +53,7 @@ class ProductController extends Controller
     {
         try {
             $q = $request->query('q');
-            $limit = 1;
+            $limit = 10;
             $listProduct = Product::query();
             if ($q) {
                 $pattern = '/^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)\s+.*/';
