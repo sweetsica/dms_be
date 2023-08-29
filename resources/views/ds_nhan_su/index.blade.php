@@ -255,7 +255,7 @@
     </div>
     @include('template.sidebar.sidebarMaster.sidebarRight')
 
-
+{{-- Sửa --}}
     @foreach ($personnelList as $item)
         <div class="modal fade" id="sua{{ $item['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
@@ -334,10 +334,12 @@
                                             <option value="">Chọn đơn
                                                 vị công tác</option>
                                             <?php }else{ ?>
+                                                <option value="{{ $item->department_id }}">
+                                                    {{ $item->department_name }}
+                                                </option>
                                             <?php } ?>
-                                            <option value="{{ $item->department_id }}">
-                                                {{ $item->department_name }}
-                                            </option>
+                                            <option value="">Chọn đơn
+                                                vị công tác</option>
                                             @foreach ($departmentlists as $dmList)
                                                 <option value="{{ $dmList->id }}">
                                                     @php
@@ -360,10 +362,12 @@
                                             <option value="">Cấp nhân
                                                 sự</option>
                                             <?php }else{ ?>
+                                                <option value="{{ $item->personnel_lv_id }}">
+                                                    {{ $item->personnel_level_name }}
+                                                </option>
                                             <?php } ?>
-                                            <option value="{{ $item->personnel_lv_id }}">
-                                                {{ $item->personnel_level_name }}
-                                            </option>
+                                            <option value="">Cấp nhân
+                                                sự</option>
                                             @foreach ($personnelLevelList as $perLvList)
                                                 <option value="{{ $perLvList->id }}">
                                                     {{ $perLvList->name }}
@@ -379,10 +383,12 @@
                                             <option value="">Vị trí
                                                 chức danh</option>
                                             <?php }else{ ?>
+                                                <option value="{{ $item->position_id }}">
+                                                    {{ $item->position_name }}
+                                                </option>
                                             <?php } ?>
-                                            <option value="{{ $item->position_id }}">
-                                                {{ $item->position_name }}
-                                            </option>
+                                            <option value="">Vị trí
+                                                chức danh</option>
                                             @foreach ($positionlists as $posiList)
                                                 <option value="{{ $posiList->id }}">
                                                     @php
@@ -405,9 +411,11 @@
                                             <option value="">Vai trò
                                             </option>
                                             <?php }else{ ?>
+                                                <option value="{{ $item->role_id }}">
+                                                    {{ $item->role_name }}
+                                                </option>
                                             <?php } ?>
-                                            <option value="{{ $item->role_id }}">
-                                                {{ $item->role_name }}
+                                            <option value="">Vai trò
                                             </option>
                                             @foreach ($roleList as $roleLit)
                                                 <option value="{{ $roleLit->id }}">
@@ -424,9 +432,12 @@
                                             <option value="">Địa bàn
                                             </option>
                                             <?php }else{ ?>
+                                                <option value="{{ $item->area_id }}">
+                                                    {{ $item->locality_name }}
+                                                </option>
                                             <?php } ?>
-                                            <option value="{{ $item->area_id }}">
-                                                {{ $item->locality_name }}
+
+                                            <option value="">Địa bàn
                                             </option>
                                             @foreach ($localityList as $localList)
                                                 <option value="{{ $localList->id }}">
@@ -443,12 +454,14 @@
                                             <option value="">Quản lý
                                                 trực tiếp</option>
                                             <?php }else{ ?>
+                                                <option value="{{ $item->manage }}">
+                                                    @if ($item->donvime)
+                                                        {{ $item->donvime->name }}
+                                                    @endif
+                                                </option>
                                             <?php } ?>
-                                            <option value="{{ $item->manage }}">
-                                                @if ($item->donvime)
-                                                    {{ $item->donvime->name }}
-                                                @endif
-                                            </option>
+                                            <option value="">Quản lý
+                                                trực tiếp</option>
                                             @foreach ($personnellists as $perllists)
                                                 <option value="{{ $perllists->id }}">
                                                     @php
@@ -479,10 +492,10 @@
                                 value="{{ $item->pack }}"> --}}
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Gói trang bị">
                                         <select name="pack" class="selectpicker" data-dropup-auto="false">
+                                            <option value="">Chọn gói trang bị</option>
                                             <option value="{{ $item->pack }}">
                                                 {{ $item->pack }}
                                             </option>
-
                                         </select>
                                     </div>
                                 </div>

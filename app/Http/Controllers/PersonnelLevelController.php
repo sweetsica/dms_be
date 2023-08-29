@@ -8,7 +8,6 @@ use App\Models\Position;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-
 class PersonnelLevelController extends Controller
 {
 
@@ -63,8 +62,9 @@ class PersonnelLevelController extends Controller
     public function destroy($id)
     {
         PersonnelLevel::destroy($id);
-        Session::flash('success', 'Đã xoá!');
-        return redirect()->back();
+        Session::flash('success', 'Xoá thành công');
+        // return redirect()->back()->with('mess', 'Đã xóa !');
+        return redirect()->route('PersonnelLevel.index');
     }
 
     public function delete(Request $request)

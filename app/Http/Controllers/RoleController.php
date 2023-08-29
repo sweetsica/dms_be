@@ -8,7 +8,6 @@ use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-
 class RoleController extends Controller
 {
 
@@ -63,8 +62,9 @@ class RoleController extends Controller
     public function destroy($id)
     {
         Role::destroy($id);
-        Session::flash('success', 'Đã xoá!');
-        return redirect()->back();
+        Session::flash('success', 'Xoá thành công');
+        return redirect()->route('Role.index');
+        // return redirect()->back()->with('mess', 'Đã xóa !');
     }
 
     public function delete(Request $request)

@@ -169,7 +169,7 @@
                                                                             {{ date('d/m/Y', strtotime($item->created_at ))}}
                                                                         </div>
 
-                                                                    </td> 
+                                                                    </td>
                                                                     <td class="">
                                                                         <div class="overText text-center" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
@@ -311,14 +311,16 @@
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn cấp quản lý">
                                         <select name="parent" class="selectpicker" data-dropup-auto="false" data-live-search="true">
                                             <?php if ($item->parent == null){ ?>
-                                            <option value="0">Chọn cấp quản lý
+                                            <option value="0">Chọn vị trí/cấp quản lý
                                             </option>
                                             <?php } else { ?>
+                                                <option value="{{ $item->parent }}">
+                                                    @if ($item->donvime)
+                                                        {{ $item->donvime->name }}
+                                                    @endif
+                                                </option>
                                             <?php } ?>
-                                            <option value="{{ $item->parent }}">
-                                                @if ($item->donvime)
-                                                    {{ $item->donvime->name }}
-                                                @endif
+                                            <option value="0">Chọn vị trí/cấp quản lý
                                             </option>
                                             @foreach ($positionlists as $ac)
                                                 <option value="{{ $ac->id }}">
@@ -457,7 +459,7 @@
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn vị trí cấp quản lý">
                                     <select name="parent" required class="selectpicker" data-dropup-auto="false" data-live-search="true">
-                                        <option value="0">Chọn vị trí cấp quản lý</option>
+                                        <option value="0">Chọn vị trí/cấp quản lý</option>
                                         @foreach ($positionlists as $item)
                                             <option value="{{ $item->id }}">
                                                 @php
@@ -627,7 +629,7 @@
             deleteButton.style.display = atLeastOneChecked ? 'block' : 'none';
         }
     </script>
-    
+
     <script>
         // $('#addForm').on('submit', function(e) {
         //     $('#addDetailProduct').modal('show');

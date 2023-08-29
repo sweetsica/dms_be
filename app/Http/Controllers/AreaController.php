@@ -37,7 +37,7 @@ class AreaController extends Controller
         if($vung != NULL) {
             $query->where("department.name", "like", "%$vung%");
         }
-        $areaList =$query->paginate(10);
+        $areaList =$query->orderBy('area.id', 'desc')->paginate(10);
         $department = Department::where('code', 'like', 'VUNG%')->get();
         $areaTree =  Department::with('khuVucs.diaBans.tuyens')->where('code', 'like', 'VUNG%')->get();
         // dd()

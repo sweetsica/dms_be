@@ -159,8 +159,9 @@
                                                     <!-- <input type="file" class="form-control" id="attachment"
                                                                                                                                                                                                                                                                                                                                                                                             name="attachment" style="display: none"> -->
                                                     <i class="bi bi-link-45deg text-color_pimary fs-3 fw-bold"></i>
-                                                    <label class="input-label text-color_pimary fs-4 fw-bold ms-2"
-                                                        for="attachment" style="cursor: pointer">File đính kèm</label>
+                                                    {{-- <label class="input-label text-color_pimary fs-4 fw-bold ms-2"
+                                                        for="attachment" style="cursor: pointer">File đính kèm</label> --}}
+                                                        <p class="input-label text-color_pimary fs-4 fw-bold ms-2">File đính kèm</p>
                                                 </div>
                                                 <div class="col-4 mt-3">
                                                     @foreach (json_decode($customer->fileName) ?? [] as $file)
@@ -302,7 +303,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                     <div class="row wapper-contact mt-4">
                                                         <h2 class="text-color_pimary fs-3 pb-4">2. Liên hệ</h2>
                                                         <div class="col-lg-12">
@@ -323,7 +323,7 @@
                                                                                 style="">Chức danh</th>
                                                                         </tr>
                                                                     </thead>
-                                                                    <@php
+                                                                    @php
                                                                         $a=1;
                                                                     @endphp
                                                                     <tbody>
@@ -348,7 +348,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                     <div class="row wapper-contac mt-4">
                                                         <h2 class="text-color_pimary fs-3 pb-4">3. Địa chỉ</h2>
                                                         {{-- Địa chỉ --}}
@@ -502,7 +501,7 @@
                                         <div class="card-title fs-4">Trao đổi</div>
                                         <div class="flex-fill ms-3 d-flex align-items-center">
                                             <input placeholder="Viết bình luận..." rows="1" id="comment"
-                                                class="form-control" name="content"></input>
+                                                class="form-control" name="content">
                                         </div>
                                         <div>
                                             <button type="submit" class="btn btn-danger mx-3">Gửi</button>
@@ -542,7 +541,7 @@
                 <div class="modal-header text-center">
                     <h5 class="modal-title w-100" id="exampleModalLabel">Sửa chi tiết khách hàng</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>Chức danh
+                </div>
                 <form id="formThemCapPhatChitiet" method="POST" action="{{ route('update.customer',$customer->id) }}" enctype="multipart/form-data">
                     @csrf
                     {{-- <input name="name" style="display: none;" id="name">

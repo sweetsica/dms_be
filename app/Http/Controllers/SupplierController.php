@@ -64,7 +64,7 @@ class SupplierController extends Controller
         }
         if($search != NULL) {
             $query->orWhere("suppliers.code", "like", "%$search%");
-        }        
+        }
 
         // $supplierList =$query->paginate(15);
         $supplierList = $query->orderByDesc('id')->paginate($limit);

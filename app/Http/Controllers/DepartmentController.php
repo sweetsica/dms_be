@@ -13,16 +13,35 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Session;
 
-
 class DepartmentController extends Controller
 {
 
+    public function pagination($list)
+    {
+        return [
+            'current_page' => $list->currentPage(),
+            'data' => $list->items(),
+            'first_page_url' => $list->url(1),
+            'from' => $list->firstItem(),
+            'last_page' => $list->lastPage(),
+            'last_page_url' => $list->url($list->lastPage()),
+            'links' => $list->toArray()['links'],
+            'next_page_url' => $list->nextPageUrl(),
+            'path' => $list->url(1),
+            'per_page' => $list->perPage(),
+            'prev_page_url' => $list->previousPageUrl(),
+            'to' => $list->lastItem(),
+            'total' => $list->total(),
+        ];
+    }
+
     public function index(Request $request)
     {
+
         $search = $request->get('search');
         $don_vi_me = $request->get('don_vi_me');
         $leader_name = $request->get('leader_name');
-
+        $limit = 15;
         // dd($abc);
         $query = Department::query();
         // $departmentList = Department::
@@ -50,11 +69,11 @@ class DepartmentController extends Controller
         if ($search != NULL) {
             $query->orWhere("personnel.name", "like", "%$search%");
         }
-        $departmentList = $query->paginate(15);
+        $departmentList = $query->orderBy('department.id', 'desc')->paginate($limit);
         // dd($departmentList);
         $UnitLeaderList = Personnel::all();
         $Department = Department::all();
-        $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
+        $departmentListTree = Department::where('parent', 0)->with('donViCon')->orderBy('department.id', 'asc')->get();
         // dd($departmentListTree);
         $departmentlists = $this->getDepartment();
         $positionlists = $this->getPosition();
@@ -72,6 +91,7 @@ class DepartmentController extends Controller
         $personnelLevelList = PersonnelLevel::all();
 
         $listUsers = Personnel::all();
+        $pagination = $this->pagination($departmentList);
 
         return view("Deparment.index", [
             "Department" => $Department,
@@ -88,6 +108,9 @@ class DepartmentController extends Controller
             'roleList' => $roleList,
             'localityList' => $localityList,
             'personnellists' => $personnellists,
+            'pagination' => $pagination,
+
+
         ]);
     }
 
@@ -325,10 +348,22 @@ class DepartmentController extends Controller
 
     public function destroy($id)
     {
-        Department::destroy($id);
-        // $selectedItems = $request->input('selected_items', []);
-        Session::flash('success', 'Đã xoá!');
-        return redirect()->back();
+        // Department::destroy($id);
+        // $record = Department::find($id);
+        // if (!$record) {
+        //     // Nếu không tìm thấy bản ghi, chuyển người dùng trở lại trang trước đó
+        //     return back()->with('error', 'Bản ghi không tồn tại.');
+        // }
+        // $record->delete();
+        // return back()->with('success', 'Bản ghi đã được xóa thành công.');
+
+            // return redirect()->route('department.index');
+
+            $route = Department::findOrFail($id);
+            $route->delete();
+
+            Session::flash('success', "Xoá tuyến thành công");
+            return redirect()->route('department.index');
     }
 
     public function delete(Request $request)

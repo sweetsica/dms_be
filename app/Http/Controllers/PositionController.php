@@ -30,7 +30,7 @@ class PositionController extends Controller
             'position.parent',
 
             'position.wage',
-            'position.created_at',
+            // 'position.created_at',
             'position.pack',
             'position.department_id',
             'position.personnel_level',
@@ -57,7 +57,7 @@ class PositionController extends Controller
             $query->where("personnel_level.name", "like", "%$cap_nhan_su%");
         }
 
-        $positionList =$query->paginate(15);
+        $positionList =$query->orderBy('position.id', 'desc')->paginate(2);
         // dd($positionList);
         $UnitLeaderList = UnitLeader::all();
         $positionListTree = Position::where('parent',0)->with('donViCon')->get();
@@ -162,8 +162,9 @@ class PositionController extends Controller
     public function destroy($id)
     {
         Position::destroy($id);
-        Session::flash('success', 'Đã xoá!');
-        return back();
+        Session::flash('success', 'Xóa thành công');
+        // return back();
+        return redirect()->route('position.index');
     }
 
     public function delete(Request $request)
@@ -173,6 +174,7 @@ class PositionController extends Controller
         Position::whereIn('id', $selectedItems)->delete();
         Session::flash('success', 'Đã xoá!');
         return back();
+        // return redirect()->route('position.index');
 
     }
     public function detach($id)
@@ -180,8 +182,8 @@ class PositionController extends Controller
         $position = Position::findOrFail($id);
         $position->department_id = null;
         $position->save();
-        
-        Session::flash('success', 'Đã xoá khỏi phòng ban này');
+
+        Session::flash('success', 'Xoá thành công khỏi phòng ban này');
         return back();
     }
 }
