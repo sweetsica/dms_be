@@ -351,25 +351,33 @@ class DepartmentController extends Controller
     {
         Department::destroy($id);
         // $selectedItems = $request->input('selected_items', []);
-        // Session::flash('success', 'Đã xoá!');
-        // return redirect()->back();
-        // Department::destroy($id);
-        // $record = Department::find($id);
-        // if (!$record) {
-        //     // Nếu không tìm thấy bản ghi, chuyển người dùng trở lại trang trước đó
-        //     return back()->with('error', 'Bản ghi không tồn tại.');
-        // }
-        // $record->delete();
-        // return back()->with('success', 'Bản ghi đã được xóa thành công.');
-
-        // return redirect()->route('department.index');
-
-        $route = Department::findOrFail($id);
-        $route->delete();
-
-        Session::flash('success', "Xoá tuyến thành công");
-        return redirect()->route('department.index');
+        Session::flash('success', 'Đã xoá!');
+        return redirect()->back();
     }
+
+    // public function destroy($id)
+    // {
+    //     Department::destroy($id);
+    //     $selectedItems = $request->input('selected_items', []);
+    //     Session::flash('success', 'Đã xoá!');
+    //     return redirect()->back();
+    //     Department::destroy($id);
+    //     $record = Department::find($id);
+    //     if (!$record) {
+    //         // Nếu không tìm thấy bản ghi, chuyển người dùng trở lại trang trước đó
+    //         return back()->with('error', 'Bản ghi không tồn tại.');
+    //     }
+    //     $record->delete();
+    //     return back()->with('success', 'Bản ghi đã được xóa thành công.');
+
+    //     return redirect()->route('department.index');
+
+    //     $route = Department::findOrFail($id);
+    //     $route->delete();
+
+    //     Session::flash('success', "Xoá tuyến thành công");
+    //     return redirect()->route('department.index');
+    // }
 
     public function delete(Request $request)
     {
