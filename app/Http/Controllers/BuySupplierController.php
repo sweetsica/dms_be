@@ -9,4 +9,8 @@ class BuySupplierController extends Controller
     public function index() {
         return view('BuySupplier.index');
     }
+
+    public function show($id) {
+        return view('BuySupplier.chiTietPNMNCC');
+    }
 }
