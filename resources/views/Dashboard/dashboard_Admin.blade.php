@@ -43,6 +43,14 @@
         {
             margin-top: 20%;
         }
+        .card_part6
+        {
+            padding: 3%;
+        }
+        .card_borderp1
+        {
+            border:2px solid rgb(246, 246, 246);
+        }
         .testkh{
             /* border: 1px solid blueviolet; */
         }  
@@ -90,6 +98,16 @@
         {
             color: var(--primary-color);
         }
+        .mainSection_chart
+        {
+            width: 100%;
+            height: 100px;
+        }
+        .mainSection_chartp1
+        {
+            width: 100%;
+            height: 150px;
+        }
     </style>
 @endsection
     <div id="mainWrap" class="mainWrap mb-0 ms-0 me-0" style="margin-top: 59px;">
@@ -135,8 +153,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-3 testkh3">
-                                    online/offline
+                                <div class="col-sm-3 text-center">
+                                    <span class="card-title-black text-center">Nhân sự Online/Offline</span>
+                                    <div class="mainSection_chart mt-3">
+                                        <canvas id="admin_NhanSuOnOff"></canvas>
+                                    </div>
                                 </div>
                                 <div class="col-sm-3 cards">
                                     <div class="row" style="height: 20%">
@@ -157,12 +178,22 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row testkh2" style="height: 45%">
-                                <div class="col-sm-6 testkh3">
-                                    Theo vùng
+                            <div class="row testkh2" style="height: 45%" >
+                                <div class="col-sm-6 text-center" style="padding: 2%">
+                                    <div class="card_borderp1">
+                                        <span class="card-title-black text-center">Số nhân sự kinh doanh theo vùng</span>
+                                        <div class="mainSection_chartp1 mt-3">
+                                            <canvas id="admin_KDTheoVung"></canvas>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-sm-6 testkh3">
-                                    Theo địa bàn
+                                <div class="col-sm-6 text-center" style="padding: 2%">
+                                    <div class="card_borderp1">
+                                        <span class="card-title-black text-center">Số nhân sự kinh doanh địa bàn</span>
+                                        <div class="mainSection_chartp1 mt-3">
+                                            <canvas id="admin_KDTheoDiaBan"></canvas>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -171,8 +202,13 @@
                                 <span class="cards-title-black">DOANH SỐ</span>
                             </div>
                             <div class="row testkh2" style="height: 45%">
-                                <div class="col-sm-12 testkh3">
-                                    tình hình
+                                <div class="col-sm-12">
+                                    <div class="card_borderp1">
+                                        <span class="card-title-black text-center">Tình hình doanh số</span>
+                                        <div class="mainSection_chartp1 mt-3">
+                                            <canvas id="admin_TinhHinhDoanhSo"></canvas>
+                                        </div>
+                                    </div>
                                 </div>                                
                             </div>
                             <div class="row testkh2" style="height: 45%">
@@ -424,26 +460,36 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row testkh2" style="height: 10%">
+                            <div class="row" style="height: 10%">
                                 <span class="cards-title-black">HOẠT ĐỘNG MARKETING</span>
                             </div>
-                            <div class="row testkh2" style="height: 30%">
-                                <div class="col-sm-6 testkh3">
-                                    <div class="row testkh4" style="height: 50%">
+                            <div class="row text-center" style="height: 30%">
+                                <div class="col-sm-6">
+                                    <div class="row card_part6" style="height: 50%;">
                                         <div class="card">
-                                            <span class="card-title-black">Số ca đào tạo</span>
+                                            <span class="card-title-black">Số ca đào tạo tháng này</span>
+                                            <span class="card-subtitle">75%</span>
                                         </div>
                                     </div>
-                                    <div class="row testkh4" style="height: 50%">
-                                        ca
+                                    <div class="row card_part6" style="height: 50%">
+                                        <div class="card">
+                                            <span class="card-title-black">Số ca activation tháng này</span>
+                                            <span class="card-subtitle">75%</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 testkh3">
-                                    <div class="row testkh4" style="height: 50%">
-                                        đào
+                                <div class="col-sm-6">
+                                    <div class="row card_part6" style="height: 50%">
+                                        <div class="card">
+                                            <span class="card-title-black">Số biên bản tháng này</span>
+                                            <span class="card-subtitle">75%</span>
+                                        </div>
                                     </div>
-                                    <div class="row testkh4" style="height: 50%">
-                                        ca
+                                    <div class="row card_part6" style="height: 50%">
+                                        <div class="card">
+                                            <span class="card-title-black">Số khách hàng đã trưng bày</span>
+                                            <span class="card-subtitle">75%</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -484,42 +530,12 @@
     <script type="text/javascript"
             src="{{ asset('assets/plugins/chartjs/chartjs-plugin-datalabels@2.0.0.js') }}"></script>
 
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/MapChartVN/highmaps.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/MapChartVN/exporting.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/MapChartVN/accessibility.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/MapChartVN/moment.min.js') }}"></script>
-
+    <!--Charts JS -->   
+    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_NhanSuOnOff.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_KDTheoVung.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_KDTheoDiaBan.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_TinhHinhDoanhSo.js') }}"></script>
     
-
-    <!--Charts JS -->
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/KeyBarChart/KeyBarChart_Floating.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/KeyLineChart/KeyLineChart_InterpolationModes.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/KeyLineChart/KeyLineChart_SteppedLineCharts.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/KeyBarChart/KeyBarChart_BorderRadius.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/KeyLineChart/KeyLineChart_LineChart.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/KeyOtherChart/KeyOtherChart_Doughnut.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/KeyOtherChart/KeyOtherChart_Pie.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/KeyOtherChart/KeyOtherChart_Scatter.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/KeyOtherChart/KeyOtherChart_ScatterMultiAxis.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/KeyOtherChart/KeyOtherChart_THKD.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/DoughnutChart.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/PieChart.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/KeyBarChart/KeyBarChart_Vertical.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdminMTT/MTT_BienDongNhanSu.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdminMTT/MTT_ChiPhiTheoPhongBan.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdminMTT/MTT_DoanhThu_ChiPhiMarketing.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdminMTT/MTT_DoanhThuTheoVung.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdminMTT/MTT_HieuQuaTruyenThong.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdminMTT/MTT_HieuSuatKinhDoanh.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdminMTT/MTT_KhachHangTheoVung.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdminMTT/MTT_LuongKhachHang.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdminMTT/MTT_NhapXuatKho.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdminMTT/MTT_NhaPhanPhoi.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdminMTT/MTT_SanPhamBanChay.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdminMTT/MTT_SoLuongBan.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdminMTT/MTT_TimKiemKhachHang.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdminMTT/MTT_TyLeChuyenDoi.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdminMTT/MTT_HeThongPhanPhoi.js') }}"></script>
  
    
     {{-- <script>
