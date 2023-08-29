@@ -3,15 +3,55 @@
 @section('content')
 @section('header-style')
     <style>
+        #half_scr 
+        {
+            height: 50%;
+        }
+        #half_scr_up 
+        {
+            height: 50%;
+            border-bottom: 2px solid #DCDCDC;
+        }
+        .row_title
+        {
+            font-size: var(--fz-24);
+            background-color: rgb(250, 250, 250);
+        }
+        #dash_board
+        {
+            margin: 18px 0px 0px 10px;
+        }
+        #part1, #part4, #part5, #part6
+        {
+            border-right: 2px solid #DCDCDC;
+        }
+        .cards-title-black 
+        {
+            font-size: var(--fz-16);
+            font-weight: 700;
+            margin-top:10px;
+        }
+        .card-title-black
+        {
+            margin-top: 3px;
+        }
+        .cards
+        {
+            background-color: rgb(246, 246, 246);
+        }
+        .card_on
+        {
+            margin-top: 20%;
+        }
         .testkh{
-            border: 1px solid blueviolet;
+            /* border: 1px solid blueviolet; */
         }  
         .testkh1{
-            border: 1px solid red;
-            padding: 1%;
+            /* border: 1px solid red; */
+            padding: 2%;
         }   
         .testkh2{
-            border: 1px solid black;
+            /* border: 1px solid black; */
         }    
         .testkh3{
             border: 1px solid yellowgreen;
@@ -19,10 +59,7 @@
         .testkh4{
             border: 1px solid yellow;
         }   
-        .row_title
-        {
-            font-size: 20px;
-        }
+        
         .bg-gray
         {
             background-color: rgba(221, 221, 221, 0.3);
@@ -36,7 +73,8 @@
         .cardname 
         {
             font-size: 8px;
-            color: #000
+            color: #000;
+            border-bottom: 2px solid rgb(230, 230, 230);
 
         }    
         .cardvalue
@@ -48,46 +86,74 @@
             position: relative;
             top: 30%;
         }
+        .primary
+        {
+            color: var(--primary-color);
+        }
     </style>
 @endsection
     <div id="mainWrap" class="mainWrap mb-0 ms-0 me-0" style="margin-top: 59px;">
         <div class="mainSection">
             <div class="main p-0">
                 <div class="card mb-3 testkh" style="height: 1080px;">    
-                    <div class="row testkh" style="height:50%">
-                        <div class="col-sm-5 testkh1">
-                            <div class="row testkh2" style="height: 15%">
-                                DASHBOARD
+                    <div id="half_scr_up" class="row testkh">
+                        <div id="part1" class="col-sm-5 testkh1">
+                            <div class="row row_title testkh2" style="height: 15%">
+                                <strong id="dash_board" class="">
+                                    DASHBOARD
+                                </strong>
                             </div>
                             <div class="row testkh2" style="height: 10%">
-                                Nhân sự
+                                <span class="cards-title-black">NHÂN SỰ</span>
                             </div>
                             <div class="row testkh2" style="height: 30%">
                                 <div class="col-sm-3 testkh3">
                                     tuyển mới
                                 </div>
-                                <div class="col-sm-3 testkh3">
-                                    <div class="row testkh4" style="height: 20%">
-                                        chấm công
+                                <div class="col-sm-3 cards">
+                                    <div class="row" style="height: 20%">
+                                        <span class="card-title-black text-center">Nhân sự chấm công</span>
                                     </div>
-                                    <div class="row testkh4" style="height: 80%">
-                                        <div class="col-sm-6 testkh4">
-                                            1
+                                    <div class="row" style="height: 80%">
+                                        <div class="col-sm-6">
+                                            <div class="card text-center card_on">
+                                                <span class="card-title cardname" data-bs-toggle="tooltip" 
+                                                    data-bs-placement="top" title="Số nhân sự vi phạm chấm công">
+                                                    Nhân sự vi phạm
+                                                </span>
+                                                <strong class="card-body cardvalue">10</strong>
+                                            </div>  
                                         </div>
-                                        <div class="col-sm-6 testkh4">
-                                            2
+                                        <div class="col-sm-6">
+                                            <div class="card text-center card_on">
+                                                <span class="card-title cardname" data-bs-toggle="tooltip" 
+                                                    data-bs-placement="top" title="Số lượt vi phạm chấm công">
+                                                    Lượt vi phạm
+                                                </span>
+                                                <strong class="card-body cardvalue">50</strong>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-3 testkh3">
                                     online/offline
                                 </div>
-                                <div class="col-sm-3 testkh3">
-                                    <div class="row testkh4" style="height: 20%">
-                                        công tác
+                                <div class="col-sm-3 cards">
+                                    <div class="row" style="height: 20%">
+                                        <span class="card-title-black text-center">Lượt công tác</span>
                                     </div>
-                                    <div class="row testkh4" style="height: 80%">
-                                        1 card
+                                    <div class="row" style="height: 80%">
+                                        <div class="col-sm-3"></div>
+                                        <div class="col-sm-6">
+                                            <div class="card text-center card_on">
+                                                <span class="card-title cardname" data-bs-toggle="tooltip" 
+                                                    data-bs-placement="top" title="Số nhân sự vi phạm chấm công">
+                                                    Nhân sự vi phạm
+                                                </span>
+                                                <strong class="card-body cardvalue">10</strong>
+                                            </div>  
+                                        </div>
+                                        <div class="col-sm-3"></div>                                        
                                     </div>
                                 </div>
                             </div>
@@ -100,9 +166,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-5 testkh1">
+                        <div id="part2" class="col-sm-5 testkh1">
                             <div class="row testkh2" style="height: 10%">
-                                Doanh số
+                                <span class="cards-title-black">DOANH SỐ</span>
                             </div>
                             <div class="row testkh2" style="height: 45%">
                                 <div class="col-sm-12 testkh3">
@@ -118,7 +184,7 @@
                                 </div>  
                             </div>
                         </div>
-                        <div class="col-sm-2 testkh1">
+                        <div id="part3" class="col-sm-2 testkh1">
                             <div class="row testkh2" style="height: 33%">
                                 Kênh 
                             </div>
@@ -130,10 +196,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row testkh" style="height:50%">
-                        <div class="col-sm-5 testkh1">
+                    <div id="half_scr" class="row testkh">
+                        <div id="part4" class="col-sm-5 testkh1">
                             <div class="row testkh2" style="height: 10%">
-                                SKU
+                                <span class="cards-title-black">SKU</span>
                             </div>
                             <div class="row testkh2" style="height: 45%">
                                 <div class="col-sm-6 testkh3">
@@ -145,16 +211,109 @@
                             </div>
                             <div class="row testkh2" style="height: 45%">
                                 <div class="col-sm-5 testkh3">
-                                    Hàng hoá
+                                    <span class="cards-title-black">CẢNH BÁO HÀNG HOÁ</span>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>SKU</th>
+                                                <th>Tồn kho</th>
+                                                <th>Hàng cận date</th>
+                                                <th>Hàng hỏng</th>
+                                                <th>Hàng lỗi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>SKU1</td>
+                                                <td>50</td>
+                                                <td>5</td>
+                                                <td>0</td>
+                                                <td>100</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SKU2</td>
+                                                <td>50</td>
+                                                <td>5</td>
+                                                <td>0</td>
+                                                <td>100</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SKU3</td>
+                                                <td>50</td>
+                                                <td>5</td>
+                                                <td>0</td>
+                                                <td>100</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SKU4</td>
+                                                <td>50</td>
+                                                <td>5</td>
+                                                <td>0</td>
+                                                <td>100</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>  
                                 <div class="col-sm-7 testkh3">
-                                    phù sku
+                                    <span class="cards-title-black">ĐỘ PHÙ SKU</span>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>SKU</th>
+                                                <th>Vùng 1</th>
+                                                <th>Vùng 2</th>
+                                                <th>Vùng 3</th>
+                                                <th>Vùng 4</th>
+                                                <th>Vùng 5</th>
+                                                <th>Vùng 6</th>
+                                               
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>SKU1</td>
+                                                <td>50</td>
+                                                <td>5</td>
+                                                <td>5</td>
+                                                <td>5</td>
+                                                <td>0</td>
+                                                <td>100</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SKU2</td>
+                                                <td>50</td>
+                                                <td>5</td>
+                                                <td>5</td>
+                                                <td>5</td>
+                                                <td>0</td>
+                                                <td>100</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SKU3</td>
+                                                <td>50</td>
+                                                <td>5</td>
+                                                <td>5</td>
+                                                <td>5</td>
+                                                <td>0</td>
+                                                <td>100</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SKU4</td>
+                                                <td>50</td>
+                                                <td>5</td>
+                                                <td>5</td>
+                                                <td>5</td>
+                                                <td>0</td>
+                                                <td>100</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>  
                             </div>
                         </div>
-                        <div class="col-sm-2 testkh1">
+                        <div id="part5" class="col-sm-2 testkh1">
                             <div class="row testkh2" style="height: 10%">
-                                Khách hàng
+                                <span class="cards-title-black">KHÁCH HÀNG</span>
                             </div>
                             <div class="row testkh2" style="height: 40%">
                                 bản đồ
@@ -166,60 +325,114 @@
                                 đặt hàng
                             </div>
                         </div>
-                        <div class="col-sm-3 testkh1">
+                        <div id="part6" class="col-sm-3 testkh1">
                             <div class="row testkh2" style="height: 10%">
-                                Số đơn và địa bàn
+                                <span class="cards-title-black">SỐ ĐƠN VÀ ĐỊA BÀN</span>
+                            </div>
+                            <div class="row cards text-center" style="height: 25%;">
+                                <div class="col-sm-12" style="height: 20%">
+                                    <span class="card-title-black">Số đơn</span>
+                                </div>
+                                <div class="col-sm-3" style="height: 80%">
+                                    <div class="card text-center card_on">
+                                        <span class="card-title cardname" data-bs-toggle="tooltip" 
+                                            data-bs-placement="top" title="Số đơn hàng đặt">
+                                            Đơn hàng đặt
+                                        </span>
+                                        <strong class="card-body cardvalue">999+</strong>
+                                    </div> 
+                                </div>
+                                <div class="col-sm-3" style="height: 80%">
+                                    <div class="card text-center card_on">
+                                        <span class="card-title cardname" data-bs-toggle="tooltip" 
+                                            data-bs-placement="top" title="Số đơn từ chối">
+                                            Đơn từ chối
+                                        </span>
+                                        <strong class="card-body cardvalue">10</strong>
+                                    </div> 
+                                </div>
+                                <div class="col-sm-3" style="height: 80%">
+                                    <div class="card text-center card_on">
+                                        <span class="card-title cardname" data-bs-toggle="tooltip" 
+                                            data-bs-placement="top" title="Số đơn bán hàng">
+                                            Đơn bán hàng
+                                        </span>
+                                        <strong class="card-body cardvalue">500</strong>
+                                    </div> 
+                                </div>
+                                <div class="col-sm-3" style="height: 80%">
+                                    <div class="card text-center card_on">
+                                        <span class="card-title cardname" data-bs-toggle="tooltip" 
+                                            data-bs-placement="top" title="Số đơn đổi trả">
+                                            Đơn đổi trả
+                                        </span>
+                                        <strong class="card-body cardvalue">05</strong>
+                                    </div> 
+                                </div>
                             </div>
                             <div class="row testkh2" style="height: 25%">
-                                <div class="col-sm-12 testkh3" style="height: 20%">
-                                    Số đơn
-                                </div>
-                                <div class="col-sm-3 testkh3" style="height: 80%">
-                                    1
-                                </div>
-                                <div class="col-sm-3 testkh3" style="height: 80%">
-                                    2
-                                </div>
-                                <div class="col-sm-3 testkh3" style="height: 80%">
-                                    3
-                                </div>
-                                <div class="col-sm-3 testkh3" style="height: 80%">
-                                    4
-                                </div>
-                            </div>
-                            <div class="row testkh2" style="height: 25%">
-                                <div class="col-sm-8 testkh3">
-                                    <div class="row testkh4" style="height: 20%">
-                                        số địa bàn
+                                <div class="col-sm-8 text-center cards">
+                                    <div class="row" style="height: 20%">
+                                        <span class="card-title-black">Số địa bàn</span>
                                     </div>
-                                    <div class="row testkh4" style="height: 80%">
-                                        <div class="col-sm-4 testkh4">
-                                            1
+                                    <div class="row" style="height: 80%">
+                                        <div class="col-sm-4">
+                                            <div class="card text-center card_on">
+                                                <span class="card-title cardname" data-bs-toggle="tooltip" 
+                                                    data-bs-placement="top" title="Không hoàn thành chỉ tiêu doanh số">
+                                                    Không hoàn thành
+                                                </span>
+                                                <strong class="card-body cardvalue">10</strong>
+                                            </div>  
                                         </div>
-                                        <div class="col-sm-4 testkh4">
-                                            2
+                                        <div class="col-sm-4">
+                                            <div class="card text-center card_on">
+                                                <span class="card-title cardname" data-bs-toggle="tooltip" 
+                                                    data-bs-placement="top" title="Không hoàn thành chỉ tiêu độ phù">
+                                                    Lượt vi phạm
+                                                </span>
+                                                <strong class="card-body cardvalue">50</strong>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-4 testkh4">
-                                            3
+                                        <div class="col-sm-4">
+                                            <div class="card text-center card_on">
+                                                <span class="card-title cardname" data-bs-toggle="tooltip" 
+                                                    data-bs-placement="top" title="Không phát sinh giao dịch trong 3 ngày">
+                                                    Lượt vi phạm
+                                                </span>
+                                                <strong class="card-body cardvalue">50</strong>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-4 testkh3">
-                                    <div class="row testkh4" style="height: 20%">
-                                        số địa bàn
+                                <div class="col-sm-4 cards">
+                                    <div class="row" style="height: 20%">
+                                        <span class="card-title-black text-center">Sự cố vi phạm</span>
                                     </div>
-                                    <div class="row testkh4" style="height: 80%">
-                                        fff
+                                    <div class="row" style="height: 80%">
+                                        <div class="col-sm-2"></div>
+                                        <div class="col-sm-8">
+                                            <div class="card text-center card_on">
+                                                <span class="card-title cardname" data-bs-toggle="tooltip" 
+                                                    data-bs-placement="top" title="Số sự cố vi phạm ở địa bàn">
+                                                    Sự cố vi phạm
+                                                </span>
+                                                <strong class="card-body cardvalue">02</strong>
+                                            </div>  
+                                        </div>
+                                        <div class="col-sm-2"></div>                                        
                                     </div>
                                 </div>
                             </div>
                             <div class="row testkh2" style="height: 10%">
-                                Hoạt động marketing
+                                <span class="cards-title-black">HOẠT ĐỘNG MARKETING</span>
                             </div>
                             <div class="row testkh2" style="height: 30%">
                                 <div class="col-sm-6 testkh3">
                                     <div class="row testkh4" style="height: 50%">
-                                        ca
+                                        <div class="card">
+                                            <span class="card-title-black">Số ca đào tạo</span>
+                                        </div>
                                     </div>
                                     <div class="row testkh4" style="height: 50%">
                                         ca
@@ -235,9 +448,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-2 testkh1">
+                        <div id="part7" class="col-sm-2 testkh1">
                             <div class="row testkh2" style="height: 10%">
-                                bản đồ
+                                <span class="cards-title-black">BẢN ĐỒ ĐỊNH VỊ</span>
+
                             </div>
                             <div class="row testkh2" style="height: 45%">
                                 đơn hàng hôm nay
