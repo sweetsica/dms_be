@@ -44,20 +44,24 @@ class CustomerController extends Controller
 
     public function show($id)
     {
-        $customer = Customer::with('channel', 'route', 'person')->findOrFail($id);
+        $customer = Customer::with('channel', 'route', 'person','group_customer')->findOrFail($id);
         // dd($customer);
         $listPersons = Personnel::all();
         $jsonCombinedData = $customer->contact;
         $combinedData = json_decode($jsonCombinedData);
         $listgroup = CustomerGroup::all();
-        $productsfg = Product::all();
-        // dd( $products);
+        $productsAll = Product::all();
+        $RouteDirection = RouteDirection::all();
+        $DepartmentAll = Department::where('name', 'like', 'tuyenKH%')->get();
+        // dd( $RouteDirection);
         return view('Customer.detailKhachHang')->with(
             compact(
                 "customer",
                 "listPersons",
                 "listgroup",
-                "productsfg",
+                "productsAll",
+                "RouteDirection",
+                "DepartmentAll",
                 "combinedData"
             )
         );
