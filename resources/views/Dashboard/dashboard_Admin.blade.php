@@ -419,10 +419,13 @@
                             <div class="row" style="height: 10%">
                                 <span class="cards-title-black">KHÁCH HÀNG</span>
                             </div>
-                            <div class="row" style="height: 40%">
-                                bản đồ
+                            <div class="row" style="height: 40%" style="padding: 1%">
+                                <div class="card_borderp1" style="padding: 2%">
+                                    Bản đồ
+                                    <img style="width:90%; height: 90%" src="{{ asset('assets/img/admin_map.png') }}" />
+                                </div>
                             </div>
-                            <div class="row" style="height: 20%">
+                            <div class="row" style="height: 20%; margin-top:10px">
                                 <div class="card card_borderp1">
                                     <span class="card-title-black">Số công nợ</span>
                                     <div class="d-flex flex-nowrap" style="margin-top:15px">
@@ -606,10 +609,16 @@
 
                             </div>
                             <div class="row testkh2" style="height: 45%">
-                                đơn hàng hôm nay
+                                <div class="card_borderp1" style="padding: 2%">
+                                    Đơn hàng hôm nay
+                                    <img style="width:95%; height: 95%" src="{{ asset('assets/img/admin_map.png') }}" />
+                                </div>
                             </div>
-                            <div class="row testkh2" style="height: 45%">
-                                vị trí hôm nay
+                            <div class="row testkh2" style="height: 45%; margin-top:10px">
+                                <div class="card_borderp1" style="padding: 2%">
+                                    Vị trí hôm nay
+                                    <img style="width:95%; height: 95%" src="{{ asset('assets/img/admin_map.png') }}" />
+                                </div>
                             </div>
                         </div>
                     </div>
