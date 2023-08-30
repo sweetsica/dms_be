@@ -41,7 +41,7 @@
                                                         <span class="fs-6 fw-bold">Tên kho :</span>
                                                     </div>
                                                     <div class="col-lg-10">
-                                                        <span class="fs-6">Kho Hà Nội</span>
+                                                        <span class="fs-6">{{ $wareHouse->name }}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -52,7 +52,7 @@
                                                         <span class="fs-6 fw-bold">Mô tả :</span>
                                                     </div>
                                                     <div class="col-lg-10">
-                                                        <span class="fs-6">Kho Hà Nội - Xuất lẻ</span>
+                                                        <span class="fs-6">{{ $wareHouse->description }}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -63,8 +63,23 @@
                                                         <span class="fs-6 fw-bold">Phân loại :</span>
                                                     </div>
                                                     <div class="col-lg-10">
-                                                        <span class="fs-6">Kho sản phẩm</span>
+                                                        @switch($wareHouse->classify)
+                                                            @case(0)
+                                                            <span class="fs-6">Kho công ty</span>
+                                                            @break
 
+                                                            @case(1)
+                                                            <span class="fs-6">Kho nhà phân phối</span>
+                                                            @break
+
+                                                            @case(2)
+                                                            <span class="fs-6">Kho bán lẻ</span>
+                                                            @break
+
+                                                            @default
+                                                                <span></span>
+                                                            @break
+                                                        @endswitch
                                                     </div>
                                                 </div>
                                             </div>
@@ -77,8 +92,7 @@
                                                         <span class="fs-6 fw-bold">Địa chỉ :</span>
                                                     </div>
                                                     <div class="col-lg-10">
-                                                        <span class="fs-6">219 Trung Kính, Yên Hoà, Cầu Giấy, Hà
-                                                            Nội</span>
+                                                        <span class="fs-6">{{ $wareHouse->address }}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -89,7 +103,13 @@
                                                         <span class="fs-6 fw-bold">Người quản lý :</span>
                                                     </div>
                                                     <div class="col-lg-9">
-                                                        <span class="fs-6"> Nguyễn Văn A - TBHT00</span>
+                                                        <span class="fs-6">
+                                                            @foreach ($listUsers as $user)
+                                                                @if ($wareHouse->manage == $user->id)
+                                                                    {{ $user->name ?? '' }}
+                                                                @endif
+                                                            @endforeach
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -100,7 +120,13 @@
                                                         <span class="fs-6 fw-bold">Kế toán phụ trách :</span>
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <span class="fs-6">Nguyễn Văn B - TBHT00</span>
+                                                        <span class="fs-6">
+                                                            @foreach ($listUsers as $user)
+                                                                @if ($wareHouse->accountant == $user->id)
+                                                                    {{ $user->name ?? '' }}
+                                                                @endif
+                                                            @endforeach
+                                                        </span>
 
                                                     </div>
                                                 </div>
@@ -145,11 +171,12 @@
                                             </button>
                                         </div>
 
-                                        <div class="ms-3">
-                                            <button class="btn btn-danger btn-lg" style="padding: 7px 15px;">
+                                        <div class="action_export mx-3" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Xuất file Excel">
+                                            <a class="btn btn-danger btn-lg btn-export" target="_blank" href="/warehouses/export/all" style="padding: 7px 15px;" id="export-warehouses-btn">
                                                 <i class="bi bi-download "></i>
-                                            </button>
-                                        </div>
+                                            </a>
+                                        </div>                                        
                                     </div>
 
                                     <div class="table-responsive mt-3">
