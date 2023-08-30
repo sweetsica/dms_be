@@ -7,34 +7,24 @@
 
     </style>
 @endsection
+
 @php
 
     function getPaginationLink($link, $pageName)
     {
-        if (!isset($link->url)) {
+        if (!isset($link['url'])) {
             return '#';
         }
 
-        $pageNumber = explode('?page=', $link->url)[1];
+        $pageNumber = explode('?page=', $link['url'])[1];
 
         $queryString = request()->query();
 
         $queryString[$pageName] = $pageNumber;
-        return route('timekeeping.list', $queryString);
+        return route('locality.index', $queryString);
     }
 
-    function isFiltering($filterNames)
-    {
-        $filters = request()->query();
-        foreach ($filterNames as $filterName) {
-            if (isset($filters[$filterName]) && $filters[$filterName] != '') {
-                return true;
-            }
-        }
-        return false;
-    }
 
-    $listData = [['id' => 1, 'code' => 'tuyen01', 'name' => 'Địa bàn 2', 'usermanager' => 'Nguyễn Văn A - TBHT00', 'email' => 'Cầu Giấy', 'nhom' => '2', 'kenh' => 'OTC'], ['id' => 2, 'code' => 'tuyen01', 'name' => 'Địa bàn 3', 'usermanager' => 'Nguyễn Văn B - MTDH01', 'email' => 'Thanh Xuân', 'nhom' => '3', 'kenh' => 'ETC']];
 
 @endphp
 @section('content')

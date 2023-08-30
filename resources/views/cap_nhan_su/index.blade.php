@@ -4,6 +4,34 @@
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 @endsection
+@php
+
+    function getPaginationLink($link, $pageName)
+    {
+        if (!isset($link['url'])) {
+            return '#';
+        }
+
+        $pageNumber = explode('?page=', $link['url'])[1];
+
+        $queryString = request()->query();
+
+        $queryString[$pageName] = $pageNumber;
+        return route('PersonnelLevel.index', $queryString);
+    }
+
+    // function isFiltering($filterNames)
+    // {
+    //     $filters = request()->query();
+    //     foreach ($filterNames as $filterName) {
+    //         if (isset($filters[$filterName]) && $filters[$filterName] != '') {
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
+
+@endphp
 
 @section('content')
     @include('template.sidebar.sidebarDepartment.sidebarLeft')
@@ -100,7 +128,8 @@
                                                                             value="{{ $item->id }}"></td>
 
                                                                     <td class=" text-center">
-                                                                        {{ $i++ }}
+                                                                        {{-- {{ $i++ }} --}}
+                                                                        {{ $personnelLevelList->total() - $loop->index - ($personnelLevelList->currentPage() - 1) * $personnelLevelList->perPage() }}
                                                                     </td>
                                                                     <td>
                                                                         <div class="overText text-center"
@@ -156,14 +185,17 @@
                                                     {{-- {{ $personnelLevelList->appends([
                                                         'search' => $search,
                                                     ])->links() }} --}}
-                                                    <nav aria-label="Page navigation example" class="float-end mt-3"
-                                                        id="target-pagination">
+                                                    <nav aria-label="Page navigation example" class="float-end mt-3" id="target-pagination">
                                                         <ul class="pagination">
-                                                            {{ $personnelLevelList->appends([
-                                                                    'search' => $search,
-                                                                ])->links() }}
+                                                            @foreach ($pagination['links'] as $link)
+                                                                <li class="page-item {{ $link['active'] ? 'active' : '' }}">
+                                                                    <a class="page-link" href="{{ getPaginationLink($link, 'page') }}"
+                                                                        aria-label="Previous">
+                                                                        <span aria-hidden="true">{!! $link['label'] !!}</span>
+                                                                    </a>
+                                                                </li>
+                                                            @endforeach
                                                         </ul>
-                                                    </nav>
                                                 </div>
                                             </form>
                                         </div>

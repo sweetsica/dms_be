@@ -50,12 +50,14 @@ class CustomerController extends Controller
         $jsonCombinedData = $customer->contact;
         $combinedData = json_decode($jsonCombinedData);
         $listgroup = CustomerGroup::all();
-        // dd( $combinedData);
+        $productsfg = Product::all();
+        // dd( $products);
         return view('Customer.detailKhachHang')->with(
             compact(
                 "customer",
                 "listPersons",
                 "listgroup",
+                "productsfg",
                 "combinedData"
             )
         );

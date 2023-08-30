@@ -17,7 +17,7 @@
         $queryString = request()->query();
 
         $queryString[$pageName] = $pageNumber;
-        return route('department.index', $queryString);
+        return route('Specifications.index', $queryString);
     }
 
     // function isFiltering($filterNames)
