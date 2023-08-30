@@ -325,7 +325,7 @@
                                         <select name="parent" class="selectpicker" data-dropup-auto="false"
                                             data-live-search="true">
                                             <?php if ($item->parent == null){ ?>
-                                            <option value="0">Chọn vị trí/cấp quản lý
+                                            <option value="0">Chọn cấp quản lý
                                             </option>
                                             <?php } else { ?>
                                             <option value="{{ $item->parent }}">
@@ -334,8 +334,6 @@
                                                 @endif
                                             </option>
                                             <?php } ?>
-                                            <option value="0">Chọn vị trí/cấp quản lý
-                                            </option>
                                             @foreach ($positionlists as $ac)
                                                 <option value="{{ $ac->id }}">
                                                     @php

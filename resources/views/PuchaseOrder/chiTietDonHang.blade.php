@@ -1,6 +1,6 @@
 @extends('template.master')
 {{-- Trang chủ GIao Ban --}}
-@section('title', 'Chi tiết kho')
+@section('title', 'Chi tiết đơn đặt hàng')
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 @endsection
@@ -39,10 +39,15 @@
     .style_select .dropdown-toggle::after {
         display: none;
     }
+
+    .layout_grid {
+        display: grid;
+        grid-template-columns: 150px auto;
+    }
 </style>
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
-    <div id="mainWrap" class="mainWrap">
+    <div id="mainWrap" class="mainWrap" style="height: 150rem">
         <div class="mainSection">
             <div class="main">
                 <div class="container-fluid">
@@ -103,7 +108,7 @@
                                     </div>
 
                                     <div class="mt-5 border-bottom border-1 pb-3">
-                                        <div class="row g-0 mb-5">
+                                        <div class="row g-0 mb-4">
                                             <div class="col-lg-6">
                                                 <div>
                                                     <span class="fs-5 fw-bold">Khách hàng :</span>
@@ -118,7 +123,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="row g-0 mb-5">
+                                        <div class="row g-0 mb-4">
                                             <div class="col-lg-12">
                                                 <div>
                                                     <span class="fs-5 fw-bold">Địa chỉ :</span>
@@ -129,7 +134,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="row g-0 mb-5">
+                                        <div class="row g-0 mb-4">
                                             <div class="col-lg-6">
                                                 <div>
                                                     <span class="fs-5 fw-bold">Nhân viên đặt :</span>
@@ -150,7 +155,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="row g-0 mb-5">
+                                        <div class="row g-0 mb-4">
                                             <div class="col-lg-6">
                                                 <div>
                                                     <span class="fs-5 fw-bold">Loại thanh toán :</span>
@@ -165,7 +170,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="row g-0 mb-5">
+                                        <div class="row g-0 mb-4">
                                             <div class="col-lg-12">
                                                 <div>
                                                     <span class="fs-5 fw-bold">Ghi chú :</span>
@@ -174,7 +179,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="row g-0 mb-5">
+                                        <div class="row g-0 mb-4">
                                             <div class="col-lg-6">
                                                 <div>
                                                     <span class="fs-5 fw-bold">Người duyệt :</span>
@@ -190,172 +195,246 @@
                                         </div>
                                     </div>
 
-                                    <div class="mt-5">
-                                        <div class="d-flex align-items-center">
-                                            <span class="text_default fs-4 fw-bold me-3">1. Sản phẩm đặt hàng</span>
-                                            <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Chọn kho"
-                                                style="width: 120px;">
-                                                <select name="" class="selectpicker" placeholder="Chọn kho"
-                                                    id="selectKho">
-                                                    <option value="1">Kho 1
-                                                    </option>
-                                                    <option value="2">Kho 2
-                                                    </option>
-                                                </select>
+                                    <div class="mt-5 border-bottom border-1 pb-3">
+                                        <div class="mt-5">
+                                            <div class="d-flex align-items-center">
+                                                <span class="text_default fs-4 fw-bold me-3">1. Sản phẩm đặt hàng</span>
+                                                <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Chọn kho"
+                                                    style="width: 120px;" class="me-3">
+                                                    <select name="" class="selectpicker" placeholder="Chọn kho"
+                                                        id="selectKho">
+                                                        <option value="1">Kho 1
+                                                        </option>
+                                                        <option value="2">Kho 2
+                                                        </option>
+                                                    </select>
+                                                </div>
+
+                                                <div>
+                                                    <button class="btn btn-danger">
+                                                        <i class="bi bi-tag"></i>
+                                                        Khuyến mại
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            {{--  --}}
+                                            @php
+                                                $arrProduct = [
+                                                    [
+                                                        'id' => 1,
+                                                        'dvt' => 'Hộp',
+                                                        'maSP' => 'SP01',
+                                                    ],
+                                                    [
+                                                        'id' => 2,
+                                                        'dvt' => 'Chiếc',
+                                                        'maSP' => 'SP02',
+                                                    ],
+                                                ];
+                                                
+                                                $arrKho = [
+                                                    [
+                                                        'id' => 1,
+                                                        'name' => 'Kho 1',
+                                                        'tonkho' => '11/100',
+                                                        'donGia' => 1000000,
+                                                    ],
+                                                    [
+                                                        'id' => 2,
+                                                        'name' => 'Kho 2',
+                                                        'tonkho' => '20/100',
+                                                        'donGia' => 1500000,
+                                                    ],
+                                                ];
+                                                $jsonProduct = json_encode($arrProduct);
+                                                $jsonKho = json_encode($arrKho);
+                                            @endphp
+
+                                            <input type="hidden" id="jsonProduct" value="{{ $jsonProduct }}">
+                                            <input type="hidden" id="jsonKho" value="{{ $jsonKho }}">
+
+                                            <div class="mt-5">
+                                                <div class="table-responsive">
+
+                                                    <table id="dsNhaCungCap" style="width: 150%;"
+                                                        class="table table-responsive table-hover table-bordered filter">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="text-nowrap text-center" style="width:2%">
+                                                                    STT
+                                                                </th>
+                                                                <th class="text-nowrap text-center" style="width:8%">
+                                                                    Mã SP
+                                                                </th>
+                                                                <th class="text-nowrap text-center" style="width:15%">
+                                                                    Tên sản phẩm
+                                                                </th>
+                                                                <th class="text-nowrap text-center" style="width:8%">
+                                                                    ĐVT
+                                                                </th>
+                                                                <th class="text-nowrap text-center" style="width:8%">
+                                                                    Kho xuất
+                                                                </th>
+                                                                <th class="text-nowrap text-center" style="width:8%">
+                                                                    SL/Tồn kho
+                                                                </th>
+                                                                <th class="text-nowrap text-center" style="width:8%">
+                                                                    Đơn giá
+                                                                </th>
+                                                                <th class="text-nowrap text-center" style="width:8%">
+                                                                    Thành tiền
+                                                                </th>
+                                                                <th class="text-nowrap text-center" style="width:8%">
+                                                                    Chiết khấu
+                                                                </th>
+                                                                <th class="text-nowrap text-center" style="width:8%">
+                                                                    Tỷ lệ CK(%)
+                                                                </th>
+                                                                <th class="text-nowrap text-center" style="width:15%">
+                                                                    Ghi chú
+                                                                </th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody id="tableBody">
+                                                            <tr>
+                                                                <td class="text-center"> <i
+                                                                        class="bi bi-plus-circle text_default fs-4 fw-bold "
+                                                                        id="addRowButton"></i>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
-                                        {{--  --}}
-                                        @php
-                                            $arrProduct = [
-                                                [
-                                                    'id' => 1,
-                                                    'dvt' => 'Hộp',
-                                                    'maSP' => 'SP01',
-                                                ],
-                                                [
-                                                    'id' => 2,
-                                                    'dvt' => 'Chiếc',
-                                                    'maSP' => 'SP02',
-                                                ],
-                                            ];
-                                            
-                                            $arrKho = [
-                                                [
-                                                    'id' => 1,
-                                                    'name' => 'Kho 1',
-                                                    'tonkho' => '11/100',
-                                                    'donGia' => 1000000,
-                                                ],
-                                                [
-                                                    'id' => 2,
-                                                    'name' => 'Kho 2',
-                                                    'tonkho' => '20/100',
-                                                    'donGia' => 1500000,
-                                                ],
-                                            ];
-                                            $jsonProduct = json_encode($arrProduct);
-                                            $jsonKho = json_encode($arrKho);
-                                        @endphp
-
-                                        <input type="hidden" id="jsonProduct" value="{{ $jsonProduct }}">
-                                        <input type="hidden" id="jsonKho" value="{{ $jsonKho }}">
 
                                         <div class="mt-5">
-                                            <div class="table-responsive">
+                                            <div class="d-flex align-items-center">
+                                                <span class="text_default fs-4 fw-bold me-3">2. Sản phẩm khuyến mại</span>
+                                                <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Chọn kho"
+                                                    style="width: 120px;">
+                                                    <select name="" class="selectpicker" placeholder="Chọn kho"
+                                                        id="selectKho">
+                                                        <option value="1">Kho 1
+                                                        </option>
+                                                        <option value="2">Kho 2
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
 
-                                                <table id="dsNhaCungCap" style="width: 150%;"
-                                                    class="table table-responsive table-hover table-bordered filter">
-                                                    <thead>
-                                                        <tr>
-                                                            <th class="text-nowrap text-center" style="width:2%">
-                                                                STT
-                                                            </th>
-                                                            <th class="text-nowrap text-center" style="width:8%">
-                                                                Mã SP
-                                                            </th>
-                                                            <th class="text-nowrap text-center" style="width:15%">
-                                                                Tên sản phẩm
-                                                            </th>
-                                                            <th class="text-nowrap text-center" style="width:8%">
-                                                                ĐVT
-                                                            </th>
-                                                            <th class="text-nowrap text-center" style="width:8%">
-                                                                Kho xuất
-                                                            </th>
-                                                            <th class="text-nowrap text-center" style="width:8%">
-                                                                SL/Tồn kho
-                                                            </th>
-                                                            <th class="text-nowrap text-center" style="width:8%">
-                                                                Đơn giá
-                                                            </th>
-                                                            <th class="text-nowrap text-center" style="width:8%">
-                                                                Thành tiền
-                                                            </th>
-                                                            <th class="text-nowrap text-center" style="width:8%">
-                                                                Chiết khấu
-                                                            </th>
-                                                            <th class="text-nowrap text-center" style="width:8%">
-                                                                Tỷ lệ CK(%)
-                                                            </th>
-                                                            <th class="text-nowrap text-center" style="width:15%">
-                                                                Ghi chú
-                                                            </th>
-                                                            <th></th>
-                                                        </tr>
-                                                    </thead>
+                                            <div class="mt-5">
+                                                <div class="table-responsive">
 
-                                                    <tbody id="tableBody">
-                                                        <tr>
-                                                            <td class="text-center text-nowrap" id="stt">
-                                                                1
-                                                            </td>
-                                                            <td class="text-center text-nowrap">
-                                                                <input class="form-control style_select bg-transparent"
-                                                                    type="text" disabled id="maSP_0" name=""
-                                                                    placeholder="Mã sản phẩm">
-                                                            </td>
-                                                            <td class="text-center text-nowrap">
-                                                                <select name="" class="style_select selectpicker"
-                                                                    id="selectNameProduct_0" placeholder="Tên sản phẩm">
-                                                                    <option value="1">Sản phẩm 01
-                                                                    </option>
-                                                                    <option value="2">Sản phẩm 02
-                                                                    </option>
-                                                                </select>
-                                                            </td>
-                                                            <td class="text-center text-nowrap">
-                                                                <input class="form-control style_select bg-transparent"
-                                                                    type="text" disabled id="DVT_0" name=""
-                                                                    placeholder="Đơn vị tính">
-                                                            </td>
-                                                            <td class="text-center text-nowrap">
-                                                                <input class="form-control style_select bg-transparent"
-                                                                    type="text" disabled id="nameKho_0" name=""
-                                                                    placeholder="Kho xuất">
-                                                            </td>
-                                                            <td class="text-center text-nowrap">
-                                                                <input class="form-control style_select bg-transparent"
-                                                                    type="text" disabled id="sltk_0" name=""
-                                                                    placeholder="Số lượng tồn kho">
-                                                            </td>
-                                                            <td class="text-center text-nowrap">
-                                                                <input class="form-control style_select bg-transparent"
-                                                                    type="text" disabled id="donGia_0" name=""
-                                                                    placeholder="Đơn giá">
-                                                            </td>
-                                                            <td class="text-center text-nowrap">
-                                                                <input class="form-control style_select bg-transparent"
-                                                                    type="number" disabled id="thanhTien_0"
-                                                                    name="" placeholder="Thành tiền">
-                                                            </td>
-                                                            <td class="text-center text-nowrap">
-                                                                <input class="form-control style_select bg-transparent"
-                                                                    type="number" id="ck_0" name=""
-                                                                    placeholder="Chiết khấu">
-                                                            </td>
-                                                            <td class="text-center text-nowrap">
-                                                                <input class="form-control style_select bg-transparent"
-                                                                    type="number" id="tyLeCK_0" name=""
-                                                                    placeholder="Tỷ lệ CK">
-                                                            </td>
-                                                            <td class="text-center text-nowrap">
-                                                                <input class="form-control style_select bg-transparent"
-                                                                    type="text" id="ghiChu_0" name=""
-                                                                    placeholder="Ghi chú">
-                                                            </td>
-                                                            <td class="text-center text-nowrap">
-                                                                <i class="bi bi-trash fs-4 fw-bold text_default"
-                                                                    id="remove-item"></i>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center"> <i
-                                                                    class="bi bi-plus-circle text_default fs-4 fw-bold "
-                                                                    id="addRowButton"></i>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                                    <table id="dsNhaCungCap"
+                                                        class="table table-responsive table-hover table-bordered filter">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="text-nowrap text-center" style="width:2%">
+                                                                    STT
+                                                                </th>
+                                                                <th class="text-nowrap text-center" style="width:8%">
+                                                                    Mã SP
+                                                                </th>
+                                                                <th class="text-nowrap text-center" style="width:15%">
+                                                                    Tên sản phẩm
+                                                                </th>
+                                                                <th class="text-nowrap text-center" style="width:8%">
+                                                                    ĐVT
+                                                                </th>
+                                                                <th class="text-nowrap text-center" style="width:8%">
+                                                                    Kho xuất
+                                                                </th>
+                                                                <th class="text-nowrap text-center" style="width:8%">
+                                                                    SL/Tồn kho
+                                                                </th>
+                                                                <th class="text-nowrap text-center" style="width:15%">
+                                                                    Ghi chú
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody id="">
+                                                            {{-- <tr>
+                                                                <td class="text-center"> <i
+                                                                        class="bi bi-plus-circle text_default fs-4 fw-bold "
+                                                                        id="addRowButton"></i>
+                                                                </td>
+                                                            </tr> --}}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-5">
+                                        <div class="col-lg-6 mb-3">
+                                            <div class="layout_grid">
+                                                <span class="fs-5 fw-bold">Tổng tiền hàng :</span>
+                                                <span class="fs-5">120.000.000</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-3">
+                                            <div class="layout_grid">
+                                                <span class="fs-5 fw-bold">Số tiền còn lại :</span>
+                                                <span class="fs-5">0</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-3">
+                                            <div class="layout_grid">
+                                                <span class="fs-5 fw-bold">Tổng tiền chiết khấu :</span>
+                                                <span class="fs-5" style="text-decoration: underline">2.600.000</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-3">
+                                            <div class="layout_grid">
+                                                <span class="fs-5 fw-bold">Hạn mức công nợ :</span>
+                                                <span class="fs-5">0</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-3">
+                                            <div class="layout_grid">
+                                                <span class="fs-5 fw-bold">Tổng tiền trước thuế :</span>
+                                                <span class="fs-5">117.400.000</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-3">
+                                            <div class="layout_grid">
+                                                <span class="fs-5 fw-bold">Dư nợ hiện tại :</span>
+                                                <span class="fs-5">0</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-3">
+                                            <div class="layout_grid">
+                                                <span class="fs-5 fw-bold">Tổng tiền thuế :</span>
+                                                <span class="fs-5">11.740.000</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-3">
+                                            <div class="layout_grid">
+                                                <span class="fs-5 fw-bold">Hạn thanh toán :</span>
+                                                <span class="fs-5">15/08/2023</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 mb-3">
+                                            <div class="layout_grid">
+                                                <span class="fs-5 fw-bold text_default">Phải thanh toán :</span>
+                                                <span class="fs-5" style="text-decoration: underline">129.140.000</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 mb-3">
+                                            <div class="layout_grid">
+                                                <span class="fs-5 fw-bold text-success">Thanh toán trước :</span>
+                                                <span class="fs-5 text-success">120.000.000</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 mb-3">
+                                            <div class="layout_grid">
+                                                <span class="fs-5 fw-bold text-success">Số tiền bằng chữ :</span>
+                                                <span class="fs-5 text-success">Một trăm hai mươi chín triệu chẵn</span>
                                             </div>
                                         </div>
                                     </div>
@@ -399,20 +478,43 @@
         const tableBody = document.getElementById("tableBody");
         const addRowButton = document.getElementById("addRowButton");
 
+        var inputJsonProduct = document.getElementById('jsonProduct');
+        var inputJsonKho = document.getElementById('jsonKho');
+        var jsonProduct = JSON.parse(inputJsonProduct.value);
+        var jsonKho = JSON.parse(inputJsonKho.value);
 
-        addRowButton.addEventListener("click", function() {
-            const newRow = document.createElement("tr");
-            newRow.innerHTML = `
-            <td class="text-center text-nowrap">
-                                                                1
+        let countId = 0;
+        let countRow = 1;
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const newRow = createRow(countId, countRow);
+            tableBody.insertBefore(newRow, addRowButton.parentNode.parentNode);
+            $('.selectpicker').selectpicker();
+            const deleteIcons = newRow.querySelectorAll("#remove-item");
+            deleteIcons.forEach(deleteIcon => {
+                deleteIcon.addEventListener("click", function() {
+                    newRow.remove();
+                });
+            });
+            countId++;
+            countRow++;
+            handleNewRow(0);
+        });
+
+        function createRow(countId, countRow) {
+            const trNew = document.createElement("tr");
+            trNew.innerHTML = `
+            <td class="text-center text-nowrap" id="stt">
+                                                                ${countRow}
                                                             </td>
                                                             <td class="text-center text-nowrap">
-                                                                <input class="form-control" type="text" disabled
-                                                                    id="maSP_0" name="">
+                                                                <input class="form-control style_select bg-transparent"
+                                                                    type="text" disabled id="maSP_${countId}" name=""
+                                                                    placeholder="Mã sản phẩm">
                                                             </td>
                                                             <td class="text-center text-nowrap">
-                                                                <select name="" class="selectpicker"
-                                                                    id="selectNameProduct_0" placeholder="Tên sản phẩm">
+                                                                <select name="" class="style_select selectpicker"
+                                                                    id="selectNameProduct_${countId}" placeholder="Tên sản phẩm">
                                                                     <option value="1">Sản phẩm 01
                                                                     </option>
                                                                     <option value="2">Sản phẩm 02
@@ -420,34 +522,56 @@
                                                                 </select>
                                                             </td>
                                                             <td class="text-center text-nowrap">
-                                                                <input class="form-control" type="text" disabled
-                                                                    id="DVT_0" name="">
+                                                                <input class="form-control style_select bg-transparent"
+                                                                    type="text" disabled id="DVT_${countId}" name=""
+                                                                    placeholder="Đơn vị tính">
                                                             </td>
                                                             <td class="text-center text-nowrap">
-                                                                1
+                                                                <input class="form-control style_select bg-transparent"
+                                                                    type="text" disabled id="nameKho_${countId}" name=""
+                                                                    placeholder="Kho xuất">
                                                             </td>
                                                             <td class="text-center text-nowrap">
-                                                                1
+                                                                <input class="form-control style_select bg-transparent"
+                                                                    type="text" disabled id="sltk_${countId}" name=""
+                                                                    placeholder="Số lượng tồn kho">
                                                             </td>
                                                             <td class="text-center text-nowrap">
-                                                                1
+                                                                <input class="form-control style_select bg-transparent"
+                                                                    type="text" disabled id="donGia_${countId}" name=""
+                                                                    placeholder="Đơn giá">
                                                             </td>
                                                             <td class="text-center text-nowrap">
-                                                                1
+                                                                <input class="form-control style_select bg-transparent"
+                                                                    type="number" disabled id="thanhTien_${countId}"
+                                                                    name="" placeholder="Thành tiền">
                                                             </td>
                                                             <td class="text-center text-nowrap">
-                                                                1
+                                                                <input class="form-control style_select bg-transparent"
+                                                                    type="number" id="ck_${countId}" name=""
+                                                                    placeholder="Chiết khấu">
                                                             </td>
                                                             <td class="text-center text-nowrap">
-                                                                1
+                                                                <input class="form-control style_select bg-transparent"
+                                                                    type="number" id="tyLeCK_${countId}" name=""
+                                                                    placeholder="Tỷ lệ CK">
                                                             </td>
                                                             <td class="text-center text-nowrap">
-                                                                1
+                                                                <input class="form-control style_select bg-transparent"
+                                                                    type="text" id="ghiChu_${countId}" name=""
+                                                                    placeholder="Ghi chú">
                                                             </td>
                                                             <td class="text-center text-nowrap">
-                                                                <i class="bi bi-trash fs-4 fw-bold text_default" id="remove-item"></i>
+                                                                <i class="bi bi-trash fs-4 fw-bold text_default"
+                                                                    id="remove-item"></i>
                                                             </td>
-        `;
+         `;
+
+            return trNew;
+        }
+
+        addRowButton.addEventListener("click", function() {
+            const newRow = createRow(countId, countRow);
 
             tableBody.insertBefore(newRow, addRowButton.parentNode.parentNode);
             $('.selectpicker').selectpicker();
@@ -458,62 +582,64 @@
                     newRow.remove();
                 });
             });
+
+            handleNewRow(countId);
+            countId++;
+            countRow++;
         });
 
+        function handleProductSelection(countId) {
+            const selectNameProduct = document.getElementById(`selectNameProduct_${countId}`);
+            const maSPInput = document.getElementById(`maSP_${countId}`);
+            const DVTInput = document.getElementById(`DVT_${countId}`);
 
-        var inputJsonProduct = document.getElementById('jsonProduct');
-        var jsonProduct = JSON.parse(inputJsonProduct.value);
+            selectNameProduct.addEventListener("change", function() {
+                const selectedValue = selectNameProduct.value;
+                const selectedItem = jsonProduct.find(item => item.id.toString() === selectedValue);
 
-        const selectNameProduct = document.getElementById("selectNameProduct_0");
-        const maSPInput = document.getElementById("maSP_0");
-        const DVTInput = document.getElementById("DVT_0");
+                if (selectedItem) {
+                    maSPInput.value = selectedItem.maSP;
+                    DVTInput.value = selectedItem.dvt;
+                } else {
+                    maSPInput.value = "";
+                    DVTInput.value = "";
+                }
+            });
+        }
 
-        selectNameProduct.addEventListener("change", function() {
-            const selectedValue = selectNameProduct.value;
-            const selectedItem = jsonProduct.find(item => item.id.toString() === selectedValue);
+        function handleKhoSelection(countId) {
+            const selectKho = document.getElementById("selectKho");
+            const nameKho = document.getElementById(`nameKho_${countId}`);
+            const sltkInput = document.getElementById(`sltk_${countId}`);
+            const donGiaInput = document.getElementById(`donGia_${countId}`);
+            const thanhTienInput = document.getElementById(`thanhTien_${countId}`);
+            const tyLeCkInput = document.getElementById(`tyLeCK_${countId}`);
 
-            if (selectedItem) {
-                maSPInput.value = selectedItem.maSP;
-                DVTInput.value = selectedItem.dvt;
-            } else {
-                maSPInput.value = "";
-                DVTInput.value = "";
-            }
-        });
+            selectKho.addEventListener("change", function() {
+                const selectedValue = selectKho.value;
+                const selectedItem = jsonKho.find(item => item.id.toString() === selectedValue);
+                if (selectedItem) {
+                    nameKho.value = selectedItem.name;
+                    sltkInput.value = selectedItem.tonkho;
+                    donGiaInput.value = selectedItem.donGia;
 
-        var inputJsonKho = document.getElementById('jsonKho');
-        var jsonKho = JSON.parse(inputJsonKho.value);
+                    const indexOfSlash = selectedItem.tonkho.indexOf("/");
+                    const numberBeforeSlash = Number(selectedItem.tonkho.slice(0, indexOfSlash));
+                    thanhTienInput.value = selectedItem.donGia * numberBeforeSlash;
 
-        const selectKho = document.getElementById("selectKho");
-        const nameKho = document.getElementById("nameKho_0");
-        const sltkInput = document.getElementById("sltk_0");
-        const donGiaInput = document.getElementById("donGia_0");
-        const thanhTienInput = document.getElementById("thanhTien_0");
-        const tyLeCkInput = document.getElementById("tyLeCK_0");
+                } else {
+                    nameKho.value = "";
+                    sltkInput.value = "";
+                    donGiaInput.value = "";
+                    thanhTienInput.value = "";
+                }
+            });
+        }
 
-        selectKho.addEventListener("change", function() {
-            const selectedValue = selectKho.value;
-            const selectedItem = jsonKho.find(item => item.id.toString() === selectedValue);
-            if (selectedItem) {
-                nameKho.value = selectedItem.name;
-                sltkInput.value = selectedItem.tonkho;
-                donGiaInput.value = selectedItem.donGia;
-
-                const indexOfSlash = selectedItem.tonkho.indexOf("/");
-                const numberBeforeSlash = Number(selectedItem.tonkho.slice(0, indexOfSlash));
-                thanhTienInput.value = selectedItem.donGia * numberBeforeSlash;
-
-            } else {
-                nameKho.value = "";
-                sltkInput.value = "";
-                donGiaInput.value = "";
-                thanhTienInput.value = "";
-            }
-        });
-
-        function calculateTienCK() {
-            const tyleCkInput = parseFloat(tyLeCkInput.value);
-            console.log('tyleCkInput', tyleCkInput);
+        function handleNewRow(countId) {
+            console.log('countId', countId);
+            handleProductSelection(countId);
+            handleKhoSelection(countId);
         }
     </script>
 

@@ -485,14 +485,14 @@
                             <div class="col-lg-6 mb-3">
                                 <input type="text" name="name" data-bs-toggle="tooltip" id="nameInput"
                                     data-bs-placement="top" title="Tên khách hàng" placeholder="Tên khách hàng*"
-                                    class="form-control mb-1">
+                                    class="form-control mb-1" required>
 
                             </div>
 
                             <div class="col-lg-6 mb-3">
                                 <input type="text" name="phone" data-bs-toggle="tooltip" required id="phoneInput"
                                     data-bs-placement="top" title="Số điện thoại" placeholder="Số điện thoại*"
-                                    class="form-control mb-1">
+                                    class="form-control mb-1" required>
                             </div>
                             <div class="col-lg-6 mb-3">
                                 <input type="text" name="email" data-bs-toggle="tooltip" id="emailInput"
@@ -500,7 +500,8 @@
                             </div>
                             <div class="col-lg-6 mb-3">
                                 <input type="text" name="address" data-bs-toggle="tooltip" id="addressInputGeneral"
-                                    data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ*" class="form-control">
+                                    data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ*" class="form-control"
+                                    required>
                             </div>
 
                             <div class="col-lg-12 mb-3">

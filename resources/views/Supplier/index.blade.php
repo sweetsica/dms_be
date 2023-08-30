@@ -463,130 +463,6 @@
     </div>
     @include('template.sidebar.sidebarMaster.sidebarRight')
 
-    {{-- @foreach ($departmentList as $item)
-        <div class="modal fade" id="suaDeXuat{{ $item['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header text-center">
-                        <h5 class="modal-title w-100" id="exampleModalLabel">Sửa đơn vị</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form method="POST" action="{{ route('department.update', $item->id) }}">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-6 mb-3">
-                                    <input data-bs-toggle="tooltip" data-bs-placement="top" title="Nhập tên đơn vị*"
-                                        name="name" type="text" placeholder="Tên đơn vị" class="form-control"
-                                        value="{{ $item->name }}" required>
-                                </div>
-                                <div class="col-6 mb-3">
-                                    <input data-bs-toggle="tooltip" data-bs-placement="top" title="Mã đơn vị*"
-                                        name="code" type="text" placeholder="Mã đơn vị*" class="form-control"
-                                        value="{{ $item->code }}" required>
-                                </div>
-                                <div class="col-6 mb-3">
-
-                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn đơn vị cha">
-                                        <select name="parent" required class="selectpicker" data-dropup-auto="false"
-                                            data-live-search="true">
-                                            <?php if( $item->parent == 0){ ?>
-                                            <option value="0">Chọn
-                                                đơn
-                                                vị cha</option>
-                                            <?php
-                                      }else{ ?>
-                                            <option value="{{ $item->parent }}">
-                                                @if ($item->donvime)
-                                                    {{ $item->donvime->name }}
-                                                @endif
-                                            </option>
-                                            <?php } ?>
-                                            <option value="0">Chọn
-                                                đơn
-                                                vị cha</option>
-                                            @foreach ($departmentlists as $ac)
-                                                <option value="{{ $ac->id }}">
-                                                    @php
-                                                        $str = '';
-                                                        for ($i = 0; $i < $ac->level; $i++) {
-                                                            echo $str;
-                                                            $str = '  --';
-                                                        }
-                                                    @endphp
-                                                    {{ $ac->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                </div>
-                                <div class="col-6 mb-3">
-                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn trưởng bộ phận">
-                                        <select name="ib_lead" class="selectpicker" data-dropup-auto="false"
-                                            data-live-search="true">
-                                            <?php if( $item->ib_lead == 0){ ?>
-                                            <option value="0">Chọn
-                                                trưởng bộ phận
-                                            </option>
-                                            <?php }else{ ?>
-                                            <option value="{{ $item->ib_lead }}">
-                                                {{ $item->leader_name }}
-                                            </option>
-                                            <?php } ?>
-                                            <option value="0">Chọn
-                                                trưởng bộ phận</option>
-                                            @foreach ($UnitLeaderList as $av)
-                                                <option value="{{ $av->id }}">
-                                                    {{ $av->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top">
-                                    <textarea name="description" type="text" placeholder="Chức năng nhiệm vụ" class="form-control "
-                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Mô tả" style="height: 80px;">{{ $item->description }}</textarea>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
-                            <button type="submit" class="btn btn-danger">Lưu</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="modal fade" id="xoaDeXuat{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title text-danger" id="exampleModalLabel">Xóa đơn vị </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Bạn có thực sự muốn xoá đơn vị này không?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
-                        <form action="{{ route('departmentr.destroy', $item->id) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="btn btn-danger">Xóa</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endforeach --}}
-
     {{-- Sửa nhà cung cấp --}}
     @foreach ($supplierList as $item)
         <div class="modal fade" id="suaNhaCungCap{{ $item->id }}" tabindex="-1"
@@ -852,153 +728,29 @@
             </div>
         </div>
 
-        <<<<<<< HEAD {{-- Xóa nhà cung cấp --}} <div class="modal fade" id="xoaNhaCungCap{{ $item->id }}" tabindex="-1"
+        {{-- Xóa nhà cung cấp --}}
+        <div class="modal fade" id="xoaNhaCungCap{{ $item->id }}" tabindex="-1"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title text-danger" id="exampleModalLabel">Xóa nhà cung cấp</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        =======
-                        {{-- Chi tiết nhà cung cấp --}}
-                        <div class="modal fade" id="chiTietNhaCungCap{{ $item->id }}" tabindex="-1"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header text-center">
-                                        <h5 class="modal-title w-100" id="exampleModalLabel">Chi tiết nhà cung cấp</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
+                    </div>
 
-                                    <div class="modal-body">
-                                        <div class="row g-3 mb-3">
-                                            <div class="col-lg-12">
-                                                <h3 class="modal-title">Thông tin chung</h3>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <input name="name" required type="text"
-                                                    placeholder="Tên nhà cung cấp*" class="form-control"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Tên nhà cung cấp*" value="{{ $item->name }}" disabled>
-
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <input name="code" required type="text"
-                                                    placeholder="Mã nhà cung cấp*" class="form-control"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Mã nhà cung cấp*" value="{{ $item->code }}" disabled>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <input name="name" required type="text"
-                                                    placeholder="Lĩnh vực kinh doanh" class="form-control"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Lĩnh vực kinh doanh" value="{{ $item->business_areas }}"
-                                                    disabled>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <input name="name" required type="text" placeholder="Mã số thuế"
-                                                    class="form-control" data-bs-toggle="tooltip"
-                                                    data-bs-placement="bottom" title="Mã số thuế"
-                                                    value="{{ $item->tax_code }}" disabled>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <input name="name" required type="text"
-                                                    placeholder="Người đại diện" class="form-control"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Người đại diện" value="{{ $item->representative }}" disabled>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <input name="name" required type="text" placeholder="Chức danh"
-                                                    class="form-control" data-bs-toggle="tooltip"
-                                                    data-bs-placement="bottom" title="Chức danh"
-                                                    value="{{ $item->job_title }}" disabled>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <input name="name" required type="text" placeholder="Số tài khoản"
-                                                    class="form-control" data-bs-toggle="tooltip"
-                                                    data-bs-placement="bottom" title="Số tài khoản"
-                                                    value="{{ $item->bank_number }}" disabled>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <input name="name" required type="text"
-                                                    placeholder="Mở ngân hàng tại" class="form-control"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Mở ngân hàng tại" value="{{ $item->bank_name }}" disabled>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <input name="name" required type="text" placeholder="Địa chỉ"
-                                                    class="form-control" data-bs-toggle="tooltip"
-                                                    data-bs-placement="bottom" title="Địa chỉ"
-                                                    value="{{ $item->address }}" disabled>
-                                            </div>
-                                        </div>
-
-                                        <div class="row g-3 mb-3">
-                                            <div class="col-lg-12">
-                                                <h3 class="modal-title">Người liên hệ</h3>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <input name="name" required type="text"
-                                                    placeholder="Tên người liên hệ" class="form-control"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Tên người liên hệ" value="{{ $item->contact_name }}" disabled>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <input name="code" required type="text"
-                                                    placeholder="SĐT người liên hệ" class="form-control"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="SĐT người liên hệ" value="{{ $item->contact_phone }}"
-                                                    disabled>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <input name="name" required type="text"
-                                                    placeholder="Email người liên hệ" class="form-control"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Email người liên hệ" value="{{ $item->contact_email }}"
-                                                    disabled>
-                                            </div>
-                                            >>>>>>> 5d4f4615a9e8e1a0a45cd8d82128162d3a523869
-                                        </div>
-                                        <div class="modal-body">
-                                            Bạn có thực sự muốn xoá nhà cung cấp này không?
-                                        </div>
-                                        <<<<<<< HEAD <div class="modal-footer">
-                                            <button type="button" class="btn btn-outline-danger"
-                                                data-bs-dismiss="modal">Hủy</button>
-                                            <form action="{{ route('Supplier.destroy', $item->id) }}" method="POST">
-                                                @csrf
-                                                <button type="submit" class="btn btn-danger">Xóa</button>
-                                            </form>
-                                            =======
-
-                                            <div class="row g-3 mb-3">
-                                                <div class="col-lg-12">
-                                                    <h3 class="modal-title">Trạng thái</h3>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <div data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                        title="Trạng thái">
-                                                        <select name="" class="selectpicker" disabled>
-                                                            @if ($item->status == 1)
-                                                                <option value="1" selected>Đang hợp tác
-                                                                </option>
-                                                                <option value="0">Ngừng hợp tác
-                                                                </option>
-                                                            @else
-                                                                <option value="1">Đang hợp tác
-                                                                </option>
-                                                                <option value="0" selected>Ngừng hợp tác
-                                                                </option>
-                                                            @endif
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                >>>>>>> 5d4f4615a9e8e1a0a45cd8d82128162d3a523869
-                                            </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="modal-body">
+                        Bạn có thực sự muốn xoá nhà cung cấp này không?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
+                        <form action="{{ route('Supplier.destroy', $item->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Xóa</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     @endforeach
     <!-- Modal Thêm mới nhà cung cấp -->
     <div class="modal fade" id="addSupplier" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
