@@ -110,13 +110,32 @@
             width: 100%;
             height: 150px;
         }
-        .
+        .sortline
+        {
+            height: 5px;
+            background-color: #48b9ea;
+        }
+        .on_line
+        {
+            height: 5px;
+            background-color:  #bbe5f7;
+        }
+        .all_line
+        {
+            margin-left: 10%;
+            width: 80%;
+            height: 7px;
+        }
+        .textp5
+        {
+            width: 33%;
+        }
     </style>
 @endsection
     <div id="mainWrap" class="mainWrap mb-0 ms-0 me-0" style="margin-top: 59px;">
         <div class="mainSection">
             <div class="main p-0">
-                <div class="card mb-3 testkh" style="height: 1080px;">    
+                <div class="card mb-3 testkh" style="height: 1200px;">    
                     <div id="half_scr_up" class="row testkh">
                         <div id="part1" class="col-sm-5 testkh1">
                             <div class="row row_title testkh2" style="height: 15%">
@@ -128,9 +147,12 @@
                                 <span class="cards-title-black">NHÂN SỰ</span>
                             </div>
                             <div class="row testkh2" style="height: 30%">
-                                <div class="col-sm-3" style="padding: 1%">
+                                <div class="col-sm-3 text-center" style="padding: 1%">
                                     <div class="col card_borderp1">                                    
                                         <span class="card-title-black text-center">Nhân sự tuyển mới</span>
+                                        <div class="mainSection_chart mt-3">
+                                            <canvas id="admin_NhanSuTuyenMoi"></canvas>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-3" style="padding: 1%">
@@ -403,11 +425,24 @@
                             <div class="row" style="height: 20%">
                                 <div class="card card_borderp1">
                                     <span class="card-title-black">Số công nợ</span>
-                                    <span class="card-subtitle text-center">75%</span>
+                                    <div class="d-flex flex-nowrap" style="margin-top:15px">
+                                        <div class="text-center textp5">Quá hạn: 75</div>
+                                        <div class="text-center textp5">75%</div>
+                                        <div class="text-center textp5">Hiện có: 100</div>
+                                    </div>
+                                    <div class="d-flex flex-nowrap all_line">
+                                        <div class="sortline" style="width:{{ 75 }}%;"></div>
+                                        <div class="on_line" style="width:{{ 100-75 }}%;"></div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row" style="height: 30%">
-                                đặt hàng
+                            <div class="row" style="height: 30%; margin-top:10px">
+                                <div class="card_borderp1">
+                                    <span class="card-title-black text-center">Số khách đặt hàng</span>
+                                    <div class="mainSection_chart mt-3">
+                                        <canvas id="admin_SoKhachDatHang"></canvas>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div id="part6" class="col-sm-3 testkh1">
@@ -486,7 +521,7 @@
                                                 <div class="card text-center card_on">
                                                     <span class="card-title cardname" data-bs-toggle="tooltip" 
                                                         data-bs-placement="top" title="Không phát sinh giao dịch trong 3 ngày">
-                                                        Không hoàn thành
+                                                        Không phát sinh
                                                     </span>
                                                     <strong class="card-body cardvalue">50</strong>
                                                 </div>
@@ -524,13 +559,20 @@
                                         <div class="card">
                                             <span class="card-title-black">Số ca đào tạo tháng này</span>
                                             <span class="card-subtitle">75%</span>
-                                            <span></span>
+                                            <div class="d-flex flex-nowrap all_line">
+                                                <div class="sortline" style="width:{{ 75 }}%;"></div>
+                                                <div class="on_line" style="width:{{ 100-75 }}%;"></div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row card_part6" style="height: 50%">
                                         <div class="card">
                                             <span class="card-title-black">Số ca activation tháng này</span>
                                             <span class="card-subtitle">75%</span>
+                                            <div class="d-flex flex-nowrap all_line">
+                                                <div class="sortline" style="width:{{ 75 }}%;"></div>
+                                                <div class="on_line" style="width:{{ 100-75 }}%;"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -539,12 +581,20 @@
                                         <div class="card">
                                             <span class="card-title-black">Số biên bản tháng này</span>
                                             <span class="card-subtitle">75%</span>
+                                            <div class="d-flex flex-nowrap all_line">
+                                                <div class="sortline" style="width:{{ 75 }}%;"></div>
+                                                <div class="on_line" style="width:{{ 100-75 }}%;"></div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row card_part6" style="height: 50%">
                                         <div class="card">
                                             <span class="card-title-black">Số khách hàng đã trưng bày</span>
                                             <span class="card-subtitle">75%</span>
+                                            <div class="d-flex flex-nowrap all_line">
+                                                <div class="sortline" style="width:{{ 75 }}%;"></div>
+                                                <div class="on_line" style="width:{{ 100-75 }}%;"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -598,6 +648,8 @@
     <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_D_DoanhSoTheoDiaBan.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_DoanhSoSKU.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_TyTrongSanLuong.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_SoKhachDatHang.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_NhanSuTuyenMoi.js') }}"></script>
     
  
    
