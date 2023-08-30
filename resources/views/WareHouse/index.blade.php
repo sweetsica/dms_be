@@ -51,7 +51,7 @@
                                                 <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
                                                     data-bs-placement="top" title="Lọc">
                                                     <button class="btn btn-outline-danger" data-bs-toggle="modal"
-                                                        data-bs-target="#filterOptions">
+                                                        data-bs-target="#filterOptions" style="padding: 7px 15px;">
                                                         <i class="bi bi-funnel"></i>
                                                     </button>
                                                 </div>

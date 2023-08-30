@@ -30,14 +30,20 @@
     }
 
     .style_select button.btn.dropdown-toggle.btn-light {
-        background-color: transparent;
-        border: none;
-        box-shadow: none;
-        outline: none;
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        outline: none !important;
     }
 
     .style_select .dropdown-toggle::after {
-        display: none;
+        display: none !important;
+    }
+
+    .style_select:focus {
+        outline: none !important;
+        border: none !important;
+        box-shadow: none !important;
     }
 
     .layout_grid {
@@ -374,67 +380,79 @@
                                         <div class="col-lg-6 mb-3">
                                             <div class="layout_grid">
                                                 <span class="fs-5 fw-bold">Tổng tiền hàng :</span>
-                                                <span class="fs-5">120.000.000</span>
+                                                <input class="form-control style_select bg-transparent" id="sumTongTien"
+                                                    disabled>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mb-3">
                                             <div class="layout_grid">
                                                 <span class="fs-5 fw-bold">Số tiền còn lại :</span>
-                                                <span class="fs-5">0</span>
+                                                <input class="form-control style_select bg-transparent" id="tienConLai"
+                                                    disabled placeholder="Số tiền còn lại">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mb-3">
                                             <div class="layout_grid">
                                                 <span class="fs-5 fw-bold">Tổng tiền chiết khấu :</span>
-                                                <span class="fs-5" style="text-decoration: underline">2.600.000</span>
+                                                <input class="form-control style_select bg-transparent" id="sumTienCk"
+                                                    disabled>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mb-3">
                                             <div class="layout_grid">
                                                 <span class="fs-5 fw-bold">Hạn mức công nợ :</span>
-                                                <span class="fs-5">0</span>
+                                                <input class="form-control style_select bg-transparent" id="hanMucCongNo"
+                                                    placeholder="Hạn mức công nợ">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mb-3">
                                             <div class="layout_grid">
                                                 <span class="fs-5 fw-bold">Tổng tiền trước thuế :</span>
-                                                <span class="fs-5">117.400.000</span>
+                                                <input class="form-control style_select bg-transparent"
+                                                    id="sumTienTruocThue" disabled>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mb-3">
                                             <div class="layout_grid">
                                                 <span class="fs-5 fw-bold">Dư nợ hiện tại :</span>
-                                                <span class="fs-5">0</span>
+                                                <input class="form-control style_select bg-transparent" id="duNoHienTai"
+                                                    placeholder="Dư nợ hiện tại">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mb-3">
                                             <div class="layout_grid">
-                                                <span class="fs-5 fw-bold">Tổng tiền thuế :</span>
-                                                <span class="fs-5">11.740.000</span>
+                                                <span class="fs-5 fw-bold">Tổng tiền thuế (8%) :</span>
+                                                <input class="form-control style_select bg-transparent" id="sumTienThue"
+                                                    disabled>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mb-3">
                                             <div class="layout_grid">
                                                 <span class="fs-5 fw-bold">Hạn thanh toán :</span>
-                                                <span class="fs-5">15/08/2023</span>
+                                                <input type="date" class="form-control style_select bg-transparent"
+                                                    id="hanThanhToan" placeholder="Hạn thanh toán" value="0">
                                             </div>
                                         </div>
                                         <div class="col-lg-12 mb-3">
                                             <div class="layout_grid">
                                                 <span class="fs-5 fw-bold text_default">Phải thanh toán :</span>
-                                                <span class="fs-5" style="text-decoration: underline">129.140.000</span>
+                                                <input class="form-control style_select bg-transparent" id="sumThanhToan"
+                                                    disabled>
                                             </div>
                                         </div>
                                         <div class="col-lg-12 mb-3">
                                             <div class="layout_grid">
                                                 <span class="fs-5 fw-bold text-success">Thanh toán trước :</span>
-                                                <span class="fs-5 text-success">120.000.000</span>
+                                                <input class="form-control style_select bg-transparent"
+                                                    id="thanhToanTruoc"
+                                                    placeholder="Vui lòng nhập số tiền thanh toán trước" />
                                             </div>
                                         </div>
                                         <div class="col-lg-12 mb-3">
                                             <div class="layout_grid">
                                                 <span class="fs-5 fw-bold text-success">Số tiền bằng chữ :</span>
-                                                <span class="fs-5 text-success">Một trăm hai mươi chín triệu chẵn</span>
+                                                <input class="form-control style_select bg-transparent" id="tienBangChu"
+                                                    placeholder="Vui lòng nhập số tiền bằng chữ" />
                                             </div>
                                         </div>
                                     </div>
@@ -486,6 +504,8 @@
         let countId = 0;
         let countRow = 1;
 
+        const rows = [];
+
         document.addEventListener("DOMContentLoaded", function() {
             const newRow = createRow(countId, countRow);
             tableBody.insertBefore(newRow, addRowButton.parentNode.parentNode);
@@ -496,9 +516,11 @@
                     newRow.remove();
                 });
             });
+            rows.push(newRow);
+            handleNewRow(0);
+            updateTotal();
             countId++;
             countRow++;
-            handleNewRow(0);
         });
 
         function createRow(countId, countRow) {
@@ -534,7 +556,7 @@
                                                             <td class="text-center text-nowrap">
                                                                 <input class="form-control style_select bg-transparent"
                                                                     type="text" disabled id="sltk_${countId}" name=""
-                                                                    placeholder="Số lượng tồn kho">
+                                                                    placeholder="Tồn kho">
                                                             </td>
                                                             <td class="text-center text-nowrap">
                                                                 <input class="form-control style_select bg-transparent"
@@ -579,11 +601,18 @@
             const deleteIcons = newRow.querySelectorAll("#remove-item");
             deleteIcons.forEach(deleteIcon => {
                 deleteIcon.addEventListener("click", function() {
+                    const rowIndex = rows.indexOf(newRow);
+                    if (rowIndex !== -1) {
+                        rows.splice(rowIndex, 1);
+                    }
                     newRow.remove();
+                    updateTotal();
                 });
             });
 
+            rows.push(newRow);
             handleNewRow(countId);
+            updateTotal();
             countId++;
             countRow++;
         });
@@ -625,8 +654,9 @@
 
                     const indexOfSlash = selectedItem.tonkho.indexOf("/");
                     const numberBeforeSlash = Number(selectedItem.tonkho.slice(0, indexOfSlash));
-                    thanhTienInput.value = selectedItem.donGia * numberBeforeSlash;
 
+                    thanhTienInput.value = selectedItem.donGia * numberBeforeSlash;
+                    updateTotal();
                 } else {
                     nameKho.value = "";
                     sltkInput.value = "";
@@ -637,10 +667,109 @@
         }
 
         function handleNewRow(countId) {
-            console.log('countId', countId);
             handleProductSelection(countId);
             handleKhoSelection(countId);
+
+            const thanhTienInput = document.getElementById(`thanhTien_${countId}`);
+            const tyLeCkInput = document.getElementById(`tyLeCK_${countId}`);
+            const ckInput = document.getElementById(`ck_${countId}`);
+
+            thanhTienInput.addEventListener("input", function() {
+                calculateDiscount(countId);
+                updateTotal();
+            });
+
+            tyLeCkInput.addEventListener("input", function() {
+                calculateDiscount(countId);
+                updateTotal();
+            });
+
+            function calculateDiscount(countId) {
+                const thanhTienValue = parseFloat(thanhTienInput.value);
+                const tyLeCkValue = parseFloat(tyLeCkInput.value);
+
+                if (!isNaN(thanhTienValue) && !isNaN(tyLeCkValue)) {
+                    const discount = (thanhTienValue * tyLeCkValue) / 100;
+                    ckInput.value = discount;
+                }
+            }
+
+
+        }
+
+        function calculateTotal() {
+            let total = 0;
+            let totalCk = 0;
+            rows.forEach(row => {
+                const thanhTienInput = row.querySelector("input[id^='thanhTien_']");
+                const ckInput = row.querySelector("input[id^='ck_']");
+                const thanhTienValue = parseFloat(thanhTienInput.value);
+                const ckValue = parseFloat(ckInput.value);
+
+                if (!isNaN(thanhTienValue)) {
+                    total += thanhTienValue;
+                }
+
+                if (!isNaN(ckValue)) {
+                    totalCk += ckValue;
+                }
+            });
+
+
+            return total;
+        }
+
+        function calculateTotalCk() {
+            let totalCk = 0;
+            rows.forEach(row => {
+                const ckInput = row.querySelector("input[id^='ck_']");
+                const ckValue = parseFloat(ckInput.value);
+
+                if (!isNaN(ckValue)) {
+                    totalCk += ckValue;
+                }
+            });
+
+            return totalCk;
+        }
+
+        function updateTotal() {
+            const total = calculateTotal();
+            const totalCk = calculateTotalCk();
+
+            const totalDisplay = document.getElementById("sumTongTien");
+            const totalCkDisplay = document.getElementById("sumTienCk");
+            totalDisplay.value = total;
+            totalCkDisplay.value = totalCk;
+
+            const totalTienHang = parseFloat(totalDisplay.value) || 0;
+            const totalCKValue = parseFloat(totalCkDisplay.value) || 0;
+
+            const totalTruocThueInput = document.getElementById("sumTienTruocThue");
+            if (!isNaN(totalTienHang) && !isNaN(totalCKValue)) {
+                totalTruocThueInput.value = totalTienHang - totalCKValue;
+            } else {
+                totalTruocThueInput.value = "";
+            }
+
+            const totalTruocThue = parseFloat(totalTruocThueInput.value) || 0;
+            const tienThueInput = document.getElementById("sumTienThue");
+            tienThueInput.value = totalTruocThue * 0.08;
+
+            const tienThue = parseFloat(tienThueInput.value) || 0;
+            const totalThanhToanInput = document.getElementById("sumThanhToan");
+            totalThanhToanInput.value = totalTruocThue + tienThue;
+
+            const tienThanhToanTruocInput = document.getElementById("thanhToanTruoc");
+
+
+            tienThanhToanTruocInput.addEventListener('input', function() {
+                const tienConLaiInput = document.getElementById("tienConLai");
+                const tienThanhToanTruoc = parseFloat(tienThanhToanTruocInput.value);
+                const tienConLai = totalThanhToanInput.value - tienThanhToanTruoc;
+                tienConLaiInput.value = tienConLai >= 0 ? tienConLai : tienConLaiInput.value = 0;
+            })
+
         }
     </script>
-
 @endsection
