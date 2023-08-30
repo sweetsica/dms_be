@@ -72,10 +72,14 @@
                                                                         type="checkbox" id="select-all"></th>
                                                                 <th class="text-nowrap text-center" style="width:2%">STT
                                                                 </th>
-                                                                <th class="text-nowrap" style="width:10%">Mã thông số</th>
-                                                                <th class="text-nowrap" style="width:10%">Tên thông số</th>
-                                                                <th class="text-nowrap" style="width:10%">Nhóm thông số</th>
-                                                                <th class="text-nowrap" style="width:20%">Mô tả</th>
+                                                                <th class="text-nowrap text-center" style="width:10%">Mã
+                                                                    thông số</th>
+                                                                <th class="text-nowrap text-center" style="width:10%">Tên
+                                                                    thông số</th>
+                                                                <th class="text-nowrap text-center" style="width:10%">Nhóm
+                                                                    thông số</th>
+                                                                <th class="text-nowrap text-center" style="width:20%">Mô tả
+                                                                </th>
                                                                 <th class="text-center" style="width:2%"><span>Thao
                                                                         tác</span>
                                                                 </th>
@@ -286,9 +290,12 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
-                                <button id="loadingBtn" style="display: none;" class="btn btn-danger" type="button" disabled>
-                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                <button type="button" class="btn btn-outline-danger me-3"
+                                    data-bs-dismiss="modal">Hủy</button>
+                                <button id="loadingBtn" style="display: none;" class="btn btn-danger" type="button"
+                                    disabled>
+                                    <span class="spinner-border spinner-border-sm" role="status"
+                                        aria-hidden="true"></span>
                                     Loading...
                                 </button>
                                 <button id="submitBtn" type="submit" class="btn btn-danger">Tạo</button>

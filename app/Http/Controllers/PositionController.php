@@ -18,7 +18,6 @@ class PositionController extends Controller
         $cap_nhan_su = $request->get('cap_nhan_su');
         $dv_cong_tac = $request->get('dv_cong_tac');
         $query = Position::query();
-        // $positionList = Position::s
         $query->join('department','department.id','=','position.department_id')
         ->join('personnel_level','personnel_level.id','=','position.personnel_level')
 
@@ -30,7 +29,7 @@ class PositionController extends Controller
             'position.parent',
 
             'position.wage',
-            // 'position.created_at',
+            'position.created_at',
             'position.pack',
             'position.department_id',
             'position.personnel_level',
@@ -57,10 +56,11 @@ class PositionController extends Controller
             $query->where("personnel_level.name", "like", "%$cap_nhan_su%");
         }
 
-        $positionList =$query->orderBy('position.id', 'desc')->paginate(2);
+        $positionList =$query->orderBy('position.id', 'desc')->paginate(10);
         // dd($positionList);
         $UnitLeaderList = UnitLeader::all();
         $positionListTree = Position::where('parent',0)->with('donViCon')->get();
+        $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
         $positionlists = $this->getPosition();
         $departmentlists = $this->getDepartment();
         $personnelLevelList = PersonnelLevel::all();
@@ -75,7 +75,7 @@ class PositionController extends Controller
             'UnitLeaderList' => $UnitLeaderList,
             'dv_cong_tac' => $dv_cong_tac,
             'cap_nhan_su' => $cap_nhan_su,
-
+            "departmentListTree" => $departmentListTree,
             "positionListTree"=>$positionListTree
         ]);
     }

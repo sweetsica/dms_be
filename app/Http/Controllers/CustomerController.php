@@ -552,7 +552,7 @@ class CustomerController extends Controller
         $data->chanelId = $chanelId;
         $data->routeId = $routeId;
         $data->status = $status;
-        $data->save();
+
         Session::flash('success', 'Sửa thành công');
         $existingFileName = json_decode($data->fileName, true) ?? [];
         $existingFilePath = json_decode($data->filePath, true) ?? [];
@@ -574,8 +574,11 @@ class CustomerController extends Controller
             $image->move(public_path('uploads'), $imageName);
             $data->image = 'uploads/' . $imageName;
         }
+        // dd($data);
+        $data->save();
         $listData = Customer::all();
-        return redirect()->route('customers', compact('listData'));
+        // return redirect()->route('customers', compact('listData'));
+        return redirect()->back();
     }
 
     public function findById($id)

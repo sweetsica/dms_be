@@ -73,11 +73,14 @@
                                                                         type="checkbox" id="select-all"></th>
                                                                 <th class="text-nowrap text-center" style="width:2%">STT
                                                                 </th>
-                                                                <th class="text-nowrap" style="width:10%">Mã nhóm thông số
+                                                                <th class="text-nowrap text-center" style="width:10%">Mã
+                                                                    nhóm thông số
                                                                 </th>
-                                                                <th class="text-nowrap" style="width:10%">Tên nhóm thông số
+                                                                <th class="text-nowrap text-center" style="width:10%">Tên
+                                                                    nhóm thông số
                                                                 </th>
-                                                                <th class="text-nowrap" style="width:20%">Mô tả</th>
+                                                                <th class="text-nowrap text-center" style="width:20%">Mô tả
+                                                                </th>
                                                                 <th class="text-center" style="width:2%"><span>Thao
                                                                         tác</span>
                                                                 </th>
@@ -118,7 +121,7 @@
                                                                     </td>
                                                                     <td>
                                                                         <div
-                                                                            class="table_actions d-flex justify-content-end">
+                                                                            class="table_actions d-flex justify-content-end text-center">
 
                                                                             <div data-bs-toggle="tooltip"
                                                                                 data-bs-placement="top" title="Sửa">
@@ -256,9 +259,12 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
-                                <button id="loadingBtn" style="display: none;" class="btn btn-danger" type="button" disabled>
-                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                <button type="button" class="btn btn-outline-danger me-3"
+                                    data-bs-dismiss="modal">Hủy</button>
+                                <button id="loadingBtn" style="display: none;" class="btn btn-danger" type="button"
+                                    disabled>
+                                    <span class="spinner-border spinner-border-sm" role="status"
+                                        aria-hidden="true"></span>
                                     Loading...
                                 </button>
                                 <button id="submitBtn" type="submit" class="btn btn-danger">Tạo</button>
