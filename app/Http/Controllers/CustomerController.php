@@ -118,7 +118,7 @@ class CustomerController extends Controller
                 if (preg_match($pattern, $q)) {
                     Session::flash('error', 'Lỗi đầu vào khi search');
                     return back();
-                }                
+                }
                 $listData = $listData->where('code', 'like', '%' . $q . '%')
                     ->orWhere('name', 'like', '%' . $q . '%')
                     ->orWhere('phone', 'like', '%' . $q . '%')
@@ -231,7 +231,6 @@ class CustomerController extends Controller
         $group = $request->get('group');
         $chanelId = $request->get('chanelId');
         $routeId = $request->get('routeId');
-        $status = $request->get('status');
         $uploadedFiles = $request->file('attachment');
         $avatar = $request->file('avatar');
         $data = new Customer();
@@ -259,7 +258,7 @@ class CustomerController extends Controller
         $data->group = $group;
         $data->chanelId = $chanelId;
         $data->routeId = $routeId;
-        $data->status = $status;
+        $data->status = "Trinh sát";
         $existingFileName = json_decode($data->fileName, true) ?? [];
         $existingFilePath = json_decode($data->filePath, true) ?? [];
         if ($uploadedFiles) {
@@ -482,7 +481,7 @@ class CustomerController extends Controller
             $images = $request->file('image');
             $imageName = time() . '.' . $images->getClientOriginalExtension();
             $image->move(public_path('uploads'), $imageName);
-            $data->image =  'uploads/' . $imageName;
+            $data->image = 'uploads/' . $imageName;
         }
 
         $data->save();
@@ -568,12 +567,12 @@ class CustomerController extends Controller
         }
         $data->fileName = json_encode($existingFileName);
         $data->filePath = json_encode($existingFilePath);
-        
+
         if ($request->hasFile('image')) {
             $images = $request->file('image');
             $imageName = time() . '.' . $images->getClientOriginalExtension();
             $image->move(public_path('uploads'), $imageName);
-            $data->image =  'uploads/' . $imageName;
+            $data->image = 'uploads/' . $imageName;
         }
         $listData = Customer::all();
         return redirect()->route('customers', compact('listData'));
