@@ -48,7 +48,7 @@
     }
 </style>
 @section('content')
-    {{-- @include('template.sidebar.sidebarDepartment.sidebarLeft') --}}
+    @include('template.sidebar.sidebarMaster.sidebarLeft')
     <div id="mainWrap" class="mainWrap">
         <div class="mainSection">
             <div class="main">
