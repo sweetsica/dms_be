@@ -13,6 +13,25 @@ use Illuminate\Support\Facades\Session;
 class PositionController extends Controller
 {
 
+    public function pagination($list)
+    {
+        return [
+            'current_page' => $list->currentPage(),
+            'data' => $list->items(),
+            'first_page_url' => $list->url(1),
+            'from' => $list->firstItem(),
+            'last_page' => $list->lastPage(),
+            'last_page_url' => $list->url($list->lastPage()),
+            'links' => $list->toArray()['links'],
+            'next_page_url' => $list->nextPageUrl(),
+            'path' => $list->url(1),
+            'per_page' => $list->perPage(),
+            'prev_page_url' => $list->previousPageUrl(),
+            'to' => $list->lastItem(),
+            'total' => $list->total(),
+        ];
+    }
+
     public function index(Request $request){
         $search = $request->get('search');
         $cap_nhan_su = $request->get('cap_nhan_su');
@@ -42,7 +61,7 @@ class PositionController extends Controller
                 if (preg_match($pattern, $search)) {
                     Session::flash('error', 'Lỗi đầu vào khi search');
                     return back();
-                }        
+                }
         if($search != NULL) {
             $query->where("position.name", "like", "%$search%");
         }
@@ -65,7 +84,7 @@ class PositionController extends Controller
         $departmentlists = $this->getDepartment();
         $personnelLevelList = PersonnelLevel::all();
 
-
+        $pagination = $this->pagination($positionList);
         return view("Position.index",[
             "positionList"=>$positionList,
             "positionlists"=>$positionlists,
@@ -76,6 +95,7 @@ class PositionController extends Controller
             'dv_cong_tac' => $dv_cong_tac,
             'cap_nhan_su' => $cap_nhan_su,
             "departmentListTree" => $departmentListTree,
+            "pagination" => $pagination,
             "positionListTree"=>$positionListTree
         ]);
     }
@@ -184,7 +204,7 @@ class PositionController extends Controller
         $position = Position::findOrFail($id);
         $position->department_id = null;
         $position->save();
-        
+
         // Session::flash('success', 'Đã xoá khỏi phòng ban này');
 
         Session::flash('success', 'Xoá thành công khỏi phòng ban này');
