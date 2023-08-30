@@ -1541,7 +1541,7 @@
                             <div class="card mb-3">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <div class="card-title">PieChart</div>
+                                        <div class="card-title">PieChart123</div>
                                     </div>
                                     <div class="mainSection_chart-container">
                                         <canvas id="pieChart"></canvas>
