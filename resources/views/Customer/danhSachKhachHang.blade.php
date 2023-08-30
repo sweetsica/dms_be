@@ -380,7 +380,7 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Lọc dữ liệu</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="">
+                <form method="GET" action="">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
