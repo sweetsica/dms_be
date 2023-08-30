@@ -1263,7 +1263,7 @@ foreach ($listPosToDept as $item){
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="reset" class="btn btn-outline-danger">Hủy</button>
+                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy
                             <button type="submit" class="btn btn-danger">Lưu</button>
                         </div>
                 </form>

@@ -79,7 +79,8 @@ class PurchaseOrderController extends Controller
      */
     public function show(string $id)
     {
-        //
+
+        return view('PuchaseOrder.chiTietDonHang');
     }
 
     /**
