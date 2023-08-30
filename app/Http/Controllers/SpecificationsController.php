@@ -10,6 +10,25 @@ use Illuminate\Support\Facades\Session;
 class SpecificationsController extends Controller
 {
 
+    public function pagination($list)
+    {
+        return [
+            'current_page' => $list->currentPage(),
+            'data' => $list->items(),
+            'first_page_url' => $list->url(1),
+            'from' => $list->firstItem(),
+            'last_page' => $list->lastPage(),
+            'last_page_url' => $list->url($list->lastPage()),
+            'links' => $list->toArray()['links'],
+            'next_page_url' => $list->nextPageUrl(),
+            'path' => $list->url(1),
+            'per_page' => $list->perPage(),
+            'prev_page_url' => $list->previousPageUrl(),
+            'to' => $list->lastItem(),
+            'total' => $list->total(),
+        ];
+    }
+
     public function index(Request $request)
     {
         $search = $request->get('search');
@@ -26,10 +45,12 @@ class SpecificationsController extends Controller
         ->orWhere("specifications.name", "like", "%$search%")
         ->orderBy('specifications.id', 'desc')->paginate(10);
         $TechnicalSpecificationsGroupList = TechnicalSpecificationsGroup::all();
+        $pagination = $this->pagination($SpecificationsList);
         return view('thong_so_ky_thuat.index', [
             'search' => $search,
             'SpecificationsList'=>$SpecificationsList,
             'TechnicalSpecificationsGroupList'=>$TechnicalSpecificationsGroupList,
+            'pagination'=>$pagination,
         ]);
     }
 
