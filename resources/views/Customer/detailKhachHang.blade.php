@@ -56,23 +56,23 @@
                                                         <img class="img-slider" src="{{ asset($customer->image) }}" />
                                                     </div>
                                                     <!-- <div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <img class="img-slider" src="{{ asset('assets/img/oto-2.png') }}" />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <img class="img-slider" src="{{ asset('assets/img/oto-3.png') }}" />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <img class="img-slider" src="{{ asset('assets/img/oto-4.png') }}" />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <img class="img-slider" src="{{ asset('assets/img/oto-2.png') }}" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <img class="img-slider" src="{{ asset('assets/img/oto-3.png') }}" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <img class="img-slider" src="{{ asset('assets/img/oto-4.png') }}" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div> -->
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-12">
                                                 <div class="slider slider-nav">
                                                     <!-- <div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <img src="{{ asset('assets/img/avatardefault.jpg') }}"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            class="img-slider_nav" />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <img src="{{ asset('assets/img/avatardefault.jpg') }}"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        class="img-slider_nav" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div> -->
                                                 </div>
                                             </div>
 
@@ -158,7 +158,7 @@
                                             <div class="mt-4">
                                                 <div class="input-group align-items-center">
                                                     <!-- <input type="file" class="form-control" id="attachment"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        name="attachment" style="display: none"> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    name="attachment" style="display: none"> -->
                                                     <i class="bi bi-link-45deg text-color_pimary fs-3 fw-bold"></i>
                                                     {{-- <label class="input-label text-color_pimary fs-4 fw-bold ms-2"
                                                         for="attachment" style="cursor: pointer">File đính kèm</label> --}}
@@ -183,7 +183,7 @@
                                 </div>
                             </div>
 
-                            <div class="viewport mt-5">
+                            <div class="viewport mt-5" style="height: 100rem">
                                 <div class="container">
                                     <ul class="tabs">
                                         <li class="label-item">
@@ -619,7 +619,7 @@
 
                             <div class="col-md-12 mb-3">
                                 <div class="table-responsive">
-                                    <table id="contact" class="table table-responsive table-hover table-bordered">
+                                    <table id="contact_edit" class="table table-responsive table-hover table-bordered">
                                         <thead>
                                             <tr>
                                                 <th class="text-nowrap text-center" style="">STT</th>
@@ -628,29 +628,30 @@
                                                 <th class="text-nowrap text-center" style="">Email</th>
                                                 <th class="text-nowrap text-center" style="">Chức danh</th>
                                                 <th class="text-nowrap text-center">
-                                                    <i class="bi bi-plus fs-3" id="addRowIcon"
+                                                    <i class="bi bi-plus fs-3" id="addRowIcon_edit"
                                                         style="color: var(--primary-color); cursor: pointer;"></i>
 
                                                 </th>
                                             </tr>
                                         </thead>
+                                        <?php $countRow = 1; ?>
                                         <tbody>
                                             @if (!empty($customer->contact))
                                                 @foreach ($combinedData as $data)
                                                     <tr>
-                                                        <td class="text-nowrap text-center" style="">
-                                                            {{ $a++ }}</td>
-                                                        <td class="text-nowrap text-center" style="">
+                                                        <td class="text-nowrap text-center" id="stt">
+                                                            {{ $countRow++ }}</td>
+                                                        <td class="text-nowrap text-center">
                                                             {{ $data->key1 }}</td>
-                                                        <td class="text-nowrap text-center" style="">
+                                                        <td class="text-nowrap text-center">
                                                             {{ $data->key2 }}</td>
-                                                        <td class="text-nowrap text-center" style="">
+                                                        <td class="text-nowrap text-center">
                                                             {{ $data->key3 }}</td>
-                                                        <td class="text-nowrap text-center" style="">
+                                                        <td class="text-nowrap text-center">
                                                             {{ $data->key4 }}</td>
                                                         <td></td>
+                                                    </tr>
                                                 @endforeach
-                                                </tr>
                                             @endif
                                         </tbody>
                                     </table>
@@ -1473,6 +1474,51 @@
             document.querySelector(".label").innerHTML =
                 `or <span class="browse-files"> <input type="file" class="default-file-input"/> <span class="browse-files-text">browse file</span> <span>from device</span> </span>`;
             uploadButton.innerHTML = `Upload`;
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tbody = document.querySelector('#contact_edit tbody');
+
+            let specCount = 0;
+            let rowCount = 1;
+            let countRow = tbody.querySelectorAll('#stt');
+            for (var i = 0; i < countRow.length; i++) {
+                rowCount++;
+            }
+
+            const addRow = () => {
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+            <td class="text-center">${rowCount}</td>
+            <td><input type="text" class="form-control" name="contact[${specCount}][key1]"></td>
+            <td><input type="text" class="form-control" name="contact[${specCount}][key2]"></td>
+            <td><input type="text" class="form-control" name="contact[${specCount}][key3]"></td>
+            <td><input type="text" class="form-control" name="contact[${specCount}][key4]"></td>
+            <td class="text-center">
+                <i class="bi bi-trash deleteRow_edit fs-3"
+                style="color: var(--primary-color); cursor: pointer;" ></i>
+            </td>
+        `;
+                tbody.appendChild(newRow);
+                rowCount++;
+                specCount++;
+
+                // Xử lý sự kiện xóa hàng
+                const deleteButtons = document.querySelectorAll('.deleteRow_edit');
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        this.closest('tr').remove();
+                    });
+                });
+            };
+
+
+            const addRowIcon = document.getElementById('addRowIcon_edit');
+            addRowIcon.addEventListener('click', function() {
+                addRow();
+            })
         });
     </script>
 @endsection

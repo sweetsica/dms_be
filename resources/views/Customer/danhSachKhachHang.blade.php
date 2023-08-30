@@ -394,7 +394,7 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Lọc dữ liệu</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="{{ route('create-customer') }}">
+                <form method="POST" action="">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -404,7 +404,7 @@
                                     <select id="select-status" class="selectpicker select_filter"
                                         data-dropup-auto="false" title="Lọc theo nhóm khách hàng" name='nhomKH'>
                                         @foreach ($listgroup as $item)
-                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -415,7 +415,7 @@
                                     <select id="select-status" class="selectpicker select_filter"
                                         data-dropup-auto="false" title="Lọc theo kênh khách hàng" name='kenhKH'>
                                         @foreach ($listChannel as $item)
-                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -426,7 +426,7 @@
                                     <select id="select-status" class="selectpicker select_filter"
                                         data-dropup-auto="false" title="Lọc theo tuyến khách hàng" name='tuyenKH'>
                                         @foreach ($listRoute as $item)
-                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -437,8 +437,32 @@
                                     <select id="select-status" class="selectpicker select_filter"
                                         data-dropup-auto="false" title="Lọc theo nhân sự thu thập" name='nhansutt'>
                                         @foreach ($listPersons as $item)
-                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
                                         @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-original-title="Lọc theo tỉnh">
+                                    <select id="city" class="selectpicker"
+                                        data-dropup-auto="false" title="Lọc theo tỉnh" name='cityFilter'>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-original-title="Lọc theo quận">
+                                    <select id="district" class="selectpicker select_filter"
+                                        data-dropup-auto="false" title="Lọc theo nhân quận" name='districtFilter'>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-original-title="Lọc theo xã">
+                                    <select id="guide" class="selectpicker select_filter"
+                                        data-dropup-auto="false" title="Lọc theo xã" name='guideFilter'>
                                     </select>
                                 </div>
                             </div>
@@ -485,14 +509,14 @@
                             <div class="col-lg-6 mb-3">
                                 <input type="text" name="name" data-bs-toggle="tooltip" id="nameInput"
                                     data-bs-placement="top" title="Tên khách hàng" placeholder="Tên khách hàng*"
-                                    class="form-control mb-1">
+                                    class="form-control mb-1" required>
 
                             </div>
 
                             <div class="col-lg-6 mb-3">
                                 <input type="text" name="phone" data-bs-toggle="tooltip" required id="phoneInput"
                                     data-bs-placement="top" title="Số điện thoại" placeholder="Số điện thoại*"
-                                    class="form-control mb-1">
+                                    class="form-control mb-1" required>
                             </div>
                             <div class="col-lg-6 mb-3">
                                 <input type="text" name="email" data-bs-toggle="tooltip" id="emailInput"
@@ -500,7 +524,8 @@
                             </div>
                             <div class="col-lg-6 mb-3">
                                 <input type="text" name="address" data-bs-toggle="tooltip" id="addressInputGeneral"
-                                    data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ*" class="form-control">
+                                    data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ*" class="form-control"
+                                    required>
                             </div>
 
                             <div class="col-lg-12 mb-3">

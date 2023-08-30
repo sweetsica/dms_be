@@ -60,7 +60,7 @@ class ProductController extends Controller
                 if (preg_match($pattern, $q)) {
                     Session::flash('error', 'Lỗi đầu vào khi search');
                     return back();
-                }               
+                }
                 $listProduct = $listProduct->where('code', 'like', '%' . $q . '%')
                     ->orWhere('name', 'like', '%' . $q . '%');
             }
@@ -145,7 +145,7 @@ class ProductController extends Controller
             $details->description = $request->description;
         }
 
-        if ($request->price == null) {
+        if ($request->price == null && $request->price == '0') {
             $details->price = 0;
         }
         if ($request->price) {

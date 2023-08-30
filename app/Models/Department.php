@@ -32,7 +32,7 @@ class Department extends Model
 
     public function donViCon()
     {
-        return $this->hasMany(Department::class, 'parent');
+        return $this->hasMany(Department::class, 'parent')->orderBy('order');
     }
 
     public function khuVucs()
