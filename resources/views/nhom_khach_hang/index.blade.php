@@ -4,6 +4,34 @@
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 @endsection
+@php
+
+    function getPaginationLink($link, $pageName)
+    {
+        if (!isset($link['url'])) {
+            return '#';
+        }
+
+        $pageNumber = explode('?page=', $link['url'])[1];
+
+        $queryString = request()->query();
+
+        $queryString[$pageName] = $pageNumber;
+        return route('department.index', $queryString);
+    }
+
+    // function isFiltering($filterNames)
+    // {
+    //     $filters = request()->query();
+    //     foreach ($filterNames as $filterName) {
+    //         if (isset($filters[$filterName]) && $filters[$filterName] != '') {
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
+
+@endphp
 
 @section('content')
     @include('template.sidebar.sidebarPosition.sidebarLeft')
@@ -262,7 +290,7 @@
                                 Loading...
                             </button>
                             <button id="submitBtn" type="submit" class="btn btn-danger">Tạo</button>
-                        </div>  
+                        </div>
                 </form>
             </div>
         </div>
