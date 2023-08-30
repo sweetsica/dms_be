@@ -611,13 +611,13 @@
                             <div class="row testkh2" style="height: 45%">
                                 <div class="card_borderp1" style="padding: 2%">
                                     Đơn hàng hôm nay
-                                    <img style="width:95%; height: 95%" src="{{ asset('assets/img/admin_map.png') }}" />
+                                    <img style="width:90%; height: 90%" src="{{ asset('assets/img/admin_map.png') }}" />
                                 </div>
                             </div>
                             <div class="row testkh2" style="height: 45%; margin-top:10px">
                                 <div class="card_borderp1" style="padding: 2%">
                                     Vị trí hôm nay
-                                    <img style="width:95%; height: 95%" src="{{ asset('assets/img/admin_map.png') }}" />
+                                    <img style="width:90%; height: 90%" src="{{ asset('assets/img/admin_map.png') }}" />
                                 </div>
                             </div>
                         </div>
