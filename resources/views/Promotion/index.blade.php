@@ -437,13 +437,13 @@
 
                                                         </td>
                                                         <td>
-                                                            {{-- <input type="text" class="form-control" name="promotion_details[{{$n++}}][key3]" value="{{$data->key3}}"> --}}
+                                                            <input type="text" class="form-control" name="promotion_details[{{$n++}}][key3]" value="{{ $promotionDetail['key3'] }}">
                                                         </td>
                                                         <td>
-                                                            {{-- <input type="text" class="form-control" name="promotion_details[{{$n++}}][key4]" value="{{$data->key4}}"> --}}
+                                                            <input type="text" class="form-control" name="promotion_details[{{$n++}}][key4]" value="{{ $promotionDetail['key4'] }}">
                                                         </td>
                                                         <td>
-                                                            {{-- <input type="text" class="form-control" name="promotion_details[{{$n++}}][key5]" value="{{$data->key5}}"> --}}
+                                                            <input type="text" class="form-control" name="promotion_details[{{$n++}}][key5]" value="{{ $promotionDetail['key5'] }}">
                                                         </td>
                                                         <td class="text-center">
                                                             <div data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -456,7 +456,7 @@
                                                                     name="promotion_details[{{ $n++ }}][key6]"
                                                                     data-live-search-placeholder="Tìm kiếm..."
                                                                     id="codeProductBonusEdit_{{ $k++ }}">
-                                                                    {{-- <option selected value="{{$data->key6}}">{{$data->key6}}</option> --}}
+                                                                    <option selected value="{{ $promotionDetail['key6'] }}">{{ $promotionDetail['key6'] }}</option>
                                                                     @foreach ($products as $product)
                                                                         <option value="{{ $product->name }}">
                                                                             {{ $product->code }}</option>
@@ -466,13 +466,13 @@
 
                                                         </td>
                                                         <td class="text-center">
-                                                            {{-- <span id="productBonusEdit_{{$m++}}" name="promotion_details[{{$n++}}][key7]">{{$data->key7}}</span> --}}
+                                                            <span id="productBonusEdit_{{$m++}}" name="promotion_details[{{$n++}}][key7]">{{ $promotionDetail['key7'] }}</span>
                                                         </td>
                                                         <td>
-                                                            {{-- <input type="text" class="form-control" name="promotion_details[{{$n++}}][key8]" value="{{$data->key8}}"> --}}
+                                                            <input type="text" class="form-control" name="promotion_details[{{$n++}}][key8]" value="{{ $promotionDetail['key8'] }}">
                                                         </td>
                                                         <td>
-                                                            {{-- <input type="text" class="form-control" name="promotion_details[{{$n++}}][key9]" value="{{$data->key9}}"> --}}
+                                                            <input type="text" class="form-control" name="promotion_details[{{$n++}}][key9]" value="{{ $promotionDetail['key9'] }}">
                                                         </td>
                                                         <td class="text-center">
                                                             <i class="bi bi-plus fs-3 add-spec_edit"
@@ -856,7 +856,7 @@
                                                         data-live-search-placeholder="Tìm kiếm..."
                                                         id="selectCodeProduct_0">
                                                         @foreach ($products as $item)
-                                                            <option value="{{ $item->name }}">{{ $item->code }}
+                                                            <option value="{{ $item->code }}">{{ $item->name }}
                                                             </option>
                                                         @endforeach
                                                     </select>
@@ -865,8 +865,6 @@
                                             <td class="text-center">
                                                 <input id="nameProduct_0" class="nameProduct form-control"
                                                     name="promotion_details[0][key2]" readonly>
-
-
                                             </td>
                                             <td>
                                                 <input type="text" class="form-control" data-bs-toggle="tooltip"
@@ -897,7 +895,6 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
-
                                             </td>
                                             <td class="text-center">
                                                 <input id="productBonus_0" name="promotion_details[0][key7]"

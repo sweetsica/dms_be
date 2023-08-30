@@ -42,7 +42,7 @@ class PersonnelLevelController extends Controller
             $search = substr($search, 0, 47);
             $search = $search.'...';
         }
-        $personnelLevelList = PersonnelLevel::where("personnel_level.code", "like", "%$search%")->orWhere("personnel_level.name", "like", "%$search%")->paginate(10);
+        $personnelLevelList = PersonnelLevel::where("personnel_level.code", "like", "%$search%")->orderBy('personnel_level.id','desc')->orWhere("personnel_level.name", "like", "%$search%")->paginate(10);
         $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
         $pagination = $this->pagination($personnelLevelList);
         return view("cap_nhan_su.index",[
