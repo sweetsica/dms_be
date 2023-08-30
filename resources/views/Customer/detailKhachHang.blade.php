@@ -732,21 +732,18 @@
 
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Sản phẩm quan tâm">
-                                {{-- <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                    data-live-search="true" title="Sản phẩm quan tâm*" data-select-all-text="Chọn tất cả"
-                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="productId[]" id="productId"
-                                    data-live-search-placeholder="Tìm kiếm..." multiple>
-                                    <option value="{{ $productList }}">{{ $productList }}</option>
-                                </select> --}}
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="productId[]" id="productId"
                                     data-live-search-placeholder="Tìm kiếm...">
                                     <option value="{{ $productList }}">{{ $productList }}</option>
+                                    @foreach ($productsfg as $Pr)
+                                        <option value="{{ $Pr->id }}">
+                                        {{ $Pr->name }}
+                                        </option>
+                                     @endforeach
                                 </select>
                             </div>
-
-
                             <div class="col-md-12 mb-3">
                                 <div class="card-title">5. Phân loại</div>
                             </div>
