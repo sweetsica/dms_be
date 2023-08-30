@@ -162,6 +162,7 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('department/{id}', [DepartmentController::class, 'update'])->name('department.update');
     Route::post('departmentr/{id}', [DepartmentController::class, 'destroy'])->name('departmentr.destroy');
     Route::post('department-delete', [DepartmentController::class, 'delete'])->name('delete-selected-items');
+    Route::post('/units/move-up', [DepartmentController::class, 'editStt'])->name('units.moveUp');
 
     Route::get('position', [PositionController::class, 'index'])->name('position.index');
     Route::post('position', [PositionController::class, 'store'])->name('position.store');

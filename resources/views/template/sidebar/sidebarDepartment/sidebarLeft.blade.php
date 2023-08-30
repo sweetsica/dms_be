@@ -62,9 +62,8 @@
                         @endphp
                         <ul id="tree1" style="overflow: scroll">
                             @foreach ($departmentListTree as $donVi)
-
                                 <li data-id="{{ $donVi->id }}" style="width: max-content">
-                                    {{$x++}}<a href="{{ route('department.index2', ['department_id' => $donVi->id]) }}"
+                                    {{$donVi->order}}<a href="{{ route('department.index2', ['department_id' => $donVi->id]) }}"
                                         class="title-child">{{ $donVi->name }}</a>
                                     @if ($donVi->donViCon->count() > 0)
                                         @include('template.sidebar.sidebarDepartment.child', [
