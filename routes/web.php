@@ -269,6 +269,8 @@ Route::middleware(['auth.role'])->group(function () {
 });
 
 Route::get('/export/customer', [ExcelController::class, 'setExportCustomter']);
+Route::get('/warehouses/export/all', [WareHouseController::class, 'export'])->name('WareHouse.export');
+
 
 // 404
 Route::fallback(function () {

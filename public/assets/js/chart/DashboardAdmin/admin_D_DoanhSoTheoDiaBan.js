@@ -34,6 +34,9 @@ new Chart(admin_D_DoanhSoTheoDiaBan, {
             },
         },
         plugins: {
+            datalabels: {
+                color: '#FFCE56',
+            },
             legend: {
                 labels:{
                     font: {
