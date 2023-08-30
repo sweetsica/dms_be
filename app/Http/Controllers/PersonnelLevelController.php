@@ -12,6 +12,25 @@ use Illuminate\Support\Facades\Session;
 class PersonnelLevelController extends Controller
 {
 
+    public function pagination($list)
+    {
+        return [
+            'current_page' => $list->currentPage(),
+            'data' => $list->items(),
+            'first_page_url' => $list->url(1),
+            'from' => $list->firstItem(),
+            'last_page' => $list->lastPage(),
+            'last_page_url' => $list->url($list->lastPage()),
+            'links' => $list->toArray()['links'],
+            'next_page_url' => $list->nextPageUrl(),
+            'path' => $list->url(1),
+            'per_page' => $list->perPage(),
+            'prev_page_url' => $list->previousPageUrl(),
+            'to' => $list->lastItem(),
+            'total' => $list->total(),
+        ];
+    }
+
     public function index(Request $request){
         $search = $request->get('search');
         $pattern = '/^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)\s+.*/';
@@ -23,11 +42,13 @@ class PersonnelLevelController extends Controller
             $search = substr($search, 0, 47);
             $search = $search.'...';
         }
-        $personnelLevelList = PersonnelLevel::where("personnel_level.code", "like", "%$search%")->orWhere("personnel_level.name", "like", "%$search%")->paginate(10);
+        $personnelLevelList = PersonnelLevel::where("personnel_level.code", "like", "%$search%")->orderBy('personnel_level.id','desc')->orWhere("personnel_level.name", "like", "%$search%")->paginate(10);
         $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
+        $pagination = $this->pagination($personnelLevelList);
         return view("cap_nhan_su.index",[
             "personnelLevelList"=>$personnelLevelList,
             "departmentListTree"=>$departmentListTree,
+            "pagination" => $pagination,
             'search' => $search
         ]);
     }

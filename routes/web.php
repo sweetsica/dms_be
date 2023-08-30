@@ -163,6 +163,7 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('departmentr/{id}', [DepartmentController::class, 'destroy'])->name('departmentr.destroy');
     Route::post('department-delete', [DepartmentController::class, 'delete'])->name('delete-selected-items');
     Route::post('/units/move-up', [DepartmentController::class, 'editStt'])->name('units.moveUp');
+    Route::delete('department-detach', [DepartmentController::class, 'detach'])->name('detach-department-items');
 
     Route::get('position', [PositionController::class, 'index'])->name('position.index');
     Route::post('position', [PositionController::class, 'store'])->name('position.store');
@@ -268,6 +269,8 @@ Route::middleware(['auth.role'])->group(function () {
 });
 
 Route::get('/export/customer', [ExcelController::class, 'setExportCustomter']);
+Route::get('/warehouses/export/all', [WareHouseController::class, 'export'])->name('WareHouse.export');
+
 
 // 404
 Route::fallback(function () {

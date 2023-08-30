@@ -20,7 +20,10 @@
         $queryString[$pageName] = $pageNumber;
         return route('timekeeping.list', $queryString);
     }
-    function isFiltering($filterNames)
+@endphp
+{{-- @php
+
+    function getPaginationLink($link, $pageName)
     {
         $filters = request()->query();
         foreach ($filterNames as $filterName) {
@@ -29,8 +32,19 @@
             }
         }
         return false;
+        if (!isset($link['url'])) {
+            return '#';
+        }
+
+        $pageNumber = explode('?page=', $link['url'])[1];
+
+        $queryString = request()->query();
+
+        $queryString[$pageName] = $pageNumber;
+        return route('customers', $queryString);
     }
-@endphp
+
+@endphp --}}
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
     <div id="mainWrap" class="mainWrap">
@@ -81,7 +95,7 @@
                                             class="btn-export"><i class="bi bi-download"></i></a>
                                     </div> --}}
 
-                                        <div class="action_export" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                             aria-label="Thêm khách hàng" data-bs-original-title="Thêm khách hàng">
                                             <button class="btn btn-danger d-block testCreateUser" data-bs-toggle="modal"
                                                 data-bs-target="#info">Thêm khách hàng</button>
@@ -120,7 +134,8 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($listData as $key => $item)
-                                                    <tr class="table-row">
+                                                    <tr class="table-row"
+                                                        data-href="/chi-tiet-khach-hang/{{ $item['id'] }}" role="button">
                                                         <td>
                                                             <div class="overText text-center">
                                                                 {{-- {{ $loop->iteration }} --}}
@@ -136,10 +151,7 @@
                                                         <td>
                                                             <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="{{ $item['name'] }}">
-                                                                <a href="/chi-tiet-khach-hang/{{ $item['id'] }}"
-                                                                    style="color: black; text-decoration: underline">
-                                                                    {{ $item['name'] }}
-                                                                </a>
+                                                                {{ $item['name'] }}
                                                             </div>
                                                         </td>
                                                         <td>
@@ -155,7 +167,7 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText " data-bs-toggle="tooltip"
+                                                            <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top"
                                                                 title="  {{ $item['companyName'] }}">
                                                                 {{ $item['companyName'] }}
@@ -186,7 +198,7 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText" data-bs-toggle="tooltip"
+                                                            <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="{{ $item['address'] }}">
                                                                 {{ $item['address'] }}
                                                             </div>
@@ -384,7 +396,7 @@
                     <h5 class="modal-title w-100" id="exampleModalLabel">Lọc dữ liệu</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="">
+                <form method="GET" action="">
                     @csrf
                     <div class="modal-body">
                         <div class="row">

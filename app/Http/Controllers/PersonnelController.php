@@ -44,6 +44,7 @@ class PersonnelController extends Controller
         $vai_tro = $request->get('vai_tro');
         $dia_ban = $request->get('dia_ban');
         $trang_thai = $request->get('trang_thai');
+        $limit = 15;
         $query = Personnel::query();
         // $personnelList = Personnel::
         $query->leftJoin('department', 'department.id', '=', 'personnel.department_id')
@@ -115,7 +116,7 @@ class PersonnelController extends Controller
             $query->where("personnel.status", "like", "%$trang_thai%");
         }
         // ->where("personnel.code", "like", "%$search%")
-        $personnelList = $query->orderBy('personnel.id','desc')->paginate(15);
+        $personnelList = $query->orderBy('personnel.id','desc')->paginate($limit);
         $departmentlists = $this->getDepartment();
         $positionlists = $this->getPosition();
         $personnellists = $this->getPersonnel();
@@ -859,7 +860,7 @@ class PersonnelController extends Controller
         $data->name = $name;
         $data->department_id = $department_id;
         $data->code = $code;
-        $data->position_id = $position_id;
+        $data->position_id = json_encode($position_id);
         $data->department_id = $department_id;
         $data->personnel_lv_id = $personnel_lv_id;
         $data->pack = $pack;

@@ -165,8 +165,12 @@ class DepartmentController extends Controller
             if (!$getDept) {
                 return View::make('404');
             }
-            $listPosToDept = Position::with('levels')->where('department_id', $department_id)->where("position.code", "like", "%$search%")->get();
+            $listPosToDept = Position::with('levels', 'department')->where('department_id', $department_id)
+                ->orWhereHas('department', function ($query) use ($department_id) {
+                    $query->where('parent', $department_id);
+                })->where("position.code", "like", "%$search%")->get();
         }
+        
         $personnelLevelList = PersonnelLevel::all();
         $positionlists = $this->getPosition();
         return view("Deparment.index2", [
@@ -337,11 +341,10 @@ class DepartmentController extends Controller
         $parent = $request->get('parent');
         $code = $request->get('code');
         $description = $request->get('description');
-        if ($request['status'] || $request['demarcation']){
+        if ($request['status'] || $request['demarcation']) {
             $status = $request->get('status');
             $demarcation = $request->get('demarcation');
-        }
-        else {
+        } else {
             $data = Department::find($id);
             $status = $data->status;
             $demarcation = $data->demarcation;
@@ -452,4 +455,17 @@ class DepartmentController extends Controller
         }
     }
 
+    public function detach(Request $request)
+    {
+        //Detach position from department
+        $selectedItems = $request->selected_items;
+        foreach ($selectedItems as $selected_id) {
+            $pos = Position::findOrFail($selected_id);
+            $pos->department_id = null;
+            $pos->save();
+        }
+
+        Session::flash('success', 'Đã xoá!');
+        return redirect()->back();
+    }
 }

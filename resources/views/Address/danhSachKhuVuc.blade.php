@@ -20,7 +20,7 @@
         $queryString = request()->query();
 
         $queryString[$pageName] = $pageNumber;
-        return route('department.index', $queryString);
+        return route('area.index', $queryString);
     }
 
     // function isFiltering($filterNames)

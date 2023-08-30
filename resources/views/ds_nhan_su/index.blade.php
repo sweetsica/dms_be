@@ -17,7 +17,7 @@
         $queryString = request()->query();
     
         $queryString[$pageName] = $pageNumber;
-        return route('department.index', $queryString);
+        return route('Personnel.index', $queryString);
     }
     
     // function isFiltering($filterNames)
@@ -161,14 +161,18 @@
                                                                         </a>
                                                                     </td>
                                                                     <td class="">
-                                                                        <a style="color: black; text-decoration: underline;"
-                                                                            href="{{ route('department.assignUser', $item->position_id) }}">
-                                                                            <div class="overText" data-bs-toggle="tooltip"
-                                                                                data-bs-placement="top"
-                                                                                title="{{ $item->position_name }}">
-                                                                                {{ $item->position_name }}
-                                                                            </div>
-                                                                        </a>
+                                                                        @php
+                                                                            $positionIds = json_decode($item->position_id, true) ?? [];
+                                                                            $positions = App\Models\Position::whereIn('id', $positionIds)->get();
+                                                                            $positionNames = $positions->pluck('name')->toArray();
+                                                                            
+                                                                            $positionList = implode(', ', $positionNames);
+                                                                        @endphp
+                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="{{ $positionList }}">
+                                                                            {{ $positionList }}
+                                                                        </div>
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
@@ -425,20 +429,14 @@
                                 </div>
                                 <div class="col-6 mb-3">
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Vị trí chức danh">
-                                        <select name="position_id" class="selectpicker" data-dropup-auto="false"
-                                            data-live-search="true">
-                                            <?php if( $item->position_id == null){ ?>
-                                            <option value="">Vị trí
-                                                chức danh</option>
-                                            <?php }else{ ?>
-                                            <option value="{{ $item->position_id }}">
-                                                {{ $item->position_name }}
-                                            </option>
-                                            <?php } ?>
-                                            <option value="">Vị trí
-                                                chức danh</option>
+                                        <select name="position_id[]" class="selectpicker" data-dropup-auto="false"
+                                            data-live-search="true" multiple>
+                                            @php
+                                                $positionIds = json_decode($item->position_id, true) ?? [];
+                                            @endphp
                                             @foreach ($positionlists as $posiList)
-                                                <option value="{{ $posiList->id }}">
+                                                <option {{ in_array($posiList->id, $positionIds) ? ' selected' : '' }}
+                                                    value="{{ $posiList->id }}">
                                                     @php
                                                         $str = '';
                                                         for ($i = 0; $i < $posiList->level; $i++) {
