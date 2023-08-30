@@ -50,7 +50,53 @@
         display: grid;
         grid-template-columns: 150px auto;
     }
+
+    .dropdown {
+        position: relative;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .dropdown .dropdown-list {
+        background: #fff;
+        position: absolute;
+        top: 35px;
+        left: -124%;
+        right: 2px;
+        box-shadow: 0 1px 2px 1px rgba(0, 0, 0, .15);
+        transform-origin: 50% 0;
+        transform: scale(1, 0);
+        transition: transform .15s ease-in-out .15s;
+        overflow-y: scroll;
+        width: 300px;
+        z-index: 99;
+    }
+
+    .dropdown .dropdown-option {
+        display: block;
+        padding: 8px 12px;
+        opacity: 0;
+        transition: opacity .15s ease-in-out;
+    }
+
+
+    .dropdown.on .dropdown-list {
+        transform: scale(1, 1);
+        transition-delay: 0s;
+    }
+
+    .dropdown.on .dropdown-list .dropdown-option {
+        opacity: 1;
+        transition-delay: .2s;
+    }
+
+    .dropdown [type="checkbox"] {
+        position: relative;
+        top: -1px;
+        margin-right: 4px;
+    }
 </style>
+
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
     <div id="mainWrap" class="mainWrap" style="height: 150rem">
@@ -217,10 +263,125 @@
                                                 </div>
 
                                                 <div>
-                                                    <button class="btn btn-danger">
+                                                    {{-- <button class="btn btn-danger">
                                                         <i class="bi bi-tag"></i>
                                                         Khuyến mại
-                                                    </button>
+                                                    </button> --}}
+                                                    {{-- <div class="dropdown">
+                                                        <button class="btn btn-danger" id="dropdownMenuLink"
+                                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <i class="bi bi-tag"></i>
+                                                            Khuyến mại
+                                                        </button>
+
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                            <div class="ui celled relaxed list">
+                                                                <div class="item">
+                                                                    <div class="ui master checkbox">
+                                                                        <input type="checkbox" name="fruits">
+                                                                        <label>Fruits</label>
+                                                                    </div>
+                                                                    <div class="list">
+                                                                        <div class="item">
+                                                                            <div class="ui child checkbox">
+                                                                                <input type="checkbox" name="apple">
+                                                                                <label>Apple</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="item">
+                                                                            <div class="ui child checkbox">
+                                                                                <input type="checkbox" name="orange">
+                                                                                <label>Orange</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="item">
+                                                                            <div class="ui child checkbox">
+                                                                                <input type="checkbox" name="pear">
+                                                                                <label>Pear</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item">
+                                                                    <div class="ui master checkbox">
+                                                                        <input type="checkbox" name="vegetables">
+                                                                        <label>Vegetables</label>
+                                                                    </div>
+                                                                    <div class="list">
+                                                                        <div class="item">
+                                                                            <div class="ui child checkbox">
+                                                                                <input type="checkbox" name="lettuce">
+                                                                                <label>Lettuce</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="item">
+                                                                            <div class="ui child checkbox">
+                                                                                <input type="checkbox" name="carrot">
+                                                                                <label>Carrot</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="item">
+                                                                            <div class="ui child checkbox">
+                                                                                <input type="checkbox" name="spinach">
+                                                                                <label>Spinach</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div> --}}
+
+                                                    <div class="dropdown" data-control="checkbox-dropdown">
+                                                        {{-- <label class="dropdown-label">Select</label> --}}
+                                                        <button class="btn btn-danger dropdown-label">
+                                                            <i class="bi bi-tag"></i>
+                                                            Khuyến mại
+                                                        </button>
+                                                        <div class="dropdown-list">
+                                                            <label class="dropdown-option">
+                                                                <input type="checkbox" data-toggle="check-all" />
+                                                                Check All
+                                                            </label>
+                                                            <label class="dropdown-option">
+                                                                <input type="checkbox" name="dropdown-group"
+                                                                    value="Selection 1" />
+                                                                Selection One
+                                                            </label>
+
+                                                            <label class="dropdown-option">
+                                                                <input type="checkbox" name="dropdown-group"
+                                                                    value="Selection 2" />
+                                                                Selection Two
+                                                            </label>
+
+                                                            <label class="dropdown-option">
+                                                                <input type="checkbox" name="dropdown-group"
+                                                                    value="Selection 3" />
+                                                                Selection Three
+                                                            </label>
+
+                                                            <label class="dropdown-option">
+                                                                <input type="checkbox" name="dropdown-group"
+                                                                    value="Selection 4" />
+                                                                Selection Four
+                                                            </label>
+
+                                                            <label class="dropdown-option">
+                                                                <input type="checkbox" name="dropdown-group"
+                                                                    value="Selection 5" />
+                                                                Selection Five
+                                                            </label>
+                                                        </div>
+
+                                                        <div class="dropdown-list">
+                                                            <label><input type="checkbox" id="select-all" />Choose
+                                                                all</label>
+                                                            <label><input type="checkbox" />Option 1</label>
+                                                            <label><input type="checkbox" />Option 2</label>
+                                                            <label><input type="checkbox" />Option 3</label>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             {{--  --}}
@@ -771,5 +932,108 @@
             })
 
         }
+    </script>
+
+    <script>
+        (function($) {
+            var CheckboxDropdown = function(el) {
+                var _this = this;
+                this.isOpen = false;
+                this.areAllChecked = false;
+                this.$el = $(el);
+                this.$label = this.$el.find('.dropdown-label');
+                this.$checkAll = this.$el.find('[data-toggle="check-all"]').first();
+                this.$selectAllCheckbox = this.$el.find('[data-toggle="select-all-checkbox"]').first();
+                this.$inputs = this.$el.find('[type="checkbox"]');
+
+                this.onCheckBox();
+
+                this.$label.on('click', function(e) {
+                    e.preventDefault();
+                    _this.toggleOpen();
+                });
+
+                this.$checkAll.on('click', function(e) {
+                    e.preventDefault();
+                    _this.onCheckAll();
+                });
+
+                this.$selectAllCheckbox.on('change', function() {
+                    _this.onSelectAllCheckboxChange();
+                });
+
+                this.$inputs.on('change', function(e) {
+                    _this.onCheckBox();
+                });
+            };
+
+            CheckboxDropdown.prototype.onCheckBox = function() {
+                this.updateStatus();
+            };
+
+            CheckboxDropdown.prototype.updateStatus = function() {
+                var checked = this.$el.find(':checked');
+
+                this.areAllChecked = false;
+                this.$selectAllCheckbox.prop('checked', false);
+
+                // if (checked.length <= 0) {
+                //     this.$label.html('Select Options');
+                // } else if (checked.length === 1) {
+                //     this.$label.html(checked.parent('label').text());
+                // } else if (checked.length === this.$inputs.length) {
+                //     this.$label.html('All Selected');
+                //     this.areAllChecked = true;
+                //     this.$selectAllCheckbox.prop('checked', true);
+                // } else {
+                //     this.$label.html(checked.length + ' Selected');
+                // }
+            };
+
+            CheckboxDropdown.prototype.onCheckAll = function(checkAll) {
+                if (!this.areAllChecked || checkAll) {
+                    this.areAllChecked = true;
+                    this.$selectAllCheckbox.prop('checked', true);
+                    this.$inputs.prop('checked', true);
+                } else {
+                    this.areAllChecked = false;
+                    this.$selectAllCheckbox.prop('checked', false);
+                    this.$inputs.prop('checked', false);
+                }
+
+                this.updateStatus();
+            };
+
+            CheckboxDropdown.prototype.onSelectAllCheckboxChange = function() {
+                var selectAllCheckboxChecked = this.$selectAllCheckbox.prop('checked');
+                this.$inputs.prop('checked', selectAllCheckboxChecked);
+                this.areAllChecked = selectAllCheckboxChecked;
+
+                this.updateStatus();
+            };
+
+            CheckboxDropdown.prototype.toggleOpen = function(forceOpen) {
+                var _this = this;
+
+                if (!this.isOpen || forceOpen) {
+                    this.isOpen = true;
+                    this.$el.addClass('on');
+                    $(document).on('click', function(e) {
+                        if (!$(e.target).closest('[data-control]').length) {
+                            _this.toggleOpen();
+                        }
+                    });
+                } else {
+                    this.isOpen = false;
+                    this.$el.removeClass('on');
+                    $(document).off('click');
+                }
+            };
+
+            var checkboxesDropdowns = document.querySelectorAll('[data-control="checkbox-dropdown"]');
+            for (var i = 0, length = checkboxesDropdowns.length; i < length; i++) {
+                new CheckboxDropdown(checkboxesDropdowns[i]);
+            }
+        })(jQuery);
     </script>
 @endsection

@@ -12,23 +12,23 @@
 @php
     function getPaginationLink($link, $pageName)
     {
-    if (!isset($link->url)) {
-    return '#';
-    }
-    $pageNumber = explode('?page=', $link->url)[1];
-    $queryString = request()->query();
-    $queryString[$pageName] = $pageNumber;
-    return route('timekeeping.list', $queryString);
+        if (!isset($link->url)) {
+            return '#';
+        }
+        $pageNumber = explode('?page=', $link->url)[1];
+        $queryString = request()->query();
+        $queryString[$pageName] = $pageNumber;
+        return route('timekeeping.list', $queryString);
     }
     function isFiltering($filterNames)
     {
-    $filters = request()->query();
-    foreach ($filterNames as $filterName) {
-    if (isset($filters[$filterName]) && $filters[$filterName] != '') {
-    return true;
-    }
-    }
-    return false;
+        $filters = request()->query();
+        foreach ($filterNames as $filterName) {
+            if (isset($filters[$filterName]) && $filters[$filterName] != '') {
+                return true;
+            }
+        }
+        return false;
     }
 @endphp
 @section('content')
@@ -36,7 +36,7 @@
     <div id="mainWrap" class="mainWrap">
         <div class="mainSection">
             <div class="main">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="mainSection_heading">
                         <h5 class="mainSection_heading-title">Danh sách khách hàng</h5>
                         @include('template.components.sectionCard')
@@ -259,7 +259,8 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <nav aria-label="Page navigation example" class="float-end mt-3" id="target-pagination">
+                                    <nav aria-label="Page navigation example" class="float-end mt-3"
+                                        id="target-pagination">
                                         <ul class="pagination">
                                             @foreach ($pagination['links'] as $link)
                                                 <li class="page-item {{ $link['active'] ? 'active' : '' }}">
@@ -271,14 +272,14 @@
                                             @endforeach
                                         </ul>
                                     </nav>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            @include('template.footer.footer')
         </div>
-        @include('template.footer.footer')
-    </div>
     </div>
     @include('template.sidebar.sidebarMaster.sidebarRight')
 
@@ -434,24 +435,24 @@
                             <div class="col-12 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top"
                                     data-bs-original-title="Lọc theo tỉnh">
-                                    <select id="city" class="selectpicker"
-                                        data-dropup-auto="false" title="Lọc theo tỉnh" name='cityFilter'>
+                                    <select id="city" class="selectpicker" data-dropup-auto="false"
+                                        title="Lọc theo tỉnh" name='cityFilter'>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-12 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top"
                                     data-bs-original-title="Lọc theo quận">
-                                    <select id="district" class="selectpicker select_filter"
-                                        data-dropup-auto="false" title="Lọc theo nhân quận" name='districtFilter'>
+                                    <select id="district" class="selectpicker select_filter" data-dropup-auto="false"
+                                        title="Lọc theo nhân quận" name='districtFilter'>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-12 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top"
                                     data-bs-original-title="Lọc theo xã">
-                                    <select id="guide" class="selectpicker select_filter"
-                                        data-dropup-auto="false" title="Lọc theo xã" name='guideFilter'>
+                                    <select id="guide" class="selectpicker select_filter" data-dropup-auto="false"
+                                        title="Lọc theo xã" name='guideFilter'>
                                     </select>
                                 </div>
                             </div>
