@@ -639,7 +639,7 @@
                                         <div class="layout_120">
                                             <span class="fw-bold fs-4">Địa chỉ:</span>
                                             <span class="fs-4"
-                                                id="addressTxt1">Hà Đông, Hà Nội</span>
+                                                id="addressTxt1">Hai Bà Trưng, Hà Nội</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 mt-4">
@@ -657,7 +657,7 @@
                                         <div class="layout_120">
                                             <span class="fw-bold fs-4">Địa chỉ:</span>
                                             <span class="fs-4"
-                                                id="addressTxt2">Hà Đông, Hà Nội</span>
+                                                id="addressTxt2">219 Phố Trung Kính, Cầu Giấy, Hà Nội</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 mt-4">
