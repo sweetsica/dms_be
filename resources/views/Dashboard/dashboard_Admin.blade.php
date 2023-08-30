@@ -148,7 +148,7 @@
                             </div>
                             <div class="row testkh2" style="height: 30%">
                                 <div class="col-sm-3 text-center" style="padding: 1%">
-                                    <div class="col card_borderp1">                                    
+                                    <div class="col card_borderp1" style="height: 100%">                                    
                                         <span class="card-title-black text-center">Nhân sự tuyển mới</span>
                                         <div class="mainSection_chart mt-3">
                                             <canvas id="admin_NhanSuTuyenMoi"></canvas>
@@ -183,7 +183,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-3 text-center" style="padding: 1%">
-                                    <div class="card_borderp1">
+                                    <div class="card_borderp1" style="height: 100%">
                                         <span class="card-title-black text-center">Nhân sự Online/Offline</span>
                                         <div class="mainSection_chart mt-3">
                                             <canvas id="admin_NhanSuOnOff"></canvas>
