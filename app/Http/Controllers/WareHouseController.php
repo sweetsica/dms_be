@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use App\Models\WareHouse;
 use App\Models\Personnel;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\WareHousesExport;
+
+
 
 class WareHouseController extends Controller
 {
@@ -80,7 +84,11 @@ class WareHouseController extends Controller
     }
 
     public function show($id) {
-        return view('WareHouse.chiTietKho');
+        $wareHouse = WareHouse::find($id);
+        $listUsers = Personnel::all();
+        return view('WareHouse.chiTietKho')
+                            ->with('wareHouse', $wareHouse)
+                            ->with('listUsers', $listUsers);
     }
 
     public function update(Request $request,$id)
@@ -122,5 +130,12 @@ class WareHouseController extends Controller
         Session::flash('success', 'Đã xoá!');
         return back();
 
+    }
+
+    public function export()
+    {             
+        $date = date('d-m-y');   
+        return Excel::download(new WareHousesExport, ''.$date.'Chi-tiet-kho.xlsx');
+        
     }
 }

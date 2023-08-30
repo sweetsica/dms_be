@@ -860,7 +860,7 @@ class PersonnelController extends Controller
         $data->name = $name;
         $data->department_id = $department_id;
         $data->code = $code;
-        $data->position_id = $position_id;
+        $data->position_id = json_encode($position_id);
         $data->department_id = $department_id;
         $data->personnel_lv_id = $personnel_lv_id;
         $data->pack = $pack;
