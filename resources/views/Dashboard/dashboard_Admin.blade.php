@@ -2,6 +2,18 @@
 @section('title', 'Bảng điều khiển Admin')
 @section('content')
 @section('header-style')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css.map">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"
+        integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"
+        integrity="sha512-wR4oNhLBHf7smjy0K4oqzdWumd+r5/+6QO/vDda76MW5iug4PT7v86FoEkySIJft3XA0Ae6axhIvHrqwm793Nw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
     <style>
         #half_scr 
         {
@@ -110,13 +122,32 @@
             width: 100%;
             height: 150px;
         }
-        .
+        .sortline
+        {
+            height: 5px;
+            background-color: #48b9ea;
+        }
+        .on_line
+        {
+            height: 5px;
+            background-color:  #bbe5f7;
+        }
+        .all_line
+        {
+            margin-left: 10%;
+            width: 80%;
+            height: 7px;
+        }
+        .textp5
+        {
+            width: 33%;
+        }
     </style>
 @endsection
     <div id="mainWrap" class="mainWrap mb-0 ms-0 me-0" style="margin-top: 59px;">
         <div class="mainSection">
             <div class="main p-0">
-                <div class="card mb-3 testkh" style="height: 1080px;">    
+                <div class="card mb-3 testkh" style="height: 1200px;">    
                     <div id="half_scr_up" class="row testkh">
                         <div id="part1" class="col-sm-5 testkh1">
                             <div class="row row_title testkh2" style="height: 15%">
@@ -128,9 +159,12 @@
                                 <span class="cards-title-black">NHÂN SỰ</span>
                             </div>
                             <div class="row testkh2" style="height: 30%">
-                                <div class="col-sm-3" style="padding: 1%">
-                                    <div class="col card_borderp1">                                    
+                                <div class="col-sm-3 text-center" style="padding: 1%">
+                                    <div class="col card_borderp1" style="height: 100%">                                    
                                         <span class="card-title-black text-center">Nhân sự tuyển mới</span>
+                                        <div class="mainSection_chart mt-3">
+                                            <canvas id="admin_NhanSuTuyenMoi"></canvas>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-3" style="padding: 1%">
@@ -161,7 +195,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-3 text-center" style="padding: 1%">
-                                    <div class="card_borderp1">
+                                    <div class="card_borderp1" style="height: 100%">
                                         <span class="card-title-black text-center">Nhân sự Online/Offline</span>
                                         <div class="mainSection_chart mt-3">
                                             <canvas id="admin_NhanSuOnOff"></canvas>
@@ -397,17 +431,44 @@
                             <div class="row" style="height: 10%">
                                 <span class="cards-title-black">KHÁCH HÀNG</span>
                             </div>
-                            <div class="row" style="height: 40%">
-                                bản đồ
-                            </div>
-                            <div class="row" style="height: 20%">
-                                <div class="card card_borderp1">
-                                    <span class="card-title-black">Số công nợ</span>
-                                    <span class="card-subtitle text-center">75%</span>
+                            <div class="row" style="height: 40%" style="padding: 1%">
+                                <div class="card_borderp1" style="padding: 2%">
+                                    Bản đồ
+                                    <div class="col-lg-12">
+                                        <div class="layout_120">
+                                            <span class="fw-bold fs-4">Địa chỉ:</span>
+                                            <span class="fs-4"
+                                                id="addressTxt">Hà Đông, Hà Nội</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 mt-4">
+                                        <div id="map" class="border"
+                                            style="height: 150px; display: block">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row" style="height: 30%">
-                                đặt hàng
+                            <div class="row" style="height: 20%; margin-top:10px">
+                                <div class="card card_borderp1">
+                                    <span class="card-title-black">Số công nợ</span>
+                                    <div class="d-flex flex-nowrap" style="margin-top:15px">
+                                        <div class="text-center textp5">Quá hạn: 75</div>
+                                        <div class="text-center textp5">75%</div>
+                                        <div class="text-center textp5">Hiện có: 100</div>
+                                    </div>
+                                    <div class="d-flex flex-nowrap all_line">
+                                        <div class="sortline" style="width:{{ 75 }}%;"></div>
+                                        <div class="on_line" style="width:{{ 100-75 }}%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="height: 30%; margin-top:10px">
+                                <div class="card_borderp1">
+                                    <span class="card-title-black text-center">Số khách đặt hàng</span>
+                                    <div class="mainSection_chart mt-3">
+                                        <canvas id="admin_SoKhachDatHang"></canvas>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div id="part6" class="col-sm-3 testkh1">
@@ -486,7 +547,7 @@
                                                 <div class="card text-center card_on">
                                                     <span class="card-title cardname" data-bs-toggle="tooltip" 
                                                         data-bs-placement="top" title="Không phát sinh giao dịch trong 3 ngày">
-                                                        Không hoàn thành
+                                                        Không phát sinh
                                                     </span>
                                                     <strong class="card-body cardvalue">50</strong>
                                                 </div>
@@ -524,13 +585,20 @@
                                         <div class="card">
                                             <span class="card-title-black">Số ca đào tạo tháng này</span>
                                             <span class="card-subtitle">75%</span>
-                                            <span></span>
+                                            <div class="d-flex flex-nowrap all_line">
+                                                <div class="sortline" style="width:{{ 75 }}%;"></div>
+                                                <div class="on_line" style="width:{{ 100-75 }}%;"></div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row card_part6" style="height: 50%">
                                         <div class="card">
                                             <span class="card-title-black">Số ca activation tháng này</span>
                                             <span class="card-subtitle">75%</span>
+                                            <div class="d-flex flex-nowrap all_line">
+                                                <div class="sortline" style="width:{{ 75 }}%;"></div>
+                                                <div class="on_line" style="width:{{ 100-75 }}%;"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -539,12 +607,20 @@
                                         <div class="card">
                                             <span class="card-title-black">Số biên bản tháng này</span>
                                             <span class="card-subtitle">75%</span>
+                                            <div class="d-flex flex-nowrap all_line">
+                                                <div class="sortline" style="width:{{ 75 }}%;"></div>
+                                                <div class="on_line" style="width:{{ 100-75 }}%;"></div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row card_part6" style="height: 50%">
                                         <div class="card">
                                             <span class="card-title-black">Số khách hàng đã trưng bày</span>
                                             <span class="card-subtitle">75%</span>
+                                            <div class="d-flex flex-nowrap all_line">
+                                                <div class="sortline" style="width:{{ 75 }}%;"></div>
+                                                <div class="on_line" style="width:{{ 100-75 }}%;"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -556,17 +632,46 @@
 
                             </div>
                             <div class="row testkh2" style="height: 45%">
-                                đơn hàng hôm nay
+                                <div class="card_borderp1" style="padding: 2%">
+                                    Đơn hàng hôm nay
+                                    {{-- <img style="width:90%; height: 90%" src="{{ asset('assets/img/admin_map.png') }}" /> --}}
+                                    <div class="col-lg-12">
+                                        <div class="layout_120">
+                                            <span class="fw-bold fs-4">Địa chỉ:</span>
+                                            <span class="fs-4"
+                                                id="addressTxt1">Hai Bà Trưng, Hà Nội</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 mt-4">
+                                        <div id="map1" class="border"
+                                            style="height: 150px; display: block">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="row testkh2" style="height: 45%">
-                                vị trí hôm nay
+                            <div class="row testkh2" style="height: 45%; margin-top:10px">
+                                <div class="card_borderp1" style="padding: 2%">
+                                    Vị trí hôm nay
+                                    {{-- <img style="width:90%; height: 90%" src="{{ asset('assets/img/admin_map.png') }}" /> --}}
+                                    <div class="col-lg-12">
+                                        <div class="layout_120">
+                                            <span class="fw-bold fs-4">Địa chỉ:</span>
+                                            <span class="fs-4"
+                                                id="addressTxt2">219 Phố Trung Kính, Cầu Giấy, Hà Nội</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 mt-4">
+                                        <div id="map2" class="border"
+                                            style="height: 150px; display: block">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div> 
             </div>
 
-        <input type="hidden" name="" value="asset('/assets/js/chart/MapChartVN/vn-all.topo.json')" id="getmapvn">           
         </div>
             @include('template.footer.footer')
         </div>
@@ -598,6 +703,14 @@
     <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_D_DoanhSoTheoDiaBan.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_DoanhSoSKU.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_TyTrongSanLuong.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_SoKhachDatHang.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/chart/DashboardAdmin/admin_NhanSuTuyenMoi.js') }}"></script>
+
+    {{-- Slick --}}
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"
+        integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
  
    
@@ -645,5 +758,448 @@
         `);
 
     </script>
+
+<script>
+    $(document).ready(function() {
+        var apiKey = "b5b7553f4280465482f4a03273fb8813";
+        var map;
+        var marker;
+        var address = $("#addressTxt").text().trim();
+        $("#map").show();
+        geocodeAddress(address);
+
+        // Function to geocode address
+        function geocodeAddress(address) {
+            $.ajax({
+                url: 'https://api.opencagedata.com/geocode/v1/json',
+                method: 'GET',
+                dataType: 'json',
+                data: {
+                    q: address,
+                    key: apiKey
+                },
+                success: function(response) {
+                    if (response.total_results > 0) {
+                        var latitude = response.results[0].geometry.lat;
+                        var longitude = response.results[0].geometry.lng;
+
+                        // Display map
+                        if (!map) {
+                            map = L.map('map').setView([latitude, longitude], 13);
+                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+
+                            }).addTo(map);
+                        } else {
+                            map.setView([latitude, longitude], 13);
+                        }
+
+                        // Add or update marker
+                        if (!marker) {
+                            marker = L.marker([latitude, longitude]).addTo(map);
+                        } else {
+                            marker.setLatLng([latitude, longitude]);
+                        }
+                    } else {
+                        alert("Please check the address.");
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log("An error occurred while geocoding: " + error);
+                }
+            });
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        var apiKey = "b5b7553f4280465482f4a03273fb8813";
+        var map1;
+        var marker;
+        var address1 = $("#addressTxt1").text().trim();
+        $("#map1").show();
+        geocodeAddress(address1);
+
+        // Function to geocode address
+        function geocodeAddress(address1) {
+            $.ajax({
+                url: 'https://api.opencagedata.com/geocode/v1/json',
+                method: 'GET',
+                dataType: 'json',
+                data: {
+                    q: address1,
+                    key: apiKey
+                },
+                success: function(response) {
+                    if (response.total_results > 0) {
+                        var latitude = response.results[0].geometry.lat;
+                        var longitude = response.results[0].geometry.lng;
+
+                        // Display map
+                        if (!map1) {
+                            map1 = L.map('map1').setView([latitude, longitude], 13);
+                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+
+                            }).addTo(map1);
+                        } else {
+                            map1.setView([latitude, longitude], 13);
+                        }
+
+                        // Add or update marker
+                        if (!marker) {
+                            marker = L.marker([latitude, longitude]).addTo(map1);
+                        } else {
+                            marker.setLatLng([latitude, longitude]);
+                        }
+                    } else {
+                        alert("Please check the address.");
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log("An error occurred while geocoding: " + error);
+                }
+            });
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        var apiKey = "b5b7553f4280465482f4a03273fb8813";
+        var map2;
+        var marker;
+        var address2 = $("#addressTxt2").text().trim();
+        $("#map2").show();
+        geocodeAddress(address2);
+
+        // Function to geocode address
+        function geocodeAddress(address2) {
+            $.ajax({
+                url: 'https://api.opencagedata.com/geocode/v1/json',
+                method: 'GET',
+                dataType: 'json',
+                data: {
+                    q: address2,
+                    key: apiKey
+                },
+                success: function(response) {
+                    if (response.total_results > 0) {
+                        var latitude = response.results[0].geometry.lat;
+                        var longitude = response.results[0].geometry.lng;
+
+                        // Display map
+                        if (!map2) {
+                            map2 = L.map('map2').setView([latitude, longitude], 13);
+                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+
+                            }).addTo(map2);
+                        } else {
+                            map2.setView([latitude, longitude], 13);
+                        }
+
+                        // Add or update marker
+                        if (!marker) {
+                            marker = L.marker([latitude, longitude]).addTo(map2);
+                        } else {
+                            marker.setLatLng([latitude, longitude]);
+                        }
+                    } else {
+                        alert("Please check the address.");
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log("An error occurred while geocoding: " + error);
+                }
+            });
+        }
+    });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script>
+        //load data tỉnh thành từ https://provinces.open-api.vn/api/
+        const host = "https://provinces.open-api.vn/api/";
+        var callAPI = (api) => {
+            return axios.get(api)
+                .then((response) => {
+                    renderData(response.data, "city");
+                });
+        }
+        callAPI('https://provinces.open-api.vn/api/?depth=1');
+        var callApiDistrict = (api) => {
+            return axios.get(api)
+                .then((response) => {
+                    renderData(response.data.districts, "district");
+                    // $('#district').selectpicker('destroy');
+                });
+        }
+        var callApiWard = (api) => {
+            return axios.get(api)
+                .then((response) => {
+                    renderData(response.data.wards, "guide");
+                    // $('#guide').selectpicker('destroy');
+                });
+        }
+
+        var renderData = (array, select) => {
+            $('#' + select).selectpicker('destroy');
+            let row = '<option disable value="">Chọn</option>';
+            array.forEach(element => {
+                row += `<option data-id="${element.code}" value="${element.name}">${element.name}</option>`
+            });
+            document.querySelector("#" + select).innerHTML = row;
+            $('#' + select).selectpicker();
+        }
+
+        $("#city").change(() => {
+            callApiDistrict(host + "p/" + $("#city").find(':selected').data('id') + "?depth=2");
+        });
+        $("#district").change(() => {
+            callApiWard(host + "d/" + $("#district").find(':selected').data('id') + "?depth=2");
+        });
+        $("#guide").change(() => {})
+
+
+        //sua dia chi cho edit
+        var callAPI_edit = (api) => {
+            return axios.get(api)
+                .then((response) => {
+                    renderData_edit(response.data, "city_edit");
+                });
+        }
+        callAPI_edit('https://provinces.open-api.vn/api/?depth=1');
+        var callApiDistrict_edit = (api) => {
+            return axios.get(api)
+                .then((response) => {
+                    renderData_edit(response.data.districts, "district_edit");
+                });
+        }
+        var callApiWard_edit = (api) => {
+            return axios.get(api)
+                .then((response) => {
+                    renderData_edit(response.data.wards, "guide_edit");
+                });
+        }
+
+        var renderData_edit = (array, select) => {
+            $('#' + select).selectpicker('destroy');
+            let row = '<option disable value="">Chọn</option>';
+            array.forEach(element => {
+                row += `<option data-id="${element.code}" value="${element.name}">${element.name}</option>`
+            });
+            document.querySelector("#" + select).innerHTML = row;
+            $('#' + select).selectpicker();
+        }
+
+        $("#city_edit").change(() => {
+            callApiDistrict_edit(host + "p/" + $("#city_edit").find(':selected').data('id') + "?depth=2");
+        });
+        $("#district_edit").change(() => {
+            callApiWard_edit(host + "d/" + $("#district_edit").find(':selected').data('id') + "?depth=2");
+        });
+        $("#guide_edit").change(() => {})
+
+
+
+        //load data nhan su api
+        function loadPersonnelData() {
+            const apiUrl = '/nhan_su';
+            const selectElement = document.getElementById('personId');
+            fetch(apiUrl)
+                .then((response) => response.json())
+                .then((data) => {
+                    selectElement.innerHTML = '';
+                    data.forEach((person) => {
+                        const option = document.createElement('option');
+                        option.value = person.id;
+                        option.textContent = person.name;
+                        selectElement.appendChild(option);
+                    });
+
+                    $('#personId').selectpicker('refresh');
+                })
+                .catch((error) => console.error('Lỗi khi gọi API:', error));
+        }
+        window.addEventListener('load', loadPersonnelData);
+
+        //load data san pham api
+        function loadProductData() {
+            const apiUrl = '/danh_sach_san_pham_cho_select';
+            const selectElement = document.getElementById('productId');
+            fetch(apiUrl)
+                .then((response) => response.json())
+                .then((data) => {
+                    selectElement.innerHTML = '';
+                    data.forEach((product) => {
+                        const option = document.createElement('option');
+                        option.value = product.id;
+                        option.textContent = product.name;
+                        selectElement.appendChild(option);
+                    });
+
+                    $('#productId').selectpicker('refresh');
+                })
+                .catch((error) => console.error('Lỗi khi gọi API:', error));
+        }
+        window.addEventListener('load', loadProductData);
+
+        //load data kenh api
+        function loadChanelData() {
+            const apiUrl = '/department_getAll';
+            const selectElement = document.getElementById('chanelId');
+            fetch(apiUrl)
+                .then((response) => response.json())
+                .then((data) => {
+                    selectElement.innerHTML = '';
+                    data.forEach((chanel) => {
+                        const option = document.createElement('option');
+                        option.value = chanel.id;
+                        option.textContent = chanel.name;
+                        selectElement.appendChild(option);
+                    });
+
+                    $('#chanelId').selectpicker('refresh');
+                })
+                .catch((error) => console.error('Lỗi khi gọi API:', error));
+        }
+        window.addEventListener('load', loadChanelData);
+
+        //load data tuyen api
+        function loadRouteData() {
+            const apiUrl = '/route_direction_getAll';
+            const selectElement = document.getElementById('routeId');
+            fetch(apiUrl)
+                .then((response) => response.json())
+                .then((data) => {
+                    selectElement.innerHTML = '';
+                    data.forEach((route) => {
+                        const option = document.createElement('option');
+                        option.value = route.id;
+                        option.textContent = route.name;
+                        selectElement.appendChild(option);
+                    });
+
+                    $('#routeId').selectpicker('refresh');
+                })
+                .catch((error) => console.error('Lỗi khi gọi API:', error));
+        }
+        window.addEventListener('load', loadRouteData);
+
+        var isAdvancedUpload = function() {
+            var div = document.createElement('div');
+            return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window &&
+                'FileReader' in window;
+        }();
+
+        let draggableFileArea = document.querySelector(".drag-file-area");
+        let browseFileText = document.querySelector(".browse-files");
+        let uploadIcon = document.querySelector(".upload-icon");
+        let dragDropText = document.querySelector(".dynamic-message");
+        let fileInput = document.querySelector(".default-file-input");
+        let cannotUploadMessage = document.querySelector(".cannot-upload-message");
+        let cancelAlertButton = document.querySelector(".cancel-alert-button");
+        let uploadedFile = document.querySelector(".file-block");
+        let fileName = document.querySelector(".file-name");
+        let fileSize = document.querySelector(".file-size");
+        let progressBar = document.querySelector(".progress-bar");
+        let removeFileButton = document.querySelector(".remove-file-icon");
+        let uploadButton = document.querySelector(".upload-button");
+        let fileFlag = 0;
+
+        fileInput.addEventListener("click", () => {
+            fileInput.value = '';
+            console.log(fileInput.value);
+        });
+
+        fileInput.addEventListener("change", e => {
+            console.log(" > " + fileInput.value)
+            uploadIcon.innerHTML = 'Tải file lên';
+            dragDropText.innerHTML = 'File Dropped Successfully!';
+            document.querySelector(".label").innerHTML =
+                `<input type="file" class="default-file-input" style=""/>`;
+            uploadButton.innerHTML = `Upload`;
+            fileName.innerHTML = fileInput.files[0].name;
+            fileSize.innerHTML = (fileInput.files[0].size / 1024).toFixed(1) + " KB";
+            uploadedFile.style.cssText = "display: flex;";
+            progressBar.style.width = 0;
+            fileFlag = 0;
+        });
+
+        uploadButton.addEventListener("click", () => {
+            let isFileUploaded = fileInput.value;
+            if (isFileUploaded != '') {
+                if (fileFlag == 0) {
+                    fileFlag = 1;
+                    var width = 0;
+                    var id = setInterval(frame, 50);
+
+                    function frame() {
+                        if (width >= 390) {
+                            clearInterval(id);
+                            uploadButton.innerHTML =
+                                `<span class="material-icons-outlined upload-button-icon"> check_circle </span> Uploaded`;
+                        } else {
+                            width += 5;
+                            progressBar.style.width = width + "px";
+                        }
+                    }
+                }
+            } else {
+                cannotUploadMessage.style.cssText = "display: flex; animation: fadeIn linear 1.5s;";
+            }
+        });
+
+        cancelAlertButton.addEventListener("click", () => {
+            cannotUploadMessage.style.cssText = "display: none;";
+        });
+
+        if (isAdvancedUpload) {
+            ["drag", "dragstart", "dragend", "dragover", "dragenter", "dragleave", "drop"].forEach(evt =>
+                draggableFileArea.addEventListener(evt, e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                })
+            );
+
+            ["dragover", "dragenter"].forEach(evt => {
+                draggableFileArea.addEventListener(evt, e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    uploadIcon.innerHTML = 'file_download';
+                    dragDropText.innerHTML = 'Drop your file here!';
+                });
+            });
+
+            draggableFileArea.addEventListener("drop", e => {
+                uploadIcon.innerHTML = 'check_circle';
+                dragDropText.innerHTML = 'File Dropped Successfully!';
+                // document.querySelector(".label").innerHTML =
+                //     `drag & drop or <span class="browse-files"> <input type="file" class="default-file-input" style=""/> <span class="browse-files-text" style="top: -23px; left: -20px;"> browse file</span> </span>`;
+                uploadButton.innerHTML = `Upload`;
+
+                let files = e.dataTransfer.files;
+                fileInput.files = files;
+                console.log(files[0].name + " " + files[0].size);
+                console.log(document.querySelector(".default-file-input").value);
+                fileName.innerHTML = files[0].name;
+                fileSize.innerHTML = (files[0].size / 1024).toFixed(1) + " KB";
+                uploadedFile.style.cssText = "display: flex;";
+                progressBar.style.width = 0;
+                fileFlag = 0;
+            });
+        }
+
+        removeFileButton.addEventListener("click", () => {
+            uploadedFile.style.cssText = "display: none;";
+            fileInput.value = '';
+            uploadIcon.innerHTML = 'file_upload';
+            dragDropText.innerHTML = 'Drag & drop any file here';
+            document.querySelector(".label").innerHTML =
+                `or <span class="browse-files"> <input type="file" class="default-file-input"/> <span class="browse-files-text">browse file</span> <span>from device</span> </span>`;
+            uploadButton.innerHTML = `Upload`;
+        });
+    </script>
+
 
 @endsection
