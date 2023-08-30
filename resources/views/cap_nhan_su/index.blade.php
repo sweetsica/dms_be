@@ -146,8 +146,8 @@
                                                                         </div>
                                                                     </td>
                                                                     <td>
-                                                                        <div class="overText text-center"
-                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
                                                                             title="{{ $item->description }}">
                                                                             {{ $item->description }}
                                                                         </div>

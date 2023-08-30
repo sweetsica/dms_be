@@ -31,7 +31,7 @@ class SupplierController extends Controller
         $search = $request->get('search');
         $don_vi_me = $request->get('don_vi_me');
         $leader_name = $request->get('leader_name');
-        $limit = 15;
+        $limit = 10;
 
         $query = Supplier::query();
         // $positionList = Position::s

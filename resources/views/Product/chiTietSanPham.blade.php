@@ -10,6 +10,7 @@
             height: 10vh;
             object-fit: contain;
         }
+
         #fileInput {
             margin-bottom: 10px;
         }
@@ -36,7 +37,8 @@
         }
 
         #fileInput {
-            display: none; /* Ẩn input thực tế */
+            display: none;
+            /* Ẩn input thực tế */
         }
 
         #fileButton {
@@ -108,8 +110,6 @@
                 margin: 0 auto;
             }
         }
-
-
     </style>
 @endsection
 @section('content')
@@ -183,39 +183,49 @@
                                         </div>
                                     </div> --}}
 
-                                    <div id="fileInputDiv" class="col-md-6 {{ empty($details->images) ? 'd-block' : 'd-none' }}">
+                                    <div id="fileInputDiv"
+                                        class="col-md-6 {{ empty($details->images) ? 'd-block' : 'd-none' }}">
                                         <div class="upload_wrapper-items">
                                             <input type="hidden" value="" />
-                                            <label for="fileInput" id="fileButton" class="btn position-relative border d-flex w-50">
+                                            <label for="fileInput" id="fileButton"
+                                                class="btn position-relative border d-flex w-50">
                                                 <img src="{{ asset('assets/img/upload-file.svg') }}" />
                                                 <span class="ps-2">Đính kèm tài liệu, ảnh sản phẩm</span>
                                             </label>
-                                            <input accept=".pdf,.xlsx,.docx,image/jpeg,image/png" id="fileInput" multiple role="button" type="file"
-                                                class="modal_upload-input modal_upload-file" name="files[]" onchange="updateList(event)" />
+                                            <input accept=".pdf,.xlsx,.docx,image/jpeg,image/png" id="fileInput" multiple
+                                                role="button" type="file" class="modal_upload-input modal_upload-file"
+                                                name="files[]" onchange="updateList(event)" />
                                         </div>
 
                                         <div id="preview" class="d-flex mt-3"></div>
-                                        <ul id="attachments" class="file-list" style="padding: 0 0 4px 0; word-break: break-all;"></ul>
+                                        <ul id="attachments" class="file-list"
+                                            style="padding: 0 0 4px 0; word-break: break-all;"></ul>
 
                                     </div>
 
 
                                     @if (!empty($details->images))
-                                        <div id="caroselImg" class="col-md-6 mb-3 {{ !empty($details->images) ? 'd-block' : 'd-none' }}" style="overflow: hidden;">
-                                            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                                        <div id="caroselImg"
+                                            class="col-md-6 mb-3 {{ !empty($details->images) ? 'd-block' : 'd-none' }}"
+                                            style="overflow: hidden;">
+                                            <div id="carouselExampleIndicators" class="carousel slide"
+                                                data-bs-ride="carousel">
                                                 <div class="carousel-inner">
                                                     @foreach (json_decode($details->images) as $key => $img)
                                                         <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                                            <img src="{{ $img }}" class="d-block w-100" alt="...">
+                                                            <img src="{{ $img }}" class="d-block w-100"
+                                                                alt="...">
                                                         </div>
                                                     @endforeach
                                                 </div>
                                                 <div class="carousel-indicators">
                                                     @foreach (json_decode($details->images) as $key => $img)
-                                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $key }}"
-                                                            class="{{ $key == 0 ? 'active' : '' }} thumbnail" aria-current="true"
-                                                            aria-label="Slide {{ $key + 1 }}">
-                                                            <img src="{{ $img }}" class="d-block w-100" alt="...">
+                                                        <button type="button" data-bs-target="#carouselExampleIndicators"
+                                                            data-bs-slide-to="{{ $key }}"
+                                                            class="{{ $key == 0 ? 'active' : '' }} thumbnail"
+                                                            aria-current="true" aria-label="Slide {{ $key + 1 }}">
+                                                            <img src="{{ $img }}" class="d-block w-100"
+                                                                alt="...">
                                                         </button>
                                                     @endforeach
                                                 </div>
@@ -265,8 +275,8 @@
                                                         <div
                                                             class="card_template-sub with_input d-flex justify-content-center align-items-center">
 
-                                                            <textarea style="pointer-events: none;" rows="1" type="text" placeholder="Nhập giá tiền" class="form-control textareaResize"
-                                                                name="price">{{ $details->price }}</textarea>
+                                                            <textarea style="pointer-events: none;" rows="1" type="text" placeholder="Nhập giá tiền"
+                                                                class="form-control textareaResize" name="price">{{ $details->price }}</textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -322,12 +332,12 @@
                                                         <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center"
                                                             style="width:50%">
                                                             <textarea rows="1" style="pointer-events: none;" type="text" placeholder="Độ dài"
-                                                                class="card-title-black form-control textareaResize auto-resize" name="listProducts[{{$key}}][key]">{{ $element->key }}</textarea>
+                                                                class="card-title-black form-control textareaResize auto-resize" name="listProducts[{{ $key }}][key]">{{ $element->key }}</textarea>
                                                         </div>
                                                         <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center"
                                                             style="width:50%">
                                                             <textarea rows="1" style="pointer-events: none;" type="text" placeholder="Catalogue mô tả"
-                                                                class="form-control textareaResize auto-resize" name="listProducts[{{$key}}][value]">{{ $element->value }}</textarea>
+                                                                class="form-control textareaResize auto-resize" name="listProducts[{{ $key }}][value]">{{ $element->value }}</textarea>
                                                         </div>
                                                     </div>
                                                 @endforeach
@@ -360,7 +370,9 @@
                                                 @endphp
                                                 <div class="col-4 mt-3">
                                                     <div class="row control_product">
-                                                        <div href="/chi-tiet-san-pham/{{ $related->id }}" class="control_product_link d-flex justify-content-between" id="control_link-1">
+                                                        <div href="/chi-tiet-san-pham/{{ $related->id }}"
+                                                            class="control_product_link d-flex justify-content-between"
+                                                            id="control_link-1">
                                                             <div class="col-3 control_product_img">
                                                                 <img src="{{ $related->thumbnail }}" alt="">
                                                             </div>
@@ -375,8 +387,11 @@
                                                                 <a href="/chi-tiet-san-pham/{{ $related->id }}"
                                                                     class="over_info1">Xem chi tiết</a>
                                                             </div>
-                                                            <div class="col-2 btn test_btn-remove-{{ $related->id }}"href="#" data-bs-toggle="modal" data-bs-target="#xoaSanPham{{ $related->id }}" >
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            <div class="col-2 btn test_btn-remove-{{ $related->id }}"href="#"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#xoaSanPham{{ $related->id }}">
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -653,11 +668,11 @@
 
 
     <script>
-// Hàm thêm phần tử
-function addNewElement(index) {
-    var newDivElement = document.createElement("div");
-    newDivElement.className = `col-md-4 mb-3 d-flex align-items-center item-${index + 1}`;
-    newDivElement.innerHTML = `
+        // Hàm thêm phần tử
+        function addNewElement(index) {
+            var newDivElement = document.createElement("div");
+            newDivElement.className = `col-md-4 mb-3 d-flex align-items-center item-${index + 1}`;
+            newDivElement.innerHTML = `
         <div class="countData card_template-sub with_input d-flex justify-content-center align-items-center" style="width:45%">
             <textarea rows="1" type="text" placeholder="Độ dài" class="card-title-black form-control textareaResize" name="listProducts[${index}][key]"></textarea>
         </div>
@@ -669,47 +684,44 @@ function addNewElement(index) {
         </div>
     `;
 
-    var colMd4Elements = document.querySelectorAll(".item-" + index);
-    console.log(colMd4Elements);
-    var lastColMd4Element = colMd4Elements[colMd4Elements.length - 1];
+            var colMd4Elements = document.querySelectorAll(".item-" + index);
+            console.log(colMd4Elements);
+            var lastColMd4Element = colMd4Elements[colMd4Elements.length - 1];
 
-    lastColMd4Element.parentNode.insertBefore(newDivElement, lastColMd4Element.nextSibling);
+            lastColMd4Element.parentNode.insertBefore(newDivElement, lastColMd4Element.nextSibling);
 
-    // Gắn sự kiện xóa vào nút delete trong phần tử mới
-    var deleteButton = newDivElement.querySelector('[data-repeater-delete]');
-    deleteButton.addEventListener('click', function(event) {
-        deleteElement(newDivElement);
-    });
-}
+            // Gắn sự kiện xóa vào nút delete trong phần tử mới
+            var deleteButton = newDivElement.querySelector('[data-repeater-delete]');
+            deleteButton.addEventListener('click', function(event) {
+                deleteElement(newDivElement);
+            });
+        }
 
-// Hàm xóa phần tử
-function deleteElement(element) {
-    var index = element.classList[2].split('-')[1]; // Lấy index từ class
-    var itemElement = document.querySelector(`.item-${index}`);
-    if (itemElement) {
-        itemElement.remove();
-    }
-    element.remove();
-}
+        // Hàm xóa phần tử
+        function deleteElement(element) {
+            var index = element.classList[2].split('-')[1]; // Lấy index từ class
+            var itemElement = document.querySelector(`.item-${index}`);
+            if (itemElement) {
+                itemElement.remove();
+            }
+            element.remove();
+        }
 
-// Sự kiện thêm
-var plusButton = document.querySelector(".bi-plus-circle");
-plusButton.addEventListener("click", function() {
-    var count = document.querySelectorAll('.countData').length / 2;
-    addNewElement(count);
-});
+        // Sự kiện thêm
+        var plusButton = document.querySelector(".bi-plus-circle");
+        plusButton.addEventListener("click", function() {
+            var count = document.querySelectorAll('.countData').length / 2;
+            addNewElement(count);
+        });
 
-// Sự kiện xóa
-document.addEventListener('click', function(event) {
-    if (event.target && event.target.getAttribute('data-repeater-delete')) {
-        var col2Element = event.target.closest('.col-2');
-        var colMd4Element = col2Element.closest('.col-md-4');
-        deleteElement(colMd4Element);
-    }
-});
-
-
-
+        // Sự kiện xóa
+        document.addEventListener('click', function(event) {
+            if (event.target && event.target.getAttribute('data-repeater-delete')) {
+                var col2Element = event.target.closest('.col-2');
+                var colMd4Element = col2Element.closest('.col-md-4');
+                deleteElement(colMd4Element);
+            }
+        });
     </script>
 
 

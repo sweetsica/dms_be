@@ -148,8 +148,8 @@
 
                                                                     </td>
                                                                     <td>
-                                                                        <div class="overText text-center"
-                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
                                                                             title="{{ $item->description }}">
                                                                             {{ $item->description }}
                                                                         </div>
@@ -157,7 +157,7 @@
                                                                     </td>
                                                                     <td>
                                                                         <div
-                                                                            class="table_actions d-flex justify-content-end">
+                                                                            class="table_actions d-flex justify-content-center">
 
                                                                             <div data-bs-toggle="tooltip"
                                                                                 data-bs-placement="top" title="Sửa">

@@ -78,7 +78,7 @@
                                             class="btn-export"><i class="bi bi-download"></i></a>
                                     </div> --}}
 
-                                        <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        <div class="action_export" data-bs-toggle="tooltip" data-bs-placement="top"
                                             aria-label="Thêm khách hàng" data-bs-original-title="Thêm khách hàng">
                                             <button class="btn btn-danger d-block testCreateUser" data-bs-toggle="modal"
                                                 data-bs-target="#info">Thêm khách hàng</button>
@@ -117,8 +117,7 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($listData as $key => $item)
-                                                    <tr class="table-row"
-                                                        data-href="/chi-tiet-khach-hang/{{ $item['id'] }}" role="button">
+                                                    <tr class="table-row">
                                                         <td>
                                                             <div class="overText text-center">
                                                                 {{-- {{ $loop->iteration }} --}}
@@ -134,7 +133,10 @@
                                                         <td>
                                                             <div class="overText text-center" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="{{ $item['name'] }}">
-                                                                {{ $item['name'] }}
+                                                                <a href="/chi-tiet-khach-hang/{{ $item['id'] }}"
+                                                                    style="color: black; text-decoration: underline">
+                                                                    {{ $item['name'] }}
+                                                                </a>
                                                             </div>
                                                         </td>
                                                         <td>
@@ -150,7 +152,7 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText text-center" data-bs-toggle="tooltip"
+                                                            <div class="overText " data-bs-toggle="tooltip"
                                                                 data-bs-placement="top"
                                                                 title="  {{ $item['companyName'] }}">
                                                                 {{ $item['companyName'] }}
@@ -181,7 +183,7 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="overText text-center" data-bs-toggle="tooltip"
+                                                            <div class="overText" data-bs-toggle="tooltip"
                                                                 data-bs-placement="top" title="{{ $item['address'] }}">
                                                                 {{ $item['address'] }}
                                                             </div>
