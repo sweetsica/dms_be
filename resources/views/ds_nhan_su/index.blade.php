@@ -269,22 +269,22 @@
                                                         'search' => $search,
                                                     ])->links() }} --}}
 
-                                                    <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                    {{-- <nav aria-label="Page navigation example" class="float-end mt-3"
                                                         id="target-pagination">
                                                         <ul class="pagination">
                                                             {{ $personnelList->appends([
                                                                     'search' => $search,
                                                                 ])->links() }}
                                                         </ul>
-                                                    </nav>
-                                                    {{-- <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                    </nav> --}}
+                                                    <nav aria-label="Page navigation example" class="float-end mt-3"
                                                         id="target-pagination">
                                                         <ul class="pagination">
                                                             @foreach ($pagination['links'] as $link)
                                                                 <li
                                                                     class="page-item {{ $link['active'] ? 'active' : '' }}">
                                                                     <a class="page-link"
-                                                                        href="{{ getPaginationLink($link, 'page') }}"
+                                                                        href="{{ getPaginationLink_A($link, 'page') }}"
                                                                         aria-label="Previous">
                                                                         <span
                                                                             aria-hidden="true">{!! $link['label'] !!}</span>
@@ -292,7 +292,7 @@
                                                                 </li>
                                                             @endforeach
                                                         </ul>
-                                                    </nav> --}}
+                                                    </nav>
                                                 </div>
                                             </form>
                                         </div>
