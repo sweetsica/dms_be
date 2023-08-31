@@ -5,32 +5,22 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 @endsection
 @php
-    
-    function getPaginationLink($link, $pageName)
+
+    function getPaginationLink_A($link, $pageName)
     {
         if (!isset($link['url'])) {
             return '#';
         }
-    
+
         $pageNumber = explode('?page=', $link['url'])[1];
-    
+
         $queryString = request()->query();
-    
+
         $queryString[$pageName] = $pageNumber;
         return route('Personnel.index', $queryString);
     }
-    
-    // function isFiltering($filterNames)
-    // {
-    //     $filters = request()->query();
-    //     foreach ($filterNames as $filterName) {
-    //         if (isset($filters[$filterName]) && $filters[$filterName] != '') {
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // }
-    
+
+
 @endphp
 
 @section('content')
@@ -160,12 +150,12 @@
                                                                             </div>
                                                                         </a>
                                                                     </td>
-                                                                    <td class="">
+                                                                    {{-- <td class="">
                                                                         @php
                                                                             $positionIds = json_decode($item->position_id, true) ?? [];
                                                                             $positions = App\Models\Position::whereIn('id', $positionIds)->get();
                                                                             $positionNames = $positions->pluck('name')->toArray();
-                                                                            
+
                                                                             $positionList = implode(', ', $positionNames);
                                                                         @endphp
                                                                         <div class="overText" data-bs-toggle="tooltip"
@@ -173,6 +163,20 @@
                                                                             title="{{ $positionList }}">
                                                                             {{ $positionList }}
                                                                         </div>
+                                                                    </td> --}}
+                                                                    <td class="">
+                                                                        @if (is_array($item->position_id))
+                                                                        @php
+                                                                            $positionIds = json_decode($item->position_id, true) ?? [];
+                                                                            $positions = App\Models\Position::whereIn('id', $positionIds)->get();
+                                                                            $positionNames = $positions->pluck('name')->toArray();
+
+                                                                            $positionList = implode(', ', $positionNames);
+                                                                        @endphp
+                                                                        <div class="overText" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $positionList }}">
+                                                                            {{ $positionList }}
+                                                                        </div>
+                                                                        @endif
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
@@ -265,15 +269,15 @@
                                                         'search' => $search,
                                                     ])->links() }} --}}
 
-                                                    {{-- <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                    <nav aria-label="Page navigation example" class="float-end mt-3"
                                                         id="target-pagination">
                                                         <ul class="pagination">
                                                             {{ $personnelList->appends([
                                                                     'search' => $search,
                                                                 ])->links() }}
                                                         </ul>
-                                                    </nav> --}}
-                                                    <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                    </nav>
+                                                    {{-- <nav aria-label="Page navigation example" class="float-end mt-3"
                                                         id="target-pagination">
                                                         <ul class="pagination">
                                                             @foreach ($pagination['links'] as $link)
@@ -288,7 +292,7 @@
                                                                 </li>
                                                             @endforeach
                                                         </ul>
-                                                    </nav>
+                                                    </nav> --}}
                                                 </div>
                                             </form>
                                         </div>
@@ -429,14 +433,17 @@
                                 </div>
                                 <div class="col-6 mb-3">
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Vị trí chức danh">
-                                        <select name="position_id[]" class="selectpicker" data-dropup-auto="false"
-                                            data-live-search="true" multiple>
-                                            @php
-                                                $positionIds = json_decode($item->position_id, true) ?? [];
-                                            @endphp
+                                        <select name="position_id" class="selectpicker" data-dropup-auto="false">
+                                            <?php if( $item->position_id == null){ ?>
+                                            <option value="">Vị trí
+                                                chức danh</option>
+                                            <?php }else{ ?>
+                                            <?php } ?>
+                                            <option value="{{ $item->position_id }}">
+                                                {{ $item->position_name }}
+                                            </option>
                                             @foreach ($positionlists as $posiList)
-                                                <option {{ in_array($posiList->id, $positionIds) ? ' selected' : '' }}
-                                                    value="{{ $posiList->id }}">
+                                                <option value="{{ $posiList->id }}">
                                                     @php
                                                         $str = '';
                                                         for ($i = 0; $i < $posiList->level; $i++) {
