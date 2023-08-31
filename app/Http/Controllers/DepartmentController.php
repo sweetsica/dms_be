@@ -219,7 +219,7 @@ class DepartmentController extends Controller
 
     public function assignUser(Request $request, $id)
     {
-        $LIMIT = 10;
+        $LIMIT = 1;
         $q = $request->query('q');
         $department = $request->query('department');
         $cap_nhan_su = $request->query('cap_nhan_su');
@@ -298,12 +298,14 @@ class DepartmentController extends Controller
         }
 
         $listUsers = $listUsers
-            ->whereJsonContains('position_id', strval($id))->get();
+            ->whereJsonContains('position_id', strval($id))->paginate($LIMIT);
 
         $selectableUser = Personnel::where(function ($query) use ($id) {
             $query->whereNull('position_id')
                 ->orWhereJsonDoesntContain('position_id', strval($id));
         })->get();
+
+        $pagination = $this->pagination($listUsers);
 
         return view("Deparment.assignUser", [
             "departmentList" => $departmentList,
@@ -322,7 +324,8 @@ class DepartmentController extends Controller
             'getPos' => $getPos,
             'selectableUser' => $selectableUser,
             'getDept' => $getDept,
-            'listPosToDept' => $listPosToDept
+            'listPosToDept' => $listPosToDept,
+            'pagination' => $pagination
         ]);
     }
 

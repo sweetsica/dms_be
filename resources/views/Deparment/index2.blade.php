@@ -436,7 +436,7 @@
                                                                             name="selected_items[]"
                                                                             value="{{ $item->id }}"></td>
                                                                     <td class=" text-center">
-                                                                        {{ $loop->iteration }}
+                                                                        {{ $listPosToDept->total() - $loop->index - ($listPosToDept->currentPage() - 1) * $listPosToDept->perPage() }}
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"

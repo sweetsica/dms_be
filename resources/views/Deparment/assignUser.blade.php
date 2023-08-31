@@ -21,6 +21,24 @@
 @endsection
 
 @php
+    
+    function getPaginationLink($link, $pageName)
+    {
+        if (!isset($link['url'])) {
+            return '#';
+        }
+    
+        $pageNumber = explode('?page=', $link['url'])[1];
+    
+        $queryString = request()->query();
+    
+        $queryString[$pageName] = $pageNumber;
+
+        $id = basename(parse_url($link['url'], PHP_URL_PATH));
+
+        return route('department.assignUser', ['id' => $id] + $queryString);
+    }
+
     $total_wage = 0;
     foreach ($listPosToDept as $item) {
         $total_wage += $item->wage;
@@ -420,7 +438,7 @@
                                                                             name="selected_items[]"
                                                                             value="{{ $item->id }}"></td>
                                                                     <td class=" text-center">
-                                                                        {{ $loop->iteration }}
+                                                                        {{ $listUsers->total() - $loop->index - ($listUsers->currentPage() - 1) * $listUsers->perPage() }}
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText text-center"
@@ -536,14 +554,22 @@
                                                             </tbody>
                                                         @endforeach
                                                     </table>
-                                                    {{-- <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                    <nav aria-label="Page navigation example" class="float-end mt-3"
                                                         id="target-pagination">
                                                         <ul class="pagination">
-                                                            {{ $departmentList->appends([
-                                                                    'search' => $search,
-                                                                ])->links() }}
+                                                            @foreach ($pagination['links'] as $link)
+                                                                <li
+                                                                    class="page-item {{ $link['active'] ? 'active' : '' }}">
+                                                                    <a class="page-link"
+                                                                        href="{{ getPaginationLink($link, 'page') }}"
+                                                                        aria-label="Previous">
+                                                                        <span
+                                                                            aria-hidden="true">{!! $link['label'] !!}</span>
+                                                                    </a>
+                                                                </li>
+                                                            @endforeach
                                                         </ul>
-                                                    </nav> --}}
+                                                    </nav>
                                                 </div>
                                             </form>
                                         </div>
