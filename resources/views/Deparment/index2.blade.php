@@ -21,6 +21,21 @@
 @endsection
 
 @php
+    
+    function getPaginationLink($link, $pageName)
+    {
+        if (!isset($link['url'])) {
+            return '#';
+        }
+    
+        $pageNumber = explode('?page=', $link['url'])[1];
+    
+        $queryString = request()->query();
+    
+        $queryString[$pageName] = $pageNumber;
+        return route('department.index2', ['department_id' => request()->department_id] + $queryString);
+    }
+    
     $total_wage = 0;
     foreach ($listPosToDept as $item) {
         $total_wage += $item->wage;
@@ -287,79 +302,88 @@
                                             align-items: center;">
 
 
-                                                <form method="GET" action="">
-                                                    {{-- <div style="display: flex"> --}}
+                                                <form method="GET">
+                                                    @foreach (request()->query() as $key => $value)
+                                                        @if ($key != 'q')
+                                                            <input type="hidden" name="{{ $key }}"
+                                                                value="{{ $value }}">
+                                                        @endif
+                                                    @endforeach
                                                     <div class="form-group has-search">
-                                                        <input type="text" class="form-control"
-                                                            value="{{ $search }}" placeholder="Tìm kiếm"
-                                                            name="search">
+                                                        <span type="submit"
+                                                            class="bi bi-search form-control-feedback fs-5"></span>
+                                                        <input type="text" class="form-control" placeholder="Tìm kiếm"
+                                                            value="{{ request()->get('q') }}" name="q">
                                                     </div>
-                                                    <div class="form-group has-search" style="display: none">
-                                                        <input type="text" class="form-control"
-                                                            value="{{ $department_id }}" placeholder="Tìm kiếm"
-                                                            name="department_id">
-                                                    </div>
-
-
-                                                    {{-- <div data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    title="Lọc cấp nhân sự">
-                                                    <select name="cap_nhan_su"  class="selectpicker"
-                                                        data-dropup-auto="false">
-                                                        <option value="">Lọc cấp nhân sự</option>
-                                                        @foreach ($personnelLevelList as $item)
-                                                                <option value="{{ $item->id }}">
-                                                                    {{ $item->name }}
-                                                                </option>
-                                                            @endforeach
-                                                    </select>
-                                                </div> --}}
-                                                    <button style="display: none">ok</button>
-                                                    {{-- </div> --}}
                                                 </form>
 
-                                                <div data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    title="Lọc cấp nhân sự">
-                                                    <select name="filter_personnel_level" required class="selectpicker"
-                                                        data-dropup-auto="false">
-                                                        <option value="">Lọc cấp nhân sự</option>
-                                                        @foreach ($personnelLevelList as $item)
-                                                            <option value="{{ $item->id }}">
-                                                                {{ $item->name }}
-                                                            </option>
+                                                <div class="d-flex align-items-center">
+                                                    <form id="filterForm">
+                                                        @foreach (request()->query() as $key => $value)
+                                                            @if (!in_array($key, ['cap_nhan_su', 'parent']))
+                                                                <input type="hidden" name="{{ $key }}"
+                                                                    value="{{ $value }}">
+                                                            @endif
                                                         @endforeach
-                                                    </select>
-                                                </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col" style="min-width: 200px">
+                                                                    <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                        data-bs-original-title="Cấp nhân sự">
+                                                                        <select class="selectpicker select_filter"
+                                                                            data-dropup-auto="false" title="Cấp nhân sự"
+                                                                            name='cap_nhan_su' data-size="5"
+                                                                            data-live-search="true">
+                                                                            <option value="" disabled
+                                                                                {{ request()->cap_nhan_su ? '' : 'selected' }}>
+                                                                                Lọc cấp nhân sự</option>
+                                                                            <option value="all"
+                                                                                {{ request()->cap_nhan_su == 'all' ? 'selected' : '' }}>
+                                                                                Tất cả</option>
+                                                                            @foreach ($personnelLevelList as $item)
+                                                                                <option
+                                                                                    {{ request()->cap_nhan_su == $item->id ? 'selected' : '' }}
+                                                                                    value="{{ $item->id }}">
+                                                                                    {{ $item->name }}
+                                                                                </option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col" style="min-width: 200px">
+                                                                    <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                        data-bs-original-title="Người đảm nhiệm">
+                                                                        <select id="select-status"
+                                                                            class="selectpicker select_filter"
+                                                                            data-dropup-auto="false"
+                                                                            title="Người đảm nhiệm" name='parent'
+                                                                            data-live-search="true">
+                                                                            <option value="" disabled
+                                                                                {{ request()->parent ? '' : 'selected' }}>
+                                                                                Lọc người đảm nhiệm</option>
+                                                                            <option value="all"
+                                                                                {{ request()->parent == 'all' ? 'selected' : '' }}>
+                                                                                Tất cả</option>
+                                                                            @foreach ($personnellists as $item)
+                                                                                <option
+                                                                                    {{ request()->parent == $item->id ? 'selected' : '' }}
+                                                                                    value="{{ $item->id }}">
+                                                                                    {{ $item->name }}
+                                                                                </option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
-                                                <div data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    title="Lọc tên vị trí">
-                                                    <select name="filter_personnel_level" required class="selectpicker"
-                                                        data-dropup-auto="false">
-                                                        <option value="">Lọc tên vị trí</option>
-                                                        @foreach ($personnelLevelList as $item)
-                                                            <option value="{{ $item->id }}">
-                                                                {{ $item->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-
-                                                <div data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    title="Lọc người đảm nhiệm">
-                                                    <select name="filter_personnel_level" required class="selectpicker"
-                                                        data-dropup-auto="false">
-                                                        <option value="">Lọc người đảm nhiệm</option>
-                                                        @foreach ($personnelLevelList as $item)
-                                                            <option value="{{ $item->id }}">
-                                                                {{ $item->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
+                                                    </form>
                                                 </div>
                                             </div>
                                             <form id="select-form" action="{{ route('detach-department-items') }}"
                                                 method="POST">
                                                 @csrf
-                                                @method("DELETE")
+                                                @method('DELETE')
                                                 <div class="action_export order-md-1 mt-3" data-bs-toggle="tooltip"
                                                     data-bs-placement="top" title="Xóa">
                                                     <button class="btn btn-danger  " type="submit"
@@ -412,7 +436,7 @@
                                                                             name="selected_items[]"
                                                                             value="{{ $item->id }}"></td>
                                                                     <td class=" text-center">
-                                                                        {{ $loop->iteration }}
+                                                                        {{ $listPosToDept->total() - $loop->index - ($listPosToDept->currentPage() - 1) * $listPosToDept->perPage() }}
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
@@ -517,14 +541,22 @@
                                                             </tbody>
                                                         @endforeach
                                                     </table>
-                                                    {{-- <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                    <nav aria-label="Page navigation example" class="float-end mt-3"
                                                         id="target-pagination">
                                                         <ul class="pagination">
-                                                            {{ $departmentList->appends([
-                                                                    'search' => $search,
-                                                                ])->links() }}
+                                                            @foreach ($pagination['links'] as $link)
+                                                                <li
+                                                                    class="page-item {{ $link['active'] ? 'active' : '' }}">
+                                                                    <a class="page-link"
+                                                                        href="{{ getPaginationLink($link, 'page') }}"
+                                                                        aria-label="Previous">
+                                                                        <span
+                                                                            aria-hidden="true">{!! $link['label'] !!}</span>
+                                                                    </a>
+                                                                </li>
+                                                            @endforeach
                                                         </ul>
-                                                    </nav> --}}
+                                                    </nav>
                                                 </div>
                                             </form>
                                         </div>
@@ -704,28 +736,22 @@
                                 <div class="col-6 mb-3">
 
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn cấp quản lý">
-                                        <select name="parent" class="selectpicker" data-dropup-auto="false">
-                                            <?php if ($item->parent == null){ ?>
-                                            <option value="0">Chọn cấp quản lý
-                                            </option>
-                                            <?php } else { ?>
-                                            <?php } ?>
-                                            <option value="{{ $item->parent }}">
-                                                @if ($item->donvime)
-                                                    {{ $item->donvime->name }}
-                                                @endif
+                                        <select required name="parent" class="selectpicker" data-dropup-auto="false">
+                                            <option value="">Chọn cấp quản lý
                                             </option>
                                             @foreach ($positionlists as $ac)
-                                                <option value="{{ $ac->id }}">
-                                                    @php
-                                                        $str = '';
-                                                        for ($i = 0; $i < $ac->level; $i++) {
-                                                            echo $str;
-                                                            $str = '  --';
-                                                        }
-                                                    @endphp
-                                                    {{ $ac->name }}
-                                                </option>
+                                                @if ($ac->id != $item->id)
+                                                    <option {{ $ac->id == $item->parent ? "selected" : "" }} value="{{ $ac->id }}">
+                                                        @php
+                                                            $str = '';
+                                                            for ($i = 0; $i < $ac->level; $i++) {
+                                                                echo $str;
+                                                                $str = '  --';
+                                                            }
+                                                        @endphp
+                                                        {{ $ac->name }}
+                                                    </option>
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>
@@ -1146,6 +1172,19 @@
             const atLeastOneChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
             deleteButton.style.display = atLeastOneChecked ? 'block' : 'none';
         }
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector('#filterForm');
+            const selectFields = form.querySelectorAll('select');
+
+            selectFields.forEach(function(select) {
+                select.addEventListener('change', function() {
+                    form.submit();
+                });
+            });
+        });
     </script>
 
 @endsection

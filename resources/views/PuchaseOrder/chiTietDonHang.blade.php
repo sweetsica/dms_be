@@ -3,6 +3,7 @@
 @section('title', 'Chi tiết đơn đặt hàng')
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
+
 @endsection
 <style>
     .text_default {
@@ -50,7 +51,61 @@
         display: grid;
         grid-template-columns: 150px auto;
     }
+
+    /* .dropdown {
+        position: relative;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .dropdown .dropdown-list {
+        background: #fff;
+        position: absolute;
+        top: 35px;
+        left: -124%;
+        right: 2px;
+        box-shadow: 0 1px 2px 1px rgba(0, 0, 0, .15);
+        transform-origin: 50% 0;
+        transform: scale(1, 0);
+        transition: transform .15s ease-in-out .15s;
+        overflow-y: scroll;
+        width: 300px;
+        z-index: 99;
+    }
+
+    .dropdown .dropdown-option {
+        display: block;
+        padding: 8px 12px;
+        opacity: 0;
+        transition: opacity .15s ease-in-out;
+    }
+
+
+    .dropdown.on .dropdown-list {
+        transform: scale(1, 1);
+        transition-delay: 0s;
+    }
+
+    .dropdown.on .dropdown-list .dropdown-option {
+        opacity: 1;
+        transition-delay: .2s;
+    }
+
+    .dropdown [type="checkbox"] {
+        position: relative;
+        top: -1px;
+        margin-right: 4px;
+    } */
+
+    .dropdown-menu-center {
+        top: 5% !important;
+        left: -82% !important;
+        right: auto !important;
+        width: 300px !important;
+        height: auto;
+    }
 </style>
+
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
     <div id="mainWrap" class="mainWrap" style="height: 150rem">
@@ -117,7 +172,8 @@
                                         <div class="row g-0 mb-4">
                                             <div class="col-lg-6">
                                                 <div>
-                                                    <span class="fs-5 fw-bold">Khách hàng :</span>
+                                                    <span class="fs-5 fw-bold" data-bs-toggle="tooltip"
+                                                        data-bs-placement="top" title="Từ chối">Khách hàng :</span>
                                                     <span class="fs-5 ">Quầy thuốc Thịnh Phúc - DTSD029</span>
                                                 </div>
                                             </div>
@@ -215,15 +271,64 @@
                                                         </option>
                                                     </select>
                                                 </div>
-
-                                                <div>
-                                                    <button class="btn btn-danger">
+                                                @php
+                                                    $arrSPKhuyenMai = [
+                                                        [
+                                                            'id' => 1,
+                                                            'tenSp' => 'Sản phẩm 1',
+                                                            'maSp' => 'SP01',
+                                                            'dvt' => 'Hộp',
+                                                            'Kho xuất' => 'Kho 01',
+                                                            'tonKho' => '10/100',
+                                                            'ghiChu' => 'Ghi chú 1',
+                                                        ],
+                                                        [
+                                                            'id' => 2,
+                                                            'tenSp' => 'Sản phẩm 2',
+                                                            'maSp' => 'SP02',
+                                                            'dvt' => 'Hộp',
+                                                            'Kho xuất' => 'Kho 02',
+                                                            'tonKho' => '20/200',
+                                                            'ghiChu' => 'Ghi chú 2',
+                                                        ],
+                                                    ];
+                                                @endphp
+                                                <div class="dropdown">
+                                                    <button class="btn btn-danger" type="button"
+                                                        id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                                        aria-expanded="false">
                                                         <i class="bi bi-tag"></i>
                                                         Khuyến mại
                                                     </button>
+                                                    <div class="dropdown-menu dropdown-menu-center"
+                                                        aria-labelledby="dropdownMenuButton1">
+                                                        <div class="text-center border-bottom py-2">
+                                                            <span class="text_default fs-5 fw-bold ">Chọn sản
+                                                                phẩm</span>
+                                                        </div>
+                                                        <div class="my-2">
+                                                            <label class="dropdown-item">
+                                                                <input type="checkbox" id="selectAllCheckbox" /> Chọn tất
+                                                                cả
+                                                            </label>
+                                                            <label class="dropdown-item">
+                                                                <input type="checkbox" class="nestedCheckbox" />Sản phẩm 1
+                                                            </label>
+                                                            <label class="dropdown-item">
+                                                                <input type="checkbox" class="nestedCheckbox" />Sản phẩm
+                                                                2
+                                                            </label>
+                                                        </div>
+                                                        <div
+                                                            class="d-flex justify-content-end align-items-center border-top py-3">
+                                                            <button class="btn btn-outline-danger me-3"> Hủy</button>
+                                                            <button class="btn btn-danger me-3"
+                                                                id="saveKhuyenMai">Lưu</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            {{--  --}}
+
                                             @php
                                                 $arrProduct = [
                                                     [
@@ -334,7 +439,7 @@
                                             <div class="mt-5">
                                                 <div class="table-responsive">
 
-                                                    <table id="dsNhaCungCap"
+                                                    <table
                                                         class="table table-responsive table-hover table-bordered filter">
                                                         <thead>
                                                             <tr>
@@ -362,7 +467,7 @@
                                                             </tr>
                                                         </thead>
 
-                                                        <tbody id="">
+                                                        <tbody id="dsKhuyenMai">
                                                             {{-- <tr>
                                                                 <td class="text-center"> <i
                                                                         class="bi bi-plus-circle text_default fs-4 fw-bold "
@@ -462,11 +567,10 @@
                     </div>
                 </div>
             </div>
+            @include('template.footer.footer')
         </div>
     </div>
-    @include('template.footer.footer')
-    </div>
-    </div>
+
     @include('template.sidebar.sidebarMaster.sidebarRight')
 
 @endsection
@@ -489,7 +593,6 @@
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/components/dataHrefTable.js') }}"></script>
-
     <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}"></script>
 
     <script>
@@ -771,5 +874,73 @@
             })
 
         }
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const selectAllCheckbox = document.getElementById("selectAllCheckbox");
+            const nestedCheckboxes = document.querySelectorAll(".nestedCheckbox");
+
+            selectAllCheckbox.addEventListener("change", function() {
+                const isChecked = selectAllCheckbox.checked;
+                nestedCheckboxes.forEach(checkbox => {
+                    checkbox.checked = isChecked;
+                });
+            });
+
+            nestedCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener("change", function() {
+                    const areAllChecked = Array.from(nestedCheckboxes).every(checkbox => checkbox
+                        .checked);
+                    selectAllCheckbox.checked = areAllChecked;
+                });
+            });
+        });
+
+        var products = @json($arrSPKhuyenMai);
+        var selectedProducts = []; // Array to store selected produc
+
+        function onSaveButtonClick() {
+            var selectAllCheckbox = document.getElementById('selectAllCheckbox');
+
+            if (selectAllCheckbox.checked) {
+                selectedProducts = products.slice(); // Copy all products
+            } else {
+                var nestedCheckboxes = document.querySelectorAll('.nestedCheckbox');
+                nestedCheckboxes.forEach(function(checkbox) {
+                    if (checkbox.checked) {
+                        var productValue = checkbox.parentNode.textContent
+                            .trim(); // Get the text content of the label
+                        var product = products.find(function(item) {
+                            return item.tenSp === productValue;
+                        });
+
+                        if (product && !selectedProducts.includes(product)) {
+                            selectedProducts.push(product);
+                        }
+                    }
+                });
+            }
+
+            // Display selected products in the table
+            var tableBody = document.getElementById('dsKhuyenMai');
+            // tableBody.innerHTML = '';
+            selectedProducts.forEach(function(product, index) {
+                var newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                <td class="text-center">${index + 1}</td>
+                <td class="text-center">${product.maSp}</td>
+                <td class="text-center">${product.tenSp}</td>
+                <td class="text-center">${product.dvt}</td>
+                <td class="text-center">${product['Kho xuất']}</td>
+                <td class="text-center">${product.tonKho}</td>
+                <td class="text-center">${product.ghiChu}</td>
+            `;
+                tableBody.appendChild(newRow);
+            });
+        }
+
+        var saveButton = document.querySelector('#saveKhuyenMai');
+        saveButton.addEventListener('click', onSaveButtonClick);
     </script>
 @endsection
