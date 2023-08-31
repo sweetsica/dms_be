@@ -451,17 +451,17 @@
                                     </div>
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Vai trò">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Vai trò*">
                                         <select name="role_id" class="selectpicker" data-dropup-auto="false">
                                             <?php if( $item->role_id == null){ ?>
-                                            <option value="">Vai trò
+                                            <option value="">Vai trò*
                                             </option>
                                             <?php }else{ ?>
                                             <option value="{{ $item->role_id }}">
                                                 {{ $item->role_name }}
                                             </option>
                                             <?php } ?>
-                                            <option value="">Vai trò
+                                            <option value="">Vai trò*
                                             </option>
                                             @foreach ($roleList as $roleLit)
                                                 <option value="{{ $roleLit->id }}">
@@ -590,7 +590,6 @@
         </div>
 
         {{-- Modal thông tin nhân sự --}}
-
         <div class="modal fade" id="infoUser{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -747,10 +746,11 @@
                                 </div>
                             </div>
                             <div class="col-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Vai trò">
-                                    <select disabled name="role_id" class="selectpicker" data-dropup-auto="false">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Vai trò*">
+                                    <select disabled name="role_id" class="selectpicker" data-dropup-auto="false"
+                                        required>
                                         <?php if( $item->role_id == null){ ?>
-                                        <option value="">Vai trò
+                                        <option value="">Vai trò*
                                         </option>
                                         <?php }else{ ?>
                                         <?php } ?>
@@ -1005,9 +1005,9 @@
                                 </div>
                             </div>
                             <div class="col-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Vai trò">
-                                    <select name="role_id" class="selectpicker" data-dropup-auto="false">
-                                        <option value="">Vai trò</option>
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Vai trò*">
+                                    <select name="role_id" class="selectpicker" data-dropup-auto="false" required>
+                                        <option value="">Vai trò*</option>
                                         @foreach ($roleList as $item)
                                             <option value="{{ $item->id }}">
                                                 {{ $item->name }}

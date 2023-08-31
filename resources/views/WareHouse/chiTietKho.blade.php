@@ -37,43 +37,43 @@
                                         <div class="row mb-3">
                                             <div class="col-lg-4">
                                                 <div class="row g-0">
-                                                    <div class="col-lg-2">
-                                                        <span class="fs-6 fw-bold">Tên kho :</span>
+                                                    <div class="col-lg-3">
+                                                        <span class="fs-5 fw-bold">Tên kho :</span>
                                                     </div>
-                                                    <div class="col-lg-10">
-                                                        <span class="fs-6">{{ $wareHouse->name }}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-4">
-                                                <div class="row g-0">
-                                                    <div class="col-lg-2">
-                                                        <span class="fs-6 fw-bold">Mô tả :</span>
-                                                    </div>
-                                                    <div class="col-lg-10">
-                                                        <span class="fs-6">{{ $wareHouse->description }}</span>
+                                                    <div class="col-lg-9">
+                                                        <span class="fs-5">{{ $wareHouse->name }}</span>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-4">
                                                 <div class="row g-0">
-                                                    <div class="col-lg-2">
-                                                        <span class="fs-6 fw-bold">Phân loại :</span>
+                                                    <div class="col-lg-3">
+                                                        <span class="fs-5 fw-bold">Mô tả :</span>
                                                     </div>
-                                                    <div class="col-lg-10">
+                                                    <div class="col-lg-9">
+                                                        <span class="fs-5">{{ $wareHouse->description }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4">
+                                                <div class="row g-0">
+                                                    <div class="col-lg-3">
+                                                        <span class="fs-5 fw-bold">Phân loại :</span>
+                                                    </div>
+                                                    <div class="col-lg-9">
                                                         @switch($wareHouse->classify)
                                                             @case(0)
-                                                            <span class="fs-6">Kho công ty</span>
+                                                                <span class="fs-5">Kho công ty</span>
                                                             @break
 
                                                             @case(1)
-                                                            <span class="fs-6">Kho nhà phân phối</span>
+                                                                <span class="fs-5">Kho nhà phân phối</span>
                                                             @break
 
                                                             @case(2)
-                                                            <span class="fs-6">Kho bán lẻ</span>
+                                                                <span class="fs-5">Kho bán lẻ</span>
                                                             @break
 
                                                             @default
@@ -88,22 +88,22 @@
                                         <div class="row">
                                             <div class="col-lg-4">
                                                 <div class="row g-0">
-                                                    <div class="col-lg-2">
-                                                        <span class="fs-6 fw-bold">Địa chỉ :</span>
+                                                    <div class="col-lg-3">
+                                                        <span class="fs-5 fw-bold">Địa chỉ :</span>
                                                     </div>
-                                                    <div class="col-lg-10">
-                                                        <span class="fs-6">{{ $wareHouse->address }}</span>
+                                                    <div class="col-lg-9">
+                                                        <span class="fs-5">{{ $wareHouse->address }}</span>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-4">
                                                 <div class="row g-0">
-                                                    <div class="col-lg-3">
-                                                        <span class="fs-6 fw-bold">Người quản lý :</span>
+                                                    <div class="col-lg-4">
+                                                        <span class="fs-5 fw-bold">Người quản lý :</span>
                                                     </div>
-                                                    <div class="col-lg-9">
-                                                        <span class="fs-6">
+                                                    <div class="col-lg-8">
+                                                        <span class="fs-5">
                                                             @foreach ($listUsers as $user)
                                                                 @if ($wareHouse->manage == $user->id)
                                                                     {{ $user->name ?? '' }}
@@ -116,11 +116,11 @@
 
                                             <div class="col-lg-4">
                                                 <div class="row g-0">
-                                                    <div class="col-lg-4">
-                                                        <span class="fs-6 fw-bold">Kế toán phụ trách :</span>
+                                                    <div class="col-lg-5">
+                                                        <span class="fs-5 fw-bold">Kế toán phụ trách :</span>
                                                     </div>
-                                                    <div class="col-lg-8">
-                                                        <span class="fs-6">
+                                                    <div class="col-lg-7">
+                                                        <span class="fs-5">
                                                             @foreach ($listUsers as $user)
                                                                 @if ($wareHouse->accountant == $user->id)
                                                                     {{ $user->name ?? '' }}
@@ -171,12 +171,14 @@
                                             </button>
                                         </div>
 
-                                        <div class="action_export mx-3" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Xuất file Excel">
-                                            <a class="btn btn-danger btn-lg btn-export" target="_blank" href="/warehouses/export/all" style="padding: 7px 15px;" id="export-warehouses-btn">
+                                        <div class="action_export mx-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="Xuất file Excel">
+                                            <a class="btn btn-danger btn-lg btn-export" target="_blank"
+                                                href="/warehouses/export/all" style="padding: 7px 15px;"
+                                                id="export-warehouses-btn">
                                                 <i class="bi bi-download "></i>
                                             </a>
-                                        </div>                                        
+                                        </div>
                                     </div>
 
                                     <div class="table-responsive mt-3">
@@ -273,10 +275,8 @@
                     </div>
                 </div>
             </div>
+            @include('template.footer.footer')
         </div>
-    </div>
-    @include('template.footer.footer')
-    </div>
     </div>
     @include('template.sidebar.sidebarMaster.sidebarRight')
 

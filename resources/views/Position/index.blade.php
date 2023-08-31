@@ -5,21 +5,21 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 @endsection
 @php
-
+    
     function getPaginationLink($link, $pageName)
     {
         if (!isset($link['url'])) {
             return '#';
         }
-
+    
         $pageNumber = explode('?page=', $link['url'])[1];
-
+    
         $queryString = request()->query();
-
+    
         $queryString[$pageName] = $pageNumber;
         return route('position.index', $queryString);
     }
-
+    
     // function isFiltering($filterNames)
     // {
     //     $filters = request()->query();
@@ -30,7 +30,7 @@
     //     }
     //     return false;
     // }
-
+    
 @endphp
 
 @section('content')
@@ -259,13 +259,17 @@
                                                                 ])->links() }}
                                                         </ul>
                                                     </nav> --}}
-                                                    <nav aria-label="Page navigation example" class="float-end mt-3" id="target-pagination">
+                                                    <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                        id="target-pagination">
                                                         <ul class="pagination">
                                                             @foreach ($pagination['links'] as $link)
-                                                                <li class="page-item {{ $link['active'] ? 'active' : '' }}">
-                                                                    <a class="page-link" href="{{ getPaginationLink($link, 'page') }}"
+                                                                <li
+                                                                    class="page-item {{ $link['active'] ? 'active' : '' }}">
+                                                                    <a class="page-link"
+                                                                        href="{{ getPaginationLink($link, 'page') }}"
                                                                         aria-label="Previous">
-                                                                        <span aria-hidden="true">{!! $link['label'] !!}</span>
+                                                                        <span
+                                                                            aria-hidden="true">{!! $link['label'] !!}</span>
                                                                     </a>
                                                                 </li>
                                                             @endforeach
@@ -511,10 +515,10 @@
                                 </div>
                             </div>
                             <div class="col-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn vị trí cấp quản lý">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn cấp quản lý">
                                     <select name="parent" required class="selectpicker" data-dropup-auto="false"
                                         data-live-search="true">
-                                        <option value="0">Chọn vị trí cấp quản lý</option>
+                                        <option value="0">Chọn cấp quản lý</option>
                                         @foreach ($positionlists as $item)
                                             <option value="{{ $item->id }}">
                                                 @php
