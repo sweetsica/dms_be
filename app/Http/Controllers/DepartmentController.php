@@ -280,7 +280,7 @@ class DepartmentController extends Controller
             $listPosToDept = Position::with('levels')->where('department_id', $department_id)->where("position.code", "like", "%$search%")->get();
         }
         $listUsers = Personnel::query()->with('department', 'level', 'role');
-        
+
         if ($q) {
             $listUsers = $listUsers->where(function ($query) use ($q) {
                 $query->where('name', 'like', '%' . $q . '%')

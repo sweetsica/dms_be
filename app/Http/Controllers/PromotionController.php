@@ -38,21 +38,7 @@ class PromotionController extends Controller
 public function index() {
 
     $promotions = Promotion::paginate(15); // Lấy danh sách Promotion
-//     $promotionDetailsArray = [];
-//     if( $promotions){
-//     foreach ($promotions as $promotion) {
-//         $promotionDetailsArray = $promotion->promotion_details;
 
-//     }
-// }else{
-//     $promotionDetailsArray=[];
-// }
-
-// if($promotionDetailsArray){
-//     $combinedData = json_decode($promotionDetailsArray);
-// }else{
-//     $combinedData = [];
-// }
 $promotionDetailsArray = [];
 if( $promotions){
 foreach ($promotions as $promotion) {
@@ -64,18 +50,20 @@ foreach ($promotions as $promotion) {
     } else {
         $promotionDetailsArray[$promotion->id] = [];
     }
+
+
 }
 }
 // else{
-// $promotionDetailsArray=[];
+//  $promotionDetails=0;
 // }
 // dd()
 
-if ($promotionDetails) {
-    $promotionDetailsArray[$promotion->id] = $promotionDetails;
-} else {
-    $promotionDetailsArray[$promotion->id] = [];
-}
+// if ($promotionDetails) {
+//     $promotionDetailsArray[$promotion->id] = $promotionDetails;
+// } else {
+//     $promotionDetailsArray[$promotion->id] = [];
+// }
 
 
 //  dd($promotionDetailsArray);

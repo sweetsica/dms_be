@@ -4,9 +4,9 @@
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 @endsection
-@php
+{{-- @php
 
-    function getPaginationLink_a($link, $pageName)
+    function getPaginationLink($link, $pageName)
     {
         if (!isset($link['url'])) {
             return '#';
@@ -19,7 +19,7 @@
         $queryString[$pageName] = $pageNumber;
         return route('TechnicalSpecificationsGroup.index', $queryString);
     }
-@endphp
+@endphp --}}
 
 @section('content')
     {{-- @include('template.sidebar.sidebarPosition.sidebarLeft') --}}
@@ -224,7 +224,7 @@
                                                         </div>
                                                     @endforeach
                                                 </table>
-                                                <nav aria-label="Page navigation example" class="float-end mt-3" id="target-pagination">
+                                                {{-- <nav aria-label="Page navigation example" class="float-end mt-3" id="target-pagination">
                                                     <ul class="pagination">
                                                         @foreach ($pagination['links'] as $link)
                                                             <li class="page-item {{ $link['active'] ? 'active' : '' }}">
@@ -235,7 +235,11 @@
                                                             </li>
                                                         @endforeach
                                                     </ul>
-                                                </nav>
+                                                </nav> --}}
+                                                {{ $customerGroupList->appends([
+                                                    'search' => $search,
+                                                ])->links() }}
+                                        </div>
                                         </div>
                                     </div>
                                 </div>

@@ -40,7 +40,7 @@ class CustomerGroupController extends Controller
             Session::flash('error', 'Lỗi đầu vào khi search');
             return back();
         }
-        $CustomerGroupList = CustomerGroup::where("customer_group.code", "like", "%$search%")->paginate(1);
+        $CustomerGroupList = CustomerGroup::where("customer_group.code", "like", "%$search%")->paginate(10);
 
         // $positionListTree = Position::where('parent', 0)->with('donViCon')->get();
         $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
