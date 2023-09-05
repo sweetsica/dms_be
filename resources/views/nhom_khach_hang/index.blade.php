@@ -6,7 +6,7 @@
 @endsection
 @php
 
-    function getPaginationLink($link, $pageName)
+    function getPaginationLink_a($link, $pageName)
     {
         if (!isset($link['url'])) {
             return '#';
@@ -17,24 +17,13 @@
         $queryString = request()->query();
 
         $queryString[$pageName] = $pageNumber;
-        return route('CustomerGroup.index', $queryString);
+        return route('TechnicalSpecificationsGroup.index', $queryString);
     }
-
-    // function isFiltering($filterNames)
-    // {
-    //     $filters = request()->query();
-    //     foreach ($filterNames as $filterName) {
-    //         if (isset($filters[$filterName]) && $filters[$filterName] != '') {
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // }
-
 @endphp
 
 @section('content')
-    @include('template.sidebar.sidebarPosition.sidebarLeft')
+    {{-- @include('template.sidebar.sidebarPosition.sidebarLeft') --}}
+    @include('template.sidebar.sidebarDepartment.sidebarLeft')
     <div id="mainWrap" class="mainWrap">
         <div class="mainSection">
             <div class="main">
@@ -235,10 +224,18 @@
                                                         </div>
                                                     @endforeach
                                                 </table>
-                                                {{ $customerGroupList->appends([
-                                                        'search' => $search,
-                                                    ])->links() }}
-                                            </div>
+                                                <nav aria-label="Page navigation example" class="float-end mt-3" id="target-pagination">
+                                                    <ul class="pagination">
+                                                        @foreach ($pagination['links'] as $link)
+                                                            <li class="page-item {{ $link['active'] ? 'active' : '' }}">
+                                                                <a class="page-link" href="{{ getPaginationLink($link, 'page') }}"
+                                                                    aria-label="Previous">
+                                                                    <span aria-hidden="true">{!! $link['label'] !!}</span>
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </nav>
                                         </div>
                                     </div>
                                 </div>
