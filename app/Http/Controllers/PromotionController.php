@@ -10,12 +10,34 @@ use App\Models\Promotion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
+
+
 class PromotionController extends Controller
 {
 
+    public function pagination($list)
+    {
+        return [
+            'current_page' => $list->currentPage(),
+            'data' => $list->items(),
+            'first_page_url' => $list->url(1),
+            'from' => $list->firstItem(),
+            'last_page' => $list->lastPage(),
+            'last_page_url' => $list->url($list->lastPage()),
+            'links' => $list->toArray()['links'],
+            'next_page_url' => $list->nextPageUrl(),
+            'path' => $list->url(1),
+            'per_page' => $list->perPage(),
+            'prev_page_url' => $list->previousPageUrl(),
+            'to' => $list->lastItem(),
+            'total' => $list->total(),
+        ];
+    }
+
+
 public function index() {
 
-    $promotions = Promotion::all(); // Lấy danh sách Promotion
+    $promotions = Promotion::paginate(15); // Lấy danh sách Promotion
 //     $promotionDetailsArray = [];
 //     if( $promotions){
 //     foreach ($promotions as $promotion) {
@@ -95,9 +117,10 @@ if ($promotionDetails) {
         $listgroup = CustomerGroup::all();
         $customersList = Customer::all();
         $products = Product::all();
+        $pagination = $this->pagination($promotions);
 
         // return view('Promotion.index', compact('promotions', 'customerGroupNames','listgroup','customersList','products','combinedData','customerNames'));
-        return view('Promotion.index', compact('promotions', 'customerGroupNames','listgroup','customersList','products','customerNames','promotionDetailsArray'));
+        return view('Promotion.index', compact('promotions', 'customerGroupNames','listgroup','customersList','products','customerNames','promotionDetailsArray','pagination'));
     }
 
     public function store(Request $request) {
