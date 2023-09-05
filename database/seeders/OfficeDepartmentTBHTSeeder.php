@@ -31,6 +31,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'parent' => '1',
             'description' => 'Tập hợp hành viên đầu não của công ty, đóng vai trò định hướng, đề ra đường lối hoạt động cho công ty',
             'ib_lead' => '',
+            'order' => '1'
         ]);
 
         Department::updateOrCreate([
@@ -41,6 +42,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'parent' => '1',
             'description' => 'Thành viên giám sát, hỗ trợ ban lãnh đạo trong việc điều hành. Bộ phận này cung cấp các quy định, điều lệ cho công ty',
             'ib_lead' => '',
+            'order' => '2'
         ]);
 
         Department::updateOrCreate([
@@ -51,16 +53,18 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'parent' => '1',
             'description' => 'Quản lý khối văn phòng',
             'ib_lead' => '',
+            'order' => '3'
         ]);
 
         Department::updateOrCreate([
             //5
             'id' => 5,
-            'code' => 'PKD',
-            'name' => 'Phòng Kinh doanh',
+            'code' => 'PKD1',
+            'name' => 'Phòng KD 1 (PPĐL)',
             'parent' => '1',
-            'description' => '',
+            'description' => 'Phụ trách mảng kinh doanh phân phối thông qua hệ thống đại lý. Trước mắt tập trung PP sản phẩm xe hàng nhỏ ',
             'ib_lead' => '',
+            'order' => '4'
         ]);
 
         Department::create([
@@ -70,6 +74,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'parent' => '4',
             'description' => 'Phụ trách các hoạt động tiếp thị của doanh nghiệp',
             'ib_lead' => '',
+            'order' => '3.1'
         ]);
 
         Department::create([
@@ -79,6 +84,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'parent' => '1',
             'description' => 'Quản lý khối văn phòng',
             'ib_lead' => '',
+            'order' => '5'
         ]);
 
         Department::create([
@@ -88,6 +94,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'parent' => '7',
             'description' => 'Giám sát điều phối mua hàng. Bộ phận đưa ra các quy định về việc mua hàng',
             'ib_lead' => '',
+            'order' => '5.1'
         ]);
         Department::create([
             //9
@@ -96,6 +103,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'parent' => '7',
             'description' => '',
             'ib_lead' => '',
+            'order' => '5.2'
         ]);
         Department::create([
             //10
@@ -104,6 +112,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'parent' => '7',
             'description' => 'Phụ trách Hành chính Nhân sự',
             'ib_lead' => '',
+            'order' => '5.3'
         ]);
         Department::create([
             //11
@@ -112,6 +121,7 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'parent' => '7',
             'description' => 'Phụ trách các hoạt động tiếp thị của doanh nghiệp',
             'ib_lead' => '11',
+            'order' => '5.4'
         ]);
         Department::create([
             //12
@@ -120,7 +130,9 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'parent' => '7',
             'description' => 'Phụ trách phân tích yêu cầu kinh doanh của lãnh đạo và doanh nghiệp',
             'ib_lead' => '',
+            'order' => '5.5'
         ]);
+
         Department::create([
             //13
             'code' => 'PKTVPT',
@@ -128,24 +140,29 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'parent' => '7',
             'description' => 'Kỹ thuật và phát triển sản phẩm',
             'ib_lead' => '',
+            'order' => '5.6'
         ]);
 
         Department::create([
             //14
-            'code' => 'KSX',
-            'name' => 'Khối Sản xuất',
+            'code' => 'NMCĐ',
+            'name' => 'Nhà máy cơ điện Thái Hưng',
             'parent' => '1',
-            'description' => 'Phụ trách các hoạt động sản xuất, lắp ráp của doanh nghiệp',
+            'description' => 'Là cơ sở sản xuất chế tạo các sản phẩm xe điện thành phẩm: -Xe hàng nhỏ - Xe Golf & Thăm Quan - (Chuẩn bị) sản xuất Ô tô điện',
             'ib_lead' => '',
+            'order' => '6'
         ]);
+
         Department::create([
             //15
-            'code' => 'TVH',
-            'name' => 'Tổ vận hành',
+            'code' => 'CĐVH',
+            'name' => 'Tổ cơ điện & Vận hành',
             'parent' => '14',
-            'description' => 'Phụ trách các hoạt động về vận hành của nhà máy',
+            'description' => 'Thực thi các nhóm việc gồm: Bảo vệ, An ninh, Điện nước, Vệ sinh, Trật tự, Xây lắp (nhỏ), Sửa chữa',
             'ib_lead' => '',
+            'order' => '6.1'
         ]);
+
         Department::create([
             //16
             'code' => 'TSC',
@@ -153,7 +170,9 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'parent' => '14',
             'description' => 'Phụ trách các hoạt động về sửa chữa và bảo hành của nhà máy',
             'ib_lead' => '',
+            'order' => '6.2'
         ]);
+
         Department::create([
             //17
             'code' => 'TLR',
@@ -161,6 +180,27 @@ class OfficeDepartmentTBHTSeeder extends Seeder
             'parent' => '14',
             'description' => 'Phụ trách các hoạt động về lắp ráp sản phẩm của nhà máy',
             'ib_lead' => '',
+            'order' => '6.3'
+        ]);
+        
+        Department::create([
+            //18
+            'code' => 'KTNM',
+            'name' => 'Phòng Kế Toán (Nhà máy)',
+            'parent' => '14',
+            'description' => 'Thực hiện các nhiệm vụ về kế toán cho toàn bộ hoạt động của nhà máy gồm: kế toán mua vào - kho - sản xuất, kế toán vận hành, kế toán hoàn thiện xây dựng',
+            'ib_lead' => '',
+            'order' => '6.4'
+        ]);
+        
+        Department::create([
+            //19
+            'code' => 'OTC',
+            'name' => 'Kênh OTC',
+            'parent' => '4',
+            'description' => 'Phụ trách kênh OTC',
+            'ib_lead' => '',
+            'order' => '3.2'
         ]);
     }
 }

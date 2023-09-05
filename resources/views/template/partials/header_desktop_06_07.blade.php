@@ -299,9 +299,9 @@
                         Phạm vi kinh doanh<i class="bi bi-chevron-right"></i>
                     </a>
                     <ul class="header_more">
-                        <li class="header_more-item">
+                        {{-- <li class="header_more-item">
                             <a href="#" class="header_more-link">Vùng</a>
-                        </li>
+                        </li> --}}
                         <li class="header_more-item">
                             <a href="{{ route('area.store') }}"class="header_more-link">Khu vực</a>
                         </li>

@@ -58,7 +58,8 @@ class AreaController extends Controller
             $query->where("department.name", "like", "%$vung%");
         }
         $areaList =$query->orderBy('area.id', 'desc')->paginate(10);
-        $department = Department::where('code', 'like', 'VUNG%')->get();
+        // $department = Department::where('code', 'like', 'VUNG%')->get();
+        $department = Department::all();
         $areaTree =  Department::with('khuVucs.diaBans.tuyens')->where('code', 'like', 'VUNG%')->get();
         $pagination = $this->pagination($areaList);
         // dd()
