@@ -390,7 +390,7 @@
                                                         onclick="return confirm('Bạn có muốn xóa vị trí khỏi phòng ban này không?')"
                                                         id="delete-selected-button" style="display: none;">Xóa</button>
                                                 </div><br>
-                                                <div class="table-responsive">
+                                                <div class="table-responsive" style="position: relative">
 
                                                     <table id="dsDaoTao"
                                                         class="table table-responsive table-hover table-bordered filter">
@@ -559,6 +559,30 @@
                                                     </nav>
                                                 </div>
                                             </form>
+
+
+                                            {{-- <form action="{{ route('department.index') }}" method="GET"
+                                                style="position: absolute;
+                                                bottom: 20px;
+                                                width: auto;
+                                                display: flex;
+                                                align-items: center">
+                                                <span class="fs-5 text-default" style="color: var(--primary-color)">Số bản
+                                                    ghi:</span>
+                                                <div style="width: 50px" class="ms-3">
+                                                    <select name="limit" required class="selectpicker"
+                                                        data-dropup-auto="false" onchange="this.form.submit()">
+                                                        <option value="5"
+                                                            @if (Request::get('limit') == 5) selected @endif>5</option>
+                                                        <option value="10"
+                                                            @if (Request::get('limit') == 10) selected @endif>10</option>
+                                                        <option value="15"
+                                                            @if (Request::get('limit') == 15) selected @endif>15</option>
+                                                        <option value="30"
+                                                            @if (Request::get('limit') == 30) selected @endif>30</option>
+                                                    </select>
+                                                </div>
+                                            </form> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -741,7 +765,8 @@
                                             </option>
                                             @foreach ($positionlists as $ac)
                                                 @if ($ac->id != $item->id)
-                                                    <option {{ $ac->id == $item->parent ? "selected" : "" }} value="{{ $ac->id }}">
+                                                    <option {{ $ac->id == $item->parent ? 'selected' : '' }}
+                                                        value="{{ $ac->id }}">
                                                         @php
                                                             $str = '';
                                                             for ($i = 0; $i < $ac->level; $i++) {

@@ -57,14 +57,15 @@
                     <br>
                     <div class="wapper-tree">
                         @php
-                            $x=1;
-                            $y=1;
+                            $x = 1;
+                            $y = 1;
                         @endphp
                         <ul id="tree1" style="overflow: scroll">
                             @foreach ($departmentListTree as $donVi)
                                 <li data-id="{{ $donVi->id }}" style="width: max-content">
-                                    {{$donVi->order}}<a href="{{ route('department.index2', ['department_id' => $donVi->id]) }}"
-                                        class="title-child">{{ $donVi->name }}</a>
+                                    {{ $donVi->order }}<a
+                                        href="{{ route('department.index2', ['department_id' => $donVi->id]) }}"
+                                        id="{{ $donVi->id }}" class="title-child">{{ $donVi->name }}</a>
                                     @if ($donVi->donViCon->count() > 0)
                                         @include('template.sidebar.sidebarDepartment.child', [
                                             'donViCon' => $donVi->donViCon,
@@ -88,7 +89,7 @@
     }
 
     .wapper-tree {
-        height: calc(100vh - 210px);
+        height: calc(100vh - 250px);
         overflow: auto;
     }
 
@@ -101,6 +102,10 @@
     .title-child.active {
         color: #ca1f24;
         font-weight: 700
+    }
+
+    .title-child.activeLink {
+        color: #ca1f24;
     }
 
     .title-child:hover {
@@ -214,8 +219,9 @@
                             icon.toggleClass(openedClass + " " + closedClass);
                             a.toggleClass('active')
                             $(this).children().children().toggle();
+
                         }
-                    })
+                    });
                     branch.children().children().toggle();
                 });
 
@@ -233,5 +239,18 @@
         })
 
         $('#tree1').treed();
+
+        var activeLink = localStorage.getItem('activeLink');
+        if (activeLink) {
+            var $activeLink = $('#' + activeLink);
+            if ($activeLink.length) {
+                $activeLink.addClass('activeLink');
+            }
+        }
+
+        $('#tree1 a').on('click', function() {
+            var linkId = $(this).attr('id');
+            localStorage.setItem('activeLink', linkId);
+        });
     </script>
 @endsection

@@ -15,8 +15,8 @@
                         <form method="GET" action="">
                             <div class="form-group has-search">
                                 <span type="submit" class="bi bi-search form-control-feedback fs-5"></span>
-                                <input type="text" style="width: 250px;" class="form-control" value="{{ request()->get('q') }}" name="q"
-                                    placeholder="Tìm kiếm">
+                                <input type="text" style="width: 250px;" class="form-control"
+                                    value="{{ request()->get('q') }}" name="q" placeholder="Tìm kiếm">
                             </div>
                         </form>
                     </div><br>
@@ -65,15 +65,16 @@
                         </div>
                     </div>
                     @php
-                            $x=1;
-                            $y=1;
-                        @endphp
+                        $x = 1;
+                        $y = 1;
+                    @endphp
                     <div class="d-lg-none" id="CoCauToChuc">
                         {{-- <ul id="tree" style="overflow: scroll"> --}}
-                            <ul id="tree2" style="overflow: scroll">
+                        <ul id="tree2" style="overflow: scroll">
                             @foreach ($departmentListTree as $donVi)
                                 <li data-id="{{ $donVi->id }}" style="width: max-content">
-                                    {{$x++}}<a href="{{ route('department.index2', ['department_id' => $donVi->id]) }}"
+                                    {{ $x++ }}<a
+                                        href="{{ route('department.index2', ['department_id' => $donVi->id]) }}"
                                         class="title-child">{{ $donVi->name }}</a>
                                     @if ($donVi->donViCon->count() > 0)
                                         @include('template.sidebar.sidebarDepartment.child', [
@@ -107,7 +108,7 @@
                                                                             @foreach ($diaBan->tuyens as $tuyen)
                                                                                 <li>{{ $tuyen->name }}</li>
                                                                             @endforeach
-                                                                        </ul>                                                                    
+                                                                        </ul>
                                                                     @endif
                                                                 </li>
                                                             @endforeach
@@ -135,7 +136,7 @@
     }
 
     .wapper-tree {
-        height: calc(100vh - 210px);
+        height: calc(100vh - 250px);
         overflow: auto;
     }
 
@@ -234,19 +235,19 @@
 
     <script>
         function ToChucFunction() {
-        var element = document.getElementById("CoCauDiaBan");
-        element.classList.add("d-lg-none");
-        var element = document.getElementById("CoCauToChuc");
-        element.classList.remove("d-lg-none");
+            var element = document.getElementById("CoCauDiaBan");
+            element.classList.add("d-lg-none");
+            var element = document.getElementById("CoCauToChuc");
+            element.classList.remove("d-lg-none");
         }
     </script>
 
     <script>
         function DiaBanFunction() {
-        var element = document.getElementById("CoCauDiaBan");
-        element.classList.remove("d-lg-none");
-        var element = document.getElementById("CoCauToChuc");
-        element.classList.add("d-lg-none");
+            var element = document.getElementById("CoCauDiaBan");
+            element.classList.remove("d-lg-none");
+            var element = document.getElementById("CoCauToChuc");
+            element.classList.add("d-lg-none");
         }
     </script>
 

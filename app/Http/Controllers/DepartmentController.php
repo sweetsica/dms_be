@@ -39,12 +39,13 @@ class DepartmentController extends Controller
 
     public function index(Request $request)
     {
-
         $search = $request->get('search');
         $don_vi_me = $request->get('don_vi_me');
         $leader_name = $request->get('leader_name');
         $limit = 15;
-
+        if ($request->has('limit')) {
+            $limit = $request->input('limit');
+        }
         // dd($abc);
         $query = Department::query();
         // $departmentList = Department::
@@ -99,9 +100,10 @@ class DepartmentController extends Controller
 
         $listUsers = Personnel::all();
         $pagination = $this->pagination($departmentList);
-
+        // dd( $pagination);
         return view("Deparment.index", [
             "Department" => $Department,
+            "limit" => $limit,
             "departmentList" => $departmentList,
             'don_vi_me' => $don_vi_me,
             'leader_name' => $leader_name,
@@ -115,16 +117,16 @@ class DepartmentController extends Controller
             'roleList' => $roleList,
             'localityList' => $localityList,
             'personnellists' => $personnellists,
-
             'pagination' => $pagination,
-
-
         ]);
     }
 
     public function index2(Request $request)
     {
         $LIMIT = 10;
+        // if ($request->has('limit')) {
+        //     $LIMIT = $request->input('limit');
+        // }
         $department_id = $request->get('department_id');
         $search = $request->get('search');
         $q = $request->query('q');
@@ -202,6 +204,7 @@ class DepartmentController extends Controller
             'UnitLeaderList' => $UnitLeaderList,
             "departmentListTree" => $departmentListTree,
             'getDept' => $getDept,
+            // 'limit' =>  $LIMIT,
             'department_id' => $department_id,
             'listPosToDept' => $listPosToDept,
             'personnellists' => $personnellists,
