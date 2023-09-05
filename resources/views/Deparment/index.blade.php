@@ -101,6 +101,8 @@
                                                                         type="checkbox" id="select-all"></th>
                                                                 <th class="text-nowrap text-center" style="width:2%">STT
                                                                 </th>
+                                                                <th class="text-nowrap text-center" style="width:3%">STT vị trí
+                                                                </th>
                                                                 <th class="text-nowrap text-center" style="width:3%">Mã đơn
                                                                     vị</th>
                                                                 <th class="text-nowrap text-center" style="width:10%">Tên
@@ -130,6 +132,13 @@
                                                                             value="{{ $item->id }}"></td>
                                                                     <td class=" text-center">
                                                                         {{ $departmentList->total() - $loop->index - ($departmentList->currentPage() - 1) * $departmentList->perPage() }}
+                                                                    </td>
+                                                                    <td class="">
+                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="{{ $item->order }}">
+                                                                            {{ $item->order }}
+                                                                        </div>
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"

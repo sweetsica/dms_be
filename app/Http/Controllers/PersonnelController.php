@@ -44,7 +44,7 @@ class PersonnelController extends Controller
         $vai_tro = $request->get('vai_tro');
         $dia_ban = $request->get('dia_ban');
         $trang_thai = $request->get('trang_thai');
-        $limit = 15;
+        $limit = 20;
         $query = Personnel::query();
         // $personnelList = Personnel::
         $query->leftJoin('department', 'department.id', '=', 'personnel.department_id')

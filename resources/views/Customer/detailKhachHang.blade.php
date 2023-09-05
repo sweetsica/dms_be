@@ -424,7 +424,10 @@
                                                                 <div class="col-lg-12 mt-4">
                                                                     <div class="layout_120">
                                                                         <span class="fw-bold fs-4">Nhóm KH:</span>
+                                                                        @if (isset($customer->group_customer))
                                                                         <span class="fs-4">{{ $customer->group_customer->name }}</span>
+                                                                        @endif
+
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-12 mt-4">

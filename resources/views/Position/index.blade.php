@@ -367,29 +367,24 @@
                                 <div class="col-6 mb-3">
 
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn cấp quản lý">
-                                        <select name="parent" class="selectpicker" data-dropup-auto="false"
+                                        <select required name="parent" class="selectpicker" data-dropup-auto="false"
                                             data-live-search="true">
-                                            <?php if ($item->parent == null){ ?>
-                                            <option value="0">Chọn cấp quản lý
-                                            </option>
-                                            <?php } else { ?>
-                                            <?php } ?>
-                                            <option value="{{ $item->parent }}">
-                                                @if ($item->donvime)
-                                                    {{ $item->donvime->name }}
-                                                @endif
+                                            <option value="">Chọn cấp quản lý
                                             </option>
                                             @foreach ($positionlists as $ac)
-                                                <option value="{{ $ac->id }}">
-                                                    @php
-                                                        $str = '';
-                                                        for ($i = 0; $i < $ac->level; $i++) {
-                                                            echo $str;
-                                                            $str = '  --';
-                                                        }
-                                                    @endphp
-                                                    {{ $ac->name }}
-                                                </option>
+                                                @if ($ac->id != $item->id)
+                                                    <option {{ $ac->id == $item->parent ? 'selected' : '' }}
+                                                        value="{{ $ac->id }}">
+                                                        @php
+                                                            $str = '';
+                                                            for ($i = 0; $i < $ac->level; $i++) {
+                                                                echo $str;
+                                                                $str = '  --';
+                                                            }
+                                                        @endphp
+                                                        {{ $ac->name }}
+                                                    </option>
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>

@@ -124,11 +124,12 @@ class DepartmentController extends Controller
 
     public function index2(Request $request)
     {
+        $LIMIT = 10;
         $department_id = $request->get('department_id');
         $search = $request->get('search');
-        $don_vi_me = $request->get('don_vi_me');
-        $leader_name = $request->get('leader_name');
-        $cap_nhan_su = $request->get('cap_nhan_su');
+        $q = $request->query('q');
+        $parent = $request->query('parent');
+        $cap_nhan_su = $request->query('cap_nhan_su');
         $query = Department::query();
         // $departmentList = Department::
         $query->leftJoin('personnel', 'personnel.id', '=', 'department.ib_lead')
@@ -141,16 +142,16 @@ class DepartmentController extends Controller
                 'department.ib_lead',
                 'personnel.name as leader_name'
             );
-        // if ($search != NULL) {
-        //     $query->where("department.code", "like", "%$search%");
-        // }
-        // if ($don_vi_me != NULL) {
-        //     $query->where("department.name", "like", "%$don_vi_me%");
-        // }
-        // if ($search != NULL) {
-        //     $query->where("personnel.name", "like", "%$search%");
-        // }
-        $departmentList = $query->paginate(15);
+
+        if ($cap_nhan_su == "all") {
+            $cap_nhan_su = null;
+        }
+
+        if ($parent == "all") {
+            $parent = null;
+        }
+
+        $departmentList = $query->get();
         // dd($departmentList);
         $UnitLeaderList = Personnel::all();
 
@@ -165,28 +166,46 @@ class DepartmentController extends Controller
             if (!$getDept) {
                 return View::make('404');
             }
-            $listPosToDept = Position::with('levels', 'department')->where('department_id', $department_id)
+            $listPosToDept = Position::query();
+
+            if ($q) {
+                $listPosToDept = $listPosToDept->where(function ($query) use ($q) {
+                    $query->where("name", "like", "%{$q}%")
+                        ->orWhere("code", "like", "%{$q}%")
+                        ->orWhere("description", "like", "%{$q}%");
+                });
+            }
+            if ($cap_nhan_su) {
+                $listPosToDept = $listPosToDept->where('personnel_level', $cap_nhan_su);
+            }
+            if ($parent) {
+                $listPosToDept = $listPosToDept->where('parent', $parent);
+            }
+            $listPosToDept = $listPosToDept->with('levels', 'department')->where('department_id', $department_id)
                 ->orWhereHas('department', function ($query) use ($department_id) {
                     $query->where('parent', $department_id);
-                })->where("position.code", "like", "%$search%")->get();
+                })->paginate($LIMIT);
+
+            $pagination = $this->pagination($listPosToDept);
         }
-        
+
         $personnelLevelList = PersonnelLevel::all();
         $positionlists = $this->getPosition();
+        $personnellists = $this->getPersonnel();
+
         return view("Deparment.index2", [
             "personnelLevelList" => $personnelLevelList,
             "positionlists" => $positionlists,
             "departmentList" => $departmentList,
-            'don_vi_me' => $don_vi_me,
-            'leader_name' => $leader_name,
             "departmentlists" => $departmentlists,
             'search' => $search,
             'UnitLeaderList' => $UnitLeaderList,
             "departmentListTree" => $departmentListTree,
             'getDept' => $getDept,
-            'cap_nhan_su' => $cap_nhan_su,
             'department_id' => $department_id,
-            'listPosToDept' => $listPosToDept
+            'listPosToDept' => $listPosToDept,
+            'personnellists' => $personnellists,
+            'pagination' => $pagination
         ]);
     }
 
@@ -200,6 +219,10 @@ class DepartmentController extends Controller
 
     public function assignUser(Request $request, $id)
     {
+        $LIMIT = 1;
+        $q = $request->query('q');
+        $department = $request->query('department');
+        $cap_nhan_su = $request->query('cap_nhan_su');
         $search = $request->get('search');
         $don_vi_me = $request->get('don_vi_me');
         $leader_name = $request->get('leader_name');
@@ -216,6 +239,15 @@ class DepartmentController extends Controller
                 'department.ib_lead',
                 'personnel.name as leader_name'
             );
+
+        if ($cap_nhan_su == "all") {
+            $cap_nhan_su = null;
+        }
+
+        if ($department == "all") {
+            $department = null;
+        }
+
         if ($search != NULL) {
             $query->where("department.name", "like", "%$search%");
         }
@@ -225,7 +257,7 @@ class DepartmentController extends Controller
         if ($leader_name != NULL) {
             $query->where("personnel.name", "like", "%$leader_name%");
         }
-        $departmentList = $query->paginate(15);
+        $departmentList = $query->get();
         // dd($departmentList);
         $UnitLeaderList = Personnel::all();
 
@@ -240,7 +272,6 @@ class DepartmentController extends Controller
         $personnelLevelList = PersonnelLevel::all();
 
         $getPos = Position::with('department.areas')->find($id);
-        $listUsers = Personnel::query();
         $department_id = $getPos['department_id'];
         $getDept = [];
         $listPosToDept = [];
@@ -248,19 +279,33 @@ class DepartmentController extends Controller
             $getDept = Department::with('areas')->find($department_id);
             $listPosToDept = Position::with('levels')->where('department_id', $department_id)->where("position.code", "like", "%$search%")->get();
         }
-        if ($search) {
-            $listUsers = $listUsers->where(function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%')
-                    ->orWhere('code', 'like', '%' . $search . '%');
+        $listUsers = Personnel::query()->with('department', 'level', 'role');
+        
+        if ($q) {
+            $listUsers = $listUsers->where(function ($query) use ($q) {
+                $query->where('name', 'like', '%' . $q . '%')
+                    ->orWhere('code', 'like', '%' . $q . '%')
+                    ->orWhere('email', 'like', '%' . $q . '%');
             });
         }
-        $listUsers = $listUsers->with('department', 'level', 'role')
-            ->whereJsonContains('position_id', strval($id))->get();
+
+        if ($department) {
+            $listUsers = $listUsers->where('department_id', $department);
+        }
+
+        if ($cap_nhan_su) {
+            $listUsers = $listUsers->where('personnel_lv_id', $cap_nhan_su);
+        }
+
+        $listUsers = $listUsers
+            ->whereJsonContains('position_id', strval($id))->paginate($LIMIT);
 
         $selectableUser = Personnel::where(function ($query) use ($id) {
             $query->whereNull('position_id')
                 ->orWhereJsonDoesntContain('position_id', strval($id));
         })->get();
+
+        $pagination = $this->pagination($listUsers);
 
         return view("Deparment.assignUser", [
             "departmentList" => $departmentList,
@@ -279,7 +324,8 @@ class DepartmentController extends Controller
             'getPos' => $getPos,
             'selectableUser' => $selectableUser,
             'getDept' => $getDept,
-            'listPosToDept' => $listPosToDept
+            'listPosToDept' => $listPosToDept,
+            'pagination' => $pagination
         ]);
     }
 

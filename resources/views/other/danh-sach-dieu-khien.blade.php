@@ -84,7 +84,7 @@
                             <div class="row">
                                 <div class="col-6 col-sm-6 col-md-4 col-xl-3 mb-5 mt-5">
                                     <div class=" control_wrapper" onclick="goRedirect(5)" >
-                                        <a href="#" class="control_link" id="control_link-5">
+                                        <a href="/danh-sach-don-dat-hang" class="control_link" id="control_link-5">
                                             <div class="control_img">
                                                 <img src="{{ asset('/assets/img/control/cargo.png') }}" alt="">
                                             </div>

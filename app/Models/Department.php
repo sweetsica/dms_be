@@ -17,7 +17,8 @@ class Department extends Model
         'description',
         'parent',
         'ib_lead',
-        'area_id'
+        'area_id',
+        'order'
     ];
 
     public function areas()
