@@ -61,8 +61,8 @@ class WareHouseController extends Controller
 
     public function store(Request $request)
     {
-        $name = $request->get('code');
-        $code  = $request->get('name');
+        $name = $request->get('name');
+        $code  = $request->get('code');
         $classify = $request->get('classify');
         $description  = $request->get('description');
         $address  = $request->get('address');
@@ -93,8 +93,8 @@ class WareHouseController extends Controller
 
     public function update(Request $request,$id)
     {
-        $name = $request->get('code');
-        $code  = $request->get('name');
+        $name = $request->get('name');
+        $code  = $request->get('code');
         $classify = $request->get('classify');
         $description  = $request->get('description');
         $address  = $request->get('address');

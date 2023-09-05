@@ -784,7 +784,7 @@
                             <div class="col-lg-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Trạng thái" required>
                                     <select name="status" title="Chọn trạng thái*" class="selectpicker" required>
-                                        <option value="1">Đang hoạt động
+                                        <option value="1" selected>Đang hoạt động
                                         </option>
                                         <option value="0">Ngưng hoạt động
                                         </option>
