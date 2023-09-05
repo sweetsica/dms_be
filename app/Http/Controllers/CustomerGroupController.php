@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CustomerGroup;
+use App\Models\Department;
 use App\Models\Position;
 use Illuminate\Http\Request;
 use LDAP\Result;
@@ -12,6 +13,25 @@ use Illuminate\Support\Facades\Session;
 class CustomerGroupController extends Controller
 {
 
+    public function pagination($list)
+    {
+        return [
+            'current_page' => $list->currentPage(),
+            'data' => $list->items(),
+            'first_page_url' => $list->url(1),
+            'from' => $list->firstItem(),
+            'last_page' => $list->lastPage(),
+            'last_page_url' => $list->url($list->lastPage()),
+            'links' => $list->toArray()['links'],
+            'next_page_url' => $list->nextPageUrl(),
+            'path' => $list->url(1),
+            'per_page' => $list->perPage(),
+            'prev_page_url' => $list->previousPageUrl(),
+            'to' => $list->lastItem(),
+            'total' => $list->total(),
+        ];
+    }
+
     public function index(Request $request)
     {
         $search = $request->get('search');
@@ -20,13 +40,15 @@ class CustomerGroupController extends Controller
             Session::flash('error', 'Lỗi đầu vào khi search');
             return back();
         }
-        $CustomerGroupList = CustomerGroup::where("customer_group.code", "like", "%$search%")->paginate(5);
-        
-        $positionListTree = Position::where('parent', 0)->with('donViCon')->get();
+        $CustomerGroupList = CustomerGroup::where("customer_group.code", "like", "%$search%")->paginate(10);
+
+        // $positionListTree = Position::where('parent', 0)->with('donViCon')->get();
+        $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
+        $departmentListTree = $departmentListTree->sortBy('order');
         return view('nhom_khach_hang.index', [
             'search' => $search,
             'customerGroupList'=>$CustomerGroupList,
-            'positionListTree'=> $positionListTree,
+            'departmentListTree'=> $departmentListTree,
         ]);
     }
 

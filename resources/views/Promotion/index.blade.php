@@ -19,6 +19,34 @@
         color: var(--primary-color);
     }
 </style>
+@php
+
+    function getPaginationLink($link, $pageName)
+    {
+        if (!isset($link['url'])) {
+            return '#';
+        }
+
+        $pageNumber = explode('?page=', $link['url'])[1];
+
+        $queryString = request()->query();
+
+        $queryString[$pageName] = $pageNumber;
+        return route('Promotion.index', $queryString);
+    }
+
+    // function isFiltering($filterNames)
+    // {
+    //     $filters = request()->query();
+    //     foreach ($filterNames as $filterName) {
+    //         if (isset($filters[$filterName]) && $filters[$filterName] != '') {
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
+
+@endphp
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
     <div id="mainWrap" class="mainWrap">
@@ -112,9 +140,9 @@
                                                                 <th class="text-nowrap text-center" style="width: 5%">Nhóm
                                                                     KH
                                                                 </th>
-                                                                <th class="text-nowrap text-center" style="width: 5%">Nhóm
+                                                                {{-- <th class="text-nowrap text-center" style="width: 5%">Nhóm
                                                                     KH
-                                                                </th>
+                                                                </th> --}}
                                                                 @if (session('user')['role_id'] == '1')
                                                                     <th class="text-nowrap text-center"
                                                                         style="width:1%;background: #fff; position: sticky; right: 0;">
@@ -124,34 +152,36 @@
                                                                 @endif
                                                             </tr>
                                                         </thead>
+                                                        @php
+                                                            $f=1;
+                                                        @endphp
                                                         <tbody>
                                                             @foreach ($promotions as $item)
                                                                 <tr>
-
-                                                                    <td class="text-center"> <input type="checkbox"
-                                                                            name="selected_items[]" value="">
-                                                                    </td>
-                                                                    <td class="text-center">1
-                                                                    </td>
-                                                                    <td class="text-center">
-                                                                        @if ($item->status == 'Hoạt động')
-                                                                            <span class="badge bg-success">Hoạt
-                                                                                động</span>
-                                                                        @else
-                                                                            <span class="badge bg-danger">Khóa</span>
-                                                                        @endif
-                                                                    </td>
-                                                                    <td class="text-center">
-                                                                        <button type="button" data-bs-toggle="modal"
-                                                                            data-bs-target="#chiTietCTKM{{ $item->id }}"
-                                                                            style="background: transparent">
-                                                                            <div class="text-wrap text-center btn-show_detail"
-                                                                                data-bs-toggle="tooltip"
-                                                                                data-bs-placement="top" title="GIAM300K">
-                                                                                {{ $item->code }}
-                                                                            </div>
-                                                                        </button>
-                                                </div>
+                                                <td class="text-center"> <input type="checkbox"
+                                                    name="selected_items[]" value="">
+                                                </td>
+                                                <td class="text-center">{{$f++}}
+                                                </td>
+                                                <td class="text-center">
+                                                    @if ($item->status == 'Hoạt động')
+                                                            <span class="badge bg-success">Hoạt
+                                                        động</span>
+                                                    @else
+                                                        <span class="badge bg-danger">Khóa</span>
+                                                    @endif
+                                                </td>
+                                                <td class="text-center">
+                                                        <button type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#chiTietCTKM{{ $item->id }}"
+                                                            style="background: transparent">
+                                                            <div class="text-wrap text-center btn-show_detail"
+                                                                    data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="GIAM300K">
+                                                                    {{ $item->code }}
+                                                            </div>
+                                                        </button>
+                                                    </div>
                                                 </td>
                                                 <td class="text-center">{{ $item->name }}
                                                 </td>
@@ -171,13 +201,13 @@
                                                         {{ $customerGroupName }}<br>
                                                     @endforeach
                                                 </td>
-                                                <td class="text-center">
+                                                {{-- <td class="text-center">
                                                     @if (isset($promotionDetailsArray[$item->id]))
                                                         @foreach ($promotionDetailsArray[$item->id] as $promotionDetail)
                                                             <p>Key 1: {{ $promotionDetail['key2'] }}</p>
                                                         @endforeach
                                                     @endif
-                                                </td>
+                                                </td> --}}
                                                 <td class="text-center"
                                                     style="background: #fff; position: sticky; right: 0;">
                                                     <div class="table_actions d-flex justify-content-center">
@@ -203,14 +233,18 @@
                                                 @endforeach
                                                 </tbody>
                                                 </table>
-                                                {{-- <nav aria-label="Page navigation example" class="float-end mt-3"
-                                                        id="target-pagination">
-                                                        <ul class="pagination">
-                                                            {{ $departmentList->appends([
-                                                                    'search' => $search,
-                                                                ])->links() }}
-                                                        </ul>
-                                                    </nav> --}}
+                                                <nav aria-label="Page navigation example" class="float-end mt-3" id="target-pagination">
+                                                    <ul class="pagination">
+                                                        @foreach ($pagination['links'] as $link)
+                                                            <li class="page-item {{ $link['active'] ? 'active' : '' }}">
+                                                                <a class="page-link" href="{{ getPaginationLink($link, 'page') }}"
+                                                                    aria-label="Previous">
+                                                                    <span aria-hidden="true">{!! $link['label'] !!}</span>
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </nav>
                                         </div>
                                         </form>
                                     </div>
@@ -856,7 +890,7 @@
                                                         data-live-search-placeholder="Tìm kiếm..."
                                                         id="selectCodeProduct_0">
                                                         @foreach ($products as $item)
-                                                            <option value="{{ $item->code }}">{{ $item->name }}
+                                                            <option value="{{ $item->code }}">{{ $item->code }}
                                                             </option>
                                                         @endforeach
                                                     </select>
