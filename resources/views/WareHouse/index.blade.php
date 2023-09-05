@@ -109,7 +109,7 @@
                                                                 </th>
                                                                 @if (session('user')['role_id'] == '1')
                                                                     <th class="text-nowrap text-center"
-                                                                        style="width:1%;background: #fff; position: sticky; right: 0;">
+                                                                        style="width:1%;background: #fff; position: sticky; right: -1px;">
                                                                         <span>Hành
                                                                             động</span>
                                                                     </th>
@@ -290,7 +290,7 @@
                                                                         @endswitch
                                                                     </td>
                                                                     <td class="text-center"
-                                                                        style="background: #fff; position: sticky; right: 0;">
+                                                                        style="background: #fff; position: sticky; right: -1px;">
                                                                         <div
                                                                             class="table_actions d-flex justify-content-center">
                                                                             <div data-bs-toggle="tooltip"
