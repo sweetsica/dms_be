@@ -4,6 +4,24 @@
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 @endsection
+@php
+
+    function getPaginationLink_A($link, $pageName)
+    {
+        if (!isset($link['url'])) {
+            return '#';
+        }
+
+        $pageNumber = explode('?page=', $link['url'])[1];
+
+        $queryString = request()->query();
+
+        $queryString[$pageName] = $pageNumber;
+        return route('Personnel.index', $queryString);
+    }
+
+
+@endphp
 
 @section('content')
     @include('template.sidebar.sidebarDepartment.sidebarLeft')
@@ -102,7 +120,8 @@
                                                                             name="selected_items[]"
                                                                             value="{{ $item->id }}"></td>
                                                                     <td class=" text-center">
-                                                                        {{ $a++ }}
+                                                                        {{-- {{ $a++ }} --}}
+                                                                        {{ $personnelList->total() - $loop->index - ($personnelList->currentPage() - 1) * $personnelList->perPage() }}
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
@@ -131,15 +150,33 @@
                                                                             </div>
                                                                         </a>
                                                                     </td>
+                                                                    {{-- <td class="">
+                                                                        @php
+                                                                            $positionIds = json_decode($item->position_id, true) ?? [];
+                                                                            $positions = App\Models\Position::whereIn('id', $positionIds)->get();
+                                                                            $positionNames = $positions->pluck('name')->toArray();
+
+                                                                            $positionList = implode(', ', $positionNames);
+                                                                        @endphp
+                                                                        <div class="overText" data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="{{ $positionList }}">
+                                                                            {{ $positionList }}
+                                                                        </div>
+                                                                    </td> --}}
                                                                     <td class="">
-                                                                        <a style="color: black; text-decoration: underline;"
-                                                                            href="{{ route('department.assignUser', $item->position_id) }}">
-                                                                            <div class="overText" data-bs-toggle="tooltip"
-                                                                                data-bs-placement="top"
-                                                                                title="{{ $item->position_name }}">
-                                                                                {{ $item->position_name }}
-                                                                            </div>
-                                                                        </a>
+                                                                        @if (is_array($item->position_id))
+                                                                        @php
+                                                                            $positionIds = json_decode($item->position_id, true) ?? [];
+                                                                            $positions = App\Models\Position::whereIn('id', $positionIds)->get();
+                                                                            $positionNames = $positions->pluck('name')->toArray();
+
+                                                                            $positionList = implode(', ', $positionNames);
+                                                                        @endphp
+                                                                        <div class="overText" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $positionList }}">
+                                                                            {{ $positionList }}
+                                                                        </div>
+                                                                        @endif
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
@@ -232,12 +269,28 @@
                                                         'search' => $search,
                                                     ])->links() }} --}}
 
-                                                    <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                    {{-- <nav aria-label="Page navigation example" class="float-end mt-3"
                                                         id="target-pagination">
                                                         <ul class="pagination">
                                                             {{ $personnelList->appends([
                                                                     'search' => $search,
                                                                 ])->links() }}
+                                                        </ul>
+                                                    </nav> --}}
+                                                    <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                        id="target-pagination">
+                                                        <ul class="pagination">
+                                                            @foreach ($pagination['links'] as $link)
+                                                                <li
+                                                                    class="page-item {{ $link['active'] ? 'active' : '' }}">
+                                                                    <a class="page-link"
+                                                                        href="{{ getPaginationLink_A($link, 'page') }}"
+                                                                        aria-label="Previous">
+                                                                        <span
+                                                                            aria-hidden="true">{!! $link['label'] !!}</span>
+                                                                    </a>
+                                                                </li>
+                                                            @endforeach
                                                         </ul>
                                                     </nav>
                                                 </div>
@@ -255,7 +308,7 @@
     </div>
     @include('template.sidebar.sidebarMaster.sidebarRight')
 
-{{-- Sửa --}}
+    {{-- Sửa --}}
     @foreach ($personnelList as $item)
         <div class="modal fade" id="sua{{ $item['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
@@ -329,14 +382,15 @@
                                 </div>
                                 <div class="col-6 mb-3">
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Đơn vị công tác">
-                                        <select name="department_id" class="selectpicker" data-dropup-auto="false" data-live-search="true">
+                                        <select name="department_id" class="selectpicker" data-dropup-auto="false"
+                                            data-live-search="true">
                                             <?php if( $item->department_id == null){ ?>
                                             <option value="">Chọn đơn
                                                 vị công tác</option>
                                             <?php }else{ ?>
-                                                <option value="{{ $item->department_id }}">
-                                                    {{ $item->department_name }}
-                                                </option>
+                                            <option value="{{ $item->department_id }}">
+                                                {{ $item->department_name }}
+                                            </option>
                                             <?php } ?>
                                             <option value="">Chọn đơn
                                                 vị công tác</option>
@@ -357,14 +411,15 @@
                                 </div>
                                 <div class="col-6 mb-3">
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Cấp nhân sự">
-                                        <select name="personnel_lv_id" class="selectpicker" data-dropup-auto="false" data-live-search="true">
+                                        <select name="personnel_lv_id" class="selectpicker" data-dropup-auto="false"
+                                            data-live-search="true">
                                             <?php if( $item->personnel_lv_id == null){ ?>
                                             <option value="">Cấp nhân
                                                 sự</option>
                                             <?php }else{ ?>
-                                                <option value="{{ $item->personnel_lv_id }}">
-                                                    {{ $item->personnel_level_name }}
-                                                </option>
+                                            <option value="{{ $item->personnel_lv_id }}">
+                                                {{ $item->personnel_level_name }}
+                                            </option>
                                             <?php } ?>
                                             <option value="">Cấp nhân
                                                 sự</option>
@@ -378,17 +433,15 @@
                                 </div>
                                 <div class="col-6 mb-3">
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Vị trí chức danh">
-                                        <select name="position_id" class="selectpicker" data-dropup-auto="false" data-live-search="true">
+                                        <select name="position_id" class="selectpicker" data-dropup-auto="false">
                                             <?php if( $item->position_id == null){ ?>
                                             <option value="">Vị trí
                                                 chức danh</option>
                                             <?php }else{ ?>
-                                                <option value="{{ $item->position_id }}">
-                                                    {{ $item->position_name }}
-                                                </option>
                                             <?php } ?>
-                                            <option value="">Vị trí
-                                                chức danh</option>
+                                            <option value="{{ $item->position_id }}">
+                                                {{ $item->position_name }}
+                                            </option>
                                             @foreach ($positionlists as $posiList)
                                                 <option value="{{ $posiList->id }}">
                                                     @php
@@ -405,17 +458,17 @@
                                     </div>
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Vai trò">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Vai trò*">
                                         <select name="role_id" class="selectpicker" data-dropup-auto="false">
                                             <?php if( $item->role_id == null){ ?>
-                                            <option value="">Vai trò
+                                            <option value="">Vai trò*
                                             </option>
                                             <?php }else{ ?>
-                                                <option value="{{ $item->role_id }}">
-                                                    {{ $item->role_name }}
-                                                </option>
+                                            <option value="{{ $item->role_id }}">
+                                                {{ $item->role_name }}
+                                            </option>
                                             <?php } ?>
-                                            <option value="">Vai trò
+                                            <option value="">Vai trò*
                                             </option>
                                             @foreach ($roleList as $roleLit)
                                                 <option value="{{ $roleLit->id }}">
@@ -427,14 +480,15 @@
                                 </div>
                                 <div class="col-6 mb-3">
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Địa bàn">
-                                        <select name="area_id" class="selectpicker" data-dropup-auto="false" data-live-search="true">
+                                        <select name="area_id" class="selectpicker" data-dropup-auto="false"
+                                            data-live-search="true">
                                             <?php if( $item->area_id == null){ ?>
                                             <option value="">Địa bàn
                                             </option>
                                             <?php }else{ ?>
-                                                <option value="{{ $item->area_id }}">
-                                                    {{ $item->locality_name }}
-                                                </option>
+                                            <option value="{{ $item->area_id }}">
+                                                {{ $item->locality_name }}
+                                            </option>
                                             <?php } ?>
 
                                             <option value="">Địa bàn
@@ -449,16 +503,17 @@
                                 </div>
                                 <div class="col-6 mb-3">
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Quản lý trực tiếp">
-                                        <select name="manage" class="selectpicker" data-dropup-auto="false" data-live-search="true">
+                                        <select name="manage" class="selectpicker" data-dropup-auto="false"
+                                            data-live-search="true">
                                             <?php if( $item->manage == null){ ?>
                                             <option value="">Quản lý
                                                 trực tiếp</option>
                                             <?php }else{ ?>
-                                                <option value="{{ $item->manage }}">
-                                                    @if ($item->donvime)
-                                                        {{ $item->donvime->name }}
-                                                    @endif
-                                                </option>
+                                            <option value="{{ $item->manage }}">
+                                                @if ($item->donvime)
+                                                    {{ $item->donvime->name }}
+                                                @endif
+                                            </option>
                                             <?php } ?>
                                             <option value="">Quản lý
                                                 trực tiếp</option>
@@ -542,7 +597,6 @@
         </div>
 
         {{-- Modal thông tin nhân sự --}}
-
         <div class="modal fade" id="infoUser{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -673,7 +727,8 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Vị trí chức danh">
-                                    <select disabled name="position_id" class="selectpicker" data-dropup-auto="false" data-live-search="true">
+                                    <select disabled name="position_id" class="selectpicker" data-dropup-auto="false"
+                                        data-live-search="true">
                                         <?php if( $item->position_id == null){ ?>
                                         <option value="">Vị trí
                                             chức danh</option>
@@ -698,10 +753,11 @@
                                 </div>
                             </div>
                             <div class="col-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Vai trò">
-                                    <select disabled name="role_id" class="selectpicker" data-dropup-auto="false">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Vai trò*">
+                                    <select disabled name="role_id" class="selectpicker" data-dropup-auto="false"
+                                        required>
                                         <?php if( $item->role_id == null){ ?>
-                                        <option value="">Vai trò
+                                        <option value="">Vai trò*
                                         </option>
                                         <?php }else{ ?>
                                         <?php } ?>
@@ -904,7 +960,8 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Đơn vị công tác">
-                                    <select name="department_id" class="selectpicker" data-dropup-auto="false" data-live-search="true">
+                                    <select name="department_id" class="selectpicker" data-dropup-auto="false"
+                                        data-live-search="true">
                                         <option value="">Đơn vị công tác</option>
                                         @foreach ($departmentlists as $item)
                                             <option value="{{ $item->id }}">
@@ -923,7 +980,8 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Cấp nhân sự">
-                                    <select name="personnel_lv_id" class="selectpicker" data-dropup-auto="false" data-live-search="true">
+                                    <select name="personnel_lv_id" class="selectpicker" data-dropup-auto="false"
+                                        data-live-search="true">
                                         <option value="">Cấp nhân sự</option>
                                         @foreach ($personnelLevelList as $item)
                                             <option value="{{ $item->id }}">
@@ -935,7 +993,8 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Vị trí chức danh">
-                                    <select name="position_id" class="selectpicker" data-dropup-auto="false" data-live-search="true">
+                                    <select name="position_id" class="selectpicker" data-dropup-auto="false"
+                                        data-live-search="true">
                                         <option value="">Vị trí chức danh</option>
                                         @foreach ($positionlists as $item)
                                             <option value="{{ $item->id }}">
@@ -953,9 +1012,9 @@
                                 </div>
                             </div>
                             <div class="col-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Vai trò">
-                                    <select name="role_id" class="selectpicker" data-dropup-auto="false">
-                                        <option value="">Vai trò</option>
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Vai trò*">
+                                    <select name="role_id" class="selectpicker" data-dropup-auto="false" required>
+                                        <option value="">Vai trò*</option>
                                         @foreach ($roleList as $item)
                                             <option value="{{ $item->id }}">
                                                 {{ $item->name }}
@@ -966,7 +1025,8 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Địa bàn">
-                                    <select name="area_id" class="selectpicker" data-dropup-auto="false" data-live-search="true">
+                                    <select name="area_id" class="selectpicker" data-dropup-auto="false"
+                                        data-live-search="true">
                                         <option value="">Địa bàn</option>
                                         @foreach ($localityList as $item)
                                             <option value="{{ $item->id }}">
@@ -979,7 +1039,8 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Quản lý trực tiếp">
-                                    <select name="manage" class="selectpicker" data-dropup-auto="false" data-live-search="true">
+                                    <select name="manage" class="selectpicker" data-dropup-auto="false"
+                                        data-live-search="true">
                                         <option value="">Quản lý trực tiếp</option>
                                         @foreach ($personnellists as $item)
                                             <option value="{{ $item->id }}">
@@ -1118,8 +1179,8 @@
                                     <select id="select-status" class="selectpicker select_filter"
                                         data-dropup-auto="false" title="Lọc theo trạng thái" name='trang_thai'>
                                         {{-- @foreach ($personnel as $item) --}}
-                                            <option value="Đang làm việc">Đang làm việc</option>
-                                            <option value="Đã nghỉ việc">Đã nghỉ việc</option>
+                                        <option value="Đang làm việc">Đang làm việc</option>
+                                        <option value="Đã nghỉ việc">Đã nghỉ việc</option>
                                         {{-- @endforeach --}}
                                     </select>
                                 </div>

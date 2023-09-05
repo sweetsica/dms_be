@@ -44,18 +44,24 @@ class CustomerController extends Controller
 
     public function show($id)
     {
-        $customer = Customer::with('channel', 'route', 'person')->findOrFail($id);
+        $customer = Customer::with('channel', 'route', 'person','group_customer')->findOrFail($id);
         // dd($customer);
         $listPersons = Personnel::all();
         $jsonCombinedData = $customer->contact;
         $combinedData = json_decode($jsonCombinedData);
         $listgroup = CustomerGroup::all();
-        // dd( $combinedData);
+        $productsAll = Product::all();
+        $RouteDirection = RouteDirection::all();
+        $DepartmentAll = Department::where('name', 'like', 'tuyenKH%')->get();
+        // dd( $RouteDirection);
         return view('Customer.detailKhachHang')->with(
             compact(
                 "customer",
                 "listPersons",
                 "listgroup",
+                "productsAll",
+                "RouteDirection",
+                "DepartmentAll",
                 "combinedData"
             )
         );
@@ -231,7 +237,6 @@ class CustomerController extends Controller
         $group = $request->get('group');
         $chanelId = $request->get('chanelId');
         $routeId = $request->get('routeId');
-        $status = $request->get('status');
         $uploadedFiles = $request->file('attachment');
         $avatar = $request->file('avatar');
         $data = new Customer();
@@ -259,7 +264,7 @@ class CustomerController extends Controller
         $data->group = $group;
         $data->chanelId = $chanelId;
         $data->routeId = $routeId;
-        $data->status = $status;
+        $data->status = "Trinh sát";
         $existingFileName = json_decode($data->fileName, true) ?? [];
         $existingFilePath = json_decode($data->filePath, true) ?? [];
         if ($uploadedFiles) {
@@ -482,7 +487,7 @@ class CustomerController extends Controller
             $images = $request->file('image');
             $imageName = time() . '.' . $images->getClientOriginalExtension();
             $image->move(public_path('uploads'), $imageName);
-            $data->image =  'uploads/' . $imageName;
+            $data->image = 'uploads/' . $imageName;
         }
 
         $data->save();
@@ -569,8 +574,9 @@ class CustomerController extends Controller
         $data->fileName = json_encode($existingFileName);
         $data->filePath = json_encode($existingFilePath);
 
-        if ($image) {
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
+        if ($request->hasFile('image')) {
+            $images = $request->file('image');
+            $imageName = time() . '.' . $images->getClientOriginalExtension();
             $image->move(public_path('uploads'), $imageName);
             $data->image = 'uploads/' . $imageName;
         }

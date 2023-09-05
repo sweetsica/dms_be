@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\ProposalController;
 use App\Http\Controllers\Api\ForgotPasswordController;
+use App\Http\Controllers\Api\HotfixController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\CustomController;
@@ -124,7 +125,7 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('them-moi-chi-tiet/{id}', [ProductController::class, 'create'])->name('product.create');
     Route::post('them-san-pham-lien-quan/{id}', [ProductController::class, 'related'])->name('product.related');
     Route::post('xoa-chi-tiet/{id}', [ProductController::class, 'delete'])->name('product.deleted');
-    Route::get('export-pdf/{id}',[ProductController::class, 'export'])->name('product.export');
+    Route::get('export-pdf/{id}', [ProductController::class, 'export'])->name('product.export');
 
     Route::get('danh-sach-phien-ban', [VersionController::class, 'index'])->name('version.list');
     Route::post('them-moi-phien-ban', [VersionController::class, 'store'])->name('version.store');
@@ -163,6 +164,7 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('departmentr/{id}', [DepartmentController::class, 'destroy'])->name('departmentr.destroy');
     Route::post('department-delete', [DepartmentController::class, 'delete'])->name('delete-selected-items');
     Route::post('/units/move-up', [DepartmentController::class, 'editStt'])->name('units.moveUp');
+    Route::delete('department-detach', [DepartmentController::class, 'detach'])->name('detach-department-items');
 
     Route::get('position', [PositionController::class, 'index'])->name('position.index');
     Route::post('position', [PositionController::class, 'store'])->name('position.store');
@@ -263,8 +265,8 @@ Route::middleware(['auth.role'])->group(function () {
     Route::post('khuyen-mai-delete', [PromotionController::class, 'delete'])->name('delete-Promotion');
 
     Route::get('dashboard_admin', function () {
-        return view('Dashboard.dashboard_Admin');});
-
+        return view('Dashboard.dashboard_Admin');
+    });
 });
 
 Route::get('/export/customer', [ExcelController::class, 'setExportCustomter']);
@@ -275,3 +277,10 @@ Route::get('/warehouses/export/all', [WareHouseController::class, 'export'])->na
 Route::fallback(function () {
     return view('404');
 });
+
+//------------------Hotfix------------------
+//Thay đổi position_id của users (personnel) từ int -> array
+Route::group(['prefix' => 'hotfix'], function () {
+    Route::get('/personnel/position_id', [HotfixController::class, 'personnel_position']);
+});
+//------------------Hotfix------------------

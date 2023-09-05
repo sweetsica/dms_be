@@ -10,6 +10,26 @@ use Illuminate\Support\Facades\Session;
 
 class AreaController extends Controller
 {
+
+    public function pagination($list)
+    {
+        return [
+            'current_page' => $list->currentPage(),
+            'data' => $list->items(),
+            'first_page_url' => $list->url(1),
+            'from' => $list->firstItem(),
+            'last_page' => $list->lastPage(),
+            'last_page_url' => $list->url($list->lastPage()),
+            'links' => $list->toArray()['links'],
+            'next_page_url' => $list->nextPageUrl(),
+            'path' => $list->url(1),
+            'per_page' => $list->perPage(),
+            'prev_page_url' => $list->previousPageUrl(),
+            'to' => $list->lastItem(),
+            'total' => $list->total(),
+        ];
+    }
+
     public function index(Request $request){
         $search = $request->get('search');
         $vung = $request->get('vung');
@@ -27,7 +47,7 @@ class AreaController extends Controller
         if (preg_match($pattern, $search)) {
             Session::flash('error', 'Lỗi đầu vào khi search');
             return back();
-        }        
+        }
         if($search != NULL) {
             $query->where("area.name", "like", "%$search%");
         }
@@ -38,8 +58,10 @@ class AreaController extends Controller
             $query->where("department.name", "like", "%$vung%");
         }
         $areaList =$query->orderBy('area.id', 'desc')->paginate(10);
-        $department = Department::where('code', 'like', 'VUNG%')->get();
+        // $department = Department::where('code', 'like', 'VUNG%')->get();
+        $department = Department::all();
         $areaTree =  Department::with('khuVucs.diaBans.tuyens')->where('code', 'like', 'VUNG%')->get();
+        $pagination = $this->pagination($areaList);
         // dd()
         return view("Address.danhSachKhuVuc",[
             "areaList"=>$areaList,
@@ -47,6 +69,7 @@ class AreaController extends Controller
             'department' => $department,
             'vung' => $vung,
             'areaTree' => $areaTree,
+            'pagination' => $pagination,
 
         ]);
     }

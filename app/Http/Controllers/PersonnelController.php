@@ -16,6 +16,25 @@ use Illuminate\Support\Facades\DB;
 class PersonnelController extends Controller
 {
 
+    public function pagination($list)
+    {
+        return [
+            'current_page' => $list->currentPage(),
+            'data' => $list->items(),
+            'first_page_url' => $list->url(1),
+            'from' => $list->firstItem(),
+            'last_page' => $list->lastPage(),
+            'last_page_url' => $list->url($list->lastPage()),
+            'links' => $list->toArray()['links'],
+            'next_page_url' => $list->nextPageUrl(),
+            'path' => $list->url(1),
+            'per_page' => $list->perPage(),
+            'prev_page_url' => $list->previousPageUrl(),
+            'to' => $list->lastItem(),
+            'total' => $list->total(),
+        ];
+    }
+
     public function index(Request $request)
     {
         $search = $request->get('search');
@@ -25,6 +44,7 @@ class PersonnelController extends Controller
         $vai_tro = $request->get('vai_tro');
         $dia_ban = $request->get('dia_ban');
         $trang_thai = $request->get('trang_thai');
+        $limit = 20;
         $query = Personnel::query();
         // $personnelList = Personnel::
         $query->leftJoin('department', 'department.id', '=', 'personnel.department_id')
@@ -68,7 +88,7 @@ class PersonnelController extends Controller
             $search = substr($search, 0, 47);
             $search = $search.'...';
         }
-        if ($search != NULL) {           
+        if ($search != NULL) {
             $query->where("personnel.code", "like", "%$search%");
         }
         if ($search != NULL) {
@@ -96,7 +116,7 @@ class PersonnelController extends Controller
             $query->where("personnel.status", "like", "%$trang_thai%");
         }
         // ->where("personnel.code", "like", "%$search%")
-        $personnelList = $query->orderBy('personnel.id','desc')->paginate(15);
+        $personnelList = $query->orderBy('personnel.id','desc')->paginate($limit);
         $departmentlists = $this->getDepartment();
         $positionlists = $this->getPosition();
         $personnellists = $this->getPersonnel();
@@ -104,6 +124,7 @@ class PersonnelController extends Controller
         $roleList = Role::all();
         $localityList = Locality::all();
         $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
+        $pagination = $this->pagination($personnelList);
         // dd($personnelLevelList);
         return view("ds_nhan_su.index", [
             "personnelList" => $personnelList,
@@ -120,6 +141,7 @@ class PersonnelController extends Controller
             "dia_ban" => $dia_ban,
             "trang_thai" => $trang_thai,
             "departmentListTree" => $departmentListTree,
+            "pagination" => $pagination,
             'search' => $search
         ]);
     }
@@ -838,7 +860,7 @@ class PersonnelController extends Controller
         $data->name = $name;
         $data->department_id = $department_id;
         $data->code = $code;
-        $data->position_id = $position_id;
+        $data->position_id = json_encode($position_id);
         $data->department_id = $department_id;
         $data->personnel_lv_id = $personnel_lv_id;
         $data->pack = $pack;
@@ -867,7 +889,7 @@ class PersonnelController extends Controller
         Session::flash('success', 'Xoá thành công');
         return redirect()->route('Personnel.index');
         return redirect()->back()->with('mess', 'Đã xóa !');;
-        
+
         // Session::flash('success', 'Xoá thành công');
         // return redirect()->route('Personnel.index');
     }

@@ -3,6 +3,7 @@
 @section('title', 'Chi tiết đơn đặt hàng')
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
+
 @endsection
 <style>
     .text_default {
@@ -30,21 +31,81 @@
     }
 
     .style_select button.btn.dropdown-toggle.btn-light {
-        background-color: transparent;
-        border: none;
-        box-shadow: none;
-        outline: none;
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        outline: none !important;
     }
 
     .style_select .dropdown-toggle::after {
-        display: none;
+        display: none !important;
+    }
+
+    .style_select:focus {
+        outline: none !important;
+        border: none !important;
+        box-shadow: none !important;
     }
 
     .layout_grid {
         display: grid;
         grid-template-columns: 150px auto;
     }
+
+    /* .dropdown {
+        position: relative;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .dropdown .dropdown-list {
+        background: #fff;
+        position: absolute;
+        top: 35px;
+        left: -124%;
+        right: 2px;
+        box-shadow: 0 1px 2px 1px rgba(0, 0, 0, .15);
+        transform-origin: 50% 0;
+        transform: scale(1, 0);
+        transition: transform .15s ease-in-out .15s;
+        overflow-y: scroll;
+        width: 300px;
+        z-index: 99;
+    }
+
+    .dropdown .dropdown-option {
+        display: block;
+        padding: 8px 12px;
+        opacity: 0;
+        transition: opacity .15s ease-in-out;
+    }
+
+
+    .dropdown.on .dropdown-list {
+        transform: scale(1, 1);
+        transition-delay: 0s;
+    }
+
+    .dropdown.on .dropdown-list .dropdown-option {
+        opacity: 1;
+        transition-delay: .2s;
+    }
+
+    .dropdown [type="checkbox"] {
+        position: relative;
+        top: -1px;
+        margin-right: 4px;
+    } */
+
+    .dropdown-menu-center {
+        top: 5% !important;
+        left: -82% !important;
+        right: auto !important;
+        width: 300px !important;
+        height: auto;
+    }
 </style>
+
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
     <div id="mainWrap" class="mainWrap" style="height: 150rem">
@@ -111,7 +172,8 @@
                                         <div class="row g-0 mb-4">
                                             <div class="col-lg-6">
                                                 <div>
-                                                    <span class="fs-5 fw-bold">Khách hàng :</span>
+                                                    <span class="fs-5 fw-bold" data-bs-toggle="tooltip"
+                                                        data-bs-placement="top" title="Từ chối">Khách hàng :</span>
                                                     <span class="fs-5 ">Quầy thuốc Thịnh Phúc - DTSD029</span>
                                                 </div>
                                             </div>
@@ -209,15 +271,64 @@
                                                         </option>
                                                     </select>
                                                 </div>
-
-                                                <div>
-                                                    <button class="btn btn-danger">
+                                                @php
+                                                    $arrSPKhuyenMai = [
+                                                        [
+                                                            'id' => 1,
+                                                            'tenSp' => 'Sản phẩm 1',
+                                                            'maSp' => 'SP01',
+                                                            'dvt' => 'Hộp',
+                                                            'Kho xuất' => 'Kho 01',
+                                                            'tonKho' => '10/100',
+                                                            'ghiChu' => 'Ghi chú 1',
+                                                        ],
+                                                        [
+                                                            'id' => 2,
+                                                            'tenSp' => 'Sản phẩm 2',
+                                                            'maSp' => 'SP02',
+                                                            'dvt' => 'Hộp',
+                                                            'Kho xuất' => 'Kho 02',
+                                                            'tonKho' => '20/200',
+                                                            'ghiChu' => 'Ghi chú 2',
+                                                        ],
+                                                    ];
+                                                @endphp
+                                                <div class="dropdown">
+                                                    <button class="btn btn-danger" type="button"
+                                                        id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                                        aria-expanded="false">
                                                         <i class="bi bi-tag"></i>
                                                         Khuyến mại
                                                     </button>
+                                                    <div class="dropdown-menu dropdown-menu-center"
+                                                        aria-labelledby="dropdownMenuButton1">
+                                                        <div class="text-center border-bottom py-2">
+                                                            <span class="text_default fs-5 fw-bold ">Chọn sản
+                                                                phẩm</span>
+                                                        </div>
+                                                        <div class="my-2">
+                                                            <label class="dropdown-item">
+                                                                <input type="checkbox" id="selectAllCheckbox" /> Chọn tất
+                                                                cả
+                                                            </label>
+                                                            <label class="dropdown-item">
+                                                                <input type="checkbox" class="nestedCheckbox" />Sản phẩm 1
+                                                            </label>
+                                                            <label class="dropdown-item">
+                                                                <input type="checkbox" class="nestedCheckbox" />Sản phẩm
+                                                                2
+                                                            </label>
+                                                        </div>
+                                                        <div
+                                                            class="d-flex justify-content-end align-items-center border-top py-3">
+                                                            <button class="btn btn-outline-danger me-3"> Hủy</button>
+                                                            <button class="btn btn-danger me-3"
+                                                                id="saveKhuyenMai">Lưu</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            {{--  --}}
+
                                             @php
                                                 $arrProduct = [
                                                     [
@@ -328,7 +439,7 @@
                                             <div class="mt-5">
                                                 <div class="table-responsive">
 
-                                                    <table id="dsNhaCungCap"
+                                                    <table
                                                         class="table table-responsive table-hover table-bordered filter">
                                                         <thead>
                                                             <tr>
@@ -356,7 +467,7 @@
                                                             </tr>
                                                         </thead>
 
-                                                        <tbody id="">
+                                                        <tbody id="dsKhuyenMai">
                                                             {{-- <tr>
                                                                 <td class="text-center"> <i
                                                                         class="bi bi-plus-circle text_default fs-4 fw-bold "
@@ -374,67 +485,79 @@
                                         <div class="col-lg-6 mb-3">
                                             <div class="layout_grid">
                                                 <span class="fs-5 fw-bold">Tổng tiền hàng :</span>
-                                                <span class="fs-5">120.000.000</span>
+                                                <input class="form-control style_select bg-transparent" id="sumTongTien"
+                                                    disabled>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mb-3">
                                             <div class="layout_grid">
                                                 <span class="fs-5 fw-bold">Số tiền còn lại :</span>
-                                                <span class="fs-5">0</span>
+                                                <input class="form-control style_select bg-transparent" id="tienConLai"
+                                                    disabled placeholder="Số tiền còn lại">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mb-3">
                                             <div class="layout_grid">
                                                 <span class="fs-5 fw-bold">Tổng tiền chiết khấu :</span>
-                                                <span class="fs-5" style="text-decoration: underline">2.600.000</span>
+                                                <input class="form-control style_select bg-transparent" id="sumTienCk"
+                                                    disabled>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mb-3">
                                             <div class="layout_grid">
                                                 <span class="fs-5 fw-bold">Hạn mức công nợ :</span>
-                                                <span class="fs-5">0</span>
+                                                <input class="form-control style_select bg-transparent" id="hanMucCongNo"
+                                                    placeholder="Hạn mức công nợ">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mb-3">
                                             <div class="layout_grid">
                                                 <span class="fs-5 fw-bold">Tổng tiền trước thuế :</span>
-                                                <span class="fs-5">117.400.000</span>
+                                                <input class="form-control style_select bg-transparent"
+                                                    id="sumTienTruocThue" disabled>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mb-3">
                                             <div class="layout_grid">
                                                 <span class="fs-5 fw-bold">Dư nợ hiện tại :</span>
-                                                <span class="fs-5">0</span>
+                                                <input class="form-control style_select bg-transparent" id="duNoHienTai"
+                                                    placeholder="Dư nợ hiện tại">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mb-3">
                                             <div class="layout_grid">
-                                                <span class="fs-5 fw-bold">Tổng tiền thuế :</span>
-                                                <span class="fs-5">11.740.000</span>
+                                                <span class="fs-5 fw-bold">Tổng tiền thuế (8%) :</span>
+                                                <input class="form-control style_select bg-transparent" id="sumTienThue"
+                                                    disabled>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mb-3">
                                             <div class="layout_grid">
                                                 <span class="fs-5 fw-bold">Hạn thanh toán :</span>
-                                                <span class="fs-5">15/08/2023</span>
+                                                <input type="date" class="form-control style_select bg-transparent"
+                                                    id="hanThanhToan" placeholder="Hạn thanh toán" value="0">
                                             </div>
                                         </div>
                                         <div class="col-lg-12 mb-3">
                                             <div class="layout_grid">
                                                 <span class="fs-5 fw-bold text_default">Phải thanh toán :</span>
-                                                <span class="fs-5" style="text-decoration: underline">129.140.000</span>
+                                                <input class="form-control style_select bg-transparent" id="sumThanhToan"
+                                                    disabled>
                                             </div>
                                         </div>
                                         <div class="col-lg-12 mb-3">
                                             <div class="layout_grid">
                                                 <span class="fs-5 fw-bold text-success">Thanh toán trước :</span>
-                                                <span class="fs-5 text-success">120.000.000</span>
+                                                <input class="form-control style_select bg-transparent"
+                                                    id="thanhToanTruoc"
+                                                    placeholder="Vui lòng nhập số tiền thanh toán trước" />
                                             </div>
                                         </div>
                                         <div class="col-lg-12 mb-3">
                                             <div class="layout_grid">
                                                 <span class="fs-5 fw-bold text-success">Số tiền bằng chữ :</span>
-                                                <span class="fs-5 text-success">Một trăm hai mươi chín triệu chẵn</span>
+                                                <input class="form-control style_select bg-transparent" id="tienBangChu"
+                                                    placeholder="Vui lòng nhập số tiền bằng chữ" />
                                             </div>
                                         </div>
                                     </div>
@@ -444,11 +567,10 @@
                     </div>
                 </div>
             </div>
+            @include('template.footer.footer')
         </div>
     </div>
-    @include('template.footer.footer')
-    </div>
-    </div>
+
     @include('template.sidebar.sidebarMaster.sidebarRight')
 
 @endsection
@@ -471,7 +593,6 @@
 
     <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/components/dataHrefTable.js') }}"></script>
-
     <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}"></script>
 
     <script>
@@ -486,6 +607,8 @@
         let countId = 0;
         let countRow = 1;
 
+        const rows = [];
+
         document.addEventListener("DOMContentLoaded", function() {
             const newRow = createRow(countId, countRow);
             tableBody.insertBefore(newRow, addRowButton.parentNode.parentNode);
@@ -496,9 +619,11 @@
                     newRow.remove();
                 });
             });
+            rows.push(newRow);
+            handleNewRow(0);
+            updateTotal();
             countId++;
             countRow++;
-            handleNewRow(0);
         });
 
         function createRow(countId, countRow) {
@@ -534,7 +659,7 @@
                                                             <td class="text-center text-nowrap">
                                                                 <input class="form-control style_select bg-transparent"
                                                                     type="text" disabled id="sltk_${countId}" name=""
-                                                                    placeholder="Số lượng tồn kho">
+                                                                    placeholder="Tồn kho">
                                                             </td>
                                                             <td class="text-center text-nowrap">
                                                                 <input class="form-control style_select bg-transparent"
@@ -579,11 +704,18 @@
             const deleteIcons = newRow.querySelectorAll("#remove-item");
             deleteIcons.forEach(deleteIcon => {
                 deleteIcon.addEventListener("click", function() {
+                    const rowIndex = rows.indexOf(newRow);
+                    if (rowIndex !== -1) {
+                        rows.splice(rowIndex, 1);
+                    }
                     newRow.remove();
+                    updateTotal();
                 });
             });
 
+            rows.push(newRow);
             handleNewRow(countId);
+            updateTotal();
             countId++;
             countRow++;
         });
@@ -625,8 +757,9 @@
 
                     const indexOfSlash = selectedItem.tonkho.indexOf("/");
                     const numberBeforeSlash = Number(selectedItem.tonkho.slice(0, indexOfSlash));
-                    thanhTienInput.value = selectedItem.donGia * numberBeforeSlash;
 
+                    thanhTienInput.value = selectedItem.donGia * numberBeforeSlash;
+                    updateTotal();
                 } else {
                     nameKho.value = "";
                     sltkInput.value = "";
@@ -637,10 +770,177 @@
         }
 
         function handleNewRow(countId) {
-            console.log('countId', countId);
             handleProductSelection(countId);
             handleKhoSelection(countId);
+
+            const thanhTienInput = document.getElementById(`thanhTien_${countId}`);
+            const tyLeCkInput = document.getElementById(`tyLeCK_${countId}`);
+            const ckInput = document.getElementById(`ck_${countId}`);
+
+            thanhTienInput.addEventListener("input", function() {
+                calculateDiscount(countId);
+                updateTotal();
+            });
+
+            tyLeCkInput.addEventListener("input", function() {
+                calculateDiscount(countId);
+                updateTotal();
+            });
+
+            function calculateDiscount(countId) {
+                const thanhTienValue = parseFloat(thanhTienInput.value);
+                const tyLeCkValue = parseFloat(tyLeCkInput.value);
+
+                if (!isNaN(thanhTienValue) && !isNaN(tyLeCkValue)) {
+                    const discount = (thanhTienValue * tyLeCkValue) / 100;
+                    ckInput.value = discount;
+                }
+            }
+
+
+        }
+
+        function calculateTotal() {
+            let total = 0;
+            let totalCk = 0;
+            rows.forEach(row => {
+                const thanhTienInput = row.querySelector("input[id^='thanhTien_']");
+                const ckInput = row.querySelector("input[id^='ck_']");
+                const thanhTienValue = parseFloat(thanhTienInput.value);
+                const ckValue = parseFloat(ckInput.value);
+
+                if (!isNaN(thanhTienValue)) {
+                    total += thanhTienValue;
+                }
+
+                if (!isNaN(ckValue)) {
+                    totalCk += ckValue;
+                }
+            });
+
+
+            return total;
+        }
+
+        function calculateTotalCk() {
+            let totalCk = 0;
+            rows.forEach(row => {
+                const ckInput = row.querySelector("input[id^='ck_']");
+                const ckValue = parseFloat(ckInput.value);
+
+                if (!isNaN(ckValue)) {
+                    totalCk += ckValue;
+                }
+            });
+
+            return totalCk;
+        }
+
+        function updateTotal() {
+            const total = calculateTotal();
+            const totalCk = calculateTotalCk();
+
+            const totalDisplay = document.getElementById("sumTongTien");
+            const totalCkDisplay = document.getElementById("sumTienCk");
+            totalDisplay.value = total;
+            totalCkDisplay.value = totalCk;
+
+            const totalTienHang = parseFloat(totalDisplay.value) || 0;
+            const totalCKValue = parseFloat(totalCkDisplay.value) || 0;
+
+            const totalTruocThueInput = document.getElementById("sumTienTruocThue");
+            if (!isNaN(totalTienHang) && !isNaN(totalCKValue)) {
+                totalTruocThueInput.value = totalTienHang - totalCKValue;
+            } else {
+                totalTruocThueInput.value = "";
+            }
+
+            const totalTruocThue = parseFloat(totalTruocThueInput.value) || 0;
+            const tienThueInput = document.getElementById("sumTienThue");
+            tienThueInput.value = totalTruocThue * 0.08;
+
+            const tienThue = parseFloat(tienThueInput.value) || 0;
+            const totalThanhToanInput = document.getElementById("sumThanhToan");
+            totalThanhToanInput.value = totalTruocThue + tienThue;
+
+            const tienThanhToanTruocInput = document.getElementById("thanhToanTruoc");
+
+
+            tienThanhToanTruocInput.addEventListener('input', function() {
+                const tienConLaiInput = document.getElementById("tienConLai");
+                const tienThanhToanTruoc = parseFloat(tienThanhToanTruocInput.value);
+                const tienConLai = totalThanhToanInput.value - tienThanhToanTruoc;
+                tienConLaiInput.value = tienConLai >= 0 ? tienConLai : tienConLaiInput.value = 0;
+            })
+
         }
     </script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const selectAllCheckbox = document.getElementById("selectAllCheckbox");
+            const nestedCheckboxes = document.querySelectorAll(".nestedCheckbox");
+
+            selectAllCheckbox.addEventListener("change", function() {
+                const isChecked = selectAllCheckbox.checked;
+                nestedCheckboxes.forEach(checkbox => {
+                    checkbox.checked = isChecked;
+                });
+            });
+
+            nestedCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener("change", function() {
+                    const areAllChecked = Array.from(nestedCheckboxes).every(checkbox => checkbox
+                        .checked);
+                    selectAllCheckbox.checked = areAllChecked;
+                });
+            });
+        });
+
+        var products = @json($arrSPKhuyenMai);
+        var selectedProducts = []; // Array to store selected produc
+
+        function onSaveButtonClick() {
+            var selectAllCheckbox = document.getElementById('selectAllCheckbox');
+
+            if (selectAllCheckbox.checked) {
+                selectedProducts = products.slice(); // Copy all products
+            } else {
+                var nestedCheckboxes = document.querySelectorAll('.nestedCheckbox');
+                nestedCheckboxes.forEach(function(checkbox) {
+                    if (checkbox.checked) {
+                        var productValue = checkbox.parentNode.textContent
+                            .trim(); // Get the text content of the label
+                        var product = products.find(function(item) {
+                            return item.tenSp === productValue;
+                        });
+
+                        if (product && !selectedProducts.includes(product)) {
+                            selectedProducts.push(product);
+                        }
+                    }
+                });
+            }
+
+            // Display selected products in the table
+            var tableBody = document.getElementById('dsKhuyenMai');
+            // tableBody.innerHTML = '';
+            selectedProducts.forEach(function(product, index) {
+                var newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                <td class="text-center">${index + 1}</td>
+                <td class="text-center">${product.maSp}</td>
+                <td class="text-center">${product.tenSp}</td>
+                <td class="text-center">${product.dvt}</td>
+                <td class="text-center">${product['Kho xuất']}</td>
+                <td class="text-center">${product.tonKho}</td>
+                <td class="text-center">${product.ghiChu}</td>
+            `;
+                tableBody.appendChild(newRow);
+            });
+        }
+
+        var saveButton = document.querySelector('#saveKhuyenMai');
+        saveButton.addEventListener('click', onSaveButtonClick);
+    </script>
 @endsection

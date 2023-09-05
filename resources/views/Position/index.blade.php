@@ -4,6 +4,34 @@
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 @endsection
+@php
+    
+    function getPaginationLink($link, $pageName)
+    {
+        if (!isset($link['url'])) {
+            return '#';
+        }
+    
+        $pageNumber = explode('?page=', $link['url'])[1];
+    
+        $queryString = request()->query();
+    
+        $queryString[$pageName] = $pageNumber;
+        return route('position.index', $queryString);
+    }
+    
+    // function isFiltering($filterNames)
+    // {
+    //     $filters = request()->query();
+    //     foreach ($filterNames as $filterName) {
+    //         if (isset($filters[$filterName]) && $filters[$filterName] != '') {
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
+    
+@endphp
 
 @section('content')
     @include('template.sidebar.sidebarDepartment.sidebarLeft')
@@ -112,7 +140,8 @@
                                                                             name="selected_items[]"
                                                                             value="{{ $item->id }}"></td>
                                                                     <td class=" text-center">
-                                                                        {{ $g++ }}
+                                                                        {{-- {{ $g++ }} --}}
+                                                                        {{ $positionList->total() - $loop->index - ($positionList->currentPage() - 1) * $positionList->perPage() }}
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
@@ -222,12 +251,28 @@
                                                             </tbody>
                                                         @endforeach
                                                     </table>
-                                                    <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                    {{-- <nav aria-label="Page navigation example" class="float-end mt-3"
                                                         id="target-pagination">
                                                         <ul class="pagination">
                                                             {{ $positionList->appends([
                                                                     'search' => $search,
                                                                 ])->links() }}
+                                                        </ul>
+                                                    </nav> --}}
+                                                    <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                        id="target-pagination">
+                                                        <ul class="pagination">
+                                                            @foreach ($pagination['links'] as $link)
+                                                                <li
+                                                                    class="page-item {{ $link['active'] ? 'active' : '' }}">
+                                                                    <a class="page-link"
+                                                                        href="{{ getPaginationLink($link, 'page') }}"
+                                                                        aria-label="Previous">
+                                                                        <span
+                                                                            aria-hidden="true">{!! $link['label'] !!}</span>
+                                                                    </a>
+                                                                </li>
+                                                            @endforeach
                                                         </ul>
                                                     </nav>
                                                 </div>
@@ -322,29 +367,24 @@
                                 <div class="col-6 mb-3">
 
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn cấp quản lý">
-                                        <select name="parent" class="selectpicker" data-dropup-auto="false"
+                                        <select required name="parent" class="selectpicker" data-dropup-auto="false"
                                             data-live-search="true">
-                                            <?php if ($item->parent == null){ ?>
-                                            <option value="0">Chọn cấp quản lý
-                                            </option>
-                                            <?php } else { ?>
-                                            <?php } ?>
-                                            <option value="{{ $item->parent }}">
-                                                @if ($item->donvime)
-                                                    {{ $item->donvime->name }}
-                                                @endif
+                                            <option value="">Chọn cấp quản lý
                                             </option>
                                             @foreach ($positionlists as $ac)
-                                                <option value="{{ $ac->id }}">
-                                                    @php
-                                                        $str = '';
-                                                        for ($i = 0; $i < $ac->level; $i++) {
-                                                            echo $str;
-                                                            $str = '  --';
-                                                        }
-                                                    @endphp
-                                                    {{ $ac->name }}
-                                                </option>
+                                                @if ($ac->id != $item->id)
+                                                    <option {{ $ac->id == $item->parent ? 'selected' : '' }}
+                                                        value="{{ $ac->id }}">
+                                                        @php
+                                                            $str = '';
+                                                            for ($i = 0; $i < $ac->level; $i++) {
+                                                                echo $str;
+                                                                $str = '  --';
+                                                            }
+                                                        @endphp
+                                                        {{ $ac->name }}
+                                                    </option>
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>
@@ -470,10 +510,10 @@
                                 </div>
                             </div>
                             <div class="col-6 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn vị trí cấp quản lý">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn cấp quản lý">
                                     <select name="parent" required class="selectpicker" data-dropup-auto="false"
                                         data-live-search="true">
-                                        <option value="0">Chọn vị trí cấp quản lý</option>
+                                        <option value="0">Chọn cấp quản lý</option>
                                         @foreach ($positionlists as $item)
                                             <option value="{{ $item->id }}">
                                                 @php

@@ -18,7 +18,7 @@ class PersonnelSeeder extends Seeder
             //1
             'name' => 'Trần Minh Thao',
             'email' => 'steven.tran@tbht.vn',
-            'password' => 'tbht2023',
+            'password' => bcrypt('tbht2023'),
             'code' => 'TMT-TBHT',
             'role_id' => 1,
             'phone' => "0123456789",
@@ -40,7 +40,7 @@ class PersonnelSeeder extends Seeder
             //2
             'name' => 'Phạm Thị Thắm',
             'email' => 'sales1@tbht.vn',
-            'password' => 'tbht2023',
+            'password' => bcrypt('tbht2023'),
             'code' => 'SALE1',
             'role_id' => 2,
             'phone' => "0374219889",
@@ -62,7 +62,7 @@ class PersonnelSeeder extends Seeder
             //3
             'name' => 'Nguyễn Văn Tiến',
             'email' => 'sales3@tbht.vn',
-            'password' => 'tbht2023',
+            'password' => bcrypt('tbht2023'),
             'code' => 'SALE3',
             'role_id' => 2,
             'phone' => "0773488562",
@@ -84,7 +84,7 @@ class PersonnelSeeder extends Seeder
             //4
             'name' => 'Dương Xuân Hải',
             'email' => 'sales2@tbht.vn',
-            'password' => 'tbht2023',
+            'password' => bcrypt('tbht2023'),
             'code' => 'SALE2',
             'role_id' => 2,
             'phone' => "0372949889",
@@ -106,7 +106,7 @@ class PersonnelSeeder extends Seeder
             //5
             'name' => 'Nguyễn Thành Đức',
             'email' => 'salesmanager1@tbht.vn',
-            'password' => 'tbht2023',
+            'password' => bcrypt('tbht2023'),
             'code' => 'SALEPM1',
             'role_id' => 3,
             'phone' => "0123456789",
@@ -128,7 +128,7 @@ class PersonnelSeeder extends Seeder
             //6
             'name' => 'Ngô Hữu Đông',
             'email' => 'salesmanager2@tbht.vn',
-            'password' => 'tbht2023',
+            'password' => bcrypt('tbht2023'),
             'code' => 'SALEPM2',
             'role_id' => 3,
             'phone' => "0123456789",
@@ -150,7 +150,7 @@ class PersonnelSeeder extends Seeder
             //7
             'name' => 'Trưởng phòng 3',
             'email' => 'salesmanager3@tbht.vn',
-            'password' => 'tbht2023',
+            'password' => bcrypt('tbht2023'),
             'code' => 'SALEPM3',
             'role_id' => 3,
             'phone' => "0123456789",
@@ -172,7 +172,7 @@ class PersonnelSeeder extends Seeder
             'id' => 999999,
             'name' => 'admin',
             'email' => 'admin@tbht.vn',
-            'password' => '123456',
+            'password' => bcrypt('123456'),
             'code' => 'ADMIN-123',
             'role_id' => 1,
             'phone' => "0123456789",

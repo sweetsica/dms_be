@@ -18,7 +18,7 @@ class Personnel extends Model implements Authenticatable
         'name',
         'department_id',
         'position_id',
-        'position_level_id',
+        'personnel_lv_id',
         'role_id',
         'area_id',
         'email',
@@ -55,7 +55,7 @@ class Personnel extends Model implements Authenticatable
 
     public function level()
     {
-        return $this->belongsTo(PersonnelLevel::class, 'position_level_id');
+        return $this->belongsTo(PersonnelLevel::class, 'personnel_lv_id');
     }
 
     public function role()

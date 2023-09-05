@@ -9,14 +9,35 @@ use Illuminate\Support\Facades\Session;
 class TechnicalSpecificationsGroupController extends Controller
 {
 
+    public function pagination($list)
+    {
+        return [
+            'current_page' => $list->currentPage(),
+            'data' => $list->items(),
+            'first_page_url' => $list->url(1),
+            'from' => $list->firstItem(),
+            'last_page' => $list->lastPage(),
+            'last_page_url' => $list->url($list->lastPage()),
+            'links' => $list->toArray()['links'],
+            'next_page_url' => $list->nextPageUrl(),
+            'path' => $list->url(1),
+            'per_page' => $list->perPage(),
+            'prev_page_url' => $list->previousPageUrl(),
+            'to' => $list->lastItem(),
+            'total' => $list->total(),
+        ];
+    }
+
     public function index(Request $request)
     {
         $search = $request->get('search');
         $TechnicalSpecificationsGroupList = TechnicalSpecificationsGroup::where("technical_specifications_group.code", "like", "%$search%")
         ->orWhere("technical_specifications_group.name", "like", "%$search%")->orderBy('id', 'desc')->paginate(10);
+        $pagination = $this->pagination($TechnicalSpecificationsGroupList);
         return view('nhom_thong_so_ky_thuat.index', [
             'search' => $search,
             'TechnicalSpecificationsGroupList'=>$TechnicalSpecificationsGroupList,
+            'pagination'=>$pagination,
         ]);
     }
 

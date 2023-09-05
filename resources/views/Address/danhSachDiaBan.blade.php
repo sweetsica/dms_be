@@ -7,35 +7,25 @@
 
     </style>
 @endsection
+
 @php
-    
-    // function getPaginationLink($link, $pageName)
-    // {
-    //     if (!isset($link->url)) {
-    //         return '#';
-    //     }
-    
-    //     $pageNumber = explode('?page=', $link->url)[1];
-    
-    //     $queryString = request()->query();
-    
-    //     $queryString[$pageName] = $pageNumber;
-    //     return route('timekeeping.list', $queryString);
-    // }
-    
-    // function isFiltering($filterNames)
-    // {
-    //     $filters = request()->query();
-    //     foreach ($filterNames as $filterName) {
-    //         if (isset($filters[$filterName]) && $filters[$filterName] != '') {
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // }
-    
-    $listData = [['id' => 1, 'code' => 'tuyen01', 'name' => 'Địa bàn 2', 'usermanager' => 'Nguyễn Văn A - TBHT00', 'email' => 'Cầu Giấy', 'nhom' => '2', 'kenh' => 'OTC'], ['id' => 2, 'code' => 'tuyen01', 'name' => 'Địa bàn 3', 'usermanager' => 'Nguyễn Văn B - MTDH01', 'email' => 'Thanh Xuân', 'nhom' => '3', 'kenh' => 'ETC']];
-    
+
+    function getPaginationLink($link, $pageName)
+    {
+        if (!isset($link['url'])) {
+            return '#';
+        }
+
+        $pageNumber = explode('?page=', $link['url'])[1];
+
+        $queryString = request()->query();
+
+        $queryString[$pageName] = $pageNumber;
+        return route('locality.index', $queryString);
+    }
+
+
+
 @endphp
 @section('content')
     @include('template.sidebar.sidebarArea.sidebarLeft')
@@ -121,7 +111,8 @@
                                                             </td>
                                                             <td>
                                                                 <div class="overText text-center">
-                                                                    {{ $a++ }}
+                                                                    {{-- {{ $a++ }} --}}
+                                                                    {{ $localityList->total() - $loop->index - ($localityList->currentPage() - 1) * $localityList->perPage() }}
                                                                 </div>
                                                             </td>
                                                             <td>
@@ -178,12 +169,24 @@
                                                     @endforeach
                                                 </tbody>
                                             </table>
-                                            <nav aria-label="Page navigation example" class="float-end mt-3"
+                                            {{-- <nav aria-label="Page navigation example" class="float-end mt-3"
                                                 id="target-pagination">
                                                 <ul class="pagination">
                                                     {{ $localityList->appends([
                                                             'search' => $search,
                                                         ])->links() }}
+                                                </ul>
+                                            </nav> --}}
+                                            <nav aria-label="Page navigation example" class="float-end mt-3" id="target-pagination">
+                                                <ul class="pagination">
+                                                    @foreach ($pagination['links'] as $link)
+                                                        <li class="page-item {{ $link['active'] ? 'active' : '' }}">
+                                                            <a class="page-link" href="{{ getPaginationLink($link, 'page') }}"
+                                                                aria-label="Previous">
+                                                                <span aria-hidden="true">{!! $link['label'] !!}</span>
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
                                                 </ul>
                                             </nav>
                                         </div>

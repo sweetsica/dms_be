@@ -12,6 +12,25 @@ use Illuminate\Support\Facades\Session;
 class LocalityController extends Controller
 {
 
+    public function pagination($list)
+    {
+        return [
+            'current_page' => $list->currentPage(),
+            'data' => $list->items(),
+            'first_page_url' => $list->url(1),
+            'from' => $list->firstItem(),
+            'last_page' => $list->lastPage(),
+            'last_page_url' => $list->url($list->lastPage()),
+            'links' => $list->toArray()['links'],
+            'next_page_url' => $list->nextPageUrl(),
+            'path' => $list->url(1),
+            'per_page' => $list->perPage(),
+            'prev_page_url' => $list->previousPageUrl(),
+            'to' => $list->lastItem(),
+            'total' => $list->total(),
+        ];
+    }
+
     public function index(Request $request){
         $search = $request->get('search');
         $khu_vuc = $request->get('khu_vuc');
@@ -46,12 +65,14 @@ class LocalityController extends Controller
         $localityList=$query->orderBy('locality.id', 'desc')->paginate(10);
         $area = Area::all();
         $areaTree =  Department::with('khuVucs.diaBans.tuyens')->where('code', 'like', 'VUNG%')->get();
+        $pagination = $this->pagination($localityList);
         return view("Address.danhSachDiaBan",[
             "localityList"=>$localityList,
             'search' => $search,
             'area' => $area,
             'khu_vuc' => $khu_vuc,
             'areaTree' => $areaTree,
+            'pagination' => $pagination,
 
         ]);
     }

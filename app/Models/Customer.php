@@ -75,6 +75,11 @@ class Customer extends Model
         return $this->belongsTo(Department::class, 'chanelId');
     }
 
+    public function group_customer()
+    {
+        return $this->belongsTo(CustomerGroup::class, 'group');
+    }
+
 //     public function promotions()
 // {
 //     return $this->belongsToMany(Promotion::class, 'customer_group_id', 'customer_id', 'promotion_id');

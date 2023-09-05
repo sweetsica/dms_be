@@ -5,25 +5,41 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
     <style>
         .mainSection_heading1 {
-        position: relative;
-        /* display: flex; */
-        align-items: center;
-        margin: 0 0 10px 0;
-        justify-content: center;
-        height: auto;
+            position: relative;
+            /* display: flex; */
+            align-items: center;
+            margin: 0 0 10px 0;
+            justify-content: center;
+            height: auto;
         }
+
         .mainSection_card1 {
-    margin-left: 10px;
-    font-size: var(--fz-12);
-}
+            margin-left: 10px;
+            font-size: var(--fz-12);
+        }
     </style>
 @endsection
 
 @php
-$total_wage = 0;
-foreach ($listPosToDept as $item){
-    $total_wage += $item->wage;
-}
+    
+    function getPaginationLink($link, $pageName)
+    {
+        if (!isset($link['url'])) {
+            return '#';
+        }
+    
+        $pageNumber = explode('?page=', $link['url'])[1];
+    
+        $queryString = request()->query();
+    
+        $queryString[$pageName] = $pageNumber;
+        return route('department.index2', ['department_id' => request()->department_id] + $queryString);
+    }
+    
+    $total_wage = 0;
+    foreach ($listPosToDept as $item) {
+        $total_wage += $item->wage;
+    }
 @endphp
 
 @section('content')
@@ -40,12 +56,15 @@ foreach ($listPosToDept as $item){
                                         <div class="col-md-3">
                                             <div class="text-nowrap">Đơn vị: </div>
                                         </div>
-                                        <div class="col-md-9"><strong class="text-nowrap">{{ Session::get('department_name') }}</strong>
+                                        <div class="col-md-9"><strong
+                                                class="text-nowrap">{{ Session::get('department_name') }}</strong>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="text-nowrap">Họ và tên: </div>
                                         </div>
-                                        <div class="col-md-9"><strong class="text-nowrap">{{ session('user')['name'] ?? "" }} - {{ session('user')['code'] ?? "" }}</strong></div>
+                                        <div class="col-md-9"><strong
+                                                class="text-nowrap">{{ session('user')['name'] ?? '' }} -
+                                                {{ session('user')['code'] ?? '' }}</strong></div>
                                     </div>
                                 </div>
                             </div>
@@ -59,7 +78,8 @@ foreach ($listPosToDept as $item){
                             </div>
                             <div class="col-md-3">
                                 <div style="margin-top:3%;">
-                                    <div id="mainSection_width" class="mainSection_thismonth d-flex align-items-center overflow-hidden d-none d-sm-block">
+                                    <div id="mainSection_width"
+                                        class="mainSection_thismonth d-flex align-items-center overflow-hidden d-none d-sm-block">
                                         <input id="thismonth" class="form-control" type="text" />
                                     </div>
                                 </div>
@@ -78,7 +98,9 @@ foreach ($listPosToDept as $item){
                                                 @if (session('user')['role_id'] == '1')
                                                     <div class="action_export order-md-4">
                                                         <button class="btn btn-danger d-block testCreateUser"
-                                                            data-bs-toggle="modal" data-bs-target="#suaPhongBan{{ $getDept['id'] }}">Sửa đơn vị</button>
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#suaPhongBan{{ $getDept['id'] }}">Sửa đơn
+                                                            vị</button>
                                                     </div>
                                                 @endif
 
@@ -125,7 +147,7 @@ foreach ($listPosToDept as $item){
                                                                     <div class="col-lg-8">
                                                                         <span class="fs-5">
                                                                             @if ($getDept->donvime)
-                                                                            {{-- <a style="color: black; text-decoration: underline;"
+                                                                                {{-- <a style="color: black; text-decoration: underline;"
                                                                                 href="{{ route('department.index2', ['department_id' => $getDept->donvime->id]) }}">
                                                                                 <div class="overText"
                                                                                     data-bs-toggle="tooltip"
@@ -134,8 +156,8 @@ foreach ($listPosToDept as $item){
                                                                                     {{ $getDept->donvime->name ?? '' }}
                                                                                 </div>
                                                                             </a> --}}
-                                                                            {{ $getDept->donvime->name ?? '' }}
-                                                                        @endif
+                                                                                {{ $getDept->donvime->name ?? '' }}
+                                                                            @endif
                                                                         </span>
                                                                     </div>
                                                                 </div>
@@ -168,18 +190,18 @@ foreach ($listPosToDept as $item){
                                                                     </div>
                                                                     <div class="col-lg-6">
                                                                         @switch($getDept->status)
-                                                                        @case(0)
-                                                                            <span class="fs-5">Không hoạt động</span>
-                                                                        @break
+                                                                            @case(0)
+                                                                                <span class="fs-5">Không hoạt động</span>
+                                                                            @break
 
-                                                                        @case(1)
-                                                                            <span class="fs-5">Hoạt động</span>
-                                                                        @break
+                                                                            @case(1)
+                                                                                <span class="fs-5">Hoạt động</span>
+                                                                            @break
 
-                                                                        @default
-                                                                            <span></span>
-                                                                        @break
-                                                                    @endswitch
+                                                                            @default
+                                                                                <span></span>
+                                                                            @break
+                                                                        @endswitch
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -216,7 +238,8 @@ foreach ($listPosToDept as $item){
                                                                             tế:</span>
                                                                     </div>
                                                                     <div class="col-lg-8">
-                                                                        <span class="fs-5">{{ $getDept->demarcation }} người</span>
+                                                                        <span class="fs-5">{{ $getDept->demarcation }}
+                                                                            người</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -227,8 +250,10 @@ foreach ($listPosToDept as $item){
                                                                     <div class="col-lg-4">
                                                                         <span class="fs-5 fw-bold">Quỹ lương năm:</span>
                                                                     </div>
-                                                                    <div class="col-lg-8" >
-                                                                        <span class="fs-5">{{ number_format($total_wage, 0, '.', '.')  }} VNĐ</span>
+                                                                    <div class="col-lg-8">
+                                                                        <span
+                                                                            class="fs-5">{{ number_format($total_wage, 0, '.', '.') }}
+                                                                            VNĐ</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -239,8 +264,10 @@ foreach ($listPosToDept as $item){
                                                                     <div class="col-lg-4">
                                                                         <span class="fs-5 fw-bold">Quỹ lương tháng:</span>
                                                                     </div>
-                                                                    <div class="col-lg-8" >
-                                                                        <span class="fs-5">{{ number_format($total_wage/12, 0, '.', '.')  }} VNĐ</span>
+                                                                    <div class="col-lg-8">
+                                                                        <span
+                                                                            class="fs-5">{{ number_format($total_wage / 12, 0, '.', '.') }}
+                                                                            VNĐ</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -253,11 +280,13 @@ foreach ($listPosToDept as $item){
                                                 <div class="row">
                                                     <div class="col-sm-6">Danh sách vị trí trực thuộc</div>
                                                     <div class="col-sm-6">
-                                                        <div class="action_wrapper align-items-center mb-3 justify-content-end">
+                                                        <div
+                                                            class="action_wrapper align-items-center mb-3 justify-content-end">
                                                             @if (session('user')['role_id'] == '1')
                                                                 <div class="action_export order-md-4">
                                                                     <button class="btn btn-danger d-block testCreateUser"
-                                                                        data-bs-toggle="modal" data-bs-target="#taoDeXuat">Thêm vị
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#taoDeXuat">Thêm vị
                                                                         trí</button>
                                                                 </div>
                                                             @endif
@@ -273,82 +302,92 @@ foreach ($listPosToDept as $item){
                                             align-items: center;">
 
 
-                                                <form method="GET" action="">
-                                                    {{-- <div style="display: flex"> --}}
+                                                <form method="GET">
+                                                    @foreach (request()->query() as $key => $value)
+                                                        @if ($key != 'q')
+                                                            <input type="hidden" name="{{ $key }}"
+                                                                value="{{ $value }}">
+                                                        @endif
+                                                    @endforeach
                                                     <div class="form-group has-search">
-                                                        <input type="text" class="form-control"
-                                                            value="{{ $search }}" placeholder="Tìm kiếm"
-                                                            name="search">
+                                                        <span type="submit"
+                                                            class="bi bi-search form-control-feedback fs-5"></span>
+                                                        <input type="text" class="form-control" placeholder="Tìm kiếm"
+                                                            value="{{ request()->get('q') }}" name="q">
                                                     </div>
-                                                    <div class="form-group has-search" style="display: none">
-                                                        <input type="text" class="form-control"
-                                                            value="{{ $department_id }}" placeholder="Tìm kiếm"
-                                                            name="department_id">
-                                                    </div>
+                                                </form>
 
+                                                <div class="d-flex align-items-center">
+                                                    <form id="filterForm">
+                                                        @foreach (request()->query() as $key => $value)
+                                                            @if (!in_array($key, ['cap_nhan_su', 'parent']))
+                                                                <input type="hidden" name="{{ $key }}"
+                                                                    value="{{ $value }}">
+                                                            @endif
+                                                        @endforeach
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col" style="min-width: 200px">
+                                                                    <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                        data-bs-original-title="Cấp nhân sự">
+                                                                        <select class="selectpicker select_filter"
+                                                                            data-dropup-auto="false" title="Cấp nhân sự"
+                                                                            name='cap_nhan_su' data-size="5"
+                                                                            data-live-search="true">
+                                                                            <option value="" disabled
+                                                                                {{ request()->cap_nhan_su ? '' : 'selected' }}>
+                                                                                Lọc cấp nhân sự</option>
+                                                                            <option value="all"
+                                                                                {{ request()->cap_nhan_su == 'all' ? 'selected' : '' }}>
+                                                                                Tất cả</option>
+                                                                            @foreach ($personnelLevelList as $item)
+                                                                                <option
+                                                                                    {{ request()->cap_nhan_su == $item->id ? 'selected' : '' }}
+                                                                                    value="{{ $item->id }}">
+                                                                                    {{ $item->name }}
+                                                                                </option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col" style="min-width: 200px">
+                                                                    <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                        data-bs-original-title="Người đảm nhiệm">
+                                                                        <select id="select-status"
+                                                                            class="selectpicker select_filter"
+                                                                            data-dropup-auto="false"
+                                                                            title="Người đảm nhiệm" name='parent'
+                                                                            data-live-search="true">
+                                                                            <option value="" disabled
+                                                                                {{ request()->parent ? '' : 'selected' }}>
+                                                                                Lọc người đảm nhiệm</option>
+                                                                            <option value="all"
+                                                                                {{ request()->parent == 'all' ? 'selected' : '' }}>
+                                                                                Tất cả</option>
+                                                                            @foreach ($personnellists as $item)
+                                                                                <option
+                                                                                    {{ request()->parent == $item->id ? 'selected' : '' }}
+                                                                                    value="{{ $item->id }}">
+                                                                                    {{ $item->name }}
+                                                                                </option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
-                                                    {{-- <div data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    title="Lọc cấp nhân sự">
-                                                    <select name="cap_nhan_su"  class="selectpicker"
-                                                        data-dropup-auto="false">
-                                                        <option value="">Lọc cấp nhân sự</option>
-                                                        @foreach ($personnelLevelList as $item)
-                                                                <option value="{{ $item->id }}">
-                                                                    {{ $item->name }}
-                                                                </option>
-                                                            @endforeach
-                                                    </select>
-                                                </div> --}}
-                                                 <button style="display: none">ok</button>
-                                            {{-- </div> --}}
-                                            </form>
-
-                                                <div data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    title="Lọc cấp nhân sự">
-                                                    <select name="filter_personnel_level" required class="selectpicker"
-                                                        data-dropup-auto="false">
-                                                        <option value="">Lọc cấp nhân sự</option>
-                                                        @foreach ($personnelLevelList as $item)
-                                                                <option value="{{ $item->id }}">
-                                                                    {{ $item->name }}
-                                                                </option>
-                                                            @endforeach
-                                                    </select>
-                                                </div>
-
-                                                <div data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    title="Lọc tên vị trí">
-                                                    <select name="filter_personnel_level" required class="selectpicker"
-                                                        data-dropup-auto="false">
-                                                        <option value="">Lọc tên vị trí</option>
-                                                        @foreach ($personnelLevelList as $item)
-                                                                <option value="{{ $item->id }}">
-                                                                    {{ $item->name }}
-                                                                </option>
-                                                            @endforeach
-                                                    </select>
-                                                </div>
-
-                                                <div data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    title="Lọc người đảm nhiệm">
-                                                    <select name="filter_personnel_level" required class="selectpicker"
-                                                        data-dropup-auto="false">
-                                                        <option value="">Lọc người đảm nhiệm</option>
-                                                        @foreach ($personnelLevelList as $item)
-                                                                <option value="{{ $item->id }}">
-                                                                    {{ $item->name }}
-                                                                </option>
-                                                            @endforeach
-                                                    </select>
+                                                    </form>
                                                 </div>
                                             </div>
-                                            <form id="select-form" action="{{ route('delete-selected-items') }}"
+                                            <form id="select-form" action="{{ route('detach-department-items') }}"
                                                 method="POST">
                                                 @csrf
+                                                @method('DELETE')
                                                 <div class="action_export order-md-1 mt-3" data-bs-toggle="tooltip"
                                                     data-bs-placement="top" title="Xóa">
                                                     <button class="btn btn-danger  " type="submit"
-                                                        onclick="return confirm('Bạn có muốn xóa không?')"
+                                                        onclick="return confirm('Bạn có muốn xóa vị trí khỏi phòng ban này không?')"
                                                         id="delete-selected-button" style="display: none;">Xóa</button>
                                                 </div><br>
                                                 <div class="table-responsive">
@@ -397,7 +436,7 @@ foreach ($listPosToDept as $item){
                                                                             name="selected_items[]"
                                                                             value="{{ $item->id }}"></td>
                                                                     <td class=" text-center">
-                                                                        {{ $loop->iteration }}
+                                                                        {{ $listPosToDept->total() - $loop->index - ($listPosToDept->currentPage() - 1) * $listPosToDept->perPage() }}
                                                                     </td>
                                                                     <td class="">
                                                                         <div class="overText" data-bs-toggle="tooltip"
@@ -448,8 +487,8 @@ foreach ($listPosToDept as $item){
                                                                     <td class="" style="text-align: center;">
                                                                         <div class="overText" data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
-                                                                            title="{{ date('d/m/Y', strtotime($item->created_at ))}}">
-                                                                            {{ date('d/m/Y', strtotime($item->created_at ))}}
+                                                                            title="{{ date('d/m/Y', strtotime($item->created_at)) }}">
+                                                                            {{ date('d/m/Y', strtotime($item->created_at)) }}
                                                                         </div>
 
                                                                     </td>
@@ -502,14 +541,22 @@ foreach ($listPosToDept as $item){
                                                             </tbody>
                                                         @endforeach
                                                     </table>
-                                                    {{-- <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                    <nav aria-label="Page navigation example" class="float-end mt-3"
                                                         id="target-pagination">
                                                         <ul class="pagination">
-                                                            {{ $departmentList->appends([
-                                                                    'search' => $search,
-                                                                ])->links() }}
+                                                            @foreach ($pagination['links'] as $link)
+                                                                <li
+                                                                    class="page-item {{ $link['active'] ? 'active' : '' }}">
+                                                                    <a class="page-link"
+                                                                        href="{{ getPaginationLink($link, 'page') }}"
+                                                                        aria-label="Previous">
+                                                                        <span
+                                                                            aria-hidden="true">{!! $link['label'] !!}</span>
+                                                                    </a>
+                                                                </li>
+                                                            @endforeach
                                                         </ul>
-                                                    </nav> --}}
+                                                    </nav>
                                                 </div>
                                             </form>
                                         </div>
@@ -527,99 +574,101 @@ foreach ($listPosToDept as $item){
     </div>
     @include('template.sidebar.sidebarMaster.sidebarRight')
 
-        {{-- Sửa đơn vị --}}
-        <div class="modal fade" id="suaPhongBan{{ $getDept['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header text-center">
-                        <h5 class="modal-title w-100" id="exampleModalLabel">Sửa đơn vị</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form method="POST" action="{{ route('department.update', $getDept->id) }}">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-6 mb-3">
-                                    <input data-bs-toggle="tooltip" data-bs-placement="top" title="Nhập tên đơn vị*"
-                                        name="name" type="text" placeholder="Tên đơn vị" class="form-control"
-                                        value="{{ $getDept->name }}" required>
-                                </div>
-                                <div class="col-6 mb-3">
-                                    <input data-bs-toggle="tooltip" data-bs-placement="top" title="Mã đơn vị*"
-                                        name="code" type="text" placeholder="Mã đơn vị*" class="form-control"
-                                        value="{{ $getDept->code }}" required>
-                                </div>
-                                <div class="col-6 mb-3">
+    {{-- Sửa đơn vị --}}
+    <div class="modal fade" id="suaPhongBan{{ $getDept['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Sửa đơn vị</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action="{{ route('department.update', $getDept->id) }}">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-6 mb-3">
+                                <input data-bs-toggle="tooltip" data-bs-placement="top" title="Nhập tên đơn vị*"
+                                    name="name" type="text" placeholder="Tên đơn vị" class="form-control"
+                                    value="{{ $getDept->name }}" required>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <input data-bs-toggle="tooltip" data-bs-placement="top" title="Mã đơn vị*"
+                                    name="code" type="text" placeholder="Mã đơn vị*" class="form-control"
+                                    value="{{ $getDept->code }}" required>
+                            </div>
+                            <div class="col-6 mb-3">
 
-                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn đơn vị cha">
-                                        <select name="parent" required class="selectpicker" data-dropup-auto="false" data-live-search="true">
-                                            <?php if( $getDept->parent == 0){ ?>
-                                            <option value="0">Chọn
-                                                đơn
-                                                vị cha</option>
-                                            <?php
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn đơn vị cha">
+                                    <select name="parent" required class="selectpicker" data-dropup-auto="false"
+                                        data-live-search="true">
+                                        <?php if( $getDept->parent == 0){ ?>
+                                        <option value="0">Chọn
+                                            đơn
+                                            vị cha</option>
+                                        <?php
                                       }else{ ?>
-                                            <option value="{{ $getDept->parent }}">
-                                                @if ($getDept->donvime)
-                                                    {{ $getDept->donvime->name }}
-                                                @endif
+                                        <option value="{{ $getDept->parent }}">
+                                            @if ($getDept->donvime)
+                                                {{ $getDept->donvime->name }}
+                                            @endif
+                                        </option>
+                                        <?php } ?>
+                                        <option value="0">Chọn
+                                            đơn
+                                            vị cha</option>
+                                        @foreach ($departmentlists as $ac)
+                                            <option value="{{ $ac->id }}">
+                                                @php
+                                                    $str = '';
+                                                    for ($i = 0; $i < $ac->level; $i++) {
+                                                        echo $str;
+                                                        $str = '  --';
+                                                    }
+                                                @endphp
+                                                {{ $ac->name }}
                                             </option>
-                                            <?php } ?>
-                                            <option value="0">Chọn
-                                                đơn
-                                                vị cha</option>
-                                            @foreach ($departmentlists as $ac)
-                                                <option value="{{ $ac->id }}">
-                                                    @php
-                                                        $str = '';
-                                                        for ($i = 0; $i < $ac->level; $i++) {
-                                                            echo $str;
-                                                            $str = '  --';
-                                                        }
-                                                    @endphp
-                                                    {{ $ac->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <div class="col-6 mb-3">
-                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn trạng thái">
-                                        <select name="status" class="selectpicker" data-dropup-auto="false">
-                                            @if ($getDept->status == 1)
+
+                            </div>
+                            <div class="col-6 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn trạng thái">
+                                    <select name="status" class="selectpicker" data-dropup-auto="false">
+                                        @if ($getDept->status == 1)
                                             <option value="1" selected>Hoạt động</option>
                                             <option value="0">Không hoạt động</option>
-                                            @else
+                                        @else
                                             <option value="1">Hoạt động</option>
                                             <option value="0" selected>Không hoạt động</option>
-                                            @endif
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-6 mb-3">
-                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn định biên">
-                                        <input class="form-control" type="number" name="demarcation" value="{{ $getDept->demarcation }}">
-                                    </div>
+                                        @endif
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-12 mb-3">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top">
-                                    <textarea name="description" type="text" placeholder="Chức năng nhiệm vụ" class="form-control "
-                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Mô tả" style="height: 80px;">{{ $getDept->description }}</textarea>
+                            <div class="col-6 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn định biên">
+                                    <input class="form-control" type="number" name="demarcation"
+                                        value="{{ $getDept->demarcation }}">
                                 </div>
                             </div>
                         </div>
+                        <div class="col-12 mb-3">
+                            <div data-bs-toggle="tooltip" data-bs-placement="top">
+                                <textarea name="description" type="text" placeholder="Chức năng nhiệm vụ" class="form-control "
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Mô tả" style="height: 80px;">{{ $getDept->description }}</textarea>
+                            </div>
+                        </div>
+                    </div>
 
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
-                            <button type="submit" class="btn btn-danger">Lưu</button>
-                        </div>
-                    </form>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-danger">Lưu</button>
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
 
     @foreach ($positionlists as $item)
         {{-- Sửa đề xuất --}}
@@ -654,7 +703,8 @@ foreach ($listPosToDept as $item){
                                                 {{ $item->department_name }}
                                             </option>
                                             @foreach ($departmentlists as $ac)
-                                                <option value="{{ $ac->id }}" {{ $ac->id == $item->department_id ? "selected" : "" }}>
+                                                <option value="{{ $ac->id }}"
+                                                    {{ $ac->id == $item->department_id ? 'selected' : '' }}>
                                                     @php
                                                         $str = '';
                                                         for ($i = 0; $i < $ac->level; $i++) {
@@ -675,7 +725,8 @@ foreach ($listPosToDept as $item){
                                             <option value="">Chọn cấp nhân sự*
                                             </option>
                                             @foreach ($personnelLevelList as $av)
-                                                <option value="{{ $av->id }}" {{ $av->id == $item->personnel_level ? "selected" : "" }}>
+                                                <option value="{{ $av->id }}"
+                                                    {{ $av->id == $item->personnel_level ? 'selected' : '' }}>
                                                     {{ $av->name }}
                                                 </option>
                                             @endforeach
@@ -685,28 +736,22 @@ foreach ($listPosToDept as $item){
                                 <div class="col-6 mb-3">
 
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn cấp quản lý">
-                                        <select name="parent" class="selectpicker" data-dropup-auto="false">
-                                            <?php if ($item->parent == null){ ?>
-                                            <option value="0">Chọn cấp quản lý
-                                            </option>
-                                            <?php } else { ?>
-                                            <?php } ?>
-                                            <option value="{{ $item->parent }}">
-                                                @if ($item->donvime)
-                                                    {{ $item->donvime->name }}
-                                                @endif
+                                        <select required name="parent" class="selectpicker" data-dropup-auto="false">
+                                            <option value="">Chọn cấp quản lý
                                             </option>
                                             @foreach ($positionlists as $ac)
-                                                <option value="{{ $ac->id }}">
-                                                    @php
-                                                        $str = '';
-                                                        for ($i = 0; $i < $ac->level; $i++) {
-                                                            echo $str;
-                                                            $str = '  --';
-                                                        }
-                                                    @endphp
-                                                    {{ $ac->name }}
-                                                </option>
+                                                @if ($ac->id != $item->id)
+                                                    <option {{ $ac->id == $item->parent ? "selected" : "" }} value="{{ $ac->id }}">
+                                                        @php
+                                                            $str = '';
+                                                            for ($i = 0; $i < $ac->level; $i++) {
+                                                                echo $str;
+                                                                $str = '  --';
+                                                            }
+                                                        @endphp
+                                                        {{ $ac->name }}
+                                                    </option>
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>
@@ -766,7 +811,7 @@ foreach ($listPosToDept as $item){
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
                         <form action="{{ route('position.detach', $item->id) }}" method="POST">
                             @csrf
-                            @method("DELETE")
+                            @method('DELETE')
                             <button type="submit" class="btn btn-danger">Xóa</button>
                         </form>
                     </div>
@@ -865,9 +910,12 @@ foreach ($listPosToDept as $item){
                                     data-bs-toggle="tooltip" data-bs-placement="top" title="Quỹ lương năm">
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
-                                <button id="loadingBtn" style="display: none;" class="btn btn-danger" type="button" disabled>
-                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                <button type="button" class="btn btn-outline-danger me-3"
+                                    data-bs-dismiss="modal">Hủy</button>
+                                <button id="loadingBtn" style="display: none;" class="btn btn-danger" type="button"
+                                    disabled>
+                                    <span class="spinner-border spinner-border-sm" role="status"
+                                        aria-hidden="true"></span>
                                     Loading...
                                 </button>
                                 <button id="submitBtn" type="submit" class="btn btn-danger">Tạo</button>
@@ -1124,6 +1172,19 @@ foreach ($listPosToDept as $item){
             const atLeastOneChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
             deleteButton.style.display = atLeastOneChecked ? 'block' : 'none';
         }
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector('#filterForm');
+            const selectFields = form.querySelectorAll('select');
+
+            selectFields.forEach(function(select) {
+                select.addEventListener('change', function() {
+                    form.submit();
+                });
+            });
+        });
     </script>
 
 @endsection

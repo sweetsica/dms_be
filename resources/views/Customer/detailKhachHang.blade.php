@@ -424,7 +424,10 @@
                                                                 <div class="col-lg-12 mt-4">
                                                                     <div class="layout_120">
                                                                         <span class="fw-bold fs-4">Nhóm KH:</span>
-                                                                        <span class="fs-4">{{ $customer->group }}</span>
+                                                                        @if (isset($customer->group_customer))
+                                                                        <span class="fs-4">{{ $customer->group_customer->name }}</span>
+                                                                        @endif
+
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-12 mt-4">
@@ -723,21 +726,18 @@
 
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Sản phẩm quan tâm">
-                                {{-- <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                    data-live-search="true" title="Sản phẩm quan tâm*" data-select-all-text="Chọn tất cả"
-                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="productId[]" id="productId"
-                                    data-live-search-placeholder="Tìm kiếm..." multiple>
-                                    <option value="{{ $productList }}">{{ $productList }}</option>
-                                </select> --}}
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="productId[]" id="productId"
                                     data-live-search-placeholder="Tìm kiếm...">
                                     <option value="{{ $productList }}">{{ $productList }}</option>
+                                    @foreach ($productsAll as $Pr)
+                                        <option value="{{ $Pr->id }}">
+                                        {{ $Pr->name }}
+                                        </option>
+                                     @endforeach
                                 </select>
                             </div>
-
-
                             <div class="col-md-12 mb-3">
                                 <div class="card-title">5. Phân loại</div>
                             </div>
@@ -745,10 +745,10 @@
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Nhóm khách hàng">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                    data-live-search="true" title="Nhóm khách hàng*" data-select-all-text="Chọn tất cả"
+                                    data-live-search="true"  data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="groupId" id="groupId"
                                     data-live-search-placeholder="Tìm kiếm...">
-                                    <option value="{{ $customer->group ?? '' }}"> {{ $customer->group ?? '' }} </option>
+                                    <option value="{{ $customer->group_customer->id ?? '' }}"> {{ $customer->group_customer->name ?? '' }}  </option>
                                     @foreach ($listgroup as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach
@@ -760,6 +760,10 @@
                                     data-live-search="true" title="Tuyến*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="routeId" id="routeId"
                                     data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="{{$customer->route->id ?? '' }}">{{$customer->route->name ?? '' }}</option>
+                                    @foreach ($RouteDirection as $rote)
+                                    <option value="{{ $rote->id }}">{{ $rote->name }}</option>
+                                @endforeach
                                 </select>
                             </div>
 
@@ -767,8 +771,12 @@
                                 title="Kênh khách hàng">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Kênh khách hàng*" data-select-all-text="Chọn tất cả"
-                                    data-deselect-all-text="Bỏ chọn" data-size="3" name="chanelId" id="chanelId"
+                                    data-deselect-all-text="Bỏ chọn"  name="chanelId" id="chanelId"
                                     data-live-search-placeholder="Tìm kiếm...">
+                                    <option value="{{$customer->channel->id ?? '' }}">{{$customer->channel->name ?? '' }}</option>
+                                    @foreach ($DepartmentAll as $department)
+                                    <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                @endforeach
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
