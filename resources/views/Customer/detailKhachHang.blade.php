@@ -1,5 +1,5 @@
 @extends('template.master')
-@section('title', 'Danh sách khách hàng')
+@section('title', 'Chi tiết khách hàng')
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
@@ -56,23 +56,23 @@
                                                         <img class="img-slider" src="{{ asset($customer->image) }}" />
                                                     </div>
                                                     <!-- <div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <img class="img-slider" src="{{ asset('assets/img/oto-2.png') }}" />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <img class="img-slider" src="{{ asset('assets/img/oto-3.png') }}" />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <img class="img-slider" src="{{ asset('assets/img/oto-4.png') }}" />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <img class="img-slider" src="{{ asset('assets/img/oto-2.png') }}" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <img class="img-slider" src="{{ asset('assets/img/oto-3.png') }}" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <img class="img-slider" src="{{ asset('assets/img/oto-4.png') }}" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div> -->
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-12">
                                                 <div class="slider slider-nav">
                                                     <!-- <div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <img src="{{ asset('assets/img/avatardefault.jpg') }}"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        class="img-slider_nav" />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <img src="{{ asset('assets/img/avatardefault.jpg') }}"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                class="img-slider_nav" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div> -->
                                                 </div>
                                             </div>
 
@@ -158,7 +158,7 @@
                                             <div class="mt-4">
                                                 <div class="input-group align-items-center">
                                                     <!-- <input type="file" class="form-control" id="attachment"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    name="attachment" style="display: none"> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            name="attachment" style="display: none"> -->
                                                     <i class="bi bi-link-45deg text-color_pimary fs-3 fw-bold"></i>
                                                     {{-- <label class="input-label text-color_pimary fs-4 fw-bold ms-2"
                                                         for="attachment" style="cursor: pointer">File đính kèm</label> --}}
@@ -425,7 +425,8 @@
                                                                     <div class="layout_120">
                                                                         <span class="fw-bold fs-4">Nhóm KH:</span>
                                                                         @if (isset($customer->group_customer))
-                                                                        <span class="fs-4">{{ $customer->group_customer->name }}</span>
+                                                                            <span
+                                                                                class="fs-4">{{ $customer->group_customer->name }}</span>
                                                                         @endif
 
                                                                     </div>
@@ -733,9 +734,9 @@
                                     <option value="{{ $productList }}">{{ $productList }}</option>
                                     @foreach ($productsAll as $Pr)
                                         <option value="{{ $Pr->id }}">
-                                        {{ $Pr->name }}
+                                            {{ $Pr->name }}
                                         </option>
-                                     @endforeach
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-md-12 mb-3">
@@ -745,10 +746,11 @@
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Nhóm khách hàng">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
-                                    data-live-search="true"  data-select-all-text="Chọn tất cả"
+                                    data-live-search="true" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="groupId" id="groupId"
                                     data-live-search-placeholder="Tìm kiếm...">
-                                    <option value="{{ $customer->group_customer->id ?? '' }}"> {{ $customer->group_customer->name ?? '' }}  </option>
+                                    <option value="{{ $customer->group_customer->id ?? '' }}">
+                                        {{ $customer->group_customer->name ?? '' }} </option>
                                     @foreach ($listgroup as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach
@@ -760,10 +762,11 @@
                                     data-live-search="true" title="Tuyến*" data-select-all-text="Chọn tất cả"
                                     data-deselect-all-text="Bỏ chọn" data-size="3" name="routeId" id="routeId"
                                     data-live-search-placeholder="Tìm kiếm...">
-                                    <option value="{{$customer->route->id ?? '' }}">{{$customer->route->name ?? '' }}</option>
+                                    <option value="{{ $customer->route->id ?? '' }}">{{ $customer->route->name ?? '' }}
+                                    </option>
                                     @foreach ($RouteDirection as $rote)
-                                    <option value="{{ $rote->id }}">{{ $rote->name }}</option>
-                                @endforeach
+                                        <option value="{{ $rote->id }}">{{ $rote->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
@@ -771,12 +774,13 @@
                                 title="Kênh khách hàng">
                                 <select class="selectpicker" data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Kênh khách hàng*" data-select-all-text="Chọn tất cả"
-                                    data-deselect-all-text="Bỏ chọn"  name="chanelId" id="chanelId"
+                                    data-deselect-all-text="Bỏ chọn" name="chanelId" id="chanelId"
                                     data-live-search-placeholder="Tìm kiếm...">
-                                    <option value="{{$customer->channel->id ?? '' }}">{{$customer->channel->name ?? '' }}</option>
+                                    <option value="{{ $customer->channel->id ?? '' }}">
+                                        {{ $customer->channel->name ?? '' }}</option>
                                     @foreach ($DepartmentAll as $department)
-                                    <option value="{{ $department->id }}">{{ $department->name }}</option>
-                                @endforeach
+                                        <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
@@ -872,10 +876,6 @@
             object-fit: cover;
             margin-right: 10px;
             padding: 12%;
-        }
-
-        .header_menu-link {
-            font-size: 1.5rem !important;
         }
 
         .action_wrapper-search {

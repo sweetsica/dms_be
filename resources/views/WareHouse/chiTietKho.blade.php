@@ -18,6 +18,12 @@
     .btn-show_detail:hover {
         color: var(--primary-color);
     }
+
+    .img-qr {
+        width: 100%;
+        max-height: 50px;
+        object-fit: cover;
+    }
 </style>
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
@@ -33,7 +39,7 @@
                         <div class="col-lg-12">
                             <div class="card mb-3">
                                 <div class="card-body px-5">
-                                    <div class="border-bottom pb-4">
+                                    <div class="border-bottom pb-4 position-relative">
                                         <div class="row mb-3">
                                             <div class="col-lg-4">
                                                 <div class="row g-0">
@@ -132,6 +138,11 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div class="position-absolute" style="top: 0; right: 0;">
+                                            <img src="{{ asset('assets/img/Qr-code.png') }}" alt="Qr-code"
+                                                class="img-qr" />
+                                        </div>
                                     </div>
 
                                     <div
@@ -190,10 +201,12 @@
                                                     </th>
                                                     <th class="text-nowrap text-center" style="width: 5%">Mã
                                                     </th>
-                                                    <th class="text-nowrap text-center" style="width: 10%">Tên
+                                                    <th class="text-nowrap text-center" style="width: 15%">Tên
                                                         sản phẩm
                                                     </th>
-                                                    <th class="text-nowrap text-center" style="width: 10%">Mô tả sản phẩm
+                                                    <th class="text-nowrap text-center" style="width: 5%">Số lô
+                                                    </th>
+                                                    <th class="text-nowrap text-center" style="width: 10%">HSD
                                                     </th>
                                                     <th class="text-nowrap text-center" style="width: 5%">Số lượng
                                                     </th>
@@ -211,52 +224,56 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td class="text-nowrap text-center">1</td>
-                                                    <td class="text-nowrap text-center">12345</td>
-                                                    <td class="text-nowrap text-center">Vitamin tổng hợp</td>
-                                                    <td class="text-nowrap text-center">aaaaaaaaaaaaaaa</td>
-                                                    <td class="text-nowrap text-center">10</td>
-                                                    <td class="text-nowrap text-center">Hộp</td>
-                                                    <td class="text-nowrap text-center">Hộp</td>
-                                                    <td class="text-nowrap text-center">Sản phẩm</td>
-                                                    <td class="text-nowrap text-center">Ngày nhập kho</td>
-                                                    <td class="text-nowrap text-center"></td>
+                                                    <td class="text-nowrap ">1</td>
+                                                    <td class="text-nowrap ">123456</td>
+                                                    <td class="text-nowrap ">Vitamin tổng hợp</td>
+                                                    <td class="text-nowrap ">1</td>
+                                                    <td class="text-nowrap ">28/08/2026</td>
+                                                    <td class="text-nowrap ">10</td>
+                                                    <td class="text-nowrap ">Hộp</td>
+                                                    <td class="text-nowrap ">Hộp</td>
+                                                    <td class="text-nowrap ">Sản phẩm</td>
+                                                    <td class="text-nowrap ">16/07/2023</td>
+                                                    <td class="text-nowrap "></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-nowrap text-center">2</td>
-                                                    <td class="text-nowrap text-center">12345</td>
-                                                    <td class="text-nowrap text-center">Vitamin tổng hợp</td>
-                                                    <td class="text-nowrap text-center">aaaaaaaaaaaaaaa</td>
-                                                    <td class="text-nowrap text-center">10</td>
-                                                    <td class="text-nowrap text-center">Hộp</td>
-                                                    <td class="text-nowrap text-center">Hộp</td>
-                                                    <td class="text-nowrap text-center">Sản phẩm</td>
-                                                    <td class="text-nowrap text-center">Ngày nhập kho</td>
-                                                    <td class="text-nowrap text-center"></td>
+                                                    <td class="text-nowrap ">2</td>
+                                                    <td class="text-nowrap ">123457</td>
+                                                    <td class="text-nowrap ">Bảng quảng cáo</td>
+                                                    <td class="text-nowrap ">1</td>
+                                                    <td class="text-nowrap ">29/08/2026</td>
+                                                    <td class="text-nowrap ">11</td>
+                                                    <td class="text-nowrap ">Cái</td>
+                                                    <td class="text-nowrap ">Cái</td>
+                                                    <td class="text-nowrap ">Vật tư MKT</td>
+                                                    <td class="text-nowrap "></td>
+                                                    <td class="text-nowrap "></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-nowrap text-center">3</td>
-                                                    <td class="text-nowrap text-center">12345</td>
-                                                    <td class="text-nowrap text-center">Vitamin tổng hợp</td>
-                                                    <td class="text-nowrap text-center">aaaaaaaaaaaaaaa</td>
-                                                    <td class="text-nowrap text-center">10</td>
-                                                    <td class="text-nowrap text-center">Hộp</td>
-                                                    <td class="text-nowrap text-center">Hộp</td>
-                                                    <td class="text-nowrap text-center">Sản phẩm</td>
-                                                    <td class="text-nowrap text-center">Ngày nhập kho</td>
-                                                    <td class="text-nowrap text-center"></td>
+                                                    <td class="text-nowrap ">3</td>
+                                                    <td class="text-nowrap ">123458</td>
+                                                    <td class="text-nowrap ">Collage</td>
+                                                    <td class="text-nowrap ">1</td>
+                                                    <td class="text-nowrap ">30/08/2026</td>
+                                                    <td class="text-nowrap ">12</td>
+                                                    <td class="text-nowrap ">Thùng</td>
+                                                    <td class="text-nowrap ">Chai</td>
+                                                    <td class="text-nowrap ">Sản phẩm</td>
+                                                    <td class="text-nowrap "></td>
+                                                    <td class="text-nowrap "></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-nowrap text-center">4</td>
-                                                    <td class="text-nowrap text-center">12345</td>
-                                                    <td class="text-nowrap text-center">Vitamin tổng hợp</td>
-                                                    <td class="text-nowrap text-center">aaaaaaaaaaaaaaa</td>
-                                                    <td class="text-nowrap text-center">10</td>
-                                                    <td class="text-nowrap text-center">Hộp</td>
-                                                    <td class="text-nowrap text-center">Hộp</td>
-                                                    <td class="text-nowrap text-center">Sản phẩm</td>
-                                                    <td class="text-nowrap text-center">Ngày nhập kho</td>
-                                                    <td class="text-nowrap text-center"></td>
+                                                    <td class="text-nowrap ">4</td>
+                                                    <td class="text-nowrap ">123459</td>
+                                                    <td class="text-nowrap ">Vitamin E</td>
+                                                    <td class="text-nowrap ">1</td>
+                                                    <td class="text-nowrap ">31/08/2026</td>
+                                                    <td class="text-nowrap ">13</td>
+                                                    <td class="text-nowrap ">Hộp</td>
+                                                    <td class="text-nowrap ">Hộp</td>
+                                                    <td class="text-nowrap ">Sản phẩm</td>
+                                                    <td class="text-nowrap ">16/07/2023</td>
+                                                    <td class="text-nowrap "></td>
                                                 </tr>
                                             </tbody>
                                         </table>
