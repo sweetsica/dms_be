@@ -100,6 +100,8 @@ class DepartmentController extends Controller
 
         $listUsers = Personnel::all();
         $pagination = $this->pagination($departmentList);
+
+        $areaTree =  Department::with('khuVucs.diaBans.tuyens')->where('code', 'like', 'VUNG%')->get();
         // dd( $pagination);
         return view("Deparment.index", [
             "Department" => $Department,
@@ -115,6 +117,7 @@ class DepartmentController extends Controller
             'personnelLevelList' => $personnelLevelList,
             'positionlists' => $positionlists,
             'roleList' => $roleList,
+            'areaTree' =>  $areaTree,
             'localityList' => $localityList,
             'personnellists' => $personnellists,
             'pagination' => $pagination,
@@ -195,7 +198,7 @@ class DepartmentController extends Controller
         $personnelLevelList = PersonnelLevel::all();
         $positionlists = $this->getPosition();
         $personnellists = $this->getPersonnel();
-
+        $areaTree =  Department::with('khuVucs.diaBans.tuyens')->where('code', 'like', 'VUNG%')->get();
         return view("Deparment.index2", [
             "personnelLevelList" => $personnelLevelList,
             "positionlists" => $positionlists,
@@ -208,7 +211,8 @@ class DepartmentController extends Controller
             'department_id' => $department_id,
             'listPosToDept' => $listPosToDept,
             'personnellists' => $personnellists,
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'areaTree' => $areaTree
         ]);
     }
 
@@ -312,7 +316,7 @@ class DepartmentController extends Controller
         })->get();
 
         $pagination = $this->pagination($listUsers);
-
+        $areaTree =  Department::with('khuVucs.diaBans.tuyens')->where('code', 'like', 'VUNG%')->get();
         return view("Deparment.assignUser", [
             "departmentList" => $departmentList,
             'don_vi_me' => $don_vi_me,
@@ -331,7 +335,8 @@ class DepartmentController extends Controller
             'selectableUser' => $selectableUser,
             'getDept' => $getDept,
             'listPosToDept' => $listPosToDept,
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'areaTree' => $areaTree
         ]);
     }
 

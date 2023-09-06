@@ -125,6 +125,7 @@ class PersonnelController extends Controller
         $localityList = Locality::all();
         $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
         $pagination = $this->pagination($personnelList);
+        $areaTree =  Department::with('khuVucs.diaBans.tuyens')->where('code', 'like', 'VUNG%')->get();
         // dd($personnelLevelList);
         return view("ds_nhan_su.index", [
             "personnelList" => $personnelList,
@@ -142,7 +143,8 @@ class PersonnelController extends Controller
             "trang_thai" => $trang_thai,
             "departmentListTree" => $departmentListTree,
             "pagination" => $pagination,
-            'search' => $search
+            'search' => $search,
+            'areaTree' => $areaTree
         ]);
     }
 

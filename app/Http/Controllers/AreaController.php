@@ -62,6 +62,7 @@ class AreaController extends Controller
         $department = Department::all();
         $areaTree =  Department::with('khuVucs.diaBans.tuyens')->get();
         $pagination = $this->pagination($areaList);
+        $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
         // dd()
         return view("Address.danhSachKhuVuc",[
             "areaList"=>$areaList,
@@ -70,7 +71,7 @@ class AreaController extends Controller
             'vung' => $vung,
             'areaTree' => $areaTree,
             'pagination' => $pagination,
-
+            'departmentListTree' => $departmentListTree
         ]);
     }
     public function store(Request $request)
