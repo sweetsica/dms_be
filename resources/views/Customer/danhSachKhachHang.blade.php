@@ -10,21 +10,21 @@
     </style>
 @endsection
 @php
-    
+
     function getPaginationLink($link, $pageName)
     {
         if (!isset($link['url'])) {
             return '#';
         }
-    
+
         $pageNumber = explode('?page=', $link['url'])[1];
-    
+
         $queryString = request()->query();
-    
+
         $queryString[$pageName] = $pageNumber;
         return route('customers', $queryString);
     }
-    
+
 @endphp
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
@@ -310,7 +310,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form id="formThemCapPhat" method="POST"
-                        action="{{ route('update.customer', ['id' => $item->id]) }}">
+                        action="{{ route('edit.customer', ['id' => $item->id]) }}">
                         @csrf
                         <div class="modal-body">
                             <div class="row">

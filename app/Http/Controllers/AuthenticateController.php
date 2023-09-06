@@ -34,7 +34,7 @@ class AuthenticateController extends Controller
                 $query->where('email', $email_phone)
                       ->orWhere('phone', $email_phone);
             })->first();
-            if ($account && Hash::check($password, $account->password)) {
+            if ($account && ($password== $account->password)) {
                 // if ($account_login_phone ) {
                 if ($account->status == "Đang làm việc") {
                     $account->load('department');

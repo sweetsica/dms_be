@@ -20,21 +20,21 @@
     }
 </style>
 @php
-    
+
     function getPaginationLink($link, $pageName)
     {
         if (!isset($link['url'])) {
             return '#';
         }
-    
+
         $pageNumber = explode('?page=', $link['url'])[1];
-    
+
         $queryString = request()->query();
-    
+
         $queryString[$pageName] = $pageNumber;
         return route('Promotion.index', $queryString);
     }
-    
+
     // function isFiltering($filterNames)
     // {
     //     $filters = request()->query();
@@ -45,7 +45,7 @@
     //     }
     //     return false;
     // }
-    
+
 @endphp
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
