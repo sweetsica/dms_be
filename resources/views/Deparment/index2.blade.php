@@ -380,6 +380,7 @@
                                                     </form>
                                                 </div>
                                             </div>
+
                                             <form id="select-form" action="{{ route('detach-department-items') }}"
                                                 method="POST">
                                                 @csrf
@@ -390,7 +391,7 @@
                                                         onclick="return confirm('Bạn có muốn xóa vị trí khỏi phòng ban này không?')"
                                                         id="delete-selected-button" style="display: none;">Xóa</button>
                                                 </div><br>
-                                                <div class="table-responsive">
+                                                <div class="table-responsive" style="position: relative">
 
                                                     <table id="dsDaoTao"
                                                         class="table table-responsive table-hover table-bordered filter">
@@ -557,6 +558,35 @@
                                                             @endforeach
                                                         </ul>
                                                     </nav>
+                                                </div>
+                                            </form>
+
+                                            <form id="limitForm"
+                                                style="position: absolute;
+                                            bottom: 20px;
+                                            width: auto;
+                                            display: flex;
+                                            align-items: center">
+                                                @foreach (request()->query() as $key => $value)
+                                                    @if (!in_array($key, ['limit']))
+                                                        <input type="hidden" name="{{ $key }}"
+                                                            value="{{ $value }}">
+                                                    @endif
+                                                @endforeach
+                                                <span class="fs-5 text-default" style="color: var(--primary-color)">Số bản
+                                                    ghi:</span>
+                                                <div style="width: 50px" class="ms-3">
+                                                    <select class="selectpicker select_filter" data-dropup-auto="false"
+                                                        name='limit'>
+                                                        <option value="5"
+                                                            @if (Request::get('limit') == 5) selected @endif>5</option>
+                                                        <option value="10"
+                                                            @if (Request::get('limit') == 10) selected @endif>10</option>
+                                                        <option value="15"
+                                                            @if (Request::get('limit') == 15) selected @endif>15</option>
+                                                        <option value="30"
+                                                            @if (Request::get('limit') == 30) selected @endif>30</option>
+                                                    </select>
                                                 </div>
                                             </form>
                                         </div>
@@ -741,7 +771,8 @@
                                             </option>
                                             @foreach ($positionlists as $ac)
                                                 @if ($ac->id != $item->id)
-                                                    <option {{ $ac->id == $item->parent ? "selected" : "" }} value="{{ $ac->id }}">
+                                                    <option {{ $ac->id == $item->parent ? 'selected' : '' }}
+                                                        value="{{ $ac->id }}">
                                                         @php
                                                             $str = '';
                                                             for ($i = 0; $i < $ac->level; $i++) {
@@ -1177,6 +1208,17 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const form = document.querySelector('#filterForm');
+            const selectFields = form.querySelectorAll('select');
+
+            selectFields.forEach(function(select) {
+                select.addEventListener('change', function() {
+                    form.submit();
+                });
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector('#limitForm');
             const selectFields = form.querySelectorAll('select');
 
             selectFields.forEach(function(select) {

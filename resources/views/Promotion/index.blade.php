@@ -20,21 +20,21 @@
     }
 </style>
 @php
-
+    
     function getPaginationLink($link, $pageName)
     {
         if (!isset($link['url'])) {
             return '#';
         }
-
+    
         $pageNumber = explode('?page=', $link['url'])[1];
-
+    
         $queryString = request()->query();
-
+    
         $queryString[$pageName] = $pageNumber;
         return route('Promotion.index', $queryString);
     }
-
+    
     // function isFiltering($filterNames)
     // {
     //     $filters = request()->query();
@@ -45,7 +45,7 @@
     //     }
     //     return false;
     // }
-
+    
 @endphp
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
@@ -153,35 +153,35 @@
                                                             </tr>
                                                         </thead>
                                                         @php
-                                                            $f=1;
+                                                            $f = 1;
                                                         @endphp
                                                         <tbody>
                                                             @foreach ($promotions as $item)
                                                                 <tr>
-                                                <td class="text-center"> <input type="checkbox"
-                                                    name="selected_items[]" value="">
-                                                </td>
-                                                <td class="text-center">{{$f++}}
-                                                </td>
-                                                <td class="text-center">
-                                                    @if ($item->status == 'Hoạt động')
-                                                            <span class="badge bg-success">Hoạt
-                                                        động</span>
-                                                    @else
-                                                        <span class="badge bg-danger">Khóa</span>
-                                                    @endif
-                                                </td>
-                                                <td class="text-center">
-                                                        <button type="button" data-bs-toggle="modal"
-                                                            data-bs-target="#chiTietCTKM{{ $item->id }}"
-                                                            style="background: transparent">
-                                                            <div class="text-wrap text-center btn-show_detail"
-                                                                    data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top" title="GIAM300K">
-                                                                    {{ $item->code }}
-                                                            </div>
-                                                        </button>
-                                                    </div>
+                                                                    <td class="text-center"> <input type="checkbox"
+                                                                            name="selected_items[]" value="">
+                                                                    </td>
+                                                                    <td class="text-center">{{ $f++ }}
+                                                                    </td>
+                                                                    <td class="text-center">
+                                                                        @if ($item->status == 'Hoạt động')
+                                                                            <span class="badge bg-success">Hoạt
+                                                                                động</span>
+                                                                        @else
+                                                                            <span class="badge bg-danger">Khóa</span>
+                                                                        @endif
+                                                                    </td>
+                                                                    <td class="text-center">
+                                                                        <button type="button" data-bs-toggle="modal"
+                                                                            data-bs-target="#chiTietCTKM{{ $item->id }}"
+                                                                            style="background: transparent">
+                                                                            <div class="text-wrap text-center btn-show_detail"
+                                                                                data-bs-toggle="tooltip"
+                                                                                data-bs-placement="top" title="GIAM300K">
+                                                                                {{ $item->code }}
+                                                                            </div>
+                                                                        </button>
+                                                </div>
                                                 </td>
                                                 <td class="text-center">{{ $item->name }}
                                                 </td>
@@ -233,11 +233,13 @@
                                                 @endforeach
                                                 </tbody>
                                                 </table>
-                                                <nav aria-label="Page navigation example" class="float-end mt-3" id="target-pagination">
+                                                <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                    id="target-pagination">
                                                     <ul class="pagination">
                                                         @foreach ($pagination['links'] as $link)
                                                             <li class="page-item {{ $link['active'] ? 'active' : '' }}">
-                                                                <a class="page-link" href="{{ getPaginationLink($link, 'page') }}"
+                                                                <a class="page-link"
+                                                                    href="{{ getPaginationLink($link, 'page') }}"
                                                                     aria-label="Previous">
                                                                     <span aria-hidden="true">{!! $link['label'] !!}</span>
                                                                 </a>
@@ -471,13 +473,19 @@
 
                                                         </td>
                                                         <td>
-                                                            <input type="text" class="form-control" name="promotion_details[{{$n++}}][key3]" value="{{ $promotionDetail['key3'] }}">
+                                                            <input type="text" class="form-control"
+                                                                name="promotion_details[{{ $n++ }}][key3]"
+                                                                value="{{ $promotionDetail['key3'] }}">
                                                         </td>
                                                         <td>
-                                                            <input type="text" class="form-control" name="promotion_details[{{$n++}}][key4]" value="{{ $promotionDetail['key4'] }}">
+                                                            <input type="text" class="form-control"
+                                                                name="promotion_details[{{ $n++ }}][key4]"
+                                                                value="{{ $promotionDetail['key4'] }}">
                                                         </td>
                                                         <td>
-                                                            <input type="text" class="form-control" name="promotion_details[{{$n++}}][key5]" value="{{ $promotionDetail['key5'] }}">
+                                                            <input type="text" class="form-control"
+                                                                name="promotion_details[{{ $n++ }}][key5]"
+                                                                value="{{ $promotionDetail['key5'] }}">
                                                         </td>
                                                         <td class="text-center">
                                                             <div data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -490,7 +498,9 @@
                                                                     name="promotion_details[{{ $n++ }}][key6]"
                                                                     data-live-search-placeholder="Tìm kiếm..."
                                                                     id="codeProductBonusEdit_{{ $k++ }}">
-                                                                    <option selected value="{{ $promotionDetail['key6'] }}">{{ $promotionDetail['key6'] }}</option>
+                                                                    <option selected
+                                                                        value="{{ $promotionDetail['key6'] }}">
+                                                                        {{ $promotionDetail['key6'] }}</option>
                                                                     @foreach ($products as $product)
                                                                         <option value="{{ $product->name }}">
                                                                             {{ $product->code }}</option>
@@ -500,13 +510,18 @@
 
                                                         </td>
                                                         <td class="text-center">
-                                                            <span id="productBonusEdit_{{$m++}}" name="promotion_details[{{$n++}}][key7]">{{ $promotionDetail['key7'] }}</span>
+                                                            <span id="productBonusEdit_{{ $m++ }}"
+                                                                name="promotion_details[{{ $n++ }}][key7]">{{ $promotionDetail['key7'] }}</span>
                                                         </td>
                                                         <td>
-                                                            <input type="text" class="form-control" name="promotion_details[{{$n++}}][key8]" value="{{ $promotionDetail['key8'] }}">
+                                                            <input type="text" class="form-control"
+                                                                name="promotion_details[{{ $n++ }}][key8]"
+                                                                value="{{ $promotionDetail['key8'] }}">
                                                         </td>
                                                         <td>
-                                                            <input type="text" class="form-control" name="promotion_details[{{$n++}}][key9]" value="{{ $promotionDetail['key9'] }}">
+                                                            <input type="text" class="form-control"
+                                                                name="promotion_details[{{ $n++ }}][key9]"
+                                                                value="{{ $promotionDetail['key9'] }}">
                                                         </td>
                                                         <td class="text-center">
                                                             <i class="bi bi-plus fs-3 add-spec_edit"
@@ -971,8 +986,10 @@
 
     <!-- Chart Js -->
     <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chart.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-stacked100@1.0.0.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-datalabels@2.0.0.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-stacked100@1.0.0.js') }}">
+    </script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-datalabels@2.0.0.js') }}">
+    </script>
 
     <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_khachHangActive.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_khachHangMoi.js') }}"></script>

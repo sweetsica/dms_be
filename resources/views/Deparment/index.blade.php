@@ -92,20 +92,21 @@
                                                         onclick="return confirm('Bạn có muốn xóa không?')"
                                                         id="delete-selected-button" style="display: none;">Xóa</button>
                                                 </div><br>
-                                                <div class="table-responsive">
+                                                <div class="table-responsive" style="position: relative">
                                                     <table id="dsDaoTao"
                                                         class="table table-responsive table-hover table-bordered filter">
                                                         <thead>
                                                             <tr>
                                                                 <th class="text-nowrap text-center" style="width:1%"><input
                                                                         type="checkbox" id="select-all"></th>
-                                                                <th class="text-nowrap text-center" style="width:2%">STT
+                                                                <th class="text-nowrap text-center" style="width:1%">STT
                                                                 </th>
-                                                                <th class="text-nowrap text-center" style="width:3%">STT vị trí
+                                                                <th class="text-nowrap text-center" style="width:1%">STT vị
+                                                                    trí
                                                                 </th>
-                                                                <th class="text-nowrap text-center" style="width:3%">Mã đơn
+                                                                <th class="text-nowrap text-center" style="width:1%">Mã đơn
                                                                     vị</th>
-                                                                <th class="text-nowrap text-center" style="width:10%">Tên
+                                                                <th class="text-nowrap text-center" style="width:6%">Tên
                                                                     đơn vị </th>
                                                                 <th class="text-nowrap text-center" style="width:5%">Đơn vị
                                                                     cha </th>
@@ -227,22 +228,18 @@
                                                             </tbody>
                                                         @endforeach
                                                     </table>
-                                                    {{-- <nav aria-label="Page navigation example" class="float-end mt-3"
+
+                                                    <nav aria-label="Page navigation example" class="float-end mt-3"
                                                         id="target-pagination">
                                                         <ul class="pagination">
-                                                            {{ $departmentList->appends([
-                                                                    'search' => $search,
-                                                                    'don_vi_me' => $don_vi_me,
-                                                                ])->links() }}
-                                                        </ul>
-                                                    </nav> --}}
-                                                    <nav aria-label="Page navigation example" class="float-end mt-3" id="target-pagination">
-                                                        <ul class="pagination">
                                                             @foreach ($pagination['links'] as $link)
-                                                                <li class="page-item {{ $link['active'] ? 'active' : '' }}">
-                                                                    <a class="page-link" href="{{ getPaginationLink($link, 'page') }}"
+                                                                <li
+                                                                    class="page-item {{ $link['active'] ? 'active' : '' }}">
+                                                                    <a class="page-link"
+                                                                        href="{{ getPaginationLink($link, 'page') }}"
                                                                         aria-label="Previous">
-                                                                        <span aria-hidden="true">{!! $link['label'] !!}</span>
+                                                                        <span
+                                                                            aria-hidden="true">{!! $link['label'] !!}</span>
                                                                     </a>
                                                                 </li>
                                                             @endforeach
@@ -251,6 +248,29 @@
                                                 </div>
                                             </form>
 
+                                            <form action="{{ route('department.index') }}" method="GET"
+                                                style="position: absolute;
+                                                bottom: 20px;
+                                                width: auto;
+                                                display: flex;
+                                                align-items: center">
+                                                <span class="fs-5 text-default" style="color: var(--primary-color)">Số bản
+                                                    ghi:</span>
+                                                <div style="width: 50px" class="ms-3">
+                                                    <select name="limit" required class="selectpicker"
+                                                        data-dropup-auto="false" onchange="this.form.submit()">
+                                                        <option value="5"
+                                                            @if (Request::get('limit') == 5) selected @endif>5</option>
+                                                        <option value="10"
+                                                            @if (Request::get('limit') == 10) selected @endif>10</option>
+                                                        <option value="15"
+                                                            @if (Request::get('limit') == 15) selected @endif>15</option>
+                                                        <option value="30"
+                                                            @if (Request::get('limit') == 30) selected @endif>30</option>
+                                                    </select>
+                                                </div>
+
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -351,9 +371,8 @@
                                 </div>
 
                                 <div class="col-6 mb-3">
-                                    <input name="unit_to_move_id" required type="text"
-                                        class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        value="{{ $item->order }}">
+                                    <input name="unit_to_move_id" required type="text" class="form-control"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" value="{{ $item->order }}">
                                 </div>
                                 {{-- <div class="col-6 mb-3" style="display: none;">
                                     <input name="stt_tr" required type="text"
@@ -409,8 +428,6 @@
                 </div>
             </div>
         </div>
-
-
     @endforeach
 
     @foreach ($listUsers as $item)
