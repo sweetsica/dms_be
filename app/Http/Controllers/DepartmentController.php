@@ -124,14 +124,15 @@ class DepartmentController extends Controller
     public function index2(Request $request)
     {
         $LIMIT = 10;
-        // if ($request->has('limit')) {
-        //     $LIMIT = $request->input('limit');
-        // }
+        if ($request->has('limit')) {
+            $LIMIT = $request->input('limit');
+        }
         $department_id = $request->get('department_id');
         $search = $request->get('search');
         $q = $request->query('q');
         $parent = $request->query('parent');
         $cap_nhan_su = $request->query('cap_nhan_su');
+
         $query = Department::query();
         // $departmentList = Department::
         $query->leftJoin('personnel', 'personnel.id', '=', 'department.ib_lead')
@@ -204,7 +205,6 @@ class DepartmentController extends Controller
             'UnitLeaderList' => $UnitLeaderList,
             "departmentListTree" => $departmentListTree,
             'getDept' => $getDept,
-            // 'limit' =>  $LIMIT,
             'department_id' => $department_id,
             'listPosToDept' => $listPosToDept,
             'personnellists' => $personnellists,
@@ -223,6 +223,9 @@ class DepartmentController extends Controller
     public function assignUser(Request $request, $id)
     {
         $LIMIT = 1;
+        if ($request->has('limit')) {
+            $LIMIT = $request->input('limit');
+        }
         $q = $request->query('q');
         $department = $request->query('department');
         $cap_nhan_su = $request->query('cap_nhan_su');

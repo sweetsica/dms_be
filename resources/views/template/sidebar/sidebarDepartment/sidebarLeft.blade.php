@@ -252,5 +252,12 @@
             var linkId = $(this).attr('id');
             localStorage.setItem('activeLink', linkId);
         });
+
+        var currentURL = window.location.href;
+        var departmentId = "department_id=1";
+        var department = "department";
+        if (currentURL.includes(departmentId) || currentURL.includes(department)) {
+            localStorage.removeItem('activeLink')
+        }
     </script>
 @endsection
