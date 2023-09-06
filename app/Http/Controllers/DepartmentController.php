@@ -169,7 +169,10 @@ class DepartmentController extends Controller
             if (!$getDept) {
                 return View::make('404');
             }
-            $listPosToDept = Position::query();
+            $listPosToDept = Position::query()->with('levels', 'department')->where('department_id', $department_id)
+                ->orWhereHas('department', function ($query) use ($department_id) {
+                    $query->where('parent', $department_id);
+                });
 
             if ($q) {
                 $listPosToDept = $listPosToDept->where(function ($query) use ($q) {
@@ -184,10 +187,7 @@ class DepartmentController extends Controller
             if ($parent) {
                 $listPosToDept = $listPosToDept->where('parent', $parent);
             }
-            $listPosToDept = $listPosToDept->with('levels', 'department')->where('department_id', $department_id)
-                ->orWhereHas('department', function ($query) use ($department_id) {
-                    $query->where('parent', $department_id);
-                })->paginate($LIMIT);
+            $listPosToDept = $listPosToDept->paginate($LIMIT);
 
             $pagination = $this->pagination($listPosToDept);
         }
