@@ -725,7 +725,7 @@
                                                 $positionIds = json_decode($item->position_id, true) ?? [];
                                             @endphp
                                             @foreach ($positionlists as $posiList)
-                                                <option {{ in_array($posiList->id, $positionIds) ? ' selected' : '' }}
+                                                <option {{ in_array($posiList->id, (array) $positionIds) ? ' selected' : '' }}
                                                     value="{{ $posiList->id }}">
                                                     @php
                                                         $str = '';
