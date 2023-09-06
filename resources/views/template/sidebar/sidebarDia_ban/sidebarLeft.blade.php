@@ -36,7 +36,8 @@
                                             </div>
                                         </a> --}}
                                         <a style="padding-left:10px;" onclick="ToChucFunction()">
-                                            <div class="d-flex align-items-center item-accordion fs-4 p-3 rounded">
+                                            <div class="d-flex align-items-center item-accordion fs-4 p-3 rounded"
+                                                id="linkToChuc">
                                                 Cơ cấu tổ chức
                                             </div>
                                         </a>
@@ -55,7 +56,8 @@
                                             </div>
                                         </a> --}}
                                         <a style="padding-left:10px;" onclick="DiaBanFunction()">
-                                            <div class="d-flex align-items-center item-accordion fs-4 p-3 rounded">
+                                            <div class="d-flex align-items-center item-accordion fs-4 p-3 rounded"
+                                                id="linkDiaBan">
                                                 Cơ cấu địa bàn
                                             </div>
                                         </a>
@@ -226,6 +228,12 @@
     .tree li.open>ul {
         display: block;
     }
+
+    .element-active {
+        background-color: #ca1f24;
+        color: #fff;
+        font-weight: 700;
+    }
 </style>
 
 @section('script-chart')
@@ -235,19 +243,28 @@
 
     <script>
         function ToChucFunction() {
-            var element = document.getElementById("CoCauDiaBan");
-            element.classList.add("d-lg-none");
-            var element = document.getElementById("CoCauToChuc");
-            element.classList.remove("d-lg-none");
-        }
-    </script>
+            var elementDiaBan = document.getElementById("CoCauDiaBan");
+            var elementToChuc = document.getElementById("CoCauToChuc");
+            var linkToChuc = document.getElementById("linkToChuc");
+            var linkDiaBan = document.getElementById("linkDiaBan");
 
-    <script>
+            elementDiaBan.classList.add("d-lg-none");
+            elementToChuc.classList.remove("d-lg-none");
+            linkToChuc.classList.add("element-active");
+            linkDiaBan.classList.remove("element-active");
+        }
+
         function DiaBanFunction() {
-            var element = document.getElementById("CoCauDiaBan");
-            element.classList.remove("d-lg-none");
-            var element = document.getElementById("CoCauToChuc");
-            element.classList.add("d-lg-none");
+            var elementDiaBan = document.getElementById("CoCauDiaBan");
+            var elementToChuc = document.getElementById("CoCauToChuc");
+            var linkToChuc = document.getElementById("linkToChuc");
+            var linkDiaBan = document.getElementById("linkDiaBan");
+
+            elementDiaBan.classList.remove("d-lg-none");
+            elementToChuc.classList.add("d-lg-none");
+
+            linkDiaBan.classList.add("element-active");
+            linkToChuc.classList.remove("element-active");
         }
     </script>
 

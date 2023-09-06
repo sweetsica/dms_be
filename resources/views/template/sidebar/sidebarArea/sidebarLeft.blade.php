@@ -16,7 +16,7 @@
                             <div class="form-group has-search">
                                 <span type="submit" class="bi bi-search form-control-feedback fs-5"></span>
                                 <input type="text" style="width: 250px;" class="form-control"
-                                    value="{{ $search }}" placeholder="Tìm kiếm" name="search">
+                                    value="{{ request()->get('q') }}" name="q" placeholder="Tìm kiếm">
                             </div>
                         </form>
                     </div><br>
@@ -30,8 +30,14 @@
                             <div id="list-container">
                                 <ul>
                                     <li>
-                                        <a href="{{ route('Personnel.index') }}" style="padding-left:10px;">
+                                        {{-- <a href="{{ route('Personnel.index') }}" style="padding-left:10px;">
                                             <div class="d-flex align-items-center item-accordion fs-4 p-3 rounded">
+                                                Cơ cấu tổ chức
+                                            </div>
+                                        </a> --}}
+                                        <a style="padding-left:10px;" onclick="ToChucFunction()">
+                                            <div class="d-flex align-items-center item-accordion fs-4 p-3 rounded"
+                                                id="linkToChuc">
                                                 Cơ cấu tổ chức
                                             </div>
                                         </a>
@@ -44,8 +50,14 @@
                                         </a>
                                     </li> --}}
                                     <li>
-                                        <a href="{{ route('Personnel.indexDiaBan') }}" style="padding-left:10px;">
+                                        {{-- <a href="{{ route('Personnel.indexDiaBan') }}" style="padding-left:10px;">
                                             <div class="d-flex align-items-center item-accordion fs-4 p-3 rounded">
+                                                Cơ cấu địa bàn
+                                            </div>
+                                        </a> --}}
+                                        <a style="padding-left:10px;" onclick="DiaBanFunction()">
+                                            <div class="d-flex align-items-center item-accordion fs-4 p-3 rounded"
+                                                id="linkDiaBan">
                                                 Cơ cấu địa bàn
                                             </div>
                                         </a>
@@ -54,8 +66,28 @@
                             </div>
                         </div>
                     </div>
-                    <div style="font-size: 14px">
-
+                    @php
+                        $x = 1;
+                        $y = 1;
+                    @endphp
+                    <div class="d-lg-none" id="CoCauToChuc">
+                        {{-- <ul id="tree" style="overflow: scroll"> --}}
+                        <ul id="tree2" style="overflow: scroll">
+                            @foreach ($departmentListTree as $donVi)
+                                <li data-id="{{ $donVi->id }}" style="width: max-content">
+                                    {{ $x++ }}<a
+                                        href="{{ route('department.index2', ['department_id' => $donVi->id]) }}"
+                                        class="title-child">{{ $donVi->name }}</a>
+                                    @if ($donVi->donViCon->count() > 0)
+                                        @include('template.sidebar.sidebarDepartment.child', [
+                                            'donViCon' => $donVi->donViCon,
+                                        ])
+                                    @endif
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div style="font-size: 14px" id="CoCauDiaBan">
                         <ul id="tree1">
                             @foreach ($areaTree as $vung)
                                 <li><a href="{{ route('Personnel.show.vung', $vung->id) }}"
@@ -128,6 +160,12 @@
     .item-accordion {
         background-color: #EBEBEB;
         color: black;
+    }
+
+    .element-active {
+        background-color: #ca1f24;
+        color: #fff;
+        font-weight: 700;
     }
 
     .item-accordion:hover {
@@ -204,6 +242,33 @@
     @endif
 
     <script>
+        function ToChucFunction() {
+            var elementDiaBan = document.getElementById("CoCauDiaBan");
+            var elementToChuc = document.getElementById("CoCauToChuc");
+            var linkToChuc = document.getElementById("linkToChuc");
+            var linkDiaBan = document.getElementById("linkDiaBan");
+
+            elementDiaBan.classList.add("d-lg-none");
+            elementToChuc.classList.remove("d-lg-none");
+            linkToChuc.classList.add("element-active");
+            linkDiaBan.classList.remove("element-active");
+        }
+
+        function DiaBanFunction() {
+            var elementDiaBan = document.getElementById("CoCauDiaBan");
+            var elementToChuc = document.getElementById("CoCauToChuc");
+            var linkToChuc = document.getElementById("linkToChuc");
+            var linkDiaBan = document.getElementById("linkDiaBan");
+
+            elementDiaBan.classList.remove("d-lg-none");
+            elementToChuc.classList.add("d-lg-none");
+
+            linkDiaBan.classList.add("element-active");
+            linkToChuc.classList.remove("element-active");
+        }
+    </script>
+
+    <script>
         $.fn.extend({
             treed: function(o) {
                 var openedClass = 'bi-dash-square';
@@ -250,6 +315,11 @@
             $("#tree1").children("li:first-child").click();
         })
 
+        $(document).ready(function() {
+            $("#tree2").children("li:first-child").click();
+        })
+
         $('#tree1').treed();
+        $('#tree2').treed();
     </script>
 @endsection

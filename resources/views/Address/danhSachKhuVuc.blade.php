@@ -8,21 +8,21 @@
     </style>
 @endsection
 @php
-
+    
     function getPaginationLink($link, $pageName)
     {
         if (!isset($link['url'])) {
             return '#';
         }
-
+    
         $pageNumber = explode('?page=', $link['url'])[1];
-
+    
         $queryString = request()->query();
-
+    
         $queryString[$pageName] = $pageNumber;
         return route('area.index', $queryString);
     }
-
+    
     // function isFiltering($filterNames)
     // {
     //     $filters = request()->query();
@@ -33,7 +33,7 @@
     //     }
     //     return false;
     // }
-
+    
 @endphp
 @section('content')
     @include('template.sidebar.sidebarArea.sidebarLeft')
@@ -178,11 +178,13 @@
                                                     @endforeach
                                                 </tbody>
                                             </table>
-                                            <nav aria-label="Page navigation example" class="float-end mt-3" id="target-pagination">
+                                            <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                id="target-pagination">
                                                 <ul class="pagination">
                                                     @foreach ($pagination['links'] as $link)
                                                         <li class="page-item {{ $link['active'] ? 'active' : '' }}">
-                                                            <a class="page-link" href="{{ getPaginationLink($link, 'page') }}"
+                                                            <a class="page-link"
+                                                                href="{{ getPaginationLink($link, 'page') }}"
                                                                 aria-label="Previous">
                                                                 <span aria-hidden="true">{!! $link['label'] !!}</span>
                                                             </a>

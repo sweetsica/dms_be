@@ -30,8 +30,9 @@
                             <div id="list-container">
                                 <ul>
                                     <li>
-                                        <a href="{{ route('Personnel.index') }}" style="padding-left:10px;">
-                                            <div class="d-flex align-items-center item-accordion fs-4 p-3 rounded">
+                                        <a onclick="ToChucFunction()" style="padding-left:10px;">
+                                            <div class="d-flex align-items-center item-accordion fs-4 p-3 rounded"
+                                                id="linkToChuc">
                                                 Cơ cấu tổ chức
                                             </div>
                                         </a>
@@ -44,8 +45,9 @@
                                         </a>
                                     </li> --}}
                                     <li>
-                                        <a href="{{ route('Personnel.indexDiaBan') }}" style="padding-left:10px;">
-                                            <div class="d-flex align-items-center item-accordion fs-4 p-3 rounded">
+                                        <a onclick="DiaBanFunction()" style="padding-left:10px;">
+                                            <div class="d-flex align-items-center item-accordion fs-4 p-3 rounded"
+                                                id="linkDiaBan">
                                                 Cơ cấu địa bàn
                                             </div>
                                         </a>
@@ -55,7 +57,7 @@
                         </div>
                     </div>
                     <br>
-                    <div class="wapper-tree">
+                    <div class="wapper-tree d-lg-none" id="CoCauToChuc">
                         @php
                             $x = 1;
                             $y = 1;
@@ -70,6 +72,43 @@
                                         @include('template.sidebar.sidebarPosition.child', [
                                             'donViCon' => $donVi->donViCon,
                                         ])
+                                    @endif
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+
+                    <div id="CoCauDiaBan">
+                        <ul id="tree2">
+                            @foreach ($areaTree as $vung)
+                                <li><a href="{{ route('Personnel.show.vung', $vung->id) }}"
+                                        class="title-child">{{ $vung->name }}</a>
+                                    @if ($vung->khuVucs->count() > 0)
+                                        <ul>
+                                            @foreach ($vung->khuVucs as $khuVuc)
+                                                <li>
+                                                    <a href="{{ route('Personnel.show.diaban', $khuVuc->id) }}"
+                                                        class="title-child">{{ $khuVuc->name }}</a>
+                                                    @if ($khuVuc->diaBans->count() > 0)
+                                                        <ul>
+                                                            @foreach ($khuVuc->diaBans as $diaBan)
+                                                                <li>
+                                                                    <a href="{{ route('Personnel.show.diaban', $diaBan->id) }}"
+                                                                        class="title-child">{{ $diaBan->name }}</a>
+                                                                    @if ($diaBan->tuyens->count() > 0)
+                                                                        <ul>
+                                                                            @foreach ($diaBan->tuyens as $tuyen)
+                                                                                <li>{{ $tuyen->name }}</li>
+                                                                            @endforeach
+                                                                        </ul>
+                                                                    @endif
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    @endif
+                                                </li>
+                                            @endforeach
+                                        </ul>
                                     @endif
                                 </li>
                             @endforeach
@@ -180,12 +219,45 @@
     .tree li.open>ul {
         display: block;
     }
+
+    .element-active {
+        background-color: #ca1f24;
+        color: #fff;
+        font-weight: 700;
+    }
 </style>
 
 @section('script-chart')
     @if (!env('FE_LAYOUT'))
         <script type="text/javascript" src="{{ asset('/assets/js/chart/ChartSidebarleft/dash.js') }}"></script>
     @endif
+
+    <script>
+        function ToChucFunction() {
+            var elementDiaBan = document.getElementById("CoCauDiaBan");
+            var elementToChuc = document.getElementById("CoCauToChuc");
+            var linkToChuc = document.getElementById("linkToChuc");
+            var linkDiaBan = document.getElementById("linkDiaBan");
+
+            elementDiaBan.classList.add("d-lg-none");
+            elementToChuc.classList.remove("d-lg-none");
+            linkToChuc.classList.add("element-active");
+            linkDiaBan.classList.remove("element-active");
+        }
+
+        function DiaBanFunction() {
+            var elementDiaBan = document.getElementById("CoCauDiaBan");
+            var elementToChuc = document.getElementById("CoCauToChuc");
+            var linkToChuc = document.getElementById("linkToChuc");
+            var linkDiaBan = document.getElementById("linkDiaBan");
+
+            elementDiaBan.classList.remove("d-lg-none");
+            elementToChuc.classList.add("d-lg-none");
+
+            linkDiaBan.classList.add("element-active");
+            linkToChuc.classList.remove("element-active");
+        }
+    </script>
 
     <script>
         $.fn.extend({
@@ -234,6 +306,11 @@
             $("#tree1").children("li:first-child").click();
         })
 
+        $(document).ready(function() {
+            $("#tree2").children("li:first-child").click();
+        })
+
         $('#tree1').treed();
+        $('#tree2').treed();
     </script>
 @endsection
