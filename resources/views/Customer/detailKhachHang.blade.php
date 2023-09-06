@@ -649,22 +649,24 @@
                                                             {{ $countRow++ }}</td>
                                                         <td class="text-nowrap text-center">
                                                             <input class="form-control" value="{{ $data->key1 }}"
-                                                                name="data[{{ $dataID++ }}][key1]" />
+                                                                name="contact[{{ $dataID }}][key1]" />
                                                         </td>
                                                         <td class="text-nowrap text-center">
                                                             <input class="form-control" value=" {{ $data->key2 }}"
-                                                                name="data[{{ $dataID++ }}][key2]" />
+                                                                name="contact[{{ $dataID }}][key2]" />
                                                         </td>
                                                         <td class="text-nowrap text-center">
                                                             <input class="form-control" value=" {{ $data->key3 }}"
-                                                                name="data[{{ $dataID++ }}][key3]" />
+                                                                name="contact[{{ $dataID }}][key3]" />
                                                         </td>
                                                         <td class="text-nowrap text-center">
                                                             <input class="form-control" value=" {{ $data->key4 }}"
-                                                                name="data[{{ $dataID++ }}][key4]" />
+                                                                name="contact[{{ $dataID }}][key4]" />
                                                         </td>
                                                     </tr>
+                                                    {{ $dataID++}}
                                                 @endforeach
+
                                             @endif
                                         </tbody>
                                     </table>
@@ -1510,10 +1512,10 @@
                 const newRow = document.createElement('tr');
                 newRow.innerHTML = `
             <td class="text-center">${rowCount}</td>
-            <td><input type="text" class="form-control" name="data[${countRow.length}][key1]"></td>
-            <td><input type="text" class="form-control" name="data[${countRow.length}][key2]"></td>
-            <td><input type="text" class="form-control" name="data[${countRow.length}][key3]"></td>
-            <td><input type="text" class="form-control" name="data[${countRow.length}][key4]"></td>
+            <td><input type="text" class="form-control" name="contact[${countRow.length}][key1]"></td>
+            <td><input type="text" class="form-control" name="contact[${countRow.length}][key2]"></td>
+            <td><input type="text" class="form-control" name="contact[${countRow.length}][key3]"></td>
+            <td><input type="text" class="form-control" name="contact[${countRow.length}][key4]"></td>
             <td class="text-center">
                 <i class="bi bi-trash deleteRow_edit fs-3"
                 style="color: var(--primary-color); cursor: pointer;" ></i>

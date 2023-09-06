@@ -5,21 +5,21 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 @endsection
 @php
-    
+
     function getPaginationLink($link, $pageName)
     {
         if (!isset($link['url'])) {
             return '#';
         }
-    
+
         $pageNumber = explode('?page=', $link['url'])[1];
-    
+
         $queryString = request()->query();
-    
+
         $queryString[$pageName] = $pageNumber;
         return route('department.index', $queryString);
     }
-    
+
     // function isFiltering($filterNames)
     // {
     //     $filters = request()->query();
@@ -30,7 +30,7 @@
     //     }
     //     return false;
     // }
-    
+
 @endphp
 @section('content')
     @include('template.sidebar.sidebarDepartment.sidebarLeft')
@@ -374,12 +374,17 @@
                                     <input name="unit_to_move_id" required type="text" class="form-control"
                                         data-bs-toggle="tooltip" data-bs-placement="top" value="{{ $item->order }}">
                                 </div>
+                                {{-- <div class="col-6 mb-3" style="display: none;">
+                                    <input name="stt_tr" required type="text"
+                                        class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        value="{{ $item->order }}">
+                                </div> --}}
                                 <div class="form-group">
                                     <label for="">Chọn STT để thay đổi vị trí:</label>
                                     <select class="form-control" id="" name="target_unit_id">
                                         <option value="{{ $item->order }}">{{ $item->order }}</option>
-                                        @foreach ($departmentList as $otherUnit)
-                                            <option value="{{ $otherUnit->order }}">{{ $otherUnit->order }}</option>
+                                        @foreach($Department as $otherUnit)
+                                            <option value="{{ $otherUnit->order }}">{{ $otherUnit->order}}</option>
                                         @endforeach
                                     </select>
                                 </div>

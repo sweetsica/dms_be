@@ -580,6 +580,15 @@ class CustomerController extends Controller
             $image->move(public_path('uploads'), $imageName);
             $data->image = 'uploads/' . $imageName;
         }
+
+        $combinedContact = [];
+        foreach ($request->contact as $array) {
+            if (is_array($array)) {
+                $combinedContact[] = $array;
+            }
+        }
+        $jsonCombinedData = json_encode($combinedContact);
+        $data->contact = $jsonCombinedData;
         // dd($data);
         $data->save();
         $listData = Customer::all();

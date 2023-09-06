@@ -254,7 +254,7 @@
                                         placeholder="Mã khu vực*" class="form-control">
                                 </div>
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Vùng*">
+                                    title="Chọn trực thuộc*">
                                     {{-- <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Vùng*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="area" data-live-search-placeholder="Tìm kiếm..."> --}}
                                     <select name="area" required class="selectpicker" data-dropup-auto="false"
                                         data-live-search="true">
@@ -306,10 +306,10 @@
                                     data-bs-placement="top" title="Mã khu vực*" placeholder="Mã khu vực*"
                                     class="form-control">
                             </div>
-                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Vùng*">
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn trực thuộc*">
                                 <select name="area" required class="selectpicker" data-dropup-auto="false"
                                     data-live-search="true">
-                                    <option value="">Chọn vùng*</option>
+                                    <option value="">Chọn trực thuộc*</option>
                                     @foreach ($department as $item)
                                         <option value="{{ $item->id }}">
                                             {{ $item->name }}

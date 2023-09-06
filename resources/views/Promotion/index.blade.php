@@ -814,7 +814,7 @@
                                     <div class="col-lg-6">
                                         <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Trạng thái">
                                             <select name="status" class="selectpicker">
-                                                <option value="">Chọn trạng thái
+                                                <option value="Hoạt động">Chọn trạng thái
                                                 </option>
                                                 <option value="Hoạt động">Hoạt động
                                                 </option>

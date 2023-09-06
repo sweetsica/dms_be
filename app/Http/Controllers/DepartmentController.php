@@ -391,6 +391,8 @@ class DepartmentController extends Controller
 
     public function update(Request $request, $id)
     {
+
+
         $unitToMoveId = $request->get('unit_to_move_id');
         $targetUnitId = $request->get('target_unit_id');
         $name = $request->get('name');
@@ -431,7 +433,6 @@ class DepartmentController extends Controller
 
             // return redirect()->back()->with('success', 'Đã hoán đổi tên đơn vị thành công.');
         }
-
         Session::flash('success', 'Sửa thành công');
         return redirect()->back();
     }
@@ -501,7 +502,7 @@ class DepartmentController extends Controller
 
                 // Lưu thay đổi vào cơ sở dữ liệu
                 $unit1->save();
-                $unit2->save();
+                // $unit2->save();
 
                 // return redirect()->back()->with('success', 'Đã hoán đổi tên đơn vị thành công.');
             } else {
