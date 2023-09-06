@@ -380,6 +380,7 @@
                                                     </form>
                                                 </div>
                                             </div>
+
                                             <form id="select-form" action="{{ route('detach-department-items') }}"
                                                 method="POST">
                                                 @csrf
@@ -560,18 +561,23 @@
                                                 </div>
                                             </form>
 
-
-                                            {{-- <form action="{{ route('department.index') }}" method="GET"
+                                            <form id="limitForm"
                                                 style="position: absolute;
-                                                bottom: 20px;
-                                                width: auto;
-                                                display: flex;
-                                                align-items: center">
+                                            bottom: 20px;
+                                            width: auto;
+                                            display: flex;
+                                            align-items: center">
+                                                @foreach (request()->query() as $key => $value)
+                                                    @if (!in_array($key, ['limit']))
+                                                        <input type="hidden" name="{{ $key }}"
+                                                            value="{{ $value }}">
+                                                    @endif
+                                                @endforeach
                                                 <span class="fs-5 text-default" style="color: var(--primary-color)">Số bản
                                                     ghi:</span>
                                                 <div style="width: 50px" class="ms-3">
-                                                    <select name="limit" required class="selectpicker"
-                                                        data-dropup-auto="false" onchange="this.form.submit()">
+                                                    <select class="selectpicker select_filter" data-dropup-auto="false"
+                                                        name='limit'>
                                                         <option value="5"
                                                             @if (Request::get('limit') == 5) selected @endif>5</option>
                                                         <option value="10"
@@ -582,7 +588,7 @@
                                                             @if (Request::get('limit') == 30) selected @endif>30</option>
                                                     </select>
                                                 </div>
-                                            </form> --}}
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -1202,6 +1208,17 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const form = document.querySelector('#filterForm');
+            const selectFields = form.querySelectorAll('select');
+
+            selectFields.forEach(function(select) {
+                select.addEventListener('change', function() {
+                    form.submit();
+                });
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector('#limitForm');
             const selectFields = form.querySelectorAll('select');
 
             selectFields.forEach(function(select) {
