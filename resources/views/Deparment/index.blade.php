@@ -355,11 +355,16 @@
                                         class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
                                         value="{{ $item->order }}">
                                 </div>
+                                {{-- <div class="col-6 mb-3" style="display: none;">
+                                    <input name="stt_tr" required type="text"
+                                        class="form-control" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        value="{{ $item->order }}">
+                                </div> --}}
                                 <div class="form-group">
                                     <label for="">Chọn STT để thay đổi vị trí:</label>
                                     <select class="form-control" id="" name="target_unit_id">
                                         <option value="{{ $item->order }}">{{ $item->order }}</option>
-                                        @foreach($departmentList as $otherUnit)
+                                        @foreach($Department as $otherUnit)
                                             <option value="{{ $otherUnit->order }}">{{ $otherUnit->order}}</option>
                                         @endforeach
                                     </select>

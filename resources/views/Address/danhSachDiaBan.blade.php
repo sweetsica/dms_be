@@ -252,7 +252,7 @@
                                         placeholder="Mã địa bàn*" class="form-control">
                                 </div>
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Khu vực*">
+                                    title="Chọn trực thuộc*">
                                     {{-- <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Khu vực*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
                                     <option value="1" selected>1</option>
                                 </select> --}}
@@ -309,13 +309,13 @@
                                     class="form-control">
                             </div>
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Khu vực*">
+                                title="Chọn trực thuộc*">
                                 {{-- <select class="selectpicker" required data-dropup-auto="false" data-width="100%" data-live-search="true" title="Khu vực*" data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3" name="secretary_id" data-live-search-placeholder="Tìm kiếm...">
                                     <option value="1">1</option>
                                 </select> --}}
                                 <select name="area_id" required class="selectpicker" data-dropup-auto="false"
                                     data-live-search="true">
-                                    <option value="">Chọn khu vực*</option>
+                                    <option value="">Chọn trực thuộc*</option>
                                     @foreach ($area as $item)
                                         <option value="{{ $item->id }}">
                                             {{ $item->name }}

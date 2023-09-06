@@ -626,19 +626,22 @@
                                     <table id="contact_edit" class="table table-responsive table-hover table-bordered">
                                         <thead>
                                             <tr>
-                                                <th class="text-nowrap text-center" style="">STT</th>
-                                                <th class="text-nowrap text-center" style="">Họ và tên</th>
-                                                <th class="text-nowrap text-center" style="">Số điện thoại</th>
-                                                <th class="text-nowrap text-center" style="">Email</th>
-                                                <th class="text-nowrap text-center" style="">Chức danh</th>
-                                                <th class="text-nowrap text-center">
-                                                    <i class="bi bi-plus fs-3" id="addRowIcon_edit"
+                                                <th class="text-nowrap text-center">STT</th>
+                                                <th class="text-nowrap text-center">Họ và tên</th>
+                                                <th class="text-nowrap text-center">Số điện thoại</th>
+                                                <th class="text-nowrap text-center">Email</th>
+                                                <th class="text-nowrap text-center">Chức danh</th>
+                                                <th class="text-nowrap text-center"><i class="bi bi-plus fs-3"
+                                                        id="addRowIcon_edit"
                                                         style="color: var(--primary-color); cursor: pointer;"></i>
 
                                                 </th>
                                             </tr>
                                         </thead>
-                                        <?php $countRow = 1; ?>
+                                        <?php
+                                        $countRow = 1;
+                                        $dataID = 0;
+                                        ?>
                                         <tbody>
                                             @if (!empty($customer->contact))
                                                 @foreach ($combinedData as $data)
@@ -646,16 +649,25 @@
                                                         <td class="text-nowrap text-center" id="stt">
                                                             {{ $countRow++ }}</td>
                                                         <td class="text-nowrap text-center">
-                                                            {{ $data->key1 }}</td>
+                                                            <input class="form-control" value="{{ $data->key1 }}"
+                                                                name="contact[{{ $dataID }}][key1]" />
+                                                        </td>
                                                         <td class="text-nowrap text-center">
-                                                            {{ $data->key2 }}</td>
+                                                            <input class="form-control" value=" {{ $data->key2 }}"
+                                                                name="contact[{{ $dataID }}][key2]" />
+                                                        </td>
                                                         <td class="text-nowrap text-center">
-                                                            {{ $data->key3 }}</td>
+                                                            <input class="form-control" value=" {{ $data->key3 }}"
+                                                                name="contact[{{ $dataID }}][key3]" />
+                                                        </td>
                                                         <td class="text-nowrap text-center">
-                                                            {{ $data->key4 }}</td>
-                                                        <td></td>
+                                                            <input class="form-control" value=" {{ $data->key4 }}"
+                                                                name="contact[{{ $dataID }}][key4]" />
+                                                        </td>
                                                     </tr>
+                                                    {{ $dataID++}}
                                                 @endforeach
+
                                             @endif
                                         </tbody>
                                     </table>
@@ -1500,10 +1512,10 @@
                 const newRow = document.createElement('tr');
                 newRow.innerHTML = `
             <td class="text-center">${rowCount}</td>
-            <td><input type="text" class="form-control" name="contact[${specCount}][key1]"></td>
-            <td><input type="text" class="form-control" name="contact[${specCount}][key2]"></td>
-            <td><input type="text" class="form-control" name="contact[${specCount}][key3]"></td>
-            <td><input type="text" class="form-control" name="contact[${specCount}][key4]"></td>
+            <td><input type="text" class="form-control" name="contact[${countRow.length}][key1]"></td>
+            <td><input type="text" class="form-control" name="contact[${countRow.length}][key2]"></td>
+            <td><input type="text" class="form-control" name="contact[${countRow.length}][key3]"></td>
+            <td><input type="text" class="form-control" name="contact[${countRow.length}][key4]"></td>
             <td class="text-center">
                 <i class="bi bi-trash deleteRow_edit fs-3"
                 style="color: var(--primary-color); cursor: pointer;" ></i>
