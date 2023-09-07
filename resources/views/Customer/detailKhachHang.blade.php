@@ -3,25 +3,140 @@
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css.map">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"
-        integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"
-        integrity="sha512-wR4oNhLBHf7smjy0K4oqzdWumd+r5/+6QO/vDda76MW5iug4PT7v86FoEkySIJft3XA0Ae6axhIvHrqwm793Nw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+    <style>
+        .title-contact {
+            padding-left: 25px;
+        }
+
+        .img-slider {
+            width: 100%;
+            object-fit: cover;
+            height: 100%;
+        }
+
+        .img-slider_nav {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            margin-right: 10px;
+            padding: 12%;
+        }
+
+        .action_wrapper-search {
+            position: relative;
+        }
+
+        #progress {
+            padding: 0;
+            list-style-type: none;
+            font-size: 10px;
+            clear: both;
+            line-height: 1em;
+            margin: 0 -1px;
+            text-align: center;
+        }
+
+        #progress li:first-child {
+            border-radius: 20px 0 0 20px;
+        }
+
+        #progress li {
+            float: left;
+            padding: 10px 10px 10px 10px;
+            background: #c1c4c1;
+            color: #fff;
+            position: relative;
+            width: calc(16% - 1px);
+            margin: 0 1px;
+            font-size: 12px;
+        }
 
 
+        #progress li:nth-child(n + 2):before {
+            content: '';
+            border-left: 16px solid #fff;
+            border-top: 16px solid transparent;
+            border-bottom: 16px solid transparent;
+            position: absolute;
+            top: 0;
+            left: 0;
+
+        }
+
+        #progress li:after {
+            content: '';
+            border-left: 16px solid #c1c4c1;
+            border-top: 16px solid transparent;
+            border-bottom: 15px solid transparent;
+            position: absolute;
+            top: 0;
+            left: 100%;
+            z-index: 20;
+        }
+
+        #progress li.active {
+            background: #46ab2b;
+        }
+
+        #progress li.active:after {
+            border-left-color: #46ab2b;
+        }
+
+        .wapper-contact {
+            padding-bottom: 20px;
+            border-bottom: 1px solid #07060633;
+        }
+
+
+        .card-body {
+            padding: 15px 30px 30px 30px !important;
+        }
+
+        .text-color_pimary {
+            color: var(--primary-color);
+        }
+
+        .layout_120 {
+            display: grid;
+            grid-template-columns: 100px auto;
+        }
+
+        .layout_90 {
+            display: grid;
+            grid-template-columns: 90px auto;
+        }
+
+        .layout_45 {
+            display: grid;
+            grid-template-columns: 45px auto;
+        }
+
+        .layout_auto {
+            display: grid;
+            grid-template-columns: auto auto;
+        }
+
+        .icon-trash_comment:hover {
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .btn-back a {
+            color: var(--primary-color)
+        }
+
+        .btn-back:hover a {
+            color: #fff
+        }
+    </style>
 @endsection
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
     <div id="mainWrap" class="mainWrap">
         <div class="mainSection">
             <div class="main">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="mainSection_heading">
                         <h5 class="mainSection_heading-title">Chi tiết khách hàng</h5>
                         @include('template.components.sectionCard')
@@ -47,35 +162,14 @@
                                 {{-- Thông tin liên hệ --}}
                                 <div class="row">
                                     <div class="col-lg-5">
-                                        <div class="row g-4">
-                                            <div class="col-lg-12">
-                                                <div class="slider slider-single">
-                                                    <div>
-                                                        {{-- <img class="img-slider"
-                                                            src="{{ asset('assets/img/avatardefault.jpg') }}" /> --}}
-                                                        <img class="img-slider" src="{{ asset($customer->image) }}" />
-                                                    </div>
-                                                    <!-- <div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <img class="img-slider" src="{{ asset('assets/img/oto-2.png') }}" />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <img class="img-slider" src="{{ asset('assets/img/oto-3.png') }}" />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <img class="img-slider" src="{{ asset('assets/img/oto-4.png') }}" />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div> -->
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-12">
-                                                <div class="slider slider-nav">
-                                                    <!-- <div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <img src="{{ asset('assets/img/avatardefault.jpg') }}"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        class="img-slider_nav" />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div> -->
-                                                </div>
-                                            </div>
-
+                                        <div>
+                                            @if ($customer->image)
+                                                <img class="img-slider" src="{{ asset($customer->image) }}"
+                                                    alt="Logo Img" />
+                                            @else
+                                                <img class="img-slider" src="{{ asset('/assets/img/avatar.jpeg') }}"
+                                                    alt="Logo Default" />
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-lg-7">
@@ -158,7 +252,7 @@
                                             <div class="mt-4">
                                                 <div class="input-group align-items-center">
                                                     <!-- <input type="file" class="form-control" id="attachment"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    name="attachment" style="display: none"> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                name="attachment" style="display: none"> -->
                                                     <i class="bi bi-link-45deg text-color_pimary fs-3 fw-bold"></i>
                                                     {{-- <label class="input-label text-color_pimary fs-4 fw-bold ms-2"
                                                         for="attachment" style="cursor: pointer">File đính kèm</label> --}}
@@ -187,8 +281,7 @@
                                 <div class="container">
                                     <ul class="tabs">
                                         <li class="label-item">
-                                            <input type="radio" name="tab" id="playlists" value="playlists"
-                                                checked>
+                                            <input type="radio" name="tab" id="playlists" value="playlists" checked>
                                             <label class="label-info header_menu-link" for="playlists">
                                                 Thông tin chi tiết
                                             </label>
@@ -664,7 +757,7 @@
                                                                 name="contact[{{ $dataID }}][key4]" />
                                                         </td>
                                                     </tr>
-                                                    {{ $dataID++}}
+                                                    {{ $dataID++ }}
                                                 @endforeach
 
                                             @endif
@@ -869,152 +962,18 @@
             </div>
         </div>
     </div>
-
-    <style>
-        .title-contact {
-            padding-left: 25px;
-        }
-
-        .img-slider {
-            width: 100%;
-            object-fit: cover;
-            height: 100%;
-        }
-
-        .img-slider_nav {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            margin-right: 10px;
-            padding: 12%;
-        }
-
-        .action_wrapper-search {
-            position: relative;
-        }
-
-        #progress {
-            padding: 0;
-            list-style-type: none;
-            font-size: 10px;
-            clear: both;
-            line-height: 1em;
-            margin: 0 -1px;
-            text-align: center;
-        }
-
-        #progress li:first-child {
-            border-radius: 20px 0 0 20px;
-        }
-
-        #progress li {
-            float: left;
-            padding: 10px 10px 10px 10px;
-            background: #c1c4c1;
-            color: #fff;
-            position: relative;
-            width: calc(16% - 1px);
-            margin: 0 1px;
-            font-size: 12px;
-        }
-
-
-        #progress li:nth-child(n + 2):before {
-            content: '';
-            border-left: 16px solid #fff;
-            border-top: 16px solid transparent;
-            border-bottom: 16px solid transparent;
-            position: absolute;
-            top: 0;
-            left: 0;
-
-        }
-
-        #progress li:after {
-            content: '';
-            border-left: 16px solid #c1c4c1;
-            border-top: 16px solid transparent;
-            border-bottom: 15px solid transparent;
-            position: absolute;
-            top: 0;
-            left: 100%;
-            z-index: 20;
-        }
-
-        #progress li.active {
-            background: #46ab2b;
-        }
-
-        #progress li.active:after {
-            border-left-color: #46ab2b;
-        }
-
-        .wapper-contact {
-            padding-bottom: 20px;
-            border-bottom: 1px solid #07060633;
-        }
-
-
-        .card-body {
-            padding: 15px 30px 30px 30px !important;
-        }
-
-        .text-color_pimary {
-            color: var(--primary-color);
-        }
-
-        .layout_120 {
-            display: grid;
-            grid-template-columns: 100px auto;
-        }
-
-        .layout_90 {
-            display: grid;
-            grid-template-columns: 90px auto;
-        }
-
-        .layout_45 {
-            display: grid;
-            grid-template-columns: 45px auto;
-        }
-
-        .layout_auto {
-            display: grid;
-            grid-template-columns: auto auto;
-        }
-
-        .icon-trash_comment:hover {
-            color: var(--primary-color);
-            cursor: pointer;
-        }
-
-        .btn-back a {
-            color: var(--primary-color)
-        }
-
-        .btn-back:hover a {
-            color: #fff
-        }
-    </style>
-
-
-
+@endsection
 @section('footer-script')
-
     <!-- Plugins -->
     <script src="{{ asset('assets/plugins/jquery-datetimepicker/custom-datetimepicker.js') }}"></script>
 
     <script type="text/javascript" charset="utf-8"
         src="https://cdn.datatables.net/fixedcolumns/4.2.2/js/dataTables.fixedColumns.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
-    <script type="text/javascript" src="{{ asset('assets/plugins/jquery-repeater/repeater.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/plugins/jquery-repeater/custom-repeater.js') }}"></script>
     <!-- Chart Js -->
     <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chart.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-stacked100@1.0.0.js') }}">
-    </script>
-    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-datalabels@2.0.0.js') }}">
-    </script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-stacked100@1.0.0.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-datalabels@2.0.0.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_khachHangActive.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_khachHangMoi.js') }}"></script>
@@ -1022,20 +981,9 @@
     <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_doanhSo.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_nhanSu.js') }}"></script>
 
-    <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
-
-
-    <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
-
-
     <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/components/dataHrefTable.js') }}"></script>
 
-    {{-- Slick --}}
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"
-        integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
         updateList = function(e) {
@@ -1136,27 +1084,6 @@
                 listItem.textContent = file.name;
                 fileListDisplay.appendChild(listItem);
             });
-        });
-    </script>
-
-    <script>
-        $(".slider-single").slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: false,
-            fade: true,
-            useTransform: false,
-            asNavFor: ".slider-nav",
-        });
-        $(".slider-nav").slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            asNavFor: ".slider-single",
-            dots: false,
-            focusOnSelect: true,
-            arrows: true,
-            prevArrow: '<button type="button" class="slick-prev bg-transparent" style="position: absolute;left: -3%; top: 40%; z-index: 9;"><i class="bi bi-arrow-left-short fs-2 text-color_pimary"></i></button>',
-            nextArrow: '<button type="button" class="slick-prev bg-transparent" style="position: absolute;right: -3%; top: 40%; z-index: 9;"><i class="bi bi-arrow-right-short fs-2 text-color_pimary"></i></button>'
         });
     </script>
 

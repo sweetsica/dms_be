@@ -342,40 +342,41 @@
         </div>
     </div>
     @include('template.sidebar.sidebarMaster.sidebarRight')
-    @section('footer-script')
+@endsection
+@section('footer-script')
 
-        <!-- Plugins -->
-        <script src="{{ asset('assets/plugins/jquery-datetimepicker/custom-datetimepicker.js') }}"></script>
+    <!-- Plugins -->
+    <script src="{{ asset('assets/plugins/jquery-datetimepicker/custom-datetimepicker.js') }}"></script>
 
-        <script type="text/javascript" charset="utf-8"
-            src="https://cdn.datatables.net/fixedcolumns/4.2.2/js/dataTables.fixedColumns.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
-        <script type="text/javascript" src="{{ asset('assets/plugins/jquery-repeater/repeater.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('assets/plugins/jquery-repeater/custom-repeater.js') }}"></script>
-        <!-- Chart Js -->
-        <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chart.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-stacked100@1.0.0.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-datalabels@2.0.0.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_khachHangActive.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_khachHangMoi.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_soDonHang.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_doanhSo.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_nhanSu.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('/assets/js/components/dataHrefTable.js') }}"></script>
+    <script type="text/javascript" charset="utf-8"
+        src="https://cdn.datatables.net/fixedcolumns/4.2.2/js/dataTables.fixedColumns.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/jquery-repeater/repeater.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/jquery-repeater/custom-repeater.js') }}"></script>
+    <!-- Chart Js -->
+    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chart.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-stacked100@1.0.0.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/chartjs-plugin-datalabels@2.0.0.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_khachHangActive.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_khachHangMoi.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_soDonHang.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_doanhSo.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/chart/StackedChart_nhanSu.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/components/selectMulWithLeftSidebar.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/components/resetFilter.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/js/components/dataHrefTable.js') }}"></script>
 
-        {{-- Sematic ui  --}}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"
-            integrity="sha512-Xo0Jh8MsOn72LGV8kU5LsclG7SUzJsWGhXbWcYs2MAmChkQzwiW/yTQwdJ8w6UA9C6EVG18GHb/TrYpYCjyAQw=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/accordion.min.js"
-            integrity="sha512-VZ9OKywfKY7qvZnTAsFqNHS6jZ79QmSdfXbzoS3aMy3FpNkDFrR2NJfrHEE4nPQROp4A9u/hB9rTwL0UP5tzHg=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script>
-            $(document).ready(function() {
-                $('.ui.accordion').accordion();
-            });
-        </script>
-    @endsection
+    {{-- Sematic ui  --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"
+        integrity="sha512-Xo0Jh8MsOn72LGV8kU5LsclG7SUzJsWGhXbWcYs2MAmChkQzwiW/yTQwdJ8w6UA9C6EVG18GHb/TrYpYCjyAQw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/accordion.min.js"
+        integrity="sha512-VZ9OKywfKY7qvZnTAsFqNHS6jZ79QmSdfXbzoS3aMy3FpNkDFrR2NJfrHEE4nPQROp4A9u/hB9rTwL0UP5tzHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(document).ready(function() {
+            $('.ui.accordion').accordion();
+        });
+    </script>
+@endsection
