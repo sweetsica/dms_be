@@ -9,6 +9,8 @@ use App\Models\Promotion;
 // use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\View;
+use Exception;
 
 
 
