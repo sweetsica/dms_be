@@ -21,4 +21,14 @@ class WareHouse extends Model
         'accountant',
         'status',        
     ];
+
+    public function managerID()
+    {
+        return $this->belongsTo(Personnel::class, 'manage');
+    }
+
+    public function accountantID()
+    {
+        return $this->belongsTo(Personnel::class, 'accountant');
+    }
 }

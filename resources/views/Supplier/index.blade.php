@@ -148,7 +148,6 @@
                                                                 @endif
                                                             </tr>
                                                         </thead>
-                                                        <?php $t = 1; ?>
                                                         @foreach ($supplierList as $item)
                                                             <tbody>
                                                                 <tr>

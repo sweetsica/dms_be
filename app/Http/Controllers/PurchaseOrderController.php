@@ -4,39 +4,58 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use App\Models\Supplier;
-
-
+use App\Models\PurchaseOrder;
+use App\Models\Personnel;
+use App\Models\RouteDirection;
+use App\Models\Customer;
+use App\Models\Department;
+use Laminas\Code\Generator\EnumGenerator\Cases\PureCases;
 
 class PurchaseOrderController extends Controller
 {
+    public function pagination($list)
+    {
+        return [
+            'current_page' => $list->currentPage(),
+            'data' => $list->items(),
+            'first_page_url' => $list->url(1),
+            'from' => $list->firstItem(),
+            'last_page' => $list->lastPage(),
+            'last_page_url' => $list->url($list->lastPage()),
+            'links' => $list->toArray()['links'],
+            'next_page_url' => $list->nextPageUrl(),
+            'path' => $list->url(1),
+            'per_page' => $list->perPage(),
+            'prev_page_url' => $list->previousPageUrl(),
+            'to' => $list->lastItem(),
+            'total' => $list->total(),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
         $search = $request->get('search');
-
-        $query = Supplier::query();
+        $limit = 10;
+        $query = PurchaseOrder::query();
         // $positionList = Position::s
-        $query
+        $query->leftJoin('customers', 'customers.id', '=', 'purchase_orders.customer_id')
         ->select(
-            'suppliers.id',
-            'suppliers.name',
-            'suppliers.code',
-            'suppliers.business_areas',
-            'suppliers.tax_code',
-            'suppliers.representative',
-            'suppliers.job_title',
-            'suppliers.bank_number',
-            'suppliers.bank_name',
-            'suppliers.address',
-            'suppliers.contact_name',
-            'suppliers.contact_phone',
-            'suppliers.contact_email',
-            'suppliers.debt_limit',
-            'suppliers.days_owed',
-            'suppliers.status',
+            'purchase_orders.id',
+            'purchase_orders.group_id',
+            'purchase_orders.order_staff',
+            'purchase_orders.route_direction',
+            'purchase_orders.customer_id',
+            'purchase_orders.description',
+            'purchase_orders.data',
+            'purchase_orders.status',
+            'purchase_orders.code',
+            'purchase_orders.total_money',
+            'purchase_orders.edit_order',
+            'purchase_orders.created_at',
+            'purchase_orders.updated_at',
+            'customers.name as customers_name',
         );
         $pattern = '/^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)\s+.*/';
         if (preg_match($pattern, $search)) {
@@ -44,17 +63,26 @@ class PurchaseOrderController extends Controller
             return back();
         }
         if($search != NULL) {
-            $query->where("suppliers.name", "like", "%$search%");
-        }
-        if($search != NULL) {
-            $query->orWhere("suppliers.code", "like", "%$search%");
-        }        
-
-        $supplierList =$query->paginate(15);
-        // dd($supplierList);
-        return view("PuchaseOrder.index",[
-            'supplierList'=>$supplierList,
+            $query->where("customers.name", "like", "%$search%");
+        }    
+        
+        $purchaseOrderList = $query->orderByDesc('id')->paginate($limit);
+        // dd($purchaseOrderList);
+        $pagination = $this->pagination($purchaseOrderList);
+        // dd($purchaseOrderList);
+        $listUsers = Personnel::all();
+        $listCustomers = Customer::all();
+        $listRouteDirections = RouteDirection::all();
+        $listGroups = Department::where('id', '=', '4')->orWhere('parent', '=', '4')->orWhere('id', '=', '5')->orWhere('parent', '=', '5')->get();
+        return view("PurchaseOrder.index",[
+            'purchaseOrderList'=>$purchaseOrderList,
+            'listUsers'=>$listUsers,
+            'listCustomers'=>$listCustomers,
+            'listRouteDirections'=>$listRouteDirections,
+            'listGroups'=>$listGroups,
             'search' => $search,
+            'pagination' => $pagination,       
+
         ]); 
     }
 
@@ -71,7 +99,25 @@ class PurchaseOrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $group_id = $request->get('group_id');
+        $order_staff = $request->get('order_staff');
+        $route_direction = $request->get('route_direction');
+        $customer_id = $request->get('customer_id');
+        $description = $request->get('description');
+        $status = 0;
+        $code = $request->get('code');
+
+        $data = new PurchaseOrder();
+        $data->group_id = $group_id;
+        $data->order_staff = $order_staff;
+        $data->route_direction = $route_direction;
+        $data->customer_id = $customer_id;
+        $data->description = $description;
+        $data->status = $status;
+        $data->code = $code;
+        $data->save();
+        Session::flash('success', 'Thêm mới thành công');
+        return back();
     }
 
     /**
@@ -80,7 +126,7 @@ class PurchaseOrderController extends Controller
     public function show(string $id)
     {
 
-        return view('PuchaseOrder.chiTietDonHang');
+        return view('PurchaseOrder.chiTietDonHang');
     }
 
     /**
@@ -96,7 +142,23 @@ class PurchaseOrderController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $group_id = $request->get('group_id');
+        $order_staff = $request->get('order_staff');
+        $route_direction = $request->get('route_direction');
+        $customer_id = $request->get('customer_id');
+        $description = $request->get('description');
+        $edit_order = $request->get('edit_order');
+
+        $data = PurchaseOrder::find($id);
+        $data->group_id = $group_id;
+        $data->order_staff = $order_staff;
+        $data->route_direction = $route_direction;
+        $data->customer_id = $customer_id;
+        $data->description = $description;
+        $data->edit_order = $edit_order;
+        $data->save();
+        Session::flash('success', 'Sửa thành công');
+        return back();
     }
 
     /**
@@ -104,6 +166,18 @@ class PurchaseOrderController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        PurchaseOrder::destroy($id);
+        Session::flash('success', 'Đã xoá!');
+        return back();
+    }
+
+    public function delete(Request $request)
+    {
+
+        $selectedItems = $request->input('selected_items', []);
+        PurchaseOrder::whereIn('id', $selectedItems)->delete();
+        Session::flash('success', 'Đã xoá!');
+        return back();
+
     }
 }
