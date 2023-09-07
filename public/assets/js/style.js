@@ -53,8 +53,8 @@ document.addEventListener("DOMContentLoaded", () => {
         asideLeft.style.left = isClosed
             ? "0"
             : `-${getComputedStyle(asideLeft)
-                  .getPropertyValue("width")
-                  .trim()}`;
+                .getPropertyValue("width")
+                .trim()}`;
         mainWrap.style.marginLeft = isClosed
             ? getComputedStyle(asideLeft).getPropertyValue("width").trim()
             : "0";
@@ -67,8 +67,8 @@ document.addEventListener("DOMContentLoaded", () => {
         asideRight.style.right = isClosed
             ? "0"
             : `-${getComputedStyle(asideRight)
-                  .getPropertyValue("width")
-                  .trim()}`;
+                .getPropertyValue("width")
+                .trim()}`;
         mainWrap.style.marginRight = isClosed
             ? getComputedStyle(asideRight).getPropertyValue("width").trim()
             : "0";
@@ -76,7 +76,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function autoCloseSidebar() {
         const screenWidth = window.innerWidth;
-        if (screenWidth > 1080 && screenWidth < 1440) {
+        // ScreenOLD screenWidth > 1080 && screenWidth < 1200
+        if (screenWidth < 1024) {
             asideLeft.style.left = `-${getComputedStyle(asideLeft)
                 .getPropertyValue("width")
                 .trim()}`;
