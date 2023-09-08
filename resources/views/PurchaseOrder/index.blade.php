@@ -278,7 +278,7 @@
 
                                                 <div class="mx-2">
                                                     <div data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                        title="Export Excel">
+                                                        title="Xuất file Excel">
                                                         <a class="btn btn-danger btn-lg" href="purchase_order/export/all">
                                                             <i class="bi bi-download "></i>
                                                         </a>
