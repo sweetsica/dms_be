@@ -4,7 +4,7 @@
 @section('header-style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 @endsection
-{{-- @php
+@php
 
     function getPaginationLink($link, $pageName)
     {
@@ -17,9 +17,21 @@
         $queryString = request()->query();
 
         $queryString[$pageName] = $pageNumber;
-        return route('TechnicalSpecificationsGroup.index', $queryString);
+        return route('Promotion.index', $queryString);
     }
-@endphp --}}
+
+    // function isFiltering($filterNames)
+    // {
+    //     $filters = request()->query();
+    //     foreach ($filterNames as $filterName) {
+    //         if (isset($filters[$filterName]) && $filters[$filterName] != '') {
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
+
+@endphp
 
 @section('content')
     {{-- @include('template.sidebar.sidebarPosition.sidebarLeft') --}}
@@ -77,12 +89,12 @@
                                                     class="table table-responsive table-hover table-bordered filter">
                                                     <thead>
                                                         <tr>
-                                                            <th class="text-nowrap text-center" style="width:2%">STT</th>
-                                                            <th class="text-nowrap" style="width:10%">Mã nhóm khách hàng
+                                                            <th class="text-nowrap text-center text-center" style="width:2%">STT</th>
+                                                            <th class="text-nowrap text-center" style="width:10%">Mã nhóm khách hàng
                                                             </th>
-                                                            <th class="text-nowrap" style="width:10%">Tên nhóm khách hàng
+                                                            <th class="text-nowrap text-center" style="width:10%">Tên nhóm khách hàng
                                                             </th>
-                                                            <th class="text-nowrap" style="width:20%">Mô tả</th>
+                                                            <th class="text-nowrap text-center" style="width:20%">Mô tả</th>
                                                             <th class="text-center" style="width:1%"><span>Thao tác</span>
                                                             </th>
                                                         </tr>
@@ -92,15 +104,16 @@
                                                         <tbody>
                                                             <tr>
                                                                 <td class=" text-center">
-                                                                    {{ $i++ }}
+                                                                    {{-- {{ $i++ }} --}}
+                                                                    {{ $customerGroupList->total() - $loop->index - ($customerGroupList->currentPage() - 1) * $customerGroupList->perPage() }}
                                                                 </td>
-                                                                <td class="">
+                                                                <td class="text-center">
                                                                     <div class="overText" data-bs-toggle="tooltip"
                                                                         data-bs-placement="top" title="{{ $item->code }}">
                                                                         {{ $item->code }}
                                                                     </div>
                                                                 </td>
-                                                                <td class="">
+                                                                <td class="text-center">
                                                                     <div class="overText" data-bs-toggle="tooltip"
                                                                         data-bs-placement="top"
                                                                         title=" {{ $item->name }}">
@@ -108,7 +121,7 @@
                                                                     </div>
 
                                                                 </td>
-                                                                <td class="">
+                                                                <td class="text-center">
                                                                     <div class="overText" data-bs-toggle="tooltip"
                                                                         data-bs-placement="top"
                                                                         title="{{ $item->description }}">
@@ -117,7 +130,7 @@
 
                                                                 </td>
                                                                 <td>
-                                                                    <div class="table_actions d-flex justify-content-end">
+                                                                    <div class="table_actions d-flex justify-content-center">
 
                                                                         <div data-bs-toggle="tooltip"
                                                                             data-bs-placement="top" title="Sửa">
@@ -231,7 +244,7 @@
                                                         </div>
                                                     @endforeach
                                                 </table>
-                                                {{-- <nav aria-label="Page navigation example" class="float-end mt-3" id="target-pagination">
+                                                <nav aria-label="Page navigation example" class="float-end mt-3" id="target-pagination">
                                                     <ul class="pagination">
                                                         @foreach ($pagination['links'] as $link)
                                                             <li class="page-item {{ $link['active'] ? 'active' : '' }}">
@@ -242,10 +255,10 @@
                                                             </li>
                                                         @endforeach
                                                     </ul>
-                                                </nav> --}}
-                                                {{ $customerGroupList->appends([
+                                                </nav>
+                                                {{-- {{ $customerGroupList->appends([
                                                         'search' => $search,
-                                                    ])->links() }}
+                                                    ])->links() }} --}}
                                             </div>
                                         </div>
                                     </div>

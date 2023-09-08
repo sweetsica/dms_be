@@ -85,12 +85,13 @@
                                             <form id="select-form" action="{{ route('Specifications.delete') }}"
                                                 method="POST">
                                                 @csrf
-                                                <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" title="Xóa">
-                                                    <button class="btn btn-danger  " type="submit"
-                                                        onclick="return confirm('Bạn có muốn xóa không?')"
-                                                        id="delete-selected-button" style="display: none;">Xóa</button>
-                                                </div><br>
+                                                <div class="action_export mx-3 order-md-1" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" title="Xóa"
+                                                style="position: absolute; top: 10px; left: 0;">
+                                                <button class="btn btn-danger  " type="submit"
+                                                    onclick="return confirm('Bạn có muốn xóa không?')"
+                                                    id="delete-selected-button" style="display: none;">Xóa</button>
+                                            </div><br>
                                                 <div class="table-responsive">
                                                     <table id="dsDaoTao"
                                                         class="table table-responsive table-hover table-bordered filter">

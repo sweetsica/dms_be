@@ -417,15 +417,12 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-nowrap text-center">Tên SP AD</th>
-                                                <th class="text-nowrap text-center" style="width: 10%;">Mã sản phẩm
-                                                </th>
+                                                <th class="text-nowrap text-center" style="width: 10%;">Mã sản phẩm</th>
                                                 <th class="text-nowrap text-center" style="width: 8%;">Đạt số lượng</th>
                                                 <th class="text-nowrap text-center" style="width: 8%;">Đạt số tiền</th>
-                                                <th class="text-nowrap text-center" style="width: 8%;">Số lượng SP tặng
-                                                </th>
+                                                <th class="text-nowrap text-center" style="width: 8%;">Số lượng SP tặng</th>
                                                 <th class="text-nowrap text-center">Tên SP</th>
-                                                <th class="text-nowrap text-center" style="width: 10%;">Mã SP tặng
-                                                    tặng</th>
+                                                <th class="text-nowrap text-center" style="width: 10%;">Mã SP tặng </th>
                                                 <th class="text-nowrap text-center" style="width: 8%;">Chiết khấu %</th>
                                                 <th class="text-nowrap text-center" style="width: 8%;">Tặng tiền</th>
                                             </tr>
@@ -505,7 +502,6 @@
                                                                     @endforeach
                                                                 </select>
                                                             </div>
-
                                                         </td>
                                                         <td class="text-center">
                                                             <input id="productBonusEdit_{{ $m++ }}"
@@ -526,7 +522,6 @@
                                                     </tr>
                                                 @endforeach
                                             @endif
-
                                             <tr>
                                                 <td class="text-center">
                                                     <i class="bi bi-plus fs-3 add-spec_edit"
@@ -608,9 +603,7 @@
                                     class="form-control" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="Khách hàng áp dụng" value="{{ $item->customer_type }}" disabled>
                             </div>
-
                         </div>
-
                         <div class="row">
                             <div class="col-lg-12 mb-3">
                                 <h5 class="modal-title">2. Chi tiết CTKM</h5>
@@ -695,10 +688,8 @@
                                                                 <option value="{{ $promotionDetail['key6'] }}" selected>
                                                                     {{ $promotionDetail['key6'] }}
                                                                 </option>
-
                                                             </select>
                                                         </div>
-
                                                     </td>
                                                     <td class="text-center">
                                                         <span
