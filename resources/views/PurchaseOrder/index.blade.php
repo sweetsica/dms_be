@@ -267,10 +267,10 @@
         
                                                         <div class="col-md-4">
                                                             <div data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                                title="Thời gian">
+                                                                title="Ngày đặt">
                                                                 <input type="date" name="thoi_gian" {{ request()->thoi_gian }} 
                                                                     value= "{{ request()->thoi_gian }}" class="form-control" style="width: 120px;"
-                                                                    placeholder="Thời gian" onchange="submitFunction()"/>
+                                                                    placeholder="Ngày đặt" onchange="submitFunction()"/>
                                                             </div>
                                                         </div>
                                                     </div>

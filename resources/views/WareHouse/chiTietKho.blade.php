@@ -139,12 +139,13 @@
                                             </div>
                                         </div>
 
-                                        <div class="position-absolute" style="top: 0; right: 0;">
-                                            <img src="{{ asset('assets/img/Qr-code.png') }}" alt="Qr-code"
-                                                class="img-qr" />
+                                        <div class="position-absolute" style="top: -24; right: 0;">                                            
+                                            <div class="d-flex" style="width:52px;">
+                                                {!! QrCode::generate(route('WareHouse.show', $wareHouse->id)) !!} 
+                                            </div>                                               
                                         </div>
                                     </div>
-
+                                    {{-- {!! QrCode::generate(route('WareHouse.show', $wareHouse->id)) !!}  --}}
                                     <div
                                         class="action_wrapper d-flex flex-wrap justify-content-between align-items-center mt-3">
                                         <div class="justify-content-between align-items-center flex-grow-1 mb-2 mb-md-0">
