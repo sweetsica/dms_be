@@ -12,6 +12,7 @@ use App\Models\Department;
 use Laminas\Code\Generator\EnumGenerator\Cases\PureCases;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PurchaseOrdersExport;
+use App\Models\Promotion;
 
 
 class PurchaseOrderController extends Controller
@@ -160,7 +161,9 @@ class PurchaseOrderController extends Controller
     public function show(string $id)
     {
         $order_detail = PurchaseOrder::find($id);
-        return view('PurchaseOrder.chiTietDonHang')->with('order_detail', $order_detail);
+        $promotion = Promotion::all();
+        return view('PurchaseOrder.chiTietDonHang')->with('order_detail', $order_detail)
+                                                   ->with('promotion', $promotion);
     }
 
     /**

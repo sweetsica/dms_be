@@ -293,13 +293,15 @@
                                                                         Chọn tất cả
                                                                     </span>
                                                                 </label>
-                                                                <label class="dropdown-item d-flex align-items-center">
-                                                                    <input type="checkbox" class="nestedCheckbox" />
-                                                                    <span class="fs-4 ms-3">
-                                                                        Sản phẩm 1
-                                                                    </span>
-                                                                </label>
-                                                                <label class="dropdown-item d-flex align-items-center">
+                                                                @foreach ($promotion as $km)
+                                                                    <label class="dropdown-item d-flex align-items-center">
+                                                                        <input type="checkbox" name="{{ $km->id }}" class="nestedCheckbox" />
+                                                                        <span class="fs-4 ms-3">
+                                                                            {{ $km->name }}
+                                                                        </span>
+                                                                    </label>
+                                                                @endforeach
+                                                                {{-- <label class="dropdown-item d-flex align-items-center">
                                                                     <input type="checkbox" class="nestedCheckbox" />
                                                                     <span class="fs-4 ms-3">
                                                                         Sản phẩm 2
@@ -310,7 +312,7 @@
                                                                     <span class="fs-4 ms-3">
                                                                         Sản phẩm 3
                                                                     </span>
-                                                                </label>
+                                                                </label> --}}
                                                             </div>
                                                             <div
                                                                 class="d-flex justify-content-end align-items-center border-top py-3">
