@@ -10,6 +10,9 @@ use App\Models\RouteDirection;
 use App\Models\Customer;
 use App\Models\Department;
 use Laminas\Code\Generator\EnumGenerator\Cases\PureCases;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PurchaseOrdersExport;
+
 
 class PurchaseOrderController extends Controller
 {
@@ -39,6 +42,9 @@ class PurchaseOrderController extends Controller
         $search = $request->get('search');
         $limit = 10;
         $query = PurchaseOrder::query();
+        $trang_thai = $request->query('trang_thai');
+        $nguoi_dat = $request->query('nguoi_dat');
+        $thoi_gian = $request->query('thoi_gian');
         // $positionList = Position::s
         $query->leftJoin('customers', 'customers.id', '=', 'purchase_orders.customer_id')
         ->select(
@@ -66,7 +72,35 @@ class PurchaseOrderController extends Controller
             $query->where("customers.name", "like", "%$search%");
         }    
         
+        if($trang_thai == "all")
+        {
+            $trang_thai = null;
+        }
+
+        if($nguoi_dat == "all")
+        {
+            $nguoi_dat = null;
+        }
+
+        if ($trang_thai != NULL) {
+            $query->where('purchase_orders.status', $trang_thai);
+        }
+        
+
+        if ($thoi_gian != NULL) {
+            $query->where('purchase_orders.created_at', "like", "%$thoi_gian%");
+                    // ->orWhere('purchase_orders.updated_at', "like", "%$thoi_gian%");
+        }
+
+        if ($nguoi_dat != NULL) {
+            $query->where('purchase_orders.order_staff', $nguoi_dat);
+        }
+
+        
+
         $purchaseOrderList = $query->orderByDesc('id')->paginate($limit);
+
+        
         // dd($purchaseOrderList);
         $pagination = $this->pagination($purchaseOrderList);
         // dd($purchaseOrderList);
@@ -117,7 +151,7 @@ class PurchaseOrderController extends Controller
         $data->code = $code;
         $data->save();
         Session::flash('success', 'Thêm mới thành công');
-        return back();
+        return redirect()->route('PurchaseOrder.show', $data->id);
     }
 
     /**
@@ -125,8 +159,8 @@ class PurchaseOrderController extends Controller
      */
     public function show(string $id)
     {
-
-        return view('PurchaseOrder.chiTietDonHang');
+        $order_detail = PurchaseOrder::find($id);
+        return view('PurchaseOrder.chiTietDonHang')->with('order_detail', $order_detail);
     }
 
     /**
@@ -179,5 +213,12 @@ class PurchaseOrderController extends Controller
         Session::flash('success', 'Đã xoá!');
         return back();
 
+    }
+
+    public function export()
+    {             
+        $now = now();  
+        return Excel::download(new PurchaseOrdersExport, 'Danh-sach-don-dat-hang-'.$now.'.xlsx');
+        
     }
 }

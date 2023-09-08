@@ -197,29 +197,46 @@
                                                 </div> --}}
 
                                                 <form id="filterForm">
+                                                    @foreach (request()->query() as $key => $value)
+                                                            @if (!in_array($key, ['trang_thai', 'nguoi_dat', 'thoi_gian']))
+                                                                <input type="hidden" name="{{ $key }}"
+                                                                    value="{{ $value }}">
+                                                            @endif
+                                                    @endforeach
                                                     <div class="row">
                                                         <div class="col-md-4">
                                                             <div data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                                 title="Trạng thái" style="width: 120px;">
-                                                                <select name="" class="selectpicker"
+                                                                <select name="trang_thai" class="selectpicker select_filter"
                                                                     placeholder="Trạng thái">
-                                                                    <option value="Tất cả" style="border-bottom">Tất cả
+                                                                    <option value="" disabled
+                                                                                {{ request()->trang_thai ? '' : 'selected' }}>
+                                                                                Lọc trạng thái</option>
+                                                                    <option value="all" style="border-bottom"
+                                                                    {{ request()->trang_thai == 'all' ? 'selected' : '' }}>
+                                                                            Tất cả</option>                                                                    
+                                                                    <option value="0" style="border-bottom" 
+                                                                    {{ request()->trang_thai == '0' ? 'selected' : '' }}>
+                                                                    Đã tạo
                                                                     </option>
-                                                                    <option value="0" style="border-bottom">Đã tạo
+                                                                    <option value="1" style="background: #BFDBFE"
+                                                                    {{ request()->trang_thai == 1 ? 'selected' : '' }}>
+                                                                    Chờ duyệt
                                                                     </option>
-                                                                    <option value="1" style="background: #BFDBFE">Chờ
-                                                                        duyệt
+                                                                    <option value="2" style="background: #BFDBFE"
+                                                                    {{ request()->trang_thai == 2 ? 'selected' : '' }}>
+                                                                    Đã duyệt
                                                                     </option>
-                                                                    <option value="2" style="background: #BFDBFE">Đã
-                                                                        duyệt
-                                                                    </option>
-                                                                    <option value="3" style="background: #BFDBFE">
+                                                                    <option value="3" style="background: #BFDBFE"
+                                                                    {{ request()->trang_thai == 3 ? 'selected' : '' }}>
                                                                         Đã xuất hàng
                                                                     </option>
-                                                                    <option value="4" style="background: #BBF7D0">
+                                                                    <option value="4" style="background: #BBF7D0"
+                                                                    {{ request()->trang_thai == 4 ? 'selected' : '' }}>
                                                                         Đã giao hàng
                                                                     </option>
-                                                                    <option value="-1" style="background: #F6C9C4">
+                                                                    <option value="-1" style="background: #F6C9C4"
+                                                                    {{ request()->trang_thai == -1 ? 'selected' : '' }}>
                                                                         Từ chối
                                                                     </option>
                                                                 </select>
@@ -229,11 +246,21 @@
                                                         <div class="col-md-4">
                                                             <div data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                                 title="Người đặt" style="width: 120px;">
-                                                                <select name="" class="selectpicker" placeholder="Người đặt">
-                                                                    <option value="Admin">Admin
-                                                                    </option>
-                                                                    <option value="Giám đốc">Giám đốc
-                                                                    </option>
+                                                                <select name="nguoi_dat" class="selectpicker select_filter" 
+                                                                placeholder="Người đặt"  data-live-search="true">
+                                                                    <option value="" disabled
+                                                                                {{ request()->nguoi_dat ? '' : 'selected' }}>
+                                                                                Lọc người đặt</option>
+                                                                    <option value="all"
+                                                                        {{ request()->nguoi_dat == 'all' ? 'selected' : '' }}>
+                                                                        Tất cả</option>
+                                                                    @foreach ($listUsers as $item)
+                                                                        <option
+                                                                            {{ request()->nguoi_dat == $item->id ? 'selected' : '' }}
+                                                                            value="{{ $item->id }}">
+                                                                            {{ $item->name }}
+                                                                        </option>
+                                                                    @endforeach
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -241,8 +268,9 @@
                                                         <div class="col-md-4">
                                                             <div data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                                 title="Thời gian">
-                                                                <input type="date" class="form-control" style="width: 120px;"
-                                                                    placeholder="Thời gian" />
+                                                                <input type="date" name="thoi_gian" {{ request()->thoi_gian }} 
+                                                                    value= "{{ request()->thoi_gian }}" class="form-control" style="width: 120px;"
+                                                                    placeholder="Thời gian" onchange="submitFunction()"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -251,9 +279,9 @@
                                                 <div class="mx-2">
                                                     <div data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                         title="Export Excel">
-                                                        <button class="btn btn-danger btn-lg">
+                                                        <a class="btn btn-danger btn-lg" href="purchase_order/export/all">
                                                             <i class="bi bi-download "></i>
-                                                        </button>
+                                                        </a>
                                                     </div>
                                                 </div>
 
@@ -1703,13 +1731,27 @@
         document.addEventListener("DOMContentLoaded", function() {
             const form = document.querySelector('#filterForm');
             const selectFields = form.querySelectorAll('select');
+            const dateFields = form.querySelectorAll('date');
 
             selectFields.forEach(function(select) {
                 select.addEventListener('change', function() {
                     form.submit();
                 });
             });
+
+            dateFields.forEach(function(date) {
+                date.addEventListener('change', function() {
+                    form.submit();
+                });
+            });
         });
+    </script>
+
+    <script>
+        function submitFunction() {
+            let form = document.getElementById("filterForm");
+            form.submit();
+        }
     </script>
 
 @endsection

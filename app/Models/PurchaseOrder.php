@@ -41,4 +41,8 @@ class PurchaseOrder extends Model
     {
         return $this->belongsTo(RouteDirection::class, 'route_direction');
     }
+    public function group()
+    {
+        return $this->belongsTo(Department::class, 'group_id');
+    }
 }

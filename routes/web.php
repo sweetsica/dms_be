@@ -274,6 +274,7 @@ Route::middleware(['auth.role'])->group(function () {
 Route::get('/export/customer', [ExcelController::class, 'setExportCustomter']);
 Route::get('/warehouses/export/all', [WareHouseController::class, 'export'])->name('WareHouse.export');
 Route::get('/warehouses/export/detail', [WareHouseController::class, 'exportDetail'])->name('WareHouse.exportDetail');
+Route::get('/purchase_order/export/all', [PurchaseOrderController::class, 'export'])->name('PurchaseOrder.export');
 
 
 

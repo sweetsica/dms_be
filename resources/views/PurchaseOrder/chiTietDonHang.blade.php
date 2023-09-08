@@ -110,14 +110,14 @@
                                                 <img class="header_logo"
                                                     src="{{ asset('assets/img/logo-thaihung-1-2.jpg') }}" alt="logo" />
                                                 {{-- <img class="header_logo" src="{{ env('LOGO_URL', '') }}" alt="logo" /> --}}
-                                                <p class="m-0 fs-5">Mã: BH_1</p>
+                                                <p class="m-0 fs-5">Mã: {{ $order_detail->code }}</p>
                                             </div>
                                             <div class="item-title text-center">
                                                 <h1 class="m-0">PHIẾU ĐẶT HÀNG</h1>
-                                                <p class="m-0 fs-5">Ngày đặt: 01/08/2023</p>
+                                                <p class="m-0 fs-5">Ngày đặt: {{ date('d/m/Y', strtotime($order_detail->created_at)) }}</p>
                                             </div>
                                             <div class="d-flex" style="width:64px; height:80px;">
-                                                {!! QrCode::generate(route('PurchaseOrder.index')) !!}  
+                                                {!! QrCode::generate(route('PurchaseOrder.show', $order_detail->id)) !!}
                                             </div>
                                             
                                         </div>
@@ -128,13 +128,13 @@
                                                     <div>
                                                         <span class="fs-5 fw-bold" data-bs-toggle="tooltip"
                                                             data-bs-placement="top" title="Từ chối">Khách hàng :</span>
-                                                        <span class="fs-5 ">Quầy thuốc Thịnh Phúc - DTSD029</span>
+                                                        <span class="fs-5 ">{{ $order_detail->customer->name ?? '' }} - {{ $order_detail->customer->code ?? 'DTSD029' }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div>
                                                         <span class="fs-5 fw-bold">Số điện thoại : </span>
-                                                        <span class="fs-5 ">0842838939</span>
+                                                        <span class="fs-5 ">{{ $order_detail->customer->phone ?? '' }}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -143,10 +143,7 @@
                                                 <div class="col-lg-12">
                                                     <div>
                                                         <span class="fs-5 fw-bold">Địa chỉ :</span>
-                                                        <span class="fs-5 ">156 Hùng Vương, Ấp Phú Hòa, Xã Tân Phú Đông,
-                                                            Thành
-                                                            Phố
-                                                            Sa Đéc, Tỉnh Đồng Tháp </span>
+                                                        <span class="fs-5 ">{{ $order_detail->customer->address ?? '' }}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -155,19 +152,19 @@
                                                 <div class="col-lg-6">
                                                     <div>
                                                         <span class="fs-5 fw-bold">Nhân viên đặt :</span>
-                                                        <span class="fs-5 ">Nguyễn Văn A - TBHT00</span>
+                                                        <span class="fs-5 ">{{ $order_detail->orderStaff->name ?? '' }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3">
                                                     <div>
                                                         <span class="fs-5 fw-bold">Nhóm :</span>
-                                                        <span class="fs-5 ">O9A-Đội O9A</span>
+                                                        <span class="fs-5 ">{{ $order_detail->group->name ?? '' }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3">
                                                     <div>
                                                         <span class="fs-5 fw-bold">Tuyến :</span>
-                                                        <span class="fs-5 ">Đồng Tháp - Thứ 3</span>
+                                                        <span class="fs-5 ">{{ $order_detail->routeDirection->name ?? '' }}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -209,7 +206,7 @@
                                                         <span class="fs-5 fw-bold">Ghi chú :</span>
                                                         <input class="form-control style_select bg-transparent"
                                                             id="ghiChu" placeholder="Ghi chú"style="padding-top: 6px"
-                                                            disabled />
+                                                            disabled value="{{ $order_detail->description ?? '' }}"/>
                                                     </div>
                                                 </div>
                                             </div>
