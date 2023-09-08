@@ -10,21 +10,21 @@
     </style>
 @endsection
 @php
-    
+
     function getPaginationLink($link, $pageName)
     {
         if (!isset($link['url'])) {
             return '#';
         }
-    
+
         $pageNumber = explode('?page=', $link['url'])[1];
-    
+
         $queryString = request()->query();
-    
+
         $queryString[$pageName] = $pageNumber;
         return route('customers', $queryString);
     }
-    
+
 @endphp
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
@@ -40,7 +40,7 @@
                         <div class="card-body">
                             <div class='row'>
                                 <div class="col-md-12">
-                                    <div class="action_wrapper d-flex justify-content-end mb-3">
+                                    <div class="action_wrapper d-flex justify-content-end">
 
                                         <div class="action_wrapper d-flex justify-content-end mb-3">
 
@@ -76,7 +76,7 @@
                                             class="btn-export"><i class="bi bi-download"></i></a>
                                     </div> --}}
 
-                                        <div class="action_export ms-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        <div class="action_export" data-bs-toggle="tooltip" data-bs-placement="top"
                                             aria-label="Thêm khách hàng" data-bs-original-title="Thêm khách hàng">
                                             <button class="btn btn-danger d-block testCreateUser" data-bs-toggle="modal"
                                                 data-bs-target="#info">Thêm khách hàng</button>
@@ -310,7 +310,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form id="formThemCapPhat" method="POST"
-                        action="{{ route('update.customer', ['id' => $item->id]) }}">
+                        action="{{ route('edit.customer', ['id' => $item->id]) }}">
                         @csrf
                         <div class="modal-body">
                             <div class="row">
@@ -507,8 +507,8 @@
                             </div>
                             <div class="col-lg-6 mb-3">
                                 <input type="text" name="address" data-bs-toggle="tooltip" id="addressInputGeneral"
-                                    data-bs-placement="top" title="Địa chỉ" placeholder="Địa chỉ*" class="form-control"
-                                    required>
+                                    data-bs-placement="top" title="Địa chỉ"
+                                    placeholder="Địa chỉ (VD: 219 Trung Kính, Yên Hòa)*" class="form-control" required>
                             </div>
 
                             <div class="col-lg-12 mb-3">

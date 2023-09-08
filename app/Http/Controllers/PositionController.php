@@ -85,6 +85,7 @@ class PositionController extends Controller
         $personnelLevelList = PersonnelLevel::all();
 
         $pagination = $this->pagination($positionList);
+        $areaTree =  Department::with('khuVucs.diaBans.tuyens')->where('code', 'like', 'VUNG%')->get();
         return view("Position.index",[
             "positionList"=>$positionList,
             "positionlists"=>$positionlists,
@@ -96,7 +97,8 @@ class PositionController extends Controller
             'cap_nhan_su' => $cap_nhan_su,
             "departmentListTree" => $departmentListTree,
             "pagination" => $pagination,
-            "positionListTree"=>$positionListTree
+            "positionListTree"=>$positionListTree,
+            'areaTree' => $areaTree
         ]);
     }
 

@@ -78,7 +78,7 @@ function isFiltering($filterNames)
 
                                                 <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
                                                     data-bs-placement="top" title="Lọc">
-                                                    <button class="btn btn-outline-danger {{ isFiltering(['classify', 'status', 'manager', 'accountant']) ? 'active' : '' }}" 
+                                                    <button class="btn btn-outline-danger {{ isFiltering(['classify', 'status', 'manage', 'accountant']) ? 'active' : '' }}" 
                                                             data-bs-toggle="modal" data-bs-target="#filterOptions" style="padding: 7px 15px;">
                                                         <i class="bi bi-funnel"></i>
                                                     </button>
@@ -153,96 +153,7 @@ function isFiltering($filterNames)
                                                                 @endif
                                                             </tr>
                                                         </thead>
-                                                        {{-- @foreach ($departmentList as $item)
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td class="text-center"> <input type="checkbox"
-                                                                            name="selected_items[]"
-                                                                            value="{{ $item->id }}"></td>
-                                                                    <td class=" text-center">
-                                                                        {{ $t++ }}
-                                                                    </td>
-                                                                    <td class="">
-                                                                        <div class="overText" data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top"
-                                                                            title="{{ $item->code }}">
-                                                                            {{ $item->code }}
-                                                                        </div>
-                                                                    </td>
-                                                                    <td class="">
-                                                                        <a style="color: black; text-decoration: underline;"
-                                                                            href="{{ route('department.index2', ['department_id' => $item->id]) }}">
-                                                                            <div class="overText" data-bs-toggle="tooltip"
-                                                                                data-bs-placement="top"
-                                                                                title="{{ $item->name }}">
-                                                                                {{ $item->name }}
-                                                                            </div>
-                                                                        </a>
-                                                                    </td>
-                                                                    <td>
-                                                                        @if ($item->donvime)
-                                                                            <a style="color: black; text-decoration: underline;"
-                                                                                href="{{ route('department.index2', ['department_id' => $item->donvime->id]) }}">
-                                                                                <div class="overText"
-                                                                                    data-bs-toggle="tooltip"
-                                                                                    data-bs-placement="top"
-                                                                                    title="{{ $item->donvime->name ?? '' }}">
-                                                                                    {{ $item->donvime->name ?? '' }}
-                                                                                </div>
-                                                                            </a>
-                                                                        @else
-                                                                        @endif
-                                                                    </td>
-                                                                    <td class="">
-                                                                        <div data-bs-toggle="modal"
-                                                                            data-bs-target="#infoUser{{ $item->ib_lead }}"
-                                                                            role="button"
-                                                                            style="text-decoration: underline;"
-                                                                            class="overText" data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top"
-                                                                            title="{{ $item->leader_name }}">
-                                                                            {{ $item->leader_name }}
-                                                                        </div>
-
-                                                                    </td>
-                                                                    <td class="">
-                                                                        <div class="overText" data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top"
-                                                                            title="{{ $item->description }}">
-                                                                            {{ $item->description }}
-                                                                        </div>
-                                                                    </td>
-                                                                    @if (session('user')['role_id'] == '1')
-                                                                        <td>
-
-                                                                            <div
-                                                                                class="table_actions d-flex justify-content-center">
-                                                                                <div data-bs-toggle="tooltip"
-                                                                                    data-bs-placement="top"
-                                                                                    title="Sửa ">
-                                                                                    <div class="btn"
-                                                                                        data-bs-toggle="modal"
-                                                                                        data-bs-target="#suaDeXuat{{ $item['id'] }}">
-                                                                                        <img style="width:16px;height:16px"
-                                                                                            src="{{ asset('assets/img/edit.svg') }}" />
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div data-bs-toggle="tooltip"
-                                                                                    data-bs-placement="top"
-                                                                                    title="Xóa">
-                                                                                    <div class="btn"
-                                                                                        data-bs-toggle="modal"
-                                                                                        data-bs-target="#xoaDeXuat{{ $item->id }}">
-                                                                                        <img style="width:16px;height:16px"
-                                                                                            src="{{ asset('assets/img/trash.svg') }}" />
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                    @endif
-                                                                </tr>
-                                                            </tbody>
-                                                        @endforeach --}}
+                                                        <?php $k = 1; ?>
                                                         @foreach ($wareHouseList as $item)
                                                             <?php $accountant_name = $item->accountant; ?>
                                                             <tbody>
@@ -291,10 +202,10 @@ function isFiltering($filterNames)
                                                                             @break
                                                                         @endswitch
                                                                     </td>
-                                                                    <td class="text-center">
+                                                                    <td>
                                                                         {{ $item->description }}
                                                                     </td>
-                                                                    <td class="text-center">
+                                                                    <td>
                                                                         {{ $item->address }}
                                                                     </td>
                                                                     <td class="text-center">

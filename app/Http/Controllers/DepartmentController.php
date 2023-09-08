@@ -100,6 +100,8 @@ class DepartmentController extends Controller
 
         $listUsers = Personnel::all();
         $pagination = $this->pagination($departmentList);
+
+        $areaTree =  Department::with('khuVucs.diaBans.tuyens')->where('code', 'like', 'VUNG%')->get();
         // dd( $pagination);
         return view("Deparment.index", [
             "Department" => $Department,
@@ -115,6 +117,7 @@ class DepartmentController extends Controller
             'personnelLevelList' => $personnelLevelList,
             'positionlists' => $positionlists,
             'roleList' => $roleList,
+            'areaTree' =>  $areaTree,
             'localityList' => $localityList,
             'personnellists' => $personnellists,
             'pagination' => $pagination,
@@ -124,14 +127,15 @@ class DepartmentController extends Controller
     public function index2(Request $request)
     {
         $LIMIT = 10;
-        // if ($request->has('limit')) {
-        //     $LIMIT = $request->input('limit');
-        // }
+        if ($request->has('limit')) {
+            $LIMIT = $request->input('limit');
+        }
         $department_id = $request->get('department_id');
         $search = $request->get('search');
         $q = $request->query('q');
         $parent = $request->query('parent');
         $cap_nhan_su = $request->query('cap_nhan_su');
+
         $query = Department::query();
         // $departmentList = Department::
         $query->leftJoin('personnel', 'personnel.id', '=', 'department.ib_lead')
@@ -168,7 +172,10 @@ class DepartmentController extends Controller
             if (!$getDept) {
                 return View::make('404');
             }
-            $listPosToDept = Position::query();
+            $listPosToDept = Position::query()->with('levels', 'department')->where('department_id', $department_id)
+                ->orWhereHas('department', function ($query) use ($department_id) {
+                    $query->where('parent', $department_id);
+                });
 
             if ($q) {
                 $listPosToDept = $listPosToDept->where(function ($query) use ($q) {
@@ -183,10 +190,7 @@ class DepartmentController extends Controller
             if ($parent) {
                 $listPosToDept = $listPosToDept->where('parent', $parent);
             }
-            $listPosToDept = $listPosToDept->with('levels', 'department')->where('department_id', $department_id)
-                ->orWhereHas('department', function ($query) use ($department_id) {
-                    $query->where('parent', $department_id);
-                })->paginate($LIMIT);
+            $listPosToDept = $listPosToDept->paginate($LIMIT);
 
             $pagination = $this->pagination($listPosToDept);
         }
@@ -194,7 +198,7 @@ class DepartmentController extends Controller
         $personnelLevelList = PersonnelLevel::all();
         $positionlists = $this->getPosition();
         $personnellists = $this->getPersonnel();
-
+        $areaTree =  Department::with('khuVucs.diaBans.tuyens')->where('code', 'like', 'VUNG%')->get();
         return view("Deparment.index2", [
             "personnelLevelList" => $personnelLevelList,
             "positionlists" => $positionlists,
@@ -204,11 +208,11 @@ class DepartmentController extends Controller
             'UnitLeaderList' => $UnitLeaderList,
             "departmentListTree" => $departmentListTree,
             'getDept' => $getDept,
-            // 'limit' =>  $LIMIT,
             'department_id' => $department_id,
             'listPosToDept' => $listPosToDept,
             'personnellists' => $personnellists,
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'areaTree' => $areaTree
         ]);
     }
 
@@ -223,6 +227,9 @@ class DepartmentController extends Controller
     public function assignUser(Request $request, $id)
     {
         $LIMIT = 1;
+        if ($request->has('limit')) {
+            $LIMIT = $request->input('limit');
+        }
         $q = $request->query('q');
         $department = $request->query('department');
         $cap_nhan_su = $request->query('cap_nhan_su');
@@ -309,7 +316,7 @@ class DepartmentController extends Controller
         })->get();
 
         $pagination = $this->pagination($listUsers);
-
+        $areaTree =  Department::with('khuVucs.diaBans.tuyens')->where('code', 'like', 'VUNG%')->get();
         return view("Deparment.assignUser", [
             "departmentList" => $departmentList,
             'don_vi_me' => $don_vi_me,
@@ -328,7 +335,8 @@ class DepartmentController extends Controller
             'selectableUser' => $selectableUser,
             'getDept' => $getDept,
             'listPosToDept' => $listPosToDept,
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'areaTree' => $areaTree
         ]);
     }
 
@@ -383,6 +391,8 @@ class DepartmentController extends Controller
 
     public function update(Request $request, $id)
     {
+
+
         $unitToMoveId = $request->get('unit_to_move_id');
         $targetUnitId = $request->get('target_unit_id');
         $name = $request->get('name');
@@ -423,7 +433,6 @@ class DepartmentController extends Controller
 
             // return redirect()->back()->with('success', 'Đã hoán đổi tên đơn vị thành công.');
         }
-
         Session::flash('success', 'Sửa thành công');
         return redirect()->back();
     }
@@ -493,7 +502,7 @@ class DepartmentController extends Controller
 
                 // Lưu thay đổi vào cơ sở dữ liệu
                 $unit1->save();
-                $unit2->save();
+                // $unit2->save();
 
                 // return redirect()->back()->with('success', 'Đã hoán đổi tên đơn vị thành công.');
             } else {

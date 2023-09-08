@@ -500,6 +500,32 @@ class CustomerController extends Controller
 
     }
 
+    public function edit(Request $request, $id)
+    {
+        $code = $request->get('code');
+        $description = $request->get('description');
+
+        $name = $request->get('name');
+        $phone = $request->get('phone');
+        $email = $request->get('email');
+
+
+        $data = Customer::find($id);
+        $data->code = $code;
+        $data->description = $description;
+
+        $data->name = $name;
+        $data->phone = $phone;
+        $data->email = $email;
+
+
+
+        $data->save();
+
+
+        return redirect()->back();
+    }
+
     public function update(Request $request, $id)
     {
         $code = $request->get('code');
@@ -580,6 +606,17 @@ class CustomerController extends Controller
             $image->move(public_path('uploads'), $imageName);
             $data->image = 'uploads/' . $imageName;
         }
+
+        $combinedContact = [];
+        if ($request->contact  !== null) {
+        foreach ($request->contact as $array) {
+            if (is_array($array)) {
+                $combinedContact[] = $array;
+            }
+        }
+    }
+        $jsonCombinedData = json_encode($combinedContact);
+        $data->contact = $jsonCombinedData;
         // dd($data);
         $data->save();
         $listData = Customer::all();

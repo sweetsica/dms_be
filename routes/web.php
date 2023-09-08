@@ -71,6 +71,8 @@ Route::middleware(['auth.role'])->group(function () {
 
     Route::post('/update-customer/{id}', [CustomerController::class, 'update'])->name('update.customer');
 
+    Route::post('/edit-customer/{id}', [CustomerController::class, 'edit'])->name('edit.customer');
+
     Route::post('/delete-customer/{id}', [CustomerController::class, 'delete'])->name('delete.customer');
 
     Route::post('/customer_upload/{id}', [CustomerController::class, 'upload'])->name('customer.upload');

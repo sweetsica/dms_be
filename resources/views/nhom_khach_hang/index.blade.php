@@ -23,7 +23,7 @@
 
 @section('content')
     {{-- @include('template.sidebar.sidebarPosition.sidebarLeft') --}}
-    @include('template.sidebar.sidebarDepartment.sidebarLeft')
+    @include('template.sidebar.sidebarMaster.sidebarLeft')
     <div id="mainWrap" class="mainWrap">
         <div class="mainSection">
             <div class="main">
@@ -67,7 +67,8 @@
 
                                                 <div class="action_export order-md-4">
                                                     <button class="btn btn-danger d-block testCreateUser"
-                                                        data-bs-toggle="modal" data-bs-target="#taoDeXuat">Thêm nhóm khách hàng</button>
+                                                        data-bs-toggle="modal" data-bs-target="#taoDeXuat">Thêm nhóm khách
+                                                        hàng</button>
                                                 </div>
                                             </div>
 
@@ -77,8 +78,10 @@
                                                     <thead>
                                                         <tr>
                                                             <th class="text-nowrap text-center" style="width:2%">STT</th>
-                                                            <th class="text-nowrap" style="width:10%">Mã nhóm khách hàng</th>
-                                                            <th class="text-nowrap" style="width:10%">Tên nhóm khách hàng</th>
+                                                            <th class="text-nowrap" style="width:10%">Mã nhóm khách hàng
+                                                            </th>
+                                                            <th class="text-nowrap" style="width:10%">Tên nhóm khách hàng
+                                                            </th>
                                                             <th class="text-nowrap" style="width:20%">Mô tả</th>
                                                             <th class="text-center" style="width:1%"><span>Thao tác</span>
                                                             </th>
@@ -93,22 +96,24 @@
                                                                 </td>
                                                                 <td class="">
                                                                     <div class="overText" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top" title="{{ $item->code }}">
-                                                                    {{ $item->code }}
-                                                                </div>
+                                                                        data-bs-placement="top" title="{{ $item->code }}">
+                                                                        {{ $item->code }}
+                                                                    </div>
                                                                 </td>
                                                                 <td class="">
                                                                     <div class="overText" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top" title=" {{ $item->name }}">
-                                                                    {{ $item->name }}
-                                                                </div>
+                                                                        data-bs-placement="top"
+                                                                        title=" {{ $item->name }}">
+                                                                        {{ $item->name }}
+                                                                    </div>
 
                                                                 </td>
                                                                 <td class="">
                                                                     <div class="overText" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top" title="{{ $item->description }}">
-                                                                    {{ $item->description }}
-                                                                </div>
+                                                                        data-bs-placement="top"
+                                                                        title="{{ $item->description }}">
+                                                                        {{ $item->description }}
+                                                                    </div>
 
                                                                 </td>
                                                                 <td>
@@ -117,7 +122,7 @@
                                                                         <div data-bs-toggle="tooltip"
                                                                             data-bs-placement="top" title="Sửa">
                                                                             <div class="btn" data-bs-toggle="modal"
-                                                                                data-bs-target="#sua{{$item['id']}}">
+                                                                                data-bs-target="#sua{{ $item['id'] }}">
                                                                                 <img style="width:16px;height:16px"
                                                                                     src="{{ asset('assets/img/edit.svg') }}" />
                                                                             </div>
@@ -125,7 +130,7 @@
                                                                         <div data-bs-toggle="tooltip"
                                                                             data-bs-placement="top" title="Xóa">
                                                                             <div class="btn" data-bs-toggle="modal"
-                                                                                data-bs-target="#xoa{{$item->id}}">
+                                                                                data-bs-target="#xoa{{ $item->id }}">
                                                                                 <img style="width:16px;height:16px"
                                                                                     src="{{ asset('assets/img/trash.svg') }}" />
                                                                             </div>
@@ -135,66 +140,68 @@
                                                             </tr>
                                                         </tbody>
 
-                                                          {{-- Sửa đề xuất --}}
-                                                          <div class="modal fade" id="sua{{ $item['id'] }}" tabindex="-1"
-                                                          aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                          <div class="modal-dialog modal-dialog-centered">
-                                                              <div class="modal-content">
-                                                                  <div class="modal-header text-center">
-                                                                      <h5 class="modal-title w-100"
-                                                                          id="exampleModalLabel">Sửa nhóm khách hàng</h5>
-                                                                      <button type="button" class="btn-close"
-                                                                          data-bs-dismiss="modal"
-                                                                          aria-label="Close"></button>
-                                                                  </div>
-                                                                  <form method="POST"
-                                                                  action="{{ route('CustomerGroup.update', $item->id) }}"
-                                                                  >
-                                                                      @csrf
+                                                        {{-- Sửa đề xuất --}}
+                                                        <div class="modal fade" id="sua{{ $item['id'] }}" tabindex="-1"
+                                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header text-center">
+                                                                        <h5 class="modal-title w-100"
+                                                                            id="exampleModalLabel">Sửa nhóm khách hàng</h5>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <form method="POST"
+                                                                        action="{{ route('CustomerGroup.update', $item->id) }}">
+                                                                        @csrf
                                                                         <div class="modal-body">
                                                                             <div class="row">
                                                                                 <div class="col-6 mb-3">
                                                                                     <input data-bs-toggle="tooltip"
                                                                                         data-bs-placement="top" required
-                                                                                        title="Nhập tên nhóm khách hàng*" name="name"
-                                                                                        type="text" placeholder="Nhập tên nhóm khách hàng*"
+                                                                                        title="Nhập tên nhóm khách hàng*"
+                                                                                        name="name" type="text"
+                                                                                        placeholder="Nhập tên nhóm khách hàng*"
                                                                                         class="form-control"
-                                                                                        value="{{$item->name}}">
+                                                                                        value="{{ $item->name }}">
                                                                                 </div>
                                                                                 <div class="col-6 mb-3">
-                                                                                    <input data-bs-toggle="tooltip" required
-                                                                                        data-bs-placement="top"
-                                                                                        title="Nhập mã nhóm khách hàng*" name="code"
-                                                                                        type="text" placeholder="Nhập mã nhóm khách hàng*"
+                                                                                    <input data-bs-toggle="tooltip"
+                                                                                        required data-bs-placement="top"
+                                                                                        title="Nhập mã nhóm khách hàng*"
+                                                                                        name="code" type="text"
+                                                                                        placeholder="Nhập mã nhóm khách hàng*"
                                                                                         class="form-control"
-                                                                                        value="{{$item->code}}">
+                                                                                        value="{{ $item->code }}">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="row">
                                                                                 <div class="col">
-                                                                                    <div data-bs-toggle="tooltip" data-bs-placement="top" >
-                                                                                        <textarea name="description" type="text" placeholder="Mô tả"
-                                                                                            class="form-control " data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                                            title="Mô tả" style="height: 80px;">{{ $item->description }}</textarea>
+                                                                                    <div data-bs-toggle="tooltip"
+                                                                                        data-bs-placement="top">
+                                                                                        <textarea name="description" type="text" placeholder="Mô tả" class="form-control " data-bs-toggle="tooltip"
+                                                                                            data-bs-placement="top" title="Mô tả" style="height: 80px;">{{ $item->description }}</textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                      <div class="modal-footer">
-                                                                          <button type="button"
-                                                                              class="btn btn-outline-danger"
-                                                                              data-bs-dismiss="modal">Hủy</button>
-                                                                          <button type="submit"
-                                                                              class="btn btn-danger">Lưu</button>
-                                                                      </div>
-                                                                  </form>
-                                                              </div>
-                                                          </div>
-                                                      </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button"
+                                                                                class="btn btn-outline-danger"
+                                                                                data-bs-dismiss="modal">Hủy</button>
+                                                                            <button type="submit"
+                                                                                class="btn btn-danger">Lưu</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
                                                         {{-- Xóa đề xuất --}}
-                                                        <div class="modal fade" id="xoa{{$item->id}}" tabindex="-1"
-                                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal fade" id="xoa{{ $item->id }}"
+                                                            tabindex="-1" aria-labelledby="exampleModalLabel"
+                                                            aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
@@ -212,8 +219,8 @@
                                                                             class="btn btn-outline-danger"
                                                                             data-bs-dismiss="modal">Hủy</button>
                                                                         <form
-                                                                        action="{{ route('CustomerGroup.destroy',$item->id) }}"
-                                                                        method="POST">
+                                                                            action="{{ route('CustomerGroup.destroy', $item->id) }}"
+                                                                            method="POST">
                                                                             @csrf
                                                                             <button type="submit"
                                                                                 class="btn btn-danger">Xóa</button>
@@ -237,9 +244,9 @@
                                                     </ul>
                                                 </nav> --}}
                                                 {{ $customerGroupList->appends([
-                                                    'search' => $search,
-                                                ])->links() }}
-                                        </div>
+                                                        'search' => $search,
+                                                    ])->links() }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -285,8 +292,10 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
-                            <button id="loadingBtn" style="display: none;" class="btn btn-danger" type="button" disabled>
+                            <button type="button" class="btn btn-outline-danger me-3"
+                                data-bs-dismiss="modal">Hủy</button>
+                            <button id="loadingBtn" style="display: none;" class="btn btn-danger" type="button"
+                                disabled>
                                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                 Loading...
                             </button>

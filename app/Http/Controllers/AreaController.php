@@ -60,8 +60,9 @@ class AreaController extends Controller
         $areaList =$query->orderBy('area.id', 'desc')->paginate(10);
         // $department = Department::where('code', 'like', 'VUNG%')->get();
         $department = Department::all();
-        $areaTree =  Department::with('khuVucs.diaBans.tuyens')->where('code', 'like', 'VUNG%')->get();
+        $areaTree =  Department::with('khuVucs.diaBans.tuyens')->get();
         $pagination = $this->pagination($areaList);
+        $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
         // dd()
         return view("Address.danhSachKhuVuc",[
             "areaList"=>$areaList,
@@ -70,7 +71,7 @@ class AreaController extends Controller
             'vung' => $vung,
             'areaTree' => $areaTree,
             'pagination' => $pagination,
-
+            'departmentListTree' => $departmentListTree
         ]);
     }
     public function store(Request $request)

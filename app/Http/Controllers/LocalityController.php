@@ -66,6 +66,7 @@ class LocalityController extends Controller
         $area = Area::all();
         $areaTree =  Department::with('khuVucs.diaBans.tuyens')->where('code', 'like', 'VUNG%')->get();
         $pagination = $this->pagination($localityList);
+        $departmentListTree = Department::where('parent', 0)->with('donViCon')->get();
         return view("Address.danhSachDiaBan",[
             "localityList"=>$localityList,
             'search' => $search,
@@ -73,6 +74,7 @@ class LocalityController extends Controller
             'khu_vuc' => $khu_vuc,
             'areaTree' => $areaTree,
             'pagination' => $pagination,
+            'departmentListTree' => $departmentListTree
 
         ]);
     }
