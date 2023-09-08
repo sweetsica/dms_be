@@ -367,7 +367,7 @@
                                 <div class="col-6 mb-3">
 
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn cấp quản lý">
-                                        <select required name="parent" class="selectpicker" data-dropup-auto="false"
+                                        <select name="parent" class="selectpicker" data-dropup-auto="false"
                                             data-live-search="true">
                                             <option value="">Chọn cấp quản lý
                                             </option>

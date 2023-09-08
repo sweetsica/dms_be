@@ -1075,6 +1075,13 @@
     {{-- Xử lý modal sửa --}}
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            function updateSelectedValues(selectId, spanId) {
+                const selectedOptions = Array.from(document.querySelectorAll(`#${selectId} option:checked`));
+                const selectedValues = selectedOptions.map(option => option.value);
+                const spanElement = document.querySelector(`#${spanId}`);
+                spanElement.textContent = selectedValues.join(", ");
+            }
+
             let specCount = 0;
 
             function addNewRow() {
@@ -1120,7 +1127,7 @@
                 <td><input type="text" class="form-control" name="promotion_detail[${specCount}][key8]"></td>
                 <td><input type="text" class="form-control" name="promotion_detail[${specCount}][key9]"></td>
                 <td class="text-center">
-                    <i class="bi bi-trash fs-3 remove-spec" style="color: var(--primary-color); cursor: pointer;"></i>
+                    <i class="bi bi-trash fs-3 remove-spec_edit" style="color: var(--primary-color); cursor: pointer;"></i>
                 </td>
             `;
 

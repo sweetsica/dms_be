@@ -305,7 +305,7 @@
                                                     @if (!empty(json_decode($details->attachments)))
                                                         @foreach (json_decode($details->attachments) as $key => $file)
                                                             <div class="col-lg-6 mb-3">
-                                                                <a href="{{ $file }}"
+                                                                <a href="{{ $file }}" target="_blank"
                                                                     class="text-color_pimary d-flex align-items-center">
                                                                     <img src="{{ asset('assets/img/icon-pdf.png') }}"
                                                                         class="img img-thumbnail"
@@ -513,8 +513,6 @@
                         </div>
                     @endforeach
                 @endif
-
-
                 {{-- Modal thêm chi tiết sản phẩm --}}
                 <div class="modal fade" id="addDetailProduct" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
@@ -584,8 +582,9 @@
                                                     <div class="d-flex align-items-center">
                                                         <input type="text" name="data[0][key3]"
                                                             data-bs-toggle="tooltip" data-bs-placement="top"
-                                                            title="Thông số" placeholder="Thông số" class="form-control"
-                                                            value="{{ $data->key3 }}">
+                                                            title="Thông số" placeholder="Thông số" class="form-control "
+                                                            value="{{ $data->key3 }}"
+                                                            style="padding: 0.475rem 0.75rem;">
                                                         <i class="bi bi-plus fs-4 ms-2 add-spec"
                                                             style="cursor: pointer; color: var(--primary-color)"></i>
                                                     </div>
@@ -1115,7 +1114,7 @@
                         <div class="d-flex align-items-center">
                             <input type="text" name="data[${specCount}][key3]" data-bs-toggle="tooltip"
                                 data-bs-placement="top" title="Thông số" placeholder="Thông số"
-                                class="form-control">
+                                class="form-control"  style="padding: 0.475rem 0.75rem;">
                             <i class="bi bi-trash fs-4 ms-2 remove-spec"
                                 style="cursor: pointer; color: var(--primary-color)"></i>
                         </div>

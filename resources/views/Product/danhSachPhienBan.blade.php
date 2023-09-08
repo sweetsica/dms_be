@@ -40,7 +40,7 @@
     <div id="mainWrap" class="mainWrap">
         <div class="mainSection">
             <div class="main">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="mainSection_heading">
                         <h5 class="mainSection_heading-title">Danh sách phiên bản</h5>
                         @include('template.components.sectionCard')
@@ -139,17 +139,23 @@
                                                         </td>
                                                         <td>
                                                             <div class="table_actions d-flex justify-content-center">
-                                                                <div class="btn test_btn-edit-{{ $item->id }}"
-                                                                    href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#suaPhienBan{{ $item->id }}">
-                                                                    <img style="width:16px;height:16px"
-                                                                        src="{{ asset('assets/img/edit.svg') }}" />
+                                                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                    title="Sửa">
+                                                                    <div class="btn test_btn-edit-{{ $item->id }}"
+                                                                        href="#" data-bs-toggle="modal"
+                                                                        data-bs-target="#suaPhienBan{{ $item->id }}">
+                                                                        <img style="width:16px;height:16px"
+                                                                            src="{{ asset('assets/img/edit.svg') }}" />
+                                                                    </div>
                                                                 </div>
-                                                                <div class="btn test_btn-remove-{{ $item->id }}"
-                                                                    href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#xoaPhienBan{{ $item->id }}">
-                                                                    <img style="width:16px;height:16px"
-                                                                        src="{{ asset('assets/img/trash.svg') }}" />
+                                                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                    title="Xóa">
+                                                                    <div class="btn test_btn-remove-{{ $item->id }}"
+                                                                        href="#" data-bs-toggle="modal"
+                                                                        data-bs-target="#xoaPhienBan{{ $item->id }}">
+                                                                        <img style="width:16px;height:16px"
+                                                                            src="{{ asset('assets/img/trash.svg') }}" />
+                                                                    </div>
                                                                 </div>
                                                             </div>
 
@@ -225,16 +231,16 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <input type="text" value="{{ $item->name }}" name="name"
-                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên phiên bản"
+                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Tên phiên bản*"
                                         placeholder="Tên phiên bản*" class="form-control">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <input type="text" value="{{ $item->code }}" name="code"
-                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã phiên bản"
+                                        data-bs-toggle="tooltip" required data-bs-placement="top" title="Mã phiên bản*"
                                         placeholder="Mã phiên bản*" class="form-control">
                                 </div>
                                 <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Thuộc loại sản phẩm">
+                                    title="Thuộc loại sản phẩm*">
                                     <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
                                         data-live-search="true" title="Thuộc loại sản phẩm*"
                                         data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn"
@@ -281,16 +287,16 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <input type="text" name="name" data-bs-toggle="tooltip" required
-                                    data-bs-placement="top" title="Tên phiên bản" placeholder="Tên phiên bản*"
+                                    data-bs-placement="top" title="Tên phiên bản*" placeholder="Tên phiên bản*"
                                     class="form-control">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <input type="text" name="code" data-bs-toggle="tooltip" required
-                                    data-bs-placement="top" title="Mã phiên bản" placeholder="Mã phiên bản*"
+                                    data-bs-placement="top" title="Mã phiên bản*" placeholder="Mã phiên bản*"
                                     class="form-control">
                             </div>
                             <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Thuộc loại sản phẩm">
+                                title="Thuộc loại sản phẩm*">
                                 <select class="selectpicker" required data-dropup-auto="false" data-width="100%"
                                     data-live-search="true" title="Thuộc loại sản phẩm*"
                                     data-select-all-text="Chọn tất cả" data-deselect-all-text="Bỏ chọn" data-size="3"
