@@ -416,16 +416,13 @@
                                     <table id="contact" class="table table-responsive table-hover table-bordered">
                                         <thead>
                                             <tr>
-                                                <th class="text-nowrap text-center">Mã sản phẩm</th>
-                                                <th class="text-nowrap text-center" style="width: 10%;">Tên SP AD
-                                                </th>
+                                                <th class="text-nowrap text-center">Tên SP AD</th>
+                                                <th class="text-nowrap text-center" style="width: 10%;">Mã sản phẩm</th>
                                                 <th class="text-nowrap text-center" style="width: 8%;">Đạt số lượng</th>
                                                 <th class="text-nowrap text-center" style="width: 8%;">Đạt số tiền</th>
-                                                <th class="text-nowrap text-center" style="width: 8%;">Số lượng SP tặng
-                                                </th>
-                                                <th class="text-nowrap text-center">Mã SP tặng</th>
-                                                <th class="text-nowrap text-center" style="width: 10%;">Tên SP
-                                                    tặng</th>
+                                                <th class="text-nowrap text-center" style="width: 8%;">Số lượng SP tặng</th>
+                                                <th class="text-nowrap text-center">Tên SP</th>
+                                                <th class="text-nowrap text-center" style="width: 10%;">Mã SP tặng </th>
                                                 <th class="text-nowrap text-center" style="width: 8%;">Chiết khấu %</th>
                                                 <th class="text-nowrap text-center" style="width: 8%;">Tặng tiền</th>
                                             </tr>
@@ -522,13 +519,15 @@
                                                                 name="promotion_details[{{ $n++ }}][key9]"
                                                                 value="{{ $promotionDetail['key9'] }}">
                                                         </td>
-                                                        <td class="text-center">
-                                                            <i class="bi bi-plus fs-3 add-spec_edit"
-                                                                style="color: var(--primary-color);cursor: pointer;"></i>
-                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             @endif
+                                            <tr>
+                                                <td class="text-center">
+                                                    <i class="bi bi-plus fs-3 add-spec_edit"
+                                                        style="color: var(--primary-color);cursor: pointer;"></i>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -973,65 +972,52 @@
         document.addEventListener("DOMContentLoaded", function() {
             let specCount = 0;
 
-            addSpecIcons.forEach(icon => {
-                icon.addEventListener("click", function() {
-                    const newSpecDiv = document.createElement("tr");
-                    newSpecDiv.innerHTML = `
-                    <td class="text-center">
-                                                <div data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Mã sản phẩm">
-                                                    <select class="selectpicker" data-dropup-auto="false"
-                                                        data-width="100%" data-live-search="true"
-                                                        title="Chọn mã sản phẩm" data-select-all-text="Mã sản phẩm"
-                                                        data-deselect-all-text="Bỏ chọn" data-size="3"
-                                                        name="promotion_details[${specCount}][key1]" data-live-search-placeholder="Tìm kiếm..."
-                                                        id="selectCodeProduct_${specCount}" >
-                                                        @foreach ($products as $item)
-                                                            <option value="{{ $item->name }}">{{ $item->code }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </td>
-                                            <td class="text-center">
-                                                <input id="nameProduct_${specCount}" class="form-control" name="promotion_details[${specCount}][key2]" readonly>
-                                            </td>
-                                            <td>
-                                                <input type="text" class="form-control" name="promotion_details[${specCount}][key3]">
-                                            </td>
-                                            <td>
-                                                <input type="text" class="form-control" name="promotion_details[${specCount}][key4]">
-                                            </td>
-                                            <td>
-                                                <input type="text" class="form-control" name="promotion_details[${specCount}][key5]">
-                                            </td>
-                                            <td class="text-center">
-                                                <div data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Mã sản phẩm tặng">
-                                                    <select class="selectpicker" data-dropup-auto="false"
-                                                        data-width="100%" data-live-search="true"
-                                                        title="Chọn sản phẩm ..." data-select-all-text="Mã sản phẩm tặng"
-                                                        data-deselect-all-text="Bỏ chọn" data-size="3"
-                                                        name="promotion_details[${specCount}][key6]" data-live-search-placeholder="Tìm kiếm..."
-                                                        id="codeProductBonus_${specCount}" >
-                                                        @foreach ($products as $item)
-                                                            <option value="{{ $item->name }}">{{ $item->code }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </td>
-                                            <td class="text-center">
-                                                <input id="productBonus_${specCount}" class="form-control" name="promotion_details[${specCount}][key7]" readonly>
-                                            </td>
-                                            <td>
-                                                <input type="text" class="form-control" name="promotion_details[${specCount}][key8]">
-                                            </td>
-                                            <td>
-                                                <input type="text" class="form-control" name="promotion_details[${specCount}][key9]">
-                                            </td>
-                                            <td class="text-center">
-                                                <i class="bi bi-trash fs-3 remove-spec"
-                                                    style="color: var(--primary-color);cursor: pointer;"></i>
-                                            </td>
+
+            function addNewRow() {
+                const newRow = document.createElement("tr");
+                newRow.innerHTML = `
+                <td class="text-center">
+                    <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Mã sản phẩm">
+                        <select class="selectpicker" data-dropup-auto="false" data-width="100%" data-live-search="true"
+                            title="Chọn mã sản phẩm" data-select-all-text="Mã sản phẩm" data-deselect-all-text="Bỏ chọn"
+                            data-size="3" name="promotion_details[${specCount}][key1]"
+                            data-live-search-placeholder="Tìm kiếm..."
+                            id="selectCodeProduct_${specCount}">
+                            @foreach ($products as $item)
+                                <option value="{{ $item->code }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <input id="nameProduct_${specCount}" class="form-control" name="promotion_details[${specCount}][key2]"
+                        readonly value="abc">
+                </td>
+                <td><input type="text" class="form-control" name="promotion_details[${specCount}][key3]"></td>
+                <td><input type="text" class="form-control" name="promotion_details[${specCount}][key4]"></td>
+                <td><input type="text" class="form-control" name="promotion_details[${specCount}][key5]"></td>
+                <td class="text-center">
+                    <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Mã sản phẩm tặng">
+                        <select class="selectpicker" data-dropup-auto="false" data-width="100%" data-live-search="true"
+                            title="Chọn sản phẩm ..." data-select-all-text="Mã sản phẩm tặng"
+                            data-deselect-all-text="Bỏ chọn" data-size="3"
+                            name="promotion_details[${specCount}][key6]" data-live-search-placeholder="Tìm kiếm..."
+                            id="codeProductBonus_${specCount}">
+                            @foreach ($products as $item)
+                                <option value="{{ $item->code }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <input id="productBonus_${specCount}" class="form-control"
+                        name="promotion_details[${specCount}][key7]" readonly>
+                </td>
+                <td><input type="text" class="form-control" name="promotion_details[${specCount}][key8]"></td>
+                <td><input type="text" class="form-control" name="promotion_details[${specCount}][key9]"></td>
+                <td class="text-center">
+                    <i class="bi bi-trash fs-3 remove-spec" style="color: var(--primary-color); cursor: pointer;"></i>
+                </td>
             `;
 
                 const currentRow = document.querySelector(".add-spec").closest("tr");
