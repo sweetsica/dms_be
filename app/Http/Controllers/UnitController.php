@@ -10,6 +10,25 @@ use Illuminate\Support\Facades\Session;
 class UnitController extends Controller
 {
 
+    public function pagination($list)
+    {
+        return [
+            'current_page' => $list->currentPage(),
+            'data' => $list->items(),
+            'first_page_url' => $list->url(1),
+            'from' => $list->firstItem(),
+            'last_page' => $list->lastPage(),
+            'last_page_url' => $list->url($list->lastPage()),
+            'links' => $list->toArray()['links'],
+            'next_page_url' => $list->nextPageUrl(),
+            'path' => $list->url(1),
+            'per_page' => $list->perPage(),
+            'prev_page_url' => $list->previousPageUrl(),
+            'to' => $list->lastItem(),
+            'total' => $list->total(),
+        ];
+    }
+
 
     public function index(Request $request)
     {
@@ -19,9 +38,11 @@ class UnitController extends Controller
             Session::flash('error', 'Lỗi đầu vào khi search');
             return back();
         }
-        $UnitList = Unit::where("unit.code", "like", "%$search%")->orWhere("unit.name", "like", "%$search%")->paginate(10);
+        $UnitList = Unit::where("unit.code", "like", "%$search%")->orWhere("unit.name", "like", "%$search%")->orderBy('unit.id','desc')->paginate(15);
+        $pagination = $this->pagination($UnitList);
         return view('don_vi_tinh.index', [
             'search' => $search,
+            "pagination" => $pagination,
             'UnitList'=>$UnitList,
         ]);
     }

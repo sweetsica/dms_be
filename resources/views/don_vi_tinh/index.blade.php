@@ -5,7 +5,36 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 @endsection
 
+
 @section('content')
+@php
+
+    function getPaginationLink($link, $pageName)
+    {
+        if (!isset($link['url'])) {
+            return '#';
+        }
+
+        $pageNumber = explode('?page=', $link['url'])[1];
+
+        $queryString = request()->query();
+
+        $queryString[$pageName] = $pageNumber;
+        return route('Unit.index', $queryString);
+    }
+
+    // function isFiltering($filterNames)
+    // {
+    //     $filters = request()->query();
+    //     foreach ($filterNames as $filterName) {
+    //         if (isset($filters[$filterName]) && $filters[$filterName] != '') {
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
+
+@endphp
 @include('template.sidebar.sidebarMaster.sidebarLeft')
     <div id="mainWrap" class="mainWrap">
         <div class="mainSection">
@@ -56,13 +85,13 @@
                                             <form id="select-form" action="{{ route('Unit.delete') }}"
                                             method="POST">
                                             @csrf
-                                            <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
-                                                data-bs-placement="top" title="Xóa" >
-                                                <button class="btn btn-danger  " type="submit"
-                                                    onclick="return confirm('Bạn có muốn xóa không?')" id="delete-selected-button"
-                                                    style="display: none;"
-                                                    >Xóa</button>
-                                            </div><br>
+                                            <div class="action_export mx-3 order-md-1" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Xóa"
+                                            style="position: absolute; top: 10px; left: 0;">
+                                            <button class="btn btn-danger  " type="submit"
+                                                onclick="return confirm('Bạn có muốn xóa không?')"
+                                                id="delete-selected-button" style="display: none;">Xóa</button>
+                                        </div><br>
                                             <div class="table-responsive">
                                                 <table id="dsDaoTao"
                                                     class="table table-responsive table-hover table-bordered filter">
@@ -84,7 +113,8 @@
                                                                 <td class=" text-center"> <input type="checkbox" name="selected_items[]"
                                                                     value="{{ $item->id }}"></td>
                                                                 <td class=" text-center">
-                                                                    {{ $i++ }}
+                                                                    {{-- {{ $i++ }} --}}
+                                                                    {{ $UnitList->total() - $loop->index - ($UnitList->currentPage() - 1) * $UnitList->perPage() }}
                                                                 </td>
                                                                 <td class="">
                                                                     <div class="overText text-center" data-bs-toggle="tooltip"
@@ -99,8 +129,8 @@
                                                                 </div>
 
                                                                 </td>
-                                                                <td>
-                                                                    <div class="table_actions d-flex justify-content-end">
+                                                                <td >
+                                                                    <div  class="table_actions d-flex justify-content-center">
 
                                                                         <div data-bs-toggle="tooltip"
                                                                             data-bs-placement="top" title="Sửa">
@@ -124,9 +154,22 @@
                                                         </tbody>
                                                     @endforeach
                                                 </table>
-                                                {{ $UnitList->appends([
-                                                        'search' => $search,
-                                                    ])->links() }}
+                                                <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                id="target-pagination">
+                                                <ul class="pagination">
+                                                    @foreach ($pagination['links'] as $link)
+                                                        <li
+                                                            class="page-item {{ $link['active'] ? 'active' : '' }}">
+                                                            <a class="page-link"
+                                                                href="{{ getPaginationLink($link, 'page') }}"
+                                                                aria-label="Previous">
+                                                                <span
+                                                                    aria-hidden="true">{!! $link['label'] !!}</span>
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                                </nav>
                                             </div>
                                             </form>
                                         </div>
