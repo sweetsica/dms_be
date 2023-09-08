@@ -105,10 +105,10 @@
 
                                             <div class="col-lg-4">
                                                 <div class="row g-0">
-                                                    <div class="col-lg-4">
+                                                    <div class="col-lg-3">
                                                         <span class="fs-5 fw-bold">Người quản lý :</span>
                                                     </div>
-                                                    <div class="col-lg-8">
+                                                    <div class="col-lg-9">
                                                         <span class="fs-5">
                                                             @foreach ($listUsers as $user)
                                                                 @if ($wareHouse->manage == $user->id)
@@ -122,10 +122,10 @@
 
                                             <div class="col-lg-4">
                                                 <div class="row g-0">
-                                                    <div class="col-lg-5">
-                                                        <span class="fs-5 fw-bold">Kế toán phụ trách :</span>
+                                                    <div class="col-lg-3">
+                                                        <span class="fs-5 fw-bold">Kế toán :</span>
                                                     </div>
-                                                    <div class="col-lg-7">
+                                                    <div class="col-lg-9">
                                                         <span class="fs-5">
                                                             @foreach ($listUsers as $user)
                                                                 @if ($wareHouse->accountant == $user->id)
@@ -148,6 +148,11 @@
                                     {{-- {!! QrCode::generate(route('WareHouse.show', $wareHouse->id)) !!}  --}}
                                     <div
                                         class="action_wrapper d-flex flex-wrap justify-content-between align-items-center mt-3">
+                                        <a href="{{ route('WareHouse.index') }}">
+                                            <button class="btn btn-outline-danger">
+                                                Về danh sách
+                                            </button>
+                                        </a>
                                         <div class="justify-content-between align-items-center flex-grow-1 mb-2 mb-md-0">
                                             <form method="GET" action="">
                                                 <div class="form-group has-search">
@@ -225,56 +230,56 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td class="text-nowrap ">1</td>
-                                                    <td class="text-nowrap ">123456</td>
-                                                    <td class="text-nowrap ">Vitamin tổng hợp</td>
-                                                    <td class="text-nowrap ">1</td>
-                                                    <td class="text-nowrap ">28/08/2026</td>
-                                                    <td class="text-nowrap ">10</td>
-                                                    <td class="text-nowrap ">Hộp</td>
-                                                    <td class="text-nowrap ">Hộp</td>
-                                                    <td class="text-nowrap ">Sản phẩm</td>
-                                                    <td class="text-nowrap ">16/07/2023</td>
-                                                    <td class="text-nowrap "></td>
+                                                    <td class="text-nowrap text-center ">1</td>
+                                                    <td class="text-nowrap text-center ">123456</td>
+                                                    <td class="text-nowrap text-center ">Vitamin tổng hợp</td>
+                                                    <td class="text-nowrap text-center ">1</td>
+                                                    <td class="text-nowrap text-center ">28/08/2026</td>
+                                                    <td class="text-nowrap text-center ">10</td>
+                                                    <td class="text-nowrap text-center ">Hộp</td>
+                                                    <td class="text-nowrap text-center ">Hộp</td>
+                                                    <td class="text-nowrap text-center ">Sản phẩm</td>
+                                                    <td class="text-nowrap text-center ">16/07/2023</td>
+                                                    <td class="text-nowrap text-center "></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-nowrap ">2</td>
-                                                    <td class="text-nowrap ">123457</td>
-                                                    <td class="text-nowrap ">Bảng quảng cáo</td>
-                                                    <td class="text-nowrap ">1</td>
-                                                    <td class="text-nowrap ">29/08/2026</td>
-                                                    <td class="text-nowrap ">11</td>
-                                                    <td class="text-nowrap ">Cái</td>
-                                                    <td class="text-nowrap ">Cái</td>
-                                                    <td class="text-nowrap ">Vật tư MKT</td>
-                                                    <td class="text-nowrap "></td>
-                                                    <td class="text-nowrap "></td>
+                                                    <td class="text-nowrap text-center ">2</td>
+                                                    <td class="text-nowrap text-center ">123457</td>
+                                                    <td class="text-nowrap text-center ">Bảng quảng cáo</td>
+                                                    <td class="text-nowrap text-center ">1</td>
+                                                    <td class="text-nowrap text-center ">29/08/2026</td>
+                                                    <td class="text-nowrap text-center ">11</td>
+                                                    <td class="text-nowrap text-center ">Cái</td>
+                                                    <td class="text-nowrap text-center ">Cái</td>
+                                                    <td class="text-nowrap text-center ">Vật tư MKT</td>
+                                                    <td class="text-nowrap text-center "></td>
+                                                    <td class="text-nowrap text-center "></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-nowrap ">3</td>
-                                                    <td class="text-nowrap ">123458</td>
-                                                    <td class="text-nowrap ">Collage</td>
-                                                    <td class="text-nowrap ">1</td>
-                                                    <td class="text-nowrap ">30/08/2026</td>
-                                                    <td class="text-nowrap ">12</td>
-                                                    <td class="text-nowrap ">Thùng</td>
-                                                    <td class="text-nowrap ">Chai</td>
-                                                    <td class="text-nowrap ">Sản phẩm</td>
-                                                    <td class="text-nowrap "></td>
-                                                    <td class="text-nowrap "></td>
+                                                    <td class="text-nowrap text-center ">3</td>
+                                                    <td class="text-nowrap text-center ">123458</td>
+                                                    <td class="text-nowrap text-center ">Collage</td>
+                                                    <td class="text-nowrap text-center ">1</td>
+                                                    <td class="text-nowrap text-center ">30/08/2026</td>
+                                                    <td class="text-nowrap text-center ">12</td>
+                                                    <td class="text-nowrap text-center ">Thùng</td>
+                                                    <td class="text-nowrap text-center ">Chai</td>
+                                                    <td class="text-nowrap text-center ">Sản phẩm</td>
+                                                    <td class="text-nowrap text-center "></td>
+                                                    <td class="text-nowrap text-center "></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-nowrap ">4</td>
-                                                    <td class="text-nowrap ">123459</td>
-                                                    <td class="text-nowrap ">Vitamin E</td>
-                                                    <td class="text-nowrap ">1</td>
-                                                    <td class="text-nowrap ">31/08/2026</td>
-                                                    <td class="text-nowrap ">13</td>
-                                                    <td class="text-nowrap ">Hộp</td>
-                                                    <td class="text-nowrap ">Hộp</td>
-                                                    <td class="text-nowrap ">Sản phẩm</td>
-                                                    <td class="text-nowrap ">16/07/2023</td>
-                                                    <td class="text-nowrap "></td>
+                                                    <td class="text-nowrap text-center ">4</td>
+                                                    <td class="text-nowrap text-center ">123459</td>
+                                                    <td class="text-nowrap text-center ">Vitamin E</td>
+                                                    <td class="text-nowrap text-center ">1</td>
+                                                    <td class="text-nowrap text-center ">31/08/2026</td>
+                                                    <td class="text-nowrap text-center ">13</td>
+                                                    <td class="text-nowrap text-center ">Hộp</td>
+                                                    <td class="text-nowrap text-center ">Hộp</td>
+                                                    <td class="text-nowrap text-center ">Sản phẩm</td>
+                                                    <td class="text-nowrap text-center ">16/07/2023</td>
+                                                    <td class="text-nowrap text-center "></td>
                                                 </tr>
                                             </tbody>
                                         </table>

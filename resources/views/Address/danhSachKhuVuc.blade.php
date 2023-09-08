@@ -306,7 +306,8 @@
                                     data-bs-placement="top" title="Mã khu vực*" placeholder="Mã khu vực*"
                                     class="form-control">
                             </div>
-                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Chọn trực thuộc*">
+                            <div class="col-md-6 mb-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Chọn trực thuộc*">
                                 <select name="area" required class="selectpicker" data-dropup-auto="false"
                                     data-live-search="true">
                                     <option value="">Chọn trực thuộc*</option>

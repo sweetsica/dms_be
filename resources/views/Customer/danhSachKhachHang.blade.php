@@ -233,17 +233,23 @@
                                                         </td>
                                                         <td style="background: #fff; position: sticky; right: 0;">
                                                             <div class="table_actions d-flex justify-content-center">
-                                                                <div class="btn test_btn-edit-{{ $item['id'] }}"
-                                                                    href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#suaca{{ $item['id'] }}">
-                                                                    <img style="width:16px;height:16px"
-                                                                        src="{{ asset('assets/img/edit.svg') }}" />
+                                                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                    title="Sửa">
+                                                                    <div class="btn test_btn-edit-{{ $item['id'] }}"
+                                                                        href="#" data-bs-toggle="modal"
+                                                                        data-bs-target="#suaca{{ $item['id'] }}">
+                                                                        <img style="width:16px;height:16px"
+                                                                            src="{{ asset('assets/img/edit.svg') }}" />
+                                                                    </div>
                                                                 </div>
-                                                                <div class="btn test_btn-remove-{{ $item['id'] }}"
-                                                                    href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#xoaca{{ $item['id'] }}">
-                                                                    <img style="width:16px;height:16px"
-                                                                        src="{{ asset('assets/img/trash.svg') }}" />
+                                                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                    title="Xóa">
+                                                                    <div class="btn test_btn-remove-{{ $item['id'] }}"
+                                                                        href="#" data-bs-toggle="modal"
+                                                                        data-bs-target="#xoaca{{ $item['id'] }}">
+                                                                        <img style="width:16px;height:16px"
+                                                                            src="{{ asset('assets/img/trash.svg') }}" />
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </td>

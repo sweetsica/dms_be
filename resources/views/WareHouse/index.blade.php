@@ -452,8 +452,8 @@ function isFiltering($filterNames)
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mb-3">
-                                    <input name="description" type="text" placeholder="Mô tả*" class="form-control"
-                                        data-bs-toggle="tooltip" data-bs-placement="bottom" title="Mô tả*"
+                                    <input name="description" type="text" placeholder="Mô tả" class="form-control"
+                                        data-bs-toggle="tooltip" data-bs-placement="bottom" title="Mô tả"
                                         value="{{ $item->description }}">
                                 </div>
                                 <div class="col-lg-6 mb-3">
@@ -473,8 +473,6 @@ function isFiltering($filterNames)
                                                 {{ $item->manage_name }}
                                             </option>
                                             <?php } ?>
-                                            <option value="0">Chọn
-                                                người quản lý*</option>
                                             @foreach ($listUsers as $av)
                                                 <option value="{{ $av->id }}">
                                                     {{ $av->name }}
