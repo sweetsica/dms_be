@@ -95,10 +95,8 @@
                                             <i class="bi bi-printer "></i>
                                             In
                                         </button>
-                                        <a href="{{ route('PurchaseOrder.index') }}">
-                                            <button class="btn btn-outline-secondary">
-                                                Đóng
-                                            </button>
+                                        <a class="btn btn-outline-secondary" href="{{ route('PurchaseOrder.index') }}">
+                                            Đóng
                                         </a>
                                     </div>
                                 </div>
@@ -118,10 +116,10 @@
                                                 <h1 class="m-0">PHIẾU ĐẶT HÀNG</h1>
                                                 <p class="m-0 fs-5">Ngày đặt: 01/08/2023</p>
                                             </div>
-                                            <div class="item-qr">
-                                                <img src="{{ asset('assets/img/Qr-code.png') }}" alt="Qr-code"
-                                                    class="img-qr" />
+                                            <div class="d-flex" style="width:64px; height:80px;">
+                                                {!! QrCode::generate(route('PurchaseOrder.index')) !!}  
                                             </div>
+                                            
                                         </div>
 
                                         <div class="mt-5 border-bottom border-1 pb-3">

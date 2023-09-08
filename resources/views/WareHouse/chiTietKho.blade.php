@@ -185,7 +185,7 @@
                                         <div class="action_export mx-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                             title="Xuất file Excel">
                                             <a class="btn btn-danger btn-lg btn-export" target="_blank"
-                                                href="/warehouses/export/all" style="padding: 7px 15px;"
+                                                href="/warehouses/export/detail" style="padding: 7px 15px;"
                                                 id="export-warehouses-btn">
                                                 <i class="bi bi-download "></i>
                                             </a>

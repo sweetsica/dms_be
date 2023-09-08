@@ -19,6 +19,34 @@
         color: var(--primary-color);
     }
 </style>
+@php
+
+function getPaginationLink($link, $pageName)
+    {
+        if (!isset($link['url'])) {
+            return '#';
+        }
+    
+        $pageNumber = explode('?page=', $link['url'])[1];
+    
+        $queryString = request()->query();
+    
+        $queryString[$pageName] = $pageNumber;
+        return route('WareHouse.index', $queryString);
+    }
+
+function isFiltering($filterNames)
+    {
+        $filters = request()->query();
+        foreach ($filterNames as $filterName) {
+            if (isset($filters[$filterName]) && $filters[$filterName] != '') {
+                return true;
+            }
+        }
+        return false;
+    }
+
+@endphp
 @section('content')
     @include('template.sidebar.sidebarMaster.sidebarLeft')
     <div id="mainWrap" class="mainWrap">
@@ -39,7 +67,7 @@
                                             <div
                                                 class="action_wrapper d-flex flex-wrap justify-content-between align-items-center mb-3">
                                                 <div
-                                                    class="order-1 order-md-2  justify-content-between align-items-center flex-grow-1 mb-2 mb-md-0">
+                                                    class="order-1 order-md-1  justify-content-between align-items-center flex-grow-1 mb-2 mb-md-0">
                                                     <form method="GET" action="">
                                                         <div class="form-group has-search">
                                                             <input type="text" style="width: 150px; float: right;"
@@ -50,10 +78,19 @@
 
                                                 <div class="action_export mx-3 order-md-3" data-bs-toggle="tooltip"
                                                     data-bs-placement="top" title="Lọc">
-                                                    <button class="btn btn-outline-danger" data-bs-toggle="modal"
-                                                        data-bs-target="#filterOptions" style="padding: 7px 10px;">
+                                                    <button class="btn btn-outline-danger {{ isFiltering(['classify', 'status', 'manage', 'accountant']) ? 'active' : '' }}" 
+                                                            data-bs-toggle="modal" data-bs-target="#filterOptions" style="padding: 7px 15px;">
                                                         <i class="bi bi-funnel"></i>
                                                     </button>
+                                                </div>
+                                                
+                                                <div class="action_export order-md-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    title="Xuất file Excel">
+                                                    <a class="btn btn-danger btn-lg btn-export" target="_blank"
+                                                        href="/warehouses/export/all" style="padding: 7px 15px; margin-right: 10px;"
+                                                        id="export-warehouses-btn">
+                                                        <i class="bi bi-download "></i>
+                                                    </a>
                                                 </div>
 
                                                 @if (session('user')['role_id'] == '1')
@@ -126,7 +163,8 @@
                                                                             value="{{ $item->id }}">
                                                                     </td>
                                                                     <td class="text-center">
-                                                                        {{ $k++ }}
+                                                                        {{ $wareHouseList->total() - $loop->index - ($wareHouseList->currentPage() - 1) * $wareHouseList->perPage() }}
+
                                                                     </td>
                                                                     <td class="text-center">
                                                                         {{ $item->code }}
@@ -171,14 +209,10 @@
                                                                         {{ $item->address }}
                                                                     </td>
                                                                     <td class="text-center">
-                                                                        {{ $item->manage_name }}
+                                                                        {{ $item->managerID->name ?? '' }}
                                                                     </td>
                                                                     <td class="text-center">
-                                                                        @foreach ($listUsers as $user)
-                                                                            @if ($accountant_name == $user->id)
-                                                                                {{ $user->name ?? '' }}
-                                                                            @endif
-                                                                        @endforeach
+                                                                        {{ $item->accountantID->name ?? '' }}
                                                                     </td>
                                                                     <td class="text-center">
                                                                         @switch($item->status)
@@ -234,6 +268,20 @@
                                                         </ul>
                                                     </nav> --}}
                                                 </div>
+                                                <nav aria-label="Page navigation example" class="float-end mt-3"
+                                                    id="target-pagination">
+                                                    <ul class="pagination">
+                                                        @foreach ($pagination['links'] as $link)
+                                                            <li class="page-item {{ $link['active'] ? 'active' : '' }}">
+                                                                <a class="page-link"
+                                                                    href="{{ getPaginationLink($link, 'page') }}"
+                                                                    aria-label="Previous">
+                                                                    <span aria-hidden="true">{!! $link['label'] !!}</span>
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </nav>
                                             </form>
                                         </div>
                                     </div>
@@ -705,6 +753,10 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
+                        <button id="loadingBtn" style="display: none;" class="btn btn-danger" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button>
                         <button id="submitBtn" type="submit" class="btn btn-danger">Lưu</button>
                     </div>
                 </form>
@@ -713,7 +765,7 @@
     </div>
 
     {{-- Filter --}}
-    {{-- <div class="modal fade" id="filterOptions" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="filterOptions" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-sm">
             <div class="modal-content">
                 <div class="modal-header text-center">
@@ -728,15 +780,48 @@
 
                             <div class="col-12 mb-3">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top"
-                                    data-bs-original-title="Lọc theo Đơn vị cha">
+                                    data-bs-original-title="Lọc theo Phân loại kho">
 
                                     <select id="select-status" class="selectpicker select_filter"
-                                        data-dropup-auto="false" title="Lọc theo Đơn vị cha" name='don_vi_me'>
-                                        @foreach ($departmentList as $item)
-                                        @if ($item->donvime)
-                                            <option value="{{ $item->parent}}">{{ $item->donvime->name}}</option>
-                                            @endif
+                                        data-dropup-auto="false" title="Lọc theo Phân loại kho" name='f_classify'>
+                                        <option value="0">Kho công ty</option>
+                                        <option value="1">Kho nhà phân phối</option>
+                                        <option value="2">Kho bán lẻ</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-original-title="Lọc theo Quản lý">
+
+                                    <select id="select-status" class="selectpicker select_filter"
+                                        data-dropup-auto="false" title="Lọc theo Quản lý" name='f_manage' data-live-search="true">
+                                        @foreach ($listUsers as $user)
+                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
                                         @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-original-title="Lọc theo Kế toán phụ trách">
+
+                                    <select id="select-status" class="selectpicker select_filter"
+                                        data-dropup-auto="false" title="Lọc theo Kế toán phụ trách" name='f_accountant' data-live-search="true">
+                                        @foreach ($listUsers as $user)
+                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-original-title="Lọc theo trạng thái">
+
+                                    <select id="select-status" class="selectpicker select_filter"
+                                        data-dropup-auto="false" title="Lọc theo trạng thái" name='f_status' >
+                                        <option value="1">Đang hoạt động</option>
+                                        <option value="0">Ngưng hoạt động</option>
                                     </select>
                                 </div>
                             </div>
@@ -749,8 +834,7 @@
                 </form>
             </div>
         </div>
-    </div> --}}
-
+    </div>
 @endsection
 @section('footer-script')
     <!-- Plugins -->
@@ -807,6 +891,29 @@
             const atLeastOneChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
             deleteButton.style.display = atLeastOneChecked ? 'block' : 'none';
         }
+    </script>
+
+    <script>
+        // $('#addForm').on('submit', function(e) {
+        //     $('#addDetailProduct').modal('show');
+        //     event.preventDefault();
+        // });
+
+
+        $(document).ready(function() {
+            // Handle form submission
+            $('#addForm').submit(function(event) {
+                // Prevent the default form submission
+                event.preventDefault();
+
+                // Show the loading button and hide the submit button
+                $('#submitBtn').hide();
+                $('#loadingBtn').show();
+
+                // Submit the form
+                $(this).unbind('submit').submit();
+            });
+        });
     </script>
 
 @endsection

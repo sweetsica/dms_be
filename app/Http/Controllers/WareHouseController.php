@@ -9,16 +9,40 @@ use App\Models\Personnel;
 use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\WareHousesExport;
+use App\Exports\WareHouseDetailExport;
+
 
 
 
 class WareHouseController extends Controller
 {
+    public function pagination($list)
+    {
+        return [
+            'current_page' => $list->currentPage(),
+            'data' => $list->items(),
+            'first_page_url' => $list->url(1),
+            'from' => $list->firstItem(),
+            'last_page' => $list->lastPage(),
+            'last_page_url' => $list->url($list->lastPage()),
+            'links' => $list->toArray()['links'],
+            'next_page_url' => $list->nextPageUrl(),
+            'path' => $list->url(1),
+            'per_page' => $list->perPage(),
+            'prev_page_url' => $list->previousPageUrl(),
+            'to' => $list->lastItem(),
+            'total' => $list->total(),
+        ];
+    }
+
     public function index(Request $request) {
 
         $search = $request->get('search');
-        $don_vi_me = $request->get('don_vi_me');
-        $leader_name = $request->get('leader_name');
+        $f_classify = $request->get('f_classify');
+        $f_manage = $request->get('f_manage');
+        $f_accountant = $request->get('f_accountant');
+        $f_status = $request->get('f_status');
+        $limit = 15;
 
         $query = WareHouse::query();
         // $positionList = Position::s
@@ -48,14 +72,30 @@ class WareHouseController extends Controller
         if($search != NULL) {
             $query->orWhere("ware_houses.code", "like", "%$search%");
         } 
+        if ($f_classify != NULL) {
+            $query->where("ware_houses.classify", "=", "$f_classify");
+        }
+        if ($f_manage != NULL) {
+            $query->where("ware_houses.manage", "=", "$f_manage");
+        }
+        if ($f_accountant != NULL) {
+            $query->where("ware_houses.accountant", "=", "$f_accountant");
+        }
+        if ($f_status != NULL) {
+            $query->where("ware_houses.status", "=", "$f_status");
+        }
         // dd($query);
-        $wareHouseList =$query->paginate(15);
+        $wareHouseList = $query->orderByDesc('id')->paginate($limit);
+        // dd($wareHouseList);
+        $pagination = $this->pagination($wareHouseList);
+        // dd($wareHouseList);
         $listUsers = Personnel::all();
         // dd($wareHouseList);
         return view("WareHouse.index",[
             'wareHouseList'=>$wareHouseList,
             'search' => $search,
-            'listUsers' => $listUsers
+            'listUsers' => $listUsers,
+            'pagination' => $pagination,       
         ]); 
     }
 
@@ -134,8 +174,15 @@ class WareHouseController extends Controller
 
     public function export()
     {             
-        $date = date('d-m-y');   
-        return Excel::download(new WareHousesExport, ''.$date.'Chi-tiet-kho.xlsx');
+        $now = now();  
+        return Excel::download(new WareHousesExport, 'Danh-sach-kho-'.$now.'.xlsx');
+        
+    }
+
+    public function exportDetail()
+    {             
+        $now = now();
+        return Excel::download(new WareHouseDetailExport, 'Chi-tiet-kho-'.$now.'.xlsx');
         
     }
 }
