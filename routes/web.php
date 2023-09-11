@@ -276,6 +276,9 @@ Route::get('/warehouses/export/all', [WareHouseController::class, 'export'])->na
 Route::get('/warehouses/export/detail', [WareHouseController::class, 'exportDetail'])->name('WareHouse.exportDetail');
 Route::get('/purchase_order/export/all', [PurchaseOrderController::class, 'export'])->name('PurchaseOrder.export');
 
+Route::post('/warehouses/import', [WareHouseController::class, 'import'])->name('WareHouse.import');
+
+
 
 
 // 404

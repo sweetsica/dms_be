@@ -83,6 +83,14 @@ function isFiltering($filterNames)
                                                         <i class="bi bi-funnel"></i>
                                                     </button>
                                                 </div>
+
+                                                <div class="action_export order-md-3" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" title="Nhập file Excel">
+                                                    <button class="btn btn-danger btn-lg btn-export" 
+                                                            data-bs-toggle="modal" data-bs-target="#importExcel" style="padding: 7px 15px; margin-right:10px;">
+                                                        <i class="bi bi-upload"></i>
+                                                    </button>
+                                                </div>
                                                 
                                                 <div class="action_export order-md-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                                     title="Xuất file Excel">
@@ -91,7 +99,8 @@ function isFiltering($filterNames)
                                                         id="export-warehouses-btn">
                                                         <i class="bi bi-download "></i>
                                                     </a>
-                                                </div>
+                                                </div>                                              
+                                                
 
                                                 @if (session('user')['role_id'] == '1')
                                                     <div class="action_export order-md-4">
@@ -676,6 +685,42 @@ function isFiltering($filterNames)
         </div>
     @endforeach
     <!-- Modal thêm kho -->
+    <div class="modal fade" id="importExcel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Nhập dữ liệu từ Excel</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('WareHouse.import') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            @csrf                        
+                            <div class="mb-3">
+                                <label class="form-label" for="inputFile">Chọn file Excel: </label>
+                                <input 
+                                    type="file" 
+                                    name="file" 
+                                    id="inputFile"
+                                    class="form-control @error('file') is-invalid @enderror">
+                    
+                                @error('file')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>                     
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Hủy</button>
+                        <button id="submitBtn" type="submit" class="btn btn-danger">Tải lên</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
     <div class="modal fade" id="addKho" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">

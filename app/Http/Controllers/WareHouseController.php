@@ -9,6 +9,7 @@ use App\Models\Personnel;
 use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\WareHousesExport;
+use App\Imports\WareHousesImport;
 use App\Exports\WareHouseDetailExport;
 
 
@@ -184,5 +185,16 @@ class WareHouseController extends Controller
         $now = now();
         return Excel::download(new WareHouseDetailExport, 'Chi-tiet-kho-'.$now.'.xlsx');
         
+    }
+
+    public function import(Request $request) 
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xlx,xlsm|max:2048',
+        ]);
+
+        Excel::import(new WareHousesImport, $request->file('file')->store('files'));
+
+        return back()->with('success', 'Đã nhập dữ liệu từ Excel!');
     }
 }
