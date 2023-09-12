@@ -9,6 +9,9 @@ new Chart(congviechoanthanh, {
                 label: "Chỉ số",
                 data: [200, 40, 40, 40, 40],
                 borderWidth: 1,
+                datalabels: {
+                    color: 'white',
+                  },
             },
         ],
     },
@@ -37,6 +40,7 @@ new Chart(congviechoanthanh, {
             tooltip: { enabled: true },
         },
     },
+    plugins: [ChartDataLabels],
 });
 
 // function dynamicColors() {

@@ -24,11 +24,17 @@ new Chart(admin_KDTheoVung, {
         label: 'Hiện có',
         data: [6, 5, 4, 5, 6, 3],
         backgroundColor: 'rgb(196, 37, 23)',
+        datalabels: {
+          color: 'white',
+        },
       },
       {
         label: 'Tổng định biên',
         data: [12, 10, 8, 10, 12, 6],
         backgroundColor: 'rgb(248, 101, 101)',
+        datalabels: {
+          color: 'white',
+        },
       },      
     ]
   },
@@ -68,5 +74,6 @@ new Chart(admin_KDTheoVung, {
         stacked: true
       }
     }
-  }
+  },
+  plugins: [ChartDataLabels],
 });

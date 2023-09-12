@@ -31,11 +31,17 @@ new Chart(admin_TinhHinhDoanhSo, {
         label: 'Doanh số',
         data: [450, 350, 250, 500, 300, 400, 250, 150, 180, 200, 450, 500],
         backgroundColor: 'rgb(196, 37, 23)',
+        datalabels: {
+          color: 'white',
+        },
       },
       {
         label: 'Chỉ tiêu',
         data: [550, 450, 150, 350, 225, 200, 170, 250, 300, 165, 375, 400],
         backgroundColor: 'rgb(248, 101, 101)',
+        datalabels: {
+          color: 'white',
+        },
       },      
     ]
   },
@@ -75,5 +81,6 @@ new Chart(admin_TinhHinhDoanhSo, {
         stacked: true
       }
     }
-  }
+  },
+  plugins: [ChartDataLabels],
 });

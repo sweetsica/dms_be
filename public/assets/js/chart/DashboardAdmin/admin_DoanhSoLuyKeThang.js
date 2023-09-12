@@ -32,6 +32,9 @@ new Chart(admin_DoanhSoLuyKeThang, {
                 borderColor: "rgba(196, 37, 23, 0.75)",
                 tension: 0,
                 fill: false,
+                datalabels: {
+                    color: 'black',
+                  },
             },
             {
                 label: "Tổng luỹ kế",
@@ -40,6 +43,9 @@ new Chart(admin_DoanhSoLuyKeThang, {
                 borderColor: "rgba(191, 164, 8,0.75)",
                 tension: 0,
                 fill: false,
+                datalabels: {
+                    color: 'black',
+                  },
             },            
         ],
     },
@@ -79,4 +85,5 @@ new Chart(admin_DoanhSoLuyKeThang, {
               },
         },
     },
+    plugins: [ChartDataLabels],
 });

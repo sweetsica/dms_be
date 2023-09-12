@@ -11,6 +11,9 @@ new Chart(admin_NhanSuTuyenMoi, {
                 borderWidth: 1,
                 backgroundColor: ["rgba(179, 223, 246)", "rgba(196, 37, 23)"],
                 borderColor: ["rgba(179, 223, 246, 0.5)", "rgba(196, 37, 23, 0.5)"],
+                datalabels: {
+                    color: 'white',
+                  },
             },
         ],
     },
@@ -48,4 +51,5 @@ new Chart(admin_NhanSuTuyenMoi, {
             tooltip: { enabled: true },
         },
     },
+    plugins: [ChartDataLabels],
 });

@@ -11,6 +11,9 @@ new Chart(admin_NhanSuOnOff, {
                 borderWidth: 1,
                 backgroundColor: ["rgba(196, 37, 23)","rgba(248, 101, 101)"],
                 borderColor: ["rgba(196, 37, 23, 0.5)","rgba(248, 101, 101, 0.5)"],
+                datalabels: {
+                    color: 'white',
+                  },
             },
         ],
     },
@@ -39,4 +42,5 @@ new Chart(admin_NhanSuOnOff, {
             tooltip: { enabled: true },            
         },
     },
+    plugins: [ChartDataLabels],
 });

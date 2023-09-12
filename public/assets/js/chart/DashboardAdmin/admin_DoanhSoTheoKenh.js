@@ -24,11 +24,17 @@ new Chart(admin_DoanhSoTheoKenh, {
         label: 'Doanh số',
         data: [45, 35, 25, 50, 30, 40],
         backgroundColor: 'rgb(196, 37, 23)',
+        datalabels: {
+          color: 'white',
+        },
       },
       {
         label: 'Chỉ tiêu',
         data: [55, 45, 15, 35, 22, 20],
         backgroundColor: 'rgb(248, 101, 101)',
+        datalabels: {
+          color: 'white',
+        },
       },      
     ]
   },
@@ -68,5 +74,6 @@ new Chart(admin_DoanhSoTheoKenh, {
         stacked: true
       }
     }
-  }
+  },
+  plugins: [ChartDataLabels],
 });
