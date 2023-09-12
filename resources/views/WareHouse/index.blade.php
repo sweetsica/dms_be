@@ -684,7 +684,7 @@ function isFiltering($filterNames)
             </div>
         </div>
     @endforeach
-    <!-- Modal thêm kho -->
+    <!-- Modal nhập file excel -->
     <div class="modal fade" id="importExcel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -699,11 +699,9 @@ function isFiltering($filterNames)
                             @csrf                        
                             <div class="mb-3">
                                 <label class="form-label" for="inputFile">Chọn file Excel: </label>
-                                <input 
-                                    type="file" 
-                                    name="file" 
-                                    id="inputFile"
-                                    class="form-control @error('file') is-invalid @enderror">
+                                <input type="file" name="file" id="inputFile" 
+                                    accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                    class="form-control @error('file') is-invalid @enderror"required>
                     
                                 @error('file')
                                     <span class="text-danger">{{ $message }}</span>
@@ -720,7 +718,7 @@ function isFiltering($filterNames)
         </div>
     </div>
 
-    
+    <!-- Modal thêm kho -->
     <div class="modal fade" id="addKho" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">

@@ -11,6 +11,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\WareHousesExport;
 use App\Imports\WareHousesImport;
 use App\Exports\WareHouseDetailExport;
+use Exception;
+
 
 
 
@@ -189,12 +191,18 @@ class WareHouseController extends Controller
 
     public function import(Request $request) 
     {
-        $request->validate([
-            'file' => 'required|mimes:xlsx,xlx,xlsm|max:2048',
-        ]);
-
-        Excel::import(new WareHousesImport, $request->file('file')->store('files'));
-
-        return back()->with('success', 'Đã nhập dữ liệu từ Excel!');
+        try 
+        {
+            $request->validate([
+                'file' => 'required|mimes:xlsx,xlx,xlsm,csv,xls|max:2048',
+            ]);
+    
+            Excel::import(new WareHousesImport, $request->file('file')->store('files'));
+    
+            return back()->with('success', 'Đã nhập dữ liệu từ Excel!');
+        }
+        catch (Exception $e) {
+            return back()->with('error', 'Sai dữ liệu đầu vào. Xin vui lòng kiểm tra và thử lại!');
+        }
     }
 }

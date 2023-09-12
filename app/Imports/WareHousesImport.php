@@ -10,13 +10,23 @@ use Maatwebsite\Excel\Concerns\SkipsOnError;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
+use Maatwebsite\Excel\Concerns\WithValidation;
 use Throwable;
 
 class WareHousesImport implements ToModel, WithStartRow, WithStrictNullComparison, SkipsOnError 
 {
     use Importable, SkipsErrors;
 
-    private $importErrors = [];
+    private $importErrors = [];    
+
+    public function rules(): array
+    {
+        return [
+            'name' => [
+                'required',                
+            ],
+        ];
+    }
 
     public function model(array $row)
     {
